@@ -1,0 +1,5 @@
+{
+  "repositoryName": "timothe-joubert",
+  "adapter": "@slicemachine/adapter-nuxt2",
+  "libraries": ["./slices"]
+}

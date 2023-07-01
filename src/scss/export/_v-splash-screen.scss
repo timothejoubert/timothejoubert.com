@@ -1,0 +1,7 @@
+@import '../variables/v-splash-screen';
+
+@each $key, $value in $loading {
+    :export {
+        #{$key}: $value;
+    }
+}

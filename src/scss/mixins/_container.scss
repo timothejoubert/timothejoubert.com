@@ -1,0 +1,9 @@
+@mixin container {
+    margin-inline: auto;
+    width: calc(100% - $container-padding-inline *2);
+
+}
+
+@mixin container-fullscreen {
+    padding-inline: $container-padding-inline;
+}

@@ -1,0 +1,23 @@
+@include v-transition(
+    'slide-in',
+    (
+        duration: 0.7s,
+    ),
+    (
+        opacity: 0,
+        translate: 0 40px,
+    ), $scope: 'global'
+);
+
+@include v-transition(
+    'slide-in-d-3',
+    (
+        duration: 0.7s,
+        delay: 0.3s,
+    ),
+        (
+            opacity: 0,
+            translate: 0 40px,
+        ), $scope: 'global'
+);
+

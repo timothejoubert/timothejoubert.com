@@ -1,0 +1,47 @@
+.text-h1 {
+    @include text-h1;
+}
+
+.text-h2 {
+    @include text-h2;
+}
+
+.text-h3 {
+    @include text-h3;
+}
+
+.text-h4 {
+    @include text-h4;
+}
+
+.text-h5 {
+    @include text-h5;
+}
+
+.text-over-title-l {
+    @include text-over-title-l;
+}
+
+.text-over-title-m {
+    @include text-over-title-m;
+}
+
+.text-over-title-s {
+    @include text-over-title-s;
+}
+
+.text-body-l {
+    @include text-body-l;
+}
+
+.text-body-m {
+    @include text-body-m;
+}
+
+.text-body-s {
+    @include text-body-s;
+}
+
+.text-body-xs {
+    @include text-body-xs;
+}

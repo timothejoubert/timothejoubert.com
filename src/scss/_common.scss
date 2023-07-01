@@ -1,0 +1,64 @@
+html {
+    background-color: var(--theme-default);
+    color: var(--theme-on-default);
+}
+
+body {
+    @include text-body-m;
+
+    font-family: $noi;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+    text-decoration-thickness: inherit;
+    text-underline-offset: inherit;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    text-transform: inherit;
+
+    &:disabled {
+        cursor: default;
+    }
+}
+
+input {
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+
+    &[type="submit"],
+    &[type="reset"] {
+        cursor: pointer;
+    }
+}
+
+textarea,
+select {
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+}
+
+img {
+    -webkit-user-drag: none;
+    max-width: 100%;
+}
+
+//::selection {
+//    background-color: color(orange);
+//    color: color(light);
+//    text-shadow: none;
+//}

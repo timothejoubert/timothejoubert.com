@@ -1,0 +1,16 @@
+$themes: (
+    light: (
+        foreground-color: color(black),
+        background-color: color(white),
+        button-filled-hover-foreground: color(white),
+        button-filled-hover-background: color(black),
+    ),
+    dark: (
+        foreground-color: color(white),
+        background-color: color(black),
+        button-filled-hover-foreground: color(black),
+        button-filled-hover-background: color(white),
+    )
+);
+
+$default-theme: dark;

@@ -1,0 +1,54 @@
+@use "sass:list";
+
+//  @mixin v-transition() -- create v-transition selector with custom properties
+//  use: @include v-transition('name', (duration: 1s), ( opacity: 0) )
+//  return:
+//  .name-enter-active,
+//  .name-leave-active {
+//      transition-duration: 1s;
+//      transition-property: opacity;
+//      transition-timing-function: ease(out-quad);
+//  }
+//  .name-enter,
+//  .name-leave-to {
+//      opacity: 0;
+//  }
+
+@mixin obj-to-props($props) {
+    @each $key, $value in $props {
+        #{$key}: $value;
+    }
+}
+
+@mixin transition-props($transitionOptions, $properties) {
+
+    @each $key, $value in $transitionOptions {
+        #{"transition-" + $key}: $value;
+    }
+    $propertyKeys: ();
+    @each $property, $value in $properties {
+        $propertyKeys: list-implode(list.append($propertyKeys, $property), ",");
+    }
+
+    transition-property: $propertyKeys;
+    transition-timing-function: ease(out-quad);
+}
+
+@mixin v-transition($name, $transitionOptions: (), $properties: (), $scope: 'scoped') {
+
+    @if ($scope == 'global' or $scope == 'scoped') {
+        $scope: '';
+    } @else {
+        $scope: ':global ';
+    }
+
+    #{$scope + "." + $name + '-leave-active'},
+    #{$scope + "." + $name + '-enter-active'} {
+        @include transition-props($transitionOptions, $properties);
+    }
+
+    #{$scope + "." + $name + '-enter'},
+    #{$scope + "." + $name + '-leave-to'} {
+        @include obj-to-props($properties);
+    }
+}
