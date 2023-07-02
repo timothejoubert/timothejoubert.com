@@ -6,13 +6,11 @@
         v-bind="linkProps"
         @click="onClick"
     >
-        <span ref="inner" :class="$style.inner">
-            <span v-if="hasIcon" ref="icon" :class="[$style.icon, animation && 'v-button__icon']">
-                <slot name="icon" />
-            </span>
-            <span v-if="hasLabel" :class="$style.label">
-                <slot>{{ label }}</slot>
-            </span>
+        <span v-if="hasIcon" ref="icon" :class="[$style.icon, animation && 'v-button__icon']">
+            <slot name="icon" />
+        </span>
+        <span v-if="hasLabel" :class="$style.label">
+            <slot>{{ label }}</slot>
         </span>
     </component>
 </template>
@@ -187,31 +185,6 @@ export default Vue.extend({
     }
 }
 
-.inner {
-    @include v-button-default-css-vars($v-button-inner, 'inner');
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-    transition: all 0.3s;
-
-    .root:not(.root--outlined):not(.root--filled) & {
-        padding: 0;
-    }
-
-    .root--has-icon:not(.root--has-label) & {
-        padding: 0;
-    }
-
-    .root--outlined & {
-        border-width: var(--v-button-border-width, 1px);
-        border-style: solid;
-        border-color: inherit;
-        border-radius: inherit;
-    }
-}
-
 .icon {
     @include v-button-default-css-vars($v-button-icon, 'icon');
 
@@ -236,9 +209,6 @@ export default Vue.extend({
 
 .label {
     @include v-button-default-css-vars($v-button-label, 'label');
-
-    padding: var(--v-button-label-padding-top, #{rem(2)}) var(--v-button-label-padding-right, #{rem(4)})
-        var(--v-button-label-padding-bottom, #{rem(2)}) var(--v-button-label-padding-left, #{rem(4)});
     white-space: nowrap;
 }
 </style>

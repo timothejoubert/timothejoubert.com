@@ -2,8 +2,10 @@
     <div :class="$style.root" class="container">
         <nuxt-link :to="homeLink" :class="$style.home">
             <icon-logo :class="$style.logo" />
-            <div :class="$style['logo-text']">{{ logoText }}</div>
+            <div :class="$style['logo-text']" class="text-h2">{{ logoText }}</div>
         </nuxt-link>
+
+        <v-toggle-settings />
     </div>
 </template>
 
@@ -32,6 +34,7 @@ export default Vue.extend({
     top: 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: color(black);
     color: color(white);
 }

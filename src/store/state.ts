@@ -5,10 +5,15 @@ export default (): RootState => ({
     settings: null,
     // mainMenu: null,
     projects: null,
+    projectTags: [],
+    projectFramework: [],
     currentPageData: null,
 
     // SplashScreen
     splashScreenDone: false,
+
+    // App
+    isSettingsOpen: false,
 
     // General
     errorPage: null,

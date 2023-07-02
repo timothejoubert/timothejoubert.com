@@ -3,10 +3,15 @@ enum MutationType {
     SET_MAIN_MENU = 'setMainMenu',
     SET_SETTINGS = 'setSettings',
     SET_PROJECTS = 'setProjects',
+    SET_FRAMEWORKS = 'setFrameworks',
+    SET_TAGS = 'setTags',
     CURRENT_PAGE_DATA = 'setCurrentPageData',
 
     // loading
     SPLASH_SCREEN_DONE = 'splashScreenDone',
+
+    // App
+    IS_SETTINGS_OPEN = 'isSettingsOpen',
 
     // Global
     WINDOW_WIDTH = 'windowWidth',

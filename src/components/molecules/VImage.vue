@@ -39,6 +39,7 @@ export default Vue.extend({
         url: String,
         placeholder: { type: Boolean, default: true },
         sizes: String as PropType<string | 'fullScreen'>,
+        cover: Boolean,
     },
     data() {
         return {
@@ -93,6 +94,7 @@ export default Vue.extend({
                     class: [
                         this.$style.root,
                         this.ratio && this.$style['root--ratio'],
+                        this.cover && this.$style['root--cover'],
                         this.loaded && this.$style['root--loaded'],
                     ],
                 },
@@ -117,9 +119,14 @@ export default Vue.extend({
         position: relative;
         display: var(--v-image-display, block);
     }
+
+    &--cover {
+        position: absolute;
+        inset: 0;
+    }
 }
 
-.root img {
+img {
     display: block;
     width: var(--v-image-width, auto);
     max-width: var(--v-image-max-width, 100%);
@@ -132,25 +139,27 @@ export default Vue.extend({
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+
+    .root--cover &,
+    .root--ratio & {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: var(--v-image-width, 100%);
+        height: var(--v-image-height, 100%);
+        object-fit: var(--v-image-object-fit, cover);
+    }
+
+    .root--lazy & {
+        opacity: 0;
+        transition: var(--v-image-img-transition, all 0s), opacity 0.3s;
+    }
+
+    .root--loaded & {
+        opacity: 1;
+    }
 }
 
-.root--ratio img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: var(--v-image-width, 100%);
-    height: var(--v-image-height, 100%);
-    object-fit: var(--v-image-object-fit, cover);
-}
-
-.root--lazy img {
-    opacity: 0;
-    transition: var(--v-image-img-transition, all 0s), opacity 0.3s;
-}
-
-.root--loaded img {
-    opacity: 1;
-}
 
 .copyright {
     --v-information-pill-background-volor: #{rgba(color(white), 0.5)};

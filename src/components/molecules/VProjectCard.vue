@@ -7,29 +7,32 @@
 <script lang="ts">
 import Vue from 'vue'
 import type { PropType } from 'vue'
-import { VCardLayout } from '~/components/molecules/VCard.vue'
 import { getProjectYear } from '~/utils/prismic/date'
-import { ProjectDocument } from '~~/prismicio-types'
+import { ProjectDocument, ProjectTagDocument } from '~~/prismicio-types'
 
 export default Vue.extend({
     name: 'VProjectCard',
     props: {
         project: Object as PropType<ProjectDocument>,
-        layout: String as PropType<VCardLayout>,
-        titleClass: String,
     },
     computed: {
         cardProps(): Record<string, any> {
-            const { thumbnail, title, tags, date, content } = this.project.data
+            const { thumbnail, title, date, tags } = this.project.data
+
+            const parsedTags = tags.map((tagReference) => {
+                const uid = (tagReference.tag as { uid?: string })?.uid
+                return this.$store.state.projectTags.filter(
+                    (projectTag: ProjectTagDocument) => projectTag.uid === uid
+                )?.[0]?.data?.name
+            })
+
+            console.log(parsedTags)
 
             return {
                 image: thumbnail,
                 title,
-                titleClass: this.titleClass,
-                description: content,
-                tags,
+                tags: parsedTags,
                 date: getProjectYear(date),
-                layout: this.layout,
             }
         },
     },

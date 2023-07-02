@@ -12,7 +12,7 @@
         @if type-of($piece) == list {
             $result: unquote("#{$result}#{$glue}#{list-implode($piece, $glue)}");
         } @else if $piece != '' {
-            $result: unquote("#{$result}#{$glue}#{$piece}");
+            $result: if($i == 1, $piece, unquote("#{$result}#{$glue}#{$piece}"));
         }
     }
 

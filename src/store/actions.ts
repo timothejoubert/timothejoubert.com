@@ -4,13 +4,15 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import type { BodyScrollOptions } from 'body-scroll-lock'
 import { PrismicDocument } from '@prismicio/types/src/value/document'
 import { Document } from '@prismicio/client/types/documents'
+import ApiSearchResponse from '@prismicio/client/types/ApiSearchResponse'
 import { RootState } from '~/types/store'
 import MutationType from '~/constants/mutation-type'
 import { CustomTypeName } from '~/types/prismic/app-prismic'
 import CustomType from '~/constants/custom-type'
-// import { MainMenuDocument} from '~~/prismicio-types'
-import { ProjectDocument, SettingsDocument } from '~~/prismicio-types'
+import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument } from '~~/prismicio-types'
 import { getNumberedDate } from '~/utils/prismic/date'
+
+type CommonContentResponse = (Document | ApiSearchResponse<ProjectTagDocument | ProjectFrameworkDocument>)[]
 
 const actions: ActionTree<RootState, RootState> = {
     async nuxtServerInit({ commit, dispatch }: ActionContext<RootState, RootState>, context: Context) {
@@ -18,9 +20,14 @@ const actions: ActionTree<RootState, RootState> = {
         else await context.app.i18n.setLocale('fr')
 
         await dispatch('getCommonContent', context)
-            .then(([settings]: Array<SettingsDocument>) => {
+            .then(([settings, frameworks, tags]: Array<CommonContentResponse>) => {
                 // commit(MutationType.SET_MAIN_MENU, mainMenu)
                 commit(MutationType.SET_SETTINGS, settings)
+                commit(
+                    MutationType.SET_FRAMEWORKS,
+                    (frameworks as unknown as ApiSearchResponse<ProjectFrameworkDocument>).results
+                )
+                commit(MutationType.SET_TAGS, (tags as unknown as ApiSearchResponse<ProjectTagDocument>).results)
             })
             .catch((fetchError: Error) => {
                 throw new Error(`failed to fetch mainMenu or setting: ${fetchError}`)
@@ -41,13 +48,21 @@ const actions: ActionTree<RootState, RootState> = {
     getCommonContent(
         _actionContext: ActionContext<RootState, RootState>,
         context: Context
-    ): Promise<Document<SettingsDocument>[]> {
+    ): Promise<CommonContentResponse> {
         const localeOptions = context.route.fullPath.includes('/en') ? { lang: 'en-gb' } : undefined
 
         // const mainMenu = context.$prismic.api.getSingle(CustomType.MAIN_MENU as CustomTypeName, localeOptions)
         const settings = context.$prismic.api.getSingle(CustomType.SETTINGS as CustomTypeName, localeOptions)
+        const frameworks = context.$prismic.api.query(
+            context.$prismic.predicates.at('document.type', CustomType.PROJECT_FRAMEWORK as CustomTypeName)
+        )
+        const tags = context.$prismic.api.query(
+            context.$prismic.predicates.at('document.type', CustomType.PROJECT_TAG as CustomTypeName)
+        )
+        // const frameworks = context.$prismic.api.getSingle(CustomType.PROJECT_FRAMEWORK as CustomTypeName, localeOptions)
+        // const tags = context.$prismic.api.getSingle(CustomType.PROJECT_TAG as CustomTypeName, localeOptions)
 
-        return Promise.all([settings])
+        return Promise.all([settings, frameworks, tags])
     },
     getProjects(
         _actionContext: ActionContext<RootState, RootState>,

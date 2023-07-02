@@ -1,34 +1,19 @@
 <template>
-    <div
-        :class="[$style.root, typeof layout === 'string' && $style[`root--layout-${layout}`]]"
-        @mouseenter="isEnter = true"
-        @mouseleave="isEnter = false"
-    >
-        <div :class="$style.media">
-            <v-pill v-if="date" :class="$style.date" :label="date" filled theme="light" size="xs" />
-            <v-image v-if="image" :prismic-image="image" :ratio="390 / 600" />
-            <v-button filled :class="$style.cta">
-                <template #icon>
-                    <icon-arrow-up-right />
-                </template>
-            </v-button>
-        </div>
+    <div :class="$style.root" @mouseenter="mouseEnter = true" @mouseleave="mouseEnter = false">
+        <v-image v-if="image" :prismic-image="image" :class="$style.image" :cover="true" />
+
         <div :class="$style.body">
-            <div :class="$style.body__left">
-                <v-split-word v-if="title" v-in-view.once :class="titleClass" :play-animation="isEnter" :word="title" />
-                <div v-if="tags.length" v-in-view.once :class="$style.tags">
-                    <span v-for="tag in tags" :key="'tag-' + tag.label" class="text-body-s" :class="$style.tag">{{
-                        tag.label
-                    }}</span>
-                </div>
-            </div>
-            <v-text
-                v-if="description"
-                v-in-view.once
-                :content="description"
-                :class="$style.description"
-                class="text-body-s"
+            <v-split-word
+                v-if="title"
+                class="text-over-title-m"
+                :word="title"
+                :play-animation="mouseEnter"
+                :class="$style.title"
             />
+            <span v-if="date">{{ date }}</span>
+            <div v-if="tags.length" :class="$style.tags">
+                <v-button theme="light" :filled="true" size="xs" v-for="tag in tags" :key="tag" class="text-body-s" :label="tag" :class="$style.tag" />
+            </div>
         </div>
     </div>
 </template>
@@ -37,30 +22,22 @@
 import Vue from 'vue'
 import type { PropType } from 'vue'
 import type { ImageField } from '@prismicio/types'
-import * as prismicT from '@prismicio/types'
-import IconArrowUpRight from '~/assets/images/icons/arrow-up-right.svg?sprite'
-
-export type VCardLayout = 'centered' | null
 
 export default Vue.extend({
     name: 'VCard',
-    components: { IconArrowUpRight },
+    data() {
+        return {
+            mouseEnter: false,
+        }
+    },
     props: {
         title: String,
-        titleClass: { type: String, default: 'text-over-title-m' },
         image: Object as PropType<ImageField>,
         tags: {
             type: Array as PropType<String[]>,
             default: () => [],
         },
         date: String,
-        description: [String, Array] as PropType<String | prismicT.RichTextField>,
-        layout: String as PropType<VCardLayout>,
-    },
-    data() {
-        return {
-            isEnter: false,
-        }
     },
 })
 </script>
@@ -68,81 +45,56 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     position: relative;
+    display: flex;
+    overflow: hidden;
+    align-items: flex-end;
+    padding: rem(12) rem(18);
+    aspect-ratio: 1;
+    border-radius: 0 #{rem(48)} 0 0;
 }
 
-.media {
-    --v-image-border-radius: #{rem(22)};
-
-    position: relative;
+.image {
+    filter: grayscale(1);
+    transition: filter 0.3s ease(out-quad);
 
     &::after {
         position: absolute;
-        z-index: 1;
-        background-image: linear-gradient(transparent, rgba(color(white), 0.15));
+        background: linear-gradient(45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.15) 100%);
         content: '';
         inset: 0;
-        pointer-events: none;
-        transition: opacity 0.3s;
+        opacity: 1;
+        transition: opacity 0.5s ease(out-quad);
     }
 
     @media (hover: hover) {
-        .root:hover &::after {
-            opacity: 0;
+        .root:hover & {
+            filter: grayscale(0);
         }
     }
 }
 
-.date {
-    position: absolute;
-    z-index: 2;
-    top: rem(12);
-    left: rem(12);
-    display: var(--v-card-date-display, flex);
+.title {
+    display: inline-flex;
+    color: color(accent);
 }
 
-.cta {
-    position: absolute;
-    z-index: 2;
-    right: rem(22);
-    bottom: rem(22);
+.date {
 }
 
 .body {
-    display: flex;
-    margin-top: rem(11);
-}
-
-.body__left {
-    flex-grow: 1;
-
-    .root--layout-centered & {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    position: relative;
+    z-index: 1;
 }
 
 .tags {
+    display: flex;
+    overflow: hidden;
+    gap: rem(10);
     margin-top: rem(4);
-    opacity: 0.8;
 }
 
 .tag {
     position: relative;
-
-    &:not(:last-child)::after {
-        position: relative;
-        content: '|';
-        margin-inline: rem(6);
-    }
-}
-
-.description {
-    display: var(--v-card-description-display);
-    width: 100%;
-
-    @include media('>=md') {
-        width: clamp(#{rem(360)}, 25%, #{rem(480)});
-    }
+    white-space: nowrap;
 }
 </style>

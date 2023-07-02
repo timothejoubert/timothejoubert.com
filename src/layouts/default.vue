@@ -2,6 +2,9 @@
     <div :class="rootClasses">
         <v-splash-screen-wrapper v-if="isSplashScreenDisplayed" />
         <v-top-bar />
+
+        <v-project-nav />
+
         <Nuxt />
         <v-footer />
     </div>
