@@ -22,11 +22,11 @@ export const getters: GetterTree<RootState, RootState> = {
         return getters.commonContentData('projectFrameWorks')
     },
     isProjectUid: (_state: RootState, getters: any) => {
-        return (uid: string): boolean => !!getters.getProjects?.some((project: ProjectDocument) => project.uid === uid)
+        return (uid: string): boolean => !!getters.projects?.some((project: ProjectDocument) => project.uid === uid)
     },
     getProjectByUid: (_state: RootState, getters: any) => {
         return (uid: string): ProjectDocument | undefined =>
-            getters.getProjects?.find((project: ProjectDocument) => project.uid === uid)
+            getters.projects?.find((project: ProjectDocument) => project.uid === uid)
     },
 }
 

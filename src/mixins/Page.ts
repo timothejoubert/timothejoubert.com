@@ -24,6 +24,7 @@ export default Vue.extend({
         let page
 
         const uid = params.pathMatch
+        console.log('uid', uid)
         const isProject = store.getters.isProjectUid(uid)
 
         const isPreview = route.fullPath.includes(`${context.$config.previewPath}/`)
@@ -53,7 +54,9 @@ export default Vue.extend({
             await store.dispatch('updatePageData', page)
             return { page }
         } else {
-            return { page: { data: {}, title: 'fail to fetch page in mixin' } }
+            const fallBack = { page: { data: {}, title: 'fail to fetch page in mixin' } }
+            await store.dispatch('updatePageData', fallBack)
+            return fallBack
         }
     },
     head(): MetaInfo {
@@ -102,8 +105,8 @@ export default Vue.extend({
         isProjectPage(): boolean {
             return !!this.page && isProjectDocument(this.page)
         },
-        slices(): SliceZone | [] {
-            return !!this.page && this.page.data?.slices
+        slices(): SliceZone[] | false {
+            return !!this.page.data?.slices?.length && this.page.data?.slices
         },
         jsonLd(): Record<string, unknown> | undefined {
             const siteName =

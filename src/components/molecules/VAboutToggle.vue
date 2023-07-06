@@ -39,11 +39,7 @@ export default Vue.extend({
 
 <style lang="scss" module>
 .root {
-    position: fixed;
-    z-index: 2;
-    right: $container-padding-inline;
-    bottom: 0;
-    left: $container-padding-inline;
+    position: relative;
     display: flex;
     height: rem(60);
     align-items: center;

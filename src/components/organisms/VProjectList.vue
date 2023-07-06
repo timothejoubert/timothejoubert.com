@@ -16,7 +16,9 @@ export default Vue.extend({
     name: 'VProjectList',
     computed: {
         projects(): ProjectDocument[] {
-            return [...Array(20).keys()].map(() => this.$store.getters.projects[0])
+            return [...Array(20).keys()]
+                .map(() => [this.$store.getters.projects[0], this.$store.getters.projects[1]])
+                .flat()
         },
     },
 })
@@ -30,6 +32,6 @@ export default Vue.extend({
 .projects {
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(var(--card-number, 4), minmax(150px, 1fr));
+    grid-template-columns: repeat(var(--card-number, 4), minmax(0, 1fr));
 }
 </style>

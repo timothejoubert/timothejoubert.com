@@ -140,8 +140,7 @@ img {
     -moz-user-select: none;
     user-select: none;
 
-    .root--cover &,
-    .root--ratio & {
+    .root--cover & {
         position: absolute;
         top: 0;
         left: 0;
@@ -159,7 +158,6 @@ img {
         opacity: 1;
     }
 }
-
 
 .copyright {
     --v-information-pill-background-volor: #{rgba(color(white), 0.5)};

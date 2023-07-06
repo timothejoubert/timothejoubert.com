@@ -1,12 +1,18 @@
 <template>
     <div :class="rootClasses">
-        <v-splash-screen-wrapper v-if="isSplashScreenDisplayed" />
-        <v-top-bar />
+        <div :class="$style.body">
+            <v-splash-screen-wrapper v-if="isSplashScreenDisplayed" />
+            <v-top-bar />
 
-        <v-main />
-        <Nuxt />
+            <v-main />
 
-        <v-about-toggle />
+            <v-about />
+        </div>
+        <transition :name="$style['project-modal']">
+            <div v-if="isProjectOpen" :class="$style.project">
+                <Nuxt />
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -15,6 +21,7 @@ import mixins from 'vue-typed-mixins'
 import Resize from '~/mixins/Resize'
 import MutationType from '~/constants/mutation-type'
 import SplashScreen from '~/mixins/SplashScreen'
+import CustomType from '~/constants/custom-type'
 
 export default mixins(Resize, SplashScreen).extend({
     name: 'default',
@@ -28,18 +35,32 @@ export default mixins(Resize, SplashScreen).extend({
         rootClasses(): (string | false | undefined)[] {
             return [this.$style.root, ...this.splashScreenClasses]
         },
+        isProjectOpen(): boolean {
+            return this.$store.state.currentPageData?.type === CustomType.PROJECT
+        },
     },
 })
 </script>
 
 <style lang="scss" module>
+@include v-transition(
+    'project-modal',
+    (
+        duration: 0.7s,
+    ),
+    (
+        translate: -100% 0,
+    )
+);
+
 .root {
     @include theme(dark);
 
     position: relative;
+    display: flex;
     /* stylelint-disable-next-line unit-no-unknown */
-    min-height: 100svh;
-    padding-bottom: $v-top-bar-height;
+    //min-height: 100svh;
+    //padding-bottom: $v-top-bar-height;
     background-color: var(--theme-background-color);
     color: var(--theme-foreground-color);
 
@@ -47,5 +68,15 @@ export default mixins(Resize, SplashScreen).extend({
         overflow: hidden;
         max-height: 100vh;
     }
+}
+
+.body {
+    position: relative;
+}
+
+.project {
+    position: relative;
+    min-width: 50%;
+    border-left: 1px solid var(--theme-foreground-color);
 }
 </style>

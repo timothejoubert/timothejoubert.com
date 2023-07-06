@@ -81,7 +81,7 @@ export default Vue.extend({
     name: 'VSocialList',
     computed: {
         socialList(): SocialsContent[] {
-            const socials = this.$store.state.settings?.data?.socials
+            const socials = this.$store.getters.settings?.data?.socials
             if (!socials && !socials?.length) return []
 
             return getSocialsData(socials)

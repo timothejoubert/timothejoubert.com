@@ -1,6 +1,9 @@
 <template>
-    <div :class="$style.root">about</div>
+    <div :class="$style.root">
+        <v-about-toggle />
+    </div>
 </template>
+
 <script lang="ts">
 import Vue from 'vue'
 

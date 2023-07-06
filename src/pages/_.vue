@@ -1,8 +1,9 @@
 <template>
-    <div v-if="pageData">
+    <div v-if="pageData" :class="$style.root">
         <slice-zone v-if="slices && components" wrapper="main" :slices="slices" :components="components" />
 
         <!--        <v-style-preview />-->
+        <v-project v-if="isProjectPage" />
 
         <!-- eslint-disable-next-line vue/no-v-html -->
         <script v-if="jsonLd" type="application/ld+json" v-html="jsonLd"></script>
@@ -28,7 +29,7 @@ export default mixins(Page).extend({
 </script>
 
 <style lang="scss" module>
-.project-page-carousel {
-    @include margin-block;
+.root {
+    position: relative;
 }
 </style>
