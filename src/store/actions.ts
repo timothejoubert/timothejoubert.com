@@ -9,10 +9,14 @@ import { RootState } from '~/types/store'
 import MutationType from '~/constants/mutation-type'
 import { CustomTypeName } from '~/types/prismic/app-prismic'
 import CustomType from '~/constants/custom-type'
-import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument } from '~~/prismicio-types'
+import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument, SettingsDocument } from '~~/prismicio-types'
 import { getNumberedDate } from '~/utils/prismic/date'
 
-type CommonContentResponse = (Document | ApiSearchResponse<ProjectTagDocument | ProjectFrameworkDocument>)[]
+type CommonContentResponse = (
+    | Document<SettingsDocument>
+    | Document<ProjectDocument>[]
+    | ApiSearchResponse<ProjectTagDocument | ProjectFrameworkDocument>
+)[]
 
 const actions: ActionTree<RootState, RootState> = {
     async nuxtServerInit({ commit, dispatch }: ActionContext<RootState, RootState>, context: Context) {
@@ -20,29 +24,23 @@ const actions: ActionTree<RootState, RootState> = {
         else await context.app.i18n.setLocale('fr')
 
         await dispatch('getCommonContent', context)
-            .then(([settings, frameworks, tags]: Array<CommonContentResponse>) => {
-                // commit(MutationType.SET_MAIN_MENU, mainMenu)
-                commit(MutationType.SET_SETTINGS, settings)
-                commit(
-                    MutationType.SET_FRAMEWORKS,
-                    (frameworks as unknown as ApiSearchResponse<ProjectFrameworkDocument>).results
-                )
-                commit(MutationType.SET_TAGS, (tags as unknown as ApiSearchResponse<ProjectTagDocument>).results)
-            })
-            .catch((fetchError: Error) => {
-                throw new Error(`failed to fetch mainMenu or setting: ${fetchError}`)
-            })
+            .then(([settings, frameworks, tags, projects]: Array<CommonContentResponse>) => {
+                const projectFrameWorks = (frameworks as unknown as ApiSearchResponse<ProjectFrameworkDocument>).results
+                const projectTags = (tags as unknown as ApiSearchResponse<ProjectTagDocument>).results
 
-        await dispatch('getProjects', context)
-            .then((projects: Array<ProjectDocument>) => {
-                const projectOrdered = projects.sort(
+                const projectOrdered = (projects as unknown as ProjectDocument[]).sort(
                     (accumulator: ProjectDocument, current: ProjectDocument) =>
                         getNumberedDate(current.data.date) - getNumberedDate(accumulator.data.date)
                 )
-                commit(MutationType.SET_PROJECTS, projectOrdered)
+                commit(MutationType.SET_COMMON_CONTENT, {
+                    settings,
+                    projectFrameWorks,
+                    projectTags,
+                    projects: projectOrdered,
+                })
             })
             .catch((fetchError: Error) => {
-                throw new Error(`failed to fetch projects: ${fetchError}`)
+                throw new Error(`failed to fetch mainMenu or setting: ${fetchError}`)
             })
     },
     getCommonContent(
@@ -53,28 +51,19 @@ const actions: ActionTree<RootState, RootState> = {
 
         // const mainMenu = context.$prismic.api.getSingle(CustomType.MAIN_MENU as CustomTypeName, localeOptions)
         const settings = context.$prismic.api.getSingle(CustomType.SETTINGS as CustomTypeName, localeOptions)
+
         const frameworks = context.$prismic.api.query(
             context.$prismic.predicates.at('document.type', CustomType.PROJECT_FRAMEWORK as CustomTypeName)
         )
         const tags = context.$prismic.api.query(
             context.$prismic.predicates.at('document.type', CustomType.PROJECT_TAG as CustomTypeName)
         )
-        // const frameworks = context.$prismic.api.getSingle(CustomType.PROJECT_FRAMEWORK as CustomTypeName, localeOptions)
-        // const tags = context.$prismic.api.getSingle(CustomType.PROJECT_TAG as CustomTypeName, localeOptions)
-
-        return Promise.all([settings, frameworks, tags])
-    },
-    getProjects(
-        _actionContext: ActionContext<RootState, RootState>,
-        context: Context
-    ): Promise<Document<ProjectDocument>[]> {
-        const localeOptions = context.route.fullPath.includes('/en') ? { lang: 'en-gb' } : undefined
 
         const projects = context.$prismic.api
             .query(context.$prismic.predicates.at('document.type', CustomType.PROJECT as CustomTypeName), localeOptions)
             .then((response) => response.results)
 
-        return Promise.resolve(projects)
+        return Promise.all([settings, frameworks, tags, projects])
     },
     updatePageData({ commit }: ActionContext<RootState, RootState>, data: PrismicDocument) {
         commit(MutationType.CURRENT_PAGE_DATA, data)

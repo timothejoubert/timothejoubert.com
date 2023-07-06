@@ -1,11 +1,8 @@
-html {
-    background-color: var(--theme-default);
-    color: var(--theme-on-default);
-}
-
 body {
     @include text-body-m;
 
+    background-color: var(--theme-background-color);
+    color: var(--theme-foreground-color);
     font-family: $noi;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -53,8 +50,8 @@ select {
 }
 
 img {
-    -webkit-user-drag: none;
     max-width: 100%;
+    -webkit-user-drag: none;
 }
 
 //::selection {

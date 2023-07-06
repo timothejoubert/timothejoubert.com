@@ -7,20 +7,20 @@
         :aria-checked="isOpen.toString()"
         @click="toggleSettings"
     >
-        <svg width="28" height="23" viewBox="0 0 28 23" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" width="2" height="23" rx="1" :class="$style.rect" />
-            <rect x="13" width="2" height="23" rx="1" :class="$style.rect" />
-            <rect x="22" width="2" height="23" rx="1" :class="$style.rect" />
-            <circle cx="5" cy="13" r="4" :class="$style.circle" stroke-width="2" />
-            <circle cx="23" cy="13" r="4" :class="$style.circle" stroke-width="2" />
-            <circle cx="14" cy="8" r="4" :class="[$style.circle, $style['circle--center']]" stroke-width="2" />
+        <svg :class="$style.svg" viewBox="0 0 28 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" width="2" height="20" rx="1" :class="$style.rect" />
+            <rect x="13" width="2" height="20" rx="1" :class="$style.rect" />
+            <rect x="22" width="2" height="20" rx="1" :class="$style.rect" />
+            <circle cx="5" cy="13" r="3" :class="$style.circle" />
+            <circle cx="23" cy="13" r="3" :class="$style.circle" />
+            <circle cx="14" cy="8" r="3" :class="[$style.circle, $style['circle--center']]" />
         </svg>
     </button>
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import MutationType from "~/constants/mutation-type"
+import Vue from 'vue'
+import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
     name: 'VToggleSettings',
@@ -31,15 +31,20 @@ export default Vue.extend({
     },
     methods: {
         toggleSettings() {
-            this.$store.commit(MutationType.SPLASH_SCREEN_DONE, !this.isOpen)
+            console.log('toggleSettings')
+            this.$store.commit(MutationType.TOGGLE_SETTINGS, !this.isOpen)
         },
     },
 })
 </script>
 <style lang="scss" module>
 .root {
-    width: rem(30);
-    color: color(white);
+    width: rem(26);
+}
+
+.svg {
+    width: 100%;
+    height: auto;
 }
 
 .rect,

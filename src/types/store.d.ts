@@ -1,15 +1,11 @@
 import { NuxtError } from '@nuxt/types'
 import { PrismicDocument } from '@prismicio/types/src/value/document'
 import * as prismicT from '@prismicio/types'
-import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument, SettingsDocument} from '~~/prismicio-types'
+import { CommonContent } from '~/types/app'
 
 interface RootState {
     // Prismic data
-    settings: SettingsDocument | null
-    // mainMenu: MainMenuDocument | null
-    projects: ProjectDocument[] | null
-    projectTags: ProjectTagDocument[]
-    projectFramework: ProjectFrameworkDocument[]
+    commonContent: CommonContent
     currentPageData: PrismicDocument | null
 
     // App

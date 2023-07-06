@@ -3,10 +3,10 @@
         <v-splash-screen-wrapper v-if="isSplashScreenDisplayed" />
         <v-top-bar />
 
-        <v-project-nav />
-
+        <v-main />
         <Nuxt />
-        <v-footer />
+
+        <v-about-toggle />
     </div>
 </template>
 
@@ -34,8 +34,14 @@ export default mixins(Resize, SplashScreen).extend({
 
 <style lang="scss" module>
 .root {
+    @include theme(dark);
+
     position: relative;
-    background-color: color(white);
+    /* stylelint-disable-next-line unit-no-unknown */
+    min-height: 100svh;
+    padding-bottom: $v-top-bar-height;
+    background-color: var(--theme-background-color);
+    color: var(--theme-foreground-color);
 
     &--splash-screen-displayed {
         overflow: hidden;

@@ -1,7 +1,7 @@
 <template>
-    <nav class="container">
+    <nav class="container" :class="$style.root">
         <ul :class="$style.projects">
-            <li v-for="project in projects" :key="project.uid">
+            <li v-for="(project, index) in projects" :key="index + project.uid">
                 <v-project-card :project="project" />
             </li>
         </ul>
@@ -13,10 +13,10 @@ import Vue from 'vue'
 import { ProjectDocument } from '~~/prismicio-types'
 
 export default Vue.extend({
-    name: 'VProjectNav',
+    name: 'VProjectList',
     computed: {
         projects(): ProjectDocument[] {
-            return [...Array(10).keys()].map(() => this.$store.state.projects[0])
+            return [...Array(20).keys()].map(() => this.$store.getters.projects[0])
         },
     },
 })
@@ -24,11 +24,12 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     position: relative;
+    margin-top: rem(30);
 }
 
 .projects {
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(var(--card-number, 4), 1fr);
+    grid-template-columns: repeat(var(--card-number, 4), minmax(150px, 1fr));
 }
 </style>

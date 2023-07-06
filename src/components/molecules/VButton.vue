@@ -117,8 +117,9 @@ export default Vue.extend({
     @include v-button-default-css-vars($v-button);
     @include theme-variants;
 
-    display: inline-block;
+    display: inline-flex;
     overflow: hidden;
+    align-items: center;
     border: none;
     color: var(--theme-foreground-color, color(black));
     text-decoration: none;
@@ -144,7 +145,6 @@ export default Vue.extend({
 
     &--filled {
         background-color: var(--theme-background-color);
-        color: var(--theme-foreground-color);
     }
 
     &--disabled {
@@ -158,22 +158,6 @@ export default Vue.extend({
 
     &--filled#{&}--disabled {
         background-color: color(grey-50);
-    }
-
-    // HOVER
-
-    @media (hover: hover) {
-        &--outlined:not(#{&}--disabled):hover {
-            border-color: var(--theme-button-outlined-hover-background);
-            background-color: var(--theme-button-outlined-hover-background);
-            color: var(--theme-button-outlined-hover-color);
-        }
-
-        &--filled#{&}--animate:not(#{&}--disabled),
-        &--filled:not(#{&}--disabled):hover {
-            background-color: var(--theme-button-filled-hover-background);
-            color: var(--theme-button-filled-hover-foreground);
-        }
     }
 
     // SIZES
@@ -209,6 +193,7 @@ export default Vue.extend({
 
 .label {
     @include v-button-default-css-vars($v-button-label, 'label');
+
     white-space: nowrap;
 }
 </style>

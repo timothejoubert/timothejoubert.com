@@ -21,7 +21,7 @@ export default Vue.extend({
             return this.$getLocalePath() || '/'
         },
         logoText(): string {
-            return this.$store.state.settings?.data?.website_name || this.$config.appName
+            return this.$store.getters.settings?.data?.website_name || this.$config.appName
         },
     },
 })
@@ -33,10 +33,11 @@ export default Vue.extend({
     z-index: 101;
     top: 0;
     display: flex;
+    height: $v-top-bar-height;
     align-items: center;
     justify-content: space-between;
-    background-color: color(black);
-    color: color(white);
+    border-bottom: 1px solid var(--theme-foreground-color);
+    background-color: var(--theme-background-color);
 }
 
 .home {

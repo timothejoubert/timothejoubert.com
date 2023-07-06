@@ -6,26 +6,53 @@
   "status": true,
   "json": {
     "Main": {
-    "website_name": { "type": "Text", "config": { "label": "Website name", "placeholder": "" } },
-    "email": { "type": "Text", "config": { "label": "Email", "placeholder": "" } },
-    "socials": {
+      "website_name": { "type": "Text", "config": { "label": "Website name", "placeholder": "" } },
+      "content": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Content",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "email": { "type": "Text", "config": { "label": "Email", "placeholder": "" } },
+      "columns": {
         "type": "Group",
         "config": {
-            "fields": {
-                "social": {
-                    "type": "Select",
-                    "config": {
-                        "label": "Social",
-                        "placeholder": "",
-                        "options": ["Instagram", "Facebook", "Youtube", "Vimeo", "TikTok", "Behance", "LinkedIn"]
-                    }
-                },
-                "link": { "type": "Link", "config": { "label": "Link", "select": null } },
-                "label": { "type": "Text", "config": { "label": "Label", "placeholder": "" } }
-            },
-            "label": "Socials"
+          "label": "columns",
+          "fields": {
+            "title": { "type": "Text", "config": { "label": "Title", "placeholder": "" } },
+            "content": {
+              "type": "StructuredText",
+              "config": {
+                "label": "Content",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+              }
+            }
+          }
         }
-    },
+      },
+      "socials": {
+        "type": "Group",
+        "config": {
+          "fields": {
+            "social": {
+              "type": "Select",
+              "config": {
+                "label": "Social",
+                "placeholder": "",
+                "options": ["Instagram", "Facebook", "Youtube", "Vimeo", "TikTok", "Behance", "LinkedIn", "Github"]
+              }
+            },
+            "link": { "type": "Link", "config": { "label": "Link", "select": null } },
+            "label": { "type": "Text", "config": { "label": "Label", "placeholder": "" } }
+          },
+          "label": "Socials"
+        }
+      },
       "slices": { "type": "Slices", "fieldset": "Slice Zone", "config": { "choices": {} } }
     },
     "SEO & Metadata": {

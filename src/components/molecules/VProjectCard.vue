@@ -8,7 +8,7 @@
 import Vue from 'vue'
 import type { PropType } from 'vue'
 import { getProjectYear } from '~/utils/prismic/date'
-import { ProjectDocument, ProjectTagDocument } from '~~/prismicio-types'
+import { ProjectDocument, ProjectDocumentDataTagsItem, ProjectTagDocument } from '~~/prismicio-types'
 
 export default Vue.extend({
     name: 'VProjectCard',
@@ -19,14 +19,12 @@ export default Vue.extend({
         cardProps(): Record<string, any> {
             const { thumbnail, title, date, tags } = this.project.data
 
-            const parsedTags = tags.map((tagReference) => {
+            const parsedTags = tags.map((tagReference: ProjectDocumentDataTagsItem) => {
                 const uid = (tagReference.tag as { uid?: string })?.uid
-                return this.$store.state.projectTags.filter(
+                return this.$store.getters.projectTags.filter(
                     (projectTag: ProjectTagDocument) => projectTag.uid === uid
                 )?.[0]?.data?.name
             })
-
-            console.log(parsedTags)
 
             return {
                 image: thumbnail,

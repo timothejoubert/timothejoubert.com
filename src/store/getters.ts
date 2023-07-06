@@ -1,14 +1,32 @@
 import type { GetterTree } from 'vuex'
 import { RootState } from '~/types/store'
-import { ProjectDocument } from '~~/prismicio-types'
+import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument } from '~~/prismicio-types'
+import { CommonContentKey } from '~/types/app'
 
 export const getters: GetterTree<RootState, RootState> = {
-    // alreadyVisited: (state: RootState) => state.alreadyVisited,
-    getProjectByUid: (state: RootState) => {
-        return (uid: string): ProjectDocument | undefined => state.projects?.find((project) => project.uid === uid)
+    commonContentData(state: RootState) {
+        return function (key: CommonContentKey) {
+            return state.commonContent?.[key]
+        }
     },
-    isProjectUid: (state: RootState) => {
-        return (uid: string): boolean => !!state.projects?.some((project) => project.uid === uid)
+    settings(_state: RootState, getters: any): ProjectDocument[] {
+        return getters.commonContentData('settings')
+    },
+    projects(_state: RootState, getters: any): ProjectDocument[] {
+        return getters.commonContentData('projects')
+    },
+    projectTags(_state: RootState, getters: any): ProjectTagDocument[] {
+        return getters.commonContentData('projectTags')
+    },
+    projectFrameworks(_state: RootState, getters: any): ProjectFrameworkDocument[] {
+        return getters.commonContentData('projectFrameWorks')
+    },
+    isProjectUid: (_state: RootState, getters: any) => {
+        return (uid: string): boolean => !!getters.getProjects?.some((project: ProjectDocument) => project.uid === uid)
+    },
+    getProjectByUid: (_state: RootState, getters: any) => {
+        return (uid: string): ProjectDocument | undefined =>
+            getters.getProjects?.find((project: ProjectDocument) => project.uid === uid)
     },
 }
 

@@ -10,9 +10,19 @@
                 :play-animation="mouseEnter"
                 :class="$style.title"
             />
-            <span v-if="date">{{ date }}</span>
+            <span v-if="date" class="text-over-title-xs">{{ date }}</span>
             <div v-if="tags.length" :class="$style.tags">
-                <v-button theme="light" :filled="true" size="xs" v-for="tag in tags" :key="tag" class="text-body-s" :label="tag" :class="$style.tag" />
+                <v-button
+                    v-for="tag in tags"
+                    :key="tag"
+                    theme="light"
+                    tag="div"
+                    :filled="true"
+                    size="xs"
+                    class="text-body-s"
+                    :label="tag"
+                    :class="$style.tag"
+                />
             </div>
         </div>
     </div>
@@ -25,11 +35,6 @@ import type { ImageField } from '@prismicio/types'
 
 export default Vue.extend({
     name: 'VCard',
-    data() {
-        return {
-            mouseEnter: false,
-        }
-    },
     props: {
         title: String,
         image: Object as PropType<ImageField>,
@@ -38,6 +43,11 @@ export default Vue.extend({
             default: () => [],
         },
         date: String,
+    },
+    data() {
+        return {
+            mouseEnter: false,
+        }
     },
 })
 </script>
@@ -59,6 +69,7 @@ export default Vue.extend({
 
     &::after {
         position: absolute;
+        z-index: 1;
         background: linear-gradient(45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.15) 100%);
         content: '';
         inset: 0;
@@ -78,8 +89,8 @@ export default Vue.extend({
     color: color(accent);
 }
 
-.date {
-}
+//.date {
+//}
 
 .body {
     position: relative;
@@ -89,8 +100,8 @@ export default Vue.extend({
 .tags {
     display: flex;
     overflow: hidden;
-    gap: rem(10);
     margin-top: rem(4);
+    gap: rem(10);
 }
 
 .tag {

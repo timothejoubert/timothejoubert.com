@@ -2,7 +2,7 @@
     <div v-if="pageData">
         <slice-zone v-if="slices && components" wrapper="main" :slices="slices" :components="components" />
 
-        <v-style-preview />
+        <!--        <v-style-preview />-->
 
         <!-- eslint-disable-next-line vue/no-v-html -->
         <script v-if="jsonLd" type="application/ld+json" v-html="jsonLd"></script>

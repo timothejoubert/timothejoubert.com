@@ -2,11 +2,7 @@ import { RootState } from '~/types/store'
 
 export default (): RootState => ({
     // Prismic data
-    settings: null,
-    // mainMenu: null,
-    projects: null,
-    projectTags: [],
-    projectFramework: [],
+    commonContent: {},
     currentPageData: null,
 
     // SplashScreen

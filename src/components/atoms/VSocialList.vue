@@ -7,6 +7,7 @@
 import Vue from 'vue'
 import type { VueConstructor } from 'vue'
 import IconFacebook from '~/assets/images/icons/social-facebook.svg?sprite'
+import IconGithub from '~/assets/images/icons/social-github.svg?sprite'
 import IconTwitter from '~/assets/images/icons/social-twitter.svg?sprite'
 import IconInstagram from '~/assets/images/icons/social-instagram.svg?sprite'
 import IconYoutube from '~/assets/images/icons/social-youtube.svg?sprite'
@@ -37,6 +38,8 @@ const getSocialIcon = (name?: string | null): VueConstructor | string => {
     if (!name) return ''
 
     switch (name.toLowerCase()) {
+        case 'github':
+            return IconGithub
         case 'instagram':
             return IconInstagram
         case 'facebook':
@@ -82,7 +85,7 @@ export default Vue.extend({
             if (!socials && !socials?.length) return []
 
             return getSocialsData(socials)
-        }
+        },
     },
 })
 </script>

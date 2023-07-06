@@ -2,17 +2,20 @@ import Vue from 'vue'
 import type { MetaInfo } from 'vue-meta'
 import { Context, NuxtError } from '@nuxt/types'
 import { SliceZone } from '@prismicio/types/src/value/sliceZone'
-import { FilledLinkToMediaField } from '@prismicio/types/src/value/linkToMedia'
+import { mapGetters } from 'vuex'
 import { FacebookMetaOptions, TwitterMetaOptions } from '~/types/meta'
 import { createFacebookMeta } from '~/utils/meta/facebook'
 import { createTwitterMeta } from '~/utils/meta/twitter'
 import { DocumentPageReachableData } from '~/types/prismic/app-prismic'
 import CustomType from '~/constants/custom-type'
-import { isHomePageDocument, isProjectListingDocument } from '~/utils/prismic/document-entity'
-import { isDefaultPageDocument, isProjectDocument } from '~/utils/prismic/custom-type-entity'
-import { isFilledLinkToMediaField } from '~/utils/prismic/field-media'
+import { isHomePageDocument } from '~/utils/prismic/document-entity'
+import { isProjectDocument } from '~/utils/prismic/custom-type-entity'
 import { SettingsDocument, ProjectDocumentData } from '~~/prismicio-types'
 import { getProjectYear } from '~/utils/prismic/date'
+
+function isValidUid(uid: string): boolean {
+    return uid === 'projects'
+}
 
 export default Vue.extend({
     nuxtI18n: false,
@@ -21,21 +24,21 @@ export default Vue.extend({
         let page
 
         const uid = params.pathMatch
-        const isPreview = route.fullPath.includes(`${context.$config.previewPath}/`)
-        const isRootPath = route.fullPath === '/en' || route.fullPath === '/'
         const isProject = store.getters.isProjectUid(uid)
 
-        if (isPreview) {
-            page = await $prismic.api.getByID(route.params.documentId)
-        } else if (isRootPath) {
+        const isPreview = route.fullPath.includes(`${context.$config.previewPath}/`)
+        const getByType = false // route.fullPath === '/en' || route.fullPath === '/'
+        const getByUid = isPreview || isValidUid(uid)
+
+        if (getByType) {
             page = await $prismic.api.getSingle(CustomType.HOME_PAGE)
         } else if (isProject) {
             page = store.getters.getProjectByUid(uid)
-        } else {
+        } else if (getByUid) {
             try {
                 page = await $prismic.api.getByUID(
                     CustomType.PAGE,
-                    uid,
+                    isPreview ? route.params.documentId : uid,
                     route.fullPath.includes('/en') ? { lang: 'en-gb' } : undefined
                 )
             } catch (fetchError: Error | any) {
@@ -50,7 +53,7 @@ export default Vue.extend({
             await store.dispatch('updatePageData', page)
             return { page }
         } else {
-            return { page: { title: "can't fetch title in Page mixin" } }
+            return { page: { data: {}, title: 'fail to fetch page in mixin' } }
         }
     },
     head(): MetaInfo {
@@ -68,11 +71,13 @@ export default Vue.extend({
         }
     },
     computed: {
+        ...mapGetters(['settings']),
         pageData(): DocumentPageReachableData {
             return this.page.data
         },
         appTitle(): string {
-            return this.$store.state.settings?.data?.site_name || this.$config.appName
+            // @ts-ignore
+            return this.settings?.data?.site_name || this.$config.appName
         },
         metaTitle(): string {
             if (this.isHome) return this.appTitle
@@ -80,7 +85,8 @@ export default Vue.extend({
             return pageTitle ? `${pageTitle} | ${this.appTitle}` : this.appTitle
         },
         pageDescription(): string | undefined {
-            return this.pageData?.meta_description || this.$store.state.settings?.data?.description
+            // @ts-ignore
+            return this.pageData?.meta_description || this.settings?.data?.description
         },
         metaImage(): string {
             const mediaUrl = (this.pageData?.meta_image as { url?: string })?.url
@@ -93,14 +99,8 @@ export default Vue.extend({
         isHome(): boolean {
             return !!this.page && isHomePageDocument(this.page)
         },
-        isProjectListing(): boolean {
-            return !!this.page && isProjectListingDocument(this.page)
-        },
         isProjectPage(): boolean {
             return !!this.page && isProjectDocument(this.page)
-        },
-        isDefaultPage(): boolean {
-            return !!this.page && isDefaultPageDocument(this.page)
         },
         slices(): SliceZone | [] {
             return !!this.page && this.page.data?.slices
