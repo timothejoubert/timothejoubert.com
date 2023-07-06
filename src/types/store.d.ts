@@ -1,6 +1,5 @@
 import { NuxtError } from '@nuxt/types'
 import { PrismicDocument } from '@prismicio/types/src/value/document'
-import * as prismicT from '@prismicio/types'
 import { CommonContent } from '~/types/app'
 
 interface RootState {
@@ -10,11 +9,7 @@ interface RootState {
 
     // App
     isSettingsOpen: boolean
-
-    // components
-    splashScreenDone: Boolean
-    mediaViewerData: null | prismicT.ImageField[]
-    mediaViewerSlideIndex: number
+    splashScreenDone: boolean
 
     // Global
     windowWidth: number

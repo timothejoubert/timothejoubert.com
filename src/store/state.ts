@@ -5,10 +5,8 @@ export default (): RootState => ({
     commonContent: {},
     currentPageData: null,
 
-    // SplashScreen
-    splashScreenDone: false,
-
     // App
+    splashScreenDone: false,
     isSettingsOpen: false,
 
     // General
@@ -17,6 +15,4 @@ export default (): RootState => ({
     windowHeight: 0,
     prefersReducedMotion: false,
     scrollIsDisabled: false,
-    mediaViewerData: null,
-    mediaViewerSlideIndex: 0,
 })
