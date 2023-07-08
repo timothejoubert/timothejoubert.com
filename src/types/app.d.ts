@@ -1,6 +1,6 @@
 import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument, SettingsDocument } from '~~/prismicio-types'
 
-type Theme = 'light' | 'dark'
+type Theme = 'light' | 'dark' | 'accent'
 
 type CommonContentKey = 'settings' | 'projectFrameWorks' | 'projectTags' | 'projects'
 
@@ -10,3 +10,5 @@ interface CommonContent {
     projectTags?: ProjectTagDocument[]
     projects?: ProjectDocument[]
 }
+
+interface ProjectFilter {}

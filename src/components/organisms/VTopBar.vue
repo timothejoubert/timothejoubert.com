@@ -1,6 +1,6 @@
 <template>
     <div :class="$style.root" class="container">
-        <nuxt-link :to="homeLink" :class="$style.home">
+        <nuxt-link :to="homeLink" :class="$style.home" @click.native="onClick">
             <icon-logo :class="$style.logo" />
             <div :class="$style['logo-text']" class="text-h2">{{ logoText }}</div>
         </nuxt-link>
@@ -12,6 +12,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import IconLogo from '~/assets/images/logo.svg?sprite'
+import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
     name: 'VTopBar',
@@ -22,6 +23,12 @@ export default Vue.extend({
         },
         logoText(): string {
             return this.$store.getters.settings?.data?.website_name || this.$config.appName
+        },
+    },
+    methods: {
+        onClick() {
+            const isAboutOpen = this.$store.state.isAboutOpen
+            if (isAboutOpen) this.$store.commit(MutationType.ABOUT_OPENED, false)
         },
     },
 })

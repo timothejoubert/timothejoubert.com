@@ -1,4 +1,4 @@
-import { ProjectDocument } from '~~/prismicio-types'
+import { ProjectDocument, ProjectDocumentDataTagsItem, ProjectTagDocument } from '~~/prismicio-types'
 import { ProjectDocumentData } from '~/types/prismic/app-prismic'
 
 export function getAllTagProject(projects: ProjectDocument[] | undefined): string[] {
@@ -19,4 +19,13 @@ export function getProjectTags(projectData: ProjectDocumentData): string[] {
         label: string
     }[]
     return filteredTags.map((tag) => tag.label)
+}
+
+export function getTagsByReference(tags: ProjectDocumentDataTagsItem[], tagDocuments: ProjectTagDocument[]): string[] {
+    return tags
+        .map((tagReference) => {
+            const uid = (tagReference.tag as { uid?: string })?.uid
+            return tagDocuments.filter((projectTag: ProjectTagDocument) => projectTag.uid === uid)?.[0]?.data?.name
+        })
+        .filter((tag) => !!tag) as string[]
 }

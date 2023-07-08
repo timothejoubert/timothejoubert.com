@@ -19,7 +19,6 @@
                     tag="div"
                     :filled="true"
                     size="xs"
-                    class="text-body-s"
                     :label="tag"
                     :class="$style.tag"
                 />

@@ -24,7 +24,6 @@ export default Vue.extend({
         let page
 
         const uid = params.pathMatch
-        console.log('uid', uid)
         const isProject = store.getters.isProjectUid(uid)
 
         const isPreview = route.fullPath.includes(`${context.$config.previewPath}/`)

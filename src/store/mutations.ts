@@ -10,8 +10,10 @@ export default {
     [MutationType.CURRENT_PAGE_DATA]: (state, value: PrismicDocument) => (state.currentPageData = value),
 
     // App
-    [MutationType.TOGGLE_SETTINGS]: (state, value: boolean) => (state.isSettingsOpen = value),
+    [MutationType.SETTING_OPENED]: (state, value: boolean) => (state.isSettingsOpen = value),
+    [MutationType.ABOUT_OPENED]: (state, value: boolean) => (state.isAboutOpen = value),
     [MutationType.SPLASH_SCREEN_DONE]: (state, value: boolean) => (state.splashScreenDone = value),
+    [MutationType.TAG_FILTERS]: (state, value: string[]) => (state.tagFilters = value),
 
     // Global
     [MutationType.WINDOW_WIDTH]: (state, value: number) => (state.windowWidth = value),

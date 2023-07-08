@@ -1,6 +1,6 @@
 <template>
-    <div :class="$style.root" class="container">
-        <button :class="$style['about-link']" aria-label="button-toggle-about" @click="onClick">
+    <div :class="$style.root">
+        <button :class="$style['about-link']" aria-label="Ouvrir la section about" @click="onClick">
             <span v-if="title" :class="[$style.title, 'body-s']">{{ title }}</span>
             <span :class="[$style.icon, isAboutOpen && $style['icon--open']]">
                 <span :class="$style['circle-outlined']"></span>
@@ -17,6 +17,7 @@
 import Vue from 'vue'
 import IconArrow from '~/assets/images/icons/arrow.svg?sprite'
 import IconCross from '~/assets/images/icons/cross.svg?sprite'
+import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
     name: 'VAboutToggle',
@@ -31,7 +32,8 @@ export default Vue.extend({
     },
     methods: {
         onClick() {
-            console.log('click')
+            const currentState = this.$store.state.isAboutOpen
+            this.$store.commit(MutationType.ABOUT_OPENED, !currentState)
         },
     },
 })
@@ -41,11 +43,9 @@ export default Vue.extend({
 .root {
     position: relative;
     display: flex;
-    height: rem(60);
+    height: $v-about-toggle-height;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid var(--theme-foreground-color);
-    background-color: var(--theme-background-color);
 }
 
 .socials {

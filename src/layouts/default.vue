@@ -3,9 +3,7 @@
         <div :class="$style.body">
             <v-splash-screen-wrapper v-if="isSplashScreenDisplayed" />
             <v-top-bar />
-
             <v-main />
-
             <v-about />
         </div>
         <transition :name="$style['project-modal']">
@@ -59,19 +57,26 @@ export default mixins(Resize, SplashScreen).extend({
     position: relative;
     display: flex;
     /* stylelint-disable-next-line unit-no-unknown */
-    //min-height: 100svh;
-    //padding-bottom: $v-top-bar-height;
+    max-height: 100svh;
     background-color: var(--theme-background-color);
     color: var(--theme-foreground-color);
 
     &--splash-screen-displayed {
         overflow: hidden;
-        max-height: 100vh;
+        //max-height: 100vh;
     }
 }
 
-.body {
-    position: relative;
+.body,
+.project {
+    -ms-overflow-style: none; /* IE and Edge */
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .project {

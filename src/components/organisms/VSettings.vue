@@ -1,5 +1,7 @@
 <template>
-    <div :class="$style.root" class="container">test</div>
+    <div :class="$style.root" class="container">
+        <button>test</button>
+    </div>
 </template>
 
 <script lang="ts">

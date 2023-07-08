@@ -1,6 +1,6 @@
 <template>
     <div :class="[$style.root, isOpen && isOpen && $style['root--open']]">
-        <v-settings :class="$style.settings" />
+        <v-settings :class="$style.settings" :inert="!isOpen" />
         <v-project-list />
     </div>
 </template>
@@ -21,6 +21,7 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     position: relative;
+    min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
     transition: translate 0.4s ease(out-quad);
     translate: 0 $v-settings-height * -1;
 

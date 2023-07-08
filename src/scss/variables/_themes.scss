@@ -9,6 +9,11 @@ $themes: (
         background-color: color(black),
         accent-color: color(accent),
     ),
+    accent: (
+        foreground-color: color(black),
+        background-color: color(accent),
+        accent-color: color(white),
+    ),
 );
 
 $default-theme: dark;

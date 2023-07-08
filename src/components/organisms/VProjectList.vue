@@ -16,9 +16,7 @@ export default Vue.extend({
     name: 'VProjectList',
     computed: {
         projects(): ProjectDocument[] {
-            return [...Array(20).keys()]
-                .map(() => [this.$store.getters.projects[0], this.$store.getters.projects[1]])
-                .flat()
+            return [...Array(8).keys()].map(() => this.$store.getters.projects).flat()
         },
     },
 })

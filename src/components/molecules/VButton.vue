@@ -59,7 +59,6 @@ export default Vue.extend({
         classNames(): (string | boolean | undefined)[] {
             return [
                 this.$style.root,
-                this.$style[`root--theme-${this.theme}`],
                 typeof this.size === 'string' && this.$style['root--size-' + this.size],
                 this.outlined && this.$style['root--outlined'],
                 this.filled && this.$style['root--filled'],
@@ -71,6 +70,7 @@ export default Vue.extend({
                 this.iconLast && this.$style['root--icon-last'],
                 this.animation && 'v-button--enable-animation',
                 this.playAnimation && this.$style['root--animate'],
+                this.$style['root--theme-' + this.theme],
             ]
         },
         internalTag(): string {

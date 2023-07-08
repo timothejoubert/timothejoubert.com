@@ -10,6 +10,11 @@ interface RootState {
     // App
     isSettingsOpen: boolean
     splashScreenDone: boolean
+    isAboutOpen: boolean
+
+    // project filters
+    tagFilters: string[]
+    frameWorkFilters: string[]
 
     // Global
     windowWidth: number

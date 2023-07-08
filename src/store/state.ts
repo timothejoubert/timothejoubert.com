@@ -8,6 +8,11 @@ export default (): RootState => ({
     // App
     splashScreenDone: false,
     isSettingsOpen: false,
+    isAboutOpen: false,
+
+    // project filters
+    tagFilters: [],
+    frameWorkFilters: [],
 
     // General
     errorPage: null,

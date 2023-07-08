@@ -5,7 +5,9 @@ enum MutationType {
 
     // loading
     SPLASH_SCREEN_DONE = 'splashScreenDone',
-    TOGGLE_SETTINGS = 'isSettingsOpen',
+    SETTING_OPENED = 'settingOpened',
+    ABOUT_OPENED = 'aboutOpened',
+    TAG_FILTERS = 'tagFilters',
 
     // Global
     ERROR_PAGE = 'errorPage',
