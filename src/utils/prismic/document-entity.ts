@@ -1,13 +1,17 @@
 import type { PrismicDocument } from '@prismicio/types'
-import { hasUid } from '~/types/prismic/prismic-guard'
 import DocumentUid from '~/constants/document-uid'
+import CustomType from '~/constants/custom-type'
 
-export function isDocumentByUid(document: PrismicDocument, name: string): boolean {
-    return hasUid(document) && document.uid === name
+export function isDocumentByCustomType(document: PrismicDocument | null, name: string): boolean {
+    return !!document?.type && document.type === name
 }
 
-export const isHomePageDocument = (document?: PrismicDocument): boolean => {
-    return isDocument(document) && isDocumentByUid(document, DocumentUid.HOME)
+export function isDocumentByUid(document: PrismicDocument | null, name: string): boolean {
+    return !!document?.uid && document.uid === name
+}
+
+export const isHomePageDocument = (document?: PrismicDocument | null): boolean => {
+    return !!document && isDocumentByCustomType(document, CustomType.HOME_PAGE)
 }
 
 export const isProjectListingDocument = (document?: PrismicDocument): boolean => {

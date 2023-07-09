@@ -22,10 +22,12 @@ export function getProjectTags(projectData: ProjectDocumentData): string[] {
 }
 
 export function getTagsByReference(tags: ProjectDocumentDataTagsItem[], tagDocuments: ProjectTagDocument[]): string[] {
-    return tags
-        .map((tagReference) => {
-            const uid = (tagReference.tag as { uid?: string })?.uid
-            return tagDocuments.filter((projectTag: ProjectTagDocument) => projectTag.uid === uid)?.[0]?.data?.name
-        })
-        .filter((tag) => !!tag) as string[]
+    return (
+        (tags
+            ?.map((tagReference) => {
+                const uid = (tagReference.tag as { uid?: string })?.uid
+                return tagDocuments.filter((projectTag: ProjectTagDocument) => projectTag.uid === uid)?.[0]?.data?.name
+            })
+            .filter((tag) => !!tag) as string[]) || []
+    )
 }

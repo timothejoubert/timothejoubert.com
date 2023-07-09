@@ -4,6 +4,7 @@
             <v-splash-screen-wrapper v-if="isSplashScreenDisplayed" />
             <v-top-bar />
             <v-main />
+            <nuxt v-if="isHomePage" />
             <v-about />
         </div>
         <transition :name="$style['project-modal']">
@@ -35,6 +36,9 @@ export default mixins(Resize, SplashScreen).extend({
         },
         isProjectOpen(): boolean {
             return this.$store.state.currentPageData?.type === CustomType.PROJECT
+        },
+        isHomePage() {
+            return this.$store.getters.isHomePage
         },
     },
 })

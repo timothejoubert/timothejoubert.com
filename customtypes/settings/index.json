@@ -7,10 +7,11 @@
   "json": {
     "Main": {
       "website_name": { "type": "Text", "config": { "label": "Website name", "placeholder": "" } },
-      "content": {
+      "about_title": { "type": "Text", "config": { "label": "About title", "placeholder": "" } },
+      "about_content": {
         "type": "StructuredText",
         "config": {
-          "label": "Content",
+          "label": "About content",
           "placeholder": "",
           "allowTargetBlank": true,
           "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"

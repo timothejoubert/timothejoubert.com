@@ -14,6 +14,13 @@ export const slugify = (text: string | null | undefined): string => {
     // .replace(/\-\-+/g, '-') // Replace multiple - with single -
 }
 
+export function getDistance(xA: number, xB: number, yA: number, yB: number) {
+    const xDiff = xA - xB
+    const yDiff = yA - yB
+
+    return Math.sqrt(xDiff * xDiff - yDiff * yDiff)
+}
+
 export const clamp = (value: number, min: number, max: number): number => {
     return Math.max(min, Math.min(value, max))
 }

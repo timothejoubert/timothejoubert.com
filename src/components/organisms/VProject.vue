@@ -24,7 +24,7 @@
             <v-text v-if="project.content" :content="project.content" :class="$style.content" />
         </div>
         <div :class="$style.body">
-            <v-image v-for="img in thumbnails" :prismic-image="img" :class="$style.thumbnail" />
+            <v-image v-for="(img, i) in thumbnails" :key="i" :prismic-image="img" :class="$style.thumbnail" />
             <!--            <v-image v-if="thumbnail" :prismic-image="thumbnail" :class="$style.thumbnail" />-->
         </div>
     </div>

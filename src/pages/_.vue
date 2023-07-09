@@ -1,15 +1,11 @@
 <template>
-    <div v-if="pageData" :class="$style.root">
-        <slice-zone v-if="slices && components" wrapper="main" :slices="slices" :components="components" />
-
+    <div :class="$style.root">
+        <!--        <slice-zone v-if="slices && components" wrapper="main" :slices="slices" :components="components" />-->
         <!--        <v-style-preview />-->
         <v-project v-if="isProjectPage" />
 
         <!-- eslint-disable-next-line vue/no-v-html -->
-        <script v-if="jsonLd" type="application/ld+json" v-html="jsonLd"></script>
-    </div>
-    <div v-else>
-        <p>pageData not find</p>
+        <script v-if="jsonLdPage" type="application/ld+json" v-html="jsonLdPage"></script>
     </div>
 </template>
 

@@ -41,7 +41,8 @@ export default Vue.extend({
 
 <style lang="scss" module>
 .root {
-    position: relative;
+    position: sticky;
+    top: 0;
     display: flex;
     height: $v-about-toggle-height;
     align-items: center;

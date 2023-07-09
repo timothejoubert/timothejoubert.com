@@ -1,15 +1,19 @@
 import type { GetterTree } from 'vuex'
 import { RootState } from '~/types/store'
-import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument } from '~~/prismicio-types'
+import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument, SettingsDocument } from '~~/prismicio-types'
 import { CommonContentKey } from '~/types/app'
+import { isHomePageDocument } from '~/utils/prismic/document-entity'
 
 export const getters: GetterTree<RootState, RootState> = {
+    isHomePage(state: RootState) {
+        return isHomePageDocument(state.currentPageData)
+    },
     commonContentData(state: RootState) {
         return function (key: CommonContentKey) {
             return state.commonContent?.[key]
         }
     },
-    settings(_state: RootState, getters: any): ProjectDocument[] {
+    settings(_state: RootState, getters: any): SettingsDocument {
         return getters.commonContentData('settings')
     },
     projects(_state: RootState, getters: any): ProjectDocument[] {

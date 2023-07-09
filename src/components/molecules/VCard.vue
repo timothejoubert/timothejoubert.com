@@ -3,11 +3,11 @@
         <v-image v-if="image" :prismic-image="image" :class="$style.image" :cover="true" />
 
         <div :class="$style.body">
-            <v-split-word
+            <v-slide-text
                 v-if="title"
-                class="text-over-title-m"
-                :word="title"
                 :play-animation="mouseEnter"
+                class="text-over-title-m"
+                :content="title"
                 :class="$style.title"
             />
             <span v-if="date" class="text-over-title-xs">{{ date }}</span>

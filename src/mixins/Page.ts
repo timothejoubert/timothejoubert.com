@@ -2,7 +2,6 @@ import Vue from 'vue'
 import type { MetaInfo } from 'vue-meta'
 import { Context, NuxtError } from '@nuxt/types'
 import { SliceZone } from '@prismicio/types/src/value/sliceZone'
-import { mapGetters } from 'vuex'
 import { FacebookMetaOptions, TwitterMetaOptions } from '~/types/meta'
 import { createFacebookMeta } from '~/utils/meta/facebook'
 import { createTwitterMeta } from '~/utils/meta/twitter'
@@ -27,7 +26,7 @@ export default Vue.extend({
         const isProject = store.getters.isProjectUid(uid)
 
         const isPreview = route.fullPath.includes(`${context.$config.previewPath}/`)
-        const getByType = false // route.fullPath === '/en' || route.fullPath === '/'
+        const getByType = route.fullPath === '/en' || route.fullPath === '/'
         const getByUid = isPreview || isValidUid(uid)
 
         if (getByType) {
@@ -73,22 +72,23 @@ export default Vue.extend({
         }
     },
     computed: {
-        ...mapGetters(['settings']),
         pageData(): DocumentPageReachableData {
-            return this.page.data
+            return this.page?.data
         },
         appTitle(): string {
-            // @ts-ignore
-            return this.settings?.data?.site_name || this.$config.appName
+            return this.$store.getters.settings?.data?.website_name || this.$config.appName
         },
         metaTitle(): string {
             if (this.isHome) return this.appTitle
-            const pageTitle = this.pageData?.meta_title || (this.pageData as { title?: string })?.title
+            const pageTitle = this.pageData?.meta_title || this.pageData?.title
             return pageTitle ? `${pageTitle} | ${this.appTitle}` : this.appTitle
         },
         pageDescription(): string | undefined {
-            // @ts-ignore
-            return this.pageData?.meta_description || this.settings?.data?.description
+            const description =
+                this.pageData?.meta_description ||
+                this.pageData?.content ||
+                this.$store.getters.settings?.data?.description
+            return Array.isArray(description) ? this.$prismic.asText(description) : description
         },
         metaImage(): string {
             const mediaUrl = (this.pageData?.meta_image as { url?: string })?.url
@@ -99,15 +99,15 @@ export default Vue.extend({
             return this.appTitle + this.$route.fullPath.substring(1)
         },
         isHome(): boolean {
-            return !!this.page && isHomePageDocument(this.page)
+            return isHomePageDocument(this.page) || this.$route.fullPath === '/'
         },
         isProjectPage(): boolean {
-            return !!this.page && isProjectDocument(this.page)
+            return isProjectDocument(this.page)
         },
         slices(): SliceZone[] | false {
             return !!this.page.data?.slices?.length && this.page.data?.slices
         },
-        jsonLd(): Record<string, unknown> | undefined {
+        jsonLdPage(): Record<string, unknown> | undefined {
             const siteName =
                 (this.$store.state.settings as SettingsDocument)?.data?.website_name || this.$config.appName
             const baseUrl = this.$config.appUrl + (this.$i18n.locale === 'en' ? 'en/' : '')

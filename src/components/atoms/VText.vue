@@ -6,14 +6,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import type { PropType } from 'vue'
-import * as prismicT from '@prismicio/types'
+import type { RichTextField } from '@prismicio/types'
 
 export default Vue.extend({
     name: 'VText',
     props: {
         tag: { type: String, default: 'div' },
-        content: [String, Array] as PropType<String | prismicT.RichTextField>,
-        textClass: [String, Array] as PropType<string | string[]>,
+        content: [String, Array] as PropType<String | RichTextField>,
+        textClass: [String, Array] as PropType<String | String[]>,
     },
     computed: {
         isRichTextFilled(): boolean {

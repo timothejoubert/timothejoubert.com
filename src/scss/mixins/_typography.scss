@@ -39,9 +39,9 @@
 }
 
 @mixin text-over-title-l {
-    @include font-size-fluid((xs: 16, xl: 22));
+    font-size: fluid-clamp((xs: 20, xl: 32));
 
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1;
 }
 
@@ -85,15 +85,14 @@
 }
 
 @mixin text-body-s {
-    @include font-size-fluid((xs: 14, xl: 16));
+    font-size: rem(16);
 
     font-weight: 300;
     line-height: 1.4;
 }
 
 @mixin text-body-xs {
-    @include font-size-fluid((xs: 12, xl: 14));
-
+    font-size: rem(14);
     font-weight: 400;
     line-height: 1.45;
 }
