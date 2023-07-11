@@ -39,7 +39,6 @@ export default Vue.extend({
     margin-inline: auto;
 
     @include media('>=md') {
-        //max-width: min(60%, rem(1000));
         max-width: rem(1000);
     }
 }
@@ -55,7 +54,7 @@ export default Vue.extend({
         padding: rem(5) rem(4) rem(7);
         color: var(--theme-accent-color);
         font-weight: initial;
-        margin-block: rem(5);
+        margin-block: rem(8);
 
         &::after {
             position: absolute;
@@ -75,10 +74,10 @@ export default Vue.extend({
 
 .content {
     display: flex;
-    justify-content: space-around;
-    gap: rem(70);
     flex-wrap: wrap;
+    justify-content: space-around;
     padding-bottom: rem(100);
+    gap: rem(70);
 
     @include media('>=sm') {
         padding-bottom: initial;

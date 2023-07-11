@@ -1,12 +1,12 @@
 <template>
-    <div :class="$style.root">
-        <button :class="$style['about-link']" aria-label="Ouvrir la section about" @click="onClick">
-            <span v-if="title" :class="[$style.title, 'body-s']">{{ title }}</span>
-            <span :class="[$style.icon, isAboutOpen && $style['icon--open']]">
-                <span :class="$style['circle-outlined']"></span>
+    <div :class="[$style.root, isAboutOpen && $style['root--open']]">
+        <button :class="$style.button" aria-label="Ouvrir la section about" @click="onClick">
+            <span v-if="title">{{ title }}</span>
+            <span :class="$style.icons">
+                <span :class="$style['circle-outline']"></span>
                 <span :class="$style['circle-filled']"></span>
-                <icon-arrow :class="$style.arrow" />
-                <icon-cross :class="$style.cross" />
+                <icon-arrow :class="[$style.icon, $style['icon--arrow']]" />
+                <icon-cross :class="[$style.icon, $style['icon--close']]" />
             </span>
         </button>
         <v-social-list-link :class="$style.socials" />
@@ -15,8 +15,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import IconArrow from '~/assets/images/icons/arrow.svg?sprite'
-import IconCross from '~/assets/images/icons/cross.svg?sprite'
+import IconArrow from '~/assets/images/icons/arrow-top-small.svg?sprite'
+import IconCross from '~/assets/images/icons/cross-small.svg?sprite'
 import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
@@ -27,7 +27,7 @@ export default Vue.extend({
             return this.$store.getters.settings?.data?.website_name
         },
         isAboutOpen(): boolean {
-            return false
+            return this.$store.state.isAboutOpen
         },
     },
     methods: {
@@ -49,8 +49,96 @@ export default Vue.extend({
     justify-content: center;
 }
 
+.button {
+    display: flex;
+    align-items: center;
+    gap: rem(18);
+}
+
+.icons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle-outline {
+    width: rem(5);
+    height: rem(5);
+    border: 1px solid var(--theme-foreground-color);
+    border-radius: 100%;
+}
+
+.circle-filled {
+    position: absolute;
+    width: rem(18);
+    height: rem(18);
+    background-color: var(--theme-foreground-color);
+    border-radius: 100%;
+    clip-path: circle(0% at 50% 50%);
+    transition: 0.4s ease(out-quart);
+    transition-property: clip-path, scale;
+
+    .root--open & {
+        clip-path: circle(50% at 50% 50%);
+    }
+
+    .root--open .button & {
+        scale: 0.9;
+    }
+
+    @media (hover: hover) {
+        .button:hover & {
+            clip-path: circle(50% at 50% 50%);
+        }
+
+        .root--open .button:hover & {
+            scale: 1.1;
+        }
+    }
+}
+
+.icon {
+    position: absolute;
+    color: var(--theme-background-color);
+    opacity: 0;
+    transition: translate 0.3s 0.1s ease(out-quad);
+    translate: 0 100%;
+
+    @media (hover: hover) {
+        .root:not(.root--open) .button:hover &--arrow {
+            opacity: 1;
+            translate: 0 0;
+        }
+        .root--open .button:hover &--close {
+            animation: slide-out-in 0.4s ease(in-out-quad);
+        }
+    }
+
+    .root--open &--close {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
 .socials {
     position: absolute;
     right: 0;
+}
+
+@keyframes slide-out-in {
+    0% {
+        translate: 0 0;
+    }
+    50% {
+        opacity: 0;
+        translate: 0 -100%;
+    }
+    50.01% {
+        opacity: 0;
+        translate: 0 100%;
+    }
+    100% {
+        translate: 0 0;
+    }
 }
 </style>

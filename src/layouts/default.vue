@@ -1,13 +1,13 @@
 <template>
-    <div :class="rootClasses">
-        <div :class="$style.body">
+    <div :class="rootClasses" :style="colorThemeStyle">
+        <div :class="[$style.body, isProjectOpen && $style['body--minify']]">
             <v-splash-screen-wrapper v-if="isSplashScreenDisplayed" />
             <v-top-bar />
             <v-main />
             <nuxt v-if="isHomePage" />
             <v-about />
         </div>
-        <transition :name="$style['project-modal']">
+        <transition name="project-modal">
             <div v-if="isProjectOpen" :class="$style.project">
                 <Nuxt />
             </div>
@@ -21,6 +21,7 @@ import Resize from '~/mixins/Resize'
 import MutationType from '~/constants/mutation-type'
 import SplashScreen from '~/mixins/SplashScreen'
 import CustomType from '~/constants/custom-type'
+import { getPredefinedThemes } from '~/utils/get-theme'
 
 export default mixins(Resize, SplashScreen).extend({
     name: 'default',
@@ -40,6 +41,14 @@ export default mixins(Resize, SplashScreen).extend({
         isHomePage() {
             return this.$store.getters.isHomePage
         },
+        colorThemeStyle() {
+            console.log(getPredefinedThemes())
+            return {
+                '--theme-foreground-color': this.$store.state.clientTheme.foreground,
+                '--theme-accent-color': this.$store.state.clientTheme.accent,
+                '--theme-background-color': this.$store.state.clientTheme.background,
+            }
+        },
     },
 })
 </script>
@@ -51,15 +60,18 @@ export default mixins(Resize, SplashScreen).extend({
         duration: 0.7s,
     ),
     (
-        translate: -100% 0,
-    )
+        translate: 100% 0,
+    ),
+    $activeProperties: (),
+    $scope: 'local'
 );
 
 .root {
-    @include theme(dark);
+    //@include theme(dark);
 
     position: relative;
     display: flex;
+    overflow: hidden;
     /* stylelint-disable-next-line unit-no-unknown */
     max-height: 100svh;
     background-color: var(--theme-background-color);
@@ -73,13 +85,16 @@ export default mixins(Resize, SplashScreen).extend({
 
 .body,
 .project {
-    -ms-overflow-style: none; /* IE and Edge */
-    overflow-y: scroll;
-    overscroll-behavior: contain;
-    scrollbar-width: none; /* Firefox */
+    @include hide-scrollbar;
+}
 
-    &::-webkit-scrollbar {
-        display: none;
+.body {
+    width: 100%;
+    flex-shrink: 0;
+    transition: width 0.7s ease(out-quad);
+
+    &--minify {
+        width: 50%;
     }
 }
 

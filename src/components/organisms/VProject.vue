@@ -8,23 +8,13 @@
                 </template>
             </v-button>
         </div>
-        <div :class="$style.info">
-            <div v-if="tags.length" :class="$style.tags">
-                <v-button
-                    v-for="tag in tags"
-                    :key="tag"
-                    :theme="isActiveTag(tag) ? 'accent' : 'light'"
-                    :filled="true"
-                    size="s"
-                    :label="tag"
-                    :class="$style.tag"
-                    @click="onTagClick(tag)"
-                />
-            </div>
-            <v-text v-if="project.content" :content="project.content" :class="$style.content" />
-        </div>
-        <div :class="$style.body">
-            <v-image v-for="(img, i) in thumbnails" :key="i" :prismic-image="img" :class="$style.thumbnail" />
+
+        <v-project-parsed v-slot="projectContent" :project="project">
+            <v-project-specification v-bind="projectContent" />
+        </v-project-parsed>
+
+        <div :class="$style.medias">
+            <v-image v-for="(media, i) in medias" :key="i" :prismic-image="media" :class="$style.media" />
             <!--            <v-image v-if="thumbnail" :prismic-image="thumbnail" :class="$style.thumbnail" />-->
         </div>
     </div>
@@ -34,8 +24,6 @@ import Vue from 'vue'
 import { LinkToMediaField } from '@prismicio/types/src/value/linkToMedia'
 import { ProjectDocumentData } from '~~/prismicio-types'
 import IconClose from '~/assets/images/icons/close.svg?sprite'
-import { getTagsByReference } from '~/utils/project/tag'
-import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
     name: 'VProject',
@@ -47,29 +35,8 @@ export default Vue.extend({
         thumbnail(): LinkToMediaField {
             return this.project.thumbnail
         },
-        thumbnails(): LinkToMediaField[] {
+        medias(): LinkToMediaField[] {
             return [...Array(6).keys()].map(() => this.thumbnail)
-        },
-        tags(): string[] {
-            return getTagsByReference(this.project.tags, this.$store.getters.projectTags)
-        },
-        filteredTags(): string[] {
-            return this.$store.state.tagFilters
-        },
-    },
-    methods: {
-        onTagClick(tag: string) {
-            if (this.isActiveTag(tag)) {
-                // remove tag
-                const tags = this.filteredTags.filter((filteredTag) => filteredTag !== tag)
-                this.$store.commit(MutationType.TAG_FILTERS, tags)
-            } else {
-                // add tag
-                this.$store.commit(MutationType.TAG_FILTERS, [...this.filteredTags, tag])
-            }
-        },
-        isActiveTag(tag: string): boolean {
-            return this.filteredTags.includes(tag)
         },
     },
 })
@@ -82,21 +49,17 @@ export default Vue.extend({
 
 .header {
     display: flex;
-    height: $v-top-bar-height;
+    min-height: $v-top-bar-height;
     align-items: center;
+    justify-content: space-between;
 }
 
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: rem(12);
+.medias {
+    margin-block: rem(50) $container-padding-inline;
 }
 
-.content {
-    margin-block: rem(20);
-}
-
-.thumbnail {
+.media {
     width: 100%;
+    margin-block: $container-padding-inline;
 }
 </style>

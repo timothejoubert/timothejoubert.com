@@ -1,4 +1,5 @@
 import { RootState } from '~/types/store'
+import { getObjectFormattedTheme } from '~/utils/get-theme'
 
 export default (): RootState => ({
     // Prismic data
@@ -8,7 +9,8 @@ export default (): RootState => ({
     // App
     splashScreenDone: false,
     isSettingsOpen: false,
-    isAboutOpen: true,
+    isAboutOpen: false,
+    clientTheme: getObjectFormattedTheme(),
 
     // project filters
     tagFilters: [],

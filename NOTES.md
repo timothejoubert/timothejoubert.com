@@ -10,12 +10,16 @@ import { Document } from '@prismicio/client/types/documents'
 
 
 ### IN PROGRESS
+** (VButton): set background and color with css var depending on props theme 
 
 ### TO CHECK
 
 ### TODOS
+** (SplashScreen): add component 
+** (SplashScreen): start loading if currently on tab
 
 ### DONE
+** (VAbout): Reveal transition
 
 ### LATER 
 * **(Route)** Set relationLink field in BO if we want nested route (projects/project-name)
@@ -27,3 +31,4 @@ import { Document } from '@prismicio/client/types/documents'
 * **(Config)** use PrismicClient (exemple)[https://community.prismic.io/t/an-invalid-prismic-repository-name-was-given/10523/10]
 
 ### ABANDONED
+** (VCard): add infinite marquee for tags ? 

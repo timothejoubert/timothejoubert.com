@@ -8,6 +8,7 @@ enum MutationType {
     SETTING_OPENED = 'settingOpened',
     ABOUT_OPENED = 'aboutOpened',
     TAG_FILTERS = 'tagFilters',
+    CLIENT_THEME = 'clientTheme',
 
     // Global
     ERROR_PAGE = 'errorPage',

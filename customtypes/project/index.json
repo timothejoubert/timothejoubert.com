@@ -8,6 +8,15 @@
     "Main": {
       "uid": { "config": { "label": "UID" }, "type": "UID" },
       "title": { "type": "Text", "config": { "label": "Title", "placeholder": "" } },
+      "favorite": {
+        "type": "Boolean",
+        "config": {
+          "label": "Favorite",
+          "default_value": false,
+          "placeholder_true": "true",
+          "placeholder_false": "false"
+        }
+      },
       "tags": {
         "type": "Group",
         "config": {
@@ -35,6 +44,8 @@
       },
       "thumbnail": { "type": "Link", "config": { "label": "Thumbnail", "placeholder": "", "select": "media" } },
       "date": { "type": "Date", "config": { "label": "Date", "placeholder": "" } },
+      "link": { "type": "Link", "config": { "label": "Link", "placeholder": "", "select": null } },
+      "link_label": { "type": "Text", "config": { "label": "Link label", "placeholder": "" } },
       "slices": { "type": "Slices", "fieldset": "Slice Zone", "config": { "choices": {} } }
     },
     "SEO & Metadata": {

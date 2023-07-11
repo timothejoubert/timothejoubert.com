@@ -1,3 +1,4 @@
+import { RTNode } from '@prismicio/types/src/value/richText'
 import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument, SettingsDocument } from '~~/prismicio-types'
 
 type Theme = 'light' | 'dark' | 'accent'
@@ -11,4 +12,10 @@ interface CommonContent {
     projects?: ProjectDocument[]
 }
 
-interface ProjectFilter {}
+type PrismicRichText = RTNode[] | RTNode[][]
+
+interface ClientTheme {
+    foreground: string
+    accent: string
+    background: string
+}

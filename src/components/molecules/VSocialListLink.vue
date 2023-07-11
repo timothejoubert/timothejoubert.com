@@ -9,7 +9,7 @@
             :title="social.name"
         >
             <span v-if="social.label">{{ social.label }}</span>
-            <component :is="social.tagIcon" v-else />
+            <component :is="social.tagIcon" v-else :class="$style.icon" />
         </a>
     </v-social-list>
 </template>
@@ -25,18 +25,42 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     display: flex;
-    gap: rem(10);
+    gap: rem(18);
+    padding-inline: rem(6);
 }
 
 .link {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.7;
+    color: var(--theme-foreground-color);
+
+    &::before {
+        position: absolute;
+        width: rem(30);
+        height: rem(30);
+        background-color: var(--theme-foreground-color);
+        border-radius: 100%;
+        content: '';
+        opacity: 0.08;
+        transition: scale 0.3s;
+    }
+
+    @media (hover: hover) {
+        &:hover::before {
+            scale: 0.9;
+        }
+    }
+}
+
+.icon {
+    width: rem(20);
+    height: auto;
+    opacity: 0.6;
     transition: opacity 0.3s;
 
     @media (hover: hover) {
-        &:hover {
+        .link:hover & {
             opacity: 1;
         }
     }

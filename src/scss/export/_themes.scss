@@ -3,7 +3,7 @@
 @each $themeName, $theme in $themes {
     @each $keyTheme, $values in $theme {
         :export {
-            theme-#{$keyTheme}-#{"" + $themeName}: $values;
+            theme-#{$themeName}#{"-" + $keyTheme}: $values;
         }
     }
 }

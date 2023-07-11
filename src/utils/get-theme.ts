@@ -1,63 +1,56 @@
 import themes from '~/scss/export/_themes.scss'
-import { Theme } from '~/types/app'
+import { ClientTheme, Theme } from '~/types/app'
+import predefinedThemes from '~/scss/export/_predefined-themes.scss'
 
-interface ThemeContent {
-    [Key: string]: string
+console.log(predefinedThemes)
+
+export function getObjectFormattedTheme(theme: Theme = 'dark') {
+    return Object.entries(themes as { string: string }).reduce(
+        (accumulator: Partial<ClientTheme>, current: [string, string]) => {
+            const key = current[0]
+            if (key.includes(`theme-${theme}`)) {
+                const parsedKey = key.substring(11, key.lastIndexOf('-')) as keyof ClientTheme
+                accumulator[parsedKey] = current[1]
+            }
+            return accumulator
+        },
+        {}
+    ) as ClientTheme
 }
 
-type ThemeMap = {
-    [key in Theme]: ThemeContent
+export function getArrayFormattedTheme(theme: Theme = 'dark') {
+    return Object.entries(themes as { string: string })
+        .filter(([key, _value]) => {
+            return key.includes(`theme-${theme}`)
+        })
+        .reduce((acc: { key: keyof ClientTheme; value: string }[], current) => {
+            const key = current[0].substring(11, current[0].lastIndexOf('-')) as keyof ClientTheme
+            acc.push({ key, value: current[1] })
+            return acc
+        }, [])
 }
 
-export const getCSSVarFromTheme = (theme: string): Record<string, string> => {
-    const wrapperStyle: Record<string, string> = {}
+type GetTheme<T extends 'object' | 'array'> = (
+    format: T,
+    theme: Theme
+) => T extends 'array' ? { key: keyof ClientTheme; value: string }[] : ClientTheme
 
-    for (const key in themes) {
-        if (key.includes(theme)) {
-            const cssVarKey = '--' + key.substring(0, key.lastIndexOf('-'))
-            wrapperStyle[cssVarKey] = themes[key]
-            if (cssVarKey === '--theme-default') wrapperStyle.backgroundColor = themes[key]
-            if (cssVarKey === '--theme-on-default') wrapperStyle.color = themes[key]
-        }
-    }
-    return wrapperStyle
+export function getTheme(format: 'object' | 'array', theme: Theme = 'dark') {
+    if (format === 'object') return getObjectFormattedTheme(theme)
+    else return getArrayFormattedTheme(theme)
 }
 
-export const getThemes = (): ThemeMap => {
-    const themeNames: Partial<ThemeMap> = {}
+export function getPredefinedThemes() {
+    return Object.entries(predefinedThemes as { string: string }).reduce(
+        (accumulator: { [key: string]: { key: string; value: string }[] }, current: [string, string]) => {
+            const keySplit = current[0].split('-')
+            const key = 'theme-' + keySplit[1]
 
-    for (const key in themes) {
-        const themeName = key.substring(key.lastIndexOf('-') + 1, key.length) as Theme
-        const themeKey = '--' + key.substring(0, key.lastIndexOf('-'))
-        const isStoredThemeName = Object.prototype.hasOwnProperty.call(themeNames, themeName)
-        const value = themes[key]
+            if (!accumulator?.[key]) accumulator[key] = []
+            accumulator[key].push({ key: keySplit[2], value: current[1] })
 
-        if (isStoredThemeName) {
-            ;(themeNames[themeName] as ThemeContent)[themeKey] = value
-        } else {
-            themeNames[themeName] = { [themeKey]: value }
-        }
-    }
-
-    return themeNames as ThemeMap
+            return accumulator
+        },
+        {}
+    )
 }
-
-interface StorybookBackground {
-    name: string
-    value: string
-}
-
-export const getMainThemesValue = (): StorybookBackground[] => {
-    const themes = getThemes()
-    const themeKeys = Object.keys(themes) as Theme[]
-    return themeKeys.map((themeKey) => {
-        return { name: themeKey, value: themes[themeKey]['--theme-default'] }
-    })
-}
-
-// function isThemeContent(themeContent: Partial<ThemeContent> | undefined): themeContent is ThemeContent {
-//     return (
-//         (themeContent && !!Object.prototype.hasOwnProperty.call(themeContent, 'light')) ||
-//         !!Object.prototype.hasOwnProperty.call(themeContent, 'dark')
-//     )
-// }

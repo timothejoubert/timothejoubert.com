@@ -129,6 +129,10 @@ export default Vue.extend({
         overflow: hidden;
     }
 
+    &:not(#{&}--has-icon) {
+        justify-content: center;
+    }
+
     @media (prefers-reduced-motion: reduce) {
         transition: none;
     }
@@ -144,6 +148,7 @@ export default Vue.extend({
     }
 
     &--filled {
+        min-width: var(--v-button-min-width);
         background-color: var(--theme-background-color);
     }
 

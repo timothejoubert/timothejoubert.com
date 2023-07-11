@@ -1,6 +1,6 @@
 import { NuxtError } from '@nuxt/types'
 import { PrismicDocument } from '@prismicio/types/src/value/document'
-import { CommonContent } from '~/types/app'
+import { ClientTheme, CommonContent } from '~/types/app'
 
 interface RootState {
     // Prismic data
@@ -11,6 +11,7 @@ interface RootState {
     isSettingsOpen: boolean
     splashScreenDone: boolean
     isAboutOpen: boolean
+    clientTheme: ClientTheme
 
     // project filters
     tagFilters: string[]
