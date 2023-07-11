@@ -31,6 +31,8 @@ import Vue from 'vue'
 import MutationType from '~/constants/mutation-type'
 import { getArrayFormattedTheme, getPredefinedThemes } from '~/utils/get-theme'
 
+const predefinedThemes = getPredefinedThemes()
+
 export default Vue.extend({
     name: 'VSettings',
     computed: {
@@ -38,7 +40,7 @@ export default Vue.extend({
             return this.$store.state.isSettingsOpen
         },
         clientThemes() {
-            return Object.keys(getPredefinedThemes()).map((key) => ({ value: key, label: key.split('-').join(' ') }))
+            return Object.keys(predefinedThemes).map((key) => ({ value: key, label: key.split('-').join(' ') }))
         },
     },
     methods: {
@@ -46,7 +48,7 @@ export default Vue.extend({
             this.updateColors(getArrayFormattedTheme())
         },
         onThemeChanged(themeId: string) {
-            const selectedTheme = getPredefinedThemes()?.[themeId]
+            const selectedTheme = predefinedThemes?.[themeId]
             selectedTheme && this.updateColors(selectedTheme)
         },
         updateColors(colors: { key: string; value: string }[]) {

@@ -44,7 +44,7 @@ export default Vue.extend({
     position: sticky;
     top: 0;
     display: flex;
-    height: $v-about-toggle-height;
+    min-height: $v-about-toggle-height;
     align-items: center;
     justify-content: center;
 }
@@ -53,6 +53,23 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     gap: rem(18);
+
+    &::after {
+        position: absolute;
+        z-index: -1;
+        border-top: 1px solid var(--theme-foreground-color);
+        background-color: var(--theme-background-color);
+        content: '';
+        inset: 0;
+        pointer-events: none;
+        transition: scale 0.5s ease(out-quad);
+    }
+
+    @media (hover: hover) {
+        .root:not(.root--open) &:hover::after {
+            scale: 1 1.1;
+        }
+    }
 }
 
 .icons {

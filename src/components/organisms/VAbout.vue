@@ -37,17 +37,16 @@ export default Vue.extend({
 </script>
 <style lang="scss" module>
 .root {
-    @include hide-scrollbar;
-
     position: sticky;
     bottom: 0;
     min-height: $v-about-toggle-height;
     max-height: calc(100vh - $v-top-bar-height);
-    border-top: 1px solid var(--theme-foreground-color);
     background-color: var(--theme-background-color);
-    transition: min-height 0.8s ease(out-quad);
+    transition: min-height 0.85s ease(out-quad);
 
     &--open {
+        @include hide-scrollbar;
+
         min-height: calc(100vh - $v-top-bar-height);
     }
 }
