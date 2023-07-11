@@ -15,7 +15,7 @@
                 <v-button
                     v-for="tag in tags"
                     :key="tag"
-                    theme="light"
+                    theme="dark"
                     tag="div"
                     :filled="true"
                     size="xs"
@@ -85,11 +85,8 @@ export default Vue.extend({
 
 .title {
     display: inline-flex;
-    color: color(accent);
+    color: var(--theme-accent-color);
 }
-
-//.date {
-//}
 
 .body {
     position: relative;

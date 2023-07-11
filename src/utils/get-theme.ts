@@ -2,8 +2,6 @@ import themes from '~/scss/export/_themes.scss'
 import { ClientTheme, Theme } from '~/types/app'
 import predefinedThemes from '~/scss/export/_predefined-themes.scss'
 
-console.log(predefinedThemes)
-
 export function getObjectFormattedTheme(theme: Theme = 'dark') {
     return Object.entries(themes as { string: string }).reduce(
         (accumulator: Partial<ClientTheme>, current: [string, string]) => {

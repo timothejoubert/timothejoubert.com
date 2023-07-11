@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.root">
+    <div :class="[$style.root, isFull && $style['root--full']]">
         <label :for="id" :class="$style.label">{{ label }}</label>
         <input :class="$style.input" type="color" @input="onUpdate" />
         <span :id="id" :class="$style.box" :style="{ backgroundColor: `var(--theme-${id}-color)` }"></span>
@@ -16,6 +16,11 @@ export default Vue.extend({
     props: {
         label: String,
         id: String as PropType<keyof ClientTheme>,
+    },
+    computed: {
+        isFull() {
+            return !this.label
+        },
     },
     methods: {
         onUpdate(event: InputEvent) {
@@ -37,6 +42,16 @@ export default Vue.extend({
     border-radius: 100vmax;
     color: var(--theme-background-color);
     cursor: pointer;
+
+    &--full {
+        overflow: hidden;
+        min-width: rem(46);
+        height: rem(20);
+        padding: 0;
+        border: 1px solid var(--theme-foreground-color);
+        background-color: initial;
+        color: initial;
+    }
 }
 
 .label {
@@ -65,5 +80,12 @@ export default Vue.extend({
     height: rem(13);
     border: 1px solid var(--theme-background-color);
     margin-left: rem(8);
+
+    .root--full & {
+        width: 100%;
+        height: 100%;
+        border: none;
+        margin: initial;
+    }
 }
 </style>

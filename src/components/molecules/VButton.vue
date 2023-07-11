@@ -6,7 +6,7 @@
         v-bind="linkProps"
         @click="onClick"
     >
-        <span v-if="hasIcon" ref="icon" :class="[$style.icon, animation && 'v-button__icon']">
+        <span v-if="hasIcon" ref="icon" :class="$style.icon">
             <slot name="icon" />
         </span>
         <span v-if="hasLabel" :class="$style.label">
@@ -52,8 +52,6 @@ export default Vue.extend({
             default: true,
         },
         theme: { type: String as PropType<Theme>, default: 'dark' },
-        animation: { type: Boolean, default: true },
-        playAnimation: Boolean,
     },
     computed: {
         classNames(): (string | boolean | undefined)[] {
@@ -68,8 +66,6 @@ export default Vue.extend({
                 this.hasIcon && this.$style['root--has-icon'],
                 this.hasLabel && this.$style['root--has-label'],
                 this.iconLast && this.$style['root--icon-last'],
-                this.animation && 'v-button--enable-animation',
-                this.playAnimation && this.$style['root--animate'],
                 this.$style['root--theme-' + this.theme],
             ]
         },
@@ -115,18 +111,38 @@ export default Vue.extend({
 
 .root {
     @include v-button-default-css-vars($v-button);
-    @include theme-variants;
+    //@include theme-variants;
 
     display: inline-flex;
     overflow: hidden;
     align-items: center;
     border: none;
-    color: var(--theme-foreground-color, color(black));
     text-decoration: none;
-    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    //color: var(--theme-foreground-color);
+    //transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 
-    &--enabled-animation {
-        overflow: hidden;
+    &--theme-light {
+        color: var(--theme-foreground-color);
+    }
+
+    &--theme-dark {
+        color: var(--theme-background-color);
+    }
+
+    &--theme-accent {
+        color: var(--theme-background-color);
+    }
+
+    &--theme-light#{&}--filled {
+        background-color: var(--theme-background-color);
+    }
+
+    &--theme-dark#{&}--filled {
+        background-color: var(--theme-foreground-color);
+    }
+
+    &--theme-accent #{&}--filled {
+        background-color: var(--theme-accent-color);
     }
 
     &:not(#{&}--has-icon) {
@@ -149,7 +165,7 @@ export default Vue.extend({
 
     &--filled {
         min-width: var(--v-button-min-width);
-        background-color: var(--theme-background-color);
+        //background-color: var(--theme-background-color);
     }
 
     &--disabled {

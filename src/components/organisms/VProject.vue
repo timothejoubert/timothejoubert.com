@@ -2,7 +2,7 @@
     <div :class="$style.root" class="container">
         <div :class="$style.header">
             <div :class="$style.title" class="text-h2">{{ project.title }}</div>
-            <v-button href="/">
+            <v-button href="/" theme="light">
                 <template #icon>
                     <icon-close />
                 </template>

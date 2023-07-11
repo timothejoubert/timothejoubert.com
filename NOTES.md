@@ -10,7 +10,8 @@ import { Document } from '@prismicio/client/types/documents'
 
 
 ### IN PROGRESS
-** (VButton): set background and color with css var depending on props theme 
+** (Setting): keep alive component
+
 
 ### TO CHECK
 
@@ -19,6 +20,7 @@ import { Document } from '@prismicio/client/types/documents'
 ** (SplashScreen): start loading if currently on tab
 
 ### DONE
+** (VButton): set background and color with css var depending on props theme 
 ** (VAbout): Reveal transition
 
 ### LATER 

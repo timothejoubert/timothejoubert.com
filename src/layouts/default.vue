@@ -21,7 +21,6 @@ import Resize from '~/mixins/Resize'
 import MutationType from '~/constants/mutation-type'
 import SplashScreen from '~/mixins/SplashScreen'
 import CustomType from '~/constants/custom-type'
-import { getPredefinedThemes } from '~/utils/get-theme'
 
 export default mixins(Resize, SplashScreen).extend({
     name: 'default',
@@ -42,7 +41,6 @@ export default mixins(Resize, SplashScreen).extend({
             return this.$store.getters.isHomePage
         },
         colorThemeStyle() {
-            console.log(getPredefinedThemes())
             return {
                 '--theme-foreground-color': this.$store.state.clientTheme.foreground,
                 '--theme-accent-color': this.$store.state.clientTheme.accent,

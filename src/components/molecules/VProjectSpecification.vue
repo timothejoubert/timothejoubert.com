@@ -37,7 +37,7 @@ export default Vue.extend({
             return {
                 filled: true,
                 size: 's',
-                theme: 'light',
+                theme: 'dark',
             }
         },
     },
