@@ -55,7 +55,6 @@ export default Vue.extend({
 }
 
 .label {
-    //display: none;
     font-size: rem(12);
     font-weight: 500;
 }

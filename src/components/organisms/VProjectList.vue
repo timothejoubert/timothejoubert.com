@@ -1,16 +1,24 @@
 <template>
-    <nav class="container" :class="$style.root">
+    <nav v-if="filteredProjects.length" class="container" :class="$style.root">
         <ul :class="$style.projects" :style="{ '--card-number': columns }">
             <li v-for="(project, index) in filteredProjects" :key="index + project.uid">
                 <v-project-card :project="project" />
             </li>
         </ul>
     </nav>
+    <div v-else :class="[$style['no-result'], !$store.state.isSettingsOpen && $style['no-result--extend']]">
+        <div :class="$style.word" class="text-h1">
+            <v-split-letters content="Oups..." tag="span" />
+        </div>
+        <div :class="$style.message">Aucun résultats</div>
+        <v-button size="m" label="Reset tous les filtres" filled @click="onClick" />
+    </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { ProjectDocument } from '~~/prismicio-types'
+import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
     name: 'VProjectList',
@@ -53,6 +61,11 @@ export default Vue.extend({
                 return projectTags.some((tag) => tags.includes(tag))
             })
         },
+        onClick() {
+            this.$store.commit(MutationType.TAG_FILTERS, [])
+            this.$store.commit(MutationType.UI_COLUMNS, '4')
+            this.$store.commit(MutationType.FRAMEWORK_FILTERS, [])
+        },
     },
 })
 </script>
@@ -66,5 +79,43 @@ export default Vue.extend({
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(var(--card-number, 4), minmax(0, 1fr));
+}
+
+.no-result {
+    display: flex;
+    min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height - $v-settings-height);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: min-height 0.4s ease(out-quad);
+
+    &--extend {
+        min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
+    }
+}
+
+.word {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: rem(4);
+    opacity: 0.1;
+    :global(.split-word-letter) {
+        animation: wave-font 1s calc(var(--letter-index) * 100ms - 2s) ease(out-quad) alternate infinite;
+    }
+}
+
+.message {
+    margin-bottom: rem(70);
+    opacity: 0.6;
+}
+
+@keyframes wave-font {
+    from {
+        font-variation-settings: 'wght' 100, 'ital' 0;
+    }
+    to {
+        font-variation-settings: 'wght' 900, 'ital' 4;
+    }
 }
 </style>

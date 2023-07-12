@@ -1,6 +1,6 @@
 <template>
     <component :is="tag" :class="[$style.root, playAnimation && $style['root--animate']]">
-        <v-split-word :content="content" />
+        <v-split-letters :content="content" />
     </component>
 </template>
 <script lang="ts">

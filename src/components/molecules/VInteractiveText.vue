@@ -1,6 +1,6 @@
 <template>
     <div :class="$style.root">
-        <v-split-word :variable-font="true" :content="word" :class="$style.content" @hook:mounted="setLetters" />
+        <v-split-letters variable-font :content="word" @hook:mounted="setLetters" />
     </div>
 </template>
 
