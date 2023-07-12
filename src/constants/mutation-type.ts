@@ -3,12 +3,16 @@ enum MutationType {
     SET_COMMON_CONTENT = 'setCommonContent',
     CURRENT_PAGE_DATA = 'setCurrentPageData',
 
-    // loading
+    // App
     SPLASH_SCREEN_DONE = 'splashScreenDone',
     SETTING_OPENED = 'settingOpened',
     ABOUT_OPENED = 'aboutOpened',
+
+    // UI settings
+    FRAMEWORK_FILTERS = 'frameworkFilters',
     TAG_FILTERS = 'tagFilters',
-    CLIENT_THEME = 'clientTheme',
+    UI_THEME = 'uiTheme',
+    UI_COLUMNS = 'uiColumns',
 
     // Global
     ERROR_PAGE = 'errorPage',

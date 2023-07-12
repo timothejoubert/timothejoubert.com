@@ -32,8 +32,12 @@ export default Vue.extend({
     methods: {
         toggleSettings() {
             const isAboutOpen = this.$store.state.isAboutOpen
-            if (isAboutOpen) this.$store.commit(MutationType.ABOUT_OPENED, false)
-            this.$store.commit(MutationType.SETTING_OPENED, !this.isOpen)
+            if (isAboutOpen) {
+                this.$store.commit(MutationType.ABOUT_OPENED, false)
+                this.$store.commit(MutationType.SETTING_OPENED, true)
+            } else {
+                this.$store.commit(MutationType.SETTING_OPENED, !this.isOpen)
+            }
         },
     },
 })

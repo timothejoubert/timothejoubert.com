@@ -43,6 +43,7 @@ $check-border-width: 2px;
 .root {
     position: relative;
     display: flex;
+    width: fit-content;
     align-items: center;
     cursor: pointer;
 }
@@ -99,7 +100,7 @@ $check-border-width: 2px;
     color: var(--theme-background-color);
     visibility: hidden;
 
-    :global(input)[type='checkbox']:checked + .root & {
+    :global(input)[type='checkbox']:checked + .checkbox & {
         visibility: inherit;
     }
 }

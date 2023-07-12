@@ -42,9 +42,9 @@ export default mixins(Resize, SplashScreen).extend({
         },
         colorThemeStyle() {
             return {
-                '--theme-foreground-color': this.$store.state.clientTheme.foreground,
-                '--theme-accent-color': this.$store.state.clientTheme.accent,
-                '--theme-background-color': this.$store.state.clientTheme.background,
+                '--theme-foreground-color': this.$store.state.uiTheme.foreground,
+                '--theme-accent-color': this.$store.state.uiTheme.accent,
+                '--theme-background-color': this.$store.state.uiTheme.background,
             }
         },
     },

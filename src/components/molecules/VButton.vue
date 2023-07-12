@@ -145,6 +145,23 @@ export default Vue.extend({
         background-color: var(--theme-accent-color);
     }
 
+    /* outlined */
+
+    &--theme-light#{&}--outlined {
+        border-color: var(--theme-background-color);
+        color: var(--theme-background-color);
+    }
+
+    &--theme-dark#{&}--outlined {
+        border-color: var(--theme-foreground-color);
+        color: var(--theme-foreground-color);
+    }
+
+    &--theme-accent #{&}--outlined {
+        border-color: var(--theme-accent-color);
+        color: var(--theme-accent-color);
+    }
+
     &:not(#{&}--has-icon) {
         justify-content: center;
     }
@@ -160,6 +177,7 @@ export default Vue.extend({
     }
 
     &--outlined {
+        border: 1px solid;
         border-color: var(--v-button-border-color, currentColor);
     }
 

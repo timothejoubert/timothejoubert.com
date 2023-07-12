@@ -4,40 +4,75 @@
             <v-grid-settings />
         </v-setting-section>
 
-        <v-setting-section title="couleur" @onResetClicked="$refs.color.resetInterface()">
+        <v-setting-section :class="$style.color" title="Couleur" @onResetClicked="$refs.color.resetInterface()">
             <v-color-settings ref="color" />
         </v-setting-section>
 
         <v-setting-section title="Cadre" @onResetClicked="resetFramework">
-            <v-select id="framework" label="Types" />
+            <v-select
+                id="framework"
+                label="Types"
+                :active-values="currentFrameWork"
+                :options="frameworks"
+                @input="onFrameworkUpdate"
+            />
         </v-setting-section>
 
         <v-setting-section title="Domaine" @onResetClicked="resetTags">
-            <v-select id="tag" label="Domaines" />
-        </v-setting-section>
-
-        <v-setting-section title="Domaines" :has-reset="false">
-            <v-select id="tag" label="Domaines" />
+            <v-select
+                id="tag"
+                label="Domaines"
+                multiple
+                :active-values="currentTags"
+                :options="tags"
+                @input="onTagUpdate"
+            />
         </v-setting-section>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { ProjectFrameworkDocument, ProjectTagDocument } from '~~/prismicio-types'
+import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
     name: 'VSetting',
     computed: {
-        isOpen() {
-            return this.$store.state.isSettingsOpen
+        currentTags(): string[] {
+            return this.$store.state.tagFilters
+        },
+        tags() {
+            return this.$store.getters.projectTags.map((framework: ProjectTagDocument) => {
+                return { value: framework.uid, label: framework.data.name }
+            })
+        },
+        currentFrameWork(): string[] {
+            return this.$store.state.frameWorkFilters
+        },
+        frameworks() {
+            return this.$store.getters.projectFrameworks.map((framework: ProjectFrameworkDocument) => {
+                return { value: framework.uid, label: framework.data.name }
+            })
         },
     },
     methods: {
-        onSliderChanged(value: string) {
-            console.log('update slider val:', value)
+        onTagUpdate(value: string) {
+            const indexValue = this.currentTags.findIndex((tag) => tag === value)
+            const tags = this.currentTags.slice()
+            const filteredTags = indexValue === -1 ? [...tags, value] : tags.filter((_tag, i) => i !== indexValue)
+
+            this.$store.commit(MutationType.TAG_FILTERS, filteredTags)
         },
-        resetFramework() {},
-        resetTags() {},
+        resetTags() {
+            this.$store.commit(MutationType.TAG_FILTERS, [])
+        },
+        onFrameworkUpdate(value: string) {
+            this.$store.commit(MutationType.FRAMEWORK_FILTERS, [value])
+        },
+        resetFramework() {
+            this.$store.commit(MutationType.FRAMEWORK_FILTERS, [])
+        },
     },
 })
 </script>
@@ -53,13 +88,11 @@ export default Vue.extend({
     gap: rem(40);
 }
 
-.buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: rem(12);
-}
+.color {
+    display: none;
 
-.date {
-    --v-setting-row-title-min-width: none;
+    @include media('>=lg') {
+        display: block;
+    }
 }
 </style>

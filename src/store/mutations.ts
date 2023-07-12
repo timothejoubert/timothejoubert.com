@@ -13,10 +13,14 @@ export default {
     [MutationType.SETTING_OPENED]: (state, value: boolean) => (state.isSettingsOpen = value),
     [MutationType.ABOUT_OPENED]: (state, value: boolean) => (state.isAboutOpen = value),
     [MutationType.SPLASH_SCREEN_DONE]: (state, value: boolean) => (state.splashScreenDone = value),
+
+    // UI settings
     [MutationType.TAG_FILTERS]: (state, value: string[]) => (state.tagFilters = value),
-    [MutationType.CLIENT_THEME]: (state, color: { key: keyof ClientTheme; value: string }) => {
-        return (state.clientTheme[color.key] = color.value)
+    [MutationType.FRAMEWORK_FILTERS]: (state, value: string[]) => (state.frameWorkFilters = value),
+    [MutationType.UI_THEME]: (state, color: { key: keyof ClientTheme; value: string }) => {
+        return (state.uiTheme[color.key] = color.value)
     },
+    [MutationType.UI_COLUMNS]: (state, value: string) => (state.uiColumns = value),
 
     // Global
     [MutationType.WINDOW_WIDTH]: (state, value: number) => (state.windowWidth = value),

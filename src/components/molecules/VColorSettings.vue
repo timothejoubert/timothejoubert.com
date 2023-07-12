@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { getArrayFormattedTheme, getPredefinedThemes } from '~/utils/get-theme'
+import { getArrayFormattedTheme, getObjectFormattedTheme, getPredefinedThemes } from '~/utils/get-theme'
 import MutationType from '~/constants/mutation-type'
 
 const predefinedThemes = getPredefinedThemes()
@@ -25,7 +25,7 @@ export default Vue.extend({
     name: 'VColorSettings',
     data() {
         return {
-            activeTheme: [],
+            activeTheme: [] as string[],
         }
     },
     computed: {
@@ -35,15 +35,18 @@ export default Vue.extend({
     },
     methods: {
         resetInterface() {
+            this.activeTheme = []
             this.updateColors(getArrayFormattedTheme())
+            this.$store.commit(MutationType.UI_THEME, getObjectFormattedTheme())
         },
         onThemeChanged(themeId: string) {
+            this.activeTheme = [themeId]
             const selectedTheme = predefinedThemes?.[themeId]
             selectedTheme && this.updateColors(selectedTheme)
         },
         updateColors(colors: { key: string; value: string }[]) {
             colors.forEach((color) => {
-                this.$store.commit(MutationType.CLIENT_THEME, { key: color.key, value: color.value })
+                this.$store.commit(MutationType.UI_THEME, { key: color.key, value: color.value })
             })
         },
     },

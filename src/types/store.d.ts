@@ -11,9 +11,10 @@ interface RootState {
     isSettingsOpen: boolean
     splashScreenDone: boolean
     isAboutOpen: boolean
-    clientTheme: ClientTheme
 
-    // project filters
+    // UI setting
+    uiTheme: ClientTheme
+    uiColumns: string
     tagFilters: string[]
     frameWorkFilters: string[]
 

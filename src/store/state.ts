@@ -10,9 +10,10 @@ export default (): RootState => ({
     splashScreenDone: false,
     isSettingsOpen: false,
     isAboutOpen: false,
-    clientTheme: getObjectFormattedTheme(),
 
-    // project filters
+    // UI setting
+    uiTheme: getObjectFormattedTheme(),
+    uiColumns: '4',
     tagFilters: [],
     frameWorkFilters: [],
 

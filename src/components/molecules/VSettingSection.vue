@@ -4,9 +4,7 @@
             <span :class="$style.title">{{ title }}</span>
             <button v-if="hasReset" :class="$style.reset" @click="$emit('onResetClicked')">Reset</button>
         </div>
-        <div :class="$style.content">
-            <slot name="default" />
-        </div>
+        <slot name="default" />
     </div>
 </template>
 <script lang="ts">

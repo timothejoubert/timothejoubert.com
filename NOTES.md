@@ -11,7 +11,7 @@ import { Document } from '@prismicio/client/types/documents'
 
 ### IN PROGRESS
 ** (Setting): keep alive component
-
+** (VSetting): hover title and reset
 
 ### TO CHECK
 
@@ -24,6 +24,7 @@ import { Document } from '@prismicio/client/types/documents'
 ** (VAbout): Reveal transition
 
 ### LATER 
+** (Image): optimize img size and use of ratio
 * **(Route)** Set relationLink field in BO if we want nested route (projects/project-name)
 * **(Build)** Generate.exclude not working
 * **(Sitemap && routes)** avoid to generate route for ['/preview', '/en/preview', '/en/slice-simulator', '/slice-simulator']

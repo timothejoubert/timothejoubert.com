@@ -30,10 +30,9 @@ export default Vue.extend({
 </script>
 <style lang="scss" module>
 .root {
-    position: relative;
-}
-
-.checkbox {
-    margin-block: rem(3);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: rem(3);
 }
 </style>

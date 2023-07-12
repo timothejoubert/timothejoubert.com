@@ -25,7 +25,7 @@ export default Vue.extend({
     methods: {
         onUpdate(event: InputEvent) {
             const value = (event.target as HTMLInputElement).value
-            this.$store.commit(MutationType.CLIENT_THEME, { key: this.id, value })
+            this.$store.commit(MutationType.UI_THEME, { key: this.id, value })
         },
     },
 })
