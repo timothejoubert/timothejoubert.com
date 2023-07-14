@@ -15,7 +15,6 @@
 
         <div :class="$style.medias">
             <v-image v-for="(media, i) in medias" :key="i" :prismic-image="media" :class="$style.media" />
-            <!--            <v-image v-if="thumbnail" :prismic-image="thumbnail" :class="$style.thumbnail" />-->
         </div>
     </div>
 </template>
@@ -32,11 +31,9 @@ export default Vue.extend({
         project(): ProjectDocumentData {
             return this.$store.state.currentPageData.data
         },
-        thumbnail(): LinkToMediaField {
-            return this.project.thumbnail
-        },
         medias(): LinkToMediaField[] {
-            return [...Array(6).keys()].map(() => this.thumbnail)
+            const medias = this.project.medias?.map((mediaReference) => mediaReference.media) || []
+            return [this.project.thumbnail, ...medias]
         },
     },
 })

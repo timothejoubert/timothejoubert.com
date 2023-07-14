@@ -58,7 +58,7 @@ $check-border-width: 2px;
     padding-top: rem(2);
     white-space: nowrap;
 
-    &:first-letter {
+    &::first-letter {
         text-transform: uppercase;
     }
 

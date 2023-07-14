@@ -1,14 +1,17 @@
 <template>
     <div :class="$style.root">
+        <div :class="$style.tags">
+            <v-button v-for="tag in tags" :key="tag" tag="div" filled size="s" theme="dark" :label="tag" />
+        </div>
         <div :class="$style.head" class="text-body-s">
             <div v-if="framework" :class="$style.framework">{{ framework }}</div>
             <div v-if="date">{{ date }}</div>
             <a v-if="link" :href="link" target="_blank" :class="$style.link">{{ linkLabel || 'Découvrir' }}</a>
         </div>
-        <div :class="$style.tags">
-            <v-button v-for="tag in tags" :key="tag" tag="div" filled size="s" theme="dark" :label="tag" />
-        </div>
-        <v-text v-if="content" :content="content" class="text-body-s" :class="$style.content" />
+        <v-text v-if="excerpt" :content="excerpt" :class="$style.excerpt" />
+        <v-collapsable v-if="content" :class="$style['more-content']" label="Voir les détails">
+            <v-text :content="content" :class="$style.content" class="text-body-xs" />
+        </v-collapsable>
     </div>
 </template>
 
@@ -26,6 +29,7 @@ export default Vue.extend({
         framework: String,
         tags: { type: Array as PropType<String[]>, default: () => [] },
         content: Array as PropType<PrismicRichText>,
+        excerpt: Array as PropType<PrismicRichText>,
     },
 })
 </script>
@@ -61,12 +65,16 @@ export default Vue.extend({
     gap: rem(16);
 }
 
-.content {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+.excerpt {
+    margin-block: rem(20);
+}
+
+.more-content {
     margin-block: rem(40) rem(28);
+}
+
+.content {
+    margin-top: rem(16);
     opacity: 0.8;
 }
 </style>

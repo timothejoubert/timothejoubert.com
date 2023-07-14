@@ -33,6 +33,15 @@
         "type": "Link",
         "config": { "label": "Framework", "select": "document", "customtypes": ["project_framework"] }
       },
+      "short_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Short description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
       "content": {
         "type": "StructuredText",
         "config": {
@@ -46,7 +55,15 @@
       "date": { "type": "Date", "config": { "label": "Date", "placeholder": "" } },
       "link": { "type": "Link", "config": { "label": "Link", "placeholder": "", "select": null } },
       "link_label": { "type": "Text", "config": { "label": "Link label", "placeholder": "" } },
-      "slices": { "type": "Slices", "fieldset": "Slice Zone", "config": { "choices": {} } }
+      "medias": {
+        "type": "Group",
+        "config": {
+          "label": "Medias",
+          "fields": {
+            "media": { "type": "Link", "config": { "label": "Media", "placeholder": "", "select": "media" } }
+          }
+        }
+      }
     },
     "SEO & Metadata": {
       "meta_description": {

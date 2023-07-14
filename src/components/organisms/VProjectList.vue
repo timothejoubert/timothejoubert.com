@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { ProjectDocument } from '~~/prismicio-types'
+import { ProjectDocument, ProjectDocumentDataTagsItem } from '~~/prismicio-types'
 import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
@@ -56,7 +56,7 @@ export default Vue.extend({
         getProjectByTags(projects: ProjectDocument[], tags: string[]): ProjectDocument[] {
             return projects.filter((project) => {
                 const projectTags = project.data.tags.map(
-                    (tagReference) => (tagReference.tag as { uid?: string }).uid || ''
+                    (tagReference: ProjectDocumentDataTagsItem) => (tagReference.tag as { uid?: string }).uid || ''
                 )
                 return projectTags.some((tag) => tags.includes(tag))
             })

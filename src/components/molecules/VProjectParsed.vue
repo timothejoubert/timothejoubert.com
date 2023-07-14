@@ -11,13 +11,14 @@ export default Vue.extend({
     props: {
         project: Object as PropType<ProjectDocumentData>,
     },
-    render(_createElement, context): undefined | VNode[] {
-        const { tags, date, link, link_label, content, framework, favorite } = context.props.project
+    render(_createElement, context): VNode[] | undefined {
+        const { tags, date, link, link_label, content, framework, favorite, short_description } = context.props.project
 
         return context.scopedSlots.default?.({
             tags: getTagsByReference(tags, context.parent.$store.getters.projectTags),
             framework: context.parent.$store.getters.getFramework((framework as { uid?: string })?.uid),
             date: getProjectYear(date),
+            excerpt: short_description,
             content,
             link: (link as { url?: string })?.url,
             linkLabel: link_label,

@@ -8,20 +8,25 @@ import { Document } from '@prismicio/client/types/documents'
 (repositoryNameOrEndpoint: string, options?: ApiOptions): Promise<Document<AllDocumentTypes>>
 ````
 
-
 ### IN PROGRESS
-** (Setting): keep alive component
-** (VSetting): hover title and reset
-
-### TO CHECK
+** (Fetch): See only favorite (Filter project fetch if setting type favorite enable and remove Favorite filter)
+** (VCollapsed): Create component
+** (SCSS): use map-to-props from boegli for transition mixin
 
 ### TODOS
+** (VSetting): hover title and reset
+** (Setting): keep alive component
+** (LeaveScreen): Create visual when blur tab 
 ** (SplashScreen): add component 
 ** (SplashScreen): start loading if currently on tab
 
 ### DONE
+** (VProject): VNew pill
+** (VProject): Desciption du projets + reflexion et recul autour du projet
 ** (VButton): set background and color with css var depending on props theme 
 ** (VAbout): Reveal transition
+
+### TO CHECK
 
 ### LATER 
 ** (Image): optimize img size and use of ratio

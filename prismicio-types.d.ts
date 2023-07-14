@@ -115,6 +115,17 @@ interface ProjectDocumentData {
      */
     framework: prismic.ContentRelationshipField<'project_framework'>
     /**
+     * Short description field in *Project*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: project.short_description
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    short_description: prismic.RichTextField
+    /**
      * Content field in *Project*
      *
      * - **Field Type**: Rich Text
@@ -170,16 +181,16 @@ interface ProjectDocumentData {
      */
     link_label: prismic.KeyTextField
     /**
-     * Slice Zone field in *Project*
+     * Medias field in *Project*
      *
-     * - **Field Type**: Slice Zone
+     * - **Field Type**: Group
      * - **Placeholder**: *None*
-     * - **API ID Path**: project.slices[]
+     * - **API ID Path**: project.medias[]
      * - **Tab**: Main
-     * - **Documentation**: https://prismic.io/docs/core-concepts/slices
+     * - **Documentation**: https://prismic.io/docs/core-concepts/group
      *
      */
-    slices: prismic.SliceZone<ProjectDocumentDataSlicesSlice>
+    medias: prismic.GroupField<Simplify<ProjectDocumentDataMediasItem>>
     /**
      * Meta Description field in *Project*
      *
@@ -231,10 +242,21 @@ export interface ProjectDocumentDataTagsItem {
     tag: prismic.ContentRelationshipField<'project_tag'>
 }
 /**
- * Slice for *Project → Slice Zone*
+ * Item in Project → Medias
  *
  */
-type ProjectDocumentDataSlicesSlice = never
+export interface ProjectDocumentDataMediasItem {
+    /**
+     * Media field in *Project → Medias*
+     *
+     * - **Field Type**: Link to Media
+     * - **Placeholder**: *None*
+     * - **API ID Path**: project.medias[].media
+     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+     *
+     */
+    media: prismic.LinkToMediaField
+}
 /**
  * Project document from Prismic
  *
@@ -517,7 +539,7 @@ declare module '@prismicio/client' {
             HomePageDocument,
             ProjectDocumentData,
             ProjectDocumentDataTagsItem,
-            ProjectDocumentDataSlicesSlice,
+            ProjectDocumentDataMediasItem,
             ProjectDocument,
             ProjectFrameworkDocumentData,
             ProjectFrameworkDocument,
