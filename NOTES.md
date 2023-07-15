@@ -9,6 +9,7 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
+** (VMedia): Allow Embed video media
 ** (Fetch): See only favorite (Filter project fetch if setting type favorite enable and remove Favorite filter)
 ** (VCollapsed): Create component
 ** (SCSS): use map-to-props from boegli for transition mixin

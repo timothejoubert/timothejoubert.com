@@ -23,7 +23,7 @@ export default Vue.extend({
                 context.props.tag,
                 {
                     class: [context.data.class, context.$style.root],
-                    staticClass: 'split-word',
+                    staticClass: (context.data?.staticClass || '') + ' split-word',
                     style: { '--word-index': index },
                 },
                 [

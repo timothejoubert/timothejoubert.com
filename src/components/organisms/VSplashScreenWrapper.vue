@@ -1,5 +1,5 @@
 <template>
-    <transition :name="$style['splash-screen']">
+    <transition :name="$style.root">
         <v-splash-screen v-if="splashScreenState !== 'done'" v-model="splashScreenState" />
     </transition>
 </template>
@@ -8,7 +8,7 @@
 import Vue from 'vue'
 import MutationType from '~/constants/mutation-type'
 
-export type SplashScreenState = 'pending' | 'beforeEnter' | 'beforeLeaved' | 'leave' | 'done'
+export type SplashScreenState = 'pending' | 'appear' | 'animating' | 'leave' | 'done'
 
 export default Vue.extend({
     name: 'VSplashScreenWrapper',
@@ -23,7 +23,7 @@ export default Vue.extend({
         },
     },
     mounted() {
-        this.splashScreenState = 'beforeEnter'
+        this.splashScreenState = 'appear'
     },
     methods: {
         onSplashScreenDone() {
@@ -34,13 +34,15 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" module>
-.splash-screen:global(#{'-enter-active'}),
-.splash-screen:global(#{'-leave-active'}) {
-    transition: opacity 0.3s;
-}
+.root {
+    &:global(#{'-enter-active'}),
+    &:global(#{'-leave-active'}) {
+        transition: opacity 0.3s;
+    }
 
-.splash-screen:global(#{'-enter'}),
-.splash-screen:global(#{'-leave-to'}) {
-    opacity: 0;
+    &:global(#{'-enter'}),
+    &:global(#{'-leave-to'}) {
+        opacity: 0;
+    }
 }
 </style>

@@ -113,7 +113,6 @@ export default Vue.extend({
     display: var(--v-image-display, inline-block);
     background-color: var(--v-image-background-color);
     border-radius: var(--v-image-border-radius, 0);
-    transition: var(--v-image-transition, none);
 
     &--ratio {
         position: relative;
