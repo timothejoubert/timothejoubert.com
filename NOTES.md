@@ -9,9 +9,11 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
+** (VSetting): Add pill when filter is filled
+** (VSetting): adapt height
+** (VProject): scroll Top when change project route
 ** (VMedia): Allow Embed video media
 ** (Fetch): See only favorite (Filter project fetch if setting type favorite enable and remove Favorite filter)
-** (VCollapsed): Create component
 ** (SCSS): use map-to-props from boegli for transition mixin
 
 ### TODOS
@@ -22,6 +24,7 @@ import { Document } from '@prismicio/client/types/documents'
 ** (SplashScreen): start loading if currently on tab
 
 ### DONE
+** (VCollapsed): Create component
 ** (VProject): VNew pill
 ** (VProject): Desciption du projets + reflexion et recul autour du projet
 ** (VButton): set background and color with css var depending on props theme 

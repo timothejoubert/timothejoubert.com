@@ -25,9 +25,8 @@
             <v-slide-text
                 v-if="title"
                 :play-animation="mouseEnter"
-                class="text-over-title-m"
                 :content="title"
-                :class="$style.title"
+                :class="[$style.title, isProjectOpen ? 'text-over-title-xs' : 'text-over-title-m']"
             />
             <span v-if="date" class="text-over-title-xs">{{ date }}</span>
         </div>
@@ -131,7 +130,9 @@ export default Vue.extend({
 .title {
     display: inline-flex;
     color: var(--theme-accent-color);
-    transition: translate 0.4s ease(out-quad);
+    transition-property: translate, font-size;
+    transition: 0.4s ease(out-quad);
+    font-weight: 800;
 
     .root--mouse-enter & {
         translate: calc(-100% - 20px) 0;

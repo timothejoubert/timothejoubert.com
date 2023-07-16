@@ -84,6 +84,7 @@ export default Vue.extend({
 .root {
     z-index: 2;
     display: flex;
+    overflow: hidden;
     height: $v-settings-height;
     flex-wrap: wrap;
     padding-bottom: rem(8);
