@@ -1,16 +1,20 @@
 <template>
-    <div>
-        <v-select
-            id="theme"
-            :options="clientThemes"
-            :active-values="activeTheme"
-            :multiple="false"
-            :class="$style.checkboxes"
-            @input="onThemeChanged"
-        />
-        <v-color-input id="foreground" :class="$style.color" />
-        <v-color-input id="accent" :class="$style.color" />
-        <v-color-input id="background" :class="$style.color" />
+    <div :class="$style.root">
+        <v-scroll-overflow :class="$style.checkboxes">
+            <v-select
+                id="theme"
+                :options="clientThemes"
+                :active-values="activeTheme"
+                :multiple="false"
+                @input="onThemeChanged"
+            />
+        </v-scroll-overflow>
+
+        <div :class="$style.colors">
+            <v-color-input id="foreground" :class="$style.color" />
+            <v-color-input id="accent" :class="$style.color" />
+            <v-color-input id="background" :class="$style.color" />
+        </div>
     </div>
 </template>
 
@@ -53,13 +57,18 @@ export default Vue.extend({
 })
 </script>
 <style lang="scss" module>
+.root {
+    display: flex;
+    gap: rem(20);
+}
 .checkboxes {
     margin-bottom: rem(20);
 }
 
-.color {
-    &:not(:last-child) {
-        margin-right: rem(8);
-    }
+.colors {
+    display: flex;
+    flex-direction: column;
+    margin-left: rem(30);
+    gap: rem(8);
 }
 </style>

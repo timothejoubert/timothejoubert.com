@@ -1,6 +1,10 @@
 <template>
-    <div :class="$style.root" @mouseenter="mouseEnter = true" @mouseleave="mouseEnter = false">
-        <v-image v-if="image" :prismic-image="image" :class="$style.image" :cover="true" />
+    <div
+        :class="[$style.root, mouseEnter && $style['root--mouse-enter'], selected && $style['root--selected']]"
+        @mouseenter="mouseEnter = true"
+        @mouseleave="mouseEnter = false"
+    >
+        <v-image v-if="image" :prismic-image="image" :class="$style.image" :cover="true" :sizes="cardPercent" />
 
         <div :class="$style.body">
             <template v-if="tags.length">
@@ -45,6 +49,7 @@ export default Vue.extend({
             default: () => [],
         },
         date: String,
+        selected: Boolean,
     },
     data() {
         return {
@@ -52,8 +57,14 @@ export default Vue.extend({
         }
     },
     computed: {
+        cardPercent(): number {
+            return 100 / this.$store.state.uiColumns + 5
+        },
         tagList() {
-            return this.mouseEnter ? this.tags.sort((a, b) => a.length - b.length) : []
+            return this.mouseEnter || this.isProjectOpen ? [] : this.tags.slice().sort((a, b) => a.length - b.length)
+        },
+        isProjectOpen(): boolean {
+            return !!this.$store.getters.isProjectOpen
         },
     },
     watch: {
@@ -73,6 +84,20 @@ export default Vue.extend({
     padding: 4%;
     aspect-ratio: 1;
     border-radius: 0 #{rem(48)} 0 0;
+
+    &::after {
+        position: absolute;
+        z-index: 5;
+        border: 1px solid transparent;
+        border-radius: 0 #{rem(48)} 0 0;
+        content: '';
+        inset: 0;
+        transition: border-color 0.3s;
+    }
+
+    &--selected::after {
+        border-color: var(--theme-accent-color);
+    }
 }
 
 .image {
@@ -106,6 +131,11 @@ export default Vue.extend({
 .title {
     display: inline-flex;
     color: var(--theme-accent-color);
+    transition: translate 0.4s ease(out-quad);
+
+    .root--mouse-enter & {
+        translate: calc(-100% - 20px) 0;
+    }
 }
 
 .body {

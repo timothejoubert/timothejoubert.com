@@ -5,8 +5,6 @@ import { isMediaFulled } from '~/utils/prismic/field-media'
 import { PrismicMedia } from '~/types/prismic/app-prismic'
 import breakpoint from '~/scss/export/_breakpoints.scss'
 
-const FALLBACK_ALT = 'Illustration de Hugo Tomasi'
-
 export interface VImageProps {
     prismicImage?: PrismicMedia
     nativeImg?: boolean
@@ -16,15 +14,16 @@ export interface VImageProps {
     sizes?: string
 }
 
-function generateBreakpoint(width: number = 70): string {
+function generateBreakpoint(width: number = 80): string {
     return Object.keys(breakpoint)
         .map((key) => `${key.split('-')[1]}:${width.toString()}vw`)
         .join(' ')
 }
 
-function getSizes(value: string | undefined): string {
+function getSizes(value: string | number | undefined): string {
     if (!value) return generateBreakpoint()
     else if (value === 'fullScreen') return generateBreakpoint(100)
+    else if (typeof value === 'number') return generateBreakpoint(value)
     return value
 }
 
@@ -38,7 +37,7 @@ export default Vue.extend({
         ratio: { type: [Boolean, Number], default: true },
         url: String,
         placeholder: { type: Boolean, default: true },
-        sizes: String as PropType<string | 'fullScreen'>,
+        sizes: [String, Number] as PropType<string | 'fullScreen' | number>,
         cover: Boolean,
     },
     data() {
@@ -54,10 +53,10 @@ export default Vue.extend({
         const imgTag = nativeImg ? 'img' : 'nuxt-img'
 
         let width = 0
-        if (prismicImage?.dimensions?.width) width = parseFloat(prismicImage.dimensions.width)
+        if (prismicImage?.width) width = parseFloat(prismicImage.width)
 
         let height = 0
-        if (prismicImage?.dimensions?.height) height = parseFloat(prismicImage.dimensions.height)
+        if (prismicImage?.height) height = parseFloat(prismicImage.height)
 
         const attrs: Record<string, any> = {
             placeholder: '15',
@@ -67,14 +66,14 @@ export default Vue.extend({
             sizes: getSizes(this.$attrs?.sizes || this.sizes),
             src: nativeImg && url ? url : prismicImage?.url || '/images/fallback-img.jpg',
             copyright: prismicImage?.copyright,
-            alt: prismicImage?.alt || FALLBACK_ALT,
+            alt: prismicImage?.alt,
             width: (!this.ratio && width) || '',
             height: (!this.ratio && height) || '',
         }
 
         const img = createElement(imgTag, {
             attrs,
-            class: [this.$style.root, this.loaded && this.$style['root--loaded']],
+            class: [this.$style.image],
             on: { load: () => (this.loaded = true) },
         })
 
@@ -95,6 +94,7 @@ export default Vue.extend({
                         this.$style.root,
                         this.ratio && this.$style['root--ratio'],
                         this.cover && this.$style['root--cover'],
+                        this.placeholder && this.$style['root--placeholder'],
                         this.loaded && this.$style['root--loaded'],
                     ],
                 },
@@ -112,11 +112,14 @@ export default Vue.extend({
     z-index: var(--v-image-z-index, 1); // create stacking context for preventing crop glitch on Safari
     display: var(--v-image-display, inline-block);
     background-color: var(--v-image-background-color);
-    border-radius: var(--v-image-border-radius, 0);
 
     &--ratio {
         position: relative;
         display: var(--v-image-display, block);
+    }
+
+    &--placeholder:not(#{&}--loaded) {
+        background-color: rgba(0, 0, 0, 0.1);
     }
 
     &--cover {
@@ -125,13 +128,14 @@ export default Vue.extend({
     }
 }
 
-img {
+.image {
     display: block;
     width: var(--v-image-width, auto);
     max-width: var(--v-image-max-width, 100%);
     height: var(--v-image-height, auto);
     min-height: var(--v-image-min-height, initial);
     aspect-ratio: var(--v-image-aspect-ratio, initial);
+    border-radius: var(--v-image-border-radius, 0);
     object-fit: var(--v-image-object-fit, initial);
     object-position: var(--v-image-object-position, initial);
     -webkit-user-drag: none;
@@ -140,29 +144,21 @@ img {
     user-select: none;
 
     .root--cover & {
+        --v-image-width: 100%;
+        --v-image-height: 100%;
+        --v-image-object-fit: cover;
+
         position: absolute;
         top: 0;
         left: 0;
-        width: var(--v-image-width, 100%);
-        height: var(--v-image-height, 100%);
-        object-fit: var(--v-image-object-fit, cover);
-    }
-
-    .root--lazy & {
-        opacity: 0;
-        transition: var(--v-image-img-transition, all 0s), opacity 0.3s;
     }
 
     .root--loaded & {
         opacity: 1;
     }
-}
 
-.copyright {
-    --v-information-pill-background-volor: #{rgba(color(white), 0.5)};
-
-    position: absolute;
-    right: var(--v-image-copyright-right, rem(22));
-    bottom: var(--v-image-copyright-bottom, rem(16));
+    .root--ratio & {
+        position: absolute;
+    }
 }
 </style>

@@ -37,7 +37,7 @@ export default Vue.extend({
 .root {
     &:global(#{'-enter-active'}),
     &:global(#{'-leave-active'}) {
-        transition: opacity 0.3s;
+        transition: opacity 0.65s ease(out-quad);
     }
 
     &:global(#{'-enter'}),

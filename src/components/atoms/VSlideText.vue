@@ -1,5 +1,5 @@
 <template>
-    <component :is="tag" :class="[$style.root, playAnimation && $style['root--animate']]">
+    <component :is="tag" v-if="content" :class="[$style.root, playAnimation && $style['root--animate']]">
         <v-split-letters :content="content" />
     </component>
 </template>

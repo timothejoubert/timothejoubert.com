@@ -1,14 +1,13 @@
 <template>
     <v-link :reference="project" :class="$style.root">
         <v-new-pill v-if="isNew" :class="$style.new" :grow="hovered" />
-        <v-card v-model="hovered" v-bind="cardProps" />
+        <v-card v-model="hovered" v-bind="cardProps" :selected="project?.uid === activeProject" />
     </v-link>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import type { PropType } from 'vue'
-import { getProjectYear } from '~/utils/prismic/date'
 import { ProjectDocument } from '~~/prismicio-types'
 import { getTagsByReference } from '~/utils/project/tag'
 
@@ -23,11 +22,6 @@ export default Vue.extend({
         }
     },
     computed: {
-        isNew() {
-            const projectDate = this.project.data?.date || ''
-
-            return !!projectDate && this.dateDiffInDays(new Date(), new Date(projectDate)) < 90
-        },
         cardProps(): Record<string, any> {
             const { thumbnail, title, tags } = this.project.data
 
@@ -38,6 +32,13 @@ export default Vue.extend({
                 title,
                 tags: parsedTags,
             }
+        },
+        isNew() {
+            const projectDate = this.project.data.date
+            return !!projectDate && this.dateDiffInDays(new Date(), new Date(projectDate)) < 90
+        },
+        activeProject() {
+            return this.$store.state.currentPageData.uid
         },
     },
     methods: {

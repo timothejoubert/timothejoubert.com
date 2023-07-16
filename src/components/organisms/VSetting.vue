@@ -9,24 +9,28 @@
         </v-setting-section>
 
         <v-setting-section title="Cadre" @onResetClicked="resetFramework">
-            <v-select
-                id="framework"
-                label="Types"
-                :active-values="currentFrameWork"
-                :options="frameworks"
-                @input="onFrameworkUpdate"
-            />
+            <v-scroll-overflow>
+                <v-select
+                    id="framework"
+                    label="Types"
+                    :active-values="currentFrameWork"
+                    :options="frameworks"
+                    @input="onFrameworkUpdate"
+                />
+            </v-scroll-overflow>
         </v-setting-section>
 
         <v-setting-section title="Domaine" @onResetClicked="resetTags">
-            <v-select
-                id="tag"
-                label="Domaines"
-                multiple
-                :active-values="currentTags"
-                :options="tags"
-                @input="onTagUpdate"
-            />
+            <v-scroll-overflow>
+                <v-select
+                    id="tag"
+                    label="Domaines"
+                    multiple
+                    :active-values="currentTags"
+                    :options="tags"
+                    @input="onTagUpdate"
+                />
+            </v-scroll-overflow>
         </v-setting-section>
     </div>
 </template>

@@ -1,10 +1,16 @@
-@mixin hide-scrollbar {
+@mixin scroll-bar-hidden {
+    @include scroll-section;
+
     -ms-overflow-style: none; /* IE and Edge */
-    overflow-y: scroll;
     overscroll-behavior: contain;
     scrollbar-width: none; /* Firefox */
 
     &::-webkit-scrollbar {
         display: none;
     }
+}
+
+@mixin scroll-section {
+    max-height: var(--scroll-section-max-height);
+    overflow-y: auto;
 }

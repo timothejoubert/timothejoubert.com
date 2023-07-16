@@ -45,7 +45,7 @@ export default Vue.extend({
     transition: min-height 0.85s ease(out-quad);
 
     &--open {
-        @include hide-scrollbar;
+        @include scroll-bar-hidden;
 
         min-height: calc(100vh - $v-top-bar-height);
     }

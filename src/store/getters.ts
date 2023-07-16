@@ -3,6 +3,7 @@ import { RootState } from '~/types/store'
 import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument, SettingsDocument } from '~~/prismicio-types'
 import { CommonContentKey } from '~/types/app'
 import { isHomePageDocument } from '~/utils/prismic/document-entity'
+import CustomType from '~/constants/custom-type'
 
 export const getters: GetterTree<RootState, RootState> = {
     isHomePage(state: RootState) {
@@ -35,6 +36,9 @@ export const getters: GetterTree<RootState, RootState> = {
     getProjectByUid: (_state: RootState, getters: any) => {
         return (uid: string): ProjectDocument | undefined =>
             getters.projects?.find((project: ProjectDocument) => project.uid === uid)
+    },
+    isProjectOpen(state: RootState): boolean {
+        return state.currentPageData?.type === CustomType.PROJECT
     },
 }
 

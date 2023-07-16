@@ -1,15 +1,24 @@
 <template>
     <div :class="$style.root">
-        <div :class="$style.tags">
-            <v-button v-for="tag in tags" :key="tag" tag="div" filled size="s" theme="dark" :label="tag" />
-        </div>
-        <div :class="$style.head" class="text-body-s">
-            <div v-if="framework" :class="$style.framework">{{ framework }}</div>
-            <div v-if="date">{{ date }}</div>
-            <a v-if="link" :href="link" target="_blank" :class="$style.link">{{ linkLabel || 'Découvrir' }}</a>
+        <div :class="$style.head">
+            <v-button
+                v-for="tag in tags"
+                :key="tag"
+                :class="$style.tag"
+                tag="div"
+                filled
+                size="s"
+                theme="dark"
+                :label="tag"
+            />
+            <div :class="$style.specifications">
+                <div v-if="framework" :class="$style.framework">{{ framework }}</div>
+                <div v-if="date">{{ date }}</div>
+                <a v-if="link" :href="link" target="_blank" :class="$style.link">{{ linkLabel || 'Découvrir' }}</a>
+            </div>
         </div>
         <v-text v-if="excerpt" :content="excerpt" :class="$style.excerpt" />
-        <v-collapsable v-if="content" :class="$style['more-content']" label="Voir les détails">
+        <v-collapsable v-if="hasContent" :class="$style['more-content']" label="Voir les détails">
             <v-text :content="content" :class="$style.content" class="text-body-xs" />
         </v-collapsable>
     </div>
@@ -28,8 +37,13 @@ export default Vue.extend({
         linkLabel: String,
         framework: String,
         tags: { type: Array as PropType<String[]>, default: () => [] },
-        content: Array as PropType<PrismicRichText>,
+        content: [Array, String] as PropType<PrismicRichText | String>,
         excerpt: Array as PropType<PrismicRichText>,
+    },
+    computed: {
+        hasContent() {
+            return (typeof this.content === 'string' && !!this.content) || !!this.content?.length
+        },
     },
 })
 </script>
@@ -37,7 +51,22 @@ export default Vue.extend({
 .root {
     position: relative;
 }
+
 .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: rem(16);
+    margin-block: rem(40) rem(24);
+}
+
+.tag {
+    &:nth-last-child(1 of .tag) {
+        margin-right: rem(12);
+    }
+}
+
+.specifications {
     @include arrow-link;
 
     --v-button-padding: 0;
@@ -45,12 +74,12 @@ export default Vue.extend({
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-bottom: rem(20);
+    gap: rem(14);
 
     & > *:not(:last-child)::after {
         position: relative;
+        margin-left: rem(14);
         content: '|';
-        margin-inline: rem(14);
     }
 }
 
@@ -58,19 +87,13 @@ export default Vue.extend({
     font-weight: 500;
 }
 
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: rem(16);
-}
-
 .excerpt {
-    margin-block: rem(20);
+    font-style: italic;
+    margin-block: rem(16);
 }
 
 .more-content {
-    margin-block: rem(40) rem(28);
+    margin-bottom: rem(40);
 }
 
 .content {

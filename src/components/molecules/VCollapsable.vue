@@ -1,7 +1,7 @@
 <template>
     <div :class="[$style.root, collapsed && $style['root--collapsed']]">
         <button :class="$style.cta" @click="collapsed = !collapsed">
-            <span :class="$style.label">{{ label }}</span>
+            <span :class="$style.label" class="text-body-xs">{{ label }}</span>
             <span :class="$style.icon"></span>
         </button>
         <div :class="$style.content">
@@ -39,14 +39,14 @@ export default Vue.extend({
 .cta {
     display: flex;
     align-items: center;
-    gap: rem(12);
+    gap: rem(10);
 }
 
 .icon {
     position: relative;
     display: flex;
-    width: rem(16);
-    height: rem(16);
+    width: rem(13);
+    height: rem(13);
     align-items: center;
     justify-content: center;
 
@@ -65,23 +65,23 @@ export default Vue.extend({
     &::after {
         width: 1px;
         height: 100%;
-        rotate: 0deg;
+        rotate: 90deg;
         transform-origin: center;
         transition: rotate 0.3s ease(out-quad);
     }
 
     .root--collapsed &::after {
-        rotate: 90deg;
+        rotate: 0deg;
     }
 }
 
 .content {
     display: grid;
-    grid-template-rows: 0fr;
+    grid-template-rows: 1fr;
     transition: grid-template-rows 0.5s;
 
     .root--collapsed & {
-        grid-template-rows: 1fr !important;
+        grid-template-rows: 0fr;
     }
 }
 

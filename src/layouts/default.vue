@@ -20,7 +20,6 @@ import mixins from 'vue-typed-mixins'
 import Resize from '~/mixins/Resize'
 import MutationType from '~/constants/mutation-type'
 import SplashScreen from '~/mixins/SplashScreen'
-import CustomType from '~/constants/custom-type'
 
 export default mixins(Resize, SplashScreen).extend({
     name: 'default',
@@ -35,7 +34,7 @@ export default mixins(Resize, SplashScreen).extend({
             return [this.$style.root, ...this.splashScreenClasses]
         },
         isProjectOpen(): boolean {
-            return this.$store.state.currentPageData?.type === CustomType.PROJECT
+            return this.$store.getters.isProjectOpen
         },
         isHomePage() {
             return this.$store.getters.isHomePage
@@ -60,7 +59,6 @@ export default mixins(Resize, SplashScreen).extend({
     (
         translate: 100% 0,
     ),
-    $activeProperties: (),
     $scope: 'local'
 );
 
@@ -83,7 +81,7 @@ export default mixins(Resize, SplashScreen).extend({
 
 .body,
 .project {
-    @include hide-scrollbar;
+    @include scroll-bar-hidden;
 }
 
 .body {

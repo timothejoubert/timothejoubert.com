@@ -78,7 +78,7 @@
 }
 
 @mixin text-body-m {
-    @include font-size-fluid((xs: 16, xl: 19));
+    @include font-size-fluid((xs: 16, xl: 18));
 
     font-weight: 400;
     line-height: 1.2;
