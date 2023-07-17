@@ -1,51 +1,78 @@
 <template>
-    <div :class="$style.root">
+    <div :class="[$style.root, hasContentFilled && $style['root--content-filled']]">
         <div :class="$style.head" class="text-over-title-xs">
             <span :class="$style.title">{{ title }}</span>
-            <button v-if="hasReset" :class="$style.reset" @click="$emit('onResetClicked')">Reset</button>
+            <v-interactive-text
+                v-if="hasReset"
+                tag="button"
+                content="Reset"
+                :class="$style.reset"
+                :inert="!hasContentFilled"
+                :trigger-event="interactiveTextTrigger"
+                @click.native="$emit('onResetClicked')"
+            />
+            <!--            <button v-if="hasReset" :class="$style.reset" @click="$emit('onResetClicked')">Reset</button>-->
         </div>
         <slot name="default" />
     </div>
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import EventType from '~/constants/event-type'
 
 export default Vue.extend({
     name: 'VSettingSection',
     props: {
         title: String,
+        hasContentFilled: Boolean,
         hasReset: { type: Boolean, default: true },
     },
-    methods: {},
+    computed: {
+        interactiveTextTrigger(): string {
+            return EventType.SETTING_TRANSITION_END
+        },
+    },
 })
 </script>
 <style lang="scss" module>
 .root {
-    //width: calc(50% - #{rem(20)});
-    //
-    //@include media-container('<vl') {
-    //    width: 100%;
-    //}
     flex-grow: 1;
 }
 
 .head {
     display: flex;
+    min-height: rem(28);
     margin-bottom: rem(30);
     font-weight: 550 !important;
 }
 
 .title {
-    padding: rem(4) rem(24);
+    display: flex;
+    //justify-content: center;
+    min-width: rem(160);
+    align-items: center;
     background-color: var(--theme-foreground-color);
     color: var(--theme-background-color);
+    padding-inline: rem(12);
 }
 
 .reset {
+    position: relative;
     padding: rem(3) rem(16);
-    background-color: var(--theme-accent-color);
-    color: var(--theme-background-color);
+    color: var(--theme-foreground-color);
     font-size: rem(13);
     font-weight: 500;
+    opacity: 0.4;
+
+    .root--content-filled & {
+        opacity: 1;
+    }
+
+    .root--content-filled &::before {
+        position: absolute;
+        border: var(--theme-foreground-color) 2px solid;
+        content: '';
+        inset: 0;
+    }
 }
 </style>

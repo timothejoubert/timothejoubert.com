@@ -42,10 +42,11 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     position: relative;
+    display: inline-block;
 
     &--variable {
         font-variation-settings: 'wght' var(--font-weight, 300), 'ital' var(--font-italic, 0);
-        //transition: font-variation-settings 0.3s ease(out-quad);
+        transition: font-variation-settings 0.3s ease(out-quad);
     }
 
     &--after-space {

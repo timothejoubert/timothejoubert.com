@@ -1,14 +1,19 @@
 <template>
     <div :class="rootClasses" :style="colorThemeStyle">
+        <client-only>
+            <v-blur-screen v-if="isSplashScreenDone && isDocumentFocused === false" />
+        </client-only>
+
         <div :class="[$style.body, isProjectOpen && $style['body--minify']]">
-            <v-splash-screen-wrapper v-if="isSplashScreenDisplayed" />
+            <v-splash-wrapper v-if="isSplashScreenEnabled" />
             <v-top-bar />
             <v-main />
             <nuxt v-if="isHomePage" />
             <v-about />
         </div>
+
         <transition name="project-modal">
-            <div v-if="isProjectOpen" :class="$style.project">
+            <div v-if="isProjectOpen" ref="project" :class="$style.project">
                 <Nuxt />
             </div>
         </transition>
@@ -17,11 +22,13 @@
 
 <script lang="ts">
 import mixins from 'vue-typed-mixins'
+import type { Route } from 'vue-router'
 import Resize from '~/mixins/Resize'
 import MutationType from '~/constants/mutation-type'
 import SplashScreen from '~/mixins/SplashScreen'
+import DocumentFocus from '~/mixins/DocumentFocus'
 
-export default mixins(Resize, SplashScreen).extend({
+export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     name: 'default',
     mounted() {
         this.$store.commit(
@@ -45,6 +52,15 @@ export default mixins(Resize, SplashScreen).extend({
                 '--theme-accent-color': this.$store.state.uiTheme.accent,
                 '--theme-background-color': this.$store.state.uiTheme.background,
             }
+        },
+    },
+    watch: {
+        $route(current: Route, previous) {
+            const isProjectSwitching =
+                this.$store.getters.isProjectUid(current.params.pathMatch) &&
+                this.$store.getters.isProjectUid(previous.params.pathMatch)
+
+            isProjectSwitching && this.$refs.project.scrollTo({ top: 0, behavior: 'smooth' })
         },
     },
 })

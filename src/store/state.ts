@@ -1,5 +1,7 @@
 import { RootState } from '~/types/store'
 import { getObjectFormattedTheme } from '~/utils/get-theme'
+import AppConst from '~/constants/app'
+import toBoolean from '~/utils/to-boolean'
 
 export default (): RootState => ({
     // Prismic data
@@ -13,9 +15,10 @@ export default (): RootState => ({
 
     // UI setting
     uiTheme: getObjectFormattedTheme(),
-    uiColumns: '4',
+    uiColumns: AppConst.UI_COLUMNS,
     tagFilters: [],
     frameWorkFilters: [],
+    allProjectDisplayed: toBoolean(AppConst.ALL_PROJECT_DISPLAYED),
 
     // General
     errorPage: null,

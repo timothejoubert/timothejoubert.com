@@ -15,12 +15,6 @@
 //      opacity: 0;
 //  }
 
-@mixin obj-to-props($props) {
-    @each $key, $value in $props {
-        #{$key}: $value;
-    }
-}
-
 @mixin transition-props($transitionOptions, $properties) {
 
     @each $key, $value in $transitionOptions {
@@ -51,11 +45,11 @@
     #{$scope + "." + $name + '-leave-active'},
     #{$scope + "." + $name + '-enter-active'} {
         @include transition-props($transitionOptions, $properties);
-        @include obj-to-props($activeProperties);
+        @include map-to-props($activeProperties);
     }
 
     #{$scope + "." + $name + '-enter'},
     #{$scope + "." + $name + '-leave-to'} {
-        @include obj-to-props($properties);
+        @include map-to-props($properties);
     }
 }

@@ -17,6 +17,7 @@ interface RootState {
     uiColumns: string
     tagFilters: string[]
     frameWorkFilters: string[]
+    allProjectDisplayed: boolean
 
     // Global
     windowWidth: number

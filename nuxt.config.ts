@@ -147,11 +147,12 @@ export default {
 
     prismic: {
         preview: process.env.PREVIEW_PATH,
-        components: true,
+        injectComponents: true,
         endpoint: apiEndpoint,
         modern: true,
         linkResolver,
         htmlSerializer,
+        toolbar: false,
     },
 
     image: {

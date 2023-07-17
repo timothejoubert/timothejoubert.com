@@ -18,6 +18,15 @@
         }
       },
       "email": { "type": "Text", "config": { "label": "Email", "placeholder": "" } },
+      "display_all_projects": {
+        "type": "Boolean",
+        "config": {
+          "label": "Display all projects",
+          "default_value": false,
+          "placeholder_true": "true",
+          "placeholder_false": "false"
+        }
+      },
       "columns": {
         "type": "Group",
         "config": {
@@ -53,8 +62,7 @@
           },
           "label": "Socials"
         }
-      },
-      "slices": { "type": "Slices", "fieldset": "Slice Zone", "config": { "choices": {} } }
+      }
     },
     "SEO & Metadata": {
       "meta_description": {

@@ -9,21 +9,22 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (VSetting): Add pill when filter is filled
-** (VSetting): adapt height
-** (VProject): scroll Top when change project route
-** (VMedia): Allow Embed video media
-** (Fetch): See only favorite (Filter project fetch if setting type favorite enable and remove Favorite filter)
-** (SCSS): use map-to-props from boegli for transition mixin
-
-### TODOS
-** (VSetting): hover title and reset
-** (Setting): keep alive component
 ** (LeaveScreen): Create visual when blur tab 
-** (SplashScreen): add component 
 ** (SplashScreen): start loading if currently on tab
 
+### TODOS
+** (VSplashScreen): quick loader when splashScreen is disabled | alreadyDone  
+** (ProjectTransition): when project switching 
+** (VMedia): Allow Embed video media
+** (VSetting): adapt height
+
 ### DONE
+** (VSetting): hover title and reset
+** (VSetting): Add pill when filter is filled
+** (Fetch): See only favorite (Filter project fetch if setting type favorite enable and remove Favorite filter)
+** (SplashScreen): add component 
+** (VProject): scroll Top when change project route
+** (SCSS): use map-to-props from boegli for transition mixin
 ** (VCollapsed): Create component
 ** (VProject): VNew pill
 ** (VProject): Desciption du projets + reflexion et recul autour du projet
@@ -43,4 +44,6 @@ import { Document } from '@prismicio/client/types/documents'
 * **(Config)** use PrismicClient (exemple)[https://community.prismic.io/t/an-invalid-prismic-repository-name-was-given/10523/10]
 
 ### ABANDONED
+** (VSetting): Display only tag with current project (if only best project remove unused tags)
+** (Setting): keep alive component
 ** (VCard): add infinite marquee for tags ? 

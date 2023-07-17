@@ -5,13 +5,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import mixins from 'vue-typed-mixins'
 import MutationType from '~/constants/mutation-type'
+import DocumentFocus from '~/mixins/DocumentFocus'
 
 export type SplashScreenState = 'pending' | 'appear' | 'animating' | 'leave' | 'done'
 
-export default Vue.extend({
-    name: 'VSplashScreenWrapper',
+export default mixins(DocumentFocus).extend({
+    name: 'VSplashWrapper',
     data() {
         return {
             splashScreenState: 'pending' as SplashScreenState,
@@ -21,13 +22,19 @@ export default Vue.extend({
         splashScreenState(state: SplashScreenState) {
             if (state === 'done') this.onSplashScreenDone()
         },
+        isDocumentFocused(value: boolean) {
+            if (value && this.splashScreenState === 'pending') this.startAnimation()
+        },
     },
     mounted() {
-        this.splashScreenState = 'appear'
+        this.isDocumentFocused && this.startAnimation()
     },
     methods: {
         onSplashScreenDone() {
             this.$store.commit(MutationType.SPLASH_SCREEN_DONE, true)
+        },
+        startAnimation() {
+            this.splashScreenState = 'appear'
         },
     },
 })

@@ -21,6 +21,7 @@ export default {
         return (state.uiTheme[color.key] = color.value)
     },
     [MutationType.UI_COLUMNS]: (state, value: string) => (state.uiColumns = value),
+    [MutationType.ALL_PROJECT_DISPLAYED]: (state, value: boolean) => (state.allProjectDisplayed = value),
 
     // Global
     [MutationType.WINDOW_WIDTH]: (state, value: number) => (state.windowWidth = value),

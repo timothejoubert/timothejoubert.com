@@ -1,14 +1,19 @@
 <template>
     <div :class="$style.root" class="container">
-        <v-setting-section title="Grille" :has-reset="false">
+        <v-setting-section title="Interface" :has-reset="false">
             <v-grid-settings />
         </v-setting-section>
 
-        <v-setting-section :class="$style.color" title="Couleur" @onResetClicked="$refs.color.resetInterface()">
+        <v-setting-section
+            :has-content-filled="isColorFilled"
+            :class="$style.color"
+            title="Couleur"
+            @onResetClicked="$refs.color.resetInterface()"
+        >
             <v-color-settings ref="color" />
         </v-setting-section>
 
-        <v-setting-section title="Cadre" @onResetClicked="resetFramework">
+        <v-setting-section title="Cadre" :has-content-filled="isFrameworkFilled" @onResetClicked="resetFramework">
             <v-scroll-overflow>
                 <v-select
                     id="framework"
@@ -20,12 +25,12 @@
             </v-scroll-overflow>
         </v-setting-section>
 
-        <v-setting-section title="Domaine" @onResetClicked="resetTags">
+        <v-setting-section title="Domaine" :has-content-filled="isTagFilled" @onResetClicked="resetTags">
             <v-scroll-overflow>
                 <v-select
                     id="tag"
                     label="Domaines"
-                    multiple
+                    type="multiple"
                     :active-values="currentTags"
                     :options="tags"
                     @input="onTagUpdate"
@@ -39,6 +44,7 @@
 import Vue from 'vue'
 import { ProjectFrameworkDocument, ProjectTagDocument } from '~~/prismicio-types'
 import MutationType from '~/constants/mutation-type'
+import { getObjectFormattedTheme } from '~/utils/get-theme'
 
 export default Vue.extend({
     name: 'VSetting',
@@ -58,6 +64,17 @@ export default Vue.extend({
             return this.$store.getters.projectFrameworks.map((framework: ProjectFrameworkDocument) => {
                 return { value: framework.uid, label: framework.data.name }
             })
+        },
+        isFrameworkFilled() {
+            return !!this.$store.state.frameWorkFilters?.length
+        },
+        isTagFilled() {
+            return !!this.$store.state.tagFilters?.length
+        },
+        isColorFilled() {
+            const defaultTheme = Object.values(getObjectFormattedTheme())
+            const currentThemeColor = Object.values(this.$store.state.uiTheme)
+            return !defaultTheme.every((color, i) => color === currentThemeColor[i])
         },
     },
     methods: {

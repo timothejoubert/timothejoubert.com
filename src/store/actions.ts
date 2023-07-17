@@ -28,15 +28,21 @@ const actions: ActionTree<RootState, RootState> = {
                 const projectFrameWorks = (frameworks as unknown as ApiSearchResponse<ProjectFrameworkDocument>).results
                 const projectTags = (tags as unknown as ApiSearchResponse<ProjectTagDocument>).results
 
-                const projectOrdered = (projects as unknown as ProjectDocument[]).sort(
-                    (accumulator: ProjectDocument, current: ProjectDocument) =>
-                        getNumberedDate(current.data.date) - getNumberedDate(accumulator.data.date)
-                )
+                const projectFiltered = (projects as unknown as ProjectDocument[])
+                    .filter((project) => {
+                        if ((settings as unknown as SettingsDocument)?.data?.display_all_projects) return true
+                        else return project.data.favorite
+                    })
+                    .sort(
+                        (accumulator: ProjectDocument, current: ProjectDocument) =>
+                            getNumberedDate(current.data.date) - getNumberedDate(accumulator.data.date)
+                    )
+
                 commit(MutationType.SET_COMMON_CONTENT, {
                     settings,
                     projectFrameWorks,
                     projectTags,
-                    projects: projectOrdered,
+                    projects: projectFiltered,
                 })
             })
             .catch((fetchError: Error) => {
@@ -59,6 +65,8 @@ const actions: ActionTree<RootState, RootState> = {
             context.$prismic.predicates.at('document.type', CustomType.PROJECT_TAG as CustomTypeName)
         )
 
+        // https://prismic.io/docs/rest-api-technical-reference
+        // TODO try to fetch only project with `my.project.display_only_favorite` that is true
         const projects = context.$prismic.api
             .query(context.$prismic.predicates.at('document.type', CustomType.PROJECT as CustomTypeName), localeOptions)
             .then((response) => response.results)

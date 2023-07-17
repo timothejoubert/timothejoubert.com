@@ -56,14 +56,14 @@ export default Vue.extend({
         }
     },
     computed: {
+        isProjectOpen(): boolean {
+            return !!this.$store.getters.isProjectOpen
+        },
         cardPercent(): number {
             return 100 / this.$store.state.uiColumns + 5
         },
         tagList() {
             return this.mouseEnter || this.isProjectOpen ? [] : this.tags.slice().sort((a, b) => a.length - b.length)
-        },
-        isProjectOpen(): boolean {
-            return !!this.$store.getters.isProjectOpen
         },
     },
     watch: {
@@ -130,9 +130,9 @@ export default Vue.extend({
 .title {
     display: inline-flex;
     color: var(--theme-accent-color);
-    transition-property: translate, font-size;
-    transition: 0.4s ease(out-quad);
     font-weight: 800;
+    transition: 0.4s ease(out-quad);
+    transition-property: translate, font-size;
 
     .root--mouse-enter & {
         translate: calc(-100% - 20px) 0;

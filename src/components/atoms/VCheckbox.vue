@@ -1,15 +1,15 @@
 <template>
-    <label class="text-body-xs" :class="$style.root">
+    <label class="text-body-xs" :class="[$style.root, type === 'switch' && $style['root--switch']]" :inert="isDisabled">
         <input
-            :type="multiple ? 'checkbox' : 'radio'"
-            :name="!multiple && id"
+            :type="tag"
+            :name="type === 'multiple' && id"
             :checked="isActive"
             :value="value"
             :class="$style.input"
             @input="onClick"
         />
         <span :class="$style.checkbox">
-            <icon-check :class="$style.icon" />
+            <icon-check v-if="type !== 'switch'" :class="$style.icon" />
         </span>
         <span :class="$style.label__text">{{ label }}</span>
     </label>
@@ -17,21 +17,34 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import type { PropType } from 'vue'
 import IconCheck from '~/assets/images/icons/check.svg?sprite'
+
+export type VCheckboxType = 'multiple' | 'radio' | 'switch' | undefined
 
 export default Vue.extend({
     name: 'VCheckbox',
     components: { IconCheck },
     props: {
         id: String,
-        multiple: Boolean,
+        type: String as PropType<VCheckboxType>,
         isActive: Boolean,
-        value: { type: String, required: true },
+        isDisabled: Boolean,
+        value: { type: [String, Boolean] },
         label: { type: String, required: true },
+    },
+    computed: {
+        tag(): 'checkbox' | 'radio' {
+            return this.type === 'radio' || !this.type ? 'radio' : 'checkbox'
+        },
     },
     methods: {
         onClick() {
-            this.$emit('input', this.value)
+            if (typeof this.value === 'boolean') {
+                this.$emit('input', !this.value)
+            } else {
+                this.$emit('input', this.value)
+            }
         },
     },
 })
@@ -46,6 +59,11 @@ $check-border-width: 2px;
     width: fit-content;
     align-items: center;
     cursor: pointer;
+
+    &[inert] {
+        opacity: 0.5;
+        //color: #575656;
+    }
 }
 
 .input {
@@ -64,6 +82,10 @@ $check-border-width: 2px;
 
     .input:focus-visible ~ & {
         text-decoration: underline;
+    }
+
+    .root[inert] & {
+        text-decoration: line-through;
     }
 }
 
@@ -92,6 +114,32 @@ $check-border-width: 2px;
         background-color: var(--theme-background-color);
         border-radius: 50%;
         content: '';
+    }
+
+    .root--switch & {
+        overflow: hidden;
+        width: rem(40);
+        height: rem(22);
+        border-width: 1px;
+        border-radius: 100vmax;
+        transition: background-color 0.3s;
+
+        &::before {
+            position: absolute;
+            left: rem(5);
+            width: rem(12);
+            height: rem(12);
+            background-color: var(--theme-foreground-color);
+            border-radius: rem(14) / 2;
+            content: '';
+            transform-origin: left;
+            transition: translate 0.3s, background-color 0.3s;
+        }
+    }
+
+    .root--switch :global(input):checked + &::before {
+        background-color: var(--theme-background-color);
+        translate: 20px 0;
     }
 }
 

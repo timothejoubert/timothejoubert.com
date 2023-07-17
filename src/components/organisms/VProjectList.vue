@@ -27,7 +27,10 @@ export default Vue.extend({
             return this.$store.getters.projects as ProjectDocument[]
         },
         filteredProjects(): ProjectDocument[] {
-            const projects = this.$store.getters.projects as ProjectDocument[]
+            const projects = (this.$store.getters.projects as ProjectDocument[]).slice().filter((project) => {
+                if (this.$store.state.allProjectDisplayed) return true
+                else return project.data.favorite
+            })
             const frameworks = this.$store.state.frameWorkFilters
             const tags = this.$store.state.tagFilters
 

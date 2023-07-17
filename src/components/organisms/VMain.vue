@@ -1,18 +1,35 @@
 <template>
     <div :class="[$style.root, isOpen && isOpen && $style['root--open']]">
-        <v-setting :class="$style.settings" :inert="!isOpen" />
+        <v-setting ref="setting" :class="$style.settings" :inert="!isOpen" />
         <v-project-list />
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import EventType from '~/constants/event-type'
+import eventBus from '~/utils/event-bus'
 
 export default Vue.extend({
     name: 'VMain',
     computed: {
         isOpen() {
             return this.$store.state.isSettingsOpen
+        },
+    },
+    watch: {
+        isOpen(value: boolean) {
+            if (!value) return
+            this.$el.addEventListener('transitionend', this.onTransitionEnd, { once: true })
+        },
+    },
+    beforeDestroy() {
+        this.$el.removeEventListener('transitionend', this.onTransitionEnd)
+    },
+    methods: {
+        onTransitionEnd() {
+            eventBus.$emit(EventType.SETTING_TRANSITION_END)
+            this.$el.removeEventListener('transitionend', this.onTransitionEnd)
         },
     },
 })

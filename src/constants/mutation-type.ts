@@ -13,6 +13,7 @@ enum MutationType {
     TAG_FILTERS = 'tagFilters',
     UI_THEME = 'uiTheme',
     UI_COLUMNS = 'uiColumns',
+    ALL_PROJECT_DISPLAYED = 'allProjectDisplayed',
 
     // Global
     ERROR_PAGE = 'errorPage',

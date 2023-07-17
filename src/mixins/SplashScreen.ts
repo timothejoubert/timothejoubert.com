@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import toBoolean from '~/utils/to-boolean'
-import GeneralsConst from '~/constants/app'
+import AppConst from '~/constants/app'
 import MutationType from '~/constants/mutation-type'
 
 const SESSION_STORAGE_KEY = 'timothe-joubert-visited'
@@ -14,17 +14,15 @@ export default Vue.extend({
     computed: {
         splashScreenClasses(): (string | false | undefined)[] {
             return [
-                this.isSplashScreenDisplayed &&
-                    !this.isSplashScreenDone &&
-                    this.$style['root--splash-screen-displayed'],
+                this.isSplashScreenEnabled && !this.isSplashScreenDone && this.$style['root--splash-screen-displayed'],
             ]
         },
         displayOnce(): boolean {
-            return toBoolean(GeneralsConst.DISPLAY_SPLASH_SCREEN_ONCE)
+            return toBoolean(AppConst.DISPLAY_SPLASH_SCREEN_ONCE)
         },
-        isSplashScreenDisplayed(): boolean {
+        isSplashScreenEnabled(): boolean {
             const isDisplayedOnlyOnFirstTime = !this.displayOnce || (this.displayOnce && !this.isAlreadyRegister)
-            return toBoolean(GeneralsConst.DISPLAY_SPLASH_SCREEN) && isDisplayedOnlyOnFirstTime
+            return toBoolean(AppConst.DISPLAY_SPLASH_SCREEN) && isDisplayedOnlyOnFirstTime
         },
         isSplashScreenDone(): boolean {
             return this.$store.state.splashScreenDone
@@ -32,7 +30,7 @@ export default Vue.extend({
     },
     watch: {
         isSplashScreenDone(isDone: boolean) {
-            if (this.isSplashScreenDisplayed && isDone && this.displayOnce)
+            if (this.isSplashScreenEnabled && isDone && this.displayOnce)
                 sessionStorage.setItem(SESSION_STORAGE_KEY, 'true')
         },
     },
@@ -47,7 +45,7 @@ export default Vue.extend({
         isReady() {
             if (
                 (this.displayOnce && this.isAlreadyRegister) ||
-                (this.isSplashScreenDisplayed && this.isSplashScreenDone)
+                (this.isSplashScreenEnabled && this.isSplashScreenDone)
             ) {
                 this.$store.commit(MutationType.SPLASH_SCREEN_DONE, true)
             }

@@ -1,7 +1,7 @@
 <template>
-    <div :class="$style.root">
+    <component :is="tag" :class="$style.root">
         <v-split-letters variable-font :content="word" @hook:mounted="setLetters" />
-    </div>
+    </component>
 </template>
 
 <script lang="ts">
@@ -9,11 +9,11 @@ import Vue from 'vue'
 import type { VueConstructor } from 'vue'
 import { getDistance, mapRange } from '~/utils/utils'
 import eventBus from '~/utils/event-bus'
-import EventType from '~/constants/event-type'
 
 interface Component {
     letters: { element: HTMLElement; xCenter: number; yCenter: number }[]
     wrapperHeight: number
+    listenerInit: boolean
 }
 
 const X_RANGE = 60
@@ -22,7 +22,9 @@ const Y_RANGE = 40
 export default (Vue as VueConstructor<Vue & Component>).extend({
     name: 'VInteractiveText',
     props: {
+        tag: { type: String, default: 'div' },
         content: String,
+        triggerEvent: String,
     },
     computed: {
         word() {
@@ -31,18 +33,22 @@ export default (Vue as VueConstructor<Vue & Component>).extend({
     },
     created() {
         this.wrapperHeight = 0
+        this.listenerInit = false
     },
     mounted() {
         this.wrapperHeight = this.$el.getBoundingClientRect().height ?? 40
 
-        eventBus.$on(EventType.ABOUT_TRANSITION_ENTERED, this.onAboutEntered)
+        if (this.triggerEvent) eventBus.$on(this.triggerEvent, this.init)
+        else this.init()
     },
     beforeDestroy() {
         this.removeListener()
-        eventBus.$off(EventType.ABOUT_TRANSITION_ENTERED, this.onAboutEntered)
+        this.triggerEvent && eventBus.$off(this.triggerEvent, this.init)
     },
     methods: {
-        onAboutEntered() {
+        init() {
+            if (this.listenerInit) return
+
             this.setLetters()
             this.initListener()
         },

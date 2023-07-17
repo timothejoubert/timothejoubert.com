@@ -58,7 +58,7 @@ export default (Vue as VueConstructor<Component>).extend({
     & > * {
         @include scroll-bar-hidden;
 
-        --scroll-section-max-height: #{rem(140)};
+        --scroll-section-max-height: #{rem(160)};
     }
 
     &--overflow {

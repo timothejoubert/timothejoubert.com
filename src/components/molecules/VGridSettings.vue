@@ -34,6 +34,15 @@
             outlined
             @click="add"
         />
+        <v-checkbox
+            v-if="displayAllProjectSwitch"
+            id="Voir tout mes projets"
+            v-model="allProjectDisplayedValue"
+            :is-active="allProjectDisplayedValue"
+            type="switch"
+            label="Tous les projets"
+            :class="$style['cta-projects']"
+        />
     </div>
 </template>
 
@@ -47,11 +56,18 @@ export default Vue.extend({
         return {
             current: '0',
             minColumn: 2,
+            allProjectDisplayedValue: false,
         }
     },
     computed: {
         columns(): string {
             return this.$store.state.uiColumns
+        },
+        displayAllProjectSwitch(): boolean {
+            return this.$store.getters.settings?.data?.display_all_projects
+        },
+        allProjectDisplayed(): boolean {
+            return this.$store.state.allProjectDisplayed
         },
     },
     watch: {
@@ -61,6 +77,12 @@ export default Vue.extend({
             },
             immediate: true,
         },
+        allProjectDisplayedValue(value: boolean) {
+            this.$store.commit(MutationType.ALL_PROJECT_DISPLAYED, value)
+        },
+    },
+    created() {
+        this.allProjectDisplayedValue = this.allProjectDisplayed
     },
     methods: {
         onMouseEnter(index: string) {
@@ -138,5 +160,9 @@ export default Vue.extend({
 
 .button-interact {
     --v-button-min-width: #{rem(40)} !important;
+}
+
+.cta-projects {
+    margin-top: rem(24);
 }
 </style>

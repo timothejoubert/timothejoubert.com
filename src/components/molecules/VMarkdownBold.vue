@@ -1,6 +1,12 @@
 <template>
     <component :is="wrapperTag">
-        <component :is="node.tag" v-for="(node, i) in parsedHtml" :key="node.start + i" :class="node.class">
+        <component
+            :is="node.tag"
+            v-for="(node, i) in parsedHtml"
+            v-bind="node.props"
+            :key="node.start + i"
+            :class="node.class"
+        >
             {{ node.content }}</component
         >
     </component>
@@ -11,11 +17,13 @@ import Vue from 'vue'
 import type { PropType } from 'vue'
 import type { RichTextField } from '@prismicio/types'
 import { RTInlineNode, RTTextNodeBase } from '@prismicio/types/src/value/richText'
+import EventType from '~/constants/event-type'
 
 interface ParsedHtml {
     content: string
     tag: string
     start: number
+    props?: { [key: string]: any }
     class?: string
 }
 
@@ -50,7 +58,8 @@ export default Vue.extend({
                 } else {
                     result.push({
                         content: text.substring(richTextContent.start, richTextContent.end).trimLeft(),
-                        tag: 'v-interactive-text', // richTextContent.type, //
+                        tag: 'v-interactive-text',
+                        props: { triggerEvent: EventType.ABOUT_TRANSITION_ENTERED },
                         class: 'v-markdown-bold-strong',
                         start: richTextContent.start,
                     })
