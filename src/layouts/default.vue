@@ -5,7 +5,7 @@
         </client-only>
 
         <div :class="[$style.body, isProjectOpen && $style['body--minify']]">
-            <v-splash-wrapper v-if="isSplashScreenEnabled" />
+            <v-splash-screen v-if="isSplashScreenEnabled" />
             <v-top-bar />
             <v-main />
             <nuxt v-if="isHomePage" />

@@ -21,7 +21,7 @@
 
         <div :class="$style.medias">
             <div v-for="(media, i) in medias" :key="i" :class="$style.media">
-                <v-image :prismic-image="media" :sizes="60" />
+                <v-image :prismic-image="media" :sizes="55" />
             </div>
         </div>
     </div>
@@ -31,7 +31,6 @@ import Vue from 'vue'
 import { LinkToMediaField } from '@prismicio/types/src/value/linkToMedia'
 import { ProjectDocumentData, ProjectDocumentDataMediasItem } from '~~/prismicio-types'
 import IconClose from '~/assets/images/icons/close.svg?sprite'
-import { isProjectDocument } from '~/utils/prismic/custom-type-entity'
 
 export default Vue.extend({
     name: 'VProject',

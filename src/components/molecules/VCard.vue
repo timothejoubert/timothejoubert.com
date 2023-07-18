@@ -82,7 +82,7 @@ export default Vue.extend({
     align-items: flex-end;
     padding: 4%;
     aspect-ratio: 1;
-    border-radius: 0 #{rem(48)} 0 0;
+    border-radius: $v-card-border-radius;
 
     &::after {
         position: absolute;

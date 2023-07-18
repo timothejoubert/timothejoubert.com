@@ -3,7 +3,7 @@ import toBoolean from '~/utils/to-boolean'
 import AppConst from '~/constants/app'
 import MutationType from '~/constants/mutation-type'
 
-const SESSION_STORAGE_KEY = 'timothe-joubert-visited'
+export const SESSION_STORAGE_KEY = 'timothe-joubert-visited'
 
 export default Vue.extend({
     data() {

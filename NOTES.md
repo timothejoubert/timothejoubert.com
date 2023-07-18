@@ -10,15 +10,16 @@ import { Document } from '@prismicio/client/types/documents'
 
 ### IN PROGRESS
 ** (LeaveScreen): Create visual when blur tab 
-** (SplashScreen): start loading if currently on tab
+** (VSetting): dynamic height
+** (VSetting): Check VInteractiveText listener on resize 
 
 ### TODOS
 ** (VSplashScreen): quick loader when splashScreen is disabled | alreadyDone  
 ** (ProjectTransition): when project switching 
 ** (VMedia): Allow Embed video media
-** (VSetting): adapt height
 
 ### DONE
+** (SplashScreen): start loading if currently on tab
 ** (VSetting): hover title and reset
 ** (VSetting): Add pill when filter is filled
 ** (Fetch): See only favorite (Filter project fetch if setting type favorite enable and remove Favorite filter)
@@ -30,20 +31,16 @@ import { Document } from '@prismicio/client/types/documents'
 ** (VProject): Desciption du projets + reflexion et recul autour du projet
 ** (VButton): set background and color with css var depending on props theme 
 ** (VAbout): Reveal transition
-
-### TO CHECK
+** (Image): optimize img size and use of ratio
+* **(Prismic)** use new Page type
 
 ### LATER 
-** (Image): optimize img size and use of ratio
-* **(Route)** Set relationLink field in BO if we want nested route (projects/project-name)
-* **(Build)** Generate.exclude not working
-* **(Sitemap && routes)** avoid to generate route for ['/preview', '/en/preview', '/en/slice-simulator', '/slice-simulator']
-* **(Nav)**: Configure nested route
-* **(Config)** check if I can make Internalization route path (update documentUid vars by currentLocale ?)
-* **(Prismic)** use new Page type
-* **(Config)** use PrismicClient (exemple)[https://community.prismic.io/t/an-invalid-prismic-repository-name-was-given/10523/10]
+* **(Route & Internalization)** check if I can make Internalization route path (update documentUid vars by currentLocale ?)
+* **(Route)**: Configure nested route (Set relationLink field in BO if we want nested route (projects/project-name))
+* **(Sitemap && routes)** avoid to generate route for ['/preview', '/en/preview', '/en/slice-simulator', '/slice-simulator'] (Generate.exclude not working)
 
 ### ABANDONED
+* **(Config)** use PrismicClient (exemple)[https://community.prismic.io/t/an-invalid-prismic-repository-name-was-given/10523/10]
 ** (VSetting): Display only tag with current project (if only best project remove unused tags)
 ** (Setting): keep alive component
 ** (VCard): add infinite marquee for tags ? 
