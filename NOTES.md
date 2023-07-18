@@ -9,16 +9,17 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (LeaveScreen): Create visual when blur tab 
 ** (VSetting): dynamic height
 ** (VSetting): Check VInteractiveText listener on resize 
 
 ### TODOS
-** (VSplashScreen): quick loader when splashScreen is disabled | alreadyDone  
+** (Responsive): 
 ** (ProjectTransition): when project switching 
 ** (VMedia): Allow Embed video media
 
 ### DONE
+** (VSplashScreen): quick loader when splashScreen is disabled | alreadyDone  
+** (LeaveScreen): Create visual when blur tab 
 ** (SplashScreen): start loading if currently on tab
 ** (VSetting): hover title and reset
 ** (VSetting): Add pill when filter is filled

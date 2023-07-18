@@ -28,9 +28,10 @@ export default Vue.extend({
     display: flex;
     overflow: hidden;
     width: 100vw;
-    height: 100dvh;
+    height: 100vh;
     align-items: center;
     justify-content: center;
+    pointer-events: none;
 
     &::after {
         position: absolute;

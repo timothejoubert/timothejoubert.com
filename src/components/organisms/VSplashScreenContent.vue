@@ -87,7 +87,7 @@ export default Vue.extend({
         onLettersAfterEnter() {
             window.setTimeout(() => {
                 this.$emit('input', 'beforeLeave')
-            }, 2000)
+            }, 1000)
         },
         onLettersBeforeLeave() {
             // this.$emit('input', 'leave')
