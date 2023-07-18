@@ -261,13 +261,13 @@ $slider-width: clamp(rem(260), 27vw, rem(450)); //rem(360);
     position: absolute;
     display: flex;
     overflow: hidden;
-    width: rem(140);
+    width: rem(110);
     align-items: center;
     justify-content: center;
     aspect-ratio: 1;
     border-radius: $v-card-border-radius;
     color: var(--theme-foreground-color);
-    font-size: rem(72);
+    font-size: rem(62);
     font-weight: 700;
     opacity: 0;
     text-transform: uppercase;
@@ -280,7 +280,12 @@ $slider-width: clamp(rem(260), 27vw, rem(450)); //rem(360);
     &::after {
         position: absolute;
         animation: loading-animation 1s infinite alternate ease(in-out-circ);
-        background-image: linear-gradient(to left, rgba(#fff, 0.1) 0%, black 50%, rgba(#fff, 0.1) 100%);
+        background-image: linear-gradient(
+            to left,
+            rgba(#fff, 0.1) 0%,
+            var(--theme-background-color) 50%,
+            rgba(#fff, 0.1) 100%
+        );
         background-position: 120% 0;
         background-size: 120% 100%;
         content: '';

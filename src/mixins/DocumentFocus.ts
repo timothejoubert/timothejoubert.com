@@ -17,7 +17,7 @@ export default Vue.extend({
             if (document.visibilityState === 'visible') {
                 window.setTimeout(() => {
                     this.isDocumentFocused = true
-                }, 1500)
+                }, 1700)
             } else {
                 this.isDocumentFocused = false
             }

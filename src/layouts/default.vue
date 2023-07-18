@@ -1,7 +1,9 @@
 <template>
     <div :class="rootClasses" :style="colorThemeStyle">
         <client-only>
-            <v-blur-screen v-if="isSplashScreenDone && isDocumentFocused === false" />
+            <transition name="fade">
+                <v-blur-screen v-if="isSplashScreenDone && isDocumentFocused === false" />
+            </transition>
         </client-only>
 
         <div :class="[$style.body, isProjectOpen && $style['body--minify']]">
@@ -85,7 +87,7 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     display: flex;
     overflow: hidden;
     /* stylelint-disable-next-line unit-no-unknown */
-    max-height: 100svh;
+    height: 100vh;
     background-color: var(--theme-background-color);
     color: var(--theme-foreground-color);
 
