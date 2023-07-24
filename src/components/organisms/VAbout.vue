@@ -14,6 +14,7 @@
 import Vue from 'vue'
 import eventBus from '~/utils/event-bus'
 import EventType from '~/constants/event-type'
+import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
     name: 'VAbout',
@@ -28,9 +29,18 @@ export default Vue.extend({
             return this.$store.state.isAboutOpen
         },
     },
+    watch: {
+        isAboutOpen(value: boolean) {
+            if (value) window.addEventListener('keyup', this.onKeyUp)
+            else window.removeEventListener('keyup', this.onKeyUp)
+        },
+    },
     methods: {
         onAfterEnter() {
             eventBus.$emit(EventType.ABOUT_TRANSITION_ENTERED)
+        },
+        onKeyUp(event: KeyboardEvent) {
+            if (event.key === 'Escape' || event.keyCode === 27) this.$store.commit(MutationType.ABOUT_OPENED, false)
         },
     },
 })

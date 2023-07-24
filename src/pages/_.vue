@@ -21,6 +21,17 @@ export default mixins(Page).extend({
     data() {
         return { components }
     },
+    mounted() {
+        window.addEventListener('keyup', this.onKeyUp)
+    },
+    beforeDestroy() {
+        window.removeEventListener('keyup', this.onKeyUp)
+    },
+    methods: {
+        onKeyUp(event: KeyboardEvent) {
+            if (event.key === 'Escape' || event.keyCode === 27) this.$router.push({ path: '/' })
+        },
+    },
 })
 </script>
 

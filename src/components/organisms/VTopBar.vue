@@ -1,7 +1,7 @@
 <template>
     <div :class="$style.root" class="container">
         <nuxt-link :to="homeLink" :class="$style.home" @click.native="onClick">
-            <icon-logo :class="$style.logo" />
+            <div :class="$style.logo"></div>
             <div :class="$style['logo-text']" class="text-h2">{{ logoText }}</div>
         </nuxt-link>
 
@@ -11,12 +11,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import IconLogo from '~/assets/images/logo.svg?sprite'
 import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
     name: 'VTopBar',
-    components: { IconLogo },
     computed: {
         homeLink(): string {
             return this.$getLocalePath() || '/'
@@ -54,7 +52,10 @@ export default Vue.extend({
 }
 
 .logo {
-    width: rem(32);
-    height: auto;
+    overflow: hidden;
+    width: rem(24);
+    aspect-ratio: 1;
+    background-color: var(--theme-foreground-color);
+    border-radius: 0 50% 0 0;
 }
 </style>

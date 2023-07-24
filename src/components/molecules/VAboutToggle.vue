@@ -24,7 +24,7 @@ export default Vue.extend({
     components: { IconArrow, IconCross },
     computed: {
         title(): string {
-            return this.$store.getters.settings?.data?.website_name
+            return this.$store.getters.settings?.data?.about_title
         },
         isAboutOpen(): boolean {
             return this.$store.state.isAboutOpen

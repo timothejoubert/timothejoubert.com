@@ -1,7 +1,7 @@
 <template>
     <div :class="[$style.root, isOpen && isOpen && $style['root--open']]">
         <v-setting ref="setting" :class="$style.settings" :inert="!isOpen" />
-        <v-project-list />
+        <v-project-list :inert="isAboutOpen" />
     </div>
 </template>
 
@@ -15,6 +15,9 @@ export default Vue.extend({
     computed: {
         isOpen() {
             return this.$store.state.isSettingsOpen
+        },
+        isAboutOpen() {
+            return this.$store.state.isAboutOpen
         },
     },
     watch: {
