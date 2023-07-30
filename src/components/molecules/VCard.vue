@@ -4,10 +4,17 @@
         @mouseenter="mouseEnter = true"
         @mouseleave="mouseEnter = false"
     >
-        <v-image v-if="image" :prismic-image="image" :class="$style.image" :cover="true" :sizes="cardPercent" />
+        <v-image
+            v-if="image"
+            :prismic-image="image"
+            :class="$style.image"
+            :cover="true"
+            :ratio="1"
+            :sizes="cardPercent"
+        />
 
         <div :class="$style.body">
-            <template v-if="tags.length">
+            <template v-if="tags && tags.length">
                 <transition-group :name="$style['tag-animation']" tag="div" :class="$style.tags">
                     <v-button
                         v-for="(tag, i) in tagList"

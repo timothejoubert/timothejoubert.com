@@ -1,7 +1,7 @@
 <template>
     <div :class="rootClass">
         <div :class="$style.center">
-            <div ref="quick-loader" :class="$style['quick-loader']">T</div>
+            <v-quick-loader v-show="quickLoaderVisible" :class="$style['quick-loader']" />
             <transition
                 :name="$style.title"
                 @after-enter="onLettersAfterEnter"
@@ -52,6 +52,11 @@ export default Vue.extend({
     props: {
         value: String as PropType<SplashScreenState>,
     },
+    data() {
+        return {
+            quickLoaderVisible: false,
+        }
+    },
     computed: {
         rootClass(): (string | undefined | false)[] {
             return [
@@ -68,17 +73,9 @@ export default Vue.extend({
         isSecondaryElementVisible() {
             return this.value !== 'pending' && this.value !== 'beforeLeave'
         },
-        displayQuickLoader() {
-            console.log('displayQuickLoader', this.$store.state.splashScreenDone)
-            return !this.$store.state.splashScreenDone
-        },
     },
     mounted() {
-        if (toBoolean(sessionStorage.getItem(SESSION_STORAGE_KEY))) {
-            ;(this.$refs?.['quick-loader'] as HTMLElement | undefined)?.classList.add(
-                this.$style['quick-loader--enabled']
-            )
-        }
+        this.quickLoaderVisible = toBoolean(sessionStorage.getItem(SESSION_STORAGE_KEY))
     },
     methods: {
         onSliderEnterDone() {
@@ -93,7 +90,7 @@ export default Vue.extend({
             // this.$emit('input', 'leave')
         },
         onLettersAfterLeave() {
-            this.$emit('input', 'done')
+            // this.$emit('input', 'done')
         },
     },
 })
@@ -258,45 +255,7 @@ $slider-width: clamp(rem(260), 27vw, rem(450)); //rem(360);
 }
 
 .quick-loader {
-    position: absolute;
-    display: flex;
-    overflow: hidden;
-    width: rem(110);
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1;
-    border-radius: $v-card-border-radius;
-    color: var(--theme-foreground-color);
-    font-size: rem(62);
-    font-weight: 700;
-    opacity: 0;
-    text-transform: uppercase;
+    pointer-events: none;
     translate: -50% 0;
-
-    &--enabled {
-        opacity: 1;
-    }
-
-    &::after {
-        position: absolute;
-        animation: loading-animation 1s infinite alternate ease(in-out-circ);
-        background-image: linear-gradient(
-            to left,
-            rgba(#fff, 0.1) 0%,
-            var(--theme-background-color) 50%,
-            rgba(#fff, 0.1) 100%
-        );
-        background-position: 120% 0;
-        background-size: 120% 100%;
-        content: '';
-        inset: -200px;
-        rotate: -45deg;
-    }
-}
-
-@keyframes loading-animation {
-    100% {
-        background-position: -480% 0;
-    }
 }
 </style>

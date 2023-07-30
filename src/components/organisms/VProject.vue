@@ -21,7 +21,7 @@
 
         <div :class="$style.medias">
             <div v-for="(media, i) in medias" :key="i" :class="$style.media">
-                <v-image :prismic-image="media" :sizes="55" />
+                <v-media :document="media" :sizes="55" :video="{ background: true }" />
             </div>
         </div>
     </div>

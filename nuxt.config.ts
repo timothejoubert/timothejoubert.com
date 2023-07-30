@@ -3,6 +3,7 @@ import SpriteLoaderPlugin from 'svg-sprite-loader/plugin'
 import { version } from './package.json'
 import linkResolver from './src/utils/prismic/link-resolver'
 import htmlSerializer from './src/utils/prismic/html-serializer'
+import { getBreakpoints } from '~/utils/breakpoint'
 
 const isProduction = process.env.NODE_ENV === 'production'
 const apiEndpoint = `https://${process.env.PRISMIC_REPOSITORY_NAME}.cdn.prismic.io/api/v2`
@@ -157,6 +158,7 @@ export default {
 
     image: {
         prismic: {},
+        screens: getBreakpoints(),
     },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build

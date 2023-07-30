@@ -3,7 +3,13 @@
         <video v-bind="props" ref="media" :class="$style.video" @click.prevent="onClick" @canplay="onVideoReady">
             <source :src="url" type="video/mp4" />
         </video>
-        <v-button v-show="videoState !== 'played'" filled :class="$style.cta" @click.prevent="onClick">
+        <v-button
+            v-if="!background"
+            v-show="videoState !== 'played'"
+            filled
+            :class="$style.cta"
+            @click.prevent="onClick"
+        >
             <template #icon>
                 <icon-play />
             </template>
@@ -22,6 +28,7 @@ export interface VVideoProps {
     cover?: boolean
     controls?: boolean
     needInteraction?: boolean
+    background?: boolean
 }
 
 export type VideoState = 'pending' | 'ready' | 'played' | 'paused' | 'ended'
@@ -35,6 +42,7 @@ export default Vue.extend({
         cover: Boolean,
         controls: { type: Boolean, default: true },
         needInteraction: Boolean,
+        background: Boolean,
     },
     data() {
         return {
@@ -43,7 +51,11 @@ export default Vue.extend({
     },
     computed: {
         rootClasses(): (undefined | false | string)[] {
-            return [this.$style.root, this.cover && this.$style['root--cover']]
+            return [
+                this.$style.root,
+                this.needInteraction && this.$style['root--need-interaction'],
+                (this.cover || this.background) && this.$style['root--cover'],
+            ]
         },
         url(): string | undefined | null {
             return (this.prismicMedia as { url?: string | null })?.url
@@ -51,25 +63,21 @@ export default Vue.extend({
         props(): Record<string, any> {
             const props: Record<string, any> = {}
 
-            if (this.autoplay) {
+            if (this.autoplay || this.background) {
                 props.autoplay = true
                 props.muted = true
                 props.loop = true
                 props.preload = 'auto'
             }
+            if (this.cover || this.background) props['data-object-fit'] = 'cover'
+            if (this.controls && !this.background) props.controls = true
 
-            if (this.cover) {
-                props['data-object-fit'] = 'cover'
-            }
-
-            if (this.controls) {
-                props.controls = true
-            }
             return props
         },
     },
     methods: {
         onClick() {
+            if (this.background) return
             if (this.videoState === 'played') this.pause()
             else this.play()
             this.$emit('video-state', this.videoState)
@@ -93,7 +101,10 @@ export default Vue.extend({
     position: relative;
     overflow: var(--v-image-overflow);
     border-radius: var(--v-image-border-radius);
-    cursor: pointer;
+
+    &--need-interaction {
+        cursor: pointer;
+    }
 
     &--cover {
         width: 100%;
@@ -102,6 +113,9 @@ export default Vue.extend({
 }
 
 .video {
+    overflow: hidden;
+    border-radius: var(--v-image-border-radius, 0);
+
     .root--cover & {
         width: 100%;
         height: 100%;
