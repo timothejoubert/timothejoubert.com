@@ -8,7 +8,6 @@
             :label="option.label"
             :type="type"
             :is-active="activeValues.includes(option.value)"
-            :class="$style.checkbox"
             @input="(value) => $emit('input', value)"
         />
     </div>
@@ -18,14 +17,26 @@ import Vue from 'vue'
 import type { PropType } from 'vue'
 import { VCheckboxType } from '~/components/atoms/VCheckbox.vue'
 
+interface VSelectOption {
+    value: string
+    label: string
+}
+
 export default Vue.extend({
     name: 'VSelect',
     props: {
         id: String,
         label: String,
         type: String as PropType<VCheckboxType>,
-        activeValues: Array as PropType<String[]>,
-        options: { type: Array as PropType<{ value: string; label: string }[]>, default: () => [] },
+        activeValues: {
+            type: Array as PropType<String[]>,
+            required: true,
+        },
+        options: {
+            type: Array as PropType<VSelectOption[]>,
+            required: true,
+            default: () => [],
+        },
     },
 })
 </script>
