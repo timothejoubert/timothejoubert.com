@@ -55,6 +55,7 @@ export default Vue.extend({
 .settings {
     .root--open & {
         position: sticky;
+        z-index: 11;
         top: $v-top-bar-height;
     }
 }
