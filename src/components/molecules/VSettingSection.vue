@@ -48,7 +48,6 @@ export default Vue.extend({
 
 .title {
     display: flex;
-    //justify-content: center;
     min-width: rem(160);
     align-items: center;
     background-color: var(--theme-foreground-color);

@@ -100,14 +100,13 @@ export default Vue.extend({
 </script>
 <style lang="scss" module>
 .root {
-    //display: grid;
-    //grid-template-columns: repeat(4, 1fr);
+    --scroll-section-max-height: #{rem(150)};
 
     z-index: 2;
     display: flex;
     overflow: hidden;
-    //height: $v-settings-height;
     flex-wrap: wrap;
+    //height: $v-settings-height;
     padding-bottom: rem(32);
     border-bottom: 1px solid var(--theme-foreground-color);
     background-color: var(--theme-background-color);

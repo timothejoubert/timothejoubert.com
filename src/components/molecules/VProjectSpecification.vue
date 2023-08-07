@@ -56,13 +56,13 @@ export default Vue.extend({
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: rem(16);
+    gap: rem(10);
     margin-block: rem(40) rem(24);
 }
 
 .tag {
     &:nth-last-child(1 of .tag) {
-        margin-right: rem(12);
+        margin-right: rem(8);
     }
 }
 
@@ -74,11 +74,11 @@ export default Vue.extend({
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: rem(14);
+    gap: rem(11);
 
     & > *:not(:last-child)::after {
         position: relative;
-        margin-left: rem(14);
+        margin-left: rem(11);
         content: '|';
     }
 }

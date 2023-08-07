@@ -171,10 +171,15 @@ export default mixins(Resize, SplashScreen, DocumentFocus, Vue as VueConstructor
     position: sticky;
     z-index: 11;
     top: $v-top-bar-height;
+    max-height: calc(var(--v-setting-height));
     transition: translate 0.4s ease(out-quad);
 
     .root:not(.root--setting-open) & {
         translate: 0 calc(var(--v-setting-height) * -1);
+    }
+
+    .root--setting-open & {
+        max-height: inherit;
     }
 }
 
@@ -184,10 +189,11 @@ export default mixins(Resize, SplashScreen, DocumentFocus, Vue as VueConstructor
     /* stylelint-disable-next-line property-no-unknown */
     container-type: inline-size;
     transition: translate 0.4s ease(out-quad);
+    translate: 0 0;
 
     .root:not(.root--setting-open) & {
-        translate: 0 calc(var(--v-setting-height) * -1);
         min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height - var(--v-setting-height));
+        translate: 0 calc(var(--v-setting-height) * -1);
     }
 }
 
