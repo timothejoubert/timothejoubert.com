@@ -10,11 +10,12 @@ import Vue from 'vue'
 import type { PropType } from 'vue'
 import { ProjectDocument } from '~~/prismicio-types'
 import { getTagsByReference } from '~/utils/project/tag'
+import { VCardProps } from '~/components/molecules/VCard.vue'
 
 export default Vue.extend({
     name: 'VProjectCard',
     props: {
-        project: Object as PropType<ProjectDocument>,
+        project: { type: Object as PropType<ProjectDocument>, required: true },
     },
     data() {
         return {
@@ -22,32 +23,34 @@ export default Vue.extend({
         }
     },
     computed: {
-        cardProps(): Record<string, any> {
+        cardProps(): VCardProps {
             const { thumbnail, title, tags } = this.project.data
 
             const parsedTags = getTagsByReference(tags, this.$store.getters.projectTags)
 
             return {
                 image: thumbnail,
-                title,
+                title: title || undefined,
                 tags: parsedTags,
             }
         },
         isNew() {
             const projectDate = this.project.data.date
-            return !!projectDate && this.dateDiffInDays(new Date(), new Date(projectDate)) < 90
+
+            if (!projectDate) return false
+
+            const start = new Date()
+            const end = new Date(projectDate)
+
+            const MS_PER_DAY = 1000 * 60 * 60 * 24 // milliseconds, minutes, seconds, hours
+            const startUtc = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate())
+            const endUtc = Date.UTC(end.getFullYear(), end.getMonth(), end.getDate())
+
+            const dayDiff = Math.abs(Math.floor((startUtc - endUtc) / MS_PER_DAY))
+            return dayDiff < 90
         },
         activeProject() {
             return this.$store.state.currentPageData.uid
-        },
-    },
-    methods: {
-        dateDiffInDays(a: Date, b: Date): number {
-            const MS_PER_DAY = 1000 * 60 * 60 * 24 // milliseconds, minutes, seconds, hours
-            const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate())
-            const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate())
-
-            return Math.abs(Math.floor((utc1 - utc2) / MS_PER_DAY))
         },
     },
 })

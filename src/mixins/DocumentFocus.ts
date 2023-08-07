@@ -7,19 +7,20 @@ export default Vue.extend({
         }
     },
     mounted() {
-        document.addEventListener('visibilitychange', this.handleVisibilityChange)
+        this.isDocumentFocused = document.visibilityState === 'visible'
+        document.addEventListener('visibilitychange', this.handleVisibilityChange, false)
     },
     beforeDestroy() {
         document.removeEventListener('visibilitychange', this.handleVisibilityChange)
     },
     methods: {
         handleVisibilityChange() {
-            if (document.visibilityState === 'visible') {
+            if (document.visibilityState === 'hidden') {
+                this.isDocumentFocused = false
+            } else {
                 window.setTimeout(() => {
                     this.isDocumentFocused = true
                 }, 1700)
-            } else {
-                this.isDocumentFocused = false
             }
         },
     },

@@ -45,6 +45,7 @@ import Vue from 'vue'
 import { ProjectFrameworkDocument, ProjectTagDocument } from '~~/prismicio-types'
 import MutationType from '~/constants/mutation-type'
 import { getObjectFormattedTheme } from '~/utils/get-theme'
+import { VSelectOption } from '~/components/atoms/VSelect.vue'
 
 export default Vue.extend({
     name: 'VSetting',
@@ -52,7 +53,7 @@ export default Vue.extend({
         currentTags(): string[] {
             return this.$store.state.tagFilters
         },
-        tags() {
+        tags(): VSelectOption[] {
             return this.$store.getters.projectTags.map((framework: ProjectTagDocument) => {
                 return { value: framework.uid, label: framework.data.name }
             })
@@ -60,7 +61,7 @@ export default Vue.extend({
         currentFrameWork(): string[] {
             return this.$store.state.frameWorkFilters
         },
-        frameworks() {
+        frameworks(): VSelectOption[] {
             return this.$store.getters.projectFrameworks.map((framework: ProjectFrameworkDocument) => {
                 return { value: framework.uid, label: framework.data.name }
             })

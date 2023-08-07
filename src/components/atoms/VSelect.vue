@@ -17,7 +17,7 @@ import Vue from 'vue'
 import type { PropType } from 'vue'
 import { VCheckboxType } from '~/components/atoms/VCheckbox.vue'
 
-interface VSelectOption {
+export interface VSelectOption {
     value: string
     label: string
 }

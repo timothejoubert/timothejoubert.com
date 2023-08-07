@@ -43,13 +43,21 @@
 <script lang="ts">
 import Vue from 'vue'
 import type { PropType } from 'vue'
-import type { ImageField } from '@prismicio/types'
+import { PrismicMedia } from '~/types/prismic/app-prismic'
+
+export interface VCardProps {
+    title?: string
+    image?: PrismicMedia
+    tags?: string[]
+    date?: string
+    selected?: boolean
+}
 
 export default Vue.extend({
     name: 'VCard',
     props: {
         title: String,
-        image: Object as PropType<ImageField>,
+        image: Object as PropType<PrismicMedia>,
         tags: {
             type: Array as PropType<String[]>,
             default: () => [],
@@ -70,7 +78,9 @@ export default Vue.extend({
             return 100 / this.$store.state.uiColumns + 5
         },
         tagList() {
-            return this.mouseEnter || this.isProjectOpen ? [] : this.tags.slice().sort((a, b) => a.length - b.length)
+            // eslint error when trying to access this.isProjectOpen
+            const isHidden = this.mouseEnter || !!this.$store.getters.isProjectOpen
+            return isHidden ? [] : this.tags.slice().sort((a, b) => a.length - b.length)
         },
     },
     watch: {

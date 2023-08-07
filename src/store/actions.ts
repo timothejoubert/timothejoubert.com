@@ -25,9 +25,6 @@ const actions: ActionTree<RootState, RootState> = {
 
         await dispatch('getCommonContent', context)
             .then(([settings, frameworks, tags, projects]: Array<CommonContentResponse>) => {
-                const projectFrameWorks = (frameworks as unknown as ApiSearchResponse<ProjectFrameworkDocument>).results
-                const projectTags = (tags as unknown as ApiSearchResponse<ProjectTagDocument>).results
-
                 const projectFiltered = (projects as unknown as ProjectDocument[])
                     .filter((project) => {
                         if ((settings as unknown as SettingsDocument)?.data?.display_all_projects) return true
@@ -38,10 +35,23 @@ const actions: ActionTree<RootState, RootState> = {
                             getNumberedDate(current.data.date) - getNumberedDate(accumulator.data.date)
                     )
 
+                const projectFrameWorks = (frameworks as unknown as ApiSearchResponse<ProjectFrameworkDocument>).results
+                const projectTags = (tags as unknown as ApiSearchResponse<ProjectTagDocument>).results
+
+                const existingProjectTag = projectTags.filter((tag) =>
+                    projectFiltered.some((project) =>
+                        project.data.tags.some((projectTag) => (projectTag.tag as { uid?: string })?.uid === tag.uid)
+                    )
+                )
+
+                const existingProjectFrameWorks = projectFrameWorks.filter((tag) =>
+                    projectFiltered.some((project) => (project.data.framework as { uid?: string })?.uid === tag.uid)
+                )
+
                 commit(MutationType.SET_COMMON_CONTENT, {
                     settings,
-                    projectFrameWorks,
-                    projectTags,
+                    projectFrameWorks: existingProjectFrameWorks,
+                    projectTags: existingProjectTag,
                     projects: projectFiltered,
                 })
             })

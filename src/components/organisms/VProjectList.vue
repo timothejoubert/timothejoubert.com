@@ -11,7 +11,7 @@
             <v-split-letters content="Oups..." tag="span" />
         </div>
         <div :class="$style.message">Aucun résultats</div>
-        <v-button size="m" label="Reset tous les filtres" filled @click="onClick" />
+        <v-button size="m" label="Reset tous les filtres" filled @click="onResetFilterClick" />
     </div>
 </template>
 
@@ -23,19 +23,24 @@ import MutationType from '~/constants/mutation-type'
 export default Vue.extend({
     name: 'VProjectList',
     computed: {
+        columns() {
+            return this.$store.state.uiColumns
+        },
         projects(): ProjectDocument[] {
-            return this.$store.getters.projects as ProjectDocument[]
+            const projects = this.$store.getters.projects as ProjectDocument[]
+
+            if (this.$store.state.allProjectDisplayed) {
+                return projects
+            } else {
+                return projects.filter((project) => project.data.favorite)
+            }
         },
         filteredProjects(): ProjectDocument[] {
-            const projects = (this.$store.getters.projects as ProjectDocument[]).slice().filter((project) => {
-                if (this.$store.state.allProjectDisplayed) return true
-                else return project.data.favorite
-            })
             const frameworks = this.$store.state.frameWorkFilters
             const tags = this.$store.state.tagFilters
 
             if (!frameworks.length && !tags.length) {
-                return projects
+                return this.projects
             } else if (frameworks.length && !tags.length) {
                 return this.getProjectByFrameworks(this.projects, frameworks)
             } else if (!frameworks.length && tags.length) {
@@ -44,9 +49,6 @@ export default Vue.extend({
                 const filteredFrameworkProjects = this.getProjectByFrameworks(this.projects, frameworks)
                 return this.getProjectByTags(filteredFrameworkProjects, tags)
             }
-        },
-        columns() {
-            return this.$store.state.uiColumns
         },
     },
     methods: {
@@ -64,7 +66,7 @@ export default Vue.extend({
                 return projectTags.some((tag) => tags.includes(tag))
             })
         },
-        onClick() {
+        onResetFilterClick() {
             this.$store.commit(MutationType.TAG_FILTERS, [])
             this.$store.commit(MutationType.UI_COLUMNS, '4')
             this.$store.commit(MutationType.FRAMEWORK_FILTERS, [])

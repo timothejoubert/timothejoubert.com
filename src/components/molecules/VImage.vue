@@ -1,5 +1,5 @@
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { VNodeData } from 'vue'
 import type { PropType, VNode } from 'vue'
 import { isMediaFulled } from '~/utils/prismic/field-media'
 import { PrismicMedia } from '~/types/prismic/app-prismic'
@@ -84,29 +84,25 @@ export default Vue.extend({
         const placeholderNode = this.placeholder && !this.loaded && createElement(VQuickLoader)
 
         if (this.ratio) {
-            const figureRatio = {
-                '--v-image-document-aspect-ratio':
-                    typeof this.ratio === 'number'
-                        ? this.ratio.toString()
-                        : width && height
-                        ? `${width}/${height}`
-                        : undefined,
+            const nodeData: Record<string, any> = {
+                class: [
+                    this.$style.root,
+                    this.ratio && this.$style['root--ratio'],
+                    this.cover && this.$style['root--cover'],
+                    !!this.placeholder && !this.loaded && this.$style['root--placeholder'],
+                    this.loaded && this.$style['root--loaded'],
+                ],
             }
 
-            return createElement(
-                'figure',
-                {
-                    style: figureRatio,
-                    class: [
-                        this.$style.root,
-                        this.ratio && this.$style['root--ratio'],
-                        this.cover && this.$style['root--cover'],
-                        !!this.placeholder && !this.loaded && this.$style['root--placeholder'],
-                        this.loaded && this.$style['root--loaded'],
-                    ],
-                },
-                [placeholderNode, img]
-            )
+            const ratio =
+                typeof this.ratio === 'number'
+                    ? this.ratio.toString()
+                    : width && height
+                    ? `${width}/${height}`
+                    : undefined
+            if (ratio) nodeData.style = { '--v-image-document-aspect-ratio': ratio }
+
+            return createElement('figure', nodeData, [placeholderNode, img])
         }
 
         return img

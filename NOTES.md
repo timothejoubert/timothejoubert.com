@@ -9,15 +9,18 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (VSetting): dynamic height
+** (VSetting): Dynamic height
 ** (VSetting): Check VInteractiveText listener on resize 
+** (VSetting): Unique Tag search ?
 
 ### TODOS
-** (Responsive): 
-** (ProjectTransition): when project switching 
-** (VMedia): Allow Embed video media
+** (Responsive): Setting | Project | About
+** (ProjectTransition): when project switching ?
+** (Back & VMedia): Allow Embed video media
 
 ### DONE
+** (VSetting): Bug, selected tag enable visibility of not best project
+** (SplashScreen): Quick load visible on first connexion
 ** (VSplashScreen): quick loader when splashScreen is disabled | alreadyDone  
 ** (LeaveScreen): Create visual when blur tab 
 ** (SplashScreen): start loading if currently on tab

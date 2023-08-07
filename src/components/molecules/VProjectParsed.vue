@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue'
-import type { PropType, VNode } from 'vue'
+import type { PropType } from 'vue'
 import { getTagsByReference } from '~/utils/project/tag'
 import { ProjectDocumentData } from '~~/prismicio-types'
 import { getProjectYear } from '~/utils/prismic/date'
@@ -11,7 +11,8 @@ export default Vue.extend({
     props: {
         project: Object as PropType<ProjectDocumentData>,
     },
-    render(_createElement, context): VNode[] | undefined {
+    render(_createElement, context): any {
+        // Don't find what is return type of scopedSlot
         const { tags, date, link, link_label, content, framework, favorite, short_description } = context.props.project
 
         return context.scopedSlots.default?.({

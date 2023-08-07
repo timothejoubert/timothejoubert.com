@@ -1,7 +1,7 @@
 <template>
     <div :class="rootClass">
         <div :class="$style.center">
-            <v-quick-loader v-show="quickLoaderVisible" :class="$style['quick-loader']" />
+            <v-quick-loader :class="[$style['quick-loader'], quickLoaderVisible && ['quick-loader--enabled']]" />
             <transition
                 :name="$style.title"
                 @after-enter="onLettersAfterEnter"
@@ -38,7 +38,7 @@ import Vue from 'vue'
 import type { PropType } from 'vue'
 import { SplashScreenState } from '~/components/organisms/VSplashScreen.vue'
 import toBoolean from '~/utils/to-boolean'
-import { SESSION_STORAGE_KEY } from '~/mixins/SplashScreen'
+import { STORAGE_KEY } from '~/mixins/SplashScreen'
 
 // ORDER
 // appear: secondary element enter => trigger: afterEnter
@@ -75,7 +75,7 @@ export default Vue.extend({
         },
     },
     mounted() {
-        this.quickLoaderVisible = toBoolean(sessionStorage.getItem(SESSION_STORAGE_KEY))
+        this.quickLoaderVisible = toBoolean(sessionStorage.getItem(STORAGE_KEY))
     },
     methods: {
         onSliderEnterDone() {
@@ -90,7 +90,7 @@ export default Vue.extend({
             // this.$emit('input', 'leave')
         },
         onLettersAfterLeave() {
-            // this.$emit('input', 'done')
+            this.$emit('input', 'done')
         },
     },
 })
@@ -118,7 +118,7 @@ $slider-width: clamp(rem(260), 27vw, rem(450)); //rem(360);
         background-color: var(--theme-background-color);
         border-radius: 8px 64px 8px 8px;
         content: '';
-        scale: 1.032;
+        scale: 1.05;
         // enter transition
         transition-delay: 0.75s;
         transition-duration: 3s;
@@ -255,7 +255,13 @@ $slider-width: clamp(rem(260), 27vw, rem(450)); //rem(360);
 }
 
 .quick-loader {
+    opacity: 0;
     pointer-events: none;
+    //transition: opacity 0.3s;
     translate: -50% 0;
+
+    &--enabled {
+        opacity: 1;
+    }
 }
 </style>

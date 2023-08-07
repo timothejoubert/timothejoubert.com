@@ -15,19 +15,16 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { SettingsDocumentData } from '~~/prismicio-types'
+// import { SettingsDocumentData } from '~~/prismicio-types'
 
 export default Vue.extend({
     name: 'VAboutContent',
     computed: {
-        settings(): SettingsDocumentData {
-            return this.$store.getters.settings?.data
-        },
         description() {
-            return this.settings?.about_content
+            return this.$store.getters.settings?.data?.about_content
         },
         columns() {
-            return this.settings.columns
+            return this.$store.getters.settings?.data.columns
         },
     },
 })
