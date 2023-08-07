@@ -1,7 +1,6 @@
 <template>
     <div :class="rootClasses" class="container">
         <v-about-toggle />
-        <!--        <transition :name="$style['about-content']" @after-enter="onAfterEnter">-->
         <transition name="about-content" @after-enter="onAfterEnter">
             <div v-if="isAboutOpen" :class="$style.wrapper" :inert="!isAboutOpen">
                 <v-about-content />
@@ -50,7 +49,7 @@ export default Vue.extend({
     position: sticky;
     bottom: 0;
     min-height: $v-about-toggle-height;
-    max-height: calc(100vh - $v-top-bar-height);
+    max-height: calc(100vh - $v-top-bar-height) !important;
     background-color: var(--theme-background-color);
     transition: min-height 0.85s ease(out-quad);
 
@@ -60,9 +59,11 @@ export default Vue.extend({
         min-height: calc(100vh - $v-top-bar-height);
     }
 }
+
 .wrapper {
     width: 100%;
 }
+
 @include v-transition(
     'about-content',
     $transitionOptions: (duration: 0.9s, delay: 0.2s),

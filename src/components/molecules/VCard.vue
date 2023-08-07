@@ -105,7 +105,7 @@ export default Vue.extend({
         position: absolute;
         z-index: 5;
         border: 1px solid transparent;
-        border-radius: 0 #{rem(48)} 0 0;
+        border-radius: $v-card-border-radius;
         content: '';
         inset: 0;
         transition: border-color 0.3s;

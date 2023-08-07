@@ -100,22 +100,25 @@ export default Vue.extend({
 </script>
 <style lang="scss" module>
 .root {
+    //display: grid;
+    //grid-template-columns: repeat(4, 1fr);
+
     z-index: 2;
     display: flex;
     overflow: hidden;
-    height: $v-settings-height;
+    //height: $v-settings-height;
     flex-wrap: wrap;
-    padding-bottom: rem(8);
+    padding-bottom: rem(32);
     border-bottom: 1px solid var(--theme-foreground-color);
     background-color: var(--theme-background-color);
     gap: rem(40);
 }
 
-.color {
-    display: none;
-
-    @include media('>=lg') {
-        display: block;
-    }
-}
+//.color {
+//    display: none;
+//
+//    @include media('>=lg') {
+//        display: block;
+//    }
+//}
 </style>

@@ -77,7 +77,7 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     position: relative;
-    margin-top: rem(30);
+    padding-block: rem(30);
 }
 
 .projects {
@@ -88,7 +88,7 @@ export default Vue.extend({
 
 .no-result {
     display: flex;
-    min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height - $v-settings-height);
+    min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height - var(--v-setting-height));
     flex-direction: column;
     align-items: center;
     justify-content: center;

@@ -77,7 +77,7 @@ export default Vue.extend({
     gap: rem(70);
 
     @include media('>=sm') {
-        padding-bottom: initial;
+        //padding-bottom: initial;
         gap: rem(100);
     }
 }

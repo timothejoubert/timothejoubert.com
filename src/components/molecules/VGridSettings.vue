@@ -2,10 +2,10 @@
     <div :class="$style.root">
         <div :class="$style.shapes" @mouseleave="onMouseLeave">
             <button
-                v-for="index in 7"
+                v-for="index in maxColumnNumber"
                 :key="index"
                 :class="[$style.shape, index <= current && $style['shape--selected']]"
-                :inert="index < minColumn"
+                :inert="index < minColumnNumber"
                 @mouseenter="onMouseEnter(index)"
                 @click="onClick(index)"
             ></button>
@@ -16,6 +16,7 @@
             theme="dark"
             size="s"
             outlined
+            :inert="current == minColumnNumber"
             @click="remove"
         />
         <v-button
@@ -31,6 +32,7 @@
             label="+"
             theme="dark"
             size="s"
+            :inert="current == maxColumnNumber"
             outlined
             @click="add"
         />
@@ -48,14 +50,20 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import type { VueConstructor } from 'vue'
+import mixins from 'vue-typed-mixins'
 import MutationType from '~/constants/mutation-type'
 
-export default Vue.extend({
+interface Component extends Vue {
+    maxColumnNumber: number
+    minColumnNumber: number
+}
+
+export default mixins(Vue as VueConstructor<Component>).extend({
     name: 'VGridSettings',
     data() {
         return {
             current: '0',
-            minColumn: 2,
             allProjectDisplayedValue: false,
         }
     },
@@ -82,6 +90,9 @@ export default Vue.extend({
         },
     },
     created() {
+        this.maxColumnNumber = 6
+        this.minColumnNumber = 2
+
         this.allProjectDisplayedValue = this.allProjectDisplayed
     },
     methods: {
@@ -101,7 +112,7 @@ export default Vue.extend({
             this.update(index)
         },
         clampIndex(index: string) {
-            return Math.min(Math.max(parseInt(index), this.minColumn), 8).toString()
+            return Math.min(Math.max(parseInt(index), this.minColumnNumber), this.maxColumnNumber).toString()
         },
         update(index: string) {
             this.$store.commit(MutationType.UI_COLUMNS, this.clampIndex(index))
@@ -155,7 +166,7 @@ export default Vue.extend({
 }
 
 .button-indicator {
-    --v-button-min-width: #{rem(120)} !important;
+    --v-button-min-width: #{rem(100)} !important;
 }
 
 .button-interact {

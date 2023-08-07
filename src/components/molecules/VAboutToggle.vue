@@ -42,6 +42,7 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     position: sticky;
+    z-index: 1;
     top: 0;
     display: flex;
     min-height: $v-about-toggle-height;
