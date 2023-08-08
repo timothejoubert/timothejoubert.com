@@ -6,29 +6,27 @@ import { isHomePageDocument } from '~/utils/prismic/document-entity'
 import CustomType from '~/constants/custom-type'
 
 export const getters: GetterTree<RootState, RootState> = {
+    // APP
     isHomePage(state: RootState) {
         return isHomePageDocument(state.currentPageData)
     },
-    commonContentData(state: RootState) {
+    getCommonContentData(state: RootState) {
         return function (key: CommonContentKey) {
             return state.commonContent?.[key]
         }
     },
     settings(_state: RootState, getters: any): SettingsDocument {
-        return getters.commonContentData('settings')
+        return getters.getCommonContentData('settings')
     },
+    isProjectOpen(state: RootState): boolean {
+        return state.currentPageData?.type === CustomType.PROJECT
+    },
+    // PROJECTS
     projects(_state: RootState, getters: any): ProjectDocument[] {
-        return getters.commonContentData('projects')
+        return getters.getCommonContentData('projects')
     },
-    projectTags(_state: RootState, getters: any): ProjectTagDocument[] {
-        return getters.commonContentData('projectTags')
-    },
-    projectFrameworks(_state: RootState, getters: any): ProjectFrameworkDocument[] {
-        return getters.commonContentData('projectFrameWorks')
-    },
-    getFramework: (_state: RootState, getters: any) => {
-        return (uid: string | undefined): ProjectDocument | undefined =>
-            getters.projectFrameworks?.find((framework: ProjectFrameworkDocument) => framework.uid === uid)?.data?.name
+    mainProjects(_state: RootState, getters: any): ProjectDocument[] {
+        return getters.projects.filter((project: ProjectDocument) => project.data.favorite)
     },
     isProjectUid: (_state: RootState, getters: any) => {
         return (uid: string): boolean => !!getters.projects?.some((project: ProjectDocument) => project.uid === uid)
@@ -37,8 +35,18 @@ export const getters: GetterTree<RootState, RootState> = {
         return (uid: string): ProjectDocument | undefined =>
             getters.projects?.find((project: ProjectDocument) => project.uid === uid)
     },
-    isProjectOpen(state: RootState): boolean {
-        return state.currentPageData?.type === CustomType.PROJECT
+    // NODES
+    frameworksDocuments(_state: RootState, getters: any): ProjectFrameworkDocument[] {
+        return getters.getCommonContentData('projectFrameWorks')
+    },
+    getFrameworkName: (_state: RootState, getters: any) => {
+        return (uid: string | undefined): string | undefined => {
+            return getters.frameworksDocuments?.find((framework: ProjectFrameworkDocument) => framework.uid === uid)
+                ?.data?.name
+        }
+    },
+    projectTags(_state: RootState, getters: any): ProjectTagDocument[] {
+        return getters.getCommonContentData('projectTags')
     },
 }
 

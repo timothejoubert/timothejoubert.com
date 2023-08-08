@@ -6,15 +6,16 @@
             </transition>
         </client-only>
 
-        <div
-            :class="[$style.body, isProjectOpen && $style['body--minify']]"
-            :style="{ '--v-setting-height': settingHeight }"
-        >
+        <div :class="[$style.body, isProjectOpen && $style['body--minify']]">
             <v-splash-screen v-if="isSplashScreenEnabled" />
 
             <v-top-bar />
-            <v-setting ref="setting" :class="$style.setting" :inert="!isSettingOpen" />
+            <!--            <v-setting ref="setting" :class="$style.setting" :inert="!isSettingOpen" />-->
+            <v-top-setting />
             <v-project-list :class="$style['project-listing']" :inert="isAboutOpen" />
+
+            <v-archive />
+
             <nuxt v-if="isHomePage" />
             <v-about />
         </div>
@@ -185,20 +186,20 @@ export default mixins(Resize, SplashScreen, DocumentFocus, Vue as VueConstructor
 
 .project-listing {
     position: relative;
-    top: 0;
-    min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
-    /* stylelint-disable-next-line property-no-unknown */
-    container-type: inline-size;
-    transition: top 0.4s ease(out-quad);
-
-    .root:not(.root--setting-open) & {
-        top: calc(var(--v-setting-height) * -1);
-        min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
-    }
-
-    .root--setting-open & {
-        min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height - var(--v-setting-height));
-    }
+    //top: 0;
+    //min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
+    ///* stylelint-disable-next-line property-no-unknown */
+    //container-type: inline-size;
+    //transition: top 0.4s ease(out-quad);
+    //
+    //.root:not(.root--setting-open) & {
+    //    top: calc(var(--v-setting-height) * -1);
+    //    min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
+    //}
+    //
+    //.root--setting-open & {
+    //    min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height - var(--v-setting-height));
+    //}
 }
 
 .project {

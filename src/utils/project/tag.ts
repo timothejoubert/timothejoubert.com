@@ -26,8 +26,8 @@ export function getTagsByReference(tags: ProjectDocumentDataTagsItem[], tagDocum
         (tags
             ?.map((tagReference) => {
                 const uid = (tagReference.tag as { uid?: string })?.uid
-                return tagDocuments.filter((projectTag: ProjectTagDocument) => projectTag.uid === uid)?.[0]?.data?.name
+                return tagDocuments?.filter((projectTag: ProjectTagDocument) => projectTag.uid === uid)?.[0]?.data?.name
             })
-            .filter((tag) => !!tag) as string[]) || []
+            ?.filter((tag) => !!tag) as string[]) || []
     )
 }

@@ -17,7 +17,7 @@ export default Vue.extend({
 
         return context.scopedSlots.default?.({
             tags: getTagsByReference(tags, context.parent.$store.getters.projectTags),
-            framework: context.parent.$store.getters.getFramework((framework as { uid?: string })?.uid),
+            framework: context.parent.$store.getters.getFrameworkName((framework as { uid?: string })?.uid),
             date: getProjectYear(date),
             excerpt: short_description,
             content,

@@ -9,6 +9,9 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
+** (MainProjects): keep not filtered project but blur them
+** (organization): clean unused code
+
 ** (Responsive): Setting | Project | About
 ** (ProjectList): empty bottom space when setting is closed 
 ** (Setting): display filter only when all project are displayed ? Unique Tag search ?

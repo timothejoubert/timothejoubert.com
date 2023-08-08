@@ -141,7 +141,7 @@ export default Vue.extend({
         background-color: var(--theme-foreground-color);
     }
 
-    &--theme-accent #{&}--filled {
+    &--theme-accent#{&}--filled {
         background-color: var(--theme-accent-color);
     }
 

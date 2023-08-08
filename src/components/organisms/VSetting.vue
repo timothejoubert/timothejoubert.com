@@ -62,7 +62,7 @@ export default Vue.extend({
             return this.$store.state.frameWorkFilters
         },
         frameworks(): VSelectOption[] {
-            return this.$store.getters.projectFrameworks.map((framework: ProjectFrameworkDocument) => {
+            return this.$store.getters.frameworksDocuments.map((framework: ProjectFrameworkDocument) => {
                 return { value: framework.uid, label: framework.data.name }
             })
         },

@@ -27,13 +27,7 @@ export default Vue.extend({
             return this.$store.state.uiColumns
         },
         projects(): ProjectDocument[] {
-            const projects = this.$store.getters.projects as ProjectDocument[]
-
-            if (this.$store.state.allProjectDisplayed) {
-                return projects
-            } else {
-                return projects.filter((project) => project.data.favorite)
-            }
+            return this.$store.getters.mainProjects as ProjectDocument[]
         },
         filteredProjects(): ProjectDocument[] {
             const frameworks = this.$store.state.frameWorkFilters
