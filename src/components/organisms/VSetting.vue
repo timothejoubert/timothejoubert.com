@@ -100,7 +100,7 @@ export default Vue.extend({
 </script>
 <style lang="scss" module>
 .root {
-    --scroll-section-max-height: #{rem(150)};
+    --scroll-section-max-height: #{rem(160)};
 
     z-index: 2;
     display: flex;

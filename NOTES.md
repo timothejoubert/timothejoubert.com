@@ -9,13 +9,14 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
+** (Responsive): Setting | Project | About
+** (ProjectList): empty bottom space when setting is closed 
+** (Setting): display filter only when all project are displayed ? Unique Tag search ?
 ** (VSetting): Check VInteractiveText listener on resize 
 
 ### TODOS
-** (Responsive): Setting | Project | About
 ** (ProjectTransition): when project switching ?
-** (Back & VMedia): Allow Embed video media
-** (Setting): display filter only when all project are displayed ? Unique Tag search ?
+** (Back & VMedia): Allow Embed video media | display controls on mp4 video  
 
 ### DONE
 ** (VSetting): Dynamic height

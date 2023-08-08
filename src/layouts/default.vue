@@ -185,15 +185,19 @@ export default mixins(Resize, SplashScreen, DocumentFocus, Vue as VueConstructor
 
 .project-listing {
     position: relative;
+    top: 0;
     min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
     /* stylelint-disable-next-line property-no-unknown */
     container-type: inline-size;
-    transition: translate 0.4s ease(out-quad);
-    translate: 0 0;
+    transition: top 0.4s ease(out-quad);
 
     .root:not(.root--setting-open) & {
+        top: calc(var(--v-setting-height) * -1);
+        min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
+    }
+
+    .root--setting-open & {
         min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height - var(--v-setting-height));
-        translate: 0 calc(var(--v-setting-height) * -1);
     }
 }
 
