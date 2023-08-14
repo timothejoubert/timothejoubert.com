@@ -31,8 +31,6 @@
 <script lang="ts">
 import mixins from 'vue-typed-mixins'
 import type { Route } from 'vue-router'
-import Vue from 'vue'
-import type { VueConstructor } from 'vue'
 import Resize from '~/mixins/Resize'
 import MutationType from '~/constants/mutation-type'
 import SplashScreen from '~/mixins/SplashScreen'
@@ -40,28 +38,15 @@ import DocumentFocus from '~/mixins/DocumentFocus'
 import eventBus from '~/utils/event-bus'
 import EventType from '~/constants/event-type'
 
-interface Component extends Vue {
-    resizeObserver: ResizeObserver
-}
-
-export default mixins(Resize, SplashScreen, DocumentFocus, Vue as VueConstructor<Component>).extend({
+export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     name: 'default',
-    data() {
-        return {
-            settingHeight: null as null | string,
-        }
-    },
     mounted() {
         this.$store.commit(
             MutationType.PREFERS_REDUCED_MOTION,
             window.matchMedia('(prefers-reduced-motion: reduce)').matches
         )
-
-        this.setSettingHeight()
-        this.initResizeObserver()
     },
     beforeDestroy() {
-        this.resizeObserver.disconnect()
         this.$el.removeEventListener('transitionend', this.onTransitionEnd)
     },
     computed: {
@@ -106,16 +91,6 @@ export default mixins(Resize, SplashScreen, DocumentFocus, Vue as VueConstructor
         },
     },
     methods: {
-        initResizeObserver() {
-            const setting = this.$refs.setting.$el as HTMLElement
-
-            this.resizeObserver = new ResizeObserver(this.setSettingHeight)
-            this.resizeObserver.observe(setting)
-        },
-        setSettingHeight() {
-            const setting = this.$refs.setting.$el as HTMLElement
-            this.settingHeight = setting.offsetHeight + 'px'
-        },
         onTransitionEnd() {
             eventBus.$emit(EventType.SETTING_TRANSITION_END)
             this.$el.removeEventListener('transitionend', this.onTransitionEnd)

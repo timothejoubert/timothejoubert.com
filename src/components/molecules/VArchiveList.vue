@@ -1,6 +1,6 @@
 <template>
     <ul :class="$style.list">
-        <li v-for="(project, i) in projects" :key="i">
+        <li v-for="(project, i) in sortedProjects" :key="i">
             <v-link
                 :reference="project"
                 :class="$style.link"
@@ -11,10 +11,10 @@
                     <div :class="$style.title">
                         {{ project.data.title }}
                     </div>
-                    <span v-if="p.date">{{ p.date }}</span>
+                    <span v-if="p.date" :class="$style.date">{{ p.date }}</span>
                     <span :class="$style.framework">{{ p.framework }}</span>
                     <div :class="$style.tags">
-                        <span v-for="tag in p.tags" :key="tag" :class="$style.tag">{{ tag }}</span>
+                        <span v-for="tag in p.tags" :key="tag.uid" :class="$style.tag">{{ tag.label }}</span>
                     </div>
                     <div :class="$style.arrow"></div>
                 </v-project-parsed>
@@ -25,16 +25,50 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import type { PropType } from 'vue'
 import { ProjectDocument } from '~~/prismicio-types'
+import { ProjectDocumentData } from '~/types/prismic/app-prismic'
+import { getProjectYear } from '~/utils/prismic/date'
 
 export default Vue.extend({
     name: 'VArchiveList',
+    props: {
+        sortOrder: String as PropType<'ASC' | 'DESC'>,
+        sortId: String as PropType<keyof ProjectDocumentData>,
+    },
     computed: {
         projects(): ProjectDocument[] {
-            return this.$store.getters.projects
+            return (this.$store.getters.projects as ProjectDocument[]).slice()
+        },
+        sortedProjects(): ProjectDocument[] {
+            const projects = this.projects
+            let projectSorted
+            const sortType = typeof projects[0].data?.[this.sortId]
+
+            if (sortType === 'undefined') projectSorted = projects
+            else if (this.sortId === 'date') {
+                projectSorted = projects.sort((p1, p2) => getProjectYear(p1.data?.date) + getProjectYear(p2.data?.date))
+            } else if (this.sortId === 'title') {
+                projectSorted = this.SortByDataAlphabetically('title')
+            } else if (this.sortId === 'framework') {
+                projectSorted = projects.sort(
+                    (projectA, projectB) => projectA.data.framework?.uid + projectB.data.framework?.uid
+                )
+            } else {
+                projectSorted = projects
+            }
+
+            return this.sortOrder === 'ASC' ? projectSorted : projectSorted.reverse()
         },
     },
     methods: {
+        SortByDataAlphabetically(projectData: keyof ProjectDocumentData) {
+            return this.projects.sort((p1: ProjectDocument, p2: ProjectDocument) => {
+                const title1 = p1.data[projectData] || ''
+                const title2 = p2.data[projectData] || ''
+                return title1 < title2 ? -1 : title1 > title2 ? 1 : 0
+            })
+        },
         onMouseEnter(event: MouseEvent) {
             const el = event.target as HTMLElement
 
@@ -55,6 +89,7 @@ export default Vue.extend({
         },
         getDirection(el: HTMLElement, mouseY: number) {
             const middle = el.getBoundingClientRect().top + el.getBoundingClientRect().height / 2
+
             return mouseY < middle ? 'top' : 'bottom'
         },
     },
@@ -63,6 +98,7 @@ export default Vue.extend({
 
 <style lang="scss" module>
 .list {
+    position: relative;
 }
 
 .link {
@@ -74,8 +110,8 @@ export default Vue.extend({
     gap: rem(36);
     isolation: isolate;
     padding-block: rem(10);
-    transition-property: opacity, padding-inline;
     transition: 0.4s ease(out-quad);
+    transition-property: opacity, color;
     white-space: nowrap;
 
     &::before {
@@ -90,7 +126,6 @@ export default Vue.extend({
 
     &:hover {
         color: var(--theme-background-color);
-        padding-inline: rem(10);
     }
 
     &:hover::before {
@@ -120,6 +155,10 @@ export default Vue.extend({
     //    inset: 0;
     //    transition: background 0.4s ease(out-quad);
     //}
+}
+
+.date {
+    width: rem(70);
 }
 
 .framework {

@@ -1,9 +1,5 @@
 <template>
-    <div
-        :class="[$style.root, mouseEnter && $style['root--mouse-enter'], selected && $style['root--selected']]"
-        @mouseenter="mouseEnter = true"
-        @mouseleave="mouseEnter = false"
-    >
+    <div :class="rootClasses" @mouseenter="mouseEnter = true" @mouseleave="mouseEnter = false">
         <v-image
             v-if="image"
             :prismic-image="image"
@@ -18,13 +14,13 @@
                 <transition-group :name="$style['tag-animation']" tag="div" :class="$style.tags">
                     <v-button
                         v-for="(tag, i) in tagList"
-                        :key="tag"
-                        theme="dark"
+                        :key="tag.uid"
+                        :theme="activeTags && activeTags.includes(tag.uid) ? 'accent' : 'dark'"
                         tag="div"
                         :filled="true"
                         :style="{ '--tag-index': tagList.length - i }"
                         size="xs"
-                        :label="tag"
+                        :label="tag.label"
                         :class="$style.tag"
                     />
                 </transition-group>
@@ -44,13 +40,16 @@
 import Vue from 'vue'
 import type { PropType } from 'vue'
 import { PrismicMedia } from '~/types/prismic/app-prismic'
+import { ClientTag } from '~/types/app'
 
 export interface VCardProps {
     title?: string
     image?: PrismicMedia
-    tags?: string[]
+    tags?: ClientTag[]
     date?: string
     selected?: boolean
+    activeTags?: ClientTag[]
+    isBlurred?: boolean
 }
 
 export default Vue.extend({
@@ -59,11 +58,13 @@ export default Vue.extend({
         title: String,
         image: Object as PropType<PrismicMedia>,
         tags: {
-            type: Array as PropType<String[]>,
+            type: Array as PropType<ClientTag[]>,
             default: () => [],
         },
         date: String,
         selected: Boolean,
+        isBlurred: Boolean,
+        activeTags: Array as PropType<ClientTag[]>,
     },
     data() {
         return {
@@ -71,6 +72,14 @@ export default Vue.extend({
         }
     },
     computed: {
+        rootClasses(): (string | undefined | false)[] {
+            return [
+                this.$style.root,
+                this.isBlurred && this.$style['root--blurred'],
+                this.mouseEnter && this.$style['root--mouse-enter'],
+                this.selected && this.$style['root--selected'],
+            ]
+        },
         isProjectOpen(): boolean {
             return !!this.$store.getters.isProjectOpen
         },
@@ -100,6 +109,7 @@ export default Vue.extend({
     padding: 4%;
     aspect-ratio: 1;
     border-radius: $v-card-border-radius;
+    transition: 0.2s ease(out-quad);
 
     &::after {
         position: absolute;
@@ -113,6 +123,10 @@ export default Vue.extend({
 
     &--selected::after {
         border-color: var(--theme-accent-color);
+    }
+
+    &--blurred {
+        opacity: 0.3;
     }
 }
 
@@ -150,6 +164,10 @@ export default Vue.extend({
     font-weight: 800;
     transition: 0.4s ease(out-quad);
     transition-property: translate, font-size;
+
+    .root--blurred & {
+        color: var(--theme-foreground-color);
+    }
 
     .root--mouse-enter & {
         translate: calc(-100% - 20px) 0;

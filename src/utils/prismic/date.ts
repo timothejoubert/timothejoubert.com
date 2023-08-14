@@ -1,6 +1,7 @@
-export function getProjectYear(date: string | null) {
+export function getProjectYear(date?: string | null): number {
     // prismic date field => 'YYYY-MM-DD
-    return date?.split('-')?.[0]
+    const year = date?.split('-')?.[0] || '0'
+    return parseInt(year)
 }
 
 export function getNumberedDate(date: string | null): number {

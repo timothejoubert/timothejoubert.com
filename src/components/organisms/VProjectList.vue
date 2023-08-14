@@ -1,18 +1,12 @@
 <template>
     <nav v-if="filteredProjects.length" class="container" :class="$style.root">
         <ul :class="$style.projects" :style="{ '--card-number': columns }">
-            <li v-for="(project, index) in filteredProjects" :key="index + project.uid">
-                <v-project-card :project="project" />
+            <li v-for="(project, index) in projects" :key="index + project.uid">
+                <v-project-card :project="project" :active-projects-id="activeProjectsId" />
             </li>
         </ul>
     </nav>
-    <div v-else :class="[$style['no-result'], !$store.state.isSettingsOpen && $style['no-result--extend']]">
-        <div :class="$style.word" class="text-h1">
-            <v-split-letters content="Oups..." tag="span" />
-        </div>
-        <div :class="$style.message">Aucun résultats</div>
-        <v-button size="m" label="Reset tous les filtres" filled @click="onResetFilterClick" />
-    </div>
+    <v-no-result v-else @reset-filter="onResetFilterClick" />
 </template>
 
 <script lang="ts">
@@ -28,6 +22,17 @@ export default Vue.extend({
         },
         projects(): ProjectDocument[] {
             return this.$store.getters.mainProjects as ProjectDocument[]
+        },
+        activeProjectsId(): string[] {
+            const tags = this.$store.state.tagFilters as string[]
+            if (!tags.length) return []
+
+            return this.projects
+                .filter((project) => {
+                    const projectTags = this.$store.getters.getTagUidByProject(project)
+                    return !tags.some((tag) => projectTags.includes(tag))
+                })
+                .map((filteredProject) => filteredProject.uid)
         },
         filteredProjects(): ProjectDocument[] {
             const frameworks = this.$store.state.frameWorkFilters
@@ -78,43 +83,5 @@ export default Vue.extend({
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(var(--card-number, 4), minmax(0, 1fr));
-}
-
-.no-result {
-    display: flex;
-    min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height - var(--v-setting-height));
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transition: min-height 0.4s ease(out-quad);
-
-    &--extend {
-        min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
-    }
-}
-
-.word {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: rem(4);
-    opacity: 0.1;
-    :global(.split-word-letter) {
-        animation: wave-font 1s calc(var(--letter-index) * 100ms - 2s) ease(out-quad) alternate infinite;
-    }
-}
-
-.message {
-    margin-bottom: rem(70);
-    opacity: 0.6;
-}
-
-@keyframes wave-font {
-    from {
-        font-variation-settings: 'wght' 100, 'ital' 0;
-    }
-    to {
-        font-variation-settings: 'wght' 900, 'ital' 4;
-    }
 }
 </style>

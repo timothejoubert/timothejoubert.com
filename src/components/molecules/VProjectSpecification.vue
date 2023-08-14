@@ -1,16 +1,18 @@
 <template>
     <div :class="$style.root">
         <div :class="$style.head">
-            <v-button
-                v-for="tag in tags"
-                :key="tag"
-                :class="$style.tag"
-                tag="div"
-                filled
-                size="s"
-                theme="dark"
-                :label="tag"
-            />
+            <template v-if="tags && tags.length">
+                <v-button
+                    v-for="tag in tags"
+                    :key="tag.uid"
+                    :class="$style.tag"
+                    tag="div"
+                    filled
+                    size="s"
+                    theme="dark"
+                    :label="tag.label"
+                />
+            </template>
             <div :class="$style.specifications">
                 <div v-if="framework" :class="$style.framework">{{ framework }}</div>
                 <div v-if="date">{{ date }}</div>
@@ -27,7 +29,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import type { PropType } from 'vue'
-import { PrismicRichText } from '~/types/app'
+import { ClientTag, PrismicRichText } from '~/types/app'
 
 export default Vue.extend({
     name: 'VProjectSpecification',
@@ -36,7 +38,7 @@ export default Vue.extend({
         link: String,
         linkLabel: String,
         framework: String,
-        tags: { type: Array as PropType<String[]>, default: () => [] },
+        tags: Array as PropType<ClientTag[]>,
         content: [Array, String] as PropType<PrismicRichText | String>,
         excerpt: Array as PropType<PrismicRichText>,
     },

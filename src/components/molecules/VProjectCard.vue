@@ -1,7 +1,7 @@
 <template>
-    <v-link :reference="project" :class="$style.root">
+    <v-link :reference="project" :class="$style.root" :inert="cardProps.isBlurred">
         <v-new-pill v-if="isNew" :class="$style.new" :grow="hovered" />
-        <v-card v-model="hovered" v-bind="cardProps" :selected="project?.uid === activeProject" />
+        <v-card v-model="hovered" v-bind="cardProps" />
     </v-link>
 </template>
 
@@ -16,6 +16,7 @@ export default Vue.extend({
     name: 'VProjectCard',
     props: {
         project: { type: Object as PropType<ProjectDocument>, required: true },
+        activeProjectsId: Array as PropType<string[]>,
     },
     data() {
         return {
@@ -32,6 +33,9 @@ export default Vue.extend({
                 image: thumbnail,
                 title: title || undefined,
                 tags: parsedTags,
+                selected: this.project?.uid === this.activeProject,
+                activeTags: this.$store.state.tagFilters,
+                isBlurred: this.activeProjectsId?.includes(this.project.uid),
             }
         },
         isNew() {

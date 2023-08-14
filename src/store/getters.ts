@@ -35,6 +35,12 @@ export const getters: GetterTree<RootState, RootState> = {
         return (uid: string): ProjectDocument | undefined =>
             getters.projects?.find((project: ProjectDocument) => project.uid === uid)
     },
+    getTagUidByProject: () => {
+        return (project: ProjectDocument): string[] =>
+            project.data.tags
+                .filter((tagRef) => !!(tagRef.tag as { uid?: string }).uid)
+                .map((tagRef) => (tagRef.tag as { uid: string }).uid)
+    },
     // NODES
     frameworksDocuments(_state: RootState, getters: any): ProjectFrameworkDocument[] {
         return getters.getCommonContentData('projectFrameWorks')

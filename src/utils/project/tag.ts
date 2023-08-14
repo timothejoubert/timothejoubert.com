@@ -21,13 +21,18 @@ export function getProjectTags(projectData: ProjectDocumentData): string[] {
     return filteredTags.map((tag) => tag.label)
 }
 
-export function getTagsByReference(tags: ProjectDocumentDataTagsItem[], tagDocuments: ProjectTagDocument[]): string[] {
-    return (
-        (tags
-            ?.map((tagReference) => {
-                const uid = (tagReference.tag as { uid?: string })?.uid
-                return tagDocuments?.filter((projectTag: ProjectTagDocument) => projectTag.uid === uid)?.[0]?.data?.name
-            })
-            ?.filter((tag) => !!tag) as string[]) || []
-    )
+export function getTagsByReference(
+    projectTags: ProjectDocumentDataTagsItem[],
+    tagDocuments: ProjectTagDocument[]
+): { uid: string; label: string }[] {
+    return projectTags?.map((tagReference) => {
+        const projectTagUid = (tagReference.tag as { uid?: string })?.uid
+        const currentTagReference = tagDocuments?.filter(
+            (tagDocument: ProjectTagDocument) => tagDocument.uid === projectTagUid
+        )
+        return {
+            label: currentTagReference?.[0]?.data?.name || '',
+            uid: currentTagReference?.[0]?.uid || '',
+        }
+    })
 }

@@ -19,3 +19,8 @@ interface ClientTheme {
     accent: string
     background: string
 }
+
+interface ClientTag {
+    uid: string
+    label: string
+}
