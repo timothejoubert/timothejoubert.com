@@ -1,5 +1,5 @@
 import { RootState } from '~/types/store'
-import { getObjectFormattedTheme } from '~/utils/get-theme'
+import { getObjectFormattedTheme } from '~/utils/theme'
 import AppConst from '~/constants/app'
 import toBoolean from '~/utils/to-boolean'
 

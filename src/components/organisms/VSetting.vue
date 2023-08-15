@@ -44,7 +44,7 @@
 import Vue from 'vue'
 import { ProjectFrameworkDocument, ProjectTagDocument } from '~~/prismicio-types'
 import MutationType from '~/constants/mutation-type'
-import { getObjectFormattedTheme } from '~/utils/get-theme'
+import { getObjectFormattedTheme } from '~/utils/theme'
 import { VSelectOption } from '~/components/atoms/VSelect.vue'
 
 export default Vue.extend({

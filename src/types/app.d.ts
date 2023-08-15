@@ -2,6 +2,7 @@ import { RTNode } from '@prismicio/types/src/value/richText'
 import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument, SettingsDocument } from '~~/prismicio-types'
 
 type Theme = 'light' | 'dark' | 'accent'
+type ThemeKey = 'foreground' | 'background' | 'accent'
 
 type CommonContentKey = 'settings' | 'projectFrameWorks' | 'projectTags' | 'projects'
 

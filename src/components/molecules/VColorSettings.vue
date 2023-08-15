@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { getArrayFormattedTheme, getObjectFormattedTheme, getPredefinedThemes } from '~/utils/get-theme'
+import { getArrayFormattedTheme, getObjectFormattedTheme, getPredefinedThemes } from '~/utils/theme'
 import MutationType from '~/constants/mutation-type'
 
 const predefinedThemes = getPredefinedThemes()

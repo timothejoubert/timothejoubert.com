@@ -5,7 +5,8 @@
             <div :class="$style['logo-text']" class="text-h2">{{ logoText }}</div>
         </nuxt-link>
 
-        <v-toggle-settings />
+        <v-theme-switcher />
+        <!--        <v-toggle-settings />-->
     </div>
 </template>
 

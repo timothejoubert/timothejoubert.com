@@ -1,5 +1,5 @@
 import themes from '~/scss/export/_themes.scss'
-import { ClientTheme, Theme } from '~/types/app'
+import { ClientTheme, Theme, ThemeKey } from '~/types/app'
 import predefinedThemes from '~/scss/export/_predefined-themes.scss'
 
 export function getObjectFormattedTheme(theme: Theme = 'dark') {
@@ -40,8 +40,8 @@ export function getTheme(format: 'object' | 'array', theme: Theme = 'dark') {
 
 export function getPredefinedThemes() {
     return Object.entries(predefinedThemes as { string: string }).reduce(
-        (accumulator: { [key: string]: { key: string; value: string }[] }, current: [string, string]) => {
-            const keySplit = current[0].split('-')
+        (accumulator: { [key: string]: { key: ThemeKey; value: string }[] }, current: [string, string]) => {
+            const keySplit = current[0].split('-') as ThemeKey[]
             const key = 'theme-' + keySplit[1]
 
             if (!accumulator?.[key]) accumulator[key] = []
