@@ -1,5 +1,5 @@
 <template>
-    <component :is="tag" v-if="content" :class="[$style.root, playAnimation && $style['root--animate']]">
+    <component :is="tag || 'div'" v-if="content" :class="[$style.root, playAnimation && $style['root--animate']]">
         <v-split-letters :content="content" />
     </component>
 </template>
@@ -8,7 +8,7 @@ import Vue from 'vue'
 
 export default Vue.extend({
     props: {
-        tag: { type: String, default: 'div' },
+        tag: String,
         content: String,
         isAnimated: { type: Boolean, default: true },
         playAnimation: Boolean,

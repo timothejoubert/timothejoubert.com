@@ -1,5 +1,5 @@
 <template>
-    <div :class="[$style.root, grow && $style['root--grow']]">
+    <div v-if="displayed" :class="[$style.root, grow && $style['root--grow']]">
         <svg
             width="99"
             height="99"
@@ -18,18 +18,35 @@
                 stroke-width="1"
             />
         </svg>
-        <span :class="$style.text" class="text-body-s"> {{ label }}</span>
+        <span :class="$style.text"> {{ label }}</span>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import type { PropType } from 'vue'
 
 export default Vue.extend({
     name: 'VNewPill',
     props: {
         label: { type: String, default: 'new' },
         grow: Boolean,
+        date: [String, null] as PropType<string | null>,
+    },
+    computed: {
+        displayed() {
+            if (!this.date) return false
+
+            const start = new Date()
+            const end = new Date(this.date)
+
+            const MS_PER_DAY = 1000 * 60 * 60 * 24 // milliseconds, minutes, seconds, hours
+            const startUtc = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate())
+            const endUtc = Date.UTC(end.getFullYear(), end.getMonth(), end.getDate())
+
+            const dayDiff = Math.abs(Math.floor((startUtc - endUtc) / MS_PER_DAY))
+            return dayDiff < 90
+        },
     },
 })
 </script>
@@ -37,10 +54,11 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     display: flex;
-    width: rem(58);
+    width: var(--v-new-pill-width, rem(58));
     align-items: center;
     justify-content: center;
-    transform: translate(15px, -15px);
+    aspect-ratio: 1;
+    transform: var(--v-new-pill-transform, translate(15px, -15px));
     transition: transform 0.3s ease(out-quad);
 
     &--grow {
@@ -74,7 +92,8 @@ export default Vue.extend({
 .text {
     position: absolute;
     color: var(--theme-background-color);
-    font-variation-settings: 'wght' 300, 'ital' 0;
+    font-size: var(--v-new-pill-font-size, rem(17));
+    font-variation-settings: 'wght' var(--v-new-pill-weight, 300), 'ital' 0;
     transition: 0.3s ease(out-quad);
     transition-property: transform, font-variation-settings;
 

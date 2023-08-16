@@ -1,5 +1,5 @@
 <template>
-    <component :is="tag" :class="$style.root">
+    <component :is="tag || 'div'" :class="$style.root">
         <v-split-letters variable-font :content="word" @hook:mounted="setLetters" />
     </component>
 </template>

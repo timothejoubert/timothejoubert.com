@@ -1,5 +1,9 @@
 <template>
-    <div :class="$style.root">
+    <div
+        :class="[$style.root, isOpen && $style['root--open']]"
+        @mouseenter="isOpen = true"
+        @mouseleave="isOpen = false"
+    >
         <v-theme-button
             v-for="(theme, i) in themes"
             :id="theme.id"
@@ -7,21 +11,21 @@
             :colors="theme.colors"
             :is-selected="theme.id === activeTheme"
             :class="$style.buttons"
-            :style="{ '--theme-button-index': i * 50 + 'ms' }"
+            :style="{ '--theme-button-index': (themes.length - i) * 50 + 'ms' }"
             @click="onThemeChanged"
         />
-        <v-theme-button :colors="['#EBEBEB', '#AAAAAA', '#494949']" />
+        <v-theme-button :colors="['#EBEBEB', '#AAAAAA', '#494949']" wrapper-tag="div" />
     </div>
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { getArrayFormattedTheme, getObjectFormattedTheme, getPredefinedThemes } from '~/utils/theme'
+import { getArrayFormattedTheme, getPredefinedThemes, getThemeList } from '~/utils/theme'
 import MutationType from '~/constants/mutation-type'
 
 const predefinedThemes = getPredefinedThemes()
 
 interface ThemeButton {
-    id?: string
+    id: string
     colors?: string[]
 }
 
@@ -29,37 +33,36 @@ export default Vue.extend({
     name: 'VThemeSwitcher',
     data() {
         return {
+            isOpen: false,
             activeTheme: null as string | null,
         }
     },
     computed: {
+        defaultTheme(): ThemeButton {
+            return {
+                id: 'default',
+                colors: getArrayFormattedTheme('dark').map((theme) => theme.value),
+            }
+        },
         themes(): ThemeButton[] {
-            return Object.entries(predefinedThemes).map(([key, values]) => {
-                const colors = values
-                    .sort((colorA, _colorB) => {
-                        if (colorA.key === 'foreground') return -2
-                        else if (colorA.key === 'background') return 1
-                        else return 0
-                    })
-                    .map((colors) => colors.value)
-                return {
-                    id: key,
-                    colors,
-                }
+            const themes = getThemeList()
+            themes.unshift({
+                id: 'default',
+                colors: getArrayFormattedTheme('dark').map((theme) => theme.value),
             })
+            return themes
         },
     },
     methods: {
-        resetInterface() {
-            this.activeTheme = null
-            this.updateColors(getArrayFormattedTheme())
-            this.$store.commit(MutationType.UI_THEME, getObjectFormattedTheme())
-        },
-        onThemeChanged(themeId: string | undefined) {
-            if (!themeId) return
+        onThemeChanged(themeId: string) {
             this.activeTheme = themeId
-            const selectedTheme = predefinedThemes?.[themeId]
-            selectedTheme && this.updateColors(selectedTheme)
+
+            if (themeId === 'default') {
+                this.updateColors(getArrayFormattedTheme('dark'))
+            } else {
+                const selectedTheme = predefinedThemes?.[themeId]
+                selectedTheme && this.updateColors(selectedTheme)
+            }
         },
         updateColors(colors: { key: string; value: string }[]) {
             colors.forEach((color) => {
@@ -82,7 +85,7 @@ export default Vue.extend({
     transition-property: opacity, translate;
     translate: rem(20) 0;
 
-    .root:hover & {
+    .root--open & {
         opacity: 1;
         pointer-events: initial;
         translate: 0 0;

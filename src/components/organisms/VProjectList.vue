@@ -1,6 +1,6 @@
 <template>
     <nav v-if="filteredProjects.length" class="container" :class="$style.root">
-        <ul :class="$style.projects" :style="{ '--card-number': columns }">
+        <ul :class="$style.projects" :style="columns && { '--card-number': columns }">
             <li v-for="(project, index) in projects" :key="index + project.uid">
                 <v-project-card :project="project" :active-projects-id="activeProjectsId" />
             </li>
@@ -16,10 +16,12 @@ import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
     name: 'VProjectList',
+    data() {
+        return {
+            columns: null as null | string,
+        }
+    },
     computed: {
-        columns() {
-            return this.$store.state.uiColumns
-        },
         projects(): ProjectDocument[] {
             return this.$store.getters.mainProjects as ProjectDocument[]
         },
@@ -50,6 +52,11 @@ export default Vue.extend({
             }
         },
     },
+    watch: {
+        '$store.state.uiColumns'(value: string) {
+            this.columns = value
+        },
+    },
     methods: {
         getProjectByFrameworks(projects: ProjectDocument[], frameworks: string[]): ProjectDocument[] {
             return projects.filter((project) => {
@@ -76,12 +83,26 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     position: relative;
-    padding-block: rem(30);
+    padding-bottom: rem(30);
 }
 
 .projects {
+    --card-number: 1;
+
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(var(--card-number, 4), minmax(0, 1fr));
+    grid-template-columns: repeat(var(--card-number), minmax(0, 1fr));
+
+    @include media('>=xs') {
+        --card-number: 2;
+    }
+
+    @include media('>=lg') {
+        --card-number: 4;
+    }
+
+    @include media('>=hd') {
+        --card-number: 5;
+    }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <component :is="wrapperTag">
+    <component :is="wrapperTag || 'p'">
         <component
             :is="node.tag"
             v-for="(node, i) in parsedHtml"

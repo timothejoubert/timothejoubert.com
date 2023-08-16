@@ -84,12 +84,15 @@ export default Vue.extend({
             return !!this.$store.getters.isProjectOpen
         },
         cardPercent(): number {
+            console.log(100 / this.$store.state.uiColumns)
             return 100 / this.$store.state.uiColumns + 5
         },
-        tagList() {
-            // eslint error when trying to access this.isProjectOpen
+        sortedTags(): ClientTag[] {
+            return this.tags?.slice().sort((a, b) => a.label.length - b.label.length) || []
+        },
+        tagList(): ClientTag[] {
             const isHidden = this.mouseEnter || !!this.$store.getters.isProjectOpen
-            return isHidden ? [] : this.tags.slice().sort((a, b) => a.length - b.length)
+            return isHidden ? [] : this.sortedTags
         },
     },
     watch: {
@@ -126,6 +129,7 @@ export default Vue.extend({
     }
 
     &--blurred {
+        filter: blur(1px);
         opacity: 0.3;
     }
 }
@@ -133,7 +137,7 @@ export default Vue.extend({
 .image {
     filter: grayscale(1);
     transition-duration: 0.4s;
-    transition-property: filter, scale;
+    transition-property: filter, scale, filter;
     transition-timing-function: ease(out-quad);
 
     &::after {
@@ -183,8 +187,8 @@ export default Vue.extend({
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: rem(14);
-    gap: rem(10);
+    margin-bottom: rem(10);
+    gap: rem(6);
 }
 
 .tag {

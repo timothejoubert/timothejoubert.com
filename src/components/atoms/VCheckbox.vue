@@ -51,6 +51,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" module>
+@use 'sass:math';
+
 $check-border-width: 2px;
 
 .root {
@@ -130,7 +132,7 @@ $check-border-width: 2px;
             width: rem(12);
             height: rem(12);
             background-color: var(--theme-foreground-color);
-            border-radius: rem(14) / 2;
+            border-radius: math.div(rem(14), 2);
             content: '';
             transform-origin: left;
             transition: translate 0.3s, background-color 0.3s;

@@ -7,13 +7,18 @@
                 @mouseenter.native="onMouseEnter"
                 @mouseleave.native="onMouseLeave"
             >
+                <v-new-pill :date="project.data.date" :class="$style.new" />
                 <v-project-parsed v-slot="p" :project="project.data">
-                    <div :class="$style.title">
+                    <div :class="[$style.title, sortId === 'title' && $style['title--highlight']]">
                         {{ project.data.title }}
                     </div>
-                    <span v-if="p.date" :class="$style.date">{{ p.date }}</span>
-                    <span :class="$style.framework">{{ p.framework }}</span>
-                    <div :class="$style.tags">
+                    <span v-if="p.date" :class="[$style.date, sortId === 'date' && $style['title--highlight']]">{{
+                        p.date
+                    }}</span>
+                    <span :class="[$style.framework, sortId === 'framework' && $style['title--highlight']]">{{
+                        p.framework
+                    }}</span>
+                    <div :class="[$style.tags, sortId === 'tags' && $style['title--highlight']]">
                         <span v-for="tag in p.tags" :key="tag.uid" :class="$style.tag">{{ tag.label }}</span>
                     </div>
                     <div :class="$style.arrow"></div>
@@ -28,7 +33,6 @@ import Vue from 'vue'
 import type { PropType } from 'vue'
 import { ProjectDocument } from '~~/prismicio-types'
 import { ProjectDocumentData } from '~/types/prismic/app-prismic'
-import { getProjectYear } from '~/utils/prismic/date'
 
 export default Vue.extend({
     name: 'VArchiveList',
@@ -43,29 +47,46 @@ export default Vue.extend({
         sortedProjects(): ProjectDocument[] {
             const projects = this.projects
             let projectSorted
-            const sortType = typeof projects[0].data?.[this.sortId]
 
-            if (sortType === 'undefined') projectSorted = projects
-            else if (this.sortId === 'date') {
-                projectSorted = projects.sort((p1, p2) => getProjectYear(p1.data?.date) + getProjectYear(p2.data?.date))
-            } else if (this.sortId === 'title') {
-                projectSorted = this.SortByDataAlphabetically('title')
-            } else if (this.sortId === 'framework') {
+            if (typeof projects[0].data?.[this.sortId] === 'undefined') {
+                projectSorted = projects
+            } else if (this.sortId === 'date') {
                 projectSorted = projects.sort(
-                    (projectA, projectB) => projectA.data.framework?.uid + projectB.data.framework?.uid
+                    (p1, p2) => parseInt(p1.data?.date || '0') - parseInt(p2.data?.date || '0')
                 )
+            } else if (this.sortId === 'title') {
+                projectSorted = this.SortByDataAlphabetically(['title'])
+            } else if (this.sortId === 'framework') {
+                projectSorted = this.SortByDataAlphabetically(['framework', 'uid'])
+            } else if (this.sortId === 'tags') {
+                projectSorted = projects.sort((p1, p2) => {
+                    const p1FirstTag = (p1.data.tags[0]?.tag as { uid?: string })?.uid || ''
+                    const p2FirstTag = (p2.data.tags[0]?.tag as { uid?: string })?.uid || ''
+                    return p1FirstTag < p2FirstTag ? -1 : p1FirstTag > p2FirstTag ? 1 : 0
+                })
             } else {
                 projectSorted = projects
             }
 
-            return this.sortOrder === 'ASC' ? projectSorted : projectSorted.reverse()
+            return this.sortOrder === 'DESC' ? projectSorted.reverse() : projectSorted
         },
     },
     methods: {
-        SortByDataAlphabetically(projectData: keyof ProjectDocumentData) {
+        SortByDataAlphabetically(objectKey: (keyof ProjectDocumentData | string)[]) {
+            const rootKey = objectKey[0] as keyof ProjectDocumentData
             return this.projects.sort((p1: ProjectDocument, p2: ProjectDocument) => {
-                const title1 = p1.data[projectData] || ''
-                const title2 = p2.data[projectData] || ''
+                const title1 =
+                    objectKey.length === 1
+                        ? p1.data[rootKey]
+                        : objectKey.length === 2
+                        ? (p1.data[rootKey] as any)?.[objectKey[1]]
+                        : ''
+                const title2 =
+                    objectKey.length === 1
+                        ? p2.data[rootKey]
+                        : objectKey.length === 2
+                        ? (p2.data[rootKey] as any)?.[objectKey[1]]
+                        : ''
                 return title1 < title2 ? -1 : title1 > title2 ? 1 : 0
             })
         },
@@ -106,6 +127,7 @@ export default Vue.extend({
     display: flex;
     overflow: hidden;
     align-items: center;
+    padding-right: rem(6);
     border-top: 1px solid var(--theme-foreground-color);
     gap: rem(36);
     isolation: isolate;
@@ -124,21 +146,32 @@ export default Vue.extend({
         translate: 0 var(--panel-translate-y, -100%);
     }
 
-    &:hover {
-        color: var(--theme-background-color);
-    }
+    @media (hover: hover) {
+        &:hover {
+            color: var(--theme-background-color);
+        }
 
-    &:hover::before {
-        translate: 0 0 !important;
+        &:hover::before {
+            translate: 0 0 !important;
+        }
     }
+}
 
-    & > *:not(.title) {
-        opacity: 0.6;
-        transition: opacity 0.4s;
-    }
+.title,
+.date,
+.framework,
+.tags {
+    opacity: 0.6;
+    transition: opacity 0.4s;
 
-    &:hover > *:not(.title) {
+    &--highlight {
         opacity: 1;
+    }
+
+    @media (hover: hover) {
+        .link:hover & {
+            opacity: 1;
+        }
     }
 }
 
@@ -147,14 +180,16 @@ export default Vue.extend({
     overflow: hidden;
     width: rem(160);
     text-overflow: ellipsis;
+}
 
-    //&::after {
-    //    position: absolute;
-    //    background: linear-gradient(to right, transparent 70%, var(--theme-background-color) 100%);
-    //    content: '';
-    //    inset: 0;
-    //    transition: background 0.4s ease(out-quad);
-    //}
+.new {
+    --v-new-pill-width: 36px;
+    --v-new-pill-transform: translate(-100%, 0);
+    --v-new-pill-weight: 450;
+    --v-new-pill-font-size: #{rem(13)};
+
+    position: absolute;
+    right: 0;
 }
 
 .date {
@@ -163,7 +198,6 @@ export default Vue.extend({
 
 .framework {
     width: clamp(15%, rem(50), rem(400));
-    //flex: 30% rem(100) 1; // [max] [min] [ideal size];
 }
 
 .tags {
@@ -180,6 +214,8 @@ export default Vue.extend({
 }
 
 .arrow {
+    @include arrow;
+
     display: flex;
     width: rem(18);
     height: rem(18);
@@ -187,12 +223,5 @@ export default Vue.extend({
     align-self: flex-end;
     justify-content: center;
     margin-left: auto;
-    background-color: var(--theme-foreground-color);
-
-    &::before,
-    &::after {
-        position: absolute;
-        content: '';
-    }
 }
 </style>

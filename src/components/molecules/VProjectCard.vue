@@ -1,6 +1,6 @@
 <template>
     <v-link :reference="project" :class="$style.root" :inert="cardProps.isBlurred">
-        <v-new-pill v-if="isNew" :class="$style.new" :grow="hovered" />
+        <v-new-pill :date="project.data.date" :class="$style.new" :grow="hovered" />
         <v-card v-model="hovered" v-bind="cardProps" />
     </v-link>
 </template>
@@ -37,21 +37,6 @@ export default Vue.extend({
                 activeTags: this.$store.state.tagFilters,
                 isBlurred: this.activeProjectsId?.includes(this.project.uid),
             }
-        },
-        isNew() {
-            const projectDate = this.project.data.date
-
-            if (!projectDate) return false
-
-            const start = new Date()
-            const end = new Date(projectDate)
-
-            const MS_PER_DAY = 1000 * 60 * 60 * 24 // milliseconds, minutes, seconds, hours
-            const startUtc = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate())
-            const endUtc = Date.UTC(end.getFullYear(), end.getMonth(), end.getDate())
-
-            const dayDiff = Math.abs(Math.floor((startUtc - endUtc) / MS_PER_DAY))
-            return dayDiff < 90
         },
         activeProject() {
             return this.$store.state.currentPageData.uid

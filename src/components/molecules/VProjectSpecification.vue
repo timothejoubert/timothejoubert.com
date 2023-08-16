@@ -34,7 +34,7 @@ import { ClientTag, PrismicRichText } from '~/types/app'
 export default Vue.extend({
     name: 'VProjectSpecification',
     props: {
-        date: String,
+        date: [String, Number],
         link: String,
         linkLabel: String,
         framework: String,
@@ -59,7 +59,7 @@ export default Vue.extend({
     flex-wrap: wrap;
     align-items: center;
     gap: rem(10);
-    margin-block: rem(40) rem(24);
+    margin-block: rem(20);
 }
 
 .tag {
@@ -101,5 +101,9 @@ export default Vue.extend({
 .content {
     margin-top: rem(16);
     opacity: 0.8;
+
+    a {
+        text-decoration: underline;
+    }
 }
 </style>

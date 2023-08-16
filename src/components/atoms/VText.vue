@@ -1,6 +1,6 @@
 <template>
-    <component :is="tag" v-if="typeof content === 'string'">{{ content }}</component>
-    <prismic-rich-text v-else-if="isRichTextFilled" :field="content" :class="$style['rich-text']" />
+    <component :is="tag || 'div'" v-if="typeof content === 'string'">{{ content }}</component>
+    <prismic-rich-text v-else-if="isRichTextFilled" :field="content" />
 </template>
 
 <script lang="ts">
@@ -11,7 +11,7 @@ import { PrismicRichText } from '~/types/app'
 export default Vue.extend({
     name: 'VText',
     props: {
-        tag: { type: String, default: 'div' },
+        tag: { type: String },
         content: [String, Array] as PropType<String | PrismicRichText>,
         textClass: [String, Array] as PropType<String | String[]>,
     },
@@ -22,10 +22,3 @@ export default Vue.extend({
     },
 })
 </script>
-<style lang="scss" module>
-.rich-text {
-    a {
-        text-decoration: underline;
-    }
-}
-</style>

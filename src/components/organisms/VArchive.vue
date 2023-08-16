@@ -14,7 +14,7 @@
                 :label="button.label"
                 theme="light"
                 :inert="!button.sortable"
-                @click="onButtonClick(button.id)"
+                @click="onButtonClick($event, button.id)"
             >
                 <template v-if="button.sortable" #icon>
                     <div :class="$style.arrow"></div>
@@ -58,7 +58,7 @@ export default Vue.extend({
     data() {
         return {
             sortId: 'date',
-            sortOrder: 'ASC' as 'ASC' | 'DESC',
+            sortOrder: 'DESC' as 'ASC' | 'DESC',
         }
     },
     computed: {
@@ -76,8 +76,9 @@ export default Vue.extend({
         },
     },
     methods: {
-        onButtonClick(id: string) {
-            this.sortOrder === 'ASC' ? (this.sortOrder = 'DESC') : (this.sortOrder = 'ASC')
+        onButtonClick(event: Event, id: string) {
+            const targetIsDesc = (event.currentTarget as HTMLElement).classList.contains(this.$style['button--desc'])
+            targetIsDesc ? (this.sortOrder = 'ASC') : (this.sortOrder = 'DESC')
 
             if (this.sortId !== id) this.sortId = id
         },
@@ -131,13 +132,12 @@ export default Vue.extend({
     border-width: 1px 1px 0 0;
     border-style: solid;
     border-color: var(--theme-foreground-color);
-    rotate: 135deg;
+    transform: translate(0, rem(-2)) rotate(135deg);
     transform-origin: center;
-    transition: rotate 0.3s ease(out-quad);
-    translate: 0 rem(0);
+    transition: transform 0.3s ease(out-quad);
 
     .button--desc & {
-        rotate: -45deg;
+        transform: translate(0, rem(2)) rotate(-45deg);
     }
 }
 </style>

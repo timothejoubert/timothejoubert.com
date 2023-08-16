@@ -4,13 +4,22 @@
         :class="classNames"
         :disabled="internalTag === 'button' && disabled"
         v-bind="linkProps"
+        @mouseenter="mouseEnter = true"
+        @mouseleave="mouseEnter = false"
         @click="onClick"
     >
         <span v-if="hasIcon" ref="icon" :class="$style.icon">
             <slot name="icon" />
         </span>
         <span v-if="hasLabel" :class="$style.label">
-            <slot>{{ label }}</slot>
+            <slot>
+                <v-slide-text
+                    v-if="animate && typeof label === 'string'"
+                    :play-animation="mouseEnter"
+                    :content="label"
+                />
+                <template v-else>{{ label }}</template>
+            </slot>
         </span>
     </component>
 </template>
@@ -51,7 +60,13 @@ export default Vue.extend({
             type: Boolean,
             default: true,
         },
+        animate: Boolean,
         theme: { type: String as PropType<Theme>, default: 'dark' },
+    },
+    data() {
+        return {
+            mouseEnter: false,
+        }
     },
     computed: {
         classNames(): (string | boolean | undefined)[] {
@@ -118,6 +133,7 @@ export default Vue.extend({
     align-items: center;
     border: none;
     text-decoration: none;
+    text-transform: uppercase;
     //color: var(--theme-foreground-color);
     //transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 

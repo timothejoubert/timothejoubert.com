@@ -28,16 +28,6 @@ export function getArrayFormattedTheme(theme: Theme = 'dark') {
         }, [])
 }
 
-type GetTheme<T extends 'object' | 'array'> = (
-    format: T,
-    theme: Theme
-) => T extends 'array' ? { key: keyof ClientTheme; value: string }[] : ClientTheme
-
-export function getTheme(format: 'object' | 'array', theme: Theme = 'dark') {
-    if (format === 'object') return getObjectFormattedTheme(theme)
-    else return getArrayFormattedTheme(theme)
-}
-
 export function getPredefinedThemes() {
     return Object.entries(predefinedThemes as { string: string }).reduce(
         (accumulator: { [key: string]: { key: ThemeKey; value: string }[] }, current: [string, string]) => {
@@ -52,3 +42,29 @@ export function getPredefinedThemes() {
         {}
     )
 }
+
+export function getThemeList() {
+    return Object.entries(getPredefinedThemes()).map(([key, values]) => {
+        const colors = values
+            .sort((colorA, _colorB) => {
+                if (colorA.key === 'foreground') return -2
+                else if (colorA.key === 'background') return 1
+                else return 0
+            })
+            .map((colors) => colors.value)
+        return {
+            id: key,
+            colors,
+        }
+    })
+}
+
+// type GetTheme<T extends 'object' | 'array'> = (
+//     format: T,
+//     theme: Theme
+// ) => T extends 'array' ? { key: keyof ClientTheme; value: string }[] : ClientTheme
+//
+// export function getTheme(format: 'object' | 'array', theme: Theme = 'dark') {
+//     if (format === 'object') return getObjectFormattedTheme(theme)
+//     else return getArrayFormattedTheme(theme)
+// }

@@ -1,6 +1,6 @@
 <template>
     <div :class="$style.root" class="container">
-        <nuxt-link :to="homeLink" :class="$style.home" @click.native="onClick">
+        <nuxt-link :to="homeLink" :class="$style.home" :inert="isLinkDisabled" @click.native="onClick">
             <div :class="$style.logo"></div>
             <div :class="$style['logo-text']" class="text-h2">{{ logoText }}</div>
         </nuxt-link>
@@ -22,6 +22,9 @@ export default Vue.extend({
         },
         logoText(): string {
             return this.$store.getters.settings?.data?.website_name || this.$config.appName
+        },
+        isLinkDisabled() {
+            return this.$route.fullPath === '/' && !this.$store.state.isAboutOpen
         },
     },
     methods: {

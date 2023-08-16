@@ -1,5 +1,5 @@
 <script lang="ts">
-import Vue, { VNodeData } from 'vue'
+import Vue from 'vue'
 import type { PropType, VNode } from 'vue'
 import { isMediaFulled } from '~/utils/prismic/field-media'
 import { PrismicMedia } from '~/types/prismic/app-prismic'
@@ -18,7 +18,9 @@ export interface VImageProps {
 function getSizes(value: string | number | undefined): string {
     if (!value) return generateImageBreakpoints()
     else if (value === 'fullScreen') return generateImageBreakpoints(100)
-    else if (typeof value === 'number') return generateImageBreakpoints(value)
+    else if (typeof value === 'number') {
+        return generateImageBreakpoints(parseInt(value.toFixed()))
+    }
     return value
 }
 
