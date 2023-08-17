@@ -12,6 +12,7 @@ export default (): RootState => ({
     splashScreenDone: false,
     isSettingsOpen: false,
     isAboutOpen: false,
+    isProjectExpanded: false,
 
     // UI setting
     uiTheme: getObjectFormattedTheme(),

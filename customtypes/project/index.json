@@ -17,21 +17,40 @@
           "placeholder_false": "false"
         }
       },
-      "tags": {
+      "tag_group": {
         "type": "Group",
         "config": {
-          "label": "Tags",
+          "label": "Tag group",
           "fields": {
             "tag": {
-              "type": "Link",
-              "config": { "label": "Tag", "select": "document", "customtypes": ["project_tag"] }
+              "type": "Select",
+              "config": {
+                "label": "Tag",
+                "placeholder": "",
+                "options": [
+                  "Développement",
+                  "Typographie",
+                  "Design d'interface",
+                  "Identité visuelle",
+                  "Code créatif",
+                  "Motion design",
+                  "Édition",
+                  "Illustration",
+                  "Expression plastique",
+                  "Multimédia"
+                ]
+              }
             }
           }
         }
       },
       "framework": {
-        "type": "Link",
-        "config": { "label": "Framework", "select": "document", "customtypes": ["project_framework"] }
+        "type": "Select",
+        "config": {
+          "label": "Framework",
+          "placeholder": "",
+          "options": ["Freelance", "Perso", "Rézo zéro", "Master 2", "DSAA", "DEC", "BTS", "STD2A"]
+        }
       },
       "short_description": {
         "type": "StructuredText",
@@ -60,7 +79,8 @@
         "config": {
           "label": "Medias",
           "fields": {
-            "media": { "type": "Link", "config": { "label": "Media", "placeholder": "", "select": "media" } }
+            "media": { "type": "Link", "config": { "label": "Media", "placeholder": "", "select": "media" } },
+            "embed_url": { "type": "Text", "config": { "label": "Embed url", "placeholder": "" } }
           }
         }
       }

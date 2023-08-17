@@ -14,7 +14,7 @@
             :style="{ '--theme-button-index': (themes.length - i) * 50 + 'ms' }"
             @click="onThemeChanged"
         />
-        <v-theme-button :colors="['#EBEBEB', '#AAAAAA', '#494949']" wrapper-tag="div" />
+        <v-theme-button :colors="['#EBEBEB', '#494949', '#AAAAAA']" wrapper-tag="div" />
     </div>
 </template>
 <script lang="ts">

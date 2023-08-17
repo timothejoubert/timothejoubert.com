@@ -1,19 +1,23 @@
 <template>
     <div :class="$style.root" class="container">
-        <nuxt-link
-            to="/"
-            :class="$style.header"
-            @mouseenter.native="mouseEnter = true"
-            @mouseleave.native="mouseEnter = false"
-        >
-            <v-slide-text
-                :play-animation="mouseEnter"
-                class="text-h2"
-                :class="$style.title"
-                :content="project.title ? project.title : undefined"
-            />
-            <icon-close :class="$style['close-icon']" />
-        </nuxt-link>
+        <div :class="$style.header">
+            <nuxt-link
+                to="/"
+                :class="$style.close"
+                @mouseenter.native="mouseEnter = true"
+                @mouseleave.native="mouseEnter = false"
+            >
+                <icon-close :class="$style['close-icon']" />
+                <v-slide-text
+                    :play-animation="mouseEnter"
+                    class="text-h2"
+                    tag="h2"
+                    :class="$style.title"
+                    :content="project.title ? project.title : undefined"
+                />
+            </nuxt-link>
+            <v-button :label="isProjectExpanded ? 'Rétrécir' : 'Agrandir'" theme="light" @click="onExpandClicked" />
+        </div>
 
         <v-project-parsed v-slot="projectContent" :project="project">
             <v-project-specification v-bind="projectContent" />
@@ -31,6 +35,7 @@ import Vue from 'vue'
 import { LinkToMediaField } from '@prismicio/types/src/value/linkToMedia'
 import { ProjectDocumentData, ProjectDocumentDataMediasItem } from '~~/prismicio-types'
 import IconClose from '~/assets/images/icons/close.svg?sprite'
+import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
     name: 'VProject',
@@ -48,6 +53,14 @@ export default Vue.extend({
             const medias =
                 this.project.medias?.map((mediaReference: ProjectDocumentDataMediasItem) => mediaReference.media) || []
             return [...medias, this.project.thumbnail]
+        },
+        isProjectExpanded() {
+            return this.$store.state.isProjectExpanded
+        },
+    },
+    methods: {
+        onExpandClicked() {
+            this.$store.commit(MutationType.IS_PROJECT_EXPANDED, !this.isProjectExpanded)
         },
     },
 })
@@ -70,6 +83,12 @@ export default Vue.extend({
     background-color: var(--theme-background-color);
 }
 
+.close {
+    display: flex;
+    align-items: center;
+    gap: rem(14);
+}
+
 .title {
     display: inline-flex;
     //color: var(--theme-accent-color);
@@ -80,7 +99,7 @@ export default Vue.extend({
     transition: none;
 
     @media (hover: hover) {
-        .header:hover & {
+        .close:hover & {
             rotate: 180deg;
             transition: rotate 0.7s ease(out-quad);
         }

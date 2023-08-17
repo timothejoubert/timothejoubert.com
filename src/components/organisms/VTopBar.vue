@@ -6,7 +6,6 @@
         </nuxt-link>
 
         <v-theme-switcher />
-        <!--        <v-toggle-settings />-->
     </div>
 </template>
 

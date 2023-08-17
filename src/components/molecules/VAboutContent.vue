@@ -3,7 +3,7 @@
         <v-markdown-bold
             v-if="description"
             :content="description"
-            wrapper-tag="div"
+            wrapper-tag="h1"
             :class="$style.description"
             class="text-over-title-l"
         />

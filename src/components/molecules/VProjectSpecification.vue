@@ -4,7 +4,7 @@
             <template v-if="tags && tags.length">
                 <v-button
                     v-for="tag in tags"
-                    :key="tag.uid"
+                    :key="tag.id"
                     :class="$style.tag"
                     tag="div"
                     filled
@@ -19,9 +19,9 @@
                 <a v-if="link" :href="link" target="_blank" :class="$style.link">{{ linkLabel || 'Découvrir' }}</a>
             </div>
         </div>
-        <v-text v-if="excerpt" :content="excerpt" :class="$style.excerpt" />
+        <v-text v-if="excerpt" tag="h3" :content="excerpt" :class="$style.excerpt" />
         <v-collapsable v-if="hasContent" :class="$style['more-content']" label="Voir les détails">
-            <v-text :content="content" :class="$style.content" class="text-body-xs" />
+            <v-text tag="h4" :content="content" :class="$style.content" class="text-body-xs" />
         </v-collapsable>
     </div>
 </template>
@@ -29,7 +29,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import type { PropType } from 'vue'
-import { ClientTag, PrismicRichText } from '~/types/app'
+import { PrismicRichText } from '~/types/app'
+import { Tag } from '~/utils/tags'
 
 export default Vue.extend({
     name: 'VProjectSpecification',
@@ -38,7 +39,7 @@ export default Vue.extend({
         link: String,
         linkLabel: String,
         framework: String,
-        tags: Array as PropType<ClientTag[]>,
+        tags: { type: Array as PropType<Tag[]>, default: () => [] },
         content: [Array, String] as PropType<PrismicRichText | String>,
         excerpt: Array as PropType<PrismicRichText>,
     },
@@ -46,6 +47,10 @@ export default Vue.extend({
         hasContent() {
             return (typeof this.content === 'string' && !!this.content) || !!this.content?.length
         },
+        // buttons(): string[] {
+        //     const tags = this.tags.map((tag) => tag.label)
+        //     return [...tags, this.framework, this.date.toString()]
+        // },
     },
 })
 </script>

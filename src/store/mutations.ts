@@ -13,6 +13,7 @@ export default {
     [MutationType.SETTING_OPENED]: (state, value: boolean) => (state.isSettingsOpen = value),
     [MutationType.ABOUT_OPENED]: (state, value: boolean) => (state.isAboutOpen = value),
     [MutationType.SPLASH_SCREEN_DONE]: (state, value: boolean) => (state.splashScreenDone = value),
+    [MutationType.IS_PROJECT_EXPANDED]: (state, value: boolean) => (state.isProjectExpanded = value),
 
     // UI settings
     [MutationType.TAG_FILTERS]: (state, value: string[]) => (state.tagFilters = value),

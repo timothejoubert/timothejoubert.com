@@ -72,6 +72,7 @@ interface ProjectDocumentData {
     /**
      * Title field in *Project*
      *
+     *
      * - **Field Type**: Text
      * - **Placeholder**: *None*
      * - **API ID Path**: project.title
@@ -93,27 +94,27 @@ interface ProjectDocumentData {
      */
     favorite: prismic.BooleanField
     /**
-     * Tags field in *Project*
+     * Tag group field in *Project*
      *
      * - **Field Type**: Group
      * - **Placeholder**: *None*
-     * - **API ID Path**: project.tags[]
+     * - **API ID Path**: project.tag_group[]
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/core-concepts/group
      *
      */
-    tags: prismic.GroupField<Simplify<ProjectDocumentDataTagsItem>>
+    tag_group: prismic.GroupField<Simplify<ProjectDocumentDataTagGroupItem>>
     /**
      * Framework field in *Project*
      *
-     * - **Field Type**: Content Relationship
+     * - **Field Type**: Select
      * - **Placeholder**: *None*
      * - **API ID Path**: project.framework
      * - **Tab**: Main
-     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+     * - **Documentation**: https://prismic.io/docs/core-concepts/select
      *
      */
-    framework: prismic.ContentRelationshipField<'project_framework'>
+    framework: prismic.SelectField<'Freelance' | 'Perso' | 'Rézo zéro' | 'Master 2' | 'DSAA' | 'DEC' | 'BTS' | 'STD2A'>
     /**
      * Short description field in *Project*
      *
@@ -226,20 +227,31 @@ interface ProjectDocumentData {
     meta_title: prismic.KeyTextField
 }
 /**
- * Item in Project → Tags
+ * Item in Project → Tag group
  *
  */
-export interface ProjectDocumentDataTagsItem {
+export interface ProjectDocumentDataTagGroupItem {
     /**
-     * Tag field in *Project → Tags*
+     * Tag field in *Project → Tag group*
      *
-     * - **Field Type**: Content Relationship
+     * - **Field Type**: Select
      * - **Placeholder**: *None*
-     * - **API ID Path**: project.tags[].tag
-     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+     * - **API ID Path**: project.tag_group[].tag
+     * - **Documentation**: https://prismic.io/docs/core-concepts/select
      *
      */
-    tag: prismic.ContentRelationshipField<'project_tag'>
+    tag: prismic.SelectField<
+        | 'Développement'
+        | 'Typographie'
+        | "Design d'interface"
+        | 'Identité visuelle'
+        | 'Code créatif'
+        | 'Motion design'
+        | 'Édition'
+        | 'Illustration'
+        | 'Expression plastique'
+        | 'Multimédia'
+    >
 }
 /**
  * Item in Project → Medias
@@ -256,6 +268,16 @@ export interface ProjectDocumentDataMediasItem {
      *
      */
     media: prismic.LinkToMediaField
+    /**
+     * Embed url field in *Project → Medias*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: project.medias[].embed_url
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    embed_url: prismic.KeyTextField
 }
 /**
  * Project document from Prismic
@@ -269,62 +291,6 @@ export interface ProjectDocumentDataMediasItem {
 export type ProjectDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
     Simplify<ProjectDocumentData>,
     'project',
-    Lang
->
-/** Content for Project framework documents */
-interface ProjectFrameworkDocumentData {
-    /**
-     * Name field in *Project framework*
-     *
-     * - **Field Type**: Text
-     * - **Placeholder**: *None*
-     * - **API ID Path**: project_framework.name
-     * - **Tab**: Main
-     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
-     *
-     */
-    name: prismic.KeyTextField
-}
-/**
- * Project framework document from Prismic
- *
- * - **API ID**: `project_framework`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/core-concepts/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ProjectFrameworkDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
-    Simplify<ProjectFrameworkDocumentData>,
-    'project_framework',
-    Lang
->
-/** Content for Project tag documents */
-interface ProjectTagDocumentData {
-    /**
-     * Name field in *Project tag*
-     *
-     * - **Field Type**: Text
-     * - **Placeholder**: *None*
-     * - **API ID Path**: project_tag.name
-     * - **Tab**: Main
-     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
-     *
-     */
-    name: prismic.KeyTextField
-}
-/**
- * Project tag document from Prismic
- *
- * - **API ID**: `project_tag`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/core-concepts/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ProjectTagDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
-    Simplify<ProjectTagDocumentData>,
-    'project_tag',
     Lang
 >
 /** Content for Settings documents */
@@ -519,12 +485,7 @@ export type SettingsDocument<Lang extends string = string> = prismic.PrismicDocu
     'settings',
     Lang
 >
-export type AllDocumentTypes =
-    | HomePageDocument
-    | ProjectDocument
-    | ProjectFrameworkDocument
-    | ProjectTagDocument
-    | SettingsDocument
+export type AllDocumentTypes = HomePageDocument | ProjectDocument | SettingsDocument
 declare module '@prismicio/client' {
     interface CreateClient {
         (repositoryNameOrEndpoint: string, options?: prismicClient.ClientConfig): prismicClient.Client<AllDocumentTypes>
@@ -534,13 +495,9 @@ declare module '@prismicio/client' {
             HomePageDocumentData,
             HomePageDocument,
             ProjectDocumentData,
-            ProjectDocumentDataTagsItem,
+            ProjectDocumentDataTagGroupItem,
             ProjectDocumentDataMediasItem,
             ProjectDocument,
-            ProjectFrameworkDocumentData,
-            ProjectFrameworkDocument,
-            ProjectTagDocumentData,
-            ProjectTagDocument,
             SettingsDocumentData,
             SettingsDocumentDataColumnsItem,
             SettingsDocumentDataSocialsItem,

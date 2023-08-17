@@ -6,15 +6,15 @@
             </transition>
         </client-only>
 
-        <div :class="[$style.body, isProjectOpen && $style['body--minify']]">
+        <div :class="[$style.body, isProjectOpen && $style['body--minify']]" @click="onBodyClick">
             <v-splash-screen v-if="isSplashScreenEnabled" />
-
             <v-top-bar />
-            <!--            <v-setting ref="setting" :class="$style.setting" :inert="!isSettingOpen" />-->
-            <v-top-setting />
-            <v-project-list :class="$style['project-listing']" :inert="isAboutOpen" />
 
-            <v-archive />
+            <!--            <v-setting ref="setting" :class="$style.setting" :inert="!isSettingOpen" />-->
+            <v-favorite-setting :inert="isBodyContentInert" />
+            <v-favorite-project-list :inert="isBodyContentInert" />
+
+            <v-archive :inert="isBodyContentInert" />
 
             <nuxt v-if="isHomePage" />
             <v-about />
@@ -53,9 +53,13 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
         rootClasses(): (string | false | undefined)[] {
             return [
                 this.$style.root,
+                this.isProjectExpanded && this.$style['root--project-expanded'],
                 this.isSettingOpen && this.$style['root--setting-open'],
                 ...this.splashScreenClasses,
             ]
+        },
+        isProjectExpanded() {
+            return this.$store.state.isProjectExpanded
         },
         isProjectOpen(): boolean {
             return this.$store.getters.isProjectOpen
@@ -74,7 +78,10 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
             return this.$store.state.isSettingsOpen
         },
         isAboutOpen() {
-            return this.$store.state.isAboutOpen
+            return this.$store.state.isAboutOpen as boolean
+        },
+        isBodyContentInert(): boolean {
+            return this.isAboutOpen || this.isProjectExpanded
         },
     },
     watch: {
@@ -83,6 +90,7 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
                 this.$store.getters.isProjectUid(current.params.pathMatch) &&
                 this.$store.getters.isProjectUid(previous.params.pathMatch)
 
+            this.$route.fullPath === '/' && this.$store.commit(MutationType.IS_PROJECT_EXPANDED, false)
             isProjectSwitching && this.$refs.project.scrollTo({ top: 0, behavior: 'smooth' })
         },
         isSettingOpen(value: boolean) {
@@ -94,6 +102,10 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
         onTransitionEnd() {
             eventBus.$emit(EventType.SETTING_TRANSITION_END)
             this.$el.removeEventListener('transitionend', this.onTransitionEnd)
+        },
+        onBodyClick(event: Event) {
+            this.isProjectExpanded && this.$router.push('/')
+            console.log(event.currentTarget)
         },
     },
 })
@@ -112,19 +124,19 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
 );
 
 .root {
-    //@include theme(dark);
-
     position: relative;
     display: flex;
     overflow: hidden;
-    /* stylelint-disable-next-line unit-no-unknown */
     height: 100vh;
     background-color: var(--theme-background-color);
     color: var(--theme-foreground-color);
 
     &--splash-screen-displayed {
         overflow: hidden;
-        //max-height: 100vh;
+    }
+
+    &--project-expanded {
+        /* !keep */
     }
 }
 
@@ -141,45 +153,40 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     &--minify {
         width: 50%;
     }
-}
 
-.setting {
-    position: sticky;
-    z-index: 11;
-    top: $v-top-bar-height;
-    max-height: calc(var(--v-setting-height));
-    transition: translate 0.4s ease(out-quad);
-
-    .root:not(.root--setting-open) & {
-        translate: 0 calc(var(--v-setting-height) * -1);
+    &::before {
+        position: absolute;
+        z-index: 109;
+        background-color: color(black);
+        content: '';
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.7s ease(out-quad);
     }
 
-    .root--setting-open & {
-        max-height: inherit;
+    .root--project-expanded &::before {
+        opacity: 0.8;
     }
-}
 
-.project-listing {
-    position: relative;
-    //top: 0;
-    //min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
-    ///* stylelint-disable-next-line property-no-unknown */
-    //container-type: inline-size;
-    //transition: top 0.4s ease(out-quad);
-    //
-    //.root:not(.root--setting-open) & {
-    //    top: calc(var(--v-setting-height) * -1);
-    //    min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
-    //}
-    //
-    //.root--setting-open & {
-    //    min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height - var(--v-setting-height));
-    //}
+    .root--project-expanded & {
+        cursor: pointer;
+    }
 }
 
 .project {
     position: relative;
+    z-index: 110;
     min-width: 50%;
     border-left: 1px solid var(--theme-foreground-color);
+    background-color: var(--theme-background-color);
+    transition: min-width 0.7s ease(out-quad), translate 0.7s ease(out-quad);
+    translate: 0 0;
+
+    .root--project-expanded & {
+        right: 0;
+        min-width: 85%;
+        translate: -35vw 0;
+    }
 }
 </style>

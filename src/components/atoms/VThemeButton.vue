@@ -1,18 +1,6 @@
 <template>
     <component :is="tag" :class="rootClasses" @click="$emit('click', id)">
-        <template v-if="isInputs">
-            <div v-for="(color, inputIndex) in colors" :key="'input-' + inputIndex" :class="$style.color">
-                <input type="color" :class="$style.input" @input="onColorInputUpdate($event, inputIndex)" />
-            </div>
-        </template>
-        <template v-else>
-            <span
-                v-for="(color, i) in colors"
-                :key="i"
-                :class="$style.color"
-                :style="!isInputs && { backgroundColor: color }"
-            ></span>
-        </template>
+        <span v-for="(color, i) in colors" :key="i" :class="$style.color" :style="{ backgroundColor: color }"></span>
     </component>
 </template>
 <script lang="ts">
@@ -25,33 +13,26 @@ export default Vue.extend({
         id: { type: String, required: false },
         colors: Array as PropType<string[]>,
         isSelected: Boolean,
-        isInputs: Boolean,
         wrapperTag: String,
-        isExpanded: Boolean,
     },
     computed: {
         rootClasses(): (undefined | false | string)[] {
             return [
                 this.$style.root,
                 this.tag === 'button' && this.$style['root--button'],
-                this.isInputs && this.$style['root--inputs'],
-                this.isExpanded && this.$style['root--expanded'],
                 this.isSelected && this.$style['root--selected'],
             ]
         },
         tag() {
-            return this.wrapperTag || (this.isInputs ? 'div' : 'button')
-        },
-    },
-    methods: {
-        onColorInputUpdate(_event: Event, _index: number) {
-            // console.log('update input', event, index)
+            return this.wrapperTag || 'button'
         },
     },
 })
 </script>
-
 <style lang="scss" module>
+$default-offset: rem(2);
+$hover-offset: rem(5);
+
 .root {
     position: relative;
     display: flex;
@@ -62,6 +43,10 @@ export default Vue.extend({
 
     &--inputs {
         min-width: rem(100);
+    }
+
+    &--button {
+        /* !keep */
     }
 }
 
@@ -88,74 +73,56 @@ export default Vue.extend({
         opacity: 0.1;
     }
 
-    .root--inputs.root--expanded &::after,
     .root--selected &::after {
         border-color: var(--theme-foreground-color);
         opacity: 0.5;
     }
 
     // FOREGROUND
-    &:first-child {
+    &:nth-child(1) {
         z-index: 1;
-        translate: 0 rem(-6);
+        translate: 0 (-$default-offset);
     }
 
-    .root--inputs &:first-child {
-        background-color: var(--theme-foreground-color);
-    }
-
-    .root--inputs.root--expanded &:first-child {
-        translate: 0 0;
+    .root--selected &:nth-child(1),
+    .root:not(.root--button) &:nth-child(1) {
+        translate: 0 (-$hover-offset);
     }
 
     // BG
     &:nth-child(2) {
-        translate: rem(-6) rem(6);
+        translate: -$default-offset $default-offset;
     }
 
-    .root--inputs &:nth-child(2) {
-        background-color: var(--theme-background-color);
-    }
-
-    .root--inputs.root--expanded &:nth-child(2) {
-        translate: rem(-28) 0;
+    .root--selected &:nth-child(2),
+    .root:not(.root--button) &:nth-child(2) {
+        translate: -$hover-offset $hover-offset;
     }
 
     // ACCENT
     &:nth-child(3) {
-        translate: rem(6) rem(6);
+        translate: $default-offset $default-offset;
     }
 
-    .root--inputs &:nth-child(3) {
-        background-color: var(--theme-accent-color);
-    }
-
-    .root--inputs.root--expanded &:nth-child(3) {
-        translate: rem(28) 0;
+    .root--selected &:nth-child(3),
+    .root:not(.root--button) &:nth-child(3) {
+        translate: $hover-offset $hover-offset;
     }
 
     @media (hover: hover) {
-        .root--button:hover &:nth-child(1) {
-            scale: 1.05;
-            translate: 0 rem(-7);
+        button.root:hover &:nth-child(1) {
+            //scale: 1.05;
+            translate: 0 (-$hover-offset);
         }
-        .root--button:hover &:nth-child(2) {
-            scale: 1.05;
-            translate: rem(-7) rem(7);
+        button.root:hover &:nth-child(2) {
+            //scale: 1.05;
+            translate: (-$hover-offset) $hover-offset;
         }
 
-        .root--button:hover &:nth-child(3) {
-            scale: 1.05;
-            translate: rem(7) rem(7);
+        button.root:hover &:nth-child(3) {
+            //scale: 1.05;
+            translate: $hover-offset $hover-offset;
         }
     }
-}
-
-.input {
-    all: unset;
-    position: absolute;
-    z-index: 8;
-    inset: -4px;
-    opacity: 0;
 }
 </style>

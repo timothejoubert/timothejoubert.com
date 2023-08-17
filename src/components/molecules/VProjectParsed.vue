@@ -1,9 +1,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import type { PropType } from 'vue'
-import { getTagsByReference } from '~/utils/project/tag'
 import { ProjectDocumentData } from '~~/prismicio-types'
 import { getProjectYear } from '~/utils/prismic/date'
+import { getTags } from '~/utils/tags'
 
 export default Vue.extend({
     name: 'VProjectParsed',
@@ -13,11 +13,11 @@ export default Vue.extend({
     },
     render(_createElement, context): any {
         // Don't find what is return type of scopedSlot
-        const { tags, date, link, link_label, content, framework, favorite, short_description } = context.props.project
+        const { date, link, link_label, content, framework, favorite, short_description } = context.props.project
 
         return context.scopedSlots.default?.({
-            tags: getTagsByReference(tags, context.parent.$store.getters.projectTags),
-            framework: context.parent.$store.getters.getFrameworkName((framework as { uid?: string })?.uid),
+            tags: getTags(context.props.project),
+            framework: framework || undefined,
             date: getProjectYear(date),
             excerpt: short_description,
             content,

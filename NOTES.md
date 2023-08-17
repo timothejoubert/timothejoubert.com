@@ -9,18 +9,18 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (organization): clean unused code | rename feature project section (HighlightedProjects)
-** (VTopSetting): filter tags by existing tag in promote project 
-
-
+** (Project): finish expanded style 
 ** (Responsive): Setting | Project | About
-** (VSetting): Check VInteractiveText listener on resize 
 
 ### TODOS
-** (ProjectTransition): when project switching ?
+** (JsonLD): Add projects data 
+** (VSetting): Check VInteractiveText listener on resize 
+** (organization): clean unused code
+** (SEO): Check headings
 ** (BackEnd & VMedia): Allow Embed video media | display controls on mp4 video  
 
 ### DONE
+** (VTopSetting): filter tags by existing tag in promote project
 ** (MainProjects): keep not filtered project but blur them
 ** (VSetting): Dynamic height
 ** (VSetting): Bug, selected tag enable visibility of not best project
@@ -43,11 +43,15 @@ import { Document } from '@prismicio/client/types/documents'
 * **(Prismic)** use new Page type
 
 ### LATER 
+* **(Data)**: Simplify stored fetch api data (ex: tags in project)
 * **(Route & Internalization)** check if I can make Internalization route path (update documentUid vars by currentLocale ?)
 * **(Route)**: Configure nested route (Set relationLink field in BO if we want nested route (projects/project-name))
 * **(Sitemap && routes)** avoid to generate route for ['/preview', '/en/preview', '/en/slice-simulator', '/slice-simulator'] (Generate.exclude not working)
 
+
+
 ### ABANDONED
+** (ProjectTransition): when project switching ?
 ** (Setting): display filter only when all project are displayed ? Unique Tag search ?
 ** (ProjectList): empty bottom space when setting is closed
 * **(Config)** use PrismicClient (exemple)[https://community.prismic.io/t/an-invalid-prismic-repository-name-was-given/10523/10]

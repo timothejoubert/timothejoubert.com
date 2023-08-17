@@ -11,6 +11,7 @@ interface RootState {
     isSettingsOpen: boolean
     splashScreenDone: boolean
     isAboutOpen: boolean
+    isProjectExpanded: boolean
 
     // UI setting
     uiTheme: ClientTheme

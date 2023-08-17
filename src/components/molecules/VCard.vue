@@ -14,8 +14,8 @@
                 <transition-group :name="$style['tag-animation']" tag="div" :class="$style.tags">
                     <v-button
                         v-for="(tag, i) in tagList"
-                        :key="tag.uid"
-                        :theme="activeTags && activeTags.includes(tag.uid) ? 'accent' : 'dark'"
+                        :key="tag.id"
+                        :theme="activeTags.includes(tag.id) ? 'accent' : 'dark'"
                         tag="div"
                         :filled="true"
                         :style="{ '--tag-index': tagList.length - i }"
@@ -25,12 +25,9 @@
                     />
                 </transition-group>
             </template>
-            <v-slide-text
-                v-if="title"
-                :play-animation="mouseEnter"
-                :content="title"
-                :class="[$style.title, isProjectOpen ? 'text-over-title-xs' : 'text-over-title-m']"
-            />
+            <h3 v-if="title" :class="[$style.title, isProjectOpen ? 'text-over-title-xs' : 'text-over-title-m']">
+                {{ title }}
+            </h3>
             <span v-if="date" class="text-over-title-xs">{{ date }}</span>
         </div>
     </div>
@@ -41,11 +38,12 @@ import Vue from 'vue'
 import type { PropType } from 'vue'
 import { PrismicMedia } from '~/types/prismic/app-prismic'
 import { ClientTag } from '~/types/app'
+import { Tag } from '~/utils/tags'
 
 export interface VCardProps {
     title?: string
     image?: PrismicMedia
-    tags?: ClientTag[]
+    tags?: Tag[]
     date?: string
     selected?: boolean
     activeTags?: ClientTag[]
@@ -58,13 +56,13 @@ export default Vue.extend({
         title: String,
         image: Object as PropType<PrismicMedia>,
         tags: {
-            type: Array as PropType<ClientTag[]>,
+            type: Array as PropType<Tag[]>,
             default: () => [],
         },
         date: String,
         selected: Boolean,
         isBlurred: Boolean,
-        activeTags: Array as PropType<ClientTag[]>,
+        activeTags: { type: Array as PropType<string[]>, default: () => [] },
     },
     data() {
         return {
@@ -84,13 +82,12 @@ export default Vue.extend({
             return !!this.$store.getters.isProjectOpen
         },
         cardPercent(): number {
-            console.log(100 / this.$store.state.uiColumns)
             return 100 / this.$store.state.uiColumns + 5
         },
-        sortedTags(): ClientTag[] {
-            return this.tags?.slice().sort((a, b) => a.label.length - b.label.length) || []
+        sortedTags(): Tag[] {
+            return this.tags?.slice().sort((tag1, tag2) => tag1.label.length - tag2.label.length) || []
         },
-        tagList(): ClientTag[] {
+        tagList(): Tag[] {
             const isHidden = this.mouseEnter || !!this.$store.getters.isProjectOpen
             return isHidden ? [] : this.sortedTags
         },
@@ -121,6 +118,7 @@ export default Vue.extend({
         border-radius: $v-card-border-radius;
         content: '';
         inset: 0;
+        pointer-events: none;
         transition: border-color 0.3s;
     }
 

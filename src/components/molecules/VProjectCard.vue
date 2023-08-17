@@ -9,8 +9,8 @@
 import Vue from 'vue'
 import type { PropType } from 'vue'
 import { ProjectDocument } from '~~/prismicio-types'
-import { getTagsByReference } from '~/utils/project/tag'
 import { VCardProps } from '~/components/molecules/VCard.vue'
+import getTagsByProject from '~/utils/tags'
 
 export default Vue.extend({
     name: 'VProjectCard',
@@ -25,14 +25,12 @@ export default Vue.extend({
     },
     computed: {
         cardProps(): VCardProps {
-            const { thumbnail, title, tags } = this.project.data
-
-            const parsedTags = getTagsByReference(tags, this.$store.getters.projectTags)
+            const { thumbnail, title } = this.project.data
 
             return {
                 image: thumbnail,
                 title: title || undefined,
-                tags: parsedTags,
+                tags: getTagsByProject(this.project),
                 selected: this.project?.uid === this.activeProject,
                 activeTags: this.$store.state.tagFilters,
                 isBlurred: this.activeProjectsId?.includes(this.project.uid),

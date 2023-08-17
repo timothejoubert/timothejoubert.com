@@ -7,6 +7,7 @@ enum MutationType {
     SPLASH_SCREEN_DONE = 'splashScreenDone',
     SETTING_OPENED = 'settingOpened',
     ABOUT_OPENED = 'aboutOpened',
+    IS_PROJECT_EXPANDED = 'isProjectExpanded',
 
     // UI settings
     FRAMEWORK_FILTERS = 'frameworkFilters',

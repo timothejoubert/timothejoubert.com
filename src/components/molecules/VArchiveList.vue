@@ -1,5 +1,5 @@
 <template>
-    <ul :class="$style.list">
+    <ul :class="rootClasses">
         <li v-for="(project, i) in sortedProjects" :key="i">
             <v-link
                 :reference="project"
@@ -41,28 +41,31 @@ export default Vue.extend({
         sortId: String as PropType<keyof ProjectDocumentData>,
     },
     computed: {
-        projects(): ProjectDocument[] {
-            return (this.$store.getters.projects as ProjectDocument[]).slice()
+        rootClasses(): (undefined | string | false)[] {
+            return [this.$style.root, this.$store.getters.isProjectOpen && this.$style['root--project-open']]
         },
         sortedProjects(): ProjectDocument[] {
-            const projects = this.projects
+            const projects = (this.$store.getters.projects as ProjectDocument[]).slice()
             let projectSorted
 
-            if (typeof projects[0].data?.[this.sortId] === 'undefined') {
-                projectSorted = projects
-            } else if (this.sortId === 'date') {
+            if (this.sortId === 'date') {
                 projectSorted = projects.sort(
                     (p1, p2) => parseInt(p1.data?.date || '0') - parseInt(p2.data?.date || '0')
                 )
-            } else if (this.sortId === 'title') {
-                projectSorted = this.SortByDataAlphabetically(['title'])
-            } else if (this.sortId === 'framework') {
-                projectSorted = this.SortByDataAlphabetically(['framework', 'uid'])
-            } else if (this.sortId === 'tags') {
+            } else if (this.sortId === 'title' || this.sortId === 'framework') {
+                projectSorted = projects.sort((p1: ProjectDocument, p2: ProjectDocument) => {
+                    const title1 = p1.data[this.sortId] || ''
+                    const title2 = p2.data[this.sortId] || ''
+                    return title1 < title2 ? -1 : title1 > title2 ? 1 : 0
+                })
+            } else if (this.sortId === 'tag_group') {
                 projectSorted = projects.sort((p1, p2) => {
-                    const p1FirstTag = (p1.data.tags[0]?.tag as { uid?: string })?.uid || ''
-                    const p2FirstTag = (p2.data.tags[0]?.tag as { uid?: string })?.uid || ''
-                    return p1FirstTag < p2FirstTag ? -1 : p1FirstTag > p2FirstTag ? 1 : 0
+                    const p1TagsString = p1.data.tag_group.map((group) => group.tag).join('')
+                    const p2TagsString = p2.data.tag_group.map((group) => group.tag).join('')
+
+                    if (p1TagsString < p2TagsString) return -1
+                    else if (p1TagsString > p2TagsString) return 1
+                    else return 0
                 })
             } else {
                 projectSorted = projects
@@ -72,24 +75,6 @@ export default Vue.extend({
         },
     },
     methods: {
-        SortByDataAlphabetically(objectKey: (keyof ProjectDocumentData | string)[]) {
-            const rootKey = objectKey[0] as keyof ProjectDocumentData
-            return this.projects.sort((p1: ProjectDocument, p2: ProjectDocument) => {
-                const title1 =
-                    objectKey.length === 1
-                        ? p1.data[rootKey]
-                        : objectKey.length === 2
-                        ? (p1.data[rootKey] as any)?.[objectKey[1]]
-                        : ''
-                const title2 =
-                    objectKey.length === 1
-                        ? p2.data[rootKey]
-                        : objectKey.length === 2
-                        ? (p2.data[rootKey] as any)?.[objectKey[1]]
-                        : ''
-                return title1 < title2 ? -1 : title1 > title2 ? 1 : 0
-            })
-        },
         onMouseEnter(event: MouseEvent) {
             const el = event.target as HTMLElement
 
@@ -118,7 +103,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" module>
-.list {
+.root {
     position: relative;
 }
 
@@ -198,11 +183,19 @@ export default Vue.extend({
 
 .framework {
     width: clamp(15%, rem(50), rem(400));
+
+    .root--project-open & {
+        display: none;
+    }
 }
 
 .tags {
     display: flex;
     flex-grow: 1;
+
+    .root--project-open & {
+        display: none;
+    }
 }
 
 .tag {

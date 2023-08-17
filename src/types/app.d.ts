@@ -1,15 +1,13 @@
 import { RTNode } from '@prismicio/types/src/value/richText'
-import { ProjectDocument, ProjectFrameworkDocument, ProjectTagDocument, SettingsDocument } from '~~/prismicio-types'
+import { ProjectDocument, SettingsDocument } from '~~/prismicio-types'
 
 type Theme = 'light' | 'dark' | 'accent'
 type ThemeKey = 'foreground' | 'background' | 'accent'
 
-type CommonContentKey = 'settings' | 'projectFrameWorks' | 'projectTags' | 'projects'
+type CommonContentKey = keyof CommonContent
 
 interface CommonContent {
     settings?: SettingsDocument
-    projectFrameWorks?: ProjectFrameworkDocument[]
-    projectTags?: ProjectTagDocument[]
     projects?: ProjectDocument[]
 }
 
@@ -19,9 +17,4 @@ interface ClientTheme {
     foreground: string
     accent: string
     background: string
-}
-
-interface ClientTag {
-    uid: string
-    label: string
 }

@@ -1,24 +1,23 @@
 <template>
-    <div :class="[$style.root, selectedTags.length && $style['root--tags-active']]" class="container">
+    <div :class="$style.root" class="container">
         <div :class="$style.tags">
             <v-button
-                v-if="!enableOneTag"
                 :animate="!!selectedTags.length"
                 size="s"
                 label="Reset"
                 theme="light"
-                :class="$style.reset"
+                :class="[$style.reset, !!selectedTags.length && $style['reset--enabled']]"
                 @click="resetTags"
             />
             <v-button
-                v-for="tag in tags"
-                :key="tag.value"
-                :theme="selectedTags.includes(tag.value) ? 'accent' : 'dark'"
+                v-for="tag in filteredTags"
+                :key="tag.id"
+                :theme="selectedTags.includes(tag.id) ? 'accent' : 'dark'"
                 size="s"
                 filled
                 :label="tag.label"
                 animate
-                @click="onTagClicked(tag.value)"
+                @click="onTagClicked(tag.id)"
             />
         </div>
         <v-column-input :class="$style.columns" />
@@ -26,19 +25,28 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { ProjectTagDocument } from '~~/prismicio-types'
-import { VSelectOption } from '~/components/atoms/VSelect.vue'
 import MutationType from '~/constants/mutation-type'
 import AppConst from '~/constants/app'
 import toBoolean from '~/utils/to-boolean'
+import { ProjectDocument } from '~~/prismicio-types'
+import getTagsByProject, { Tag } from '~/utils/tags'
 
 export default Vue.extend({
-    name: 'VTopSetting',
+    name: 'VFavoriteSetting',
     computed: {
-        tags(): VSelectOption[] {
-            return this.$store.getters.projectTags?.map((tag: ProjectTagDocument) => {
-                return { value: tag.uid, label: tag.data.name }
-            })
+        filteredTags(): Tag[] {
+            const projects = this.$store.getters.highlightedProjects
+
+            return projects.reduce((accumulator: Tag[], project: ProjectDocument) => {
+                const projectTags = getTagsByProject(project)
+
+                projectTags.forEach((projectTag) => {
+                    const hasSameTag = accumulator.some((addedTag) => addedTag.id === projectTag.id)
+                    if (!hasSameTag) accumulator.push(projectTag)
+                })
+
+                return accumulator
+            }, [])
         },
         selectedTags(): string[] {
             return this.$store.state.tagFilters
@@ -87,8 +95,10 @@ export default Vue.extend({
     --v-button-padding: 0;
 
     margin-right: rem(10);
+    opacity: 0.5;
 
-    .root--tags-active & {
+    &--enabled {
+        opacity: 1;
         text-decoration: underline;
         text-underline-offset: 2px;
     }

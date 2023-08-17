@@ -21,7 +21,7 @@
                 </template>
             </v-button>
         </div>
-        <v-archive-list :sort-id="sortId" :sort-order="sortOrder" :sort-data="{ id: sortId, order: sortOrder }" />
+        <v-archive-list :sort-id="sortId" :sort-order="sortOrder" />
     </div>
 </template>
 
@@ -43,7 +43,7 @@ const DISPLAYED_INFO = [
     },
     {
         label: 'Tags',
-        id: 'tags',
+        id: 'tag_group',
     },
 ]
 
@@ -121,7 +121,7 @@ export default Vue.extend({
         width: clamp(15%, rem(50), rem(400));
     }
 
-    &--tags {
+    &--tag_group {
         flex-grow: 1;
     }
 }
