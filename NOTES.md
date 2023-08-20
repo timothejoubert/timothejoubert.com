@@ -10,6 +10,7 @@ import { Document } from '@prismicio/client/types/documents'
 
 ### IN PROGRESS
 ** (Project): finish expanded style 
+** (Archive): add rate order
 ** (Responsive): Setting | Project | About
 
 ### TODOS

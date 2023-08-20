@@ -17,7 +17,7 @@ export default Vue.extend({
     },
     computed: {
         isRichTextFilled(): boolean {
-            return !!(this.content?.[0] as Partial<Record<'text', string>>)?.text
+            return !!(this.content?.[0] as { text?: string })?.text
         },
     },
 })

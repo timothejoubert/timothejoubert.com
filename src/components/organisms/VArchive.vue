@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.root" class="container">
+    <div :class="rootClasses" class="container">
         <div :class="$style.title" class="text-body-l">Archive</div>
         <div :class="$style.top">
             <v-button
@@ -58,10 +58,13 @@ export default Vue.extend({
     data() {
         return {
             sortId: 'date',
-            sortOrder: 'DESC' as 'ASC' | 'DESC',
+            sortOrder: 'ASC' as 'ASC' | 'DESC',
         }
     },
     computed: {
+        rootClasses(): (undefined | string | false)[] {
+            return [this.$style.root, this.$store.getters.isProjectOpen && this.$style['root--project-open']]
+        },
         buttons(): ArchiveSetting[] {
             const result: ArchiveSetting[] = DISPLAYED_INFO.map((info) => {
                 return {
@@ -123,6 +126,18 @@ export default Vue.extend({
 
     &--tag_group {
         flex-grow: 1;
+    }
+
+    &--link {
+        margin-left: auto;
+    }
+
+    .root--project-open & {
+        @include column-stretch;
+    }
+
+    .root--project-open &--title {
+        @include column-stretch($expand: true);
     }
 }
 

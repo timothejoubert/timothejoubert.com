@@ -7,21 +7,34 @@
                     :key="tag.id"
                     :class="$style.tag"
                     tag="div"
-                    filled
                     size="s"
                     theme="dark"
                     :label="tag.label"
+                    filled
                 />
             </template>
             <div :class="$style.specifications">
-                <div v-if="framework" :class="$style.framework">{{ framework }}</div>
+                <!--                <div v-if="framework" :class="$style.framework">{{ framework }}</div>-->
                 <div v-if="date">{{ date }}</div>
-                <a v-if="link" :href="link" target="_blank" :class="$style.link">{{ linkLabel || 'Découvrir' }}</a>
+                <v-button
+                    v-if="link"
+                    :class="$style.link"
+                    size="s"
+                    theme="dark"
+                    outlined
+                    :href="link"
+                    animate
+                    :label="linkLabel || 'Découvrir'"
+                >
+                    <template #icon>
+                        <icon-arrow />
+                    </template>
+                </v-button>
             </div>
         </div>
         <v-text v-if="excerpt" tag="h3" :content="excerpt" :class="$style.excerpt" />
         <v-collapsable v-if="hasContent" :class="$style['more-content']" label="Voir les détails">
-            <v-text tag="h4" :content="content" :class="$style.content" class="text-body-xs" />
+            <v-text tag="h4" :content="content" :class="$style.content" />
         </v-collapsable>
     </div>
 </template>
@@ -31,9 +44,11 @@ import Vue from 'vue'
 import type { PropType } from 'vue'
 import { PrismicRichText } from '~/types/app'
 import { Tag } from '~/utils/tags'
+import IconArrow from '~/assets/images/icons/arrow-up-right.svg?sprite'
 
 export default Vue.extend({
     name: 'VProjectSpecification',
+    components: { IconArrow },
     props: {
         date: [String, Number],
         link: String,
@@ -45,12 +60,10 @@ export default Vue.extend({
     },
     computed: {
         hasContent() {
-            return (typeof this.content === 'string' && !!this.content) || !!this.content?.length
+            return (
+                (typeof this.content === 'string' && !!this.content) || !!(this.content?.[0] as { text?: string })?.text
+            )
         },
-        // buttons(): string[] {
-        //     const tags = this.tags.map((tag) => tag.label)
-        //     return [...tags, this.framework, this.date.toString()]
-        // },
     },
 })
 </script>
@@ -71,6 +84,10 @@ export default Vue.extend({
     &:nth-last-child(1 of .tag) {
         margin-right: rem(8);
     }
+}
+
+.link {
+    --v-button-padding: #{0 rem(8) 0 rem(18)} !important;
 }
 
 .specifications {
@@ -105,7 +122,7 @@ export default Vue.extend({
 
 .content {
     margin-top: rem(16);
-    opacity: 0.8;
+    opacity: 0.9;
 
     a {
         text-decoration: underline;

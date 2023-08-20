@@ -21,7 +21,7 @@
                     <div :class="[$style.tags, sortId === 'tags' && $style['title--highlight']]">
                         <span v-for="tag in p.tags" :key="tag.uid" :class="$style.tag">{{ tag.label }}</span>
                     </div>
-                    <div :class="$style.arrow"></div>
+                    <arrow-icon :class="$style.icon" />
                 </v-project-parsed>
             </v-link>
         </li>
@@ -31,11 +31,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import type { PropType } from 'vue'
-import { ProjectDocument } from '~~/prismicio-types'
+import { ProjectDocument, ProjectDocumentDataTagGroupItem } from '~~/prismicio-types'
 import { ProjectDocumentData } from '~/types/prismic/app-prismic'
+import ArrowIcon from '~/assets/images/icons/arrow-up-right.svg?sprite'
 
 export default Vue.extend({
     name: 'VArchiveList',
+    components: { ArrowIcon },
     props: {
         sortOrder: String as PropType<'ASC' | 'DESC'>,
         sortId: String as PropType<keyof ProjectDocumentData>,
@@ -50,7 +52,7 @@ export default Vue.extend({
 
             if (this.sortId === 'date') {
                 projectSorted = projects.sort(
-                    (p1, p2) => parseInt(p1.data?.date || '0') - parseInt(p2.data?.date || '0')
+                    (p1, p2) => parseInt(p2.data?.date || '0') - parseInt(p1.data?.date || '0')
                 )
             } else if (this.sortId === 'title' || this.sortId === 'framework') {
                 projectSorted = projects.sort((p1: ProjectDocument, p2: ProjectDocument) => {
@@ -60,8 +62,12 @@ export default Vue.extend({
                 })
             } else if (this.sortId === 'tag_group') {
                 projectSorted = projects.sort((p1, p2) => {
-                    const p1TagsString = p1.data.tag_group.map((group) => group.tag).join('')
-                    const p2TagsString = p2.data.tag_group.map((group) => group.tag).join('')
+                    const p1TagsString = p1.data.tag_group
+                        .map((group: ProjectDocumentDataTagGroupItem) => group.tag)
+                        .join('')
+                    const p2TagsString = p2.data.tag_group
+                        .map((group: ProjectDocumentDataTagGroupItem) => group.tag)
+                        .join('')
 
                     if (p1TagsString < p2TagsString) return -1
                     else if (p1TagsString > p2TagsString) return 1
@@ -146,8 +152,14 @@ export default Vue.extend({
 .date,
 .framework,
 .tags {
+    overflow: hidden;
     opacity: 0.6;
-    transition: opacity 0.4s;
+    text-overflow: ellipsis;
+    transition: opacity 0.4s, max-width 0.4s;
+
+    .root--project-open & {
+        @include column-stretch;
+    }
 
     &--highlight {
         opacity: 1;
@@ -160,13 +172,6 @@ export default Vue.extend({
     }
 }
 
-.title {
-    position: relative;
-    overflow: hidden;
-    width: rem(160);
-    text-overflow: ellipsis;
-}
-
 .new {
     --v-new-pill-width: 36px;
     --v-new-pill-transform: translate(-100%, 0);
@@ -177,28 +182,34 @@ export default Vue.extend({
     right: 0;
 }
 
+.title {
+    position: relative;
+    width: rem(160);
+
+    .root--project-open & {
+        @include column-stretch($expand: true);
+    }
+}
+
 .date {
     width: rem(70);
 }
 
 .framework {
     width: clamp(15%, rem(50), rem(400));
-
-    .root--project-open & {
-        display: none;
-    }
 }
 
 .tags {
     display: flex;
     flex-grow: 1;
-
-    .root--project-open & {
-        display: none;
-    }
 }
 
 .tag {
+    &:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     &:not(:last-child)::after {
         position: relative;
         content: '|';
@@ -206,15 +217,7 @@ export default Vue.extend({
     }
 }
 
-.arrow {
-    @include arrow;
-
-    display: flex;
-    width: rem(18);
-    height: rem(18);
-    align-items: center;
-    align-self: flex-end;
-    justify-content: center;
+.icon {
     margin-left: auto;
 }
 </style>

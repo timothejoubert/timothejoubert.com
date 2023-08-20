@@ -6,7 +6,7 @@
             :class="$style.image"
             :cover="true"
             :ratio="1"
-            :sizes="cardPercent"
+            :sizes="maxCardPercentDisplayed"
         />
 
         <div :class="$style.body">
@@ -15,7 +15,7 @@
                     <v-button
                         v-for="(tag, i) in tagList"
                         :key="tag.id"
-                        :theme="activeTags.includes(tag.id) ? 'accent' : 'dark'"
+                        :theme="activeTags && activeTags.includes(tag.id) ? 'accent' : 'dark'"
                         tag="div"
                         :filled="true"
                         :style="{ '--tag-index': tagList.length - i }"
@@ -37,8 +37,9 @@
 import Vue from 'vue'
 import type { PropType } from 'vue'
 import { PrismicMedia } from '~/types/prismic/app-prismic'
-import { ClientTag } from '~/types/app'
 import { Tag } from '~/utils/tags'
+import AppConst from '~/constants/app'
+import { mediaIsMax } from '~/utils/media'
 
 export interface VCardProps {
     title?: string
@@ -46,7 +47,7 @@ export interface VCardProps {
     tags?: Tag[]
     date?: string
     selected?: boolean
-    activeTags?: ClientTag[]
+    activeTags?: Tag[]
     isBlurred?: boolean
 }
 
@@ -67,6 +68,7 @@ export default Vue.extend({
     data() {
         return {
             mouseEnter: false,
+            maxCardPercentDisplayed: 100 / parseInt(AppConst.UI_COLUMNS) || 25,
         }
     },
     computed: {
@@ -81,9 +83,6 @@ export default Vue.extend({
         isProjectOpen(): boolean {
             return !!this.$store.getters.isProjectOpen
         },
-        cardPercent(): number {
-            return 100 / this.$store.state.uiColumns + 5
-        },
         sortedTags(): Tag[] {
             return this.tags?.slice().sort((tag1, tag2) => tag1.label.length - tag2.label.length) || []
         },
@@ -96,6 +95,12 @@ export default Vue.extend({
         mouseEnter(value: boolean) {
             this.$emit('input', value)
         },
+        '$store.state.uiColumns'(value: string) {
+            this.maxCardPercentDisplayed = Math.ceil(Math.max(this.maxCardPercentDisplayed, 100 / parseInt(value)))
+        },
+    },
+    mounted() {
+        if (mediaIsMax('md')) this.maxCardPercentDisplayed = 50
     },
 })
 </script>

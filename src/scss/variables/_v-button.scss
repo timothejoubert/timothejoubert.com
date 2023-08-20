@@ -12,7 +12,7 @@ $v-button: (
         padding: 0 rem(12),
     ),
     s: (
-        font-size: rem(11),
+        font-size: $v-button-font-size-s,
         min-width: rem(62),
         height: rem(24),
         padding: 0 rem(18),

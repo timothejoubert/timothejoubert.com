@@ -1,0 +1,3 @@
+@mixin column-stretch($expand: false) {
+    max-width: if($expand,  rem(100), rem(70));
+}

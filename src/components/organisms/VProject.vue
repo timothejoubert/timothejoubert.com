@@ -16,7 +16,13 @@
                     :content="project.title ? project.title : undefined"
                 />
             </nuxt-link>
-            <v-button :label="isProjectExpanded ? 'Rétrécir' : 'Agrandir'" theme="light" @click="onExpandClicked" />
+            <v-button
+                :label="isProjectExpanded ? 'Rétrécir' : 'Agrandir'"
+                animate
+                :class="$style.expand"
+                theme="light"
+                @click="onExpandClicked"
+            />
         </div>
 
         <v-project-parsed v-slot="projectContent" :project="project">
@@ -24,8 +30,12 @@
         </v-project-parsed>
 
         <div :class="$style.medias">
-            <div v-for="(media, i) in medias" :key="i" :class="$style.media">
-                <v-media :document="media" :sizes="55" :video="{ background: true }" />
+            <div v-for="(media, i) in medias" :key="'media-' + i" :class="$style.media">
+                <v-media
+                    :document="media"
+                    :sizes="isProjectExpanded || isProjectAlreadyOpen ? 80 : 55"
+                    :video="{ background: true }"
+                />
             </div>
         </div>
     </div>
@@ -42,6 +52,7 @@ export default Vue.extend({
     components: { IconClose },
     data() {
         return {
+            isProjectAlreadyOpen: false,
             mouseEnter: false,
         }
     },
@@ -54,8 +65,13 @@ export default Vue.extend({
                 this.project.medias?.map((mediaReference: ProjectDocumentDataMediasItem) => mediaReference.media) || []
             return [...medias, this.project.thumbnail]
         },
-        isProjectExpanded() {
+        isProjectExpanded(): boolean {
             return this.$store.state.isProjectExpanded
+        },
+    },
+    watch: {
+        isProjectExpanded(value: boolean) {
+            if (value) this.isProjectAlreadyOpen = true
         },
     },
     methods: {
@@ -106,11 +122,16 @@ export default Vue.extend({
     }
 }
 
+.expand {
+    --v-button-padding: 0;
+}
+
 .medias {
     margin-bottom: rem(50);
 }
 
 .media {
+    --v-image-width: 100%;
     --v-image-border-radius: #{rem(8)};
 
     width: 100%;

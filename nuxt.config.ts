@@ -8,7 +8,7 @@ import { getBreakpoints } from '~/utils/breakpoint'
 const isProduction = process.env.NODE_ENV === 'production'
 const apiEndpoint = `https://${process.env.PRISMIC_REPOSITORY_NAME}.cdn.prismic.io/api/v2`
 
-const locales = ['en', 'fr']
+const locales = ['fr']
 export const defaultLocale = 'fr'
 
 export default {

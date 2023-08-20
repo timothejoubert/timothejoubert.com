@@ -103,9 +103,8 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
             eventBus.$emit(EventType.SETTING_TRANSITION_END)
             this.$el.removeEventListener('transitionend', this.onTransitionEnd)
         },
-        onBodyClick(event: Event) {
+        onBodyClick(_event: Event) {
             this.isProjectExpanded && this.$router.push('/')
-            console.log(event.currentTarget)
         },
     },
 })

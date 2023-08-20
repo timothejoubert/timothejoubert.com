@@ -16,7 +16,7 @@
         width: rem(12);
         height: rem(12);
         content: '';
-        //opacity: 0.6;
+        opacity: 0.7;
         transition: opacity 0.3s ease(out-quad);
     }
 
@@ -42,7 +42,7 @@
         &:hover::after,
         &:hover::before {
             opacity: 1;
-            //animation: slide-out-in 0.3s ease(in-out-quad);
+            animation: slide-out-in 0.3s ease(in-out-quad);
         }
     }
 }

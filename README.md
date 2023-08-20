@@ -13,7 +13,7 @@
 * Login in your Netlify account
 * Sync your github repo
 * Customize your domain name
-* Add your environment variables in "site settings"
+* Add your environment variables in "site settings" or import your .env file
 
 ### WEBHOOK
 * Add the generated netlify url webhook in prismic settings [Prismic tuto](https://prismic.io/docs/webhooks) | [Netlify build hook page](https://app.netlify.com/sites/hugo-tomasi/settings/deploys#build-hooks)
