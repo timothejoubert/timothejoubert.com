@@ -1,6 +1,6 @@
 <template>
-    <ul :class="rootClasses">
-        <li v-for="(project, i) in sortedProjects" :key="i">
+    <ul v-if="hasProject" :class="rootClasses">
+        <li v-for="(project, i) in filteredProjects" :key="i">
             <v-link
                 :reference="project"
                 :class="$style.link"
@@ -18,7 +18,7 @@
                     <span :class="[$style.framework, sortId === 'framework' && $style['title--highlight']]">{{
                         p.framework
                     }}</span>
-                    <div :class="[$style.tags, sortId === 'tags' && $style['title--highlight']]">
+                    <div :class="[$style.tags, sortId === 'tag_group' && $style['title--highlight']]">
                         <span v-for="tag in p.tags" :key="tag.uid" :class="$style.tag">{{ tag.label }}</span>
                     </div>
                     <arrow-icon :class="$style.icon" />
@@ -26,6 +26,12 @@
             </v-link>
         </li>
     </ul>
+    <v-no-result
+        v-else
+        :class="$style['no-result']"
+        button-label="Effacer la recherche"
+        @reset-filter="$emit('clearSearch')"
+    />
 </template>
 
 <script lang="ts">
@@ -41,10 +47,23 @@ export default Vue.extend({
     props: {
         sortOrder: String as PropType<'ASC' | 'DESC'>,
         sortId: String as PropType<keyof ProjectDocumentData>,
+        search: String,
+    },
+    data() {
+        return {
+            hasKeyUpListener: false,
+        }
     },
     computed: {
         rootClasses(): (undefined | string | false)[] {
-            return [this.$style.root, this.$store.getters.isProjectOpen && this.$style['root--project-open']]
+            return [
+                this.$style.root,
+                !this.hasProject && this.$style['root--empty'],
+                this.$store.getters.isProjectOpen && this.$style['root--project-open'],
+            ]
+        },
+        hasProject(): boolean {
+            return !!this.filteredProjects.length
         },
         sortedProjects(): ProjectDocument[] {
             const projects = (this.$store.getters.projects as ProjectDocument[]).slice()
@@ -79,8 +98,34 @@ export default Vue.extend({
 
             return this.sortOrder === 'DESC' ? projectSorted.reverse() : projectSorted
         },
+        filteredProjects(): ProjectDocument[] {
+            if (!this.search.length) return this.sortedProjects
+            return this.sortedProjects.filter(({ data }: ProjectDocument) => {
+                return data.title && data.title.toLowerCase().includes(this.search.toLowerCase())
+            })
+        },
+    },
+    watch: {
+        filteredProjects(projects: ProjectDocument[]) {
+            if (projects.length === 1 && !this.hasKeyUpListener) {
+                this.hasKeyUpListener = true
+                window.addEventListener('keyup', this.onKeyUp)
+            } else if (this.hasKeyUpListener) {
+                this.hasKeyUpListener = false
+                window.removeEventListener('keyup', this.onKeyUp)
+            }
+        },
+    },
+    beforeDestroy() {
+        window.removeEventListener('keyup', this.onKeyUp)
     },
     methods: {
+        onKeyUp(event: KeyboardEvent) {
+            if (event.key === 'Enter') {
+                const selectedProjectUid = this.filteredProjects[0].uid
+                this.$router.push('/' + selectedProjectUid)
+            }
+        },
         onMouseEnter(event: MouseEvent) {
             const el = event.target as HTMLElement
 
@@ -110,7 +155,13 @@ export default Vue.extend({
 
 <style lang="scss" module>
 .root {
-    position: relative;
+    min-height: rem(500);
+}
+
+.no-result {
+    --v-no-result-min-height: #{rem(500)};
+
+    border-top: 1px solid var(--theme-foreground-color);
 }
 
 .link {

@@ -11,6 +11,7 @@ import { Document } from '@prismicio/client/types/documents'
 ### IN PROGRESS
 ** (Project): finish expanded style 
 ** (Archive): add rate order
+** (Video): add loader and aspect ratio
 ** (Responsive): Setting | Project | About
 
 ### TODOS

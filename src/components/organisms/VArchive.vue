@@ -20,8 +20,9 @@
                     <div :class="$style.arrow"></div>
                 </template>
             </v-button>
+            <v-search-input v-model="search" />
         </div>
-        <v-archive-list :sort-id="sortId" :sort-order="sortOrder" />
+        <v-archive-list :sort-id="sortId" :sort-order="sortOrder" :search="search" @clearSearch="search = ''" />
     </div>
 </template>
 
@@ -59,6 +60,7 @@ export default Vue.extend({
         return {
             sortId: 'date',
             sortOrder: 'ASC' as 'ASC' | 'DESC',
+            search: '',
         }
     },
     computed: {
@@ -73,7 +75,7 @@ export default Vue.extend({
                     sortable: true,
                 }
             })
-            result.push({ label: 'Lien', id: 'link' })
+            // result.push({ label: 'Lien', id: 'link' })
 
             return result
         },
@@ -92,6 +94,10 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     margin-block: rem(60) rem(60);
+
+    &--project-open {
+        --v-search-input-max-width: #{rem(70)};
+    }
 }
 
 .title {

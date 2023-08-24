@@ -4,7 +4,7 @@
             <v-split-letters content="Oups..." tag="span" />
         </div>
         <div :class="$style.message">Aucun résultats</div>
-        <v-button size="m" label="Reset tous les filtres" filled @click="$emit('reset-filter')" />
+        <v-button animate size="s" :label="buttonLabel" filled @click="$emit('reset-filter')" />
     </div>
 </template>
 
@@ -13,13 +13,16 @@ import Vue from 'vue'
 
 export default Vue.extend({
     name: 'VNoResult',
+    props: {
+        buttonLabel: { type: String, default: 'Reset tous les filtres' },
+    },
 })
 </script>
 
 <style lang="scss" module>
 .root {
     display: flex;
-    min-height: calc(100vh - $v-top-bar-height - $v-about-toggle-height);
+    min-height: var(--v-no-result-min-height, calc(100vh - $v-top-bar-height - $v-about-toggle-height));
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -44,7 +47,7 @@ export default Vue.extend({
 
 @keyframes wave-font {
     from {
-        font-variation-settings: 'wght' 100, 'ital' 0;
+        font-variation-settings: 'wght' 300, 'ital' 0;
     }
     to {
         font-variation-settings: 'wght' 900, 'ital' 4;
