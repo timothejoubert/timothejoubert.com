@@ -1,5 +1,5 @@
 <template>
-    <component :is="tag" :class="rootClasses" @click="$emit('click', id)">
+    <component :is="wrapperTag" :class="rootClasses" @click="$emit('click', id)">
         <span v-for="(color, i) in colors" :key="i" :class="$style.color" :style="{ backgroundColor: color }"></span>
     </component>
 </template>
@@ -13,18 +13,16 @@ export default Vue.extend({
         id: { type: String, required: false },
         colors: Array as PropType<string[]>,
         isSelected: Boolean,
-        wrapperTag: String,
+        wrapperTag: { type: String, default: 'button' },
+        switcher: Boolean,
     },
     computed: {
         rootClasses(): (undefined | false | string)[] {
             return [
                 this.$style.root,
-                this.tag === 'button' && this.$style['root--button'],
+                this.switcher && this.$style['root--switcher'],
                 this.isSelected && this.$style['root--selected'],
             ]
-        },
-        tag() {
-            return this.wrapperTag || 'button'
         },
     },
 })
@@ -85,7 +83,7 @@ $hover-offset: rem(5);
     }
 
     .root--selected &:nth-child(1),
-    .root:not(.root--button) &:nth-child(1) {
+    .root:not(.root--switcher) &:nth-child(1) {
         translate: 0 (-$hover-offset);
     }
 
@@ -95,7 +93,7 @@ $hover-offset: rem(5);
     }
 
     .root--selected &:nth-child(2),
-    .root:not(.root--button) &:nth-child(2) {
+    .root:not(.root--switcher) &:nth-child(2) {
         translate: -$hover-offset $hover-offset;
     }
 
@@ -105,7 +103,7 @@ $hover-offset: rem(5);
     }
 
     .root--selected &:nth-child(3),
-    .root:not(.root--button) &:nth-child(3) {
+    .root:not(.root--switcher) &:nth-child(3) {
         translate: $hover-offset $hover-offset;
     }
 

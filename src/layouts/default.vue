@@ -38,6 +38,9 @@ import DocumentFocus from '~/mixins/DocumentFocus'
 import eventBus from '~/utils/event-bus'
 import EventType from '~/constants/event-type'
 
+const DEBUG_INPUT_ENTER = 'admin'
+const DEBUG_INPUT_LEAVE = 'quit'
+
 export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     name: 'default',
     data() {
@@ -49,6 +52,10 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
         this.$store.commit(
             MutationType.PREFERS_REDUCED_MOTION,
             window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        )
+        console.info(
+            `%cWrite '${DEBUG_INPUT_ENTER}' when focusing the window to launch debug mode and '${DEBUG_INPUT_LEAVE}' for leave`,
+            'color: yellow; background: black'
         )
         window.addEventListener('keyup', this.onKeyUp)
     },
@@ -107,10 +114,22 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     },
     methods: {
         onKeyUp(e: KeyboardEvent) {
-            if (e.key === 'Backspace' || e.key === 'Escape') this.typedKey = ''
-            else this.typedKey += e.key
+            this.typedKey += e.key
 
-            this.$store.commit(MutationType.IS_EVERY_PROJECT_IN_FAVORITE, this.typedKey === 'cheat')
+            const debugMode = this.typedKey.includes(DEBUG_INPUT_ENTER)
+                ? 'on'
+                : this.typedKey.includes(DEBUG_INPUT_LEAVE)
+                ? 'off'
+                : null
+
+            if (debugMode) {
+                this.$store.commit(MutationType.IS_EVERY_PROJECT_IN_FAVORITE, debugMode === 'on')
+                this.typedKey = ''
+                console.info(
+                    `%cDebug mode: ${debugMode === 'on' ? 'enable' : 'disable'}`,
+                    'color: black; background: yellow'
+                )
+            }
         },
         onTransitionEnd() {
             eventBus.$emit(EventType.SETTING_TRANSITION_END)

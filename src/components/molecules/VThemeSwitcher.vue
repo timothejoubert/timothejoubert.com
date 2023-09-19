@@ -5,16 +5,22 @@
         @mouseleave="isOpen = false"
     >
         <v-theme-button
+            :colors="['#EBEBEB', '#494949', '#AAAAAA']"
+            aria-label="Ouvrir les différents themes"
+            @focusin.native="isOpen = true"
+        />
+        <v-theme-button
             v-for="(theme, i) in themes"
             :id="theme.id"
             :key="theme.id"
+            :inert="!isOpen"
             :colors="theme.colors"
             :is-selected="theme.id === activeTheme"
             :class="$style.buttons"
             :style="{ '--theme-button-index': (themes.length - i) * 50 + 'ms' }"
+            switcher
             @click="onThemeChanged"
         />
-        <v-theme-button :colors="['#EBEBEB', '#494949', '#AAAAAA']" wrapper-tag="div" />
     </div>
 </template>
 <script lang="ts">
@@ -34,16 +40,10 @@ export default Vue.extend({
     data() {
         return {
             isOpen: false,
-            activeTheme: null as string | null,
+            activeTheme: 'default' as string | null,
         }
     },
     computed: {
-        defaultTheme(): ThemeButton {
-            return {
-                id: 'default',
-                colors: getArrayFormattedTheme('dark').map((theme) => theme.value),
-            }
-        },
         themes(): ThemeButton[] {
             const themes = getThemeList()
             themes.unshift({
@@ -75,6 +75,7 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     display: flex;
+    flex-direction: row-reverse;
     gap: rem(4);
 }
 
