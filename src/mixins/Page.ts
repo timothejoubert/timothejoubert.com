@@ -26,10 +26,10 @@ export default Vue.extend({
         const isProject = store.getters.isProjectUid(uid)
 
         const isPreview = route.fullPath.includes(`${context.$config.previewPath}/`)
-        const getByType = route.fullPath === '/en' || route.fullPath === '/'
+        const isHome = route.fullPath === '/en' || route.fullPath === '/'
         const getByUid = isPreview || isValidUid(uid)
 
-        if (getByType) {
+        if (isHome) {
             page = await $prismic.api.getSingle(CustomType.HOME_PAGE)
         } else if (isProject) {
             page = store.getters.getProjectByUid(uid)
@@ -108,14 +108,16 @@ export default Vue.extend({
             return !!this.page.data?.slices?.length && this.page.data?.slices
         },
         jsonLdPage(): Record<string, unknown> | undefined {
+            console.log((this.$store.getters.settings as SettingsDocument)?.data?.website_name)
             const siteName =
-                (this.$store.state.settings as SettingsDocument)?.data?.website_name || this.$config.appName
+                (this.$store.getters.settings as SettingsDocument)?.data?.website_name || this.$config.appName
             const baseUrl = this.$config.appUrl + (this.$i18n.locale === 'en' ? 'en/' : '')
+
             const websitePersonEntity = {
                 name: siteName,
                 alternateName: siteName.replace(/\s/g, ''),
                 url: baseUrl,
-                jobTitle: 'Motion designer',
+                jobTitle: 'Développeur Front-end et Designer graphique',
             }
 
             if (this.isHome) {
@@ -133,13 +135,15 @@ export default Vue.extend({
                 }
             } else if (this.isProjectPage) {
                 const project = this.pageData as ProjectDocumentData
-                const optionals: Record<string, unknown> = {}
+                const projectContent: Record<string, unknown> = {}
                 const media = (project.thumbnail as { url?: string })?.url
 
-                if (project.title) optionals.name = project.title
-                if (media) optionals.image = media
-                if (project.content) optionals.description = this.$prismic.asText(project.content)
-                if (project.date) optionals.copyrightYear = getProjectYear(project.date)
+                if (project.title) projectContent.name = project.title
+                if (media) projectContent.image = media
+                if (project.content || project.short_description)
+                    projectContent.description =
+                        this.$prismic.asText(project.short_description) || this.$prismic.asText(project.content)
+                if (project.date) projectContent.copyrightYear = getProjectYear(project.date)
 
                 return {
                     '@context': 'https://schema.org',
@@ -150,7 +154,7 @@ export default Vue.extend({
                         '@type': 'Person',
                         ...websitePersonEntity,
                     },
-                    ...optionals,
+                    ...projectContent,
                 }
             } else {
                 return undefined

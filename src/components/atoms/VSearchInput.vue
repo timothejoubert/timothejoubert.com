@@ -1,8 +1,9 @@
 <template>
     <div
-        :class="[$style.root, isExpanded && $style['root--expanded']]"
+        :class="[$style.root, (isExpanded || !!value.length) && $style['root--expanded']]"
         @mouseenter="isExpanded = true"
         @mouseleave="isExpanded = false"
+        @focusin="isExpanded = true"
     >
         <div :class="$style.search"></div>
         <input
@@ -36,6 +37,9 @@ export default Vue.extend({
         }
     },
     methods: {
+        rootClasses(): (string | undefined | false)[] {
+            return [this.$style.root, (this.isExpanded || !!this.value.length) && this.$style['root--expanded']]
+        },
         onInput(event: Event) {
             this.text = (event.target as HTMLInputElement).value
             this.$emit('input', this.text)

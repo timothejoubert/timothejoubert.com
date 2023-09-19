@@ -143,16 +143,16 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
 </script>
 
 <style lang="scss" module>
-@include v-transition(
-    'project-modal',
-    (
-        duration: 0.7s,
-    ),
-    (
-        translate: 100% 0,
-    ),
-    $scope: 'local'
-);
+//@include v-transition(
+//    'project-modal',
+//    (
+//        duration: 0.7s,
+//    ),
+//    (
+//        translate: 100% 0,
+//    ),
+//    $scope: 'local'
+//);
 
 .root {
     position: relative;
@@ -176,10 +176,14 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     @include scroll-bar-hidden;
 }
 
+@function expanded-project-transition($property) {
+    @return $property 0.8s ease(out-quad);
+}
+
 .body {
     width: 100%;
     flex-shrink: 0;
-    transition: width 0.7s ease(out-quad);
+    transition: expanded-project-transition(width);
 
     &--minify {
         width: 50%;
@@ -193,7 +197,7 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
         inset: 0;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.7s ease(out-quad);
+        transition: expanded-project-transition(opacity);
     }
 
     .root--project-expanded &::before {
@@ -211,11 +215,13 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     min-width: 50%;
     border-left: 1px solid var(--theme-foreground-color);
     background-color: var(--theme-background-color);
-    transition: min-width 0.7s ease(out-quad), translate 0.7s ease(out-quad);
+    transition: expanded-project-transition(min-width), expanded-project-transition(translate);
     translate: 0 0;
+    right: 0;
+    transform-origin: center right;
 
     .root--project-expanded & {
-        right: 0;
+        //position: absolute;
         min-width: 85%;
         translate: -35vw 0;
     }

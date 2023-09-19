@@ -20,7 +20,7 @@
                     <div :class="$style.arrow"></div>
                 </template>
             </v-button>
-            <v-search-input v-model="search" />
+            <v-search-input v-model="search" :class="$style.search" />
         </div>
         <keep-alive>
             <v-archive-list :sort-id="sortId" :sort-order="sortOrder" :search="search" @clearSearch="search = ''" />
@@ -137,11 +137,12 @@ export default Vue.extend({
     }
 
     &--tag_group {
+        max-width: rem(550);
         flex-grow: 1;
     }
 
     &--rate {
-        min-width: rem(100);
+        min-width: rem(120);
     }
 
     &--link {
@@ -155,6 +156,10 @@ export default Vue.extend({
     .root--project-open &--title {
         @include column-stretch($expand: true);
     }
+}
+
+.search {
+    margin-left: auto;
 }
 
 .arrow {

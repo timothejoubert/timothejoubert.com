@@ -263,10 +263,11 @@ export default Vue.extend({
 .tags {
     display: flex;
     flex-grow: 1;
+    max-width: rem(550);
 }
 
 .rate {
-    min-width: rem(100);
+    min-width: rem(120);
 }
 
 .tag {

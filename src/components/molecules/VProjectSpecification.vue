@@ -31,7 +31,7 @@
                     </template>
                 </v-button>
             </div>
-            <v-awards v-if="awards.length" :awards="awards" />
+            <v-awards v-if="awards.length" :awards="awards" :class="$style.award" />
         </div>
         <v-text v-if="excerpt" tag="h3" :content="excerpt" :class="$style.excerpt" />
         <v-collapsable v-if="hasContent" :class="$style['more-content']" label="Voir les détails">
@@ -91,6 +91,10 @@ export default Vue.extend({
 
 .link {
     --v-button-padding: #{0 rem(8) 0 rem(18)} !important;
+}
+
+.award {
+    margin-left: rem(8);
 }
 
 .specifications {

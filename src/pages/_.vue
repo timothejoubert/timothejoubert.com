@@ -1,12 +1,14 @@
 <template>
-    <div :class="$style.root">
-        <!--        <slice-zone v-if="slices && components" wrapper="main" :slices="slices" :components="components" />-->
-        <!--        <v-style-preview />-->
-        <v-project v-if="isProjectPage" />
-
-        <!-- eslint-disable-next-line vue/no-v-html -->
-        <script v-if="jsonLdPage" type="application/ld+json" v-html="jsonLdPage"></script>
-    </div>
+    <v-project v-if="isProjectPage">
+        <!-- eslint-disable-next-line vue/no-v-html-->
+        <template #jsonLdPage>
+            <script v-if="jsonLdPage" type="application/ld+json" v-html="jsonLdPage"></script>
+        </template>
+    </v-project>
+    <!-- <div :class="$style.root">-->
+    <!-- <slice-zone v-if="slices && components" wrapper="main" :slices="slices" :components="components" />-->
+    <!-- <v-style-preview />-->
+    <!-- </div>-->
 </template>
 
 <script lang="ts">
@@ -34,9 +36,3 @@ export default mixins(Page).extend({
     },
 })
 </script>
-
-<style lang="scss" module>
-.root {
-    position: relative;
-}
-</style>

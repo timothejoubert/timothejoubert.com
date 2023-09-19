@@ -38,6 +38,7 @@
                 />
             </div>
         </div>
+        <slot name="jsonLdPage" />
     </div>
 </template>
 <script lang="ts">
