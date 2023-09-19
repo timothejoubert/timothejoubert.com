@@ -4,6 +4,7 @@ import type { PropType } from 'vue'
 import { ProjectDocumentData } from '~~/prismicio-types'
 import { getProjectYear } from '~/utils/prismic/date'
 import { getTags } from '~/utils/tags'
+import { isLinkFieldFulled } from '~/utils/prismic/relation-field'
 
 export default Vue.extend({
     name: 'VProjectParsed',
@@ -13,9 +14,14 @@ export default Vue.extend({
     },
     render(_createElement, context): any {
         // Don't find what is return type of scopedSlot
-        const { date, link, link_label, content, framework, favorite, short_description } = context.props.project
+        const { date, link, link_label, content, framework, favorite, short_description, awards, rate } =
+            context.props.project
+
+        const awardList = awards?.filter((award) => award.name || award.type || isLinkFieldFulled(award.link))
 
         return context.scopedSlots.default?.({
+            awards: awardList,
+            rate: rate || 0,
             tags: getTags(context.props.project),
             framework: framework || undefined,
             date: getProjectYear(date),

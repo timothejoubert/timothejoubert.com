@@ -35,7 +35,8 @@ export default Vue.extend({
     name: 'VFavoriteSetting',
     computed: {
         filteredTags(): Tag[] {
-            const projects = this.$store.getters.highlightedProjects
+            const isEveryProjectDisplayed = this.$store.state.isEveryProjectInFavorite
+            const projects = this.$store.getters[isEveryProjectDisplayed ? 'projects' : 'highlightedProjects']
 
             return projects.reduce((accumulator: Tag[], project: ProjectDocument) => {
                 const projectTags = getTagsByProject(project)
@@ -55,7 +56,13 @@ export default Vue.extend({
             return toBoolean(AppConst.ONLY_ONE_TAG_ALLOW)
         },
     },
+    mounted() {
+        window.addEventListener('keyup', this.onKeyUp)
+    },
     methods: {
+        onKeyUp(e: KeyboardEvent) {
+            if (e.key === 'Backspace' || e.key === 'Escape') this.resetTags()
+        },
         onTagClicked(value: string) {
             const tags = this.selectedTags.slice()
             const tagIndex = this.selectedTags.indexOf(value)
@@ -77,7 +84,6 @@ export default Vue.extend({
 <style lang="scss" module="">
 .root {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     gap: rem(40);
     margin-block: rem(20) rem(26);

@@ -1,6 +1,6 @@
 <template>
     <ul v-if="hasProject" :class="rootClasses">
-        <li v-for="(project, i) in filteredProjects" :key="i">
+        <li v-for="project in filteredProjects" :key="project.uid">
             <v-link
                 :reference="project"
                 :class="$style.link"
@@ -21,6 +21,7 @@
                     <div :class="[$style.tags, sortId === 'tag_group' && $style['title--highlight']]">
                         <span v-for="tag in p.tags" :key="tag.uid" :class="$style.tag">{{ tag.label }}</span>
                     </div>
+                    <v-rate :rate="p.rate" :class="[$style.rate, sortId === 'rate' && $style['title--highlight']]" />
                     <arrow-icon :class="$style.icon" />
                 </v-project-parsed>
             </v-link>
@@ -69,11 +70,18 @@ export default Vue.extend({
             const projects = (this.$store.getters.projects as ProjectDocument[]).slice()
             let projectSorted
 
-            if (this.sortId === 'date') {
+            const sortedDataType = typeof projects[0]?.data?.[this.sortId]
+            if (sortedDataType === 'number') {
+                // rate
+                projectSorted = projects.sort(
+                    (p1, p2) => (p2.data[this.sortId] as number) - (p1.data[this.sortId] as number)
+                )
+            } else if (this.sortId === 'date') {
                 projectSorted = projects.sort(
                     (p1, p2) => parseInt(p2.data?.date || '0') - parseInt(p1.data?.date || '0')
                 )
-            } else if (this.sortId === 'title' || this.sortId === 'framework') {
+            } else if (sortedDataType === 'string') {
+                // title || framework
                 projectSorted = projects.sort((p1: ProjectDocument, p2: ProjectDocument) => {
                     const title1 = p1.data[this.sortId] || ''
                     const title2 = p2.data[this.sortId] || ''
@@ -100,6 +108,7 @@ export default Vue.extend({
         },
         filteredProjects(): ProjectDocument[] {
             if (!this.search.length) return this.sortedProjects
+
             return this.sortedProjects.filter(({ data }: ProjectDocument) => {
                 return data.title && data.title.toLowerCase().includes(this.search.toLowerCase())
             })
@@ -202,7 +211,8 @@ export default Vue.extend({
 .title,
 .date,
 .framework,
-.tags {
+.tags,
+.rate {
     overflow: hidden;
     opacity: 0.6;
     text-overflow: ellipsis;
@@ -247,7 +257,7 @@ export default Vue.extend({
 }
 
 .framework {
-    width: clamp(15%, rem(50), rem(400));
+    width: rem(100);
 }
 
 .tags {
@@ -255,7 +265,15 @@ export default Vue.extend({
     flex-grow: 1;
 }
 
+.rate {
+    min-width: rem(100);
+}
+
 .tag {
+    .root--project-open &:not(:first-child) {
+        display: none;
+    }
+
     &:first-child {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -269,6 +287,7 @@ export default Vue.extend({
 }
 
 .icon {
+    flex-shrink: 0;
     margin-left: auto;
 }
 </style>

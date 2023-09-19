@@ -33,7 +33,7 @@
             <div v-for="(media, i) in medias" :key="'media-' + i" :class="$style.media">
                 <v-media
                     :document="media"
-                    :sizes="isProjectExpanded || isProjectAlreadyOpen ? 80 : 55"
+                    :sizes="isProjectExpanded || isProjectAlreadyOpen ? 90 : 60"
                     :video="{ background: true }"
                 />
             </div>
@@ -136,6 +136,10 @@ export default Vue.extend({
 
     width: 100%;
     margin-block: $container-padding-inline;
+
+    &:first-child {
+        margin-top: rem(28);
+    }
 
     &:not(:last-child) {
         overflow: hidden;

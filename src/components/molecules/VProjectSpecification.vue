@@ -15,7 +15,7 @@
             </template>
             <div :class="$style.specifications">
                 <!--                <div v-if="framework" :class="$style.framework">{{ framework }}</div>-->
-                <div v-if="date">{{ date }}</div>
+                <!--                <div v-if="date">{{ date }}</div>-->
                 <v-button
                     v-if="link"
                     :class="$style.link"
@@ -31,6 +31,7 @@
                     </template>
                 </v-button>
             </div>
+            <v-awards v-if="awards.length" :awards="awards" />
         </div>
         <v-text v-if="excerpt" tag="h3" :content="excerpt" :class="$style.excerpt" />
         <v-collapsable v-if="hasContent" :class="$style['more-content']" label="Voir les détails">
@@ -45,6 +46,7 @@ import type { PropType } from 'vue'
 import { PrismicRichText } from '~/types/app'
 import { Tag } from '~/utils/tags'
 import IconArrow from '~/assets/images/icons/arrow-up-right.svg?sprite'
+import { AwardProps } from '~/components/molecules/VAwards.vue'
 
 export default Vue.extend({
     name: 'VProjectSpecification',
@@ -54,6 +56,7 @@ export default Vue.extend({
         link: String,
         linkLabel: String,
         framework: String,
+        awards: { type: Array as PropType<AwardProps[]>, default: () => [] },
         tags: { type: Array as PropType<Tag[]>, default: () => [] },
         content: [Array, String] as PropType<PrismicRichText | String>,
         excerpt: Array as PropType<PrismicRichText>,
@@ -77,14 +80,14 @@ export default Vue.extend({
     flex-wrap: wrap;
     align-items: center;
     gap: rem(10);
-    margin-block: rem(20);
+    margin-block: rem(20) rem(26);
 }
 
-.tag {
-    &:nth-last-child(1 of .tag) {
-        margin-right: rem(8);
-    }
-}
+//.tag {
+//    &:nth-last-child(1 of .tag) {
+//        margin-right: rem(8);
+//    }
+//}
 
 .link {
     --v-button-padding: #{0 rem(8) 0 rem(18)} !important;
@@ -112,8 +115,12 @@ export default Vue.extend({
 }
 
 .excerpt {
-    font-style: italic;
+    line-height: 1.4;
     margin-block: rem(16);
+
+    a {
+        text-decoration: underline;
+    }
 }
 
 .more-content {

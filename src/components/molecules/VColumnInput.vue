@@ -42,21 +42,16 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import type { VueConstructor } from 'vue'
-import mixins from 'vue-typed-mixins'
 import MutationType from '~/constants/mutation-type'
 
-interface Component extends Vue {
-    maxColumnNumber: number
-    minColumnNumber: number
-}
-
-export default mixins(Vue as VueConstructor<Component>).extend({
+export default Vue.extend({
     name: 'VColumnInput',
     data() {
         return {
             displayButtons: false,
             current: '0',
+            maxColumnNumber: 6,
+            minColumnNumber: 2,
         }
     },
     computed: {
@@ -71,10 +66,13 @@ export default mixins(Vue as VueConstructor<Component>).extend({
             },
             immediate: true,
         },
-    },
-    created() {
-        this.maxColumnNumber = 6
-        this.minColumnNumber = 2
+        '$store.state.isEveryProjectInFavorite'(value: boolean) {
+            if (value) this.maxColumnNumber = 8
+            else this.maxColumnNumber = 6
+        },
+        maxColumnNumber(max: number) {
+            if (Number(this.current) > max) this.update(max.toString())
+        },
     },
     methods: {
         onMouseEnter(index: string) {
@@ -104,6 +102,7 @@ export default mixins(Vue as VueConstructor<Component>).extend({
 <style lang="scss" module>
 .root {
     position: relative;
+    margin-top: rem(1);
 }
 
 .shapes {

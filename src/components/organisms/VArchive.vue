@@ -22,7 +22,9 @@
             </v-button>
             <v-search-input v-model="search" />
         </div>
-        <v-archive-list :sort-id="sortId" :sort-order="sortOrder" :search="search" @clearSearch="search = ''" />
+        <keep-alive>
+            <v-archive-list :sort-id="sortId" :sort-order="sortOrder" :search="search" @clearSearch="search = ''" />
+        </keep-alive>
     </div>
 </template>
 
@@ -43,8 +45,12 @@ const DISPLAYED_INFO = [
         id: 'framework',
     },
     {
-        label: 'Tags',
+        label: 'Type',
         id: 'tag_group',
+    },
+    {
+        label: 'Notes',
+        id: 'rate',
     },
 ]
 
@@ -127,11 +133,15 @@ export default Vue.extend({
     }
 
     &--framework {
-        width: clamp(15%, rem(50), rem(400));
+        width: rem(100);
     }
 
     &--tag_group {
         flex-grow: 1;
+    }
+
+    &--rate {
+        min-width: rem(100);
     }
 
     &--link {

@@ -8,6 +8,7 @@ enum MutationType {
     SETTING_OPENED = 'settingOpened',
     ABOUT_OPENED = 'aboutOpened',
     IS_PROJECT_EXPANDED = 'isProjectExpanded',
+    IS_EVERY_PROJECT_IN_FAVORITE = 'isEveryProjectInFavorite',
 
     // UI settings
     FRAMEWORK_FILTERS = 'frameworkFilters',

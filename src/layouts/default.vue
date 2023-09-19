@@ -40,14 +40,21 @@ import EventType from '~/constants/event-type'
 
 export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     name: 'default',
+    data() {
+        return {
+            typedKey: '',
+        }
+    },
     mounted() {
         this.$store.commit(
             MutationType.PREFERS_REDUCED_MOTION,
             window.matchMedia('(prefers-reduced-motion: reduce)').matches
         )
+        window.addEventListener('keyup', this.onKeyUp)
     },
     beforeDestroy() {
         this.$el.removeEventListener('transitionend', this.onTransitionEnd)
+        window.removeEventListener('keyup', this.onKeyUp)
     },
     computed: {
         rootClasses(): (string | false | undefined)[] {
@@ -91,7 +98,7 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
                 this.$store.getters.isProjectUid(previous.params.pathMatch)
 
             this.$route.fullPath === '/' && this.$store.commit(MutationType.IS_PROJECT_EXPANDED, false)
-            isProjectSwitching && this.$refs.project.scrollTo({ top: 0, behavior: 'smooth' })
+            isProjectSwitching && this.$refs.project?.scrollTo({ top: 0, behavior: 'smooth' })
         },
         isSettingOpen(value: boolean) {
             if (!value) return
@@ -99,6 +106,12 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
         },
     },
     methods: {
+        onKeyUp(e: KeyboardEvent) {
+            if (e.key === 'Backspace' || e.key === 'Escape') this.typedKey = ''
+            else this.typedKey += e.key
+
+            this.$store.commit(MutationType.IS_EVERY_PROJECT_IN_FAVORITE, this.typedKey === 'cheat')
+        },
         onTransitionEnd() {
             eventBus.$emit(EventType.SETTING_TRANSITION_END)
             this.$el.removeEventListener('transitionend', this.onTransitionEnd)

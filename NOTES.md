@@ -9,6 +9,7 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
+** (Archive): highlight title letter on input search
 ** (Project): finish expanded style 
 ** (Archive): add rate order
 ** (Video): add loader and aspect ratio

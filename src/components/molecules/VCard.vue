@@ -114,6 +114,10 @@ export default Vue.extend({
     padding: 4%;
     aspect-ratio: 1;
     border-radius: $v-card-border-radius;
+    /* stylelint-disable property-no-unknown */
+    container-name: card;
+    container-type: inline-size;
+    /* stylelint-enable */
     transition: 0.2s ease(out-quad);
 
     &::after {
@@ -184,6 +188,13 @@ export default Vue.extend({
 .body {
     position: relative;
     z-index: 1;
+}
+
+/* stylelint-disable-next-line scss/at-rule-no-unknown */
+@container card (max-width: 200px) {
+    .tags {
+        display: none !important;
+    }
 }
 
 .tags {

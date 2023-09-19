@@ -13,6 +13,7 @@ export default (): RootState => ({
     isSettingsOpen: false,
     isAboutOpen: false,
     isProjectExpanded: false,
+    isEveryProjectInFavorite: false,
 
     // UI setting
     uiTheme: getObjectFormattedTheme(),

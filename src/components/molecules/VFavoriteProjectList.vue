@@ -1,7 +1,7 @@
 <template>
-    <nav v-if="true" class="container" :class="$style.root">
+    <nav v-if="projects.length" class="container" :class="$style.root">
         <ul :class="$style.projects" :style="columns && { '--card-number': columns }">
-            <li v-for="(project, index) in projects" :key="index + project.uid">
+            <li v-for="project in projects" :key="project.uid">
                 <v-project-card :project="project" :active-projects-id="activeProjectsId" />
             </li>
         </ul>
@@ -24,6 +24,7 @@ export default Vue.extend({
     },
     computed: {
         projects(): ProjectDocument[] {
+            if (this.$store.state.isEveryProjectInFavorite) return this.$store.getters.projects as ProjectDocument[]
             return this.$store.getters.highlightedProjects as ProjectDocument[]
         },
         activeProjectsId(): string[] {
