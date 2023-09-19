@@ -212,13 +212,13 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
 .project {
     position: relative;
     z-index: 110;
+    right: 0;
     min-width: 50%;
     border-left: 1px solid var(--theme-foreground-color);
     background-color: var(--theme-background-color);
+    transform-origin: center right;
     transition: expanded-project-transition(min-width), expanded-project-transition(translate);
     translate: 0 0;
-    right: 0;
-    transform-origin: center right;
 
     .root--project-expanded & {
         //position: absolute;
