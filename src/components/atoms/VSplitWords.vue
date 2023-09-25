@@ -24,7 +24,7 @@ export default Vue.extend({
                 {
                     class: [context.data.class, context.$style.root],
                     staticClass: (context.data?.staticClass || '') + ' split-word',
-                    style: { '--word-index': index },
+                    style: { '--word-index': index.toString() } as { [key: string]: string },
                 },
                 [
                     createElement(VSplitLetters, {

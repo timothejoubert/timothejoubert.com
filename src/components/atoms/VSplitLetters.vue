@@ -18,6 +18,7 @@ export default Vue.extend({
         if (!letters?.length) return createElement('')
 
         return letters.map((letter: string, i: number) => {
+            const letterIndex = i + (previousWordLength ?? 0)
             return createElement(
                 letter === ' ' ? '' : tag,
                 {
@@ -31,7 +32,7 @@ export default Vue.extend({
                         letters?.[i - 1] === ' ' && context.$style['root--after-space'],
                     ],
                     staticClass: 'split-word-letter',
-                    style: { '--letter-index': i + (previousWordLength ?? 0) },
+                    style: { '--letter-index': letterIndex.toString() } as { [key: string]: string },
                 },
                 letter
             )

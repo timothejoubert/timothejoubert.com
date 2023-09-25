@@ -50,21 +50,16 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import type { VueConstructor } from 'vue'
-import mixins from 'vue-typed-mixins'
 import MutationType from '~/constants/mutation-type'
 
-interface Component extends Vue {
-    maxColumnNumber: number
-    minColumnNumber: number
-}
-
-export default mixins(Vue as VueConstructor<Component>).extend({
+export default Vue.extend({
     name: 'VGridSettings',
     data() {
         return {
             current: '0',
             allProjectDisplayedValue: false,
+            maxColumnNumber: 6,
+            minColumnNumber: 2,
         }
     },
     computed: {
@@ -90,9 +85,6 @@ export default mixins(Vue as VueConstructor<Component>).extend({
         },
     },
     created() {
-        this.maxColumnNumber = 6
-        this.minColumnNumber = 2
-
         this.allProjectDisplayedValue = this.allProjectDisplayed
     },
     methods: {
