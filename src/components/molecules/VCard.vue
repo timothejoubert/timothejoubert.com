@@ -197,6 +197,13 @@ export default Vue.extend({
     }
 }
 
+/* stylelint-disable-next-line scss/at-rule-no-unknown */
+@container card (max-width: 150px) {
+    .title {
+        display: none !important;
+    }
+}
+
 .tags {
     display: flex;
     flex-direction: column;

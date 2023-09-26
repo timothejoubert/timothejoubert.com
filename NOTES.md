@@ -9,20 +9,24 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (Archive): highlight title letter on input search
-** (Project): finish expanded style 
-** (Archive): add rate order
-** (Video): add loader and aspect ratio
+** (Content): check for better media quality
+** (VArchive): Clean integration and responsive
 ** (Responsive): Setting | Project | About
 
 ### TODOS
 ** (JsonLD): Add projects data 
+** (SEO): Check headings
+** (CMS field on VMedia): Display controls or sound on videoMedia  
 ** (VSetting): Check VInteractiveText listener on resize 
 ** (organization): clean unused code
-** (SEO): Check headings
-** (BackEnd & VMedia): Allow Embed video media | display controls on mp4 video  
+
+### IMPROVEMENT
+** (Archive): highlight title letter on input search (js => reformat text with div wrapper )
+** (Video): add loader and aspect ratio
 
 ### DONE
+** (Archive): add rate order
+** (Project): finish expanded style
 ** (VTopSetting): filter tags by existing tag in promote project
 ** (MainProjects): keep not filtered project but blur them
 ** (VSetting): Dynamic height
@@ -45,13 +49,11 @@ import { Document } from '@prismicio/client/types/documents'
 ** (Image): optimize img size and use of ratio
 * **(Prismic)** use new Page type
 
-### LATER 
+### NEXT PROJECT 
 * **(Data)**: Simplify stored fetch api data (ex: tags in project)
 * **(Route & Internalization)** check if I can make Internalization route path (update documentUid vars by currentLocale ?)
 * **(Route)**: Configure nested route (Set relationLink field in BO if we want nested route (projects/project-name))
 * **(Sitemap && routes)** avoid to generate route for ['/preview', '/en/preview', '/en/slice-simulator', '/slice-simulator'] (Generate.exclude not working)
-
-
 
 ### ABANDONED
 ** (ProjectTransition): when project switching ?

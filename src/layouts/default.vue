@@ -10,7 +10,6 @@
             <v-splash-screen v-if="isSplashScreenEnabled" />
             <v-top-bar />
 
-            <!--            <v-setting ref="setting" :class="$style.setting" :inert="!isSettingOpen" />-->
             <v-favorite-setting :inert="isBodyContentInert" />
             <v-favorite-project-list :inert="isBodyContentInert" />
 

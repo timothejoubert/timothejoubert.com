@@ -1,0 +1,2622 @@
+[
+    {
+        "id": "ZLFzchIAACIAcI3M",
+        "title": "Diesel",
+        "slug": "diesel-fragrance",
+        "favorite": false,
+        "date": "2023-05-15",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "diesel-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/eac64a19-59e1-4748-abfc-5b869fd0139f_diesel-0.jpg?auto=compress,format",
+            "size": "635585",
+            "height": "1440",
+            "width": "1440"
+        },
+        "excerpt": "Ecran promotionnel pour la sortie d'une nouvelle fragrance Diesel ",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            }
+        ],
+        "framework": "Freelance",
+        "rate": 7,
+        "content": "",
+        "externalLink": "https://asteria-video.netlify.app/",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "diesel-2.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/50da0456-d1c6-448e-b6d2-90a1f88da061_diesel-2.mov",
+                "size": "12753404"
+            },
+            {
+                "link_type": "Media",
+                "name": "diesel-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/8a1a30b6-e254-429c-82bf-8453047cedc7_diesel-1.jpg?auto=compress,format",
+                "size": "744250",
+                "height": "1209",
+                "width": "1920"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-14T16:10:34+0000",
+            "last_update": "2023-09-19T20:32:56+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZLFzchIAACIAcI3M%22%29+%5D%5D"
+    },
+    {
+        "id": "ZKCFahEAACAAxrQA",
+        "title": "Hugo Tomasi",
+        "slug": "hugo-tomasi",
+        "favorite": true,
+        "date": "2023-04-05",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "hugo-tomasi-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/e508b188-b254-408f-b840-d1c47c13a91b_hugo-tomasi-0.jpg?auto=compress,format",
+            "size": "1112666",
+            "height": "1232",
+            "width": "1232"
+        },
+        "excerpt": "Refonte du nouveau site web pour le motion designer et 3D artiste, Hugo Tomasi. Contrairement à son premier portfolio, nous avons trouvé judicieux de simplifier au maximum l'esthétique du site afin de mettre en avant son contenu vidéo.",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            },
+            {
+                "id": "design-d-interface",
+                "label": "Design d'interface"
+            }
+        ],
+        "framework": "Freelance",
+        "rate": null,
+        "content": "Le site se base sur une grille sobre et minimaliste afin de mettre en avant le contenu animé qu'il réalise.Avec le recul, je pense que les éléments interactifs(apparition de contenu, éléments qui défilent)sont superflus et n'apporte pas par réellement de plus-values.À l'avenir, j'essayerai de calmer l'insatiable volonté de faire du tape à l'œil.\n\nAprès avoir testé de nombreux CMS (outil de gestion de contenu), j'utilise maintenant Prismic, celui-ci me semble simple d'utilisation autant du point de vue du développeur que du client.À l'occasion de ce site, j'ai mis en place un starter disponible sur github. Je vais chercher à l'améliorer au fur et à mesure de mes projets pour pouvoir concevoir des sites web plus rapidement et efficacement.",
+        "externalLink": "https://hugo-tomasi.netlify.app/",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "hugo-tomasi-6.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/1c5e4415-82c0-4072-97af-7190959fe656_hugo-tomasi-6.png?auto=compress,format",
+                "size": "2557692",
+                "height": "2140",
+                "width": "3172"
+            },
+            {
+                "link_type": "Media",
+                "name": "hugo-tomasi-5.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/70f88e6b-f091-4685-9446-0b185d51d20b_hugo-tomasi-5.png?auto=compress,format",
+                "size": "1939886",
+                "height": "2124",
+                "width": "3426"
+            },
+            {
+                "link_type": "Media",
+                "name": "hugo-tomasi-8.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/a5485411-69ee-47cc-ac21-73dcdc993f9a_hugo-tomasi-8.png?auto=compress,format",
+                "size": "2801376",
+                "height": "2124",
+                "width": "3426"
+            },
+            {
+                "link_type": "Media",
+                "name": "hugo-tomasi-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/3ecb7bd5-18d5-40cf-ab3d-d56debec210e_hugo-tomasi-3.jpg?auto=compress,format",
+                "size": "666718",
+                "height": "5489",
+                "width": "1280"
+            },
+            {
+                "link_type": "Media",
+                "name": "hugo-tomasi-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/88f59080-4504-4fd6-8c21-31c4d9700439_hugo-tomasi-1.jpg?auto=compress,format",
+                "size": "301080",
+                "height": "1850",
+                "width": "1280"
+            },
+            {
+                "link_type": "Media",
+                "name": "hugo-tomasi-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/0a9c09b2-858e-4bac-a174-9dc480b93ab4_hugo-tomasi-2.jpg?auto=compress,format",
+                "size": "534914",
+                "height": "1749",
+                "width": "1403"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-01T19:58:38+0000",
+            "last_update": "2023-08-20T20:36:14+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZKCFahEAACAAxrQA%22%29+%5D%5D"
+    },
+    {
+        "id": "ZLRGvhIAACAAfSPA",
+        "title": "Cité musicale Metz",
+        "slug": "cmm",
+        "favorite": true,
+        "date": "2023-04-01",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "cmm-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/80c7eca9-9569-4bfd-8f0e-26a41cd410ae_cmm-0.jpg?auto=compress,format",
+            "size": "1411161",
+            "height": "1440",
+            "width": "1440"
+        },
+        "excerpt": "Création du site pour la cité musicale de Metz.",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            }
+        ],
+        "framework": "Rézo zéro",
+        "rate": null,
+        "content": "",
+        "externalLink": "https://www.citemusicale-metz.fr/",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "cmm-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/a826adc9-7829-4474-be24-7ad5635283f8_cmm-3.jpg?auto=compress,format",
+                "size": "1457664",
+                "height": "1903",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "cmm-5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/28af6f3b-b095-4d14-bd1e-97a65f0dfd80_cmm-5.jpg?auto=compress,format",
+                "size": "577247",
+                "height": "1511",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "cmm-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/d514bc17-4f88-43ff-8d23-a1f912055983_cmm-1.jpg?auto=compress,format",
+                "size": "4677444",
+                "height": "9638",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "cmm-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/29f824f4-d589-4708-9c71-7d016cf4c99f_cmm-4.jpg?auto=compress,format",
+                "size": "2911936",
+                "height": "5891",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "cmm-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/fc565f4a-5511-4e65-86ba-e8319de0a319_cmm-2.jpg?auto=compress,format",
+                "size": "1133907",
+                "height": "1659",
+                "width": "1920"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-16T19:38:04+0000",
+            "last_update": "2023-08-20T18:35:25+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZLRGvhIAACAAfSPA%22%29+%5D%5D"
+    },
+    {
+        "id": "ZLQvUBIAACAAfLqm",
+        "title": "Asteria",
+        "slug": "asteria",
+        "favorite": false,
+        "date": "2023-03-29",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "asteria-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/9a618a73-3a38-495e-b483-1c90b476a114_asteria-0.jpg?auto=compress,format",
+            "size": "1022779",
+            "height": "1440",
+            "width": "1440"
+        },
+        "excerpt": "On m'a missionné pour réaliser une section interactive au sein d'une landing page pour l'agence de mode Asteria.",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            }
+        ],
+        "framework": "Freelance",
+        "rate": null,
+        "content": "Via ce projet, j'ai pu expérimenter le principe de shaders via WebGl. Malgré mes études et ma pratique de développement front, je n'ai jamais été très bon en math, j'ai donc pas mal galéré à comprendre les algo de manipulation de pixel. Cette techno me semble très interessante pour faire du code génératif et abstrait. J'aurai probablement le temps d'expérimenter davantage lors de futurs projets. ",
+        "externalLink": "https://asteriaagency.com/",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "asteria-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/fa667801-3808-43fd-b79f-9eea4caddb41_asteria-4.jpg?auto=compress,format",
+                "size": "464937",
+                "height": "1281",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "asteria-5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/7f472b06-dc22-4896-8864-91d7c458b0f9_asteria-5.jpg?auto=compress,format",
+                "size": "612384",
+                "height": "1392",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "asteria-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/13fea944-0f15-4273-92e2-78757febd0df_asteria-3.jpg?auto=compress,format",
+                "size": "1445814",
+                "height": "1281",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "asteria-6.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/e11d8d3f-8182-406b-920d-e004e91b0a0c_asteria-6.jpg?auto=compress,format",
+                "size": "1415167",
+                "height": "1379",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "asteria-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/38be1fe6-21db-47a8-8e45-8a58c544ade4_asteria-2.jpg?auto=compress,format",
+                "size": "536053",
+                "height": "1205",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "asteria-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/382daec7-9144-4806-87eb-e636e5cfa28b_asteria-1.jpg?auto=compress,format",
+                "size": "582941",
+                "height": "1143",
+                "width": "1920"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-16T18:08:58+0000",
+            "last_update": "2023-08-17T19:08:44+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZLQvUBIAACAAfLqm%22%29+%5D%5D"
+    },
+    {
+        "id": "ZLRvXBIAAHFXfdkp",
+        "title": "Modelec",
+        "slug": "modelec",
+        "favorite": true,
+        "date": "2022-12-12",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "modelec-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/d674c948-a458-4773-b9e7-f8511606b9d3_modelec-0.jpg?auto=compress,format",
+            "size": "2379120",
+            "height": "1440",
+            "width": "1440"
+        },
+        "excerpt": "Site web pour Modelec entreprise d\"appareils électriques haut de gamme.",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            }
+        ],
+        "framework": "Rézo zéro",
+        "rate": null,
+        "content": "",
+        "externalLink": "https://www.modelec.com/fr",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "modelec-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/4db3f00d-8fe7-45e1-96bc-b1659e9d52cd_modelec-4.jpg?auto=compress,format",
+                "size": "4183675",
+                "height": "5219",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "modelec-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/479657eb-0083-4956-b26e-7ee03863adfc_modelec-2.jpg?auto=compress,format",
+                "size": "239135",
+                "height": "1174",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "modelec-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/5643002e-7871-48dd-8a0a-d402bdd19ff1_modelec-3.jpg?auto=compress,format",
+                "size": "206917",
+                "height": "1120",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "modelec-5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/69b4fac4-8ece-46d6-bccd-6e6104e25c57_modelec-5.jpg?auto=compress,format",
+                "size": "703228",
+                "height": "1120",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "modelec-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/3d9a3945-5f48-437f-85d8-423e9b101675_modelec-1.jpg?auto=compress,format",
+                "size": "1097513",
+                "height": "1659",
+                "width": "1920"
+            }
+        ],
+        "awards": [
+            {
+                "name": "Site of the day & Developer award",
+                "type": "web",
+                "url": "https://www.awwwards.com/sites/modelec"
+            }
+        ],
+        "publication": {
+            "creation": "2023-07-16T22:31:30+0000",
+            "last_update": "2023-09-19T18:14:17+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZLRvXBIAAHFXfdkp%22%29+%5D%5D"
+    },
+    {
+        "id": "ZLQkvhIAAHFXfIt6",
+        "title": "Eden home",
+        "slug": "eden-home",
+        "favorite": false,
+        "date": "2022-11-05",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "eden-home-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/8be167b9-75d4-49eb-82f5-d6570bd8f283_eden-home-0.jpg?auto=compress,format",
+            "size": "1126396",
+            "height": "1440",
+            "width": "1440"
+        },
+        "excerpt": "Création d'un site web pour Eden Home, un constructeur de maisons alpines qui crée des maisons en bois durables et personnalisées.",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            }
+        ],
+        "framework": "Rézo zéro",
+        "rate": null,
+        "content": "J'ai pu concevoir la partie technique de ce site en autonomie au sein de Rézo Zéro. Je me suis mis une grosse pression pour produire un site qui respecte les exigences de l'agence. J'ai donc voulu aller rapidement pour mettre en avant mes compétences. Cependant, je vois de nombreuses erreurs que j'ai pu faire qui rendent difficile la maintenabilité du site. Aujourd'hui, je fais davantage attention aux bonnes pratiques de référencement et d'optimisations de ressources, des éléments qui ne me fascinent pas, mais qui sont primordiaux pour rendre un site web efficace.",
+        "externalLink": "https://www.eden-home.fr/",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "eden-home-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/47f3fffd-d6c4-4d6c-81f2-2b6f1a3cb275_eden-home-4.jpg?auto=compress,format",
+                "size": "1634710",
+                "height": "4384",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "eden-home-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/12eaa630-436c-4fda-adf7-351c12defc5a_eden-home-1.jpg?auto=compress,format",
+                "size": "300375",
+                "height": "1045",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "eden-home-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/c9b5dbe4-700f-46d1-8324-18a43fc807a4_eden-home-3.jpg?auto=compress,format",
+                "size": "1014118",
+                "height": "2697",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "eden-home-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/b3090fd4-bfdd-4e81-af1b-b1cd55f0f83b_eden-home-2.jpg?auto=compress,format",
+                "size": "704317",
+                "height": "1269",
+                "width": "1920"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-16T17:11:29+0000",
+            "last_update": "2023-08-17T19:16:28+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZLQkvhIAAHFXfIt6%22%29+%5D%5D"
+    },
+    {
+        "id": "ZLCUVxIAACIAbL7V",
+        "title": "Fourre tout",
+        "slug": "fourre-tout",
+        "favorite": false,
+        "date": "2022-10-01",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "timothe-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/a2852627-6f95-43c2-8d90-72ec2424f2af_timothe-0.jpg?auto=compress,format",
+            "size": "162672",
+            "height": "1440",
+            "width": "1440"
+        },
+        "excerpt": "Mon portfolio actuel mettant en avant la diversité de mes projets.",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            },
+            {
+                "id": "design-d-interface",
+                "label": "Design d'interface"
+            }
+        ],
+        "framework": "Perso",
+        "rate": null,
+        "content": "Mon portfolio actuel a pour objectif premier de me constituer une base de données organisée de tous mes projets.Cela me permet, dans un premier temps, d'avoir une vue d'ensemble sur mes réalisations et, dans un second temps, de m'obliger à prendre du temps pour les mettre en valeur. \nJe prends le risque de ne pas mettre uniquement mes meilleurs projets et, par conséquent, ne pas avoir le portfolio idéal pour être embauché, mais je trouve cela plus intéressant, sincère et moins bullshit. \nJe me suis fait énormément plaisir à imaginer l'interface, notamment en jouant sur le contenu d'un site sans changer de page et de mettre en place une interface modulaire et personnalisable.J'ai pu assouvir mon côté web créatif avec de nombreuses micro-interactions.",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "timothe-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/3b9913cf-f45f-4a4d-857e-121a8bb12e29_timothe-1.jpg?auto=compress,format",
+                "size": "1015683",
+                "height": "1377",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "timothe-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/3a14ffae-60cb-44fa-8326-651036f5fef1_timothe-2.jpg?auto=compress,format",
+                "size": "364610",
+                "height": "1366",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "timothe-5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/5944e887-c907-4e2a-81fc-07fd5d1aea5d_timothe-5.jpg?auto=compress,format",
+                "size": "814496",
+                "height": "1655",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "timothe-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/86233bcc-39df-4267-9fbb-03c2de97bf52_timothe-3.jpg?auto=compress,format",
+                "size": "380970",
+                "height": "1362",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "timothe-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/24d96321-4ac6-479d-9569-a2c0533fa217_timothe-4.jpg?auto=compress,format",
+                "size": "635692",
+                "height": "1308",
+                "width": "1920"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-14T00:18:34+0000",
+            "last_update": "2023-08-17T19:14:36+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZLCUVxIAACIAbL7V%22%29+%5D%5D"
+    },
+    {
+        "id": "ZLRychIAACIAfedn",
+        "title": "CMBV",
+        "slug": "cmbv",
+        "favorite": false,
+        "date": "2022-09-19",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "cmbv-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/2b3c90b9-f241-4a81-b926-c5ad54cfacfa_cmbv-0.jpg?auto=compress,format",
+            "size": "1029087",
+            "height": "1346",
+            "width": "1440"
+        },
+        "excerpt": "Mise a jour de la page d'accueil du site expérience du centre de musique baroque de Versailles. ",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            }
+        ],
+        "framework": "Rézo zéro",
+        "rate": null,
+        "content": "",
+        "externalLink": "https://expodcast.cmbv.fr",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "cmbv-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/e9364bf5-0df6-41d8-821d-9976ea3bf482_cmbv-1.jpg?auto=compress,format",
+                "size": "2155944",
+                "height": "2783",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "cmbv-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/448e1f49-c2f2-47cb-8ed0-7f4ffa86a94f_cmbv-3.jpg?auto=compress,format",
+                "size": "1884650",
+                "height": "2592",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "cmbv-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/13664f1c-5990-4f47-9cf5-d0669acc27e9_cmbv-2.jpg?auto=compress,format",
+                "size": "1125188",
+                "height": "1080",
+                "width": "1920"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-16T22:43:01+0000",
+            "last_update": "2023-08-17T19:10:31+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZLRychIAACIAfedn%22%29+%5D%5D"
+    },
+    {
+        "id": "ZL7TFREAACEALV7q",
+        "title": "Rapport RZ",
+        "slug": "rapport-rz",
+        "favorite": false,
+        "date": "2022-08-25",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "rapport-rz-1.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/3fb35b6c-93c5-4dee-85fd-5e90925f22fa_rapport-rz-1.jpg?auto=compress,format",
+            "size": "1304918",
+            "height": "1346",
+            "width": "1440"
+        },
+        "excerpt": "Rapport de stage suite à mon stage chez Rézo zéro.",
+        "tag": [
+            {
+                "id": "edition",
+                "label": "Édition"
+            }
+        ],
+        "framework": "Master 2",
+        "rate": null,
+        "content": "",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "rapport-rz-8.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/b42c44d2-b61e-4701-aa6a-8195d65759f1_rapport-rz-8.jpg?auto=compress,format",
+                "size": "2519409",
+                "height": "1964",
+                "width": "2716"
+            },
+            {
+                "link_type": "Media",
+                "name": "rapport-rz-6.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/efe6f051-3135-4070-bd92-ebaf76cf953c_rapport-rz-6.jpg?auto=compress,format",
+                "size": "935884",
+                "height": "1189",
+                "width": "2908"
+            },
+            {
+                "link_type": "Media",
+                "name": "rapport-rz-7.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/f5d05bc4-dcfb-4f16-96cf-fb3fe758db89_rapport-rz-7.jpg?auto=compress,format",
+                "size": "886657",
+                "height": "1189",
+                "width": "2908"
+            },
+            {
+                "link_type": "Media",
+                "name": "rapport-rz-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/f0da66e2-070b-4357-8e61-d310fc0a067e_rapport-rz-2.jpg?auto=compress,format",
+                "size": "533797",
+                "height": "1314",
+                "width": "1609"
+            },
+            {
+                "link_type": "Media",
+                "name": "rapport-rz-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/e1a911e8-dcb2-41c7-bd1f-96ce966f3862_rapport-rz-4.jpg?auto=compress,format",
+                "size": "374183",
+                "height": "1314",
+                "width": "1609"
+            },
+            {
+                "link_type": "Media",
+                "name": "rapport-rz-5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/cc9abb42-77e1-4e60-b8b3-cd4a999403d9_rapport-rz-5.jpg?auto=compress,format",
+                "size": "578757",
+                "height": "1406",
+                "width": "1701"
+            },
+            {
+                "link_type": "Media",
+                "name": "rapport-rz-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/530a4641-03b1-40de-a01b-19604407059a_rapport-rz-3.jpg?auto=compress,format",
+                "size": "571746",
+                "height": "1314",
+                "width": "1609"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-24T19:42:02+0000",
+            "last_update": "2023-08-17T19:15:08+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZL7TFREAACEALV7q%22%29+%5D%5D"
+    },
+    {
+        "id": "ZL7JxxEAACEALTTn",
+        "title": "Justine saez",
+        "slug": "justine-saez",
+        "favorite": false,
+        "date": "2022-07-02",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "justine-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/31a9af32-77b3-4967-84dd-d57f77d89e57_justine-0.jpg?auto=compress,format",
+            "size": "757960",
+            "height": "1346",
+            "width": "1440"
+        },
+        "excerpt": "Portfolio pour l'illustratrice Lyonnaise Justine Saez. ",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            },
+            {
+                "id": "design-d-interface",
+                "label": "Design d'interface"
+            }
+        ],
+        "framework": "Freelance",
+        "rate": null,
+        "content": "Afin de pouvoir réaliser des sites web en freelance, j'ai investigué longuement avant de trouver une stack technique efficace pour réaliser des portfolios. J'avais pour objectif de trouvé un système de back office ergonomique et facile à prendre en main avec le moins de frais d'hébergement possible. ",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "justine-5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/ee2ec1c5-ea3d-421a-b373-b1ac6d256584_justine-5.jpg?auto=compress,format",
+                "size": "4273761",
+                "height": "6394",
+                "width": "1728"
+            },
+            {
+                "link_type": "Media",
+                "name": "justine-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/bb2ef758-c38f-4a67-a7c0-29ef67d0fcc6_justine-3.jpg?auto=compress,format",
+                "size": "1130438",
+                "height": "1170",
+                "width": "1728"
+            },
+            {
+                "link_type": "Media",
+                "name": "justine-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/68315ad1-dabb-4d4d-a59b-575c4868d2b5_justine-2.jpg?auto=compress,format",
+                "size": "978234",
+                "height": "1170",
+                "width": "1728"
+            },
+            {
+                "link_type": "Media",
+                "name": "justine-8.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/52906dcc-f98b-4360-8b38-8c028f47bf06_justine-8.jpg?auto=compress,format",
+                "size": "1281530",
+                "height": "1170",
+                "width": "1728"
+            },
+            {
+                "link_type": "Media",
+                "name": "justine-7.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/7a208ef6-b283-4b53-bd7f-3d4dc2733b74_justine-7.jpg?auto=compress,format",
+                "size": "2104094",
+                "height": "3112",
+                "width": "1728"
+            },
+            {
+                "link_type": "Media",
+                "name": "justine-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/7f508ed2-047a-4aae-9978-09bfa19fb06b_justine-1.jpg?auto=compress,format",
+                "size": "1461918",
+                "height": "1447",
+                "width": "1920"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-24T18:58:19+0000",
+            "last_update": "2023-08-17T19:15:28+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZL7JxxEAACEALTTn%22%29+%5D%5D"
+    },
+    {
+        "id": "ZLRmuRIAACAAfbLh",
+        "title": "Centre pompidou - metz",
+        "slug": "centre-pompidou",
+        "favorite": false,
+        "date": "2022-05-22",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "centre-pompidou-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/51bc9e7b-63ba-44f3-9c23-9e03b8840322_centre-pompidou-0.jpg?auto=compress,format",
+            "size": "1186899",
+            "height": "1440",
+            "width": "1440"
+        },
+        "excerpt": "Site web pour le centre pompidou de Metz",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            }
+        ],
+        "framework": "Rézo zéro",
+        "rate": null,
+        "content": "",
+        "externalLink": "https://centrepompidou-metz.fr",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "centre-pompidou-5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/1c8fdc62-5dec-4646-a46d-9792f4853c5d_centre-pompidou-5.jpg?auto=compress,format",
+                "size": "810630",
+                "height": "1427",
+                "width": "1440"
+            },
+            {
+                "link_type": "Media",
+                "name": "centre-pompidou-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/4374211c-ca9f-40b6-a78f-942b39dcb67d_centre-pompidou-1.jpg?auto=compress,format",
+                "size": "575862",
+                "height": "954",
+                "width": "1440"
+            },
+            {
+                "link_type": "Media",
+                "name": "centre-pompidou-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/5482010c-42c1-41f8-822e-e730b1b8c94f_centre-pompidou-4.jpg?auto=compress,format",
+                "size": "554638",
+                "height": "1164",
+                "width": "1440"
+            },
+            {
+                "link_type": "Media",
+                "name": "centre-pompidou-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/a247a09a-405b-4e3b-aaeb-08a99039ec73_centre-pompidou-3.jpg?auto=compress,format",
+                "size": "2417486",
+                "height": "4908",
+                "width": "1440"
+            },
+            {
+                "link_type": "Media",
+                "name": "centre-pompidou-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/2f716aaf-bf26-464e-a544-3fbe75ed4a25_centre-pompidou-2.jpg?auto=compress,format",
+                "size": "1374472",
+                "height": "1659",
+                "width": "1920"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-16T21:53:00+0000",
+            "last_update": "2023-08-17T19:09:31+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZLRmuRIAACAAfbLh%22%29+%5D%5D"
+    },
+    {
+        "id": "ZMAr_BEAACMAMy-y",
+        "title": "Grid moi ça",
+        "slug": "grid-moi-ca",
+        "favorite": false,
+        "date": "2022-03-25",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "img-grid-p5-0.png",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/e0c71dd6-127e-494b-a16a-85cad8c7fc37_img-grid-p5-0.png?auto=compress,format",
+            "size": "265936",
+            "height": "1601",
+            "width": "1601"
+        },
+        "excerpt": "Un programme P5.js permettant de générer des patterns aléatoire à partir d'images.",
+        "tag": [
+            {
+                "id": "code-creatif",
+                "label": "Code créatif"
+            }
+        ],
+        "framework": "Perso",
+        "rate": null,
+        "content": "",
+        "externalLink": "https://editor.p5js.org/timothejoubert26/sketches/hywhcVqF0",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "img-grid-p5-7.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/8edef831-c769-48c9-ad97-2a780fd47878_img-grid-p5-7.png?auto=compress,format",
+                "size": "636210",
+                "height": "2020",
+                "width": "3534"
+            },
+            {
+                "link_type": "Media",
+                "name": "img-grid-p5-8.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/e9dc3992-b6ab-4b3e-a250-5b43d0f6cf1b_img-grid-p5-8.png?auto=compress,format",
+                "size": "693383",
+                "height": "1922",
+                "width": "3528"
+            },
+            {
+                "link_type": "Media",
+                "name": "img-grid-p5-10.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/448f7883-87d7-435c-9a58-71e6e07e75ad_img-grid-p5-10.png?auto=compress,format",
+                "size": "1566505",
+                "height": "2018",
+                "width": "3534"
+            },
+            {
+                "link_type": "Media",
+                "name": "img-grid-p5-1-1.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/36ee0318-150f-4106-a448-1294ca7be28e_img-grid-p5-1-1.png?auto=compress,format",
+                "size": "1701698",
+                "height": "1808",
+                "width": "3324"
+            },
+            {
+                "link_type": "Media",
+                "name": "img-grid-p5-5.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/baf401ac-8709-4105-8f8b-324f2ccc29a3_img-grid-p5-5.mp4",
+                "size": "4965448"
+            },
+            {
+                "link_type": "Media",
+                "name": "img-grid-p5-2.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/7940f749-b48b-4a70-86da-d6cb70c7502e_img-grid-p5-2.png?auto=compress,format",
+                "size": "700839",
+                "height": "1700",
+                "width": "2702"
+            },
+            {
+                "link_type": "Media",
+                "name": "img-grid-p5-6.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/e2cbf5b7-9715-4e22-97a9-125cc9f15621_img-grid-p5-6.mp4",
+                "size": "834270"
+            },
+            {
+                "link_type": "Media",
+                "name": "img-grid-p5-2.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/7940f749-b48b-4a70-86da-d6cb70c7502e_img-grid-p5-2.png?auto=compress,format",
+                "size": "700839",
+                "height": "1700",
+                "width": "2702"
+            },
+            {
+                "link_type": "Media",
+                "name": "img-grid-p5-4.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/2a737c55-3b24-4f12-8010-ee7a0cf93c44_img-grid-p5-4.png?auto=compress,format",
+                "size": "271621",
+                "height": "1532",
+                "width": "1568"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-25T20:14:22+0000",
+            "last_update": "2023-08-17T19:15:53+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZMAr_BEAACMAMy-y%22%29+%5D%5D"
+    },
+    {
+        "id": "ZL7Y6hEAACMALXoz",
+        "title": "Number of type",
+        "slug": "number-of-type",
+        "favorite": false,
+        "date": "2022-03-25",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "number-of-type-1.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/a7822fc2-3d91-4e04-b134-9099f5d487b3_number-of-type-1.jpg?auto=compress,format",
+            "size": "739235",
+            "height": "1346",
+            "width": "1440"
+        },
+        "excerpt": "Petit programme P5.js permettant de créer des dessins basés sur une grille.",
+        "tag": [
+            {
+                "id": "code-creatif",
+                "label": "Code créatif"
+            },
+            {
+                "id": "typographie",
+                "label": "Typographie"
+            }
+        ],
+        "framework": "Perso",
+        "rate": null,
+        "content": "",
+        "externalLink": "https://editor.p5js.org/timothejoubert26/sketches/hywhcVqF0",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "number-of-type-2.gif",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/653fd5a0-9bb9-46b1-91af-1a9a4c3b41bc_number-of-type-2.gif?auto=compress,format",
+                "size": "782298",
+                "height": "1196",
+                "width": "1094"
+            },
+            {
+                "link_type": "Media",
+                "name": "number-of-type-0.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/95a7b49c-d89f-4643-bbdf-5824f72ebe75_number-of-type-0.jpg?auto=compress,format",
+                "size": "683468",
+                "height": "1771",
+                "width": "1768"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-24T20:04:09+0000",
+            "last_update": "2023-08-17T19:16:13+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZL7Y6hEAACMALXoz%22%29+%5D%5D"
+    },
+    {
+        "id": "ZMBFrBEAACIAM42L",
+        "title": "36 days of type",
+        "slug": "36-days-of-type",
+        "favorite": true,
+        "date": "2022-03-07",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "DOT-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/c2db06fd-472f-490c-8d89-9b2808eef9b6_DOT-0.jpg?auto=compress,format",
+            "size": "1203163",
+            "height": "1346",
+            "width": "1440"
+        },
+        "excerpt": "Outil web permettant de construire et animer des lettres.",
+        "tag": [
+            {
+                "id": "code-creatif",
+                "label": "Code créatif"
+            },
+            {
+                "id": "typographie",
+                "label": "Typographie"
+            }
+        ],
+        "framework": "Perso",
+        "rate": null,
+        "content": "Pour l'occasion du challenge 36 days of type sur instagram, j'ai conçu un script P5.js qui construit les lettres à partir de formes géométriques simples. J'ai ajouté une petite interface graphique qui permet de modifier l'aspect de la typographie afin de générer une grande variété de caractères. La difficulté de ce challenge est d'être assez constant et productif pour poster chaque jour. Malgré la conception du script en amont, l'enregistrement, l'édition, le tri et les retouches des visuelles produis reste très chronophage. Cela pourrait être une tâche intéressante à automatiser à l'avenir. Je reste bien satisfait de la diversité des lettres produites et des détails intéressants de certains caractères. ",
+        "externalLink": "https://editor.p5js.org/timothejoubert26/collections/BchfYrQ4V",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "DOT-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/97c3332f-00e6-48ad-b813-0c8468f5a21b_DOT-1.jpg?auto=compress,format",
+                "size": "3701074",
+                "height": "2664",
+                "width": "4072"
+            },
+            {
+                "link_type": "Media",
+                "name": "DOT-2.gif",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/fb77ba1f-4493-4296-86ee-031daed6e312_DOT-2.gif?auto=compress,format",
+                "size": "3999855",
+                "height": "1200",
+                "width": "1200"
+            },
+            {
+                "link_type": "Media",
+                "name": "DOT-13.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/b036bfbb-11ff-4612-9e2f-80f604559491_DOT-13.mov",
+                "size": "14072748"
+            },
+            {
+                "link_type": "Media",
+                "name": "DOT-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/794f03c4-6a8e-46c5-8227-c58cee22de3e_DOT-3.jpg?auto=compress,format",
+                "size": "541626",
+                "height": "960",
+                "width": "1052"
+            },
+            {
+                "link_type": "Media",
+                "name": "DOT-12.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/d4caa496-740d-4361-8e00-f5a0c282bc4c_DOT-12.jpg?auto=compress,format",
+                "size": "312843",
+                "height": "960",
+                "width": "989"
+            },
+            {
+                "link_type": "Media",
+                "name": "DOT-11.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/ab6abe81-1961-4d58-98cd-15c562f74c7b_DOT-11.jpg?auto=compress,format",
+                "size": "308800",
+                "height": "960",
+                "width": "1116"
+            },
+            {
+                "link_type": "Media",
+                "name": "DOT-10.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/fc2ebd3f-e172-4a87-a75d-065175342f24_DOT-10.jpg?auto=compress,format",
+                "size": "282234",
+                "height": "960",
+                "width": "1103"
+            },
+            {
+                "link_type": "Media",
+                "name": "DOT-5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/b7c0a7f5-1dfd-43d7-8c05-0bf029e4544e_DOT-5.jpg?auto=compress,format",
+                "size": "603702",
+                "height": "960",
+                "width": "966"
+            },
+            {
+                "link_type": "Media",
+                "name": "DOT-7.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/9e357e71-67bf-4916-8524-a0035780941a_DOT-7.jpg?auto=compress,format",
+                "size": "538934",
+                "height": "960",
+                "width": "960"
+            },
+            {
+                "link_type": "Media",
+                "name": "DOT-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/418bb848-2f79-4b56-ab17-103bbd29e816_DOT-4.jpg?auto=compress,format",
+                "size": "464565",
+                "height": "960",
+                "width": "993"
+            },
+            {
+                "link_type": "Media",
+                "name": "DOT-8.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/c5e1ced6-9a47-4919-b50e-8fdfa13455bb_DOT-8.jpg?auto=compress,format",
+                "size": "388143",
+                "height": "960",
+                "width": "960"
+            },
+            {
+                "link_type": "Media",
+                "name": "DOT-6.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/07c4f642-aa30-4c7c-b29d-5340da89faf6_DOT-6.jpg?auto=compress,format",
+                "size": "327306",
+                "height": "960",
+                "width": "983"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-25T21:59:11+0000",
+            "last_update": "2023-09-07T19:11:23+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZMBFrBEAACIAM42L%22%29+%5D%5D"
+    },
+    {
+        "id": "ZMay8hAAAB8AQIK6",
+        "title": "Opéra de Lyon",
+        "slug": "opera-de-lyon",
+        "favorite": false,
+        "date": "2022-03-03",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "onl-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/4f2b2b40-f308-4546-a139-3c82455c9b64_onl-0.jpg?auto=compress,format",
+            "size": "2384063",
+            "height": "1440",
+            "width": "1440"
+        },
+        "excerpt": "Création du site pour l'opéra de Lyon.",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            }
+        ],
+        "framework": "Rézo zéro",
+        "rate": null,
+        "content": "Il s'agit du premier gros projet auquel j'ai pu participer au sein de Rézo zéro. J'ai pu expérimentation une stack technique assez avancée; à savoir le framework Vue.js couplet à Nuxt et un headless CMS créer par Ambroise Maupate, un membre de l'équipe. Le site étant assez complexe, cela m'a montré l'importance d'avoir une méthodologie en béton.",
+        "externalLink": "https://www.opera-lyon.com/",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "onl-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/ac9d5275-86e4-4c79-a246-49c8f264ad8e_onl-2.jpg?auto=compress,format",
+                "size": "3248876",
+                "height": "3605",
+                "width": "2161"
+            },
+            {
+                "link_type": "Media",
+                "name": "onl-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/24829f5f-2dfb-4ec0-b558-7c373e94c6c2_onl-3.jpg?auto=compress,format",
+                "size": "1237215",
+                "height": "2836",
+                "width": "1830"
+            },
+            {
+                "link_type": "Media",
+                "name": "onl-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/155c8aab-d0d1-40a2-acae-9df2d821ada7_onl-1.jpg?auto=compress,format",
+                "size": "2312420",
+                "height": "3198",
+                "width": "1700"
+            },
+            {
+                "link_type": "Media",
+                "name": "onl-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/7045e96f-8fa8-4956-88ac-ad1b4463ee98_onl-4.jpg?auto=compress,format",
+                "size": "1285217",
+                "height": "1920",
+                "width": "1920"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-07-30T19:05:11+0000",
+            "last_update": "2023-08-17T19:17:07+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZMay8hAAAB8AQIK6%22%29+%5D%5D"
+    },
+    {
+        "id": "ZMhNaxAAAB8AR7TC",
+        "title": "Fontimate",
+        "slug": "fontimate",
+        "favorite": true,
+        "date": "2022-02-04",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "fontimate-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/884d3ed1-b143-4c1b-961a-deaec938e46d_fontimate-0.jpg?auto=compress,format",
+            "size": "1724691",
+            "height": "2160",
+            "width": "2160"
+        },
+        "excerpt": "Création d'un outil en ligne permettant d'animer de la typographie variable.",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            },
+            {
+                "id": "design-d-interface",
+                "label": "Design d'interface"
+            },
+            {
+                "id": "typographie",
+                "label": "Typographie"
+            },
+            {
+                "id": "identite-visuelle",
+                "label": "Identité visuelle"
+            }
+        ],
+        "framework": "Master 2",
+        "rate": null,
+        "content": "",
+        "externalLink": "https://fontimate.netlify.app/",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "fontimate-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/b27c1503-9cef-46ba-a881-f6ef5f01bcd0_fontimate-4.jpg?auto=compress,format",
+                "size": "1143256",
+                "height": "1910",
+                "width": "2852"
+            },
+            {
+                "link_type": "Media",
+                "name": "fontimate-5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/5082dc86-07c3-404b-91e7-19efacc64bc8_fontimate-5.jpg?auto=compress,format",
+                "size": "2507355",
+                "height": "1910",
+                "width": "2852"
+            },
+            {
+                "link_type": "Media",
+                "name": "fontimate-6.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/ac8a4469-b0b5-4f13-a14f-49ae1e120149_fontimate-6.jpg?auto=compress,format",
+                "size": "2460514",
+                "height": "1910",
+                "width": "2852"
+            },
+            {
+                "link_type": "Media",
+                "name": "fontimate-8.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/4fc8ff51-92ea-40d7-a36d-88d500fc4e6b_fontimate-8.mov",
+                "size": "8633938"
+            },
+            {
+                "link_type": "Media",
+                "name": "fontimate-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/bf8ff3e9-e43e-4f6b-a299-2c33ab6dcf00_fontimate-2.jpg?auto=compress,format",
+                "size": "1035751",
+                "height": "2824",
+                "width": "2698"
+            },
+            {
+                "link_type": "Media",
+                "name": "fontimate-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/37dba298-ba30-4fb5-9698-bf095a87ebb6_fontimate-1.jpg?auto=compress,format",
+                "size": "969623",
+                "height": "1845",
+                "width": "2949"
+            },
+            {
+                "link_type": "Media",
+                "name": "fontimate-7.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/599587d6-3cdd-429a-9b0d-0ef5bbd130dc_fontimate-7.jpg?auto=compress,format",
+                "size": "5955254",
+                "height": "8170",
+                "width": "1706"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-01T00:12:41+0000",
+            "last_update": "2023-09-26T21:10:33+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZMhNaxAAAB8AR7TC%22%29+%5D%5D"
+    },
+    {
+        "id": "ZM_ciREAACEAer3F",
+        "title": "Out of box",
+        "slug": "out-of-box",
+        "favorite": false,
+        "date": "2022-01-23",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "out-of-box-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/a73ac2ab-a21e-45cc-b785-c2a8dc51ccba_out-of-box-0.jpg?auto=compress,format",
+            "size": "2149817",
+            "height": "2160",
+            "width": "2160"
+        },
+        "excerpt": "Création du site web pour l'agence Out of box à lyon.",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            },
+            {
+                "id": "design-d-interface",
+                "label": "Design d'interface"
+            }
+        ],
+        "framework": "Freelance",
+        "rate": null,
+        "content": "",
+        "externalLink": "https://www.outofbox.fr/",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "out-of-box-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/8ef335cc-8396-45e6-8a98-134a71c37049_out-of-box-1.jpg?auto=compress,format",
+                "size": "1437504",
+                "height": "1425",
+                "width": "2165"
+            },
+            {
+                "link_type": "Media",
+                "name": "out-of-box-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/fb6eaadc-8332-4793-b1ff-79f613ff54e1_out-of-box-2.jpg?auto=compress,format",
+                "size": "2545276",
+                "height": "6377",
+                "width": "2922"
+            },
+            {
+                "link_type": "Media",
+                "name": "out-of-box-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/235530ef-1654-440a-b74b-0cca3d7dc24c_out-of-box-3.jpg?auto=compress,format",
+                "size": "2808584",
+                "height": "9543",
+                "width": "2165"
+            },
+            {
+                "link_type": "Media",
+                "name": "out-of-box-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/53d6912c-9268-41bf-86a6-0e3c3cc523fd_out-of-box-4.jpg?auto=compress,format",
+                "size": "1251286",
+                "height": "1908",
+                "width": "2886"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-06T17:48:18+0000",
+            "last_update": "2023-08-17T19:17:53+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZM_ciREAACEAer3F%22%29+%5D%5D"
+    },
+    {
+        "id": "ZM_d6hEAACEAesP6",
+        "title": "Parachute",
+        "slug": "parachute",
+        "favorite": true,
+        "date": "2022-01-10",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "parachute-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/e855b35b-ef33-453c-9d11-f806ef3f7fe0_parachute-0.jpg?auto=compress,format",
+            "size": "970611",
+            "height": "843",
+            "width": "843"
+        },
+        "excerpt": "Création d'une identité visuelle et d'une interface web pour l'émission de radio indépendante Parachute, l'objectif étant de mettre en avant le côté éclectique et underground de la playlist diffusée.",
+        "tag": [
+            {
+                "id": "code-creatif",
+                "label": "Code créatif"
+            },
+            {
+                "id": "identite-visuelle",
+                "label": "Identité visuelle"
+            }
+        ],
+        "framework": "Freelance",
+        "rate": 16,
+        "content": "Les stickers représentent des éléments individuels qui, lorsqu'ils sont assemblés, forment une composition globale unique. De même, dans une playlist éclectique, chaque morceau de musique représente une pièce musicale distinctive qui, une fois regroupée avec d'autres, crée une expérience musicale cohérente et personnelle. \nTout comme les stickers peuvent être déplacés et réarrangés pour créer de nouvelles compositions visuelles, une playlist de musique peut être modifiée et mise à jour pour refléter l'évolution des goûts musicaux de l'auditeur. En résumé, les stickers et la conception de playlists partagent le principe de l'individualité, de la personnalisation et de la créativité pour créer quelque chose de significatif et unique.",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "parachute-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/d41a309e-d246-4baa-a89c-c395556eb684_parachute-1.jpg?auto=compress,format",
+                "size": "2481565",
+                "height": "1192",
+                "width": "843"
+            },
+            {
+                "link_type": "Media",
+                "name": "parachute-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/62c4ac30-07c7-45c4-8e35-898006c29b64_parachute-2.jpg?auto=compress,format",
+                "size": "2559700",
+                "height": "3708",
+                "width": "1703"
+            },
+            {
+                "link_type": "Media",
+                "name": "parachute-7.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/e9bf7d4b-6b97-44a7-ab0e-ed1d008d26dd_parachute-7.mp4",
+                "size": "3677152"
+            },
+            {
+                "link_type": "Media",
+                "name": "parachute-6.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/06b97f5b-c9fd-4fda-97c8-34559b4c5ee0_parachute-6.jpg?auto=compress,format",
+                "size": "198085",
+                "height": "762",
+                "width": "802"
+            },
+            {
+                "link_type": "Media",
+                "name": "parachute-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/d8bcd253-cd46-401c-8c4d-6a5eba2dd3f8_parachute-3.jpg?auto=compress,format",
+                "size": "964311",
+                "height": "843",
+                "width": "843"
+            },
+            {
+                "link_type": "Media",
+                "name": "parachute-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/256b0d7d-f846-4106-ab5f-03472f43cd40_parachute-4.jpg?auto=compress,format",
+                "size": "745761",
+                "height": "843",
+                "width": "843"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-06T17:52:45+0000",
+            "last_update": "2023-09-19T20:47:20+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZM_d6hEAACEAesP6%22%29+%5D%5D"
+    },
+    {
+        "id": "ZM_ezBEAACIAesfy",
+        "title": "Com on",
+        "slug": "com-on",
+        "favorite": false,
+        "date": "2022-01-08",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "com-on-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/fda98cfe-1bda-4430-91da-2f8aaf248fd6_com-on-0.jpg?auto=compress,format",
+            "size": "1793301",
+            "height": "2700",
+            "width": "2700"
+        },
+        "excerpt": "Application fictive pour un service de billeterie d'évènement musicale.",
+        "tag": [
+            {
+                "id": "design-d-interface",
+                "label": "Design d'interface"
+            },
+            {
+                "id": "identite-visuelle",
+                "label": "Identité visuelle"
+            }
+        ],
+        "framework": "Master 2",
+        "rate": null,
+        "content": "",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "com-on-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/f9886fce-f588-40c3-9760-ab73bd3faa32_com-on-2.jpg?auto=compress,format",
+                "size": "1312737",
+                "height": "1920",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "com-on-4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/8145b3b0-4338-4ca7-a976-0aeabb82107c_com-on-4.jpg?auto=compress,format",
+                "size": "1279524",
+                "height": "2715",
+                "width": "4224"
+            },
+            {
+                "link_type": "Media",
+                "name": "com-on-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/57466f16-8a9b-4f31-be41-de490ea4019d_com-on-1.jpg?auto=compress,format",
+                "size": "1792624",
+                "height": "3981",
+                "width": "2658"
+            },
+            {
+                "link_type": "Media",
+                "name": "com-on-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/40324165-58d9-4ab7-a6ca-c49d84b629ff_com-on-3.jpg?auto=compress,format",
+                "size": "1855130",
+                "height": "2527",
+                "width": "3003"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-06T17:57:45+0000",
+            "last_update": "2023-08-20T16:55:51+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZM_ezBEAACIAesfy%22%29+%5D%5D"
+    },
+    {
+        "id": "ZM_f4xEAACMAeszb",
+        "title": "Duo form",
+        "slug": "duo-form",
+        "favorite": false,
+        "date": "2022-01-04",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "duoform-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/4c1dba7f-71a5-4416-ab64-fd99c208d85f_duoform-0.jpg?auto=compress,format",
+            "size": "1492292",
+            "height": "1920",
+            "width": "1920"
+        },
+        "excerpt": "Design de landing page et d'application pour un service fictif de mentoring pédagogique.",
+        "tag": [
+            {
+                "id": "design-d-interface",
+                "label": "Design d'interface"
+            },
+            {
+                "id": "identite-visuelle",
+                "label": "Identité visuelle"
+            }
+        ],
+        "framework": "Master 2",
+        "rate": null,
+        "content": "",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "duoform-3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/3b3c9a58-262f-40d3-bb01-b6dbc2fea3eb_duoform-3.jpg?auto=compress,format",
+                "size": "666106",
+                "height": "1374",
+                "width": "2304"
+            },
+            {
+                "link_type": "Media",
+                "name": "duoform-7.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/92c8ac49-0951-4938-99bd-6006d8f8224d_duoform-7.mp4",
+                "size": "4560257"
+            },
+            {
+                "link_type": "Media",
+                "name": "duoform-1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/a3847693-c1e2-47cc-880c-fa25d22ba5c9_duoform-1.jpg?auto=compress,format",
+                "size": "594449",
+                "height": "2237",
+                "width": "1324"
+            },
+            {
+                "link_type": "Media",
+                "name": "duoform-5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/1ac8f6d8-f2d5-461a-a9ba-fec4da491df2_duoform-5.jpg?auto=compress,format",
+                "size": "1005550",
+                "height": "2317",
+                "width": "1763"
+            },
+            {
+                "link_type": "Media",
+                "name": "duoform-6.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/d71e620d-8556-4625-afe0-2c067b59d5ab_duoform-6.jpg?auto=compress,format",
+                "size": "1280753",
+                "height": "2317",
+                "width": "1763"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-06T18:03:41+0000",
+            "last_update": "2023-08-17T19:19:01+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZM_f4xEAACMAeszb%22%29+%5D%5D"
+    },
+    {
+        "id": "ZOJHcRIAACUAzGkp",
+        "title": "Exo front",
+        "slug": "exo-front",
+        "favorite": false,
+        "date": "2021-12-23",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "exo-integration-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/4c275ea7-6652-4c5b-b4ba-a86766fd2e52_exo-integration-0.jpg?auto=compress,format",
+            "size": "535821",
+            "height": "1920",
+            "width": "1920"
+        },
+        "excerpt": "Un petit exercice pour me challenger sur de l'intégration d'un hero banner existant, réalisé en 1 heure.",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            }
+        ],
+        "framework": "Perso",
+        "rate": null,
+        "content": "",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "exo-integration-2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/7586b9e3-180f-4d14-a016-8afe92ae7065_exo-integration-2.jpg?auto=compress,format",
+                "size": "1953881",
+                "height": "4955",
+                "width": "3774"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-20T17:06:06+0000",
+            "last_update": "2023-08-20T19:43:29+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZOJHcRIAACUAzGkp%22%29+%5D%5D"
+    },
+    {
+        "id": "ZOJI7hIAACgAzG_V",
+        "title": "Recherche de stage typo",
+        "slug": "recherche-stage",
+        "favorite": false,
+        "date": "2021-12-20",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "rchch-stage-typo-0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/082e6f15-a5f4-4d5a-bee8-a4f8130368d6_rchch-stage-typo-0.jpg?auto=compress,format",
+            "size": "475521",
+            "height": "1920",
+            "width": "1920"
+        },
+        "excerpt": "Un petit programme envoyé dans mes mails de candidature lors d'une recherche de stage.",
+        "tag": [
+            {
+                "id": "code-creatif",
+                "label": "Code créatif"
+            },
+            {
+                "id": "typographie",
+                "label": "Typographie"
+            }
+        ],
+        "framework": "Perso",
+        "rate": null,
+        "content": "",
+        "externalLink": "https://codepen.io/timti/pen/NWaapoe",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "rchch-stage-typo-2.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/f404ce9b-02a0-4a9f-8a49-026aa636e5a7_rchch-stage-typo-2.mp4",
+                "size": "11685194"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-20T17:10:36+0000",
+            "last_update": "2023-08-20T17:12:33+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZOJI7hIAACgAzG_V%22%29+%5D%5D"
+    },
+    {
+        "id": "ZOJKaRIAACgAzHZw",
+        "title": "Duik wtf",
+        "slug": "duik-wtf",
+        "favorite": false,
+        "date": "2021-12-07",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "duik-perso_3.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/b794d696-4c9d-4c56-988b-7f3bb35555d4_duik-perso_3.jpg?auto=compress,format",
+            "size": "780118",
+            "height": "2880",
+            "width": "2880"
+        },
+        "excerpt": "Pendant un cours de motion design, je me suis permis de faire n'importe quoi avec le plugin Duik sur After effects. ",
+        "tag": [
+            {
+                "id": "motion-design",
+                "label": "Motion design"
+            },
+            {
+                "id": "illustration",
+                "label": "Illustration"
+            }
+        ],
+        "framework": "Master 2",
+        "rate": 12,
+        "content": "Il est très dur et fastidieux d’animer fidèlement les mouvements du corps humain.J’ai donc préféré modifier quelques paramètres du plugin et voir ce que ça donnait. Je trouve ça plus enrichissant d’assumer une création ridicule et de pousser le délire, que de passer plusieurs jours pour produire une animation inévitable peu convaincante.",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "duik-perso_0.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/dd5451df-7375-4848-b080-3e0805d89ccd_duik-perso_0.jpg?auto=compress,format",
+                "size": "242578",
+                "height": "1081",
+                "width": "1922"
+            },
+            {
+                "link_type": "Media",
+                "name": "duik-perso_1.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/26ceddea-77e5-4252-a0b4-66650feda16c_duik-perso_1.mp4",
+                "size": "1167740"
+            },
+            {
+                "link_type": "Media",
+                "name": "duik-perso_2.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/e6933f8f-bf11-4e7d-b436-c116a43c871f_duik-perso_2.mp4",
+                "size": "6598641"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-20T17:27:39+0000",
+            "last_update": "2023-09-26T20:33:40+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZOJKaRIAACgAzHZw%22%29+%5D%5D"
+    },
+    {
+        "id": "ZOJnyxIAACUAzPiu",
+        "title": "Boule en soie",
+        "slug": "boule-en-soie",
+        "favorite": false,
+        "date": "2021-11-30",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "boule-en-soie_0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/0ff77ae3-106e-4dbe-99a9-f137f5fa3efe_boule-en-soie_0.jpg?auto=compress,format",
+            "size": "1551674",
+            "height": "1920",
+            "width": "1920"
+        },
+        "excerpt": "Un projet complètement honteux réalisé en duo qui c'est très mal déroulé.",
+        "tag": [
+            {
+                "id": "design-d-interface",
+                "label": "Design d'interface"
+            }
+        ],
+        "framework": "Master 2",
+        "rate": null,
+        "content": "Concept: L'application Boule en soie, en navigation augmentée, a pour objectif de mettre en avant le restaurant situé au vieux quartier de Vaulx-en-Velin. Cette expérience immersive amène à une exploration déambulatoire dans laquelle l’utilisateur sera amené à scanner les différents éléments remarquables du lieu. Il y découvrira des informations liées à l’histoire du lieu et aux objets qui l’entourent.",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "boule-en-soie_1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/0ed50734-e558-410e-b3fe-d1b51515fd0d_boule-en-soie_1.jpg?auto=compress,format",
+                "size": "321780",
+                "height": "1187",
+                "width": "1818"
+            },
+            {
+                "link_type": "Media",
+                "name": "boule-en-soie_2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/5437dd21-17ce-417c-91ce-031ee9b067a8_boule-en-soie_2.jpg?auto=compress,format",
+                "size": "1948604",
+                "height": "1738",
+                "width": "2441"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-20T19:40:01+0000",
+            "last_update": "2023-08-20T19:40:41+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZOJnyxIAACUAzPiu%22%29+%5D%5D"
+    },
+    {
+        "id": "ZOJ09BIAACUAzTOX",
+        "title": "Webtober",
+        "slug": "webtober",
+        "favorite": false,
+        "date": "2021-10-30",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "webtober_0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/80dd067c-3cef-431f-aa55-02a75cd7ac4c_webtober_0.jpg?auto=compress,format",
+            "size": "340262",
+            "height": "2880",
+            "width": "2880"
+        },
+        "excerpt": "J'ai voulu faire à ma sauce le Inktober, un challenge instagram qui demande de publié un dessin par jour. Durant ce mois, j'ai essayé de réaliser une trentaine d'interaction javascript plus ou moins complexes. ",
+        "tag": [
+            {
+                "id": "code-creatif",
+                "label": "Code créatif"
+            }
+        ],
+        "framework": "Perso",
+        "rate": null,
+        "content": "",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "webtober_1.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/74f29baf-9284-4189-bf73-61a6317a6200_webtober_1.mov",
+                "size": "8553864"
+            },
+            {
+                "link_type": "Media",
+                "name": "webtober_2.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/151c6951-5cb7-46d0-9f1b-0e5770850526_webtober_2.mp4",
+                "size": "10023408"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-20T20:17:59+0000",
+            "last_update": "2023-08-20T20:17:59+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZOJ09BIAACUAzTOX%22%29+%5D%5D"
+    },
+    {
+        "id": "ZO4veRAAACEA_7CL",
+        "title": "X-wing",
+        "slug": "xwing",
+        "favorite": false,
+        "date": "2021-10-20",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "xwing_0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/e463c69f-e10b-4ca2-a0e2-f7fca46c5b81_xwing_0.jpg?auto=compress,format",
+            "size": "1964084",
+            "height": "2880",
+            "width": "2880"
+        },
+        "excerpt": "Création d'un vaisseau X-wing sur Blender.",
+        "tag": [
+            {
+                "id": "multimedia",
+                "label": "Multimédia"
+            }
+        ],
+        "framework": "Master 2",
+        "rate": null,
+        "content": "",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "xwing_1.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/b9689b7b-d000-4ffe-8f8a-ce8b536d5d08_xwing_1.mp4",
+                "size": "444267"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-29T17:50:57+0000",
+            "last_update": "2023-08-29T18:55:21+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZO4veRAAACEA_7CL%22%29+%5D%5D"
+    },
+    {
+        "id": "ZO4_CxAAACEA__YE",
+        "title": "Portfolio V3",
+        "slug": "portfolio-v3",
+        "favorite": false,
+        "date": "2021-10-13",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "portfolio-V3_0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/61584487-27de-4a5c-b7e0-2e085e8a994b_portfolio-V3_0.jpg?auto=compress,format",
+            "size": "237153",
+            "height": "1440",
+            "width": "1440"
+        },
+        "excerpt": "Mon précédant portfolio conçu en React. ",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            },
+            {
+                "id": "design-d-interface",
+                "label": "Design d'interface"
+            }
+        ],
+        "framework": "Perso",
+        "rate": null,
+        "content": "",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "portfolio-V3_1.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/6c0eec92-2f21-4e93-b95d-77aff87e7b72_portfolio-V3_1.mp4",
+                "size": "23980645"
+            },
+            {
+                "link_type": "Media",
+                "name": "portfolio-V3_5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/cbb0d967-32da-467b-85f6-0871962d1e0e_portfolio-V3_5.jpg?auto=compress,format",
+                "size": "321122",
+                "height": "1075",
+                "width": "1755"
+            },
+            {
+                "link_type": "Media",
+                "name": "portfolio-V3_3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/7adfda6e-c4c3-43dc-b9e8-8ca1d9ce3505_portfolio-V3_3.jpg?auto=compress,format",
+                "size": "241167",
+                "height": "1075",
+                "width": "1755"
+            },
+            {
+                "link_type": "Media",
+                "name": "portfolio-V3_4.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/781b717a-f5ed-4f48-b87c-28c8a269c3b0_portfolio-V3_4.jpg?auto=compress,format",
+                "size": "669948",
+                "height": "984",
+                "width": "1440"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-29T18:59:35+0000",
+            "last_update": "2023-08-29T18:59:35+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZO4_CxAAACEA__YE%22%29+%5D%5D"
+    },
+    {
+        "id": "ZO5DGBAAACEAAAGG",
+        "title": "Colors of africa",
+        "slug": "colors-of-africa",
+        "favorite": false,
+        "date": "2021-07-13",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "colors-of-africa_0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/ff66a071-d50b-43cd-8a6c-2bc4d7eaf942_colors-of-africa_0.jpg?auto=compress,format",
+            "size": "840032",
+            "height": "2256",
+            "width": "2597"
+        },
+        "excerpt": "Recherche d'interaction web autour d'une typographie variable pour mettre en avant des citations. Expérimentation réalisée durant mon stage chez Screen club.",
+        "tag": [
+            {
+                "id": "developpement",
+                "label": "Développement"
+            }
+        ],
+        "framework": "Freelance",
+        "rate": null,
+        "content": "",
+        "externalLink": "https://colors-of-africa.netlify.app",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "colors-of-africa_2.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/e5729f5d-e5af-4511-8e3d-e02a85333165_colors-of-africa_2.mp4",
+                "size": "2288058"
+            },
+            {
+                "link_type": "Media",
+                "name": "colors-of-africa_1.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/d702603a-bee3-43b3-85c7-4ba3504b66f5_colors-of-africa_1.png?auto=compress,format",
+                "size": "466321",
+                "height": "2142",
+                "width": "3504"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-08-29T19:15:31+0000",
+            "last_update": "2023-09-07T18:22:13+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZO5DGBAAACEAAAGG%22%29+%5D%5D"
+    },
+    {
+        "id": "ZQIEPhIAACIAlCHs",
+        "title": "Pogote-moi cette fonte !",
+        "slug": "pogote-moi-cette-fonte",
+        "favorite": true,
+        "date": "2021-06-15",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "pogo-cette-fonte_0.png",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/79df69f9-21d6-47e4-a7c7-9fefcc0b90fa_pogo-cette-fonte_0.png?auto=compress,format",
+            "size": "107800",
+            "height": "1660",
+            "width": "1660"
+        },
+        "excerpt": "À partir de mon mémoire de recherche, j'ai mis en place des outils web ayant pour objectif de rendre la typographie plus captivante. Mon travail s'est articulé autour de la transformation de la typographie via des expériences visuelles vivantes et créatives. Mon objectif était de briser sa rigidité en la rendant plus interactive. Mon ambition était de créer des outils numériques qui permettraient d'expérimenter, de formaliser, et de donner un sens profond aux créations graphiques.",
+        "tag": [
+            {
+                "id": "code-creatif",
+                "label": "Code créatif"
+            },
+            {
+                "id": "typographie",
+                "label": "Typographie"
+            }
+        ],
+        "framework": "DSAA",
+        "rate": 17,
+        "content": "Durant ce projet, j’ai pris énormément de plaisir à expérimenter sans contraintes. J’ai passé beaucoup de temps à tester des choses sans savoir ou j’allais, ce qui fût très plaisant et enrichissant. Néanmoins, cette manière de faire ma aussi frustrée parce que je n’ai pas réellement conçu une production représentative et aboutie. Mon site final est assez brouillon et ne fonctionne pas bien. Ce site avait pour objectif de présenter mes recherches, mais j’ai voulu intégrer l’aspect expérimental dans la construction de celui-ci. Ce parti pris rentre en conflit avec la compréhension du projet, il aurait fallut faire un site simple et sans fioriture et laisser mes expérimentations parler d’elles mêmes. ",
+        "externalLink": "https://www.notion.so/timothej/Pogote-moi-cette-fonte-4521a648613240dd906d6966609ea2d6",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_1.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/3a61a29d-b0cb-4d69-80a2-225836c309c7_pogo-cette-fonte_1.jpg?auto=compress,format",
+                "size": "202114",
+                "height": "1200",
+                "width": "848"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_2.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/e393ff83-cbbd-45cf-9767-53fc326d7c9f_pogo-cette-fonte_2.mp4",
+                "size": "13760271"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/168bf216-89a1-45e8-b5df-ab09adbefb62_pogo-cette-fonte_3.jpg?auto=compress,format",
+                "size": "1201895",
+                "height": "1948",
+                "width": "3256"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_4.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/750471cd-4665-4f68-b410-219bb8dbd685_pogo-cette-fonte_4.mp4",
+                "size": "19919899"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_5.JPG",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/726de118-2469-4d27-8c70-013281102829_pogo-cette-fonte_5.JPG?auto=compress,format",
+                "size": "505249",
+                "height": "1080",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_6.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/94a03bca-45d1-48bc-8268-f8502271c845_pogo-cette-fonte_6.jpg?auto=compress,format",
+                "size": "6095560",
+                "height": "2381",
+                "width": "4060"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_7.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/56683751-c437-4535-b509-8afef8b634d4_pogo-cette-fonte_7.jpg?auto=compress,format",
+                "size": "1284504",
+                "height": "2256",
+                "width": "2597"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_8.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/27b090cc-7d34-49d5-bcc3-40b87218b444_pogo-cette-fonte_8.mp4",
+                "size": "2535613"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_9.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/60f68b16-21ff-4fb9-8324-b427c9f1123e_pogo-cette-fonte_9.jpg?auto=compress,format",
+                "size": "1454213",
+                "height": "2936",
+                "width": "2547"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_10.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/b5b485e1-a052-407d-9d32-0a82bbabcef4_pogo-cette-fonte_10.jpg?auto=compress,format",
+                "size": "1383597",
+                "height": "2210",
+                "width": "4356"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_11.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/50b2624c-08e3-4cf3-bf8f-d110a54e715e_pogo-cette-fonte_11.jpg?auto=compress,format",
+                "size": "1883495",
+                "height": "4032",
+                "width": "3024"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_12.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/6795b4c1-1dba-4f20-ab55-475a2d7fa962_pogo-cette-fonte_12.mp4",
+                "size": "837110"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_13.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/97c9270b-b3a2-4b7f-b13d-08970c9aafe3_pogo-cette-fonte_13.jpg?auto=compress,format",
+                "size": "130537",
+                "height": "1400",
+                "width": "1400"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_14.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/16e62f2c-870d-4546-9864-43f6b96ab2dd_pogo-cette-fonte_14.mp4",
+                "size": "12955411"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_15.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/18e15ba5-fa40-48c9-93a7-64c4ae301b86_pogo-cette-fonte_15.jpg?auto=compress,format",
+                "size": "1768733",
+                "height": "2329",
+                "width": "3272"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_16.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/19b53e7f-7126-4bb7-892d-4e999bb1e764_pogo-cette-fonte_16.png?auto=compress,format",
+                "size": "336027",
+                "height": "1826",
+                "width": "2858"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_17.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/443f5066-cbdb-4d79-ab74-b607b65909ac_pogo-cette-fonte_17.mp4",
+                "size": "530625"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_18.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/49dc7b89-8d20-4664-8385-2e9432402240_pogo-cette-fonte_18.png?auto=compress,format",
+                "size": "205009",
+                "height": "1348",
+                "width": "2348"
+            },
+            {
+                "link_type": "Media",
+                "name": "pogo-cette-fonte_19.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/b1666a83-aa8a-422c-ac9c-b969ee0c1d61_pogo-cette-fonte_19.jpg?auto=compress,format",
+                "size": "1284105",
+                "height": "4571",
+                "width": "1498"
+            }
+        ],
+        "awards": [
+            {
+                "name": "Étapes",
+                "type": "book",
+                "url": "https://diplomes.etapes.com/pogote-moi-cette-fonte/"
+            }
+        ],
+        "publication": {
+            "creation": "2023-09-13T18:49:37+0000",
+            "last_update": "2023-09-19T18:35:16+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZQIEPhIAACIAlCHs%22%29+%5D%5D"
+    },
+    {
+        "id": "ZPodQBIAACIAcT5k",
+        "title": "C'est tout un programme",
+        "slug": "cest-tout-un-programme",
+        "favorite": false,
+        "date": "2021-02-16",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "tout-un-programme_1.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/668c0f1e-09ec-4228-9487-ac0bbda81a3c_tout-un-programme_1.jpg?auto=compress,format",
+            "size": "4129382",
+            "height": "2000",
+            "width": "2002"
+        },
+        "excerpt": "Lors de ma deuxième année de DSAA, j'ai conçu un mémoire qui traite de l'implication des outils numériques dans le travail de design. Mon appétence pour le code m’a donc amené à me questionner sur les languages informatiques/outils numériques que nous utilisons dans notre pratique de design.",
+        "tag": [
+            {
+                "id": "edition",
+                "label": "Édition"
+            },
+            {
+                "id": "code-creatif",
+                "label": "Code créatif"
+            }
+        ],
+        "framework": "DSAA",
+        "rate": 17,
+        "content": "Sujet: En quoi la compréhension des outils numériques enrichit il notre pratique du design graphique ? Pourquoi les logiciels déplacent-ils les enjeux des designers ? Est-ce que se baser sur la contrainte technique est une bonne méthodologie de design ? ",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "tout-un-programme_0.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/b5881466-6c40-44b5-8a12-e5e067a634fc_tout-un-programme_0.jpg?auto=compress,format",
+                "size": "723576",
+                "height": "1248",
+                "width": "1920"
+            },
+            {
+                "link_type": "Media",
+                "name": "tout-un-programme_3.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/0dee55e7-a8aa-486c-b36a-8a6a4a023af0_tout-un-programme_3.jpg?auto=compress,format",
+                "size": "4938475",
+                "height": "2000",
+                "width": "2992"
+            },
+            {
+                "link_type": "Media",
+                "name": "tout-un-programme_2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/2b073053-ce5a-4d9b-b4b6-cdae7bad6df0_tout-un-programme_2.jpg?auto=compress,format",
+                "size": "4425747",
+                "height": "2000",
+                "width": "2992"
+            },
+            {
+                "link_type": "Media",
+                "name": "tout-un-programme_4.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/58a15cbf-0d86-48bd-aaf7-83979a6348d2_tout-un-programme_4.png?auto=compress,format",
+                "size": "4064494",
+                "height": "4775",
+                "width": "2389"
+            },
+            {
+                "link_type": "Media",
+                "name": "tout-un-programme_5.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/593a6612-4214-4903-a372-ae5c9a2a6ebb_tout-un-programme_5.jpg?auto=compress,format",
+                "size": "668640",
+                "height": "1432",
+                "width": "3268"
+            },
+            {
+                "link_type": "Media",
+                "name": "tout-un-programme_6.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/61ca5c90-7929-4d2a-bed2-76d0de63355e_tout-un-programme_6.mp4",
+                "size": "1136431"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-09-07T19:02:03+0000",
+            "last_update": "2023-09-26T21:13:45+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZPodQBIAACIAcT5k%22%29+%5D%5D"
+    },
+    {
+        "id": "ZRHchRAAACEALXlO",
+        "title": "LMD Playground",
+        "slug": "lmd-playground",
+        "favorite": true,
+        "date": "2021-02-16",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "lmd-playground_0.jpg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/fea0e715-71d1-4467-8725-282dd4bdbc70_lmd-playground_0.jpg?auto=compress,format",
+            "size": "960431",
+            "height": "2880",
+            "width": "2880"
+        },
+        "excerpt": "À l'occasion des journées portes ouvertes de La Martinière Diderot 2021, j’ai imaginé une identité visuelle générative. Pour mettre en avant l'aspect modulaire du design, j'ai mis en place une interface graphique. Les visiteurs des JPO en ligne ont donc pu interagir avec pour générer\nleur propre palette colorimétrique, leur propre composition et animer le tout pour rendre leur visite plus attrayante.",
+        "tag": [
+            {
+                "id": "code-creatif",
+                "label": "Code créatif"
+            },
+            {
+                "id": "design-d-interface",
+                "label": "Design d'interface"
+            },
+            {
+                "id": "identite-visuelle",
+                "label": "Identité visuelle"
+            }
+        ],
+        "framework": "DSAA",
+        "rate": 16,
+        "content": "Je n'ai jamais été très fan des productions d'art génératif, cela m'évoque plus des œuvres de technicien ou de scientifique que des œuvres graphiques. Cependant, j'aimerais utiliser cette pratique pour réaliser des outils graphiques facilitant la déclinaison et l'itération autour d'une identité graphique. J'apprécie particulièrement les projets du Studio Dumbar et de Chevalvert, ils mettent à profit la programmation pour proposer des visuels et des animations originales. \n\n",
+        "externalLink": "https://www.lamartinierediderot.fr/jpo/jpo2021_jeu.html",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "lmd-playground_1.gif",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/5a708319-6fa5-44d8-9501-c3437999eade_lmd-playground_1.gif?auto=compress,format",
+                "size": "1090301",
+                "height": "1000",
+                "width": "800"
+            },
+            {
+                "link_type": "Media",
+                "name": "lmd-playground_2.jpg",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/d6281c36-2c4d-4224-a345-acf20c6515f3_lmd-playground_2.jpg?auto=compress,format",
+                "size": "181376",
+                "height": "675",
+                "width": "1200"
+            },
+            {
+                "link_type": "Media",
+                "name": "lmd-playground_3.png",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/7e46a0b4-cb79-4e44-a185-0cfd57722b47_lmd-playground_3.png?auto=compress,format",
+                "size": "655790",
+                "height": "2134",
+                "width": "3542"
+            },
+            {
+                "link_type": "Media",
+                "name": "lmd-playground_4.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/2116353f-c567-44f7-9a8d-e71b880dd867_lmd-playground_4.mp4",
+                "size": "2017800"
+            },
+            {
+                "link_type": "Media",
+                "name": "lmd-playground_5.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/9f9e8495-ba21-45ff-995b-6f6b6f230ef5_lmd-playground_5.mp4",
+                "size": "3344942"
+            },
+            {
+                "link_type": "Media",
+                "name": "lmd-playground_6.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/65ccf256-9780-4be6-a827-0320d6c2e169_lmd-playground_6.mov",
+                "size": "6493294"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-09-25T20:25:33+0000",
+            "last_update": "2023-09-26T21:08:48+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZRHchRAAACEALXlO%22%29+%5D%5D"
+    },
+    {
+        "id": "ZRNDzhAAACIAL9JJ",
+        "title": "Animer le confiné",
+        "slug": "animer-le-confine",
+        "favorite": false,
+        "date": "2020-05-13",
+        "thumbnail": {
+            "link_type": "Media",
+            "name": "animer-le-confine_0.jpeg",
+            "kind": "image",
+            "url": "https://images.prismic.io/timothe-joubert/6f963ddd-e588-40a9-812d-1b9e092ee8d0_animer-le-confine_0.jpeg?auto=compress,format",
+            "size": "517836",
+            "height": "2880",
+            "width": "2880"
+        },
+        "excerpt": "Afin de rendre le confinement productif, j'ai fait une petite série d'animation divers et variée. J'ai particulièrement apprécié faire des animations frame by frame, c'est une très bonne pratique pour se détendre et passer le temps, je recommande. ",
+        "tag": [
+            {
+                "id": "motion-design",
+                "label": "Motion design"
+            },
+            {
+                "id": "illustration",
+                "label": "Illustration"
+            }
+        ],
+        "framework": "Perso",
+        "rate": 14,
+        "content": "On retrouve notamment Fessetival, une animation reprenant le style des encarts publicitaires charnel sur les journaux.",
+        "medias": [
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_1.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/e738b808-5049-4bc6-91b6-147517164608_animer-le-confine_1.mp4",
+                "size": "12652722"
+            },
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_2.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/c6f54c4b-3161-4604-8229-6dbf9c282246_animer-le-confine_2.mov",
+                "size": "1028857"
+            },
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_3.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/eda7fbfb-e300-4f60-b977-5f1dd851ee8b_animer-le-confine_3.mov",
+                "size": "1258117"
+            },
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_4.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/410283c3-93e2-433c-95e3-2810f9e81cce_animer-le-confine_4.mov",
+                "size": "1864108"
+            },
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_5.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/2170b084-b757-4e40-9025-c3b264f46925_animer-le-confine_5.mp4",
+                "size": "1427746"
+            },
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_7.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/f31271ea-a37f-493d-8a2e-53820ea4db32_animer-le-confine_7.mov",
+                "size": "15994297"
+            },
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_8.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/a1533f5d-c0b7-45c9-8ff8-a106215c51dd_animer-le-confine_8.mp4",
+                "size": "12712275"
+            },
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_9.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/5160d9a3-003d-471a-9576-bbde80ea89cc_animer-le-confine_9.mov",
+                "size": "8385144"
+            },
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_10.mp4",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/99bc62d4-01f5-4385-97ad-a8948e1ca23d_animer-le-confine_10.mp4",
+                "size": "19088989"
+            },
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_13.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/112563cc-17c1-48d6-9d6f-a9cf12869552_animer-le-confine_13.mov",
+                "size": "8187923"
+            },
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_14.mov",
+                "kind": "document",
+                "url": "https://timothe-joubert.cdn.prismic.io/timothe-joubert/3e7733f4-34bf-4917-8b69-d4c1d26a7785_animer-le-confine_14.mov",
+                "size": "6255757"
+            },
+            {
+                "link_type": "Media",
+                "name": "animer-le-confine_15.gif",
+                "kind": "image",
+                "url": "https://images.prismic.io/timothe-joubert/7499752a-7e1f-4e34-aa62-d77bcda58010_animer-le-confine_15.gif?auto=compress,format",
+                "size": "1046013",
+                "height": "768",
+                "width": "2732"
+            }
+        ],
+        "awards": [],
+        "publication": {
+            "creation": "2023-09-26T21:04:27+0000",
+            "last_update": "2023-09-26T21:13:28+0000"
+        },
+        "endpoint": "https://timothe-joubert.cdn.prismic.io/api/v2/documents/search?ref=ZRNJiRAAACAAL9uO&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22ZRNDzhAAACIAL9JJ%22%29+%5D%5D"
+    }
+]
