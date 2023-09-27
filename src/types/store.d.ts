@@ -22,6 +22,7 @@ interface RootState {
     allProjectDisplayed: boolean
 
     // Global
+    firstPageError: NuxtError | null
     windowWidth: number
     windowHeight: number
     errorPage: NuxtError | null

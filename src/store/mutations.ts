@@ -1,5 +1,6 @@
 import type { MutationTree } from 'vuex'
 import type { PrismicDocument } from '@prismicio/types'
+import { NuxtError } from '@nuxt/types'
 import MutationType from '~/constants/mutation-type'
 import { RootState } from '~/types/store'
 import { ClientTheme, CommonContent } from '~/types/app'
@@ -26,6 +27,7 @@ export default {
     [MutationType.ALL_PROJECT_DISPLAYED]: (state, value: boolean) => (state.allProjectDisplayed = value),
 
     // Global
+    [MutationType.FIRST_PAGE_ERROR]: (state, value: NuxtError) => (state.firstPageError = value),
     [MutationType.WINDOW_WIDTH]: (state, value: number) => (state.windowWidth = value),
     [MutationType.WINDOW_HEIGHT]: (state, value: number) => (state.windowHeight = value),
     [MutationType.PREFERS_REDUCED_MOTION]: (state, navigation: boolean) => (state.prefersReducedMotion = navigation),

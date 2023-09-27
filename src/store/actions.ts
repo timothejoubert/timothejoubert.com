@@ -1,5 +1,5 @@
 import type { ActionTree, ActionContext } from 'vuex'
-import { Context } from '@nuxt/types'
+import { Context, NuxtError } from '@nuxt/types'
 import { PrismicDocument } from '@prismicio/types/src/value/document'
 import { Document } from '@prismicio/client/types/documents'
 import { RootState } from '~/types/store'
@@ -23,8 +23,13 @@ const actions: ActionTree<RootState, RootState> = {
                         : (projects as unknown as ProjectDocument[]).filter((project) => project.data.favorite),
                 })
             })
-            .catch((fetchError: Error) => {
-                throw new Error(`failed to fetch mainMenu or setting: ${fetchError}`)
+            .catch((requestError: Error) => {
+                commit(MutationType.FIRST_PAGE_ERROR, {
+                    statusCode: 500,
+                    message: requestError?.message,
+                } as NuxtError)
+
+                throw new Error(`failed to fetch mainMenu or setting: ${requestError}`)
             })
     },
     getCommonContent(

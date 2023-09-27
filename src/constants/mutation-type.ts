@@ -18,6 +18,7 @@ enum MutationType {
     ALL_PROJECT_DISPLAYED = 'allProjectDisplayed',
 
     // Global
+    FIRST_PAGE_ERROR = 'firstPageError',
     ERROR_PAGE = 'errorPage',
     WINDOW_WIDTH = 'windowWidth',
     WINDOW_HEIGHT = 'windowHeight',

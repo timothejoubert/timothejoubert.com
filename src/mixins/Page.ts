@@ -19,6 +19,11 @@ function isValidUid(uid: string): boolean {
 export default Vue.extend({
     async asyncData(context: Context) {
         const { $prismic, params, store, route, error } = context
+
+        if (process.server && store.state.firstPageError) {
+            error(store.state.firstPageError)
+        }
+
         let page
 
         const uid = params.pathMatch
@@ -35,24 +40,22 @@ export default Vue.extend({
         } else if (isProject) {
             page = store.getters.getProjectByUid(uid)
         } else if (getByUid) {
-            try {
-                page = await $prismic.api.getByUID(
-                    CustomType.PAGE,
-                    isPreview ? route.params.documentId : uid,
-                    route.fullPath.includes('/en') ? { lang: 'en-gb' } : undefined
-                )
-            } catch (fetchError: Error | any) {
-                error({
-                    statusCode: fetchError?.response?.status,
-                    message: fetchError?.message,
-                } as NuxtError)
-            }
+            page = await $prismic.api.getByUID(
+                CustomType.PAGE,
+                isPreview ? route.params.documentId : uid,
+                route.fullPath.includes('/en') ? { lang: 'en-gb' } : undefined
+            )
         }
 
         if (page) {
             await store.dispatch('updatePageData', page)
             return { page }
         } else {
+            error({
+                statusCode: 404,
+                message: 'Projet introuvable',
+            } as NuxtError)
+
             const fallBack = { page: { data: {}, title: 'fail to fetch page in mixin' } }
             await store.dispatch('updatePageData', fallBack)
             return fallBack

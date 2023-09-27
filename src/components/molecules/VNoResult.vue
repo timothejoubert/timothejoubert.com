@@ -1,9 +1,9 @@
 <template>
     <div :class="$style.root">
         <div :class="$style.word" class="text-h1">
-            <v-split-letters content="Oups..." tag="span" />
+            <v-split-letters :content="title" tag="span" />
         </div>
-        <div :class="$style.message">Aucun résultats</div>
+        <div :class="$style.message">{{ subTitle }}</div>
         <v-button animate size="s" :label="buttonLabel" filled @click="$emit('reset-filter')" />
     </div>
 </template>
@@ -14,6 +14,8 @@ import Vue from 'vue'
 export default Vue.extend({
     name: 'VNoResult',
     props: {
+        title: { type: String, default: 'Oups...' },
+        subTitle: { type: String, default: 'Aucun résultats' },
         buttonLabel: { type: String, default: 'Reset tous les filtres' },
     },
 })

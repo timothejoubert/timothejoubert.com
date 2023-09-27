@@ -9,11 +9,13 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (PreProd): disable referencement / deploy netlify / webHook prismic / redirection route ancien site (netlify) 
+** (PreProd): redirection route ancien site (netlify) 
 ** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
-** (Content): check for better media quality
+** (PreProd): Build sitemap
+** (404): Integration Page
 ** (VArchive): Clean integration and responsive
 ** (Responsive): Setting | Project | About
+** (Remplissage): check for better media quality
 ** (Remplissage): Animer le confiné 1ere video
 
 ### TODOS
@@ -28,6 +30,7 @@ import { Document } from '@prismicio/client/types/documents'
 ** (Video): add loader and aspect ratio
 
 ### DONE
+** (PreProd): disable referencement / deploy netlify / webHook prismic 
 ** (Archive): add rate order
 ** (Project): finish expanded style
 ** (VTopSetting): filter tags by existing tag in promote project

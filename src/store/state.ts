@@ -23,6 +23,7 @@ export default (): RootState => ({
     allProjectDisplayed: toBoolean(AppConst.ALL_PROJECT_DISPLAYED),
 
     // General
+    firstPageError: null,
     errorPage: null,
     windowWidth: 0,
     windowHeight: 0,

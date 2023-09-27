@@ -75,7 +75,7 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
             return this.$store.state.isProjectExpanded
         },
         isProjectOpen(): boolean {
-            return this.$store.getters.isProjectOpen
+            return this.$store.getters.isProjectOpen || !!(this.$nuxt as any)?.nuxt?.err
         },
         isHomePage() {
             return this.$store.getters.isHomePage

@@ -1,32 +1,42 @@
 <template>
-    <section :class="$style.root">
-        <div>
-            <h1>## Page error ## 🤦‍ Probablement une {{ error.statusCode }}...️</h1>
-            <h2>{{error.path}}</h2>
-        </div>
-        <p>{{ error.message }}</p>
-    </section>
+    <v-no-result
+        :class="$style.root"
+        :title="title"
+        :sub-title="subTitle"
+        button-label="Retour à l'accueil"
+        @reset-filter="onClick"
+    />
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import type {PropType} from 'vue'
-import {NuxtError} from "@nuxt/types";
+import type { PropType } from 'vue'
+import { NuxtError } from '@nuxt/types'
 
 export default Vue.extend({
     layout: 'error',
     props: {
         error: Object as PropType<NuxtError>,
     },
+    computed: {
+        title() {
+            const status = this.error?.statusCode
+            return status ? status.toString() : '## Erreur ##'
+        },
+        subTitle() {
+            return this.error?.message || "J'vais me reconvertir de toute façon"
+        },
+    },
+    methods: {
+        onClick() {
+            this.$router.push('/')
+        },
+    },
 })
 </script>
 
 <style lang="scss" module>
 .root {
-    position: relative;
-    max-width: rem(800);
-    min-height: calc(100vh - rem(68 + 28));
-    margin-inline: auto;
-    padding-block: rem(200);
+    --v-no-result-min-height: 100vh;
 }
 </style>
