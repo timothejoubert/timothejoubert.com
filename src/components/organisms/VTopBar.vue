@@ -17,7 +17,7 @@ export default Vue.extend({
     name: 'VTopBar',
     computed: {
         homeLink(): string {
-            return this.$getLocalePath() || '/'
+            return '/' // this?.$getLocalePath() || '/'
         },
         logoText(): string {
             return this.$store.getters.settings?.data?.website_name || this.$config.appName

@@ -41,7 +41,7 @@ export default Vue.extend({
 
         const isDocument = document && hasUid(document)
 
-        let url = context.parent.$getLocalePath()
+        let url = '' // context.parent.$getLocalePath()
 
         if (isDocument && document?.uid) {
             url += '/' + document.uid

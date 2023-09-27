@@ -98,7 +98,7 @@ export default Vue.extend({
         },
         linkProps(): Record<string, any> {
             const props: Record<string, any> = {}
-            const localePath = this.$getLocalePath()
+            const localePath = '' // this.$getLocalePath()
 
             if (this.to) {
                 props.to = localePath + this.to
