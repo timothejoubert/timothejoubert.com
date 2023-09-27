@@ -18,6 +18,10 @@
 ### WEBHOOK
 * Add the generated netlify url webhook in prismic settings [Prismic tuto](https://prismic.io/docs/webhooks) | [Netlify build hook page](https://app.netlify.com/sites/hugo-tomasi/settings/deploys#build-hooks)
 
+### REDIRECTION
+* Create netlify.toml or _redirect file in static folder with specific rules (Netlify tuto)[https://docs.netlify.com/routing/redirects/]
+
+
 ### PREVIEW
 * Setup preview in prismic setting BO (add name, domain and path to the preview in prismic settings)
 * Add the cdn link in header script and the preview path url in nuxt.config.js
@@ -32,6 +36,3 @@ prismic: {
     preview: process.env.PREVIEW_PATH
 }
 ```
-
-### REDIRECTION
-* Create netlify.toml file in static folder with specific rules (Netlify tuto)[https://docs.netlify.com/routing/redirects/]

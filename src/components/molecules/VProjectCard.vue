@@ -37,7 +37,7 @@ export default Vue.extend({
             }
         },
         activeProject() {
-            return this.$store.state.currentPageData.uid
+            return this.$store.state.currentPageData?.uid
         },
     },
 })

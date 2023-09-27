@@ -28,7 +28,9 @@ export default Vue.extend({
         const isHome = route.fullPath === '/en' || route.fullPath === '/'
         const getByUid = isPreview || isValidUid(uid)
 
-        if (isHome) {
+        if (isPreview) {
+            page = await $prismic.api.getByID(route.params.documentId)
+        } else if (isHome) {
             page = await $prismic.api.getSingle(CustomType.HOME_PAGE)
         } else if (isProject) {
             page = store.getters.getProjectByUid(uid)
