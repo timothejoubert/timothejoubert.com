@@ -9,6 +9,8 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
+** (PreProd): disable referencement / deploy netlify / webHook prismic / redirection route ancien site (netlify) 
+** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
 ** (Content): check for better media quality
 ** (VArchive): Clean integration and responsive
 ** (Responsive): Setting | Project | About

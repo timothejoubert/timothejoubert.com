@@ -64,7 +64,7 @@ export default {
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
         // https://i18n.nuxtjs.org/
-        'nuxt-i18n',
+        // 'nuxt-i18n',
         // https://sitemap.nuxtjs.org/guide/setup
         // '@nuxtjs/sitemap',
     ],
@@ -85,19 +85,19 @@ export default {
     // },
 
     // https://i18n.nuxtjs.org/
-    i18n: {
-        locales: locales.map((locale) => ({
-            code: locale,
-            file: `nuxt.${locale}.json`,
-        })),
-        lazy: true,
-        langDir: './assets/locales/',
-        detectBrowserLanguage: false,
-        strategy: 'prefix_except_default', // remove url path for default locale
-        defaultLocale,
-        vuex: false,
-        vueI18n: { fallbackLocale: defaultLocale },
-    },
+    // i18n: {
+    //     locales: locales.map((locale) => ({
+    //         code: locale,
+    //         file: `nuxt.${locale}.json`,
+    //     })),
+    //     lazy: true,
+    //     langDir: './assets/locales/',
+    //     detectBrowserLanguage: false,
+    //     strategy: 'prefix_except_default', // remove url path for default locale
+    //     defaultLocale,
+    //     vuex: false,
+    //     vueI18n: { fallbackLocale: defaultLocale },
+    // },
 
     // https://github.com/nuxt-community/svg-module
     svg: {
@@ -139,12 +139,7 @@ export default {
         isMultiLang: locales.length > 1,
     },
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: [
-        '~/plugins/prismic-components.ts',
-        '~/plugins/document-uid.ts',
-        '~/plugins/directives.ts',
-        '~/plugins/locale.ts',
-    ],
+    plugins: ['~/plugins/prismic-components.ts', '~/plugins/document-uid.ts', '~/plugins/directives.ts'],
 
     prismic: {
         preview: process.env.PREVIEW_PATH,

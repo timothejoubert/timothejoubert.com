@@ -17,7 +17,6 @@ function isValidUid(uid: string): boolean {
 }
 
 export default Vue.extend({
-    nuxtI18n: false,
     async asyncData(context: Context) {
         const { $prismic, params, store, route, error } = context
         let page
@@ -66,7 +65,7 @@ export default Vue.extend({
         ]
 
         return {
-            htmlAttrs: { lang: this.$i18n?.locale || this.$config.defaultLocale },
+            htmlAttrs: { lang: this.$config.defaultLocale },
             title: this.metaTitle,
             meta,
         }
@@ -108,10 +107,9 @@ export default Vue.extend({
             return !!this.page.data?.slices?.length && this.page.data?.slices
         },
         jsonLdPage(): Record<string, unknown> | undefined {
-            console.log((this.$store.getters.settings as SettingsDocument)?.data?.website_name)
             const siteName =
                 (this.$store.getters.settings as SettingsDocument)?.data?.website_name || this.$config.appName
-            const baseUrl = this.$config.appUrl + (this.$i18n.locale === 'en' ? 'en/' : '')
+            const baseUrl = this.$config.appUrl
 
             const websitePersonEntity = {
                 name: siteName,

@@ -2,7 +2,6 @@ import type { ActionTree, ActionContext } from 'vuex'
 import { Context } from '@nuxt/types'
 import { PrismicDocument } from '@prismicio/types/src/value/document'
 import { Document } from '@prismicio/client/types/documents'
-import type { LocaleObject } from 'nuxt-i18n'
 import { RootState } from '~/types/store'
 import MutationType from '~/constants/mutation-type'
 import { CustomTypeName } from '~/types/prismic/app-prismic'
@@ -13,13 +12,6 @@ type CommonContentResponse = (Document<SettingsDocument> | Document<ProjectDocum
 
 const actions: ActionTree<RootState, RootState> = {
     async nuxtServerInit({ commit, dispatch }: ActionContext<RootState, RootState>, context: Context) {
-        // TODO: don't know why i18n en exist
-        const isEnEnable =
-            context.route.fullPath.includes('/en') &&
-            (context.i18n.locales as LocaleObject[]).some((locale) => locale.code === 'en')
-
-        if (isEnEnable) await context.app.i18n.setLocale('en')
-
         await dispatch('getCommonContent', context)
             .then(([settings, projects]: Array<CommonContentResponse>) => {
                 const displayAllProjects = (settings as unknown as SettingsDocument)?.data?.display_all_projects

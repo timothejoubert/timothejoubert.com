@@ -26,7 +26,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import VueI18n from 'vue-i18n'
 import type { PropType } from 'vue'
 import { Theme } from '~/types/app'
 
@@ -44,7 +43,7 @@ export default Vue.extend({
     name: 'VButton',
     props: {
         filled: Boolean,
-        label: [String, Boolean, Object] as PropType<string | false | VueI18n.TranslateResult>,
+        label: [String, Boolean, Object] as PropType<string | false>,
         size: [String, Boolean] as PropType<VButtonSize | false>,
         elevated: Boolean,
         rounded: {
