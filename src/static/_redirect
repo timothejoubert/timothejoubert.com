@@ -1,0 +1,7 @@
+# Redirects from what the browser requests to what we serve
+/home            /
+/projet/elec     /
+/projet/audiome  /
+/projet/lmd      /lmd-playground
+/projet/hugo     /hugo-tomasi
+/projet/pogo     /pogote-moi-cette-fonte

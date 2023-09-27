@@ -14,6 +14,7 @@ import { Document } from '@prismicio/client/types/documents'
 ** (Content): check for better media quality
 ** (VArchive): Clean integration and responsive
 ** (Responsive): Setting | Project | About
+** (Remplissage): Animer le confiné 1ere video
 
 ### TODOS
 ** (JsonLD): Add projects data 
