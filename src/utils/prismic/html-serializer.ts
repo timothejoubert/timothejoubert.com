@@ -35,7 +35,7 @@ export default function htmlSerializer(type: string, element: PrismicDocument, _
             return /* html */ `<strong class="font-semibold">${children.join('')}</strong>`
 
         case 'hyperlink':
-            return /* html */ `<a href="${element.data.url}">${children.join('')}</a>`
+            return /* html */ `<a href="${element.data.url}" target="_blank">${children.join('')}</a>`
 
         default:
             return null

@@ -66,23 +66,21 @@ export default {
         // https://i18n.nuxtjs.org/
         // 'nuxt-i18n',
         // https://sitemap.nuxtjs.org/guide/setup
-        // '@nuxtjs/sitemap',
+        '@nuxtjs/sitemap',
     ],
 
     // https://sitemap.nuxtjs.org/guide/setup
-    // sitemap: {
-    //     hostname: process.env.APP_URL, // required
-    //     i18n: {
-    //         locales,
-    //         DefaultLocale: 'fr',
-    //     },
-    //     path: '/sitemap.xml',
-    //     cacheTime: 1000 * 60 * 60 * 20,
-    //     defaults: {
-    //         changefreq: 'daily',
-    //         lastmod: new Date(),
-    //     },
-    // },
+    sitemap: {
+        hostname: process.env.APP_URL, // required
+        path: '/sitemap.xml',
+        cacheTime: 1000 * 60 * 60 * 20,
+        exclude: ['/preview/**', '/slice-simulator/**', '/en/**'],
+        defaults: {
+            changefreq: 'daily',
+            lastmod: new Date(),
+        },
+        routes: ['/test', '/test2'],
+    },
 
     // https://i18n.nuxtjs.org/
     // i18n: {
@@ -112,8 +110,8 @@ export default {
     // Redirect to custom Error layout in SPA mode
     generate: {
         fallback: true,
-        // exclude: ['/preview', '/slice-simulator', '/en/preview', '/en/slice-simulator'],
-        // /^\/preview/, // start with "/path"
+        // exclude: ['/preview/index', '/slice-simulator/index', '/en/preview/index', '/en/slice-simulator/index'],
+        // exclude: /\/(preview|en|slice-simulator)/, // contains "/(string or string)"
         devtools: true,
     },
 

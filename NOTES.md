@@ -12,7 +12,6 @@ import { Document } from '@prismicio/client/types/documents'
 ** (PreProd): redirection route ancien site (netlify) 
 ** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
 ** (PreProd): Build sitemap
-** (404): Integration Page
 ** (VArchive): Clean integration and responsive
 ** (Responsive): Setting | Project | About
 ** (Remplissage): check for better media quality
@@ -30,6 +29,7 @@ import { Document } from '@prismicio/client/types/documents'
 ** (Video): add loader and aspect ratio
 
 ### DONE
+** (404): Integration Page
 ** (PreProd): disable referencement / deploy netlify / webHook prismic 
 ** (Archive): add rate order
 ** (Project): finish expanded style
