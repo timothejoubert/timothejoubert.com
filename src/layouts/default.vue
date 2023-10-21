@@ -6,20 +6,19 @@
             </transition>
         </client-only>
 
-        <div :class="[$style.body, isProjectOpen && $style['body--minify']]" @click="onBodyClick">
+        <div id="main" :class="[$style.body, isProjectOpen && $style['body--minify']]" @click="onBodyClick">
             <v-splash-screen v-if="isSplashScreenEnabled" />
-            <v-top-bar />
+            <v-top-bar :class="$style['top-bar']" />
 
             <v-favorite-setting :inert="isBodyContentInert" />
             <v-favorite-project-list :inert="isBodyContentInert" />
 
-            <v-archive :inert="isBodyContentInert" />
+            <v-archive v-if="displayArchive" :inert="isBodyContentInert" />
 
             <nuxt v-if="isHomePage" />
-            <v-about />
+            <v-about :class="$style.footer" />
         </div>
-
-        <transition name="project-modal">
+        <transition :name="$style['project-modal']">
             <div v-if="isProjectOpen" ref="project" :class="$style.project">
                 <Nuxt />
             </div>
@@ -36,6 +35,8 @@ import SplashScreen from '~/mixins/SplashScreen'
 import DocumentFocus from '~/mixins/DocumentFocus'
 import eventBus from '~/utils/event-bus'
 import EventType from '~/constants/event-type'
+import toBoolean from '~/utils/to-boolean'
+import AppConst from '~/constants/app'
 
 const DEBUG_INPUT_ENTER = 'admin'
 const DEBUG_INPUT_LEAVE = 'quit'
@@ -45,6 +46,7 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     data() {
         return {
             typedKey: '',
+            bodyScrollTop: 0,
         }
     },
     mounted() {
@@ -70,6 +72,9 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
                 this.isSettingOpen && this.$style['root--setting-open'],
                 ...this.splashScreenClasses,
             ]
+        },
+        displayArchive(): boolean {
+            return toBoolean(AppConst.DISPLAY_ARCHIVE)
         },
         isProjectExpanded() {
             return this.$store.state.isProjectExpanded
@@ -137,27 +142,27 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
         onBodyClick(_event: Event) {
             this.isProjectExpanded && this.$router.push('/')
         },
+        onBeforeProjectEnter() {
+            // this.toggleBodyPosition('absolute')
+        },
+        onBeforeProjectLeave() {
+            // this.toggleBodyPosition('initial')
+        },
+        // toggleBodyPosition(position: string) {
+        // const body = this.$refs.body as HTMLElement
+        // this.bodyScrollTop = body.scrollTop
+
+        // body.style.position = position
+        // body.scrollTop = this.bodyScrollTop
+        // },
     },
 })
 </script>
 
 <style lang="scss" module>
-//@include v-transition(
-//    'project-modal',
-//    (
-//        duration: 0.7s,
-//    ),
-//    (
-//        translate: 100% 0,
-//    ),
-//    $scope: 'local'
-//);
-
 .root {
     position: relative;
     display: flex;
-    overflow: hidden;
-    height: 100vh;
     background-color: var(--theme-background-color);
     color: var(--theme-foreground-color);
 
@@ -165,8 +170,16 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
         overflow: hidden;
     }
 
-    &--project-expanded {
-        /* !keep */
+    //&::after {
+    //    position: absolute;
+    //    content: '';
+    //    background-color: var(--theme-background-color);
+    //    inset: -100px 0;
+    //}
+
+    @include media('>=lg') {
+        overflow: hidden;
+        height: 100vh;
     }
 }
 
@@ -180,13 +193,13 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
 }
 
 .body {
+    display: flex;
     width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    //overflow: hidden;
     flex-shrink: 0;
     transition: expanded-project-transition(width);
-
-    &--minify {
-        width: 50%;
-    }
 
     &::before {
         position: absolute;
@@ -206,23 +219,84 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     .root--project-expanded & {
         cursor: pointer;
     }
+
+    @include media('<lg') {
+        &::before {
+            top: $v-top-bar-height;
+        }
+
+        &--minify::before {
+            opacity: 0.8;
+        }
+    }
+
+    @include media('>=lg') {
+        &--minify {
+            width: 50%;
+        }
+    }
+}
+
+.top-bar {
+    flex-shrink: 0;
+}
+
+.footer {
+    margin-top: auto;
+
+    &::after {
+        position: absolute;
+        z-index: -1;
+        background-color: var(--theme-background-color);
+        content: '';
+        inset: 0 $container-padding-inline * -1;
+    }
+
+    @include media('<lg') {
+        position: fixed;
+        z-index: 111 !important;
+        left: $container-padding-inline;
+    }
 }
 
 .project {
-    position: relative;
+    position: absolute;
     z-index: 110;
-    right: 0;
-    min-width: 50%;
-    border-left: 1px solid var(--theme-foreground-color);
+    top: $v-top-bar-height;
+    width: 100%;
     background-color: var(--theme-background-color);
-    transform-origin: center right;
-    transition: expanded-project-transition(min-width), expanded-project-transition(translate);
     translate: 0 0;
 
-    .root--project-expanded & {
-        //position: absolute;
-        min-width: 85%;
-        translate: -35vw 0;
+    @include media('>=lg') {
+        position: relative;
+        top: initial;
+        right: 0;
+        min-width: 50%;
+        border-left: 1px solid var(--theme-foreground-color);
+        transform-origin: center right;
+        transition: expanded-project-transition(min-width), expanded-project-transition(translate);
+        translate: 0 0;
+
+        .root--project-expanded & {
+            min-width: 85%;
+            translate: -35vw 0;
+        }
+    }
+}
+
+.project-modal {
+    @include media('<lg') {
+        &:global(#{'-enter-active'}),
+        &:global(#{'-leave-active'}) {
+            transition: translate 0.9s ease(out-quad);
+        }
+
+        &:global(#{'-enter'}),
+        &:global(#{'-enter-from'}),
+        &:global(#{'-leave-to'}) {
+            /* stylelint-disable-next-line unit-no-unknown */
+            translate: 0 100dvh;
+        }
     }
 }
 </style>

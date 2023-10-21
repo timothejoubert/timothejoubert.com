@@ -11,9 +11,7 @@ import { Document } from '@prismicio/client/types/documents'
 ### IN PROGRESS
 ** (PreProd): redirection route ancien site (netlify) 
 ** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
-** (PreProd): Build sitemap
-** (VArchive): Clean integration and responsive
-** (Responsive): Setting | Project | About
+** (PreProd): Sitemap
 ** (Remplissage): check for better media quality
 ** (Remplissage): Animer le confiné 1ere video
 
@@ -25,8 +23,10 @@ import { Document } from '@prismicio/client/types/documents'
 ** (organization): clean unused code
 
 ### IMPROVEMENT
+** (VArchive): Clean integration and responsive
 ** (Archive): highlight title letter on input search (js => reformat text with div wrapper )
 ** (Video): add loader and aspect ratio
+** (Responsive): Setting | Project | About
 
 ### DONE
 ** (404): Integration Page

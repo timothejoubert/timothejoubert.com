@@ -1,7 +1,7 @@
 <template>
     <nav v-if="projects.length" class="container" :class="$style.root">
         <ul :class="$style.projects" :style="columns && { '--card-number': columns }">
-            <li v-for="project in projects" :key="project.uid">
+            <li v-for="project in projects" :id="project.uid" :key="project.uid">
                 <v-project-card :project="project" :active-projects-id="activeProjectsId" />
             </li>
         </ul>
@@ -57,6 +57,10 @@ export default Vue.extend({
 .root {
     position: relative;
     padding-bottom: rem(30);
+
+    @include media('>=lg') {
+        padding-bottom: $v-about-toggle-height;
+    }
 }
 
 .projects {
@@ -71,6 +75,10 @@ export default Vue.extend({
     }
 
     @include media('>=lg') {
+        --card-number: 3;
+    }
+
+    @include media('>=xxl') {
         --card-number: 4;
     }
 

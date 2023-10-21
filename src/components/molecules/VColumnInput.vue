@@ -50,7 +50,7 @@ export default Vue.extend({
         return {
             displayButtons: false,
             current: '0',
-            maxColumnNumber: 6,
+            maxColumnNumber: 5,
             minColumnNumber: 2,
         }
     },

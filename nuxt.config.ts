@@ -112,7 +112,7 @@ export default {
         fallback: true,
         // exclude: ['/preview/index', '/slice-simulator/index', '/en/preview/index', '/en/slice-simulator/index'],
         // exclude: /\/(preview|en|slice-simulator)/, // contains "/(string or string)"
-        devtools: true,
+        // devtools: true,
     },
 
     // Global CSS: https://go.nuxtjs.dev/config-css

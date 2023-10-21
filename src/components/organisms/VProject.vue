@@ -1,6 +1,6 @@
 <template>
-    <div :class="$style.root" class="container">
-        <div :class="$style.header">
+    <div :class="[$style.root, isSticky && $style['root--sticky']]" class="container">
+        <div ref="header" :class="$style.header">
             <nuxt-link
                 to="/"
                 :class="$style.close"
@@ -55,6 +55,8 @@ export default Vue.extend({
         return {
             isProjectAlreadyOpen: false,
             mouseEnter: false,
+            // stickyObserver: null as null | IntersectionObserver,
+            isSticky: false,
         }
     },
     computed: {
@@ -75,10 +77,27 @@ export default Vue.extend({
             if (value) this.isProjectAlreadyOpen = true
         },
     },
+    // mounted() {
+    //     this.createStickyObserver()
+    // },
+    // beforeDestroy() {
+    //     this.stickyObserver?.disconnect()
+    // },
     methods: {
         onExpandClicked() {
             this.$store.commit(MutationType.IS_PROJECT_EXPANDED, !this.isProjectExpanded)
         },
+        // createStickyObserver() {
+        //     this.stickyObserver = new IntersectionObserver(this.onStickyObserverChange, {
+        //         threshold: 1,
+        //         rootMargin: `0px 0px 0px 0px`,
+        //     })
+        //
+        //     this.stickyObserver.observe(this.$refs.header as HTMLElement)
+        // },
+        // onStickyObserverChange(entries: IntersectionObserverEntry[]) {
+        //     this.isSticky = !entries[0].isIntersecting
+        // },
     },
 })
 </script>
@@ -125,6 +144,12 @@ export default Vue.extend({
 
 .expand {
     --v-button-padding: 0;
+
+    display: none;
+
+    @include media('>=lg') {
+        display: block;
+    }
 }
 
 .medias {
