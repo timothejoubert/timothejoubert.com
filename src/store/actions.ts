@@ -12,6 +12,9 @@ type CommonContentResponse = (Document<SettingsDocument> | Document<ProjectDocum
 
 const actions: ActionTree<RootState, RootState> = {
     async nuxtServerInit({ commit, dispatch }: ActionContext<RootState, RootState>, context: Context) {
+        const isPreview = context.route.path === `${context.$config.previewPath}/`
+        if (isPreview) await dispatch('setPreviewPage', context)
+
         await dispatch('getCommonContent', context)
             .then(([settings, projects]: Array<CommonContentResponse>) => {
                 const displayAllProjects = (settings as unknown as SettingsDocument)?.data?.display_all_projects
@@ -47,7 +50,7 @@ const actions: ActionTree<RootState, RootState> = {
         const projects = context.$prismic.api
             .query(context.$prismic.predicates.at('document.type', CustomType.PROJECT as CustomTypeName), {
                 orderings: '[my.project.date desc]',
-                pageSize: 100, // default 20
+                pageSize: 80, // default 20
                 ...localeOptions,
             })
             .then((response) => response.results)
@@ -56,6 +59,14 @@ const actions: ActionTree<RootState, RootState> = {
     },
     updatePageData({ commit }: ActionContext<RootState, RootState>, data: PrismicDocument) {
         commit(MutationType.CURRENT_PAGE_DATA, data)
+    },
+    async setPreviewPage(_actionContext: ActionContext<RootState, RootState>, context: Context) {
+        const documentId = context.route?.query?.documentId
+        const id = Array.isArray(documentId) ? documentId[0] : documentId
+        if (!id) return
+
+        const page = await context.$prismic.api.getByID(id)
+        await context.store.dispatch('updatePageData', page)
     },
 }
 

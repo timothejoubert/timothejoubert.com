@@ -29,7 +29,7 @@ export default Vue.extend({
         const uid = params.pathMatch
         const isProject = store.getters.isProjectUid(uid)
 
-        const isPreview = route.fullPath.includes(`${context.$config.previewPath}/`)
+        const isPreview = [route.path, route.fullPath].some((path) => path.includes(`${context.$config.previewPath}/`))
         const isHome = route.fullPath === '/en' || route.fullPath === '/'
         const getByUid = isPreview || isValidUid(uid)
 
