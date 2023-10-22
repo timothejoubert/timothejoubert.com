@@ -23,7 +23,7 @@ export default Vue.extend({
                 letter === ' ' ? '' : tag,
                 {
                     attrs: {
-                        'aria-content': letter,
+                        'letter-value': letter,
                     },
                     class: [
                         context.data.class,

@@ -12,6 +12,8 @@ import { Document } from '@prismicio/client/types/documents'
 ** (PreProd): redirection route ancien site (netlify) 
 ** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
 ** (PreProd): Sitemap
+** (Font): Compress fontFile (noi)
+** (Accessibility): aria attributre split-word-letter 
 
 ### TODOS
 ** (ColorSwitcher): update layout sur mobile

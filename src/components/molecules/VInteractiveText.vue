@@ -71,7 +71,6 @@ export default (Vue as VueConstructor<Vue & Component>).extend({
             })
         },
         onMouseMove(event: MouseEvent) {
-            console.log('onMouseMove')
             this.letters.forEach((letter) => {
                 const mouseDist = getDistance(event.clientX, letter.xCenter, event.clientY, letter.yCenter)
                 const dist = isNaN(mouseDist) ? 0 : parseInt(mouseDist.toFixed(2))

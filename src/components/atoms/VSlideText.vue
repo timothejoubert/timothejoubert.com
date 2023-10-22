@@ -23,7 +23,7 @@ export default Vue.extend({
         position: absolute;
         top: 0;
         left: 0;
-        content: attr(aria-content);
+        content: attr(letter-value);
         opacity: 0;
         transition: opacity 300ms calc(var(--letter-index) * 20ms) ease(out-quad);
         translate: 0 100%;

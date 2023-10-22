@@ -3,7 +3,6 @@
         :class="$style.root"
         :aria-label="`${isOpen ? 'Close' : 'Open'} options panel`"
         type="button"
-        role="switch"
         :aria-checked="isOpen.toString()"
         @click="toggleSettings"
     >
