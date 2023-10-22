@@ -141,13 +141,13 @@ export default {
         isMultiLang: locales.length > 1,
     },
     prismic: {
-        preview: false, // process.env.PREVIEW_PATH,
-        // injectComponents: true,
         endpoint: apiEndpoint,
         modern: true,
         linkResolver,
         htmlSerializer,
-        // toolbar: false,
+        preview: false, // process.env.PREVIEW_PATH,
+        // injectComponents: true,
+        toolbar: false,
     },
 
     image: {

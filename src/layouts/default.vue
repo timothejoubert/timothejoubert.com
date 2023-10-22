@@ -15,7 +15,7 @@
 
             <v-archive v-if="displayArchive" :inert="isBodyContentInert" />
 
-            <!--            <nuxt v-if="isHomePage" />-->
+            <nuxt v-if="isHomePage" />
             <v-about :class="$style.footer" />
         </div>
         <transition :name="$style['project-modal']">

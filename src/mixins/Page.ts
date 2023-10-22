@@ -80,7 +80,7 @@ export default Vue.extend({
             return this.page?.data
         },
         appTitle(): string {
-            return this.$store.getters.settings?.data?.website_name || this.$config.appName
+            return this.$store.getters.settings?.data?.website_name || this.$config.appName || 'Timothé Joubert'
         },
         metaTitle(): string {
             if (this.isHome) return this.appTitle
