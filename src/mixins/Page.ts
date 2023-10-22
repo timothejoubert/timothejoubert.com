@@ -9,8 +9,8 @@ import { DocumentPageReachableData } from '~/types/prismic/app-prismic'
 import CustomType from '~/constants/custom-type'
 import { isHomePageDocument } from '~/utils/prismic/document-entity'
 import { isProjectDocument } from '~/utils/prismic/custom-type-entity'
-import { SettingsDocument, ProjectDocumentData } from '~~/prismicio-types'
-import { getProjectYear } from '~/utils/prismic/date'
+import { SettingsDocument } from '~~/prismicio-types'
+import { getJsonLdData } from '~/utils/jsonLd'
 
 function isValidUid(uid: string): boolean {
     return uid === 'projects'
@@ -114,54 +114,13 @@ export default Vue.extend({
         jsonLdPage(): Record<string, unknown> | undefined {
             const siteName =
                 (this.$store.getters.settings as SettingsDocument)?.data?.website_name || this.$config.appName
-            const baseUrl = this.$config.appUrl
 
-            const websitePersonEntity = {
-                name: siteName,
-                alternateName: siteName.replace(/\s/g, ''),
-                url: baseUrl,
-                jobTitle: 'Développeur Front-end et Designer graphique',
-            }
-
-            if (this.isHome) {
-                return {
-                    '@context': 'https://schema.org',
-                    '@type': 'WebSite',
-                    ...websitePersonEntity,
-                    author: {
-                        '@type': 'Person',
-                        givenName: 'Timothé',
-                        familyName: 'Joubert',
-                        birthDate: '1998-08-24',
-                        url: 'https://timothejoubert.com',
-                    },
-                }
-            } else if (this.isProjectPage) {
-                const project = this.pageData as ProjectDocumentData
-                const projectContent: Record<string, unknown> = {}
-                const media = (project.thumbnail as { url?: string })?.url
-
-                if (project.title) projectContent.name = project.title
-                if (media) projectContent.image = media
-                if (project.content || project.short_description)
-                    projectContent.description =
-                        this.$prismic.asText(project.short_description) || this.$prismic.asText(project.content)
-                if (project.date) projectContent.copyrightYear = getProjectYear(project.date)
-
-                return {
-                    '@context': 'https://schema.org',
-                    '@type': 'VisualArtwork',
-                    artform: 'Video',
-                    artMedium: 'Digital',
-                    creator: {
-                        '@type': 'Person',
-                        ...websitePersonEntity,
-                    },
-                    ...projectContent,
-                }
-            } else {
-                return undefined
-            }
+            return getJsonLdData({
+                document: this.page,
+                siteName,
+                baseUrl: this.$config.appUrl,
+                websiteSettings: this.$store.getters.settings,
+            })
         },
     },
     created() {

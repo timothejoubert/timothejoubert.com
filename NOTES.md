@@ -12,11 +12,12 @@ import { Document } from '@prismicio/client/types/documents'
 ** (PreProd): redirection route ancien site (netlify) 
 ** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
 ** (PreProd): Sitemap
+** (JsonLD): Add projects data 
 ** (Remplissage): check for better media quality
 ** (Remplissage): Animer le confiné 1ere video
 
 ### TODOS
-** (JsonLD): Add projects data 
+** (Hover): Logo 
 ** (SEO): Check headings
 ** (CMS field on VMedia): Display controls or sound on videoMedia  
 ** (VSetting): Check VInteractiveText listener on resize 

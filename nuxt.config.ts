@@ -4,6 +4,7 @@ import { version } from './package.json'
 import linkResolver from './src/utils/prismic/link-resolver'
 import htmlSerializer from './src/utils/prismic/html-serializer'
 import { getBreakpoints } from '~/utils/breakpoint'
+import { createSitemaps, createSitemap } from '~/utils/sitemap'
 
 const isProduction = process.env.NODE_ENV === 'production'
 const apiEndpoint = `https://${process.env.PRISMIC_REPOSITORY_NAME}.cdn.prismic.io/api/v2`
@@ -12,10 +13,8 @@ const locales = ['fr']
 export const defaultLocale = 'fr'
 
 export default {
-    target: 'static',
-
+    // target: 'static',
     srcDir: 'src',
-
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         title: process.env.APP_TITLE,
@@ -45,6 +44,15 @@ export default {
             },
         ],
     },
+    // Global CSS: https://go.nuxtjs.dev/config-css
+    css: ['@/scss/main'],
+    // https://github.com/nuxt-community/style-resources-module#setup
+    // can access @include... in all files
+    styleResources: {
+        scss: ['@/scss/_style-resources.scss'],
+        hoistUseStatements: true,
+    },
+
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
         '@nuxtjs/prismic',
@@ -66,35 +74,22 @@ export default {
         // https://i18n.nuxtjs.org/
         // 'nuxt-i18n',
         // https://sitemap.nuxtjs.org/guide/setup
-        '@nuxtjs/sitemap',
+        // '@nuxtjs/sitemap',
     ],
+    // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+    plugins: ['~/plugins/prismic-components.ts', '~/plugins/document-uid.ts', '~/plugins/directives.ts'],
 
     // https://sitemap.nuxtjs.org/guide/setup
-    sitemap: {
-        hostname: process.env.APP_URL, // required
-        path: '/sitemap.xml',
-        cacheTime: 1000 * 60 * 60 * 20,
-        exclude: ['/preview/**', '/slice-simulator/**', '/en/**'],
-        defaults: {
-            changefreq: 'daily',
-            lastmod: new Date(),
-        },
-        routes: ['/test', '/test2'],
-    },
-
-    // https://i18n.nuxtjs.org/
-    // i18n: {
-    //     locales: locales.map((locale) => ({
-    //         code: locale,
-    //         file: `nuxt.${locale}.json`,
-    //     })),
-    //     lazy: true,
-    //     langDir: './assets/locales/',
-    //     detectBrowserLanguage: false,
-    //     strategy: 'prefix_except_default', // remove url path for default locale
-    //     defaultLocale,
-    //     vuex: false,
-    //     vueI18n: { fallbackLocale: defaultLocale },
+    // sitemap: {
+    //     hostname: process.env.APP_URL, // required
+    //     path: '/sitemap.xml',
+    //     cacheTime: 1000 * 60 * 60 * 20,
+    //     exclude: ['/en/**/*', '/preview/**', '/slice-simulator/**'],
+    //     defaults: {
+    //         changefreq: 'daily',
+    //         lastmod: new Date(),
+    //     },
+    //     routes: createSitemap('fr'),
     // },
 
     // https://github.com/nuxt-community/svg-module
@@ -107,22 +102,23 @@ export default {
     },
 
     // https://nuxtjs.org/deployments/netlify/
-    // Redirect to custom Error layout in SPA mode
     generate: {
-        fallback: true,
-        // exclude: ['/preview/index', '/slice-simulator/index', '/en/preview/index', '/en/slice-simulator/index'],
+        fallback: true, // Redirect error to 404.html
+        subFolders: false,
+        crawler: false,
+        devtools: true,
+        ignore: [
+            '.nuxt', // buildDir
+            'static', // dir.static
+            'dist', // generate.dir
+            'assets',
+            'node_modules',
+            '.**/*',
+            '.*',
+            'README.md',
+        ],
+        // exclude: [/^\/en/, '/preview', '/slice-simulator/index'],
         // exclude: /\/(preview|en|slice-simulator)/, // contains "/(string or string)"
-        // devtools: true,
-    },
-
-    // Global CSS: https://go.nuxtjs.dev/config-css
-    css: ['@/scss/main'],
-
-    // https://github.com/nuxt-community/style-resources-module#setup
-    // can access @include... in all files
-    styleResources: {
-        scss: ['@/scss/_style-resources.scss'],
-        hoistUseStatements: true,
     },
 
     // Auto import components: https://go.nuxtjs.dev/config-components
@@ -136,9 +132,6 @@ export default {
         previewPath: process.env.PREVIEW_PATH,
         isMultiLang: locales.length > 1,
     },
-    // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: ['~/plugins/prismic-components.ts', '~/plugins/document-uid.ts', '~/plugins/directives.ts'],
-
     prismic: {
         preview: process.env.PREVIEW_PATH,
         injectComponents: true,
@@ -151,6 +144,8 @@ export default {
 
     image: {
         prismic: {},
+        // https://image.nuxt.com/get-started/configuration
+        format: ['webp'],
         screens: getBreakpoints(),
     },
 

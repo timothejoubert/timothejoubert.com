@@ -15,7 +15,7 @@
 
             <v-archive v-if="displayArchive" :inert="isBodyContentInert" />
 
-            <nuxt v-if="isHomePage" />
+            <!--            <nuxt v-if="isHomePage" />-->
             <v-about :class="$style.footer" />
         </div>
         <transition :name="$style['project-modal']">
@@ -23,6 +23,8 @@
                 <Nuxt />
             </div>
         </transition>
+
+        <script v-if="isHomePage" type="application/ld+json" v-html="jsonLdHome"></script>
     </div>
 </template>
 
@@ -37,6 +39,8 @@ import eventBus from '~/utils/event-bus'
 import EventType from '~/constants/event-type'
 import toBoolean from '~/utils/to-boolean'
 import AppConst from '~/constants/app'
+import { SettingsDocument } from '~~/prismicio-types'
+import { getJsonLdData, getJsonLdProjectList } from '~/utils/jsonLd'
 
 const DEBUG_INPUT_ENTER = 'admin'
 const DEBUG_INPUT_LEAVE = 'quit'
@@ -65,6 +69,26 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
         window.removeEventListener('keyup', this.onKeyUp)
     },
     computed: {
+        jsonLdHome(): Record<string, unknown> {
+            const siteName =
+                (this.$store.getters.settings as SettingsDocument)?.data?.website_name || this.$config.appName
+
+            const data = getJsonLdData({
+                document: this.$store.state.currentPageData,
+                siteName,
+                baseUrl: this.$config.appUrl,
+                websiteSettings: this.$store.getters.settings,
+            })
+
+            const displayedProject = this.displayArchive
+                ? this.$store.getters.projects
+                : this.$store.getters.highlightedProjects
+
+            return {
+                ...data,
+                hasPart: getJsonLdProjectList(displayedProject),
+            }
+        },
         rootClasses(): (string | false | undefined)[] {
             return [
                 this.$style.root,
@@ -253,7 +277,7 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     }
 
     @include media('<lg') {
-        position: fixed;
+        position: fixed !important;
         z-index: 111 !important;
         left: $container-padding-inline;
     }

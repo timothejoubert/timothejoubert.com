@@ -15,6 +15,7 @@ import IconLinkedin from '~/assets/images/icons/social-linkedin.svg?sprite'
 import IconBehance from '~/assets/images/icons/social-behance.svg?sprite'
 import IconVimeo from '~/assets/images/icons/social-vimeo.svg?sprite'
 import IconTikTok from '~/assets/images/icons/social-tiktok.svg?sprite'
+import { SettingsDocumentData } from '~~/prismicio-types'
 
 export interface SocialsContent {
     name: string
@@ -61,20 +62,18 @@ const getSocialIcon = (name?: string | null): VueConstructor | string => {
     }
 }
 
-export function getSocialsData(socialsList: Social[] | undefined): SocialsContent[] {
+export function getSocialsData(socialsList: SettingsDocumentData['socials'] | undefined): SocialsContent[] {
     if (!socialsList?.length) return []
 
-    return socialsList
-        ?.map((item) => {
-            const { social, link, label } = item
-            return {
-                url: link?.url || '',
-                name: social || '',
-                tagIcon: getSocialIcon(social),
-                label: label || '',
-            }
-        })
-        ?.filter((item) => !!item)
+    return socialsList?.map((item) => {
+        const { social, link, label } = item
+        return {
+            url: (link as { url?: string })?.url || '',
+            name: social || '',
+            tagIcon: getSocialIcon(social),
+            label: label || '',
+        }
+    })
 }
 
 export default Vue.extend({
@@ -82,9 +81,9 @@ export default Vue.extend({
     computed: {
         socialList(): SocialsContent[] {
             const socials = this.$store.getters.settings?.data?.socials
-            if (!socials && !socials?.length) return []
 
-            return getSocialsData(socials)
+            if (socials?.length) return getSocialsData(socials)
+            else return []
         },
     },
 })

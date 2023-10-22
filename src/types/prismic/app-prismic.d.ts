@@ -2,7 +2,12 @@
 import { ImageField, PrismicDocumentWithoutUID } from '@prismicio/types'
 import { PrismicDocument, PrismicDocumentWithUID } from '@prismicio/types/src/value/document'
 import { LinkToMediaField } from '@prismicio/types/src/value/linkToMedia'
-import { SettingsDocument, AllDocumentTypes, ProjectDocument } from '~~/prismicio-types'
+import {
+    SettingsDocument,
+    AllDocumentTypes,
+    ProjectDocument,
+    ProjectDocumentDataTagGroupItem,
+} from '~~/prismicio-types'
 
 // GLOBAL
 export type CustomTypeName = extractDocumentType<AllDocumentTypes>
@@ -10,6 +15,9 @@ export type DocumentWithUid = extractDocument<AllDocumentTypes, PrismicDocumentW
 export type DocumentWithUidNames = extractDocumentType<DocumentWithUid>
 export type DocumentWithoutUidNames = extractDocumentType<extractDocument<AllDocumentTypes, PrismicDocumentWithoutUID>>
 export type DocumentPageReachable = Exclude<DocumentWithUid, { type: 'project_framework' | 'project_tag' }>
+
+export type TagLabel = ProjectDocumentDataTagGroupItem['tag']
+export type FrameworkLabel = ProjectDocumentData['framework']
 
 export type DocumentWithUidData = DocumentWithUid['data']
 export type DocumentPageReachableData = DocumentPageReachable['data']

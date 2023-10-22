@@ -5,10 +5,8 @@
             <script v-if="jsonLdPage" type="application/ld+json" v-html="jsonLdPage"></script>
         </template>
     </v-project>
-    <!-- <div :class="$style.root">-->
     <!-- <slice-zone v-if="slices && components" wrapper="main" :slices="slices" :components="components" />-->
     <!-- <v-style-preview />-->
-    <!-- </div>-->
 </template>
 
 <script lang="ts">
