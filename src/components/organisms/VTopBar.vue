@@ -1,8 +1,15 @@
 <template>
     <div :class="$style.root" class="container">
-        <nuxt-link :to="homeLink" :class="$style.home" :inert="isLinkDisabled" @click.native="onClick">
-            <div :class="$style.logo"></div>
-            <div :class="$style['logo-text']" class="text-h2">{{ logoText }}</div>
+        <nuxt-link
+            :to="homeLink"
+            :class="$style['back-home']"
+            :event="isLinkDisabled ? '' : 'click'"
+            @click.native="onClick"
+        >
+            <div :class="$style.logo">
+                <span :class="$style.logo__inner">T</span>
+            </div>
+            <VInteractiveText :class="$style['logo-text']" class="text-h2" :content="logoText" />
         </nuxt-link>
 
         <v-theme-switcher />
@@ -49,17 +56,40 @@ export default Vue.extend({
     background-color: var(--theme-background-color);
 }
 
-.home {
+.back-home {
     display: flex;
     align-items: center;
     gap: rem(12);
 }
 
 .logo {
+    display: flex;
     overflow: hidden;
     width: rem(24);
+    align-items: center;
+    justify-content: center;
     aspect-ratio: 1;
     background-color: var(--theme-foreground-color);
     border-radius: 0 50% 0 0;
+    color: var(--theme-background-color);
+    font-size: rem(18);
+    font-weight: 900;
+}
+
+.logo__inner {
+    position: absolute;
+    //scale: 0;
+    //transition: scale 0.3s ease(out-quad);
+    translate: 0 1px;
+
+    //@media (hover: hover) {
+    //    .back-home:hover & {
+    //        scale: 1;
+    //    }
+    //}
+}
+
+.logo-text {
+    --font-weight: 700;
 }
 </style>

@@ -41,6 +41,7 @@ export default Vue.extend({
 }
 
 .description {
+    isolation: isolate;
     margin-block: rem(60) rem(100);
     text-wrap: balance;
 

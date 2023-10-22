@@ -5,7 +5,7 @@
                 v-for="index in maxColumnNumber"
                 :key="index"
                 :class="[$style.shape, index <= current && $style['shape--selected']]"
-                :inert="index < minColumnNumber"
+                :disabled="index < minColumnNumber"
                 @mouseenter="onMouseEnter(index)"
                 @click="onClick(index)"
             ></button>
@@ -120,6 +120,10 @@ export default Vue.extend({
     height: rem(22);
     background-color: var(--theme-foreground-color);
     border-radius: 0 9px 0 0;
+
+    &[disabled] {
+        cursor: not-allowed;
+    }
 
     &::before,
     &::after {

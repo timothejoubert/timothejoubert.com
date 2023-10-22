@@ -47,7 +47,7 @@ export default (Vue as VueConstructor<Vue & Component>).extend({
     },
     methods: {
         init() {
-            if (this.listenerInit) return
+            if (this.listenerInit && !this.triggerEvent) return
 
             this.setLetters()
             this.initListener()
@@ -71,6 +71,7 @@ export default (Vue as VueConstructor<Vue & Component>).extend({
             })
         },
         onMouseMove(event: MouseEvent) {
+            console.log('onMouseMove')
             this.letters.forEach((letter) => {
                 const mouseDist = getDistance(event.clientX, letter.xCenter, event.clientY, letter.yCenter)
                 const dist = isNaN(mouseDist) ? 0 : parseInt(mouseDist.toFixed(2))
@@ -84,8 +85,10 @@ export default (Vue as VueConstructor<Vue & Component>).extend({
         },
         onMouseLeave() {
             this.letters.forEach((letter) => {
-                letter.element.style.setProperty('--font-weight', '300')
-                letter.element.style.setProperty('--font-italic', '0')
+                letter.element.style.removeProperty('--font-weight')
+                letter.element.style.removeProperty('--font-italic')
+                // letter.element.style.setProperty('--font-weight', '300')
+                // letter.element.style.setProperty('--font-italic', '0')
             })
         },
         getLetterCenter(element: HTMLElement, axe: 'left' | 'top') {

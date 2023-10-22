@@ -90,13 +90,13 @@ export default {
             changefreq: 'daily',
             lastmod: new Date(),
         },
+        routes: createSitemap('fr'),
         // routes: [
         //     {
         //         path: 'sitemap.xml',
         //         exclude: ['/cabinet', '/cabinet/*', '/cabinet/recruiter/*', '/account-removed', '/search-by-cv'],
         //     },
         // ],
-        routes: createSitemap('fr'),
     },
 
     // https://github.com/nuxt-community/svg-module

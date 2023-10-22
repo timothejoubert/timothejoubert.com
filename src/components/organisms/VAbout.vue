@@ -2,7 +2,7 @@
     <div :class="rootClasses" class="container">
         <v-about-toggle />
         <transition name="about-content" @after-enter="onAfterEnter">
-            <div v-if="isAboutOpen" :class="$style.wrapper" :inert="!isAboutOpen">
+            <div v-show="isAboutOpen" :class="$style.wrapper" :inert="!isAboutOpen">
                 <v-about-content />
             </div>
         </transition>
