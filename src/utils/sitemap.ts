@@ -21,7 +21,6 @@ export function createSitemap(locale: string) {
                 $prismic.predicates.at('document.type', CustomType.PROJECT as CustomTypeName)
             )
             const routes = projectsResponse.results.map((page: ProjectDocument) => page.uid)
-            console.log(locale, routes)
 
             return routes
         },
