@@ -24,7 +24,7 @@ export const getters: GetterTree<RootState, RootState> = {
         return getters.getCommonContentData('projects')
     },
     highlightedProjects(_state: RootState, getters: any): ProjectDocument[] {
-        return getters.projects.filter((project: ProjectDocument) => project.data.favorite)
+        return getters.projects?.filter((project: ProjectDocument) => project.data.favorite) || []
     },
     isProjectUid: (_state: RootState, getters: any) => {
         return (uid: string): boolean => !!getters.projects?.some((project: ProjectDocument) => project.uid === uid)

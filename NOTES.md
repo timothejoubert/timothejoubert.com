@@ -12,18 +12,18 @@ import { Document } from '@prismicio/client/types/documents'
 ** (PreProd): redirection route ancien site (netlify) 
 ** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
 ** (PreProd): Sitemap
-** (JsonLD): Add projects data 
-** (Remplissage): check for better media quality
-** (Remplissage): Animer le confiné 1ere video
 
 ### TODOS
+** (Remplissage): check for better media quality
+** (Remplissage): Animer le confiné 1ere video
 ** (Hover): Logo 
-** (SEO): Check headings
 ** (CMS field on VMedia): Display controls or sound on videoMedia  
 ** (VSetting): Check VInteractiveText listener on resize 
-** (organization): clean unused code
 
 ### IMPROVEMENT
+** (organization): clean unused code
+** (SEO): Check headings
+** (JsonLD): Better projects data 
 ** (VArchive): Clean integration and responsive
 ** (Archive): highlight title letter on input search (js => reformat text with div wrapper )
 ** (Video): add loader and aspect ratio
