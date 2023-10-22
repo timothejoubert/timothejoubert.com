@@ -74,23 +74,30 @@ export default {
         // https://i18n.nuxtjs.org/
         // 'nuxt-i18n',
         // https://sitemap.nuxtjs.org/guide/setup
-        // '@nuxtjs/sitemap',
+        '@nuxtjs/sitemap',
     ],
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: ['~/plugins/prismic-components.ts', '~/plugins/document-uid.ts', '~/plugins/directives.ts'],
 
     // https://sitemap.nuxtjs.org/guide/setup
-    // sitemap: {
-    //     hostname: process.env.APP_URL, // required
-    //     path: '/sitemap.xml',
-    //     cacheTime: 1000 * 60 * 60 * 20,
-    //     exclude: ['/en/**/*', '/preview/**', '/slice-simulator/**'],
-    //     defaults: {
-    //         changefreq: 'daily',
-    //         lastmod: new Date(),
-    //     },
-    //     routes: createSitemap('fr'),
-    // },
+    sitemap: {
+        generate: true, // Enable me when using nuxt generate
+        hostname: process.env.APP_URL, // required
+        path: '/sitemap.xml',
+        cacheTime: 1000 * 60 * 60 * 20,
+        exclude: ['/en/**/*', '/preview/**', '/slice-simulator/**', '/slice-simulator'],
+        defaults: {
+            changefreq: 'daily',
+            lastmod: new Date(),
+        },
+        // routes: [
+        //     {
+        //         path: 'sitemap.xml',
+        //         exclude: ['/cabinet', '/cabinet/*', '/cabinet/recruiter/*', '/account-removed', '/search-by-cv'],
+        //     },
+        // ],
+        routes: createSitemap('fr'),
+    },
 
     // https://github.com/nuxt-community/svg-module
     svg: {
@@ -107,6 +114,7 @@ export default {
         subFolders: false,
         crawler: false,
         devtools: true,
+        // avoid to regenerate if these folders change
         ignore: [
             '.nuxt', // buildDir
             'static', // dir.static
@@ -117,7 +125,7 @@ export default {
             '.*',
             'README.md',
         ],
-        // exclude: [/^\/en/, '/preview', '/slice-simulator/index'],
+        exclude: [/^\/en/, '/preview', '/slice-simulator/index'],
         // exclude: /\/(preview|en|slice-simulator)/, // contains "/(string or string)"
     },
 

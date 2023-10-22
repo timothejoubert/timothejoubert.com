@@ -15,7 +15,7 @@ import IconLinkedin from '~/assets/images/icons/social-linkedin.svg?sprite'
 import IconBehance from '~/assets/images/icons/social-behance.svg?sprite'
 import IconVimeo from '~/assets/images/icons/social-vimeo.svg?sprite'
 import IconTikTok from '~/assets/images/icons/social-tiktok.svg?sprite'
-import { SettingsDocumentData } from '~~/prismicio-types'
+import { SettingsDocumentData, SettingsDocumentDataSocialsItem } from '~~/prismicio-types'
 
 export interface SocialsContent {
     name: string
@@ -65,7 +65,7 @@ const getSocialIcon = (name?: string | null): VueConstructor | string => {
 export function getSocialsData(socialsList: SettingsDocumentData['socials'] | undefined): SocialsContent[] {
     if (!socialsList?.length) return []
 
-    return socialsList?.map((item) => {
+    return socialsList?.map((item: SettingsDocumentDataSocialsItem) => {
         const { social, link, label } = item
         return {
             url: (link as { url?: string })?.url || '',

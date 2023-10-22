@@ -12,8 +12,7 @@ import { ProjectDocument } from '~~/prismicio-types'
 
 export function createSitemap(locale: string) {
     return {
-        // path: `/sitemap-${locale}.xml`,
-        path: `/sitemap.xml`,
+        path: `/sitemap-${locale}.xml`,
         async routes() {
             if (!process.env.APP_URL) throw new Error('API URL or BASE URL is not configured.')
             const { $prismic } = require('@nuxtjs/prismic')

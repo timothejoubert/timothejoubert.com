@@ -101,7 +101,7 @@ $slider-width: clamp(rem(260), 27vw, rem(450)); //rem(360);
 
 .root {
     position: fixed;
-    z-index: 102;
+    z-index: 1002;
     display: flex;
     width: 100%;
     height: 100%;
