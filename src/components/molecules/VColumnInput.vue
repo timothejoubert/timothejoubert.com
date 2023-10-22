@@ -6,6 +6,7 @@
                 :key="index"
                 :class="[$style.shape, index <= current && $style['shape--selected']]"
                 :disabled="index < minColumnNumber"
+                :aria-label="'Changer le layout en' + index + ' colonnes'"
                 @mouseenter="onMouseEnter(index)"
                 @click="onClick(index)"
             ></button>

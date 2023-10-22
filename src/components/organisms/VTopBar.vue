@@ -63,17 +63,21 @@ export default Vue.extend({
 }
 
 .logo {
-    display: flex;
-    overflow: hidden;
-    width: rem(24);
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1;
-    background-color: var(--theme-foreground-color);
-    border-radius: 0 50% 0 0;
-    color: var(--theme-background-color);
-    font-size: rem(18);
-    font-weight: 900;
+    display: none;
+
+    @include media('>=550px') {
+        display: flex;
+        overflow: hidden;
+        width: rem(24);
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1;
+        background-color: var(--theme-foreground-color);
+        border-radius: 0 50% 0 0;
+        color: var(--theme-background-color);
+        font-size: rem(18);
+        font-weight: 900;
+    }
 }
 
 .logo__inner {

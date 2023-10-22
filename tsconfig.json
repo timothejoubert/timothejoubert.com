@@ -32,7 +32,6 @@
             "prismic-ts-codegen",
             "@prismicio/types",
             "@types/node",
-            "nuxt-i18n",
             "@nuxt/image",
             "@nuxt/content",
             "webpack-env",
