@@ -1,7 +1,7 @@
 <template>
     <div :class="[$style.root, isAboutOpen && $style['root--open']]">
-        <button :class="$style.button" aria-label="Ouvrir la section about" @click="onClick">
-            <span v-if="title">{{ title }}</span>
+        <button :class="$style.button" :aria-label="ariaLabel" @click="onClick">
+            <span v-if="label">{{ label }}</span>
             <span :class="$style.icons">
                 <span :class="$style['circle-outline']"></span>
                 <span :class="$style['circle-filled']"></span>
@@ -23,11 +23,15 @@ export default Vue.extend({
     name: 'VAboutToggle',
     components: { IconArrow, IconCross },
     computed: {
-        title(): string {
-            return this.$store.getters.settings?.data?.about_title
+        label(): string {
+            return this.$store.getters.settings?.data?.about_label
         },
         isAboutOpen(): boolean {
             return this.$store.state.isAboutOpen
+        },
+        ariaLabel(): string {
+            const action = this.isAboutOpen ? 'Fermer' : 'Ouvrir'
+            return `${action} la section ${this.label}`
         },
     },
     methods: {

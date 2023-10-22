@@ -4,7 +4,7 @@ import { version } from './package.json'
 import linkResolver from './src/utils/prismic/link-resolver'
 import htmlSerializer from './src/utils/prismic/html-serializer'
 import { getBreakpoints } from '~/utils/breakpoint'
-import { createSitemaps, createSitemap } from '~/utils/sitemap'
+import { createSitemap } from '~/utils/sitemap'
 
 const isProduction = process.env.NODE_ENV === 'production'
 const apiEndpoint = `https://${process.env.PRISMIC_REPOSITORY_NAME}.cdn.prismic.io/api/v2`
@@ -17,7 +17,7 @@ export default {
     srcDir: 'src',
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
-        title: process.env.APP_TITLE,
+        title: process.env.APP_NAME,
         htmlAttrs: {
             lang: defaultLocale,
         },
