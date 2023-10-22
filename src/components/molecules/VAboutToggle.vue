@@ -24,14 +24,14 @@ export default Vue.extend({
     components: { IconArrow, IconCross },
     computed: {
         label(): string {
-            return this.$store.getters.settings?.data?.about_label
+            return this.$store.getters.settings?.data?.about_title
         },
         isAboutOpen(): boolean {
             return this.$store.state.isAboutOpen
         },
         ariaLabel(): string {
             const action = this.isAboutOpen ? 'Fermer' : 'Ouvrir'
-            return `${action} la section ${this.label}`
+            return `${action} la section '${this.label}'`
         },
     },
     methods: {

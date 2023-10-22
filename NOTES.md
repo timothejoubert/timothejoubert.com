@@ -14,6 +14,7 @@ import { Document } from '@prismicio/client/types/documents'
 ** (PreProd): Sitemap
 
 ### TODOS
+** (ColorSwitcher): update layout sur mobile
 ** (Remplissage): check for better media quality
 ** (Remplissage): Animer le confiné 1ere video
 ** (Hover): Logo 

@@ -262,7 +262,12 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
 }
 
 .top-bar {
+    position: relative;
     flex-shrink: 0;
+
+    @include media('>=sm') {
+        position: sticky;
+    }
 }
 
 .footer {
@@ -286,14 +291,14 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
 .project {
     position: absolute;
     z-index: 110;
-    top: $v-top-bar-height;
+    //top: $v-top-bar-height;
     width: 100%;
     background-color: var(--theme-background-color);
     translate: 0 0;
 
     @include media('>=lg') {
         position: relative;
-        top: initial;
+        //top: initial;
         right: 0;
         min-width: 50%;
         border-left: 1px solid var(--theme-foreground-color);
