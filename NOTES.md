@@ -9,24 +9,27 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (PreProd): redirection route ancien site (netlify) 
-** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
-** (PreProd): Sitemap
 ** (Font): Compress fontFile (noi)
+** (Project: Pogote moi): Vérifier access notion
+** (VArchive): Changer de projet avec les fleches
 
 ### TODOS
-** (ColorSwitcher): update layout sur mobile
-** (Remplissage): check for better media quality | Animer le confiné 1ere video
+** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
+** (SEO): Check headings
+** (ColorSwitcher): update layout sur mobile (popover)
+** (Content): check for better media quality | Animer le confiné 1ere video
 ** (CMS field on VMedia): Display controls or sound on videoMedia  
-** (VSetting): Check VInteractiveText listener on resize 
+** (Perf): VInteractiveText mousemove values not reset on resize 
 
 ### IMPROVEMENT
-** (SEO): Check headings
-** (JsonLD): Better projects data 
-** (Archive): highlight title letter on input search (js => reformat text with div wrapper )
+** (SEO): Sitemap
 ** (Video): add loader and aspect ratio
+** (Improvement): Ajouter data visualisation sur des projets (la typologie la plus féquente, pourcentage des frameworks, note moyenne, note mediane, projets par année, année la plus productive, ) 
+** (Archive): highlight title letter on input search (js => reformat text with div wrapper )
+** (JsonLD): Better projects data 
 
 ### DONE
+** (PreProd): redirection route ancien site (netlify)
 ** (organization): clean unused code
 ** (Responsive): Setting | Project | About
 ** (VArchive): Clean integration and responsive

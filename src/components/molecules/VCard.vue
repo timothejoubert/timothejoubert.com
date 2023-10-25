@@ -205,6 +205,8 @@ export default Vue.extend({
     }
 }
 
+// tags selector not working on prod
+.body > div:first-child,
 .tags {
     display: flex;
     flex-direction: column;
