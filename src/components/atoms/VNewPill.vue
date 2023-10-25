@@ -45,7 +45,7 @@ export default Vue.extend({
             const endUtc = Date.UTC(end.getFullYear(), end.getMonth(), end.getDate())
 
             const dayDiff = Math.abs(Math.floor((startUtc - endUtc) / MS_PER_DAY))
-            return dayDiff < 90
+            return dayDiff < 120
         },
     },
 })

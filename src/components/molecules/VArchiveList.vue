@@ -1,38 +1,28 @@
 <template>
-    <ul v-if="hasProject" :class="rootClasses">
-        <li v-for="project in filteredProjects" :key="project.uid">
-            <v-link
-                :reference="project"
-                :class="$style.link"
-                @mouseenter.native="onMouseEnter"
-                @mouseleave.native="onMouseLeave"
-            >
-                <v-new-pill :date="project.data.date" :class="$style.new" />
-                <v-project-parsed v-slot="p" :project="project.data">
-                    <div :class="[$style.title, sortId === 'title' && $style['title--highlight']]">
-                        {{ project.data.title }}
-                    </div>
-                    <span v-if="p.date" :class="[$style.date, sortId === 'date' && $style['title--highlight']]">{{
-                        p.date
-                    }}</span>
-                    <span :class="[$style.framework, sortId === 'framework' && $style['title--highlight']]">{{
-                        p.framework
-                    }}</span>
-                    <div :class="[$style.tags, sortId === 'tag_group' && $style['title--highlight']]">
-                        <span v-for="tag in p.tags" :key="tag.uid" :class="$style.tag">{{ tag.label }}</span>
-                    </div>
-                    <v-rate :rate="p.rate" :class="[$style.rate, sortId === 'rate' && $style['title--highlight']]" />
-                    <arrow-icon :class="$style.icon" />
-                </v-project-parsed>
-            </v-link>
-        </li>
-    </ul>
-    <v-no-result
-        v-else
-        :class="$style['no-result']"
-        button-label="Effacer la recherche"
-        @reset-filter="$emit('clearSearch')"
-    />
+    <div>
+        <slot name="top-bar" />
+        <ul v-if="hasProject" :class="rootClasses">
+            <li v-for="project in filteredProjects" :key="project.uid">
+                <v-link
+                    :reference="project"
+                    :class="$style.link"
+                    @mouseenter.native="onMouseEnter"
+                    @mouseleave.native="onMouseLeave"
+                >
+                    <v-new-pill :date="project.data.date" :class="$style.new" />
+                    <v-project-parsed v-slot="p" :project="project.data">
+                        <slot name="project" :project="p" />
+                    </v-project-parsed>
+                </v-link>
+            </li>
+        </ul>
+        <v-no-result
+            v-else
+            :class="$style['no-result']"
+            button-label="Effacer la recherche"
+            @reset-filter="$emit('clearSearch')"
+        />
+    </div>
 </template>
 
 <script lang="ts">
@@ -40,11 +30,9 @@ import Vue from 'vue'
 import type { PropType } from 'vue'
 import { ProjectDocument, ProjectDocumentDataTagGroupItem } from '~~/prismicio-types'
 import { ProjectDocumentData } from '~/types/prismic/app-prismic'
-import ArrowIcon from '~/assets/images/icons/arrow-up-right.svg?sprite'
 
 export default Vue.extend({
     name: 'VArchiveList',
-    components: { ArrowIcon },
     props: {
         sortOrder: String as PropType<'ASC' | 'DESC'>,
         sortId: String as PropType<keyof ProjectDocumentData>,
@@ -180,11 +168,11 @@ export default Vue.extend({
     align-items: center;
     padding-right: rem(6);
     border-top: 1px solid var(--theme-foreground-color);
-    gap: rem(36);
+    gap: var(--v-archive-list-gap, rem(36));
     isolation: isolate;
     padding-block: rem(10);
     transition: 0.4s ease(out-quad);
-    transition-property: opacity, color;
+    transition-property: opacity, color, gap;
     white-space: nowrap;
 
     &::before {
@@ -208,31 +196,6 @@ export default Vue.extend({
     }
 }
 
-.title,
-.date,
-.framework,
-.tags,
-.rate {
-    overflow: hidden;
-    opacity: 0.6;
-    text-overflow: ellipsis;
-    transition: opacity 0.4s, max-width 0.4s;
-
-    .root--project-open & {
-        @include column-stretch;
-    }
-
-    &--highlight {
-        opacity: 1;
-    }
-
-    @media (hover: hover) {
-        .link:hover & {
-            opacity: 1;
-        }
-    }
-}
-
 .new {
     --v-new-pill-width: 36px;
     --v-new-pill-transform: translate(-100%, 0);
@@ -241,54 +204,5 @@ export default Vue.extend({
 
     position: absolute;
     right: 0;
-}
-
-.title {
-    position: relative;
-    width: rem(160);
-
-    .root--project-open & {
-        @include column-stretch($expand: true);
-    }
-}
-
-.date {
-    width: rem(70);
-}
-
-.framework {
-    width: rem(100);
-}
-
-.tags {
-    display: flex;
-    max-width: rem(550);
-    flex-grow: 1;
-}
-
-.rate {
-    min-width: rem(120);
-}
-
-.tag {
-    .root--project-open &:not(:first-child) {
-        display: none;
-    }
-
-    &:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    &:not(:last-child)::after {
-        position: relative;
-        content: '|';
-        margin-inline: rem(8);
-    }
-}
-
-.icon {
-    flex-shrink: 0;
-    margin-left: auto;
 }
 </style>

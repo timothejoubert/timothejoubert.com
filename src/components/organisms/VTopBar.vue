@@ -9,7 +9,7 @@
             <div :class="$style.logo">
                 <span :class="$style.logo__inner">T</span>
             </div>
-            <VInteractiveText :class="$style['logo-text']" class="text-h2" :content="logoText" />
+            <v-interactive-text :class="$style['logo-text']" class="text-h2" :content="logoText" />
         </nuxt-link>
 
         <v-theme-switcher :class="$style.themes" />

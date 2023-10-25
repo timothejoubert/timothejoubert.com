@@ -18,13 +18,20 @@ export default Vue.extend({
     },
     render(_createElement, context): any {
         // Don't find what is return type of scopedSlot
-        const { date, link, link_label, content, framework, favorite, short_description, awards, rate } =
+        const { title, date, link, link_label, content, framework, favorite, short_description, rate } =
             context.props.project
 
+        const tags = getTags(context.props.project)
+        const tagsString = tags?.reduce((acc, tag, i) => {
+            return (acc += tag.label + (i === tags.length - 1 ? '' : ' | '))
+        }, '')
+
         return context.scopedSlots.default?.({
+            title,
             awards: getAwards(context.props.project),
             rate: rate || 0,
-            tags: getTags(context.props.project),
+            tags,
+            parsedTags: tagsString,
             framework: framework || undefined,
             date: getProjectYear(date),
             excerpt: short_description,

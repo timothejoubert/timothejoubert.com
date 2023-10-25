@@ -13,26 +13,25 @@ import { Document } from '@prismicio/client/types/documents'
 ** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
 ** (PreProd): Sitemap
 ** (Font): Compress fontFile (noi)
-** (Accessibility): aria attributre split-word-letter 
 
 ### TODOS
 ** (ColorSwitcher): update layout sur mobile
-** (Remplissage): check for better media quality
-** (Remplissage): Animer le confiné 1ere video
-** (Hover): Logo 
+** (Remplissage): check for better media quality | Animer le confiné 1ere video
 ** (CMS field on VMedia): Display controls or sound on videoMedia  
 ** (VSetting): Check VInteractiveText listener on resize 
 
 ### IMPROVEMENT
-** (organization): clean unused code
 ** (SEO): Check headings
 ** (JsonLD): Better projects data 
-** (VArchive): Clean integration and responsive
 ** (Archive): highlight title letter on input search (js => reformat text with div wrapper )
 ** (Video): add loader and aspect ratio
-** (Responsive): Setting | Project | About
 
 ### DONE
+** (organization): clean unused code
+** (Responsive): Setting | Project | About
+** (VArchive): Clean integration and responsive
+** (Hover): Logo
+** (Accessibility): aria attributre split-word-letter 
 ** (404): Integration Page
 ** (PreProd): disable referencement / deploy netlify / webHook prismic 
 ** (Archive): add rate order

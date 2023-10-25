@@ -60,7 +60,7 @@ $clear-width: rem(17);
 
 .root {
     position: relative;
-    display: flex;
+    display: var(--v-search-input-display, flex);
     width: rem(38);
     align-items: center;
     justify-content: center;

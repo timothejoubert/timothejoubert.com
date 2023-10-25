@@ -68,7 +68,7 @@ export default Vue.extend({
     data() {
         return {
             mouseEnter: false,
-            maxCardPercentDisplayed: 100 / parseInt(AppConst.UI_COLUMNS) || 25,
+            maxCardPercentDisplayed: 100 / parseInt(AppConst.UI_COLUMNS),
         }
     },
     computed: {
@@ -101,6 +101,7 @@ export default Vue.extend({
     },
     mounted() {
         if (mediaIsMax('md')) this.maxCardPercentDisplayed = 50
+        // udpate maxCardPercentDisplayed depending on current css var grid value
     },
 })
 </script>

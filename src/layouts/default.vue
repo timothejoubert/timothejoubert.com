@@ -98,7 +98,7 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
             ]
         },
         displayArchive(): boolean {
-            return toBoolean(AppConst.DISPLAY_ARCHIVE)
+            return toBoolean(AppConst.DISPLAY_ARCHIVE) || this.$store.state.isEveryProjectInFavorite
         },
         isProjectExpanded() {
             return this.$store.state.isProjectExpanded

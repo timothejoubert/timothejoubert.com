@@ -1,35 +1,45 @@
 <template>
-    <div :class="rootClasses" class="container">
-        <div :class="$style.title" class="text-body-l">Archive</div>
-        <div :class="$style.top">
-            <v-button
-                v-for="button in buttons"
-                :key="button.id"
-                :class="[
-                    $style.button,
-                    $style[`button--${button.id}`],
-                    button.id === sortId && $style['button--active'],
-                    sortOrder === 'DESC' && button.id === sortId && $style['button--desc'],
-                ]"
-                :label="button.label"
-                theme="light"
-                :inert="!button.sortable"
-                @click="onButtonClick($event, button.id)"
-            >
-                <template v-if="button.sortable" #icon>
-                    <div :class="$style.arrow"></div>
-                </template>
-            </v-button>
-            <v-search-input v-model="search" :class="$style.search" />
-        </div>
+    <section :class="rootClasses" class="container">
+        <v-interactive-text :class="$style['section-title']" class="text-body-l" :content="'Archives'" />
         <keep-alive>
-            <v-archive-list :sort-id="sortId" :sort-order="sortOrder" :search="search" @clearSearch="search = ''" />
+            <v-archive-list :sort-id="sortId" :sort-order="sortOrder" :search="search" @clearSearch="search = ''">
+                <template #top-bar>
+                    <div :class="$style['top-bar']">
+                        <v-button
+                            v-for="button in buttons"
+                            :key="button.id"
+                            :class="[
+                                getSectionClass(button.id),
+                                sortOrder === 'DESC' && button.id === sortId && $style['button--desc'],
+                            ]"
+                            :label="button.label"
+                            theme="light"
+                            :inert="!button.sortable"
+                            @click="onButtonClick($event, button.id)"
+                        >
+                            <template v-if="button.sortable" #icon><div :class="$style.sortable__icon"></div></template>
+                        </v-button>
+                        <div :class="$style.search">
+                            <v-search-input v-model="search" />
+                        </div>
+                    </div>
+                </template>
+                <template #project="{ project }">
+                    <div :class="getSectionClass('title')">{{ project.title }}</div>
+                    <span v-if="project.date" :class="getSectionClass('date')">{{ project.date }}</span>
+                    <span :class="getSectionClass('framework')">{{ project.framework }}</span>
+                    <div :class="getSectionClass('tag_group')">{{ project.parsedTags }}</div>
+                    <v-rate :rate="project.rate" :class="getSectionClass('rate')" />
+                    <div :class="$style['link-icon']"><arrow-icon /></div>
+                </template>
+            </v-archive-list>
         </keep-alive>
-    </div>
+    </section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import ArrowIcon from '~/assets/images/icons/arrow-up-right.svg?sprite'
 
 const DISPLAYED_INFO = [
     {
@@ -52,7 +62,12 @@ const DISPLAYED_INFO = [
         label: 'Notes',
         id: 'rate',
     },
-]
+] as const
+
+type SomeType<T extends { id: string }[]> = { [P in T[number]['id']]: string }
+const removeReadonly = <T extends any>(arr: T[] | readonly T[]): T[] => arr as T[]
+const nonReadonlyArr = removeReadonly(DISPLAYED_INFO)
+type SectionType = keyof SomeType<typeof nonReadonlyArr>
 
 interface ArchiveSetting {
     label: string
@@ -62,6 +77,7 @@ interface ArchiveSetting {
 
 export default Vue.extend({
     name: 'VArchive',
+    components: { ArrowIcon },
     data() {
         return {
             sortId: 'date',
@@ -93,6 +109,13 @@ export default Vue.extend({
 
             if (this.sortId !== id) this.sortId = id
         },
+        getSectionClass(id: string) {
+            return [this.$style.item, this.$style[id], this.sortId === id && this.$style['item--highlight']] as [
+                'item',
+                SectionType,
+                false | `item--${SectionType}`
+            ]
+        },
     },
 })
 </script>
@@ -100,69 +123,27 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     margin-block: rem(60) rem(60);
+    --v-archive-list-gap: #{rem(32)};
 
     &--project-open {
+        --v-archive-list-gap: #{rem(18)};
         --v-search-input-max-width: #{rem(70)};
     }
 }
 
-.title {
+.section-title {
     margin-bottom: rem(42);
 }
 
-.top {
-    display: flex;
-    gap: rem(36);
-}
-
-.button {
+.top-bar {
     --v-button-padding: 0;
 
-    opacity: 0.5;
-
-    &--active {
-        opacity: 0.8;
-    }
-
-    &--title {
-        width: rem(160);
-    }
-
-    &--date {
-        width: rem(70);
-    }
-
-    &--framework {
-        width: rem(100);
-    }
-
-    &--tag_group {
-        max-width: rem(550);
-        flex-grow: 1;
-    }
-
-    &--rate {
-        min-width: rem(120);
-    }
-
-    &--link {
-        margin-left: auto;
-    }
-
-    .root--project-open & {
-        @include column-stretch;
-    }
-
-    .root--project-open &--title {
-        @include column-stretch($expand: true);
-    }
+    display: flex;
+    transition: gap 0.4s ease(out-quad);
+    gap: var(--v-archive-list-gap);
 }
 
-.search {
-    margin-left: auto;
-}
-
-.arrow {
+.sortable__icon {
     width: rem(10);
     height: rem(10);
     border-width: 1px 1px 0 0;
@@ -174,6 +155,91 @@ export default Vue.extend({
 
     .button--desc & {
         transform: translate(0, rem(2)) rotate(-45deg);
+    }
+}
+
+.item {
+    overflow: hidden;
+    opacity: 0.6;
+    text-overflow: ellipsis;
+    transition: opacity 0.4s, max-width 0.4s;
+
+    .root--project-open & {
+        width: rem(100);
+    }
+
+    &--highlight {
+        opacity: 1;
+    }
+
+    @media (hover: hover) {
+        .link:hover & {
+            opacity: 1;
+        }
+    }
+}
+
+.title {
+    position: relative;
+    width: rem(160);
+    flex-shrink: 0;
+
+    .root--project-open & {
+        max-width: rem(100);
+    }
+}
+
+.date {
+    display: none;
+    width: rem(70);
+
+    @include media('>=md') {
+        display: flex;
+    }
+}
+
+.framework {
+    display: none;
+
+    @include media('>=lg') {
+        width: rem(100);
+        display: flex;
+    }
+}
+
+.tag_group {
+    flex-grow: 1;
+}
+
+.rate {
+    display: none;
+
+    @include media('>=lg') {
+        min-width: rem(100);
+        display: flex;
+    }
+}
+
+.search {
+    --v-search-input-display: none;
+
+    @include media('>=lg') {
+        --v-search-input-display: flex;
+    }
+}
+
+.search,
+.link-icon {
+    display: flex;
+    justify-content: flex-end;
+    flex-shrink: 0;
+
+    @include media('>=lg') {
+        width: rem(140);
+
+        .root--project-open & {
+            max-width: rem(100);
+        }
     }
 }
 </style>
