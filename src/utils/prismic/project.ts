@@ -1,5 +1,6 @@
 import { getTags } from '~/utils/tags'
 import { ProjectDocument } from '~~/prismicio-types'
+import { PrismicRichText } from '~/types/app'
 
 interface PrismicMedia {
     link_type: string
@@ -25,8 +26,8 @@ interface FormattedProject {
     favorite: boolean
     title: string | null
     date: string | null
-    excerpt: string | undefined
-    content: string | undefined
+    excerpt: { text: string | undefined; richText: PrismicRichText }
+    content: { text: string | undefined; richText: PrismicRichText }
     externalLink: string | undefined
     tag: { id: string; label: string }[]
     framework: string | null
@@ -45,7 +46,7 @@ function richTextToString(content: unknown): string | undefined {
     }
 }
 
-export function getFormattedProjects(projects: ProjectDocument[]): FormattedProject[] {
+export function getFormattedBackupProjects(projects: ProjectDocument[]): FormattedProject[] {
     return projects.map((project) => {
         const { data, uid, id, href } = project
         const { title, date, favorite, framework, rate, link, content, short_description, thumbnail, medias, awards } =
@@ -58,11 +59,11 @@ export function getFormattedProjects(projects: ProjectDocument[]): FormattedProj
             favorite,
             date,
             thumbnail: thumbnail as unknown as PrismicMedia,
-            excerpt: richTextToString(short_description),
+            excerpt: { text: richTextToString(short_description), richText: short_description },
             tag: getTags(data),
             framework,
             rate,
-            content: richTextToString(content),
+            content: { text: richTextToString(content), richText: content },
             externalLink: (link as { url?: string })?.url,
             medias: medias.filter((el) => (el.media as { url?: string })?.url).map(({ media }) => media),
             awards: awards

@@ -9,12 +9,16 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (Font): Compress fontFile (noi)
-** (Project: Pogote moi): Vérifier access notion
-** (VArchive): Changer de projet avec les fleches
+** (Font): Compress fontFile(noi) 
+** (Project: Pogote moi): Vérifier access notion 
+** (VArchive): Changer de projet avec les fleches 
+** (Backup): Faire backup 
+** (Varchive): set text Opacity to 1 on hover
 
 ### TODOS
+** (Analytic): Ajouter analytic ? matomo / notion ?
 ** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
+** (SEO): Text alt des img
 ** (SEO): Check headings
 ** (ColorSwitcher): update layout sur mobile (popover)
 ** (Content): check for better media quality | Animer le confiné 1ere video
@@ -25,6 +29,7 @@ import { Document } from '@prismicio/client/types/documents'
 ** (SEO): Sitemap
 ** (Video): add loader and aspect ratio
 ** (Improvement): Ajouter data visualisation sur des projets (la typologie la plus féquente, pourcentage des frameworks, note moyenne, note mediane, projets par année, année la plus productive, ) 
+** (Improvement): Ajouter les technologies utilisées en Dev. 
 ** (Archive): highlight title letter on input search (js => reformat text with div wrapper )
 ** (JsonLD): Better projects data 
 
@@ -65,9 +70,9 @@ import { Document } from '@prismicio/client/types/documents'
 * **(Data)**: Simplify stored fetch api data (ex: tags in project)
 * **(Route & Internalization)** check if I can make Internalization route path (update documentUid vars by currentLocale ?)
 * **(Route)**: Configure nested route (Set relationLink field in BO if we want nested route (projects/project-name))
-* **(Sitemap && routes)** avoid to generate route for ['/preview', '/en/preview', '/en/slice-simulator', '/slice-simulator'] (Generate.exclude not working)
 
 ### ABANDONED
+* **(Sitemap && routes)** avoid to generate route for ['/preview', '/en/preview', '/en/slice-simulator', '/slice-simulator'] (Generate.exclude not working)
 ** (ProjectTransition): when project switching ?
 ** (Setting): display filter only when all project are displayed ? Unique Tag search ?
 ** (ProjectList): empty bottom space when setting is closed

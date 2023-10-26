@@ -14,16 +14,7 @@
             "height": "1440",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Ecran promotionnel pour la sortie d'une nouvelle fragrance Diesel ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Ecran promotionnel pour la sortie d'une nouvelle fragrance Diesel ",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Ecran promotionnel pour la sortie d'une nouvelle fragrance Diesel ",
         "tag": [
             {
                 "id": "developpement",
@@ -32,10 +23,7 @@
         ],
         "framework": "Freelance",
         "rate": 11,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "externalLink": "https://asteria-video.netlify.app/",
         "medias": [
             {
@@ -77,16 +65,7 @@
             "height": "1232",
             "width": "1232"
         },
-        "excerpt": {
-            "text": "Refonte du site web d'Hugo Tomasi, motion designer et artiste 3D, mettant en avant son travail avec une esthétique minimaliste.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Refonte du site web d'Hugo Tomasi, motion designer et artiste 3D, mettant en avant son travail avec une esthétique minimaliste.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Refonte du site web d'Hugo Tomasi, motion designer et artiste 3D, mettant en avant son travail avec une esthétique minimaliste.",
         "tag": [
             {
                 "id": "developpement",
@@ -99,31 +78,7 @@
         ],
         "framework": "Freelance",
         "rate": 15,
-        "content": {
-            "text": "Contrairement à son premier portfolio, nous avons trouvé judicieux de simplifier au maximum l'esthétique du site afin de mettre en avant son contenu vidéo. Le site se base sur une grille sobre et minimaliste afin de mettre en avant le contenu animé qu'il réalise. J'ai choisi d'alterner des sections visuelle et typographique afin de retranscrire les notions d'efficacité et de qualité que l'on retrouve dans son travail. Avec du recul, je pense que les éléments interactifs (apparition de contenu, éléments qui défilent) sont superflus et n'apporte pas par réellement de plus-values. À l'avenir, j'irai encore plus à l'essentiel.\n\nAprès avoir testé de nombreux CMS, j'utilise maintenant Prismic, celui-ci me semble simple d'utilisation autant du point de vue du développeur que du client. J'ai mis en place un starter disponible sur github. Je vais chercher à l'améliorer au fur et à mesure de mes projets pour pouvoir concevoir des sites web plus rapidement et efficacement.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Contrairement à son premier portfolio, nous avons trouvé judicieux de simplifier au maximum l'esthétique du site afin de mettre en avant son contenu vidéo. Le site se base sur une grille sobre et minimaliste afin de mettre en avant le contenu animé qu'il réalise. J'ai choisi d'alterner des sections visuelle et typographique afin de retranscrire les notions d'efficacité et de qualité que l'on retrouve dans son travail. Avec du recul, je pense que les éléments interactifs (apparition de contenu, éléments qui défilent) sont superflus et n'apporte pas par réellement de plus-values. À l'avenir, j'irai encore plus à l'essentiel.\n\nAprès avoir testé de nombreux CMS, j'utilise maintenant Prismic, celui-ci me semble simple d'utilisation autant du point de vue du développeur que du client. J'ai mis en place un starter disponible sur github. Je vais chercher à l'améliorer au fur et à mesure de mes projets pour pouvoir concevoir des sites web plus rapidement et efficacement.",
-                    "spans": [
-                        {
-                            "start": 688,
-                            "end": 695,
-                            "type": "em"
-                        },
-                        {
-                            "start": 819,
-                            "end": 840,
-                            "type": "hyperlink",
-                            "data": {
-                                "link_type": "Web",
-                                "url": "https://github.com/timothejoubert/nuxt-prismic-skeleton"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
+        "content": "Contrairement à son premier portfolio, nous avons trouvé judicieux de simplifier au maximum l'esthétique du site afin de mettre en avant son contenu vidéo. Le site se base sur une grille sobre et minimaliste afin de mettre en avant le contenu animé qu'il réalise. J'ai choisi d'alterner des sections visuelle et typographique afin de retranscrire les notions d'efficacité et de qualité que l'on retrouve dans son travail. Avec du recul, je pense que les éléments interactifs (apparition de contenu, éléments qui défilent) sont superflus et n'apporte pas par réellement de plus-values. À l'avenir, j'irai encore plus à l'essentiel.\n\nAprès avoir testé de nombreux CMS, j'utilise maintenant Prismic, celui-ci me semble simple d'utilisation autant du point de vue du développeur que du client. J'ai mis en place un starter disponible sur github. Je vais chercher à l'améliorer au fur et à mesure de mes projets pour pouvoir concevoir des sites web plus rapidement et efficacement.",
         "externalLink": "https://hugo-tomasi.netlify.app/",
         "medias": [
             {
@@ -203,27 +158,7 @@
             "height": "1440",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Conception du site pour la Cité musicale-Metz au sein de l'équipe Rézo Zéro.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Conception du site pour la Cité musicale-Metz au sein de l'équipe Rézo Zéro.",
-                    "spans": [
-                        {
-                            "start": 66,
-                            "end": 75,
-                            "type": "hyperlink",
-                            "data": {
-                                "link_type": "Web",
-                                "url": "https://www.rezo-zero.com/fr/",
-                                "target": "_blank"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
+        "excerpt": "Conception du site pour la Cité musicale-Metz au sein de l'équipe Rézo Zéro.",
         "tag": [
             {
                 "id": "developpement",
@@ -232,16 +167,7 @@
         ],
         "framework": "Rézo zéro",
         "rate": 15,
-        "content": {
-            "text": "",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "",
         "externalLink": "https://www.citemusicale-metz.fr/",
         "medias": [
             {
@@ -312,16 +238,7 @@
             "height": "1440",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "On m'a missionné pour réaliser une section interactive au sein d'une landing page pour l'agence de mode Asteria.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "On m'a missionné pour réaliser une section interactive au sein d'une landing page pour l'agence de mode Asteria.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "On m'a missionné pour réaliser une section interactive au sein d'une landing page pour l'agence de mode Asteria.",
         "tag": [
             {
                 "id": "developpement",
@@ -330,16 +247,7 @@
         ],
         "framework": "Freelance",
         "rate": 12,
-        "content": {
-            "text": "Via ce projet, j'ai pu expérimenter le principe de shaders via WebGl. Malgré mes études et ma pratique de développement front, je n'ai jamais été très bon en math, j'ai donc pas mal galéré à comprendre les algo de manipulation de pixel. Cette techno me semble très interessante pour faire du code génératif et abstrait. J'aurai probablement le temps d'expérimenter davantage lors de futurs projets. ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Via ce projet, j'ai pu expérimenter le principe de shaders via WebGl. Malgré mes études et ma pratique de développement front, je n'ai jamais été très bon en math, j'ai donc pas mal galéré à comprendre les algo de manipulation de pixel. Cette techno me semble très interessante pour faire du code génératif et abstrait. J'aurai probablement le temps d'expérimenter davantage lors de futurs projets. ",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "Via ce projet, j'ai pu expérimenter le principe de shaders via WebGl. Malgré mes études et ma pratique de développement front, je n'ai jamais été très bon en math, j'ai donc pas mal galéré à comprendre les algo de manipulation de pixel. Cette techno me semble très interessante pour faire du code génératif et abstrait. J'aurai probablement le temps d'expérimenter davantage lors de futurs projets. ",
         "externalLink": "https://asteriaagency.com/",
         "medias": [
             {
@@ -419,16 +327,7 @@
             "height": "1440",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Site web pour Modelec, une entreprise fabriquant des interrupteurs haut de gamme. ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Site web pour Modelec, une entreprise fabriquant des interrupteurs haut de gamme. ",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Site web pour Modelec, une entreprise fabriquant des interrupteurs haut de gamme. ",
         "tag": [
             {
                 "id": "developpement",
@@ -437,16 +336,7 @@
         ],
         "framework": "Rézo zéro",
         "rate": 18,
-        "content": {
-            "text": "Ce site se distingue par son design minimaliste et efficace, une palette de couleurs bien choisie et un menu aéré et impactant. Il met en valeur un contenu de qualité avec des images variées pour illustrer les produits. Je suis fière de ce projet car il est à l'équilibre entre sobriété dans le design et singularité via les animations d'interactions.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Ce site se distingue par son design minimaliste et efficace, une palette de couleurs bien choisie et un menu aéré et impactant. Il met en valeur un contenu de qualité avec des images variées pour illustrer les produits. Je suis fière de ce projet car il est à l'équilibre entre sobriété dans le design et singularité via les animations d'interactions.",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "Ce site se distingue par son design minimaliste et efficace, une palette de couleurs bien choisie et un menu aéré et impactant. Il met en valeur un contenu de qualité avec des images variées pour illustrer les produits. Je suis fière de ce projet car il est à l'équilibre entre sobriété dans le design et singularité via les animations d'interactions.",
         "externalLink": "https://www.modelec.com/fr",
         "medias": [
             {
@@ -523,16 +413,7 @@
             "height": "1440",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Création d'un site web pour Eden Home, un constructeur de maisons alpines qui crée des maisons en bois durables et personnalisées.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Création d'un site web pour Eden Home, un constructeur de maisons alpines qui crée des maisons en bois durables et personnalisées.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Création d'un site web pour Eden Home, un constructeur de maisons alpines qui crée des maisons en bois durables et personnalisées.",
         "tag": [
             {
                 "id": "developpement",
@@ -541,16 +422,7 @@
         ],
         "framework": "Rézo zéro",
         "rate": 15,
-        "content": {
-            "text": "J'ai pu concevoir la partie technique de ce site en autonomie au sein de Rézo Zéro. Je me suis mis une grosse pression pour produire un site qui respecte les exigences de l'agence. J'ai donc voulu aller rapidement pour mettre en avant mes compétences. Cependant, je vois de nombreuses erreurs que j'ai pu faire qui rendent difficile la maintenabilité du site. Aujourd'hui, je fais davantage attention aux bonnes pratiques de référencement et d'optimisations de ressources, des éléments qui ne me fascinent pas, mais qui sont primordiaux pour rendre un site web efficace.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "J'ai pu concevoir la partie technique de ce site en autonomie au sein de Rézo Zéro. Je me suis mis une grosse pression pour produire un site qui respecte les exigences de l'agence. J'ai donc voulu aller rapidement pour mettre en avant mes compétences. Cependant, je vois de nombreuses erreurs que j'ai pu faire qui rendent difficile la maintenabilité du site. Aujourd'hui, je fais davantage attention aux bonnes pratiques de référencement et d'optimisations de ressources, des éléments qui ne me fascinent pas, mais qui sont primordiaux pour rendre un site web efficace.",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "J'ai pu concevoir la partie technique de ce site en autonomie au sein de Rézo Zéro. Je me suis mis une grosse pression pour produire un site qui respecte les exigences de l'agence. J'ai donc voulu aller rapidement pour mettre en avant mes compétences. Cependant, je vois de nombreuses erreurs que j'ai pu faire qui rendent difficile la maintenabilité du site. Aujourd'hui, je fais davantage attention aux bonnes pratiques de référencement et d'optimisations de ressources, des éléments qui ne me fascinent pas, mais qui sont primordiaux pour rendre un site web efficace.",
         "externalLink": "https://www.eden-home.fr/",
         "medias": [
             {
@@ -612,16 +484,7 @@
             "height": "1440",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Mon portfolio actuel mettant en avant la diversité de mes projets et mes compétences dans le développement.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Mon portfolio actuel mettant en avant la diversité de mes projets et mes compétences dans le développement.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Mon portfolio actuel mettant en avant la diversité de mes projets et mes compétences dans le développement.",
         "tag": [
             {
                 "id": "developpement",
@@ -634,16 +497,7 @@
         ],
         "framework": "Perso",
         "rate": 17,
-        "content": {
-            "text": "Mon portfolio actuel a pour objectif premier de me constituer une base de données organisée de tous mes projets.Cela me permet, dans un premier temps, d'avoir une vue d'ensemble sur mes réalisations et, dans un second temps, de m'obliger à prendre du temps pour les mettre en valeur. \nJe prends le risque de ne pas mettre uniquement mes meilleurs projets et, par conséquent, ne pas avoir le portfolio idéal pour être embauché, mais je trouve cela plus intéressant, sincère et moins bullshit. \nJe me suis fait énormément plaisir à imaginer l'interface, notamment en jouant sur le contenu d'un site sans changer de page et de mettre en place une interface modulaire et personnalisable.J'ai pu assouvir mon côté web créatif avec de nombreuses micro-interactions.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Mon portfolio actuel a pour objectif premier de me constituer une base de données organisée de tous mes projets.Cela me permet, dans un premier temps, d'avoir une vue d'ensemble sur mes réalisations et, dans un second temps, de m'obliger à prendre du temps pour les mettre en valeur. \nJe prends le risque de ne pas mettre uniquement mes meilleurs projets et, par conséquent, ne pas avoir le portfolio idéal pour être embauché, mais je trouve cela plus intéressant, sincère et moins bullshit. \nJe me suis fait énormément plaisir à imaginer l'interface, notamment en jouant sur le contenu d'un site sans changer de page et de mettre en place une interface modulaire et personnalisable.J'ai pu assouvir mon côté web créatif avec de nombreuses micro-interactions.",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "Mon portfolio actuel a pour objectif premier de me constituer une base de données organisée de tous mes projets.Cela me permet, dans un premier temps, d'avoir une vue d'ensemble sur mes réalisations et, dans un second temps, de m'obliger à prendre du temps pour les mettre en valeur. \nJe prends le risque de ne pas mettre uniquement mes meilleurs projets et, par conséquent, ne pas avoir le portfolio idéal pour être embauché, mais je trouve cela plus intéressant, sincère et moins bullshit. \nJe me suis fait énormément plaisir à imaginer l'interface, notamment en jouant sur le contenu d'un site sans changer de page et de mettre en place une interface modulaire et personnalisable.J'ai pu assouvir mon côté web créatif avec de nombreuses micro-interactions.",
         "medias": [
             {
                 "link_type": "Media",
@@ -713,16 +567,7 @@
             "height": "1346",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Mise a jour de la page d'accueil du site expérience du centre de musique baroque de Versailles. ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Mise a jour de la page d'accueil du site expérience du centre de musique baroque de Versailles. ",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Mise a jour de la page d'accueil du site expérience du centre de musique baroque de Versailles. ",
         "tag": [
             {
                 "id": "developpement",
@@ -731,10 +576,7 @@
         ],
         "framework": "Rézo zéro",
         "rate": 12,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "externalLink": "https://expodcast.cmbv.fr",
         "medias": [
             {
@@ -787,27 +629,7 @@
             "height": "1346",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Rapport de stage suite à mon stage chez Rézo zéro.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Rapport de stage suite à mon stage chez Rézo zéro.",
-                    "spans": [
-                        {
-                            "start": 40,
-                            "end": 49,
-                            "type": "hyperlink",
-                            "data": {
-                                "link_type": "Web",
-                                "url": "https://rezo-zero.com/",
-                                "target": "_blank"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
+        "excerpt": "Rapport de stage suite à mon stage chez Rézo zéro.",
         "tag": [
             {
                 "id": "edition",
@@ -816,10 +638,7 @@
         ],
         "framework": "Master 2",
         "rate": 14,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "medias": [
             {
                 "link_type": "Media",
@@ -907,16 +726,7 @@
             "height": "1346",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Portfolio pour l'illustratrice Lyonnaise Justine Saez. J'ai essayé de retranscrire l'aspect spontané et exploratoire de ces dessins tout en organisant ses projets de manière sobre et efficace.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Portfolio pour l'illustratrice Lyonnaise Justine Saez. J'ai essayé de retranscrire l'aspect spontané et exploratoire de ces dessins tout en organisant ses projets de manière sobre et efficace.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Portfolio pour l'illustratrice Lyonnaise Justine Saez. J'ai essayé de retranscrire l'aspect spontané et exploratoire de ces dessins tout en organisant ses projets de manière sobre et efficace.",
         "tag": [
             {
                 "id": "developpement",
@@ -929,16 +739,7 @@
         ],
         "framework": "Freelance",
         "rate": 15,
-        "content": {
-            "text": "Afin de pouvoir réaliser des sites web en freelance, j'ai investigué longuement avant de trouver une stack technique efficace pour réaliser des portfolios. J'avais pour objectif de trouvé un système de back office ergonomique et facile à prendre en main avec le moins de frais d'hébergement possible. ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Afin de pouvoir réaliser des sites web en freelance, j'ai investigué longuement avant de trouver une stack technique efficace pour réaliser des portfolios. J'avais pour objectif de trouvé un système de back office ergonomique et facile à prendre en main avec le moins de frais d'hébergement possible. ",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "Afin de pouvoir réaliser des sites web en freelance, j'ai investigué longuement avant de trouver une stack technique efficace pour réaliser des portfolios. J'avais pour objectif de trouvé un système de back office ergonomique et facile à prendre en main avec le moins de frais d'hébergement possible. ",
         "externalLink": "https://justine-saez.netlify.app/",
         "medias": [
             {
@@ -1018,16 +819,7 @@
             "height": "1440",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Site web pour le centre pompidou de Metz.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Site web pour le centre pompidou de Metz.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Site web pour le centre pompidou de Metz.",
         "tag": [
             {
                 "id": "developpement",
@@ -1036,10 +828,7 @@
         ],
         "framework": "Rézo zéro",
         "rate": 14,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "externalLink": "https://centrepompidou-metz.fr",
         "medias": [
             {
@@ -1110,16 +899,7 @@
             "height": "1601",
             "width": "1601"
         },
-        "excerpt": {
-            "text": "Un programme P5.js permettant de générer des patterns aléatoire à partir d'images.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Un programme P5.js permettant de générer des patterns aléatoire à partir d'images.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Un programme P5.js permettant de générer des patterns aléatoire à partir d'images.",
         "tag": [
             {
                 "id": "code-creatif",
@@ -1128,10 +908,7 @@
         ],
         "framework": "Perso",
         "rate": 15,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "externalLink": "https://editor.p5js.org/timothejoubert26/sketches/hywhcVqF0",
         "medias": [
             {
@@ -1234,16 +1011,7 @@
             "height": "1346",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Programme P5.js permettant de créer des dessins basés sur une grille. À partir d'un set d'image sélectionnable, l'utilisateur peut 'dessiner' ses propres caractères. ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Programme P5.js permettant de créer des dessins basés sur une grille. À partir d'un set d'image sélectionnable, l'utilisateur peut 'dessiner' ses propres caractères. ",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Programme P5.js permettant de créer des dessins basés sur une grille. À partir d'un set d'image sélectionnable, l'utilisateur peut 'dessiner' ses propres caractères. ",
         "tag": [
             {
                 "id": "code-creatif",
@@ -1256,10 +1024,7 @@
         ],
         "framework": "Perso",
         "rate": 15,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "externalLink": "https://editor.p5js.org/timothejoubert26/sketches/hywhcVqF0",
         "medias": [
             {
@@ -1303,16 +1068,7 @@
             "height": "1346",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Conception d'un générateur de lettre pour le défi Instagram '36 days of type'. Il s'agit d'une interface visuelle permettant de construire et d'animer de la typographie à partir de forme géométrique.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Conception d'un générateur de lettre pour le défi Instagram '36 days of type'. Il s'agit d'une interface visuelle permettant de construire et d'animer de la typographie à partir de forme géométrique.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Conception d'un générateur de lettre pour le défi Instagram '36 days of type'. Il s'agit d'une interface visuelle permettant de construire et d'animer de la typographie à partir de forme géométrique.",
         "tag": [
             {
                 "id": "code-creatif",
@@ -1325,16 +1081,7 @@
         ],
         "framework": "Perso",
         "rate": 16,
-        "content": {
-            "text": "À l'occasion du challenge 36 days of type, j'ai conçu un script P5.js qui construit les lettres à partir de formes géométriques simples. J'ai ajouté une interface graphique qui permet de modifier l'aspect de la typographie afin de générer une grande variété de caractères. La difficulté de ce challenge est d'être assez constant et productif pour poster chaque jour. Malgré la conception du script en amont, l'enregistrement, l'édition, le tri et les retouches des visuelles produis reste très chronophage. Cela pourrait être une tâche intéressante à automatiser à l'avenir. Je reste bien satisfait de la diversité des lettres produites et des détails intéressants de certains caractères. ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "À l'occasion du challenge 36 days of type, j'ai conçu un script P5.js qui construit les lettres à partir de formes géométriques simples. J'ai ajouté une interface graphique qui permet de modifier l'aspect de la typographie afin de générer une grande variété de caractères. La difficulté de ce challenge est d'être assez constant et productif pour poster chaque jour. Malgré la conception du script en amont, l'enregistrement, l'édition, le tri et les retouches des visuelles produis reste très chronophage. Cela pourrait être une tâche intéressante à automatiser à l'avenir. Je reste bien satisfait de la diversité des lettres produites et des détails intéressants de certains caractères. ",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "À l'occasion du challenge 36 days of type, j'ai conçu un script P5.js qui construit les lettres à partir de formes géométriques simples. J'ai ajouté une interface graphique qui permet de modifier l'aspect de la typographie afin de générer une grande variété de caractères. La difficulté de ce challenge est d'être assez constant et productif pour poster chaque jour. Malgré la conception du script en amont, l'enregistrement, l'édition, le tri et les retouches des visuelles produis reste très chronophage. Cela pourrait être une tâche intéressante à automatiser à l'avenir. Je reste bien satisfait de la diversité des lettres produites et des détails intéressants de certains caractères. ",
         "externalLink": "https://editor.p5js.org/timothejoubert26/collections/BchfYrQ4V",
         "medias": [
             {
@@ -1466,16 +1213,7 @@
             "height": "1440",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Création du site pour L'opéra de Lyon.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Création du site pour L'opéra de Lyon.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Création du site pour L'opéra de Lyon.",
         "tag": [
             {
                 "id": "developpement",
@@ -1484,16 +1222,7 @@
         ],
         "framework": "Rézo zéro",
         "rate": 17,
-        "content": {
-            "text": "Il s'agit du premier gros projet auquel j'ai pu participer au sein de Rézo zéro. J'ai pu expérimentation une stack technique assez avancée; à savoir le framework Vue.js couplet à Nuxt et un headless CMS créer par Ambroise Maupate, un membre de l'équipe. Le site étant assez complexe, cela m'a montré l'importance d'avoir une méthodologie en béton.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Il s'agit du premier gros projet auquel j'ai pu participer au sein de Rézo zéro. J'ai pu expérimentation une stack technique assez avancée; à savoir le framework Vue.js couplet à Nuxt et un headless CMS créer par Ambroise Maupate, un membre de l'équipe. Le site étant assez complexe, cela m'a montré l'importance d'avoir une méthodologie en béton.",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "Il s'agit du premier gros projet auquel j'ai pu participer au sein de Rézo zéro. J'ai pu expérimentation une stack technique assez avancée; à savoir le framework Vue.js couplet à Nuxt et un headless CMS créer par Ambroise Maupate, un membre de l'équipe. Le site étant assez complexe, cela m'a montré l'importance d'avoir une méthodologie en béton.",
         "externalLink": "https://www.opera-lyon.com/",
         "medias": [
             {
@@ -1555,16 +1284,7 @@
             "height": "2160",
             "width": "2160"
         },
-        "excerpt": {
-            "text": "Conception d'une interface web permettant d'animer de la typographie variable et d'une landing page présentant l'outil en ligne.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Conception d'une interface web permettant d'animer de la typographie variable et d'une landing page présentant l'outil en ligne.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Conception d'une interface web permettant d'animer de la typographie variable et d'une landing page présentant l'outil en ligne.",
         "tag": [
             {
                 "id": "developpement",
@@ -1585,16 +1305,7 @@
         ],
         "framework": "Master 2",
         "rate": 16,
-        "content": {
-            "text": "Dans le cadre de mon Master 2, nous avions comme objectif de réaliser un outil utile pour les designers web. Il permet de tester différents types d'animations à partir d'une typographie variable et de récupérer le code pour l'intégrer dans un site. Je souhaitais proposer le plus d'options possibles pour montrer le champ des possible. J'ai donc été confronté à de nombreux problèmes d'UX. Il a donc fallu faire comprendre visuellement et de manière synthétique la diversité des paramètres. J'ai pensé et conçu l'interface web, développé le site et l'outil web avec Vue (langage que je n'avais jamais utilisé) en 1 mois. Même si le site final n'est pas tout à fait abouti et manque d'intuitivité, je suis plutôt satisfaite de ma réalisation dans le temps imparti.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Dans le cadre de mon Master 2, nous avions comme objectif de réaliser un outil utile pour les designers web. Il permet de tester différents types d'animations à partir d'une typographie variable et de récupérer le code pour l'intégrer dans un site. Je souhaitais proposer le plus d'options possibles pour montrer le champ des possible. J'ai donc été confronté à de nombreux problèmes d'UX. Il a donc fallu faire comprendre visuellement et de manière synthétique la diversité des paramètres. J'ai pensé et conçu l'interface web, développé le site et l'outil web avec Vue (langage que je n'avais jamais utilisé) en 1 mois. Même si le site final n'est pas tout à fait abouti et manque d'intuitivité, je suis plutôt satisfaite de ma réalisation dans le temps imparti.",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "Dans le cadre de mon Master 2, nous avions comme objectif de réaliser un outil utile pour les designers web. Il permet de tester différents types d'animations à partir d'une typographie variable et de récupérer le code pour l'intégrer dans un site. Je souhaitais proposer le plus d'options possibles pour montrer le champ des possible. J'ai donc été confronté à de nombreux problèmes d'UX. Il a donc fallu faire comprendre visuellement et de manière synthétique la diversité des paramètres. J'ai pensé et conçu l'interface web, développé le site et l'outil web avec Vue (langage que je n'avais jamais utilisé) en 1 mois. Même si le site final n'est pas tout à fait abouti et manque d'intuitivité, je suis plutôt satisfaite de ma réalisation dans le temps imparti.",
         "externalLink": "https://fontimate.netlify.app/",
         "medias": [
             {
@@ -1681,16 +1392,7 @@
             "height": "2160",
             "width": "2160"
         },
-        "excerpt": {
-            "text": "Création du portfolio pour l'agence Out of box à Lyon.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Création du portfolio pour l'agence Out of box à Lyon.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Création du portfolio pour l'agence Out of box à Lyon.",
         "tag": [
             {
                 "id": "developpement",
@@ -1703,16 +1405,7 @@
         ],
         "framework": "Freelance",
         "rate": 13,
-        "content": {
-            "text": "Un de mes premier site web full custom en freelance, front et back, réalisé avec Wagtail (framework Python). C'est avec ce projet que je me suis rendu comptes des difficultés de freelance, relation client, budget, pression... ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Un de mes premier site web full custom en freelance, front et back, réalisé avec Wagtail (framework Python). C'est avec ce projet que je me suis rendu comptes des difficultés de freelance, relation client, budget, pression... ",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "Un de mes premier site web full custom en freelance, front et back, réalisé avec Wagtail (framework Python). C'est avec ce projet que je me suis rendu comptes des difficultés de freelance, relation client, budget, pression... ",
         "externalLink": "https://www.outofbox.fr/",
         "medias": [
             {
@@ -1774,27 +1467,7 @@
             "height": "843",
             "width": "843"
         },
-        "excerpt": {
-            "text": "Création d'une identité visuelle et d'une interface web pour l'émission de radio indépendante Parachute, l'objectif étant de mettre en avant le côté éclectique et underground de la playlist diffusée.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Création d'une identité visuelle et d'une interface web pour l'émission de radio indépendante Parachute, l'objectif étant de mettre en avant le côté éclectique et underground de la playlist diffusée.",
-                    "spans": [
-                        {
-                            "start": 94,
-                            "end": 103,
-                            "type": "hyperlink",
-                            "data": {
-                                "link_type": "Web",
-                                "url": "https://www.instagram.com/parachute.prcht/",
-                                "target": "_blank"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
+        "excerpt": "Création d'une identité visuelle et d'une interface web pour l'émission de radio indépendante Parachute, l'objectif étant de mettre en avant le côté éclectique et underground de la playlist diffusée.",
         "tag": [
             {
                 "id": "code-creatif",
@@ -1807,37 +1480,7 @@
         ],
         "framework": "Freelance",
         "rate": 16,
-        "content": {
-            "text": "Les stickers représentent des éléments individuels qui, lorsqu'ils sont assemblés, forment une composition globale unique. De même, dans une playlist éclectique, chaque morceau de musique représente une pièce musicale distinctive qui, une fois regroupée avec d'autres, crée une expérience musicale cohérente et personnelle. \nTout comme les stickers peuvent être déplacés et réarrangés pour créer de nouvelles compositions visuelles, une playlist de musique peut être modifiée et mise à jour pour refléter l'évolution des goûts musicaux de l'auditeur. En résumé, les stickers et la conception de playlists partagent le principe de l'individualité, de la personnalisation et de la créativité pour créer quelque chose de significatif et unique.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Les stickers représentent des éléments individuels qui, lorsqu'ils sont assemblés, forment une composition globale unique. De même, dans une playlist éclectique, chaque morceau de musique représente une pièce musicale distinctive qui, une fois regroupée avec d'autres, crée une expérience musicale cohérente et personnelle. \nTout comme les stickers peuvent être déplacés et réarrangés pour créer de nouvelles compositions visuelles, une playlist de musique peut être modifiée et mise à jour pour refléter l'évolution des goûts musicaux de l'auditeur. En résumé, les stickers et la conception de playlists partagent le principe de l'individualité, de la personnalisation et de la créativité pour créer quelque chose de significatif et unique.",
-                    "spans": [
-                        {
-                            "start": 630,
-                            "end": 645,
-                            "type": "em"
-                        },
-                        {
-                            "start": 653,
-                            "end": 669,
-                            "type": "em"
-                        },
-                        {
-                            "start": 679,
-                            "end": 689,
-                            "type": "em"
-                        },
-                        {
-                            "start": 718,
-                            "end": 741,
-                            "type": "em"
-                        }
-                    ]
-                }
-            ]
-        },
+        "content": "Les stickers représentent des éléments individuels qui, lorsqu'ils sont assemblés, forment une composition globale unique. De même, dans une playlist éclectique, chaque morceau de musique représente une pièce musicale distinctive qui, une fois regroupée avec d'autres, crée une expérience musicale cohérente et personnelle. \nTout comme les stickers peuvent être déplacés et réarrangés pour créer de nouvelles compositions visuelles, une playlist de musique peut être modifiée et mise à jour pour refléter l'évolution des goûts musicaux de l'auditeur. En résumé, les stickers et la conception de playlists partagent le principe de l'individualité, de la personnalisation et de la créativité pour créer quelque chose de significatif et unique.",
         "medias": [
             {
                 "link_type": "Media",
@@ -1914,16 +1557,7 @@
             "height": "2700",
             "width": "2700"
         },
-        "excerpt": {
-            "text": "Application mobile fictive pour un service de billetterie d'évènement musicale.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Application mobile fictive pour un service de billetterie d'évènement musicale.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Application mobile fictive pour un service de billetterie d'évènement musicale.",
         "tag": [
             {
                 "id": "design-d-interface",
@@ -1936,16 +1570,7 @@
         ],
         "framework": "Master 2",
         "rate": 13,
-        "content": {
-            "text": "",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "",
         "medias": [
             {
                 "link_type": "Media",
@@ -2006,16 +1631,7 @@
             "height": "1920",
             "width": "1920"
         },
-        "excerpt": {
-            "text": "Design d'une landing page et d'une application pour un service fictif de mentoring pédagogique.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Design d'une landing page et d'une application pour un service fictif de mentoring pédagogique.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Design d'une landing page et d'une application pour un service fictif de mentoring pédagogique.",
         "tag": [
             {
                 "id": "design-d-interface",
@@ -2028,10 +1644,7 @@
         ],
         "framework": "Master 2",
         "rate": 14,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "medias": [
             {
                 "link_type": "Media",
@@ -2099,16 +1712,7 @@
             "height": "1920",
             "width": "1920"
         },
-        "excerpt": {
-            "text": "Un petit exercice dans un temps imparti (1h) pour me challenger sur de l'intégration web.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Un petit exercice dans un temps imparti (1h) pour me challenger sur de l'intégration web.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Un petit exercice dans un temps imparti (1h) pour me challenger sur de l'intégration web.",
         "tag": [
             {
                 "id": "developpement",
@@ -2117,10 +1721,7 @@
         ],
         "framework": "Perso",
         "rate": 10,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "medias": [
             {
                 "link_type": "Media",
@@ -2154,16 +1755,7 @@
             "height": "1920",
             "width": "1920"
         },
-        "excerpt": {
-            "text": "Un petit programme Codepen envoyé dans mes mails de candidature lors d'une recherche de stage.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Un petit programme Codepen envoyé dans mes mails de candidature lors d'une recherche de stage.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Un petit programme Codepen envoyé dans mes mails de candidature lors d'une recherche de stage.",
         "tag": [
             {
                 "id": "code-creatif",
@@ -2176,10 +1768,7 @@
         ],
         "framework": "Perso",
         "rate": 13,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "externalLink": "https://codepen.io/timti/pen/NWaapoe",
         "medias": [
             {
@@ -2212,16 +1801,7 @@
             "height": "2880",
             "width": "2880"
         },
-        "excerpt": {
-            "text": "Pendant un cours de motion design, je me suis permis de faire n'importe quoi avec le plugin Duik sur After effects. ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Pendant un cours de motion design, je me suis permis de faire n'importe quoi avec le plugin Duik sur After effects. ",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Pendant un cours de motion design, je me suis permis de faire n'importe quoi avec le plugin Duik sur After effects. ",
         "tag": [
             {
                 "id": "motion-design",
@@ -2234,16 +1814,7 @@
         ],
         "framework": "Master 2",
         "rate": 12,
-        "content": {
-            "text": "Il est très dur et fastidieux d’animer fidèlement les mouvements du corps humain.J’ai donc préféré modifier quelques paramètres du plugin et voir ce que ça donnait. Je trouve ça plus enrichissant d’assumer une création ridicule et de pousser le délire, que de passer plusieurs jours pour produire une animation inévitable peu convaincante.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Il est très dur et fastidieux d’animer fidèlement les mouvements du corps humain.J’ai donc préféré modifier quelques paramètres du plugin et voir ce que ça donnait. Je trouve ça plus enrichissant d’assumer une création ridicule et de pousser le délire, que de passer plusieurs jours pour produire une animation inévitable peu convaincante.",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "Il est très dur et fastidieux d’animer fidèlement les mouvements du corps humain.J’ai donc préféré modifier quelques paramètres du plugin et voir ce que ça donnait. Je trouve ça plus enrichissant d’assumer une création ridicule et de pousser le délire, que de passer plusieurs jours pour produire une animation inévitable peu convaincante.",
         "medias": [
             {
                 "link_type": "Media",
@@ -2291,16 +1862,7 @@
             "height": "1920",
             "width": "1920"
         },
-        "excerpt": {
-            "text": "Un projet d'application tablette en réalité augmenté autour de l'histoire de la soie à Lyon.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Un projet d'application tablette en réalité augmenté autour de l'histoire de la soie à Lyon.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Un projet d'application tablette en réalité augmenté autour de l'histoire de la soie à Lyon.",
         "tag": [
             {
                 "id": "design-d-interface",
@@ -2309,22 +1871,7 @@
         ],
         "framework": "Master 2",
         "rate": 6,
-        "content": {
-            "text": "Un projet complètement honteux réalisé en duo qui c'est très mal déroulé.\nConcept: L'application Boule en soie, en navigation augmentée, a pour objectif de mettre en avant le restaurant situé au vieux quartier de Vaulx-en-Velin. Cette expérience immersive amène à une exploration déambulatoire dans laquelle l’utilisateur sera amené à scanner les différents éléments remarquables du lieu. Il y découvrira des informations liées à l’histoire du lieu et aux objets qui l’entourent.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Un projet complètement honteux réalisé en duo qui c'est très mal déroulé.\nConcept: L'application Boule en soie, en navigation augmentée, a pour objectif de mettre en avant le restaurant situé au vieux quartier de Vaulx-en-Velin. Cette expérience immersive amène à une exploration déambulatoire dans laquelle l’utilisateur sera amené à scanner les différents éléments remarquables du lieu. Il y découvrira des informations liées à l’histoire du lieu et aux objets qui l’entourent.",
-                    "spans": [
-                        {
-                            "start": 97,
-                            "end": 135,
-                            "type": "em"
-                        }
-                    ]
-                }
-            ]
-        },
+        "content": "Un projet complètement honteux réalisé en duo qui c'est très mal déroulé.\nConcept: L'application Boule en soie, en navigation augmentée, a pour objectif de mettre en avant le restaurant situé au vieux quartier de Vaulx-en-Velin. Cette expérience immersive amène à une exploration déambulatoire dans laquelle l’utilisateur sera amené à scanner les différents éléments remarquables du lieu. Il y découvrira des informations liées à l’histoire du lieu et aux objets qui l’entourent.",
         "medias": [
             {
                 "link_type": "Media",
@@ -2367,16 +1914,7 @@
             "height": "2880",
             "width": "2880"
         },
-        "excerpt": {
-            "text": "J'ai voulu faire à ma sauce le Inktober, un challenge instagram qui demande de publié un dessin par jour. Durant ce mois, j'ai essayé de réaliser une trentaine d'interaction javascript plus ou moins complexes. ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "J'ai voulu faire à ma sauce le Inktober, un challenge instagram qui demande de publié un dessin par jour. Durant ce mois, j'ai essayé de réaliser une trentaine d'interaction javascript plus ou moins complexes. ",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "J'ai voulu faire à ma sauce le Inktober, un challenge instagram qui demande de publié un dessin par jour. Durant ce mois, j'ai essayé de réaliser une trentaine d'interaction javascript plus ou moins complexes. ",
         "tag": [
             {
                 "id": "code-creatif",
@@ -2385,10 +1923,7 @@
         ],
         "framework": "Perso",
         "rate": 13,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "medias": [
             {
                 "link_type": "Media",
@@ -2427,16 +1962,7 @@
             "height": "2880",
             "width": "2880"
         },
-        "excerpt": {
-            "text": "Création d'un vaisseau X-wing sur Blender.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Création d'un vaisseau X-wing sur Blender.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Création d'un vaisseau X-wing sur Blender.",
         "tag": [
             {
                 "id": "multimedia",
@@ -2445,10 +1971,7 @@
         ],
         "framework": "Master 2",
         "rate": 12,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "medias": [
             {
                 "link_type": "Media",
@@ -2480,16 +2003,7 @@
             "height": "1440",
             "width": "1440"
         },
-        "excerpt": {
-            "text": "Mon précédant portfolio conçu en React. ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Mon précédant portfolio conçu en React. ",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Mon précédant portfolio conçu en React. ",
         "tag": [
             {
                 "id": "developpement",
@@ -2502,10 +2016,7 @@
         ],
         "framework": "Perso",
         "rate": 14,
-        "content": {
-            "text": "",
-            "richText": []
-        },
+        "content": "",
         "externalLink": "https://timothejoubert-v3.netlify.app/",
         "medias": [
             {
@@ -2565,27 +2076,7 @@
             "height": "2256",
             "width": "2597"
         },
-        "excerpt": {
-            "text": "Recherche d'interaction web autour d'une typographie variable pour mettre en avant des citations. Expérimentation réalisée durant mon stage chez Screen club.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Recherche d'interaction web autour d'une typographie variable pour mettre en avant des citations. Expérimentation réalisée durant mon stage chez Screen club.",
-                    "spans": [
-                        {
-                            "start": 145,
-                            "end": 156,
-                            "type": "hyperlink",
-                            "data": {
-                                "link_type": "Web",
-                                "url": "https://www.screen-club.com/",
-                                "target": "_blank"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
+        "excerpt": "Recherche d'interaction web autour d'une typographie variable pour mettre en avant des citations. Expérimentation réalisée durant mon stage chez Screen club.",
         "tag": [
             {
                 "id": "developpement",
@@ -2594,16 +2085,7 @@
         ],
         "framework": "Freelance",
         "rate": 12,
-        "content": {
-            "text": "",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "",
-                    "spans": []
-                }
-            ]
-        },
+        "content": "",
         "externalLink": "https://colors-of-africa.netlify.app",
         "medias": [
             {
@@ -2645,16 +2127,7 @@
             "height": "1660",
             "width": "1660"
         },
-        "excerpt": {
-            "text": "À partir de mon mémoire de recherche, j'ai mis en place des outils web ayant pour objectif de rendre la typographie plus captivante. Mon travail s'est articulé autour de la transformation de la typographie via des expériences visuelles vivantes et créatives. Mon objectif était de briser sa rigidité en la rendant plus interactive. Mon ambition était de créer des outils numériques qui permettraient d'expérimenter, de formaliser, et de donner un sens profond aux créations graphiques.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "À partir de mon mémoire de recherche, j'ai mis en place des outils web ayant pour objectif de rendre la typographie plus captivante. Mon travail s'est articulé autour de la transformation de la typographie via des expériences visuelles vivantes et créatives. Mon objectif était de briser sa rigidité en la rendant plus interactive. Mon ambition était de créer des outils numériques qui permettraient d'expérimenter, de formaliser, et de donner un sens profond aux créations graphiques.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "À partir de mon mémoire de recherche, j'ai mis en place des outils web ayant pour objectif de rendre la typographie plus captivante. Mon travail s'est articulé autour de la transformation de la typographie via des expériences visuelles vivantes et créatives. Mon objectif était de briser sa rigidité en la rendant plus interactive. Mon ambition était de créer des outils numériques qui permettraient d'expérimenter, de formaliser, et de donner un sens profond aux créations graphiques.",
         "tag": [
             {
                 "id": "code-creatif",
@@ -2667,27 +2140,7 @@
         ],
         "framework": "DSAA",
         "rate": 17,
-        "content": {
-            "text": "Durant ce projet, j’ai pris énormément de plaisir à expérimenter sans contraintes. J’ai passé beaucoup de temps à tester des choses sans savoir ou j’allais, ce qui fût très plaisant et enrichissant. Néanmoins, cette manière de faire ma aussi frustrée parce que je n’ai pas réellement conçu une production représentative et aboutie. Mon site final est assez brouillon et ne fonctionne pas bien. Ce site avait pour objectif de présenter mes recherches, mais j’ai voulu intégrer l’aspect expérimental dans la construction de celui-ci. Ce parti pris rentre en conflit avec la compréhension du projet, il aurait fallut faire un site simple et sans fioriture et laisser mes expérimentations parler d’elles mêmes. ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Durant ce projet, j’ai pris énormément de plaisir à expérimenter sans contraintes. J’ai passé beaucoup de temps à tester des choses sans savoir ou j’allais, ce qui fût très plaisant et enrichissant. Néanmoins, cette manière de faire ma aussi frustrée parce que je n’ai pas réellement conçu une production représentative et aboutie. Mon site final est assez brouillon et ne fonctionne pas bien. Ce site avait pour objectif de présenter mes recherches, mais j’ai voulu intégrer l’aspect expérimental dans la construction de celui-ci. Ce parti pris rentre en conflit avec la compréhension du projet, il aurait fallut faire un site simple et sans fioriture et laisser mes expérimentations parler d’elles mêmes. ",
-                    "spans": [
-                        {
-                            "start": 332,
-                            "end": 346,
-                            "type": "hyperlink",
-                            "data": {
-                                "link_type": "Web",
-                                "url": "https://pogotes-moi-cette-fonte.netlify.app/",
-                                "target": "_blank"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
+        "content": "Durant ce projet, j’ai pris énormément de plaisir à expérimenter sans contraintes. J’ai passé beaucoup de temps à tester des choses sans savoir ou j’allais, ce qui fût très plaisant et enrichissant. Néanmoins, cette manière de faire ma aussi frustrée parce que je n’ai pas réellement conçu une production représentative et aboutie. Mon site final est assez brouillon et ne fonctionne pas bien. Ce site avait pour objectif de présenter mes recherches, mais j’ai voulu intégrer l’aspect expérimental dans la construction de celui-ci. Ce parti pris rentre en conflit avec la compréhension du projet, il aurait fallut faire un site simple et sans fioriture et laisser mes expérimentations parler d’elles mêmes. ",
         "externalLink": "https://www.notion.so/timothej/Pogote-moi-cette-fonte-4521a648613240dd906d6966609ea2d6",
         "medias": [
             {
@@ -2878,16 +2331,7 @@
             "height": "2000",
             "width": "2002"
         },
-        "excerpt": {
-            "text": "Lors de ma deuxième année de DSAA, j'ai conçu un mémoire qui traite de l'implication des outils numériques dans le travail de design. Mon appétence pour le code m’a donc amené à me questionner sur les languages informatiques/outils numériques que nous utilisons dans notre pratique de design.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Lors de ma deuxième année de DSAA, j'ai conçu un mémoire qui traite de l'implication des outils numériques dans le travail de design. Mon appétence pour le code m’a donc amené à me questionner sur les languages informatiques/outils numériques que nous utilisons dans notre pratique de design.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Lors de ma deuxième année de DSAA, j'ai conçu un mémoire qui traite de l'implication des outils numériques dans le travail de design. Mon appétence pour le code m’a donc amené à me questionner sur les languages informatiques/outils numériques que nous utilisons dans notre pratique de design.",
         "tag": [
             {
                 "id": "edition",
@@ -2900,22 +2344,7 @@
         ],
         "framework": "DSAA",
         "rate": 17,
-        "content": {
-            "text": "Sujet: En quoi la compréhension des outils numériques enrichit il notre pratique du design graphique ? Pourquoi les logiciels déplacent-ils les enjeux des designers ? Est-ce que se baser sur la contrainte technique est une bonne méthodologie de design ? ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Sujet: En quoi la compréhension des outils numériques enrichit il notre pratique du design graphique ? Pourquoi les logiciels déplacent-ils les enjeux des designers ? Est-ce que se baser sur la contrainte technique est une bonne méthodologie de design ? ",
-                    "spans": [
-                        {
-                            "start": 0,
-                            "end": 7,
-                            "type": "strong"
-                        }
-                    ]
-                }
-            ]
-        },
+        "content": "Sujet: En quoi la compréhension des outils numériques enrichit il notre pratique du design graphique ? Pourquoi les logiciels déplacent-ils les enjeux des designers ? Est-ce que se baser sur la contrainte technique est une bonne méthodologie de design ? ",
         "medias": [
             {
                 "link_type": "Media",
@@ -2992,16 +2421,7 @@
             "height": "2880",
             "width": "2880"
         },
-        "excerpt": {
-            "text": "Création de l'identité visuelle et d'un outil web interactif pour les journées portes ouvertes de La Martinière Diderot 2021.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Création de l'identité visuelle et d'un outil web interactif pour les journées portes ouvertes de La Martinière Diderot 2021.",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Création de l'identité visuelle et d'un outil web interactif pour les journées portes ouvertes de La Martinière Diderot 2021.",
         "tag": [
             {
                 "id": "code-creatif",
@@ -3018,37 +2438,7 @@
         ],
         "framework": "DSAA",
         "rate": 16,
-        "content": {
-            "text": "À l'occasion des journées portes ouvertes de La Martinière Diderot 2021, j’ai imaginé une identité visuelle générative. Pour mettre en avant l'aspect modulaire du design, j'ai mis en place une interface graphique. Les visiteurs des JPO en ligne ont donc pu interagir avec pour générer\nleur propre palette colorimétrique, leur propre composition et animer le tout pour rendre leur visite plus attrayante.\n\nJe n'ai jamais été très fan des productions d'art génératif, cela m'évoque plus des œuvres de technicien ou de scientifique que des œuvres graphiques. Cependant, j'aimerais utiliser cette pratique pour réaliser des outils graphiques facilitant la déclinaison et l'itération autour d'une identité graphique. J'apprécie particulièrement les projets du Studio Dumbar et de Chevalvert, ils mettent à profit la programmation pour proposer des visuels et des animations originales. \n\n",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "À l'occasion des journées portes ouvertes de La Martinière Diderot 2021, j’ai imaginé une identité visuelle générative. Pour mettre en avant l'aspect modulaire du design, j'ai mis en place une interface graphique. Les visiteurs des JPO en ligne ont donc pu interagir avec pour générer\nleur propre palette colorimétrique, leur propre composition et animer le tout pour rendre leur visite plus attrayante.\n\nJe n'ai jamais été très fan des productions d'art génératif, cela m'évoque plus des œuvres de technicien ou de scientifique que des œuvres graphiques. Cependant, j'aimerais utiliser cette pratique pour réaliser des outils graphiques facilitant la déclinaison et l'itération autour d'une identité graphique. J'apprécie particulièrement les projets du Studio Dumbar et de Chevalvert, ils mettent à profit la programmation pour proposer des visuels et des animations originales. \n\n",
-                    "spans": [
-                        {
-                            "start": 755,
-                            "end": 768,
-                            "type": "hyperlink",
-                            "data": {
-                                "link_type": "Web",
-                                "url": "https://studiodumbar.com/work/north-sea-jazz",
-                                "target": "_blank"
-                            }
-                        },
-                        {
-                            "start": 775,
-                            "end": 785,
-                            "type": "hyperlink",
-                            "data": {
-                                "link_type": "Web",
-                                "url": "https://chevalvert.fr/fr/projects/federation-francaise-du-paysage",
-                                "target": "_blank"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
+        "content": "À l'occasion des journées portes ouvertes de La Martinière Diderot 2021, j’ai imaginé une identité visuelle générative. Pour mettre en avant l'aspect modulaire du design, j'ai mis en place une interface graphique. Les visiteurs des JPO en ligne ont donc pu interagir avec pour générer\nleur propre palette colorimétrique, leur propre composition et animer le tout pour rendre leur visite plus attrayante.\n\nJe n'ai jamais été très fan des productions d'art génératif, cela m'évoque plus des œuvres de technicien ou de scientifique que des œuvres graphiques. Cependant, j'aimerais utiliser cette pratique pour réaliser des outils graphiques facilitant la déclinaison et l'itération autour d'une identité graphique. J'apprécie particulièrement les projets du Studio Dumbar et de Chevalvert, ils mettent à profit la programmation pour proposer des visuels et des animations originales. \n\n",
         "externalLink": "https://www.lamartinierediderot.fr/jpo/jpo2021_jeu.html",
         "medias": [
             {
@@ -3111,7 +2501,7 @@
         "id": "ZRNDzhAAACIAL9JJ",
         "title": "Animer le confiné",
         "slug": "animer-le-confine",
-        "favorite": false,
+        "c": false,
         "date": "2020-05-13",
         "thumbnail": {
             "link_type": "Media",
@@ -3122,16 +2512,7 @@
             "height": "2880",
             "width": "2880"
         },
-        "excerpt": {
-            "text": "Afin de rendre le confinement productif, j'ai fait une petite série d'animation divers et variée. J'ai particulièrement apprécié faire des animations frame by frame, c'est une très bonne pratique pour se détendre et passer le temps, je recommande. ",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "Afin de rendre le confinement productif, j'ai fait une petite série d'animation divers et variée. J'ai particulièrement apprécié faire des animations frame by frame, c'est une très bonne pratique pour se détendre et passer le temps, je recommande. ",
-                    "spans": []
-                }
-            ]
-        },
+        "excerpt": "Afin de rendre le confinement productif, j'ai fait une petite série d'animation divers et variée. J'ai particulièrement apprécié faire des animations frame by frame, c'est une très bonne pratique pour se détendre et passer le temps, je recommande. ",
         "tag": [
             {
                 "id": "motion-design",
@@ -3144,22 +2525,7 @@
         ],
         "framework": "Perso",
         "rate": 14,
-        "content": {
-            "text": "On retrouve notamment Fessetival, une animation reprenant le style des encarts publicitaires charnel sur les journaux.",
-            "richText": [
-                {
-                    "type": "paragraph",
-                    "text": "On retrouve notamment Fessetival, une animation reprenant le style des encarts publicitaires charnel sur les journaux.",
-                    "spans": [
-                        {
-                            "start": 22,
-                            "end": 32,
-                            "type": "strong"
-                        }
-                    ]
-                }
-            ]
-        },
+        "content": "On retrouve notamment Fessetival, une animation reprenant le style des encarts publicitaires charnel sur les journaux.",
         "medias": [
             {
                 "link_type": "Media",

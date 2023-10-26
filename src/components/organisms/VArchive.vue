@@ -90,16 +90,13 @@ export default Vue.extend({
             return [this.$style.root, this.$store.getters.isProjectOpen && this.$style['root--project-open']]
         },
         buttons(): ArchiveSetting[] {
-            const result: ArchiveSetting[] = DISPLAYED_INFO.map((info) => {
+            return DISPLAYED_INFO.map((info) => {
                 return {
                     label: info.label,
                     id: info.id,
                     sortable: true,
                 }
             })
-            // result.push({ label: 'Lien', id: 'link' })
-
-            return result
         },
     },
     methods: {
