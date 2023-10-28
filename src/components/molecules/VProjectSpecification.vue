@@ -131,6 +131,11 @@ export default Vue.extend({
     margin-bottom: rem(40);
 }
 
+.excerpt,
+.more-content {
+    max-width: rem(800);
+}
+
 .content {
     margin-top: rem(16);
     opacity: 0.9;

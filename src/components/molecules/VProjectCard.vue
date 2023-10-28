@@ -1,5 +1,5 @@
 <template>
-    <v-link :reference="project" :class="$style.root" :inert="cardProps.isBlurred">
+    <v-link :id="'favorite-' + project.uid" :reference="project" :class="$style.root" :inert="cardProps.isBlurred">
         <v-new-pill :date="project.data.date" :class="$style.new" :grow="hovered" />
         <v-card v-model="hovered" v-bind="cardProps" />
     </v-link>

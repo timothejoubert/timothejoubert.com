@@ -4,6 +4,7 @@
         <ul v-if="hasProject" :class="rootClasses">
             <li v-for="project in filteredProjects" :key="project.uid">
                 <v-link
+                    :id="'archive-' + project.uid"
                     :reference="project"
                     :class="[$style.link, project.uid === openedProjectUid && $style['link--active']]"
                     @click.native="updateProjectQueue"

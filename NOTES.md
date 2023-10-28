@@ -10,10 +10,10 @@ import { Document } from '@prismicio/client/types/documents'
 
 ### IN PROGRESS
 ** (Project: Pogote moi): Vérifier access notion 
-
-### TODOS 
 ** (Responsive): better card on mobile 
 ** (Responsive): ColorSwitcher popover ? (popover)
+
+### TODOS 
 ** (Perf): VInteractiveText mousemove values not reset on resize 
 
 ### IMPROVEMENT

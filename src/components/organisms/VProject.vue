@@ -1,6 +1,6 @@
 <template>
     <div :class="[$style.root, isSticky && $style['root--sticky']]" class="container">
-        <div ref="header" :class="$style.header">
+        <header ref="header" :class="$style.header">
             <nuxt-link
                 to="/"
                 :class="$style.close"
@@ -23,21 +23,23 @@
                 theme="light"
                 @click="onExpandClicked"
             />
-        </div>
+        </header>
 
-        <v-project-parsed v-slot="projectContent" :project="project">
-            <v-project-specification v-bind="projectContent" />
-        </v-project-parsed>
+        <main>
+            <v-project-parsed v-slot="projectContent" :project="project">
+                <v-project-specification v-bind="projectContent" />
+            </v-project-parsed>
 
-        <div :class="$style.medias">
-            <div v-for="(media, i) in medias" :key="'media-' + i" :class="$style.media">
-                <v-media
-                    :document="media"
-                    :sizes="isProjectExpanded || isProjectAlreadyOpen ? 90 : 60"
-                    :video="{ background: true }"
-                />
+            <div :class="$style.medias">
+                <div v-for="(media, i) in medias" :key="'media-' + i" :class="$style.media">
+                    <v-media
+                        :document="media"
+                        :sizes="isProjectExpanded || isProjectAlreadyOpen ? 90 : 60"
+                        :video="{ background: true }"
+                    />
+                </div>
             </div>
-        </div>
+        </main>
 
         <v-next-project :class="$style['next-project']" />
         <slot name="jsonLdPage" />
@@ -95,7 +97,12 @@ export default Vue.extend({
             } else if (event.key === 'ArrowRight') {
                 uid = this.$store.getters.getProjectUidInQueue('next')
             }
-            uid && this.$router.push('/' + uid)
+            if (uid) {
+                // TODO: focus link element depending on section clicked | active
+                // const selectedProjectType: 'favorite' | 'archive'
+                // document.getElementById(selectedProjectType + '-' + uid)?.focus()
+                this.$router.push('/' + uid)
+            }
         },
         onExpandClicked() {
             this.$store.commit(MutationType.IS_PROJECT_EXPANDED, !this.isProjectExpanded)
