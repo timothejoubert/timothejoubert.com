@@ -38,6 +38,8 @@
                 />
             </div>
         </div>
+
+        <v-next-project :class="$style['next-project']" />
         <slot name="jsonLdPage" />
     </div>
 </template>
@@ -77,13 +79,24 @@ export default Vue.extend({
             if (value) this.isProjectAlreadyOpen = true
         },
     },
-    // mounted() {
-    //     this.createStickyObserver()
-    // },
-    // beforeDestroy() {
-    //     this.stickyObserver?.disconnect()
-    // },
+    mounted() {
+        // this.createStickyObserver()
+        window.addEventListener('keyup', this.onKeyUp)
+    },
+    beforeDestroy() {
+        window.removeEventListener('keyup', this.onKeyUp)
+        // this.stickyObserver?.disconnect()
+    },
     methods: {
+        onKeyUp(event: KeyboardEvent) {
+            let uid: string | undefined
+            if (event.key === 'ArrowLeft') {
+                uid = this.$store.getters.getProjectUidInQueue('previous')
+            } else if (event.key === 'ArrowRight') {
+                uid = this.$store.getters.getProjectUidInQueue('next')
+            }
+            uid && this.$router.push('/' + uid)
+        },
         onExpandClicked() {
             this.$store.commit(MutationType.IS_PROJECT_EXPANDED, !this.isProjectExpanded)
         },
@@ -153,7 +166,9 @@ export default Vue.extend({
 }
 
 .medias {
-    margin-bottom: rem(50);
+    &:last-of-type {
+        margin-bottom: rem(50);
+    }
 }
 
 .media {
@@ -176,5 +191,9 @@ export default Vue.extend({
             box-shadow: 5px 5px 8px rgba(#000, 0.07), -5px -5px 8px rgba(#000, 0.04);
         }
     }
+}
+
+.next-project {
+    margin-bottom: rem(50);
 }
 </style>

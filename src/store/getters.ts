@@ -33,6 +33,25 @@ export const getters: GetterTree<RootState, RootState> = {
         return (uid: string): ProjectDocument | undefined =>
             getters.projects?.find((project: ProjectDocument) => project.uid === uid)
     },
+    getProjectUidInQueue(state: RootState, getters: any) {
+        return (position: 'previous' | 'next'): string => {
+            const currentUid = state.currentPageData?.uid
+            const list = (state.projectQueueList as string[]) || getters.projects.map((p: ProjectDocument) => p.uid)
+            const currentIndex = list.findIndex((uid) => uid === currentUid)
+
+            let nextProjectIndex = 0
+            if (position === 'next' && currentIndex !== list.length - 1) nextProjectIndex = currentIndex + 1
+            else if (position === 'previous') {
+                nextProjectIndex = currentIndex === 0 ? list.length - 1 : currentIndex - 1
+            }
+
+            return list[nextProjectIndex]
+        }
+    },
+    getNextProjectInQueue(_state: RootState, getters: any): ProjectDocument {
+        const nextProjectUid = getters.getProjectUidInQueue('next')
+        return getters.getProjectByUid(nextProjectUid)
+    },
 }
 
 export default getters

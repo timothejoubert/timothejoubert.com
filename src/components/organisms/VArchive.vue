@@ -166,6 +166,7 @@ export default Vue.extend({
         width: rem(100);
     }
 
+    :global(.nuxt-link-active) &,
     :global(.hovered) &,
     &--highlight {
         opacity: 1;

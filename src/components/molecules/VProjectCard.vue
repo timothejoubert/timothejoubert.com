@@ -8,8 +8,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import type { PropType } from 'vue'
-import { ProjectDocument } from '~~/prismicio-types'
-import { VCardProps } from '~/components/molecules/VCard.vue'
+import type { ProjectDocument } from '~~/prismicio-types'
+import type { VCardProps } from '~/components/molecules/VCard.vue'
 import getTagsByProject from '~/utils/tags'
 
 export default Vue.extend({
@@ -33,7 +33,7 @@ export default Vue.extend({
                 tags: getTagsByProject(this.project),
                 selected: this.project?.uid === this.activeProject,
                 activeTags: this.$store.state.tagFilters,
-                isBlurred: this.activeProjectsId?.includes(this.project.uid),
+                isBlurred: !!this.activeProjectsId.length && !this.activeProjectsId?.includes(this.project.uid),
             }
         },
         activeProject() {

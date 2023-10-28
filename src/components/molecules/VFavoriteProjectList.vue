@@ -1,7 +1,7 @@
 <template>
     <nav v-if="projects.length" class="container" :class="$style.root">
         <ul :class="$style.projects" :style="columns && { '--card-number': columns }">
-            <li v-for="project in projects" :id="project.uid" :key="project.uid">
+            <li v-for="project in projects" :id="project.uid" :key="project.uid" @click="updateProjectQueue">
                 <v-project-card :project="project" :active-projects-id="activeProjectsId" />
             </li>
         </ul>
@@ -14,6 +14,7 @@ import Vue from 'vue'
 import { ProjectDocument } from '~~/prismicio-types'
 import MutationType from '~/constants/mutation-type'
 import getTagsByProject, { Tag } from '~/utils/tags'
+import AppConst from '~/constants/app'
 
 export default Vue.extend({
     name: 'VFavoriteProjectList',
@@ -31,23 +32,30 @@ export default Vue.extend({
             const selectedTags = this.$store.state.tagFilters as string[]
             if (!selectedTags.length) return []
 
-            const projectWithCommonSelectedTags = this.projects.filter((project) => {
+            const projectWithSelectedTag = this.projects.filter((project) => {
                 const projectTags = getTagsByProject(project)
-                return !projectTags.some(({ id }: Tag) => selectedTags.includes(id))
+                return projectTags.some(({ id }: Tag) => selectedTags.includes(id))
             })
 
-            return projectWithCommonSelectedTags.map((filteredProject) => filteredProject.uid)
+            return projectWithSelectedTag.map((filteredProject) => filteredProject.uid)
         },
     },
     watch: {
         '$store.state.uiColumns'(value: string) {
             this.columns = value
         },
+        '$store.state.tagFilters'() {
+            this.updateProjectQueue()
+        },
     },
     methods: {
+        updateProjectQueue() {
+            const activeUidList = this.activeProjectsId.length ? this.activeProjectsId : this.projects.map((p) => p.uid)
+            this.$store.commit(MutationType.PROJECT_QUEUE_LIST, activeUidList)
+        },
         onResetFilterClick() {
             this.$store.commit(MutationType.TAG_FILTERS, [])
-            this.$store.commit(MutationType.UI_COLUMNS, '4')
+            this.$store.commit(MutationType.UI_COLUMNS, AppConst.UI_COLUMNS)
             this.$store.commit(MutationType.FRAMEWORK_FILTERS, [])
         },
     },

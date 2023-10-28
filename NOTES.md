@@ -9,22 +9,21 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (VArchive): Changer de projet avec les fleches 
-** (Varchive): set text Opacity to 1 on hover
 ** (Project: Pogote moi): Vérifier access notion 
 
-### TODOS
-** (Font): Compress fontFile(noi) 
-** (Analytic): Ajouter analytic ? matomo / notion ?
-** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
-** (SEO): Text alt des img
-** (SEO): Check headings
-** (ColorSwitcher): update layout sur mobile (popover)
-** (Content): check for better media quality | Animer le confiné 1ere video
-** (CMS field on VMedia): Display controls or sound on videoMedia  
+### TODOS 
+** (Responsive): better card on mobile 
+** (Responsive): ColorSwitcher popover ? (popover)
 ** (Perf): VInteractiveText mousemove values not reset on resize 
 
 ### IMPROVEMENT
+** (Font): Compress fontFile(noi) 
+** (Analytic): Ajouter analytic ? matomo / notion ?
+** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
+** (SEO): Check headings
+** (Content): check for better media quality | Animer le confiné 1ere video
+** (CMS field on VMedia): Display controls or sound on videoMedia  
+** (SEO): Text alt des img
 ** (SEO): Sitemap
 ** (Video): add loader and aspect ratio
 ** (Improvement): Ajouter data visualisation sur des projets (la typologie la plus féquente, pourcentage des frameworks, note moyenne, note mediane, projets par année, année la plus productive, ) 
@@ -33,6 +32,8 @@ import { Document } from '@prismicio/client/types/documents'
 ** (JsonLD): Better projects data 
 
 ### DONE
+** (VArchive): Changer de projet avec les fleches
+** (Varchive): set text Opacity to 1 on hover
 ** (Backup): Faire backup (last: 16-10-2023)
 ** (PreProd): redirection route ancien site (netlify)
 ** (organization): clean unused code

@@ -15,7 +15,7 @@
             <slot>
                 <v-slide-text
                     v-if="animate && typeof label === 'string'"
-                    :play-animation="mouseEnter"
+                    :play-animation="playLabelAnimation"
                     :content="label"
                 />
                 <template v-else>{{ label }}</template>
@@ -60,6 +60,7 @@ export default Vue.extend({
             default: true,
         },
         animate: Boolean,
+        playAnimation: Boolean,
         theme: { type: String as PropType<Theme>, default: 'dark' },
     },
     data() {
@@ -68,6 +69,9 @@ export default Vue.extend({
         }
     },
     computed: {
+        playLabelAnimation(): boolean {
+            return this.playAnimation || this.mouseEnter
+        },
         classNames(): (string | boolean | undefined)[] {
             return [
                 this.$style.root,

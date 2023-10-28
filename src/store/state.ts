@@ -14,6 +14,7 @@ export default (): RootState => ({
     isAboutOpen: false,
     isProjectExpanded: false,
     isEveryProjectInFavorite: false,
+    projectQueueList: null,
 
     // UI setting
     uiTheme: getObjectFormattedTheme(),

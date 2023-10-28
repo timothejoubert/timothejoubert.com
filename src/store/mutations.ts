@@ -16,6 +16,8 @@ export default {
     [MutationType.SPLASH_SCREEN_DONE]: (state, value: boolean) => (state.splashScreenDone = value),
     [MutationType.IS_PROJECT_EXPANDED]: (state, value: boolean) => (state.isProjectExpanded = value),
     [MutationType.IS_EVERY_PROJECT_IN_FAVORITE]: (state, value: boolean) => (state.isEveryProjectInFavorite = value),
+    [MutationType.PROJECT_QUEUE_LIST]: (state, value: RootState['projectQueueList']) =>
+        (state.projectQueueList = value),
 
     // UI settings
     [MutationType.TAG_FILTERS]: (state, value: string[]) => (state.tagFilters = value),

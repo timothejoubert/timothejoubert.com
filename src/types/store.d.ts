@@ -13,6 +13,7 @@ interface RootState {
     isAboutOpen: boolean
     isProjectExpanded: boolean
     isEveryProjectInFavorite: boolean
+    projectQueueList: string[] | null
 
     // UI setting
     uiTheme: ClientTheme

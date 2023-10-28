@@ -5,7 +5,8 @@
             <li v-for="project in filteredProjects" :key="project.uid">
                 <v-link
                     :reference="project"
-                    :class="$style.link"
+                    :class="[$style.link, project.uid === openedProjectUid && $style['link--active']]"
+                    @click.native="updateProjectQueue"
                     @mouseenter.native="onMouseEnter"
                     @mouseleave.native="onMouseLeave"
                 >
@@ -30,6 +31,7 @@ import Vue from 'vue'
 import type { PropType } from 'vue'
 import { ProjectDocument, ProjectDocumentDataTagGroupItem } from '~~/prismicio-types'
 import { ProjectDocumentData } from '~/types/prismic/app-prismic'
+import MutationType from '~/constants/mutation-type'
 
 export default Vue.extend({
     name: 'VArchiveList',
@@ -50,6 +52,9 @@ export default Vue.extend({
                 !this.hasProject && this.$style['root--empty'],
                 this.$store.getters.isProjectOpen && this.$style['root--project-open'],
             ]
+        },
+        openedProjectUid(): string | undefined {
+            return this.$store.state.currentPageData?.uid
         },
         hasProject(): boolean {
             return !!this.filteredProjects.length
@@ -112,11 +117,27 @@ export default Vue.extend({
                 window.removeEventListener('keyup', this.onKeyUp)
             }
         },
+        sortOrder() {
+            this.updateProjectQueue()
+        },
+        sortId() {
+            this.updateProjectQueue()
+        },
+    },
+    mounted() {
+        const hasQueue = !!this.$store.state.projectQueueList?.length
+        if (!hasQueue) this.updateProjectQueue()
     },
     beforeDestroy() {
         window.removeEventListener('keyup', this.onKeyUp)
     },
     methods: {
+        updateProjectQueue() {
+            this.$store.commit(
+                MutationType.PROJECT_QUEUE_LIST,
+                this.filteredProjects.map((p) => p.uid)
+            )
+        },
         onKeyUp(event: KeyboardEvent) {
             if (event.key === 'Enter') {
                 const selectedProjectUid = this.filteredProjects[0].uid
@@ -177,6 +198,12 @@ export default Vue.extend({
     transition-property: opacity, color, gap;
     white-space: nowrap;
 
+    &:global(.nuxt-link-active) {
+        color: var(--theme-background-color);
+        cursor: default;
+    }
+
+    &::after,
     &::before {
         position: absolute;
         z-index: -3;
@@ -187,6 +214,16 @@ export default Vue.extend({
         translate: 0 var(--panel-translate-y, -100%);
     }
 
+    &::after {
+        z-index: -4;
+    }
+
+    &:global(.nuxt-link-active)::after {
+        --panel-translate-y: 0 !important;
+
+        background-color: color-mix(in sRGB, var(--theme-foreground-color) 85%, transparent);
+    }
+
     @media (hover: hover) {
         &:hover {
             color: var(--theme-background-color);
@@ -194,6 +231,11 @@ export default Vue.extend({
 
         &:hover::before {
             translate: 0 0 !important;
+        }
+
+        &:global(.nuxt-link-active):hover::before {
+            //color: var(--theme-background-color);
+            background-color: var(--theme-accent-color) !important;
         }
     }
 }
