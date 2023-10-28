@@ -9,13 +9,12 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (Font): Compress fontFile(noi) 
-** (Project: Pogote moi): Vérifier access notion 
 ** (VArchive): Changer de projet avec les fleches 
-** (Backup): Faire backup 
 ** (Varchive): set text Opacity to 1 on hover
+** (Project: Pogote moi): Vérifier access notion 
 
 ### TODOS
+** (Font): Compress fontFile(noi) 
 ** (Analytic): Ajouter analytic ? matomo / notion ?
 ** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
 ** (SEO): Text alt des img
@@ -34,6 +33,7 @@ import { Document } from '@prismicio/client/types/documents'
 ** (JsonLD): Better projects data 
 
 ### DONE
+** (Backup): Faire backup (last: 16-10-2023)
 ** (PreProd): redirection route ancien site (netlify)
 ** (organization): clean unused code
 ** (Responsive): Setting | Project | About

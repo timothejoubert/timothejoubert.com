@@ -126,6 +126,7 @@ export default Vue.extend({
         onMouseEnter(event: MouseEvent) {
             const el = event.target as HTMLElement
 
+            el.classList.add('hovered')
             if (this.getDirection(el, event.y) === 'bottom') {
                 el.style.setProperty('--panel-translate-y', '-100%')
             } else {
@@ -135,6 +136,7 @@ export default Vue.extend({
         onMouseLeave(event: MouseEvent) {
             const el = event.target as HTMLElement
 
+            el.classList.remove('hovered')
             if (this.getDirection(el, event.y) === 'bottom') {
                 el.style.setProperty('--panel-translate-y', '100%')
             } else {

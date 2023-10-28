@@ -120,6 +120,7 @@ export default Vue.extend({
 <style lang="scss" module>
 .root {
     margin-block: rem(60) rem(60);
+
     --v-archive-list-gap: #{rem(32)};
 
     &--project-open {
@@ -136,8 +137,8 @@ export default Vue.extend({
     --v-button-padding: 0;
 
     display: flex;
-    transition: gap 0.4s ease(out-quad);
     gap: var(--v-archive-list-gap);
+    transition: gap 0.4s ease(out-quad);
 }
 
 .sortable__icon {
@@ -165,6 +166,7 @@ export default Vue.extend({
         width: rem(100);
     }
 
+    :global(.hovered) &,
     &--highlight {
         opacity: 1;
     }
@@ -188,7 +190,7 @@ export default Vue.extend({
 
 .date {
     display: none;
-    width: rem(70);
+    width: rem(60);
 
     @include media('>=md') {
         display: flex;
@@ -199,8 +201,8 @@ export default Vue.extend({
     display: none;
 
     @include media('>=lg') {
-        width: rem(100);
         display: flex;
+        width: rem(100);
     }
 }
 
@@ -212,8 +214,8 @@ export default Vue.extend({
     display: none;
 
     @include media('>=lg') {
-        min-width: rem(100);
         display: flex;
+        min-width: rem(100);
     }
 }
 
@@ -228,8 +230,8 @@ export default Vue.extend({
 .search,
 .link-icon {
     display: flex;
-    justify-content: flex-end;
     flex-shrink: 0;
+    justify-content: flex-end;
 
     @include media('>=lg') {
         width: rem(140);
