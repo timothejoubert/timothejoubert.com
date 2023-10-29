@@ -1,10 +1,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import type { PropType, VNode, VNodeData } from 'vue'
-import VVideo, { VVideoProps } from '~/components/molecules/VVideo.vue'
+import VVideo from '~/components/molecules/VVideo.vue'
+import type { VVideoProps } from '~/components/molecules/VVideo.vue'
 import { isImage, isVideo } from '~/utils/prismic/media'
 import { PrismicMedia } from '~/types/prismic/app-prismic'
-import VImage, { VImageProps } from '~/components/molecules/VImage.vue'
+import VImage from '~/components/molecules/VImage.vue'
+import type { VImageProps } from '~/components/molecules/VImage.vue'
 
 export default Vue.extend({
     name: 'VMedia',

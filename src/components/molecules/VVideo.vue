@@ -3,6 +3,11 @@
         <video v-bind="props" ref="media" :class="$style.video" @click.prevent="onClick" @canplay="onVideoReady">
             <source :src="url" type="video/mp4" />
         </video>
+        <v-button v-if="soundEnabled" filled :class="$style.cta" @click.prevent="onSoundClick">
+            <template #icon>
+                <component :is="soundState === 'on' ? 'IconSoundOff' : 'IconSoundOn'" />
+            </template>
+        </v-button>
         <v-button
             v-if="!background"
             v-show="videoState !== 'played'"
@@ -20,6 +25,8 @@
 import Vue from 'vue'
 import type { PropType } from 'vue'
 import IconPlay from '~/assets/images/icons/play.svg?sprite'
+import IconSoundOn from '~/assets/images/icons/sound-on.svg?sprite'
+import IconSoundOff from '~/assets/images/icons/sound-off.svg?sprite'
 import { PrismicMedia } from '~/types/prismic/app-prismic'
 
 export interface VVideoProps {
@@ -29,13 +36,15 @@ export interface VVideoProps {
     controls?: boolean
     needInteraction?: boolean
     background?: boolean
+    soundEnabled?: boolean
 }
 
 export type VideoState = 'pending' | 'ready' | 'played' | 'paused' | 'ended'
+export type SoundState = 'muted' | 'on' | 'off'
 
 export default Vue.extend({
     name: 'VVideo',
-    components: { IconPlay },
+    components: { IconPlay, IconSoundOn, IconSoundOff },
     props: {
         prismicMedia: Object as PropType<PrismicMedia>,
         autoplay: Boolean,
@@ -43,10 +52,12 @@ export default Vue.extend({
         controls: { type: Boolean, default: true },
         needInteraction: Boolean,
         background: Boolean,
+        soundEnabled: Boolean,
     },
     data() {
         return {
             videoState: 'pending' as VideoState,
+            soundState: 'muted' as SoundState,
         }
     },
     computed: {
@@ -75,12 +86,22 @@ export default Vue.extend({
             return props
         },
     },
+    watch: {
+        soundState(state: SoundState) {
+            const vid = this.$refs.media as HTMLVideoElement
+            vid.muted = state !== 'on'
+        },
+    },
     methods: {
         onClick() {
             if (this.background) return
             if (this.videoState === 'played') this.pause()
             else this.play()
             this.$emit('video-state', this.videoState)
+        },
+        onSoundClick() {
+            if (this.soundState === 'muted' || this.soundState === 'off') this.soundState = 'on'
+            else if (this.soundState === 'on') this.soundState = 'off'
         },
         play() {
             ;(this.$refs.media as HTMLVideoElement).play()

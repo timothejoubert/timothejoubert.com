@@ -20,12 +20,13 @@
             <Nuxt v-if="isHomePage" />
             <v-about :class="$style.footer" />
         </div>
-        <transition :name="$style['project-modal']">
-            <div v-if="isProjectOpen" ref="project" :class="$style.project">
-                <Nuxt />
-            </div>
-        </transition>
-
+        <keep-alive>
+            <transition :name="$style['project-modal']">
+                <div v-if="isProjectOpen" ref="project" :class="$style.project">
+                    <Nuxt />
+                </div>
+            </transition>
+        </keep-alive>
         <script v-if="isHomePage" type="application/ld+json" v-html="jsonLdHome"></script>
     </div>
 </template>

@@ -1,7 +1,12 @@
 <template>
     <nav v-if="projects.length" class="container" :class="$style.root">
         <ul :class="$style.projects" :style="columns && { '--card-number': columns }">
-            <li v-for="project in projects" :id="project.uid" :key="project.uid" @click="updateProjectQueue">
+            <li
+                v-for="project in projects"
+                :id="`favorite-project-${project.uid}`"
+                :key="project.uid"
+                @click="updateProjectQueue"
+            >
                 <v-project-card :project="project" :active-projects-id="activeProjectsId" />
             </li>
         </ul>

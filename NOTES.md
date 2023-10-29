@@ -9,17 +9,16 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (Project: Pogote moi): Vérifier access notion 
 ** (Responsive): better card on mobile 
 ** (Responsive): ColorSwitcher popover ? (popover)
-** (VVideo): Ajouter muted & controls
 
 ### TODOS 
 ** (Perf): VInteractiveText mousemove values not reset on resize 
+** (Perf): Avoid rerender component VArchiveList
 
 ### IMPROVEMENT
 ** (Font): Compress fontFile(noi) 
-** (Analytic): Ajouter analytic ? matomo / notion ?
+** (Analytic): Ajouter `analytic` ? matomo / notion ?
 ** (PreProd): Ne pas build les pages inutiles (/preview, /en, /en/slice-simulator)
 ** (SEO): Check headings
 ** (Content): check for better media quality | Animer le confiné 1ere video
@@ -33,6 +32,8 @@ import { Document } from '@prismicio/client/types/documents'
 ** (JsonLD): Better projects data 
 
 ### DONE
+** (VVideo): Ajouter muted & controls
+** (Project: Pogote moi): Vérifier access notion
 ** (VArchive): Changer de projet avec les fleches
 ** (Varchive): set text Opacity to 1 on hover
 ** (Backup): Faire backup (last: 16-10-2023)

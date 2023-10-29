@@ -31,11 +31,11 @@
             </v-project-parsed>
 
             <div :class="$style.medias">
-                <div v-for="(media, i) in medias" :key="'media-' + i" :class="$style.media">
+                <div v-for="(media, i) in medias" :key="`media-${media?.url}-${i}`" :class="$style.media">
                     <v-media
                         :document="media"
                         :sizes="isProjectExpanded || isProjectAlreadyOpen ? 90 : 60"
-                        :video="{ background: true }"
+                        :video="{ background: true, ...media?.videoOptions }"
                     />
                 </div>
             </div>
@@ -51,6 +51,7 @@ import { LinkToMediaField } from '@prismicio/types/src/value/linkToMedia'
 import { ProjectDocumentData, ProjectDocumentDataMediasItem } from '~~/prismicio-types'
 import IconClose from '~/assets/images/icons/close.svg?sprite'
 import MutationType from '~/constants/mutation-type'
+import { VVideoProps } from '~/components/molecules/VVideo.vue'
 
 export default Vue.extend({
     name: 'VProject',
@@ -67,9 +68,12 @@ export default Vue.extend({
         project(): ProjectDocumentData {
             return this.$store.state.currentPageData.data
         },
-        medias(): LinkToMediaField[] {
+        medias(): (LinkToMediaField & { videoOptions?: Partial<VVideoProps> })[] {
             const medias =
-                this.project.medias?.map((mediaReference: ProjectDocumentDataMediasItem) => mediaReference.media) || []
+                this.project.medias?.map((mediaReference: ProjectDocumentDataMediasItem) => {
+                    return { ...mediaReference.media, videoOptions: { soundEnabled: mediaReference.sound_enabled } }
+                }) || []
+
             return [...medias, this.project.thumbnail]
         },
         isProjectExpanded(): boolean {
