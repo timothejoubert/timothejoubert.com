@@ -12,6 +12,7 @@ import { Document } from '@prismicio/client/types/documents'
 ** (Project: Pogote moi): Vérifier access notion 
 ** (Responsive): better card on mobile 
 ** (Responsive): ColorSwitcher popover ? (popover)
+** (VVideo): Ajouter muted & controls
 
 ### TODOS 
 ** (Perf): VInteractiveText mousemove values not reset on resize 

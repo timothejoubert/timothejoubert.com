@@ -15,7 +15,9 @@
 
             <v-archive v-if="displayArchive" :inert="isBodyContentInert" />
 
-            <nuxt v-if="isHomePage" />
+            <!--            <v-statistics />-->
+
+            <Nuxt v-if="isHomePage" />
             <v-about :class="$style.footer" />
         </div>
         <transition :name="$style['project-modal']">
@@ -278,13 +280,16 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
         z-index: -1;
         background-color: var(--theme-background-color);
         content: '';
-        inset: 0 $container-padding-inline * -1;
+        inset: 0 calc(var(--section-padding) * -1);
+    }
+
+    @include media('>=md', '<lg') {
     }
 
     @include media('<lg') {
+        left: var(--section-padding);
         position: fixed !important;
         z-index: 111 !important;
-        left: $container-padding-inline;
     }
 }
 

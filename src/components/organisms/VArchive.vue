@@ -59,7 +59,7 @@ const DISPLAYED_INFO = [
         id: 'tag_group',
     },
     {
-        label: 'Notes',
+        label: 'Fierté',
         id: 'rate',
     },
 ] as const
@@ -187,6 +187,10 @@ export default Vue.extend({
     .root--project-open & {
         max-width: rem(100);
     }
+
+    @include media('<md') {
+        flex-grow: 1;
+    }
 }
 
 .date {
@@ -194,7 +198,7 @@ export default Vue.extend({
     width: rem(60);
 
     @include media('>=md') {
-        display: flex;
+        display: block;
     }
 }
 
@@ -208,7 +212,13 @@ export default Vue.extend({
 }
 
 .tag_group {
-    flex-grow: 1;
+    display: none;
+
+    @include media('>=md') {
+        flex-grow: 1;
+        display: block;
+        min-width: rem(100);
+    }
 }
 
 .rate {

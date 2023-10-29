@@ -5,3 +5,15 @@
 .container-fullscreen {
     @include container-fullscreen;
 }
+
+:root {
+    @each $breakpoint, $value in $container {
+        @if $breakpoint == 0 {
+            --section-padding: #{$value};
+        } @else {
+            @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+                --section-padding: #{$value};
+            }
+        }
+    }
+}

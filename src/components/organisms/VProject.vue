@@ -183,7 +183,7 @@ export default Vue.extend({
     --v-image-border-radius: #{rem(8)};
 
     width: 100%;
-    margin-block: $container-padding-inline;
+    margin-block: var(--section-padding);
 
     &:first-child {
         margin-top: rem(28);
