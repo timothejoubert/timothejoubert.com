@@ -196,13 +196,6 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
         overflow: hidden;
     }
 
-    //&::after {
-    //    position: absolute;
-    //    content: '';
-    //    background-color: var(--theme-background-color);
-    //    inset: -100px 0;
-    //}
-
     @include media('>=lg') {
         overflow: hidden;
         height: 100vh;
@@ -283,13 +276,10 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
         inset: 0 calc(var(--section-padding) * -1);
     }
 
-    @include media('>=md', '<lg') {
-    }
-
     @include media('<lg') {
-        left: var(--section-padding);
         position: fixed !important;
         z-index: 111 !important;
+        left: var(--section-padding);
     }
 }
 

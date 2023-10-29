@@ -227,6 +227,10 @@ export default Vue.extend({
         display: initial;
         flex-grow: 1;
         flex-shrink: 100;
+
+        &.item--button {
+            display: flex;
+        }
     }
 }
 
