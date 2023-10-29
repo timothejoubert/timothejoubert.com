@@ -51,7 +51,10 @@ export default Vue.extend({
     display: flex;
     min-height: $v-about-toggle-height;
     align-items: center;
-    justify-content: center;
+
+    @include media('>=sm') {
+        justify-content: center;
+    }
 }
 
 .button {

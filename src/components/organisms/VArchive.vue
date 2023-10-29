@@ -9,7 +9,7 @@
                             v-for="button in buttons"
                             :key="button.id"
                             :class="[
-                                getSectionClass(button.id),
+                                getSectionClass(button.id, true),
                                 sortOrder === 'DESC' && button.id === sortId && $style['button--desc'],
                             ]"
                             :label="button.label"
@@ -106,12 +106,13 @@ export default Vue.extend({
 
             if (this.sortId !== id) this.sortId = id
         },
-        getSectionClass(id: string) {
-            return [this.$style.item, this.$style[id], this.sortId === id && this.$style['item--highlight']] as [
-                'item',
-                SectionType,
-                false | `item--${SectionType}`
-            ]
+        getSectionClass(id: string, isButton?: true) {
+            return [
+                this.$style.item,
+                isButton && this.$style['item--button'],
+                this.$style[id],
+                this.sortId === id && this.$style['item--highlight'],
+            ] as ['item', 'item--button' | false, SectionType, false | `item--${SectionType}`]
         },
     },
 })
@@ -195,10 +196,14 @@ export default Vue.extend({
 
 .date {
     display: none;
-    width: rem(60);
+    width: rem(70);
 
     @include media('>=md') {
-        display: block;
+        display: initial;
+
+        &.item--button {
+            display: flex;
+        }
     }
 }
 
@@ -206,8 +211,12 @@ export default Vue.extend({
     display: none;
 
     @include media('>=lg') {
-        display: flex;
+        display: initial;
         width: rem(100);
+
+        &.item--button {
+            display: flex;
+        }
     }
 }
 
@@ -215,9 +224,9 @@ export default Vue.extend({
     display: none;
 
     @include media('>=md') {
+        display: initial;
         flex-grow: 1;
-        display: block;
-        min-width: rem(100);
+        flex-shrink: 100;
     }
 }
 
