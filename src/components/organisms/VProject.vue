@@ -217,6 +217,10 @@ export default Vue.extend({
 }
 
 .next-project {
-    margin-bottom: rem(50);
+    margin-bottom: calc($v-about-toggle-height + rem(20));
+
+    @include media('>=md') {
+        margin-bottom: rem(50);
+    }
 }
 </style>

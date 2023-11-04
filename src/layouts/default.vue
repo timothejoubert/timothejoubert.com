@@ -261,15 +261,13 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
     flex-shrink: 0;
 
     @include media('<sm') {
-        position: relative;
+        position: relative !important;
     }
 }
 
 .favorite-setting {
-    display: none;
-
-    @include media('>=md') {
-        display: flex;
+    @include media('<md') {
+        display: none !important;
     }
 }
 

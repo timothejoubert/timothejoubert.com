@@ -50,15 +50,23 @@ export default Vue.extend({
     z-index: 11;
     bottom: 0;
     min-height: $v-about-toggle-height;
-    max-height: calc(100vh - $v-top-bar-height) !important;
+    max-height: 100vh !important;
     background-color: var(--theme-background-color);
     transition: min-height 0.85s ease(out-quad);
 
     &--open {
         @include scroll-bar-hidden;
 
-        min-height: calc(100vh - $v-top-bar-height);
+        min-height: calc(100vh + 2px) !important;
         overflow-x: hidden;
+    }
+
+    @include media('>=md') {
+        max-height: calc(100vh - $v-top-bar-height) !important;
+
+        &--open {
+            min-height: calc(100vh - $v-top-bar-height);
+        }
     }
 }
 

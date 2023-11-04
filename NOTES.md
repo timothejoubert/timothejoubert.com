@@ -9,12 +9,13 @@ import { Document } from '@prismicio/client/types/documents'
 ````
 
 ### IN PROGRESS
-** (Responsive): better card on mobile 
-** (Responsive): add search project bar
+** (Responsive): revoir project modal & sticky pos
 ** (Responsive): revoir project modal
 ** (Responsive): Video autoplay launch fullscreen on mobile
 
 ### TODOS 
+** (Responsive): better card on mobile 
+** (Responsive): add search project bar
 ** (Perf): VInteractiveText mousemove values not reset on resize 
 ** (Perf): Avoid rerender component VArchiveList
 
