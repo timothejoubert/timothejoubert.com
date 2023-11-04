@@ -258,11 +258,9 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
 }
 
 .top-bar {
-    position: relative;
-    flex-shrink: 0;
-
-    @include media('>=sm') {
-        position: sticky;
+    @include media('<sm') {
+        position: relative;
+        flex-shrink: 0;
     }
 }
 
