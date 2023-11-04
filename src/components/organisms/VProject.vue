@@ -34,7 +34,7 @@
                 <div v-for="(media, i) in medias" :key="`media-${media?.url}-${i}`" :class="$style.media">
                     <v-media
                         :document="media"
-                        :sizes="isProjectExpanded || isProjectAlreadyOpen ? 90 : 60"
+                        :sizes="imageSizes"
                         :video="{ background: true, ...media?.videoOptions }"
                     />
                 </div>
@@ -52,6 +52,7 @@ import { ProjectDocumentData, ProjectDocumentDataMediasItem } from '~~/prismicio
 import IconClose from '~/assets/images/icons/close.svg?sprite'
 import MutationType from '~/constants/mutation-type'
 import { VVideoProps } from '~/components/molecules/VVideo.vue'
+import { getBreakpointValue } from '~/utils/media'
 
 export default Vue.extend({
     name: 'VProject',
@@ -78,6 +79,12 @@ export default Vue.extend({
         },
         isProjectExpanded(): boolean {
             return this.$store.state.isProjectExpanded
+        },
+        isLessThanMd(): boolean {
+            return this.$store.state.windowWidth < getBreakpointValue('md')
+        },
+        imageSizes(): number {
+            return this.isProjectExpanded || this.isProjectAlreadyOpen || this.isLessThanMd ? 90 : 60
         },
     },
     watch: {
@@ -184,22 +191,27 @@ export default Vue.extend({
 
 .media {
     --v-image-width: 100%;
-    --v-image-border-radius: #{rem(8)};
 
     width: 100%;
-    margin-block: var(--section-padding);
+    margin-block: rem(26);
 
     &:first-child {
         margin-top: rem(28);
     }
 
-    &:not(:last-child) {
-        overflow: hidden;
-        padding: rem(20) rem(20);
-        background-color: #efeeee;
+    @include media('>=md') {
+        --v-image-border-radius: #{rem(8)};
 
-        img {
-            box-shadow: 5px 5px 8px rgba(#000, 0.07), -5px -5px 8px rgba(#000, 0.04);
+        margin-block: var(--section-padding);
+
+        &:not(:last-child) {
+            overflow: hidden;
+            padding: rem(20) rem(20);
+            background-color: #efeeee;
+
+            img {
+                box-shadow: 5px 5px 8px rgba(#000, 0.07), -5px -5px 8px rgba(#000, 0.04);
+            }
         }
     }
 }
