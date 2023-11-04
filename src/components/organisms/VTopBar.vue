@@ -12,7 +12,7 @@
             <v-interactive-text :class="$style['logo-text']" class="text-h2" :content="logoText" />
         </nuxt-link>
 
-        <v-theme-switcher :class="$style.themes" />
+        <v-theme-switcher />
     </div>
 </template>
 
@@ -95,13 +95,7 @@ export default Vue.extend({
 
 .logo-text {
     --font-weight: 700;
-}
 
-.themes {
-    display: none;
-
-    @include media('>=sm') {
-        display: flex;
-    }
+    white-space: nowrap;
 }
 </style>

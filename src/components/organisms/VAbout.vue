@@ -58,6 +58,7 @@ export default Vue.extend({
         @include scroll-bar-hidden;
 
         min-height: calc(100vh - $v-top-bar-height);
+        overflow-x: hidden;
     }
 }
 

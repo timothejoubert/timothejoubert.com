@@ -87,7 +87,7 @@ export default Vue.extend({
     flex-grow: 1;
 
     @include media('>=sm') {
-        max-width: rem(300);
+        max-width: rem(280);
     }
 }
 </style>

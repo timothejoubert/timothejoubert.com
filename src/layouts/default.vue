@@ -10,8 +10,8 @@
             <v-splash-screen v-if="isSplashScreenEnabled" />
             <v-top-bar :class="$style['top-bar']" />
 
-            <v-favorite-setting :inert="isBodyContentInert" />
-            <v-favorite-project-list :inert="isBodyContentInert" />
+            <v-favorite-setting :inert="isBodyContentInert" :class="$style['favorite-setting']" />
+            <v-favorite-project-list :inert="isBodyContentInert" :class="$style['favorite-project']" />
 
             <v-archive v-if="displayArchive" :inert="isBodyContentInert" />
 
@@ -263,6 +263,20 @@ export default mixins(Resize, SplashScreen, DocumentFocus).extend({
 
     @include media('>=sm') {
         position: sticky;
+    }
+}
+
+.favorite-setting {
+    display: none;
+
+    @include media('>=md') {
+        display: flex;
+    }
+}
+
+.favorite-project {
+    @include media('<md') {
+        margin-top: rem(20);
     }
 }
 

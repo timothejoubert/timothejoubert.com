@@ -10,7 +10,9 @@ import { Document } from '@prismicio/client/types/documents'
 
 ### IN PROGRESS
 ** (Responsive): better card on mobile 
-** (Responsive): ColorSwitcher popover ? (popover)
+** (Responsive): add search project bar
+** (Responsive): revoir project modal
+** (Responsive): Video autoplay launch fullscreen on mobile
 
 ### TODOS 
 ** (Perf): VInteractiveText mousemove values not reset on resize 
@@ -32,6 +34,9 @@ import { Document } from '@prismicio/client/types/documents'
 ** (JsonLD): Better projects data 
 
 ### DONE
+** (Responsive): Overflow about
+** (Responsive): remove favorite filter
+** (Responsive): ColorSwitcher popover ? (popover)
 ** (VVideo): Ajouter muted & controls
 ** (Project: Pogote moi): Vérifier access notion
 ** (VArchive): Changer de projet avec les fleches
