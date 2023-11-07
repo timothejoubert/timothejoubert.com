@@ -10,7 +10,6 @@ import { Document } from '@prismicio/client/types/documents'
 
 ### IN PROGRESS
 ** (Responsive): revoir project modal & sticky pos
-** (Responsive): revoir project modal
 ** (Responsive): Video autoplay launch fullscreen on mobile
 
 ### TODOS 
