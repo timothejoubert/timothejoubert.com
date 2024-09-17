@@ -1,8 +1,8 @@
 @font-face {
     font-display: swap;
     font-family: 'noi';
-    font-weight: 100 900;
     font-style: oblique 0deg 10deg;
+    font-weight: 100 900;
     src:
         url('~assets/fonts/noigrotesk-variable.ttf') format('truetype'),
         url('~assets/fonts/noigrotesk-variable.woff') format('woff'),
@@ -12,8 +12,8 @@
 @font-face {
     font-display: swap;
     font-family: 'agrandir';
-    font-weight: 100 900;
-    //font-stretch: 50 200;
+    font-stretch: 50 200;
     font-style: oblique 0deg 9deg;
+    font-weight: 100 900;
     src: url('~assets/fonts/agrandir-variable.ttf') format('truetype');
 }

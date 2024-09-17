@@ -5,12 +5,15 @@ import linkResolver from './src/utils/prismic/link-resolver'
 import htmlSerializer from './src/utils/prismic/html-serializer'
 import { getBreakpoints } from '~/utils/breakpoint'
 import { createSitemap } from '~/utils/sitemap'
+import toBoolean from '~/utils/to-boolean'
 
 const isProduction = process.env.NODE_ENV === 'production'
 const apiEndpoint = `https://${process.env.PRISMIC_REPOSITORY_NAME}.cdn.prismic.io/api/v2`
 
 const locales = ['fr']
 export const defaultLocale = 'fr'
+
+console.log('is preview enabled', toBoolean(process.env.PREVIEW_ENABLED))
 
 export default {
     // target: 'static',
@@ -38,10 +41,12 @@ export default {
         ],
         script: [
             // preview cdn
-            {
-                src: `https://static.cdn.prismic.io/prismic.js?new=true&repo=${process.env.PRISMIC_REPOSITORY_NAME}`,
-                defer: true,
-            },
+            toBoolean(process.env.PREVIEW_ENABLED)
+                ? {
+                      src: `https://static.cdn.prismic.io/prismic.js?new=true&repo=${process.env.PRISMIC_REPOSITORY_NAME}`,
+                      defer: true,
+                  }
+                : undefined,
         ],
     },
     // Global CSS: https://go.nuxtjs.dev/config-css
@@ -145,7 +150,7 @@ export default {
         modern: true,
         linkResolver,
         htmlSerializer,
-        preview: false, // process.env.PREVIEW_PATH,
+        preview: toBoolean(process.env.PREVIEW_ENABLED), // process.env.PREVIEW_PATH,
         // injectComponents: true,
         toolbar: false,
     },

@@ -1,7 +1,9 @@
 <template>
-    <div :class="[$style.root, collapsed && $style['root--collapsed']]">
+    <component :is="wrapperTag || 'div'" :class="[$style.root, collapsed && $style['root--collapsed']]">
         <button :class="$style.cta" @click="collapsed = !collapsed">
-            <span :class="$style.label" class="text-body-xs">{{ label }}</span>
+            <slot name="label">
+                <span :class="$style.label" class="text-body-xs">{{ label }}</span>
+            </slot>
             <span :class="$style.icon"></span>
         </button>
         <div :class="$style.content">
@@ -11,7 +13,7 @@
                 </slot>
             </div>
         </div>
-    </div>
+    </component>
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -21,6 +23,7 @@ import { PrismicRichText } from '~/types/app'
 export default Vue.extend({
     name: 'VCollapsable',
     props: {
+        wrapperTag: String,
         label: { type: String, default: 'Voir plus' },
         content: [String, Array] as PropType<String | PrismicRichText>,
     },
@@ -78,7 +81,7 @@ export default Vue.extend({
 .content {
     display: grid;
     grid-template-rows: 1fr;
-    transition: grid-template-rows 0.5s;
+    transition: grid-template-rows var(--v-collapsed-transition-duration, 0.5s);
 
     .root--collapsed & {
         grid-template-rows: 0fr;

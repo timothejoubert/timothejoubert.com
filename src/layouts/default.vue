@@ -13,7 +13,7 @@
             <v-favorite-setting :inert="isBodyContentInert" :class="$style['favorite-setting']" />
             <v-favorite-project-list :inert="isBodyContentInert" :class="$style['favorite-project']" />
 
-            <v-archive v-if="displayArchive" :inert="isBodyContentInert" />
+            <v-archive-section v-if="displayArchive" :inert="isBodyContentInert" />
 
             <!--            <v-statistics />-->
 
