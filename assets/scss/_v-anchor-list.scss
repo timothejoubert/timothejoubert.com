@@ -1,0 +1,11 @@
+$v-anchor-list-height-sm: rem(53);
+$v-anchor-list-height-md: rem(76);
+
+
+:root {
+    --v-anchor-list-height: #{$v-anchor-list-height-sm};
+
+    @include media('>=lg') {
+        --v-anchor-list-height: #{$v-anchor-list-height-md};
+    }
+}

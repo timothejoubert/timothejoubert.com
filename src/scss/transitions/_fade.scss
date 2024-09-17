@@ -1,9 +1,0 @@
-@include v-transition(
-    'fade',
-    (
-        duration: 0.4s,
-    ),
-    (
-        opacity: 0,
-    ), $scope: 'global'
-);

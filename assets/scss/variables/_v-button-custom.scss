@@ -1,0 +1,71 @@
+@use "sass:map";
+@use "sass:math";
+
+$v-button-size-vars-by-variant: () !default;
+
+/* MENU */
+$v-button-custom-menu: (
+    common: (
+        border-style: solid,
+        border-color: var(--theme-color-buttons-menu-border),
+        background-color: var(--theme-color-buttons-menu-bg),
+        border-width: 1px,
+        color: var(--theme-color-buttons-menu-label)
+    ),
+    sm: (
+        font-size: rem(12),
+        min-width: rem(40),
+        padding-inline: rem(12),
+        height: rem(40),
+    ),
+    md: (
+        font-size: rem(14),
+        min-width: rem(56),
+        padding-inline: rem(16),
+        height: rem(56),
+    ),
+);
+$v-button-custom-menu-icon: (
+    common: (
+        color: var(--theme-color-buttons-menu-icon-light),
+    ),
+);
+$v-button-custom-menu-label: (
+    sm: (
+        margin-inline: rem(6),
+    ),
+    md: (
+        margin-inline: rem(8),
+    ),
+);
+
+/* FAB */
+$v-button-custom-fab: (
+    common: (
+        background-color: var(--theme-color-buttons-fab-bg),
+    ),
+    sm: (
+        padding: rem(8)
+    ),
+    md: (
+        padding: rem(16)
+    ),
+);
+$v-button-custom-fab-icon: ();
+$v-button-custom-fab-label: ();
+
+
+// Merged
+$v-button-size-vars-by-custom: (
+    fab: (
+        (vars: $v-button-custom-fab, prefix: ''),
+        (vars: $v-button-custom-fab-icon, prefix: 'icon'),
+        (vars: $v-button-custom-fab-label, prefix: 'label'),
+    ),
+    menu: (
+        (vars: $v-button-custom-menu, prefix: ''),
+        (vars: $v-button-custom-menu-icon, prefix: 'icon'),
+        (vars: $v-button-custom-menu-label, prefix: 'label'),
+    ),
+);
+$v-button-size-vars-by-variant: map-merge($v-button-size-vars-by-variant, $v-button-size-vars-by-custom);

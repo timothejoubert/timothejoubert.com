@@ -1,0 +1,286 @@
+.text-h1-md {
+    @include text-h1-md;
+}
+
+.text-h1-sm {
+    @include text-h1-sm;
+}
+
+.text-h1-xs {
+    @include text-h1-xs;
+}
+
+.text-h1-responsive {
+    @include text-h1-xs;
+
+    @include media('>=md') {
+        @include text-h1-sm;
+    }
+
+    @include media('>=vl') {
+        @include text-h1-md;
+    }
+}
+
+.text-h2-sm {
+    @include text-h2-sm;
+}
+
+.text-h2-md {
+    @include text-h2-md;
+}
+
+.text-h2-responsive {
+    @include text-h2-sm;
+
+    @include media('>=md') {
+        @include text-h2-md;
+    }
+}
+
+.text-h3-md {
+    @include text-h3-md;
+}
+
+.text-h3-sm {
+    @include text-h3-sm;
+}
+
+.text-h3-responsive {
+    @include text-h3-sm;
+
+    @include media('>=md') {
+        @include text-h3-md;
+    }
+}
+
+.text-h4-responsive {
+    @include text-h4-sm;
+
+    @include media('>=md') {
+        @include text-h4-md;
+    }
+}
+
+.text-h4-md {
+    @include text-h4-md;
+}
+
+.text-h4-sm {
+    @include text-h4-sm;
+}
+
+.text-over-title-md {
+    @include text-over-title-md;
+}
+
+.text-over-title-sm {
+    @include text-over-title-sm;
+}
+
+.text-over-title-xs {
+    @include text-over-title-xs;
+}
+
+.text-body-md {
+    @include text-body-md;
+}
+
+.text-body-sm {
+    @include text-body-sm;
+}
+
+.text-body-xs {
+    @include text-body-xs;
+}
+
+.text-body-xxs {
+    @include text-body-xxs;
+}
+
+.text-body-responsive {
+    @include text-body-sm;
+
+    @include media('>=md') {
+        @include text-body-md;
+    }
+}
+
+.text-introduction-md {
+    @include text-introduction-md;
+}
+
+.text-introduction-sm {
+    @include text-introduction-sm;
+}
+
+.text-push-lg {
+    @include text-push-lg;
+}
+
+.text-push-md {
+    @include text-push-md;
+}
+
+.text-push-sm {
+    @include text-push-sm;
+}
+
+.text-push-xs {
+    @include text-push-xs;
+}
+
+.text-push-responsive-md {
+    @include text-push-xs;
+
+    @include media('>=md') {
+        @include text-push-md;
+    }
+
+}
+
+.text-push-responsive-sm {
+    @include text-push-xs;
+
+    @include media('>=md') {
+        @include text-push-sm;
+    }
+
+}
+
+.text-bulleted-list {
+    @include text-bulleted-list;
+}
+
+.text-badge {
+    @include text-badge;
+}
+
+.text-button-md {
+    @include text-button-md;
+}
+
+.text-button-sm {
+    @include text-button-sm;
+}
+
+.text-button-xs {
+    @include text-button-xs;
+}
+
+.text-anchor-md {
+    @include text-anchor-md;
+}
+
+.text-anchor-sm {
+    @include text-anchor-sm;
+}
+
+.text-anchor-responsive {
+    @include text-anchor-sm;
+
+    @include media('>=md') {
+        @include text-anchor-md;
+    }
+
+}
+
+.text-tag-md {
+    @include text-tag-md;
+}
+
+.text-tag-sm {
+    @include text-tag-sm;
+}
+
+.text-form-placeholder {
+    @include text-form-placeholder;
+}
+
+.text-form-supporting-text {
+    @include text-form-supporting-text;
+}
+
+.text-form-label {
+    @include text-form-label;
+}
+
+.text-form {
+    @include text-form;
+}
+
+.text-accordion-md {
+    @include text-accordion-md;
+}
+
+.text-accordion-sm {
+    @include text-accordion-sm;
+}
+
+.text-accordion-responsive {
+    @include text-accordion-sm;
+
+    @include media('>=md') {
+        @include text-accordion-md;
+    }
+}
+
+.text-menu-md {
+    @include text-menu-md;
+}
+
+.text-menu-sm {
+    @include text-menu-sm;
+}
+
+.text-sub-menu-md {
+    @include text-sub-menu-md;
+}
+
+.text-sub-menu-sm {
+    @include text-sub-menu-sm;
+}
+
+.text-breadcrumb-md {
+    @include text-breadcrumb-md;
+}
+
+.text-breadcrumb-sm {
+    @include text-breadcrumb-sm;
+}
+
+.text-breadcrumb-responsive {
+    @include text-breadcrumb-sm;
+
+    @include media('>=md') {
+        @include text-breadcrumb-md;
+    }
+}
+
+.text-widgets {
+    @include text-widgets;
+}
+
+.text-date-md {
+    @include text-date-md;
+}
+
+.text-date-sm {
+    @include text-date-sm;
+}
+
+.text-map-lg {
+    @include text-map-lg;
+}
+
+.text-map-md {
+    @include text-map-md;
+}
+
+.text-map-sm {
+    @include text-map-sm;
+}
+
+.label-widgets-hour {
+    @include label-widgets-hour;
+}

@@ -1,0 +1,391 @@
+@use 'sass:math';
+
+@mixin text-h1-md {
+    font-family: $font-serif;
+    font-size: rem(80);
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+@mixin text-h1-sm {
+    font-family: $font-serif;
+    font-size: rem(64);
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+@mixin text-h1-xs {
+    font-family: $font-serif;
+    font-size: rem(40);
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+@mixin text-h2-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(22);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+@mixin text-h2-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(28);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+@mixin text-h3-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(20);
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+@mixin text-h3-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(18);
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+@mixin text-h4-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(18);
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+@mixin text-h4-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(16);
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+@mixin text-over-title-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(16);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+@mixin text-over-title-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(14);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+@mixin text-over-title-xs {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(12);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+@mixin text-body-md {
+    font-family: $font-sans-serif;
+    font-size: rem(17);
+    line-height: 1.5;
+}
+
+@mixin text-body-sm {
+    font-family: $font-sans-serif;
+    font-size: rem(15);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+}
+
+@mixin text-body-xs {
+    font-family: $font-sans-serif;
+    font-size: rem(12);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+}
+
+@mixin text-body-xxs {
+    font-family: $font-sans-serif;
+    font-size: rem(10);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+}
+
+@mixin text-introduction-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(30);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+@mixin text-introduction-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(22);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+@mixin text-push-lg {
+    font-family: $font-serif;
+    font-size: rem(64);
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+@mixin text-push-md {
+    font-family: $font-serif;
+    font-size: rem(56);
+    font-weight: 700;
+    line-height: 1.04;
+    text-transform: uppercase;
+}
+
+@mixin text-push-sm {
+    font-family: $font-serif;
+    font-size: rem(52);
+    font-weight: 700;
+    line-height: 1.04;
+    text-transform: uppercase;
+}
+
+@mixin text-push-xs {
+    font-family: $font-serif;
+    font-size: rem(40);
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+@mixin text-bulleted-list {
+    font-family: $font-serif;
+    font-size: rem(16);
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+@mixin text-badge {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(12);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+}
+
+@mixin text-button-xs {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(10);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+}
+
+@mixin text-button-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(12);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+}
+
+@mixin text-button-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(14);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+}
+
+@mixin text-anchor-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(14);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+@mixin text-anchor-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(12);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+@mixin text-tag-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(14);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+}
+
+@mixin text-tag-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(12);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+@mixin text-form-placeholder {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(16); // 16px to prevent automatic zoom in mobile
+    font-weight: 700;
+    line-height: 1.7;
+    text-transform: uppercase;
+
+    @include media('>=vl') {
+        font-size: rem(14);
+    }
+}
+
+@mixin text-form-supporting-text {
+    font-family: $font-sans-serif;
+    font-size: rem(12);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+}
+
+@mixin text-form-label {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(10);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+}
+
+@mixin text-form {
+    font-family: $font-sans-serif;
+    font-size: rem(15);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+@mixin text-accordion-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(20);
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+@mixin text-accordion-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(16);
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+@mixin text-menu-sm {
+    font-family: $font-serif;
+    font-size: rem(24);
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+@mixin text-menu-md {
+    font-family: $font-serif;
+    font-size: rem(32);
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+@mixin text-sub-menu-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(16);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+@mixin text-sub-menu-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(20);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+
+
+@mixin text-breadcrumb-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(14);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+@mixin text-breadcrumb-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(12);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+@mixin text-widgets {
+    font-family: $font-serif;
+    font-size: rem(32);
+    font-weight: 700;
+    line-height: 1;
+}
+
+@mixin text-date-md {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(32);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+@mixin text-date-sm {
+    font-family: $font-sans-serif-narrow;
+    font-size: rem(28);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+@mixin text-map-lg {
+    font-family: $font-serif;
+    font-size: rem(36);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+@mixin text-map-md {
+    font-family: $font-serif;
+    font-size: rem(24);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+@mixin text-map-sm {
+    font-family: $font-serif;
+    font-size: rem(16);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+@mixin label-widgets-hour {
+    font-family: $font-serif;
+    font-size: rem(32);
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+}

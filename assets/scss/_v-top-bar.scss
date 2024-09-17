@@ -1,0 +1,11 @@
+$v-top-bar-height-sm: rem(100);
+$v-top-bar-height-md: rem(112);
+
+
+:root {
+    --v-top-bar-height: #{$v-top-bar-height-sm};
+
+    @include media('>=lg') {
+        --v-top-bar-height: #{$v-top-bar-height-md};
+    }
+}

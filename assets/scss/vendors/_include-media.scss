@@ -1,0 +1,6 @@
+@import "include-media/dist/include-media";
+
+// @see https://eduardoboucas.github.io/include-media/documentation/#mixin-media
+$media-expressions: (
+    'hover': '(hover: hover)'
+);

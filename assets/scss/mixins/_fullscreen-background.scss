@@ -1,0 +1,4 @@
+@mixin fullscreen-background {
+    box-shadow: 0 0 0 100vmax var(--fullscreen-background-color), inset 0 0 0 100vmax var(--fullscreen-background-color);
+    clip-path: inset(0 -100vmax);
+}

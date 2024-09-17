@@ -1,0 +1,8 @@
+@function color($key) {
+    @if global-variable-exists('colors') and map-has-key($colors, $key) {
+        @return map-get($colors, $key);
+    }
+
+    @warn "Unkown '#{$key}' in $colors.";
+    @return rgb(0 0 0);
+}

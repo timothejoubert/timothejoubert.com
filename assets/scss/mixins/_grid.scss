@@ -1,0 +1,51 @@
+@mixin raw-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+
+    @include grid-gap;
+}
+
+@mixin grid($width: null) {
+    @include container($width);
+    @include raw-grid;
+}
+
+@mixin container($width: null) {
+    width: if($width != null, $width, var(--grid-width));
+    max-width: var(--grid-max-width);
+    margin-inline: auto;
+}
+
+@mixin grid-gap {
+    @supports (gap: 0) {
+        /* autoprefixer grid: off */
+        gap: 0 var(--gutter);
+    }
+}
+
+@mixin grid-item-stretch {
+    position: relative;
+    left: calc(var(--gutter) * -1);
+    width: calc(100% + var(--gutter) * 2);
+    padding-inline: var(--gutter);
+}
+
+@mixin grid-item-framed {
+    position: relative;
+    width: calc(100% + var(--gutter) * -2);
+    margin-inline: auto;
+
+    @include media('>=lg') {
+        padding-inline: var(--gutter);
+    }
+}
+
+@mixin grid-item-fullwidth {
+    position: relative;
+    width: 100%;
+    padding-inline: var(--gutter);
+
+    @include media('>=lg') {
+        padding-inline: calc(var(--gutter) * 2);
+    }
+}

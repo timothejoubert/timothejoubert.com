@@ -1,0 +1,63 @@
+// PPRader
+
+@include font-face('PPRader', 'PPRader-Bold') {
+    font-weight: 700;
+}
+
+@include font-face('PPRader', 'PPRader-BoldItalic') {
+    font-style: italic;
+    font-weight: 700;
+}
+
+@include font-face('PPRader', 'PPRader-Regular') {
+    font-weight: 400;
+}
+
+@include font-face('PPRader', 'PPRader-Italic') {
+    font-style: italic;
+    font-weight: 400;
+}
+
+// Lektorat
+
+@include font-face('Lektorat', 'LektoratText-Bold') {
+    font-weight: 700;
+}
+
+@include font-face('Lektorat', 'LektoratText-BoldOblique') {
+    font-style: italic;
+    font-weight: 700;
+}
+
+@include font-face('Lektorat', 'LektoratText-Semibold') {
+    font-weight: 600;
+}
+
+@include font-face('Lektorat', 'LektoratText-SemiboldOblique') {
+    font-style: italic;
+    font-weight: 600;
+}
+
+@include font-face('Lektorat', 'LektoratText-Regular') {
+    font-weight: 400;
+}
+
+@include font-face('Lektorat', 'LektoratText-Oblique') {
+    font-style: italic;
+    font-weight: 400;
+}
+
+
+// Lektorat Narrow
+
+@include font-face('Lektorat-Narrow', 'Lektorat-NarrowBold') {
+    font-weight: 700;
+}
+
+@include font-face('Lektorat-Narrow', 'Lektorat-NarrowSemibold') {
+    font-weight: 600;
+}
+
+@include font-face('Lektorat-Narrow', 'Lektorat-NarrowRegular') {
+    font-weight: 400;
+}

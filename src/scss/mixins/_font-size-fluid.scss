@@ -1,5 +1,0 @@
-@use "sass:math";
-
-@mixin font-size-fluid($font-size) {
-    @include property-fluid(font-size, $font-size);
-}

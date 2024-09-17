@@ -1,0 +1,13 @@
+.loading-animation {
+    @include loading-animation('global');
+}
+
+.loading-animation-text-placeholder {
+    @include loading-animation-text-placeholder;
+}
+
+@keyframes loading-animation {
+    100% {
+        background-position: -480% 0;
+    }
+}
