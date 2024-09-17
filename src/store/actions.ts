@@ -44,11 +44,9 @@ const actions: ActionTree<RootState, RootState> = {
         // const mainMenu = context.$prismic.api.getSingle(CustomType.MAIN_MENU as CustomTypeName, localeOptions)
         const settings = context.$prismic.api.getSingle(CustomType.SETTINGS as CustomTypeName, localeOptions)
 
-        // https://prismic.io/docs/rest-api-technical-reference
-        // https://prismic.io/docs/technical-reference/prismicio-client?version=v5#predicates
-        // TODO try to fetch only project with `my.project.display_only_favorite` that is true
+        // context.$prismic.predicates.at('my.project.favorite', true),
         const projects = context.$prismic.api
-            .query(context.$prismic.predicates.at('document.type', CustomType.PROJECT as CustomTypeName), {
+            .query([context.$prismic.predicates.at('document.type', CustomType.PROJECT as CustomTypeName)], {
                 orderings: '[my.project.date desc]',
                 pageSize: 80, // default 20
                 ...localeOptions,

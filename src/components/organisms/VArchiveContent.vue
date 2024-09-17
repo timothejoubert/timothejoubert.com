@@ -1,40 +1,43 @@
 <template>
-    <section :class="rootClasses" class="container">
-        <v-interactive-text :class="$style['section-title']" class="text-body-l" :content="'Archives'" />
-        <keep-alive>
-            <v-archive-list :sort-id="sortId" :sort-order="sortOrder" :search="search" @clearSearch="search = ''">
-                <template #top-bar>
-                    <div :class="$style['top-bar']">
-                        <v-button
-                            v-for="button in buttons"
-                            :key="button.id"
-                            :class="[
-                                getSectionClass(button.id, true),
-                                sortOrder === 'DESC' && button.id === sortId && $style['button--desc'],
-                            ]"
-                            :label="button.label"
-                            theme="light"
-                            :inert="!button.sortable"
-                            @click="onButtonClick($event, button.id)"
-                        >
-                            <template v-if="button.sortable" #icon><div :class="$style.sortable__icon"></div></template>
-                        </v-button>
-                        <div :class="$style.search">
-                            <v-search-input v-model="search" />
-                        </div>
+    <keep-alive>
+        <v-archive-list
+            :class="$style.root"
+            :sort-id="sortId"
+            :sort-order="sortOrder"
+            :search="search"
+            @clearSearch="search = ''"
+        >
+            <template #top-bar>
+                <div :class="$style['top-bar']">
+                    <v-button
+                        v-for="button in buttons"
+                        :key="button.id"
+                        :class="[
+                            getSectionClass(button.id, true),
+                            sortOrder === 'DESC' && button.id === sortId && $style['button--desc'],
+                        ]"
+                        :label="button.label"
+                        theme="light"
+                        :inert="!button.sortable"
+                        @click="onButtonClick($event, button.id)"
+                    >
+                        <template v-if="button.sortable" #icon><div :class="$style.sortable__icon"></div></template>
+                    </v-button>
+                    <div :class="$style.search">
+                        <v-search-input v-model="search" />
                     </div>
-                </template>
-                <template #project="{ project }">
-                    <div :class="getSectionClass('title')">{{ project.title }}</div>
-                    <span v-if="project.date" :class="getSectionClass('date')">{{ project.date }}</span>
-                    <span :class="getSectionClass('framework')">{{ project.framework }}</span>
-                    <div :class="getSectionClass('tag_group')">{{ project.parsedTags }}</div>
-                    <v-rate :rate="project.rate" :class="getSectionClass('rate')" />
-                    <div :class="$style['link-icon']"><arrow-icon /></div>
-                </template>
-            </v-archive-list>
-        </keep-alive>
-    </section>
+                </div>
+            </template>
+            <template #project="{ project }">
+                <div :class="getSectionClass('title')">{{ project.title }}</div>
+                <span v-if="project.date" :class="getSectionClass('date')">{{ project.date }}</span>
+                <span :class="getSectionClass('framework')">{{ project.framework }}</span>
+                <div :class="getSectionClass('tag_group')">{{ project.parsedTags }}</div>
+                <v-rate :rate="project.rate" :class="getSectionClass('rate')" />
+                <div :class="$style['link-icon']"><arrow-icon /></div>
+            </template>
+        </v-archive-list>
+    </keep-alive>
 </template>
 
 <script lang="ts">
@@ -76,7 +79,7 @@ interface ArchiveSetting {
 }
 
 export default Vue.extend({
-    name: 'VArchive',
+    name: 'VArchiveContent',
     components: { ArrowIcon },
     data() {
         return {
@@ -120,18 +123,12 @@ export default Vue.extend({
 
 <style lang="scss" module>
 .root {
-    margin-block: rem(60) rem(60);
-
     --v-archive-list-gap: #{rem(32)};
 
     &--project-open {
         --v-archive-list-gap: #{rem(18)};
         --v-search-input-max-width: #{rem(70)};
     }
-}
-
-.section-title {
-    margin-bottom: rem(42);
 }
 
 .top-bar {
