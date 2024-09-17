@@ -1,3 +1,2 @@
-cd frontend
 # Echo a message when yarn lint command fails
 pnpm lint || (echo "$(tput setaf 1)\nLinting failed. Please fix the errors using \"pnpm lint-fix\" and try again.\n$(tput sgr0)" && exit 1)

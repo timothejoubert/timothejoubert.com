@@ -17,11 +17,13 @@ export function isDocumentEntity(entity: unknown): entity is PrismicDocument {
     return isObject(entity) && !!objectHasAllKeys(entity, ['id', 'type', 'last_publication_date', 'tags', 'lang'])
 }
 
+type LinkTypeValue = typeof LinkType[keyof typeof LinkType]
+
 // Relation Link field
 export function isLinkField(entity: unknown): entity is LinkField {
     if (!isObject(entity)) return false
 
-    return !!objectHasAllKeys(entity, ['link_type']) && Object.values(LinkType).includes(entity.link_type as any)
+    return !!objectHasAllKeys(entity, ['link_type']) && Object.values(LinkType).includes((entity as { link_type: LinkTypeValue }).link_type)
 }
 
 export function isContentRelationshipField(entity: unknown): entity is FilledContentRelationshipField {
@@ -42,7 +44,7 @@ export function isFilledLinkToImage(entity: unknown): entity is FilledLinkToMedi
 
 // Media field
 export function isFilledImageField(field: unknown): field is FilledImageFieldImage {
-    return !!returnObjWithAllValidKey(field as Object, ['alt', 'url', 'dimensions', 'copyright'])?.url
+    return typeof field === 'object' && !!field && !!returnObjWithAllValidKey(field as Record<string, unknown>, ['alt', 'url', 'dimensions', 'copyright'])?.url
 }
 
 export function isFilledLinkToMediaField(field: unknown): field is FilledLinkToMediaField {
@@ -74,7 +76,7 @@ const richTextKeys = Object.values(RichTextNodeType)
 
 export function isRichTextFilled(el: unknown): el is RichTextField<'filled'> {
     const isArray = Array.isArray(el)
-    if (!isArray || isArray && !el?.length) return false
+    if (!isArray || (isArray && !el?.length)) return false
 
     return el.some(item => richTextKeys.includes(item.type))
 }
