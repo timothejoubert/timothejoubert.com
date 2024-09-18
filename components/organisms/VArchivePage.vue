@@ -1,11 +1,9 @@
-<script  lang="ts" setup>
-
+<script lang="ts" setup>
 </script>
 
 <template>
     <div :class="$style.root">
-        <NuxtPage />
-        <VNav />
+        <h1>Archive page</h1>
     </div>
 </template>
 

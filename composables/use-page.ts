@@ -10,10 +10,14 @@ export interface Page {
 interface UsePageOptions extends Page {}
 
 export function usePage(options?: UsePageOptions) {
+    console.log('usePage')
     const nextPage = useNextPage()
     const currentPage = useCurrentPage()
 
-    const title = options?.title || options?.webResponse?.data?.meta_title || options?.webResponse?.data?.title
+    const runtimeConfig = useRuntimeConfig()
+
+    const pageTitle = options?.title || options?.webResponse?.data?.meta_title || options?.webResponse?.data?.title
+    const title = `${pageTitle} | ${runtimeConfig.public.site.name}`
 
     nextPage.value = {
         title,
@@ -27,9 +31,10 @@ export function usePage(options?: UsePageOptions) {
 
     watch(
         currentPage,
-        (page) => {
-            useHead({ title: page.title })
-            useAlternateLinks(page.alternateLinks)
+        () => {
+            console.log('watch page', nextPage.value.webResponse?.url)
+            useHead({ title })
+            useAlternateLinks(nextPage.value.alternateLinks)
         },
         { deep: true, immediate: true },
     )

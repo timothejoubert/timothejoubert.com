@@ -19,12 +19,15 @@ export async function usePrismicFetchPage<T extends PrismicDocument>(prismicDocu
             const isDynamicUidDocument = uid && isDynamicDocument(prismicDocument)
             try {
                 if (isDynamicUidDocument) {
-                    return await prismicClient.getByUID(prismicDocument, uid, { ...fetchLocaleOption.value })
+                    return await prismicClient.getByUID(prismicDocument, uid, {
+                        ...fetchLocaleOption.value,
+                    })
                 }
                 else if (isExistingDocumentType(prismicDocument)) {
+                    // prismicClient.get
                     return await prismicClient.getSingle(prismicDocument, {
                         ...fetchLocaleOption.value,
-                        fetchLinks: ['my.project.title', 'my.project.excerpt', 'my.project.main_media'],
+                        // fetchLinks: ['my.project.title', 'my.project.excerpt', 'my.project.main_media'],
                     })
                 }
             }

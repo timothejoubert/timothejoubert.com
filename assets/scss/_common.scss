@@ -39,3 +39,7 @@ body {
     outline: 2px solid var(--theme-foreground-color, currentColor);
     outline-offset: 6px;
 }
+
+pre {
+    white-space: pre-wrap;
+}

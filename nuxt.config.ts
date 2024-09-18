@@ -3,12 +3,15 @@ import { endpoint } from './slicemachine.config.json'
 import { version } from './package.json'
 import { hoistUseStatements } from './utils/vite/hoist-use-statements'
 import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from './i18n.config'
+import { prismicDocumentRouteList } from './utils/prismic/route-resolver'
 
-// const isDev = process.env.NODE_ENV === 'development'
 const isGenerate = process.argv.includes('generate')
 
 export default defineNuxtConfig({
     devtools: { enabled: true },
+    alias: {
+        '#root': __dirname,
+    },
     app: {
         head: {
             htmlAttrs: {
@@ -24,7 +27,6 @@ export default defineNuxtConfig({
                 { rel: 'manifest', href: '/favicon/site.webmanifest' },
                 { rel: 'mask-icon', href: '/favicon/safari-pinned-tab.svg', color: '#fff' },
             ],
-            // script: [cookieScript],
         },
     },
 
@@ -131,6 +133,9 @@ export default defineNuxtConfig({
         endpoint,
         preview: '/preview',
         toolbar: false,
+        clientConfig: {
+            routes: prismicDocumentRouteList,
+        },
     },
 
     // https://github.com/nuxt-modules/svg-sprite#options
