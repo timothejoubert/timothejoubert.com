@@ -36,16 +36,16 @@ const linkList = computed(() => {
     position: fixed;
     bottom: rem(40);
     left: 50%;
-    translate: -50% 0;
-    background-color: black;
     border-radius: rem(6);
+    background-color: black;
+    translate: -50% 0;
 }
 
 .list {
     display: flex;
-    gap: rem(4);
     padding: initial;
     margin: initial;
+    gap: rem(4);
 }
 
 .item {
@@ -54,12 +54,12 @@ const linkList = computed(() => {
 
 .link {
     display: flex;
+    height: rem(38);
     align-items: center;
     justify-content: center;
-    height: rem(38);
+    border-radius: rem(3);
+    color: white;
     padding-inline: rem(14);
     text-decoration: none;
-    color: white;
-    border-radius: rem(3);
 }
 </style>
