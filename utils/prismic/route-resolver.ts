@@ -1,30 +1,30 @@
 // https://prismic.io/docs/route-resolver#resolvers
 // https://prismic.io/docs/nuxt-3-define-routes
-import { DocumentType } from '#root/constants/document-type'
+import { PrismicDocumentType } from '#root/constants/prismic-document-type'
 import { extractValueBetweenOccurrence } from '#root/utils/string/extract'
 import { I18N_LOCALES } from '#root/i18n.config'
 
 export const prismicDocumentRouteList = [
     {
-        type: DocumentType.PROJECT_LISTING,
+        type: PrismicDocumentType.PROJECT_LISTING,
         path: '/:lang?',
         alias: ['/:lang?', '/:lang?/projects', '/:lang?/projets'],
     },
     {
-        type: DocumentType.ARCHIVE,
+        type: PrismicDocumentType.ARCHIVE,
         path: '/:lang?/archive',
     },
     {
-        type: DocumentType.HOME,
+        type: PrismicDocumentType.HOME,
         path: '/not-exist',
     },
     {
-        type: DocumentType.ABOUT,
+        type: PrismicDocumentType.ABOUT,
         path: '/:lang?/a-propos',
         alias: ['/:lang?/bio'],
     },
     {
-        type: DocumentType.PROJECT,
+        type: PrismicDocumentType.PROJECT,
         path: '/:lang?/projets/:uid',
         alias: ['/:lang?/projects/:uid'],
     },
@@ -50,10 +50,10 @@ export function mapRoutePathToPrismicDocument(path: string) {
 
     if (route) return route.type
 
-    return DocumentType.ERROR_PAGE
+    return undefined
 }
 
-export function getDocumentRoutePath(documentType: DocumentType) {
+export function getDocumentRoutePath(documentType: PrismicDocumentType) {
     const currentRoute = prismicDocumentRouteList.find(route => route.type === documentType)
 
     return currentRoute?.path?.replace('/:lang?', '').replace(':uid', '')

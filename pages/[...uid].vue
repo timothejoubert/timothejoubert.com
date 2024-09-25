@@ -1,38 +1,37 @@
 <script lang="ts" setup>
-// import { defaultPageTransition } from '~/transitions/default-page-transition'
-import { isExistingDocumentType } from '~/utils/prismic/document-type'
-import { DocumentType } from '~/constants/document-type'
+import { PrismicDocumentType } from '~/constants/prismic-document-type'
+// import {defaultPageTransition} from "~/transitions/default-page-transition";
 
 // definePageMeta({
-//     pageTransition: defaultPageTransition,
+    // pageTransition: defaultPageTransition,
 // })
 
 const prismicDocumentType = useMapRouteToPrismicDocument()
-const { prismicDocumentData, alternateLinks, error } = await usePrismicFetchPage(prismicDocumentType)
+const { webResponse, error } = await usePrismicFetchPage(prismicDocumentType)
 
-if (!isExistingDocumentType(prismicDocumentType)) {
-    showError({ status: 404, message: 'Le type de document prismic recherché n\'est pas inclu dans l\'application' })
-}
-else if (error) {
+if (error) {
     showError(error)
+} else if (!webResponse) {
+    showError({ status: 404, statusText: 'Undefined Prismic document' })
 }
 
-console.log('prismicDocumentType', prismicDocumentType, prismicDocumentData.url)
+console.log('webResponse', webResponse)
+usePrismicSeoMeta(webResponse)
 
 usePage({
-    webResponse: prismicDocumentData,
-    alternateLinks,
+    webResponse,
+    alternateLinks: webResponse?.alternate_languages,
 })
 
 const displayedPage = computed(() => {
     switch (prismicDocumentType) {
-        case DocumentType.PROJECT_LISTING:
+        case PrismicDocumentType.PROJECT_LISTING:
             return 'project-listing'
-        case DocumentType.ARCHIVE:
+        case PrismicDocumentType.ARCHIVE:
             return 'archive'
-        case DocumentType.ABOUT:
+        case PrismicDocumentType.ABOUT:
             return 'about'
-        case DocumentType.PROJECT:
+        case PrismicDocumentType.PROJECT:
             return 'project'
         default:
             return null
@@ -51,19 +50,19 @@ if (!displayedPage.value) {
     <div :class="$style.root">
         <LazyVProjectListingPage
             v-if=" displayedPage === 'project-listing'"
-            :prismic-document="prismicDocumentData"
+            :prismic-document="webResponse"
         />
-        <LazyVAboutPage
+        <LazyVArchivePage
             v-else-if=" displayedPage === 'archive'"
-            :prismic-document="prismicDocumentData"
+            :prismic-document="webResponse"
         />
         <LazyVAboutPage
             v-else-if=" displayedPage === 'about'"
-            :prismic-document="prismicDocumentData"
+            :prismic-document="webResponse"
         />
         <LazyVProjectPage
             v-else-if=" displayedPage === 'project'"
-            :prismic-document="prismicDocumentData"
+            :prismic-document="webResponse"
         />
     </div>
 </template>

@@ -1,7 +1,7 @@
 import { mapRoutePathToPrismicDocument } from '~/utils/prismic/route-resolver'
-import { DocumentType } from '~/constants/document-type'
+import { PrismicDocumentType } from '~/constants/prismic-document-type'
 
 export function useMapRouteToPrismicDocument() {
     const route = useRoute()
-    return mapRoutePathToPrismicDocument(route.path) || DocumentType.PROJECT_LISTING
+    return mapRoutePathToPrismicDocument(route.path) || PrismicDocumentType.PROJECT_LISTING
 }

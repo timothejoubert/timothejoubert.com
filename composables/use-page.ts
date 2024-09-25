@@ -1,45 +1,45 @@
-import type { PrismicDocument, AlternateLanguage } from '@prismicio/types'
+import type { AlternateLanguage } from '@prismicio/types'
 import EventType from '~/constants/event-type'
+import type {AllDocumentTypes} from "~/prismicio-types";
 
 export interface Page {
     title?: string
-    webResponse?: PrismicDocument
+    webResponse?: AllDocumentTypes | null
     alternateLinks?: AlternateLanguage[]
+    isFirstVisit?:boolean
 }
 
 interface UsePageOptions extends Page {}
 
 export function usePage(options?: UsePageOptions) {
-    console.log('usePage')
     const nextPage = useNextPage()
     const currentPage = useCurrentPage()
 
     const runtimeConfig = useRuntimeConfig()
 
-    const pageTitle = options?.title || options?.webResponse?.data?.meta_title || options?.webResponse?.data?.title
-    const title = `${pageTitle} | ${runtimeConfig.public.site.name}`
+    const getTitle = (page?: Page) => {
+        const pageTitle = page?.title || page?.webResponse?.data?.meta_title || (page?.webResponse?.data as {title?: string})?.title
+        return `${pageTitle} | ${runtimeConfig.public.site.name}`
+    }
 
     nextPage.value = {
-        title,
+        title: getTitle(options),
         webResponse: options?.webResponse,
         alternateLinks: options?.alternateLinks,
     }
 
-    if (!currentPage.value?.webResponse || !currentPage.value?.title) {
-        currentPage.value = { ...nextPage.value }
+    function updateCurrentPage(page: Page) {
+        useHead({ title: getTitle(page) })
+        useAlternateLinks(page.alternateLinks)
+        currentPage.value = {...page}
     }
 
-    watch(
-        currentPage,
-        () => {
-            console.log('watch page', nextPage.value.webResponse?.url)
-            useHead({ title })
-            useAlternateLinks(nextPage.value.alternateLinks)
-        },
-        { deep: true, immediate: true },
-    )
-
-    usePageTransitionEvent(EventType.PAGE_TRANSITION_AFTER_LEAVE, () => {
-        currentPage.value = { ...nextPage.value }
-    })
+    const route = useRoute()
+    if (route.meta.pageTransition) {
+        usePageTransitionEvent(EventType.PAGE_TRANSITION_AFTER_LEAVE, () => {
+        updateCurrentPage(nextPage.value)
+        })
+    } else {
+        updateCurrentPage(nextPage.value)
+    }
 }
