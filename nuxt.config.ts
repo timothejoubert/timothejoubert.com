@@ -125,11 +125,14 @@ export default defineNuxtConfig({
         },
     },
 
+    // TODO: verify if stories pages aren't build
     ignore: [
+        'pages/_stories/**',
         isGenerate ? 'assets/backup/**' : undefined,
     ],
 
     modules: [
+        '@nuxt/image',
         '@nuxtjs/prismic',
         '@nuxtjs/svg-sprite',
         '@nuxt/image',
@@ -174,18 +177,25 @@ export default defineNuxtConfig({
 
     // https://image.nuxt.com/get-started/configuration
     image: {
+        imgix: {
+            baseURL: '',
+        },
         quality: 75,
+        // https://image.nuxt.com/get-started/configuration#screens
         screens: {
-            xs: 375, // override size to match our breakpoints
-            xl: 1440, // override size to match our breakpoints
-            hd: 1920, // additional size
-            qhd: 2500, // additional size
+            xs: 375,
+            sm: 480,
+            vl: 1280, // initially xl
+            xl: 1440,
+            xxl: 1600,
+            hd: 1920,
+            qhd: 2500,
         },
         // @ts-expect-error not working with [1]
         densities: '1',
         presets: {
             default: {
-                sizes: 'xs:100vw md:100vw lg:100vw vl:100vw xl:100vw hd:100vw qhd:100vw',
+                sizes: 'xs:100vw sm:100vw md:100vw lg:100vw vl:100vw xl:100vw xxl:100vw hd:100vw qhd:100vw',
             },
         },
     },

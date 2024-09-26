@@ -5,7 +5,7 @@ import {
     isVideoEmbedField,
 } from '~/utils/prismic/guard'
 import prismicData from '~/slicemachine.config.json'
-import { removeSpecialCharacter } from '~/utils/string/format'
+import { replaceSpecialCharacter } from '~/utils/string/slugify'
 import { returnObjWithAllValidKey } from '~/utils/object/object-has-all-keys'
 
 // REFERENCES
@@ -43,6 +43,7 @@ function extractDataFromUrl(url: string | undefined) {
 
     return { name, id, extension }
 }
+const getEmbedPlatform = (f: unknown) => !!f
 
 export function getPrismicMediaData(field: PrismicImageField | undefined) {
     const url = getReferenceUrl(field)
@@ -63,7 +64,7 @@ export function getPrismicMediaData(field: PrismicImageField | undefined) {
     }
 
     const data = {
-        name: removeSpecialCharacter((field as { name?: string })?.name || name),
+        name: replaceSpecialCharacter((field as { name?: string })?.name || name),
         id: (id || (Math.random() * 1000).toString()) as string,
         url,
         mediaType,

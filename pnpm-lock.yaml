@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       plyr:
         specifier: ^3.7.8
         version: 3.7.8
@@ -42,6 +45,9 @@ importers:
       '@slicemachine/adapter-nuxt':
         specifier: ^0.3.49
         version: 0.3.49(@prismicio/types@0.2.9)(@types/uuid@9.0.8)(nuxt@3.13.2(@parcel/watcher@2.4.1)(@types/node@22.7.1)(eslint@9.11.1(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.22.4)(sass@1.79.3)(stylelint@16.9.0(typescript@5.5.4))(terser@5.33.0)(typescript@5.5.4)(vite@5.4.8(@types/node@22.7.1)(sass@1.79.3)(terser@5.33.0)))(uuid@9.0.1)
+      '@types/lodash':
+        specifier: ^4.17.9
+        version: 4.17.9
       '@vueuse/core':
         specifier: ^10.11.1
         version: 10.11.1(vue@3.5.8(typescript@5.5.4))
@@ -1428,6 +1434,9 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/lodash@4.17.9':
+    resolution: {integrity: sha512-w9iWudx1XWOHW5lQRS9iKpK/XuRhnN+0T7HvdCCd802FYkT1AMTnxndJHGrNJwRoRHkslGr4S29tjm1cT7x/7w==}
 
   '@types/node@22.7.1':
     resolution: {integrity: sha512-adOMRLVmleuWs/5V/w5/l7o0chDK/az+5ncCsIapTKogsu/3MVWvSgP58qVTXi5IwpfGt8pMobNq9rOWtJyu5Q==}
@@ -6683,6 +6692,8 @@ snapshots:
       '@types/node': 22.7.1
 
   '@types/json-schema@7.0.15': {}
+
+  '@types/lodash@4.17.9': {}
 
   '@types/node@22.7.1':
     dependencies:

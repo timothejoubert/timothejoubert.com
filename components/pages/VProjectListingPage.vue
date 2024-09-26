@@ -1,8 +1,15 @@
 <script lang="ts" setup>
+
+import type { ProjectListingPageDocument } from "~/prismicio-types";
+
+defineProps<{
+    prismicDocument: ProjectListingPageDocument,
+}>()
 // const { data: projectListingResponse } = usePrismicFetchDocuments('project')
 
 // const projects = computed(() => projectListingResponse.value.results || [])
 const projects = []
+
 </script>
 
 <template>

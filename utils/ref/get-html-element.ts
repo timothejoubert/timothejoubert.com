@@ -12,6 +12,7 @@ export function isDomElement(el: TemplateElement) {
     return (el as HTMLElement).ownerDocument?.documentElement.tagName.toLowerCase() === 'html'
 }
 
+// TODO: use vueUse utils ?
 export function getHtmlElement(element: TemplateElementRef) {
     const el = toValue(element)
     if (!el) return

@@ -8,3 +8,7 @@ export function slugify(input: string | undefined) {
 
     return slug
 }
+
+export function replaceSpecialCharacter(value: string) {
+    return value.replace(/[^\w\s]/gi, ' ')
+}

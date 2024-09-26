@@ -31,6 +31,7 @@
         "@nuxtjs/svg-sprite": "^1.0.2",
         "@prismicio/types": "^0.2.9",
         "@slicemachine/adapter-nuxt": "^0.3.49",
+        "@types/lodash": "^4.17.9",
         "@vueuse/core": "^10.11.1",
         "@vueuse/nuxt": "^10.11.1",
         "eslint": "^9.11.1",
@@ -50,6 +51,7 @@
         "vite-svg-loader": "^5.1.0"
     },
     "dependencies": {
+        "lodash": "^4.17.21",
         "plyr": "^3.7.8",
         "tiny-emitter": "^2.1.0"
     },
