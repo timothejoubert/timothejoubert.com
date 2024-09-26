@@ -17,18 +17,18 @@ defineProps<{
     --v-copyright-button-width: #{rem(14)};
 
     position: absolute;
-    bottom: rem(12);
     right: rem(12);
+    bottom: rem(12);
 }
 
 .button {
     display: flex;
+    width: var(--v-copyright-button-width);
+    height: var(--v-copyright-button-width);
     align-items: center;
     justify-content: center;
     background-color: white;
     color: black;
-    width: var(--v-copyright-button-width);
-    height: var(--v-copyright-button-width);
 }
 
 .content {
