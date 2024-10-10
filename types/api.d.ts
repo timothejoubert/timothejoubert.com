@@ -7,7 +7,7 @@ export type DocumentWithoutUid = IntersectDocument<AllDocumentTypes, PrismicDocu
 export type ReachableDocument = ExcludeDocument<AllDocumentTypes, (MenuDocument)> // ExcludeDocument<DocumentWithUid, MenuDocument> // PageDocument | ProjectDocument
 
 // Document type
-export type DocumentType = ExtractDocumentType<AllDocumentTypes>
+export type PrismicDocumentType = ExtractDocumentType<AllDocumentTypes>
 export type DocumentWithUidType = ExtractDocumentType<DocumentWithUid>
 export type DocumentWithoutUidType = ExtractDocumentType<IntersectDocument<AllDocumentTypes, PrismicDocumentWithoutUID>>
 export type ReachableDocumentType = ExtractDocumentType<ReachableDocument>

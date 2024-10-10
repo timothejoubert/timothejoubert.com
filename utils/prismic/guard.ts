@@ -13,7 +13,7 @@ import { isObject } from '~/utils/object/is-object'
 import { objectHasAllKeys, returnObjWithAllValidKey } from '~/utils/object/object-has-all-keys'
 import type { CustomEmbedField } from '~/utils/prismic/prismic-media'
 
-export function isDocumentEntity(entity: unknown): entity is PrismicDocument {
+export function isPrismicDocument(entity: unknown): entity is PrismicDocument {
     return isObject(entity) && !!objectHasAllKeys(entity, ['id', 'type', 'last_publication_date', 'tags', 'lang'])
 }
 

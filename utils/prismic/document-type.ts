@@ -1,5 +1,9 @@
 import { PrismicDocumentType } from '~/constants/prismic-document-type'
 
+export function isPrismicDocument() {
+
+}
+
 export function isExistingDocumentType(type: string) {
     return !!Object.values(PrismicDocumentType).find(existingType => existingType === type)
 }

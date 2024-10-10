@@ -1,5 +1,4 @@
 <script  lang="ts" setup>
-
 defineProps<{
     content: string
 }>()
@@ -7,8 +6,12 @@ defineProps<{
 
 <template>
     <div :class="$style.root">
-        <button :aria-label="$t('see_copyright')">i</button>
-        <div :class="$style.content">{{content}}</div>
+        <button :aria-label="$t('see_copyright')">
+            i
+        </button>
+        <div :class="$style.content">
+            {{ content }}
+        </div>
     </div>
 </template>
 

@@ -4,8 +4,7 @@ import { hash } from 'ohash'
 import type { ImageField, LinkToMediaField } from '@prismicio/types'
 import pick from 'lodash/pick'
 import { LazyVCopyright, VImg, VPicture } from '#components'
-import { imgProps } from '#image/components/NuxtImg'
-import { pictureProps } from '#image/components/NuxtPicture'
+import { imgProps, pictureProps } from '#image/components/_base'
 
 import type { Writeable } from '~/utils/types'
 import { imgixProviderAttributes, type ImgixProviderPropsKeys } from '~/utils/image/imgix'
@@ -35,8 +34,9 @@ export default defineComponent({
         })
 
         const cropDimensions = computed(() => modifiers.value?.crop?.split('x') || [])
-        const width = computed(() => cropDimensions.value[0] || props?.width || document.value?.dimensions.width)
-        const height = computed(() => cropDimensions.value[1] || props?.height || document.value?.dimensions.height)
+        const width = computed(() => cropDimensions.value[0] || props?.width || document.value?.dimensions?.width)
+        const height = computed(() => cropDimensions.value[1] || props?.height || document.value?.dimensions?.height)
+
         const isPicture = computed(() => !!slots.default || props.tag === 'picture')
         const src = computed(() => {
             const src = document.value?.thumbnail?.relativePath || document.value?.url
@@ -44,7 +44,6 @@ export default defineComponent({
 
             return queryIndex === -1 ? src : src.substring(0, queryIndex)
         })
-        console.log('src', src.value)
 
         const copyright = computed(
             () =>
@@ -55,7 +54,7 @@ export default defineComponent({
         const $img = useImage()
         const getFormat = () => props.format || !document.value?.processable ? undefined : 'jpeg'
 
-        const imageComponentProps = computed(() => {
+        const imageAttrs = computed(() => {
             return {
                 ...pick(props, Object.keys(isPicture.value ? pictureProps : imgProps)),
                 src: src.value,
@@ -78,20 +77,23 @@ export default defineComponent({
                 },
             }
         })
-        console.log('props', imageComponentProps.value)
 
-        const imageComponent = h(isPicture.value ? VPicture : VImg, imageComponentProps.value, slots.default)
+        const mediaComponent = (isPicture.value ? VPicture : VImg)
+        const mediaNode = h(mediaComponent, {
+            ...imageAttrs.value,
+            class: $style.root,
+        }, slots.default)
 
         return () => {
             if (copyright.value) {
-                const id = `figure-${hash(imageComponentProps.value)}`
+                const id = `figure-${hash(imageAttrs.value)}`
 
                 return (
                     h('figure', {
                         id: id,
                         class: [$style.root, $style['root--copyright']],
                     }, [
-                        imageComponent,
+                        mediaNode,
                         h(LazyVCopyright, {
                             content: copyright.value,
                             container: `#${id}`,
@@ -99,13 +101,17 @@ export default defineComponent({
                     ]))
             }
 
-            return imageComponent
+            return mediaNode
         }
     },
 })
 </script>
 
 <style lang="scss" module>
+img.root {
+    display: block;
+}
+
 .root {
     &--copyright {
         position: relative;

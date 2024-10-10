@@ -3,7 +3,7 @@ import { h, type PropType } from 'vue'
 import type { NuxtLinkProps } from '#app/components/nuxt-link'
 import { NuxtLink } from '#components'
 import type { ReachableDocument } from '~/types/api'
-import { type PossibleRoutePath, usePathLinkParser } from '~/composables/use-link-path-parser'
+import type { PossibleRoutePath } from '~/composables/use-link-path-parser'
 
 export const vLinkProps = {
     label: [String, Boolean],
@@ -18,7 +18,8 @@ export default defineComponent({
     setup(props, { attrs, slots }) {
         const { isRelative, isExternal, url } = usePathLinkParser(props.to)
 
-        // A VLink without URL or reference will render nothing except the default slot if present, fallback to the label, or at least nothing
+        // A VLink without URL or reference will render nothing
+        // except the default slot if present, fallback to the label, or at least nothing
         if (!url) {
             return () =>
                 slots.default?.({ label: props.label })

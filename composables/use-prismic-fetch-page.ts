@@ -8,27 +8,28 @@ export async function usePrismicFetchPage(prismicDocument: DocumentType) {
     const key = `fetched-page-${prismicDocument}-${uid || 'unique'}`
 
     const { data } = await useAsyncData(key, async () => {
-            try {
-                const prismicClient = usePrismic().client
-                const { fetchLocaleOption } = useLocale()
+        try {
+            const prismicClient = usePrismic().client
+            const { fetchLocaleOption } = useLocale()
 
-                if (uid && isDynamicDocument(prismicDocument)) {
-                    return await prismicClient.getByUID(prismicDocument, uid, { ...fetchLocaleOption.value })
-                } else if (isExistingDocumentType(prismicDocument)) {
-                    return await prismicClient.getSingle(prismicDocument, { ...fetchLocaleOption.value,})
-                }
+            if (uid && isDynamicDocument(prismicDocument)) {
+                return await prismicClient.getByUID(prismicDocument, uid, { ...fetchLocaleOption.value })
             }
-            catch (error: unknown) {
-                console.error(`PrismicError in useFetchPage on ${prismicDocument} `, error)
-                // @ts-expect-error cannot know the error type
-                return { error: createError(error) }
+            else if (isExistingDocumentType(prismicDocument)) {
+                return await prismicClient.getSingle(prismicDocument, { ...fetchLocaleOption.value })
             }
-        })
+        }
+        catch (error: unknown) {
+            console.error(`PrismicError in useFetchPage on ${prismicDocument} `, error)
+            // @ts-expect-error cannot know the error type
+            return { error: createError(error) }
+        }
+    })
 
     const response = data.value
 
     return {
         webResponse: (!!response && !('error' in response)) ? response : undefined,
-        error: (!!response && ('error' in response)) ? response.error: undefined,
+        error: (!!response && ('error' in response)) ? response.error : undefined,
     }
 }

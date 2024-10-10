@@ -1,4 +1,4 @@
-import type {SettingsDocument} from "~/prismicio-types";
+import type { SettingsDocument } from '~/prismicio-types'
 
 const key = 'settings-document'
 export async function usePrismicSettingsDocument() {

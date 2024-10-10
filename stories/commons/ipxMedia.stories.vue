@@ -1,4 +1,4 @@
-<script  lang=ts setup>
+<script  lang="ts" setup>
 const imageField = {
     dimensions: {
         width: 2400,
@@ -18,16 +18,19 @@ const imageField = {
 </script>
 
 <template>
-    <div :class="$style.root">
-        <div>
-            <div>Img</div>
+    <NuxtStory>
+        <NuxtStoryVariant title="Default">
             <VPrismicImage :document="imageField" />
+        </NuxtStoryVariant>
+        <NuxtStoryVariant title="With crop, width, height ">
             <VPrismicImage
                 :document="imageField"
                 fit="crop"
                 width="100"
                 height="200"
             />
+        </NuxtStoryVariant>
+        <NuxtStoryVariant title="ratio">
             <VPrismicImage
                 :document="imageField"
                 width="300"
@@ -35,6 +38,8 @@ const imageField = {
                 ar="5:2"
                 crop="top,left"
             />
+        </NuxtStoryVariant>
+        <NuxtStoryVariant title="With sources">
             <VPrismicImage :document="imageField">
                 <VPictureSource
                     media="(max-width: 767px)"
@@ -42,12 +47,11 @@ const imageField = {
                 />
                 <VPictureSource :modifiers="{ fit: 'crop', ar: '7:2', crop: 'bottom,right' }" />
             </VPrismicImage>
-        </div>
-    </div>
+        </NuxtStoryVariant>
+    </nuxtstory>
 </template>
 
-<style lang=scss module>
+<style lang="scss" module>
 .root {
-    margin: rem(200);
 }
 </style>

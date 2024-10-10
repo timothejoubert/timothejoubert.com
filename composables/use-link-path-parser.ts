@@ -1,27 +1,31 @@
 import type { LocationAsRelativeRaw, _RouteRecordBase } from 'vue-router'
+import { isPrismicDocument } from '~/utils/prismic/guard'
 
 export type PossibleRoutePath = string | undefined | null | LocationAsRelativeRaw | _RouteRecordBase
 
-export function usePathLinkParser(path: PossibleRoutePath) {
+export function usePathLinkParser(reference: PossibleRoutePath) {
     const siteUrl = useRuntimeConfig().public?.site.url
     const router = useRouter()
 
-    // TODO: return path when path is PrismicDocument
     const url = computed(() => {
-        if (!path) {
+        if (!reference) {
             return
         }
-        else if (typeof path === 'object' && 'name' in path) {
-            return router.hasRoute(path.name as string) ? router.resolve(path)?.fullPath : undefined
+        else if (isPrismicDocument(reference) && 'url' in reference) {
+            return reference.url
         }
-        else if (typeof path === 'object') {
-            return router.resolve(path)?.fullPath
+        else if (typeof reference === 'object' && 'name' in reference) {
+            return router.hasRoute(reference.name as string) ? router.resolve(reference)?.fullPath : undefined
         }
-        else return path
+        else if (typeof reference === 'object') {
+            return router.resolve(reference)?.fullPath
+        }
+        else return reference
     })
 
     const isRelative = computed(() => {
         const firstChar = toValue(url)?.charAt(0)
+
         if (!firstChar) return
 
         return firstChar === '/' || firstChar === '#' || (siteUrl && toValue(url)?.startsWith(siteUrl))

@@ -142,7 +142,15 @@ export default defineNuxtConfig({
         '@nuxtjs/sitemap',
         '@vueuse/nuxt',
         '@nuxt/eslint',
+        '@rezo-zero/nuxt-stories',
     ],
+
+    // https://github.com/rezozero/nuxt-stories
+    stories: {
+        pattern: [
+            '**/*.stories.vue',
+        ],
+    },
 
     prismic: {
         endpoint,

@@ -1,9 +1,13 @@
 import { usePrismic } from '@prismicio/vue'
-import type { DocumentType } from '~/types/api'
+import type { BuildQueryURLArgs } from '@prismicio/client/dist/buildQueryURL'
+import type { FetchParams } from '@prismicio/client/dist/BaseClient'
+import type { PrismicDocumentType } from '~/types/api'
 import { prismicDocumentRouteList } from '~/utils/prismic/route-resolver'
 
 // Rename DocumentType to PrismicDocumentType
-export function usePrismicFetchDocuments(prismicDocument: DocumentType, options: Record<string, unknown> = {}) {
+type PrismicFetchDocumentsOptions = Partial<BuildQueryURLArgs> & FetchParams
+
+export function usePrismicFetchDocuments(prismicDocument: PrismicDocumentType, options: PrismicFetchDocumentsOptions = {}) {
     const key = `fetched-pages-${prismicDocument}`
     const cachedData = useNuxtData(key)
 
