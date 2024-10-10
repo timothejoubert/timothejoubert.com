@@ -1,6 +1,6 @@
-import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
+import withNuxt from './.nuxt/eslint.config.mjs'
 
-export default createConfigForNuxt(
+export default withNuxt(
     {
         ignores: ['dist', '.output'],
     },

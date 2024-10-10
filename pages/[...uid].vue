@@ -3,7 +3,7 @@ import { PrismicDocumentType } from '~/constants/prismic-document-type'
 // import {defaultPageTransition} from "~/transitions/default-page-transition";
 
 // definePageMeta({
-    // pageTransition: defaultPageTransition,
+// pageTransition: defaultPageTransition,
 // })
 
 const prismicDocumentType = useMapRouteToPrismicDocument()
@@ -11,7 +11,8 @@ const { webResponse, error } = await usePrismicFetchPage(prismicDocumentType)
 
 if (error) {
     showError(error)
-} else if (!webResponse) {
+}
+else if (!webResponse) {
     showError({ status: 404, statusText: 'Undefined Prismic document' })
 }
 

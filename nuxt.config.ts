@@ -5,7 +5,7 @@ import { hoistUseStatements } from './utils/vite/hoist-use-statements'
 import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from './i18n.config'
 import { prismicDocumentRouteList } from './utils/prismic/route-resolver'
 
-const isGenerate = process.argv.includes('generate')
+const isDev = process.env.NODE_ENV === 'development'
 
 export default defineNuxtConfig({
     devtools: { enabled: true },
@@ -115,20 +115,22 @@ export default defineNuxtConfig({
                     ].join('; '),
                 },
             },
-            // Auto generated page by svgSprite module
             '/_icons': {
                 headers: {
-                    // Do not index the page and remove it from sitemap
+                    'X-Robots-Tag': 'noindex', // Do not index the page and remove it from sitemap
+                },
+            },
+            '/_stories/**': {
+                headers: {
                     'X-Robots-Tag': 'noindex',
                 },
             },
         },
     },
 
-    // TODO: verify if stories pages aren't build
     ignore: [
-        'pages/_stories/**',
-        isGenerate ? 'assets/backup/**' : undefined,
+        isDev ? undefined : 'pages/_stories/**',
+        'assets/backup/**',
     ],
 
     modules: [

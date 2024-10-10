@@ -1,13 +1,14 @@
 <script lang="ts">
 import type { PropType } from 'vue'
 import { hash } from 'ohash'
-import {LazyVCopyright, VImg, VPicture} from '#components'
-import { imgProps } from '#image/components/nuxt-img'
-import { pictureProps } from '#image/components/nuxt-picture'
-import type {ImageField, LinkToMediaField} from "@prismicio/types";
-import pick from "lodash/pick";
-import type {Writeable} from "~/utils/types";
-import {imgixProviderAttributes, type ImgixProviderPropsKeys} from "~/utils/image/imgix";
+import type { ImageField, LinkToMediaField } from '@prismicio/types'
+import pick from 'lodash/pick'
+import { LazyVCopyright, VImg, VPicture } from '#components'
+import { imgProps } from '#image/components/NuxtImg'
+import { pictureProps } from '#image/components/NuxtPicture'
+
+import type { Writeable } from '~/utils/types'
+import { imgixProviderAttributes, type ImgixProviderPropsKeys } from '~/utils/image/imgix'
 
 type PossiblePrismicMedia = LinkToMediaField | ImageField
 
@@ -19,7 +20,6 @@ export const vRoadizImageProps = {
     tag: String as PropType<'picture' | 'img'>,
     copyright: [String, Boolean],
 }
-
 
 export default defineComponent({
     props: vRoadizImageProps,
@@ -69,7 +69,7 @@ export default defineComponent({
                     || (!isPicture.value
                         && !props.densities
                         && ($img.options.presets?.default?.sizes || $img.options.screens))
-                    || undefined,
+                        || undefined,
                 provider: 'imgix',
                 modifiers: {
                     ...modifiers.value,

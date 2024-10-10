@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ExtractPropTypes } from 'vue'
 import type { ImageOptions } from '@nuxt/image'
-import { imgProps } from '#image/components/nuxt-img'
+import { imgProps } from '#image/components/NuxtImg'
 import { getInt, parseSize } from '#image/utils'
 
 export const vImgProps = {
@@ -108,10 +108,10 @@ export default defineComponent({
                         ...(!isResponsive
                             ? { href: src.value }
                             : {
-                                href: responsiveImageData.value.src,
-                                imagesizes: responsiveImageData.value.sizes,
-                                imagesrcset: responsiveImageData.value.srcset,
-                            }),
+                                    href: responsiveImageData.value.src,
+                                    imagesizes: responsiveImageData.value.sizes,
+                                    imagesrcset: responsiveImageData.value.srcset,
+                                }),
                         ...(typeof props.preload !== 'boolean' && props.preload.fetchPriority
                             ? { fetchpriority: props.preload.fetchPriority }
                             : {}),
