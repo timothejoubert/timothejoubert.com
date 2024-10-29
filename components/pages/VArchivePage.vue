@@ -1,4 +1,9 @@
 <script lang="ts" setup>
+import type { ArchiveDocument } from '~/prismicio-types'
+
+defineProps<{
+    document: ArchiveDocument
+}>()
 </script>
 
 <template>

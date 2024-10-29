@@ -31,7 +31,7 @@ export const prismicDocumentRouteList = [
 ]
 
 // TODO: find item by alias too
-export function mapRoutePathToPrismicDocument(path: string) {
+export function resolvePrismicDocumentFromPath(path: string) {
     const firstSegment = extractValueBetweenOccurrence(path, '/', [1, 2]) || ''
 
     const route = prismicDocumentRouteList.find((prismicRoute) => {

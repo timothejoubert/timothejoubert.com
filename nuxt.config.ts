@@ -32,7 +32,6 @@ export default defineNuxtConfig({
             ],
         },
     },
-
     router: {
         options: {
             scrollBehaviorType: 'smooth',
@@ -45,7 +44,6 @@ export default defineNuxtConfig({
         '~/components/organisms',
         '~/components/pages',
     ],
-
     runtimeConfig: {
         public: {
             version,
@@ -56,9 +54,7 @@ export default defineNuxtConfig({
             },
         },
     },
-
     css: ['~/assets/scss/main.scss'],
-
     vite: {
         css: {
             preprocessorOptions: {
@@ -127,12 +123,10 @@ export default defineNuxtConfig({
             },
         },
     },
-
     ignore: [
         isDev ? undefined : 'pages/_stories/**',
         'assets/backup/**',
     ],
-
     modules: [
         '@nuxt/image',
         '@nuxtjs/prismic',

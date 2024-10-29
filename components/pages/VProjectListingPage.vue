@@ -1,41 +1,37 @@
 <script lang="ts" setup>
-// import { usePrismic } from '@prismicio/vue'
-import type { ProjectListingPageDocument } from '~/prismicio-types'
+import type { ProjectDocument, ProjectListingPageDocument } from '~/prismicio-types'
 
 defineProps<{
-    prismicDocument: ProjectListingPageDocument
+    document: ProjectListingPageDocument
 }>()
 
-// TODO: find how to filter project by field value
-// const prismicFilter = usePrismic().filter
-// const filters = prismicFilter.at('my.project.favorite', true)
-
-const { data: projectListingResponse } = usePrismicFetchDocuments('project', {
+const prismicFilter = usePrismic().filter
+const fetchListing = await usePrismicFetchDocuments<ProjectDocument>('project', {
     orderings: {
         field: 'my.project.date',
         direction: 'desc',
     },
-    filters: ['at(my.project.favorite, true)'],
-    pageSize: 10, // default 20
+    filters: [prismicFilter.at('my.project.favorite', true)],
 })
-const projects = computed(() => projectListingResponse.value.results || [])
 
-console.log('projects', projects.value)
+const isPending = computed(() => fetchListing.status.value === 'pending')
+const projects = computed(() => fetchListing.data.value?.results || [])
 </script>
 
 <template>
     <div :class="$style.root">
-        <h1>Project listing page</h1>
+        <h1>Project listing page | isPending: {{ isPending }}</h1>
         <ol
             v-if="projects.length"
             :class="$style.list"
         >
             <li
-                v-for="project in projects"
-                :key="project.uid"
+                v-for="(project, index) in projects"
+                :key="project?.uid || index"
             >
                 <VProjectCard
                     :project="project"
+                    :skeleton="isPending"
                 />
             </li>
         </ol>

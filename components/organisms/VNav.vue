@@ -20,12 +20,12 @@ const linkList = computed(() => {
                 :key="i"
                 :class="$style.item"
             >
-                <VLink
+                <VPrismicLink
                     :to="item.link"
                     :class="$style.link"
                 >
                     {{ item.label }}
-                </VLink>
+                </VPrismicLink>
             </li>
         </ul>
     </nav>

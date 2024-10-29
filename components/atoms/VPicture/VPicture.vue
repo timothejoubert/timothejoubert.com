@@ -2,8 +2,8 @@
 import type { ExtractPropTypes } from 'vue'
 import pick from 'lodash/pick'
 import { imgProps, pictureProps } from '#image/components/_base'
-import VImg from '~/components/molecules/VImg.vue'
-import VPictureSource from '~/components/molecules/VPicture/VPictureSource.vue'
+import VImg from '~/components/atoms/VImg.vue'
+import VPictureSource from '~/components/atoms/VPicture/VPictureSource.vue'
 
 export const vPictureProps = {
     ...pictureProps,

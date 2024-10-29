@@ -2,29 +2,23 @@
 import { h, type PropType } from 'vue'
 import type { NuxtLinkProps } from '#app/components/nuxt-link'
 import { NuxtLink } from '#components'
-import type { ReachableDocument } from '~/types/api'
-import type { PossibleRoutePath } from '~/composables/use-link-path-parser'
+import { type PossibleRouteReference, useLinkResolver } from '~/composables/use-link-resolver'
 
-export const vLinkProps = {
-    label: [String, Boolean],
-    to: [Object, String] as PropType<ReachableDocument | string | PossibleRoutePath>,
+export const vPrismicLinkProps = {
+    to: [Object, String] as PropType<PossibleRouteReference>,
     nuxtLinkProps: Object as PropType<NuxtLinkProps>,
     custom: Boolean, // use scoped slot
 }
 
 export default defineComponent({
     inheritAttrs: false,
-    props: vLinkProps,
+    props: vPrismicLinkProps,
     setup(props, { attrs, slots }) {
-        const { isRelative, isExternal, url } = usePathLinkParser(props.to)
+        const { isRelative, isExternal, url } = useLinkResolver(props.to)
 
-        // A VLink without URL or reference will render nothing
-        // except the default slot if present, fallback to the label, or at least nothing
+        // A VPrismicLink without URL or reference will render slot
         if (!url) {
-            return () =>
-                slots.default?.({ label: props.label })
-                || (typeof props.label === 'string' && h('span', attrs, props.label))
-                || null
+            return () => slots.default?.() || null
         }
 
         // Define attributes
@@ -45,6 +39,7 @@ export default defineComponent({
             return result
         })
 
+        // Render scoped slot data
         if (props.custom) {
             const vNode = slots.default?.({ ...attributes.value })
 
@@ -52,7 +47,7 @@ export default defineComponent({
         }
 
         // By default return a NuxtLink component
-        return () => h(NuxtLink, attributes.value, slots.default || (() => (typeof props.label === 'string' && props.label) || ''))
+        return () => h(NuxtLink, attributes.value, slots.default)
     },
 })
 </script>

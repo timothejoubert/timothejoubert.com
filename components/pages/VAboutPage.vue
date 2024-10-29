@@ -1,4 +1,10 @@
-<script  lang="ts" setup></script>
+<script  lang="ts" setup>
+import type { AboutDocument } from '~/prismicio-types'
+
+defineProps<{
+    document: AboutDocument
+}>()
+</script>
 
 <template>
     <div :class="$style.root">

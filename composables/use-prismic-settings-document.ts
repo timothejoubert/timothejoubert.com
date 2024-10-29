@@ -1,6 +1,7 @@
 import type { SettingsDocument } from '~/prismicio-types'
 
 const key = 'settings-document'
+// TODO: Refactor to usePrismicCommonContent
 export async function usePrismicSettingsDocument() {
     const cachedData = useNuxtData<SettingsDocument>(key)
 

@@ -1,4 +1,9 @@
 <script lang="ts" setup>
+import type { ProjectDocument } from '~/prismicio-types'
+
+defineProps<{
+    document: ProjectDocument
+}>()
 </script>
 
 <template>

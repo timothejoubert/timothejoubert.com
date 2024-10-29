@@ -2,19 +2,24 @@
 import type { ProjectDocument } from '~/prismicio-types'
 
 interface VProjectCardProps {
-    project: ProjectDocument
+    project: ProjectDocument | null
 }
 
 const props = defineProps<VProjectCardProps>()
+
+const data = computed(() => props.project?.data)
+const thumbnail = computed(() => data.value?.thumbnail)
+const title = computed(() => data.value?.title)
 </script>
 
 <template>
-    <VLink
+    <VPrismicLink
         :to="props.project"
         :class="$style.root"
     >
         <VPrismicImage
-            :document="project.data.thumbnail"
+            v-if="thumbnail"
+            :document="thumbnail"
             fit="crop"
             ar="1:1"
             width="500"
@@ -22,12 +27,16 @@ const props = defineProps<VProjectCardProps>()
             :class="$style.image"
             sizes="sm:100vw md:50vw lg:25vw xl:25vw xxl:25vw hq:25vw qhd:25vw"
         />
+        <div
+            v-else
+            :class="[$style.image, $style['image--placeholder']]"
+        />
         <div :class="$style.body">
             <div :class="$style.title">
-                {{ project.data.title }}
+                {{ title }}
             </div>
         </div>
-    </VLink>
+    </VPrismicLink>
 </template>
 
 <style lang="scss" module>
@@ -36,6 +45,7 @@ const props = defineProps<VProjectCardProps>()
     display: block;
     border-radius: rem(8);
     overflow: hidden;
+    color: white;
 
     &::after {
         position: absolute;
@@ -75,10 +85,10 @@ const props = defineProps<VProjectCardProps>()
     position: absolute;
     inset: 0;
     padding: rem(14);
+    z-index: 2;
 }
 
 .title {
     font-weight: 800;
-
 }
 </style>

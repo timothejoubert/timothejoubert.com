@@ -1,7 +1,7 @@
-import type { DocumentType } from '~/types/api'
+import type { PrismicDocumentType } from '~/types/api'
 import { isDynamicDocument, isExistingDocumentType } from '~/utils/prismic/document-type'
 
-export async function usePrismicFetchPage(prismicDocument: DocumentType) {
+export async function usePrismicFetchPage(prismicDocument: PrismicDocumentType) {
     const route = useRoute()
     const routeUid = route.params?.uid || ''
     const uid = Array.isArray(routeUid) ? routeUid.at(-1) : routeUid

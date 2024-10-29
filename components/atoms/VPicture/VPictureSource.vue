@@ -2,7 +2,7 @@
 import type { MaybeRefOrGetter, PropType } from 'vue'
 import type { ImageOptions } from '@nuxt/image'
 import type { Head } from '@unhead/schema'
-import type { VPictureProps } from '~/components/molecules/VPicture/VPicture.vue'
+import type { VPictureProps } from '~/components/atoms/VPicture/VPicture.vue'
 
 const props = defineProps({
     media: String,
