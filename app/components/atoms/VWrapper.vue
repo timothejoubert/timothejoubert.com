@@ -12,7 +12,7 @@ export type VWrapperProps = { wrapper?: ComponentOrTagName | false | undefined }
 defineProps<VWrapperProps>()
 
 defineOptions({
-    inheritAttrs: false,
+	inheritAttrs: false,
 })
 </script>
 

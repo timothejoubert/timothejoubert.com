@@ -3,25 +3,25 @@ import { LinkType } from '@prismicio/types'
 import { hasAllKeys } from '~/utils/object/object-validation'
 
 const fieldKeys = [
-    'link_type',
-    'id',
-    'uid',
-    'type',
-    'tags',
-    'lang',
-    'url',
-    'slug',
-    'isBroken',
-    'data',
+	'link_type',
+	'id',
+	'uid',
+	'type',
+	'tags',
+	'lang',
+	'url',
+	'slug',
+	'isBroken',
+	'data',
 ]
 
 export function isContentRelationshipField(field: unknown) {
-    return hasAllKeys(field, fieldKeys) ? field as ContentRelationshipField : undefined
+	return hasAllKeys(field, fieldKeys) ? field as ContentRelationshipField : undefined
 }
 
 export function getFilledContentRelationshipField(field: unknown) {
-    const fieldTyped = isContentRelationshipField(field)
+	const fieldTyped = isContentRelationshipField(field)
 
-    if (fieldTyped && fieldTyped.link_type === LinkType.Document && 'id' in fieldTyped && fieldTyped.id) return fieldTyped as FilledContentRelationshipField
-    return undefined
+	if (fieldTyped && fieldTyped.link_type === LinkType.Document && 'id' in fieldTyped && fieldTyped.id) return fieldTyped as FilledContentRelationshipField
+	return undefined
 }

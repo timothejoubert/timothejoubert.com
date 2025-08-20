@@ -2,7 +2,7 @@
 import type { ProjectDocument } from '~~/prismicio-types'
 
 defineProps<{
-    projects: ProjectDocument[]
+	projects: ProjectDocument[]
 }>()
 
 console.log('[VProjectListing]')

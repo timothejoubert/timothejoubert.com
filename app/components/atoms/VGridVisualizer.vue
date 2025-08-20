@@ -5,16 +5,16 @@ const maxColumnLength = Math.max(...Object.values(ScssGrid).map(v => Number(v)))
 const isVisible = ref(false)
 
 function onKeyDown(e: KeyboardEvent) {
-    const isValidKeyDown = e.shiftKey && (e.key === 'g' || e.key === 'G')
-    if (isValidKeyDown) isVisible.value = !isVisible.value
+	const isValidKeyDown = e.shiftKey && (e.key === 'g' || e.key === 'G')
+	if (isValidKeyDown) isVisible.value = !isVisible.value
 }
 
 onMounted(() => {
-    window.addEventListener('keydown', onKeyDown)
+	window.addEventListener('keydown', onKeyDown)
 })
 
 onBeforeUnmount(() => {
-    window.removeEventListener('keydown', onKeyDown)
+	window.removeEventListener('keydown', onKeyDown)
 })
 </script>
 
@@ -40,15 +40,15 @@ onBeforeUnmount(() => {
     top: 0;
     bottom: 0;
     left: var(--gutter);
+    padding-left: initial;
     grid-template-rows: 1fr;
     margin-block: initial;
     pointer-events: none;
-    padding-left: initial;
 }
 
 .item {
     min-height: 100%;
-    background-color: rgba(255, 0, 0, 10%);
+    background-color: rgb(255, 0, 0, 10%);
     list-style: none;
 }
 </style>

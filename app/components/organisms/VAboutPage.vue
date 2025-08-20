@@ -2,7 +2,7 @@
 import type { AboutDocument } from '~~/prismicio-types'
 
 const props = defineProps<{
-    document: AboutDocument
+	document: AboutDocument
 }>()
 
 const page = computed(() => props.document.data)
@@ -41,14 +41,15 @@ const page = computed(() => props.document.data)
 .root {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+
 	// max-width: 100ch;
 }
 
 .content {
 	margin-top: 200px;
+	grid-column: 1 / -1;
 	margin-inline: auto;
 	text-align: center;
-	grid-column: 1 / -1;
 }
 
 .section {

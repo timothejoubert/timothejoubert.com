@@ -4,23 +4,23 @@ import VPrismicLink from '../atoms/VPrismicLink.vue'
 import type { VPrismicImageField } from '~/components/atoms/VPrismicImg.vue'
 
 const props = defineProps<{
-    title: string | null
-    image: VPrismicImageField
-    content: string | null
-    tags?: string[]
-    url?: string | null
+	title: string | null
+	image: VPrismicImageField
+	content: string | null
+	tags?: string[]
+	url?: string | null
 } & VWrapperProps>()
 
 const imgSizes = computed(() => {
-    return 'xs:92vw sm:92vw md:30vw lg:22vw xl:22vw hq:22vw qhd:22vw'
+	return 'xs:92vw sm:92vw md:30vw lg:22vw xl:22vw hq:22vw qhd:22vw'
 })
 
 const $style = useCssModule()
 const rootClasses = computed(() => {
-    return [
-        props.url && $style['root--has-link'],
-        $style.root,
-    ]
+	return [
+		props.url && $style['root--has-link'],
+		$style.root,
+	]
 })
 </script>
 
@@ -97,8 +97,8 @@ const rootClasses = computed(() => {
 .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
     order: 3;
+    gap: 6px;
 }
 
 .content {

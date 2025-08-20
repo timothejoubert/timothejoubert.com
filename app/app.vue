@@ -6,7 +6,7 @@ const currentPage = useCurrentPage()
 const pageType = computed(() => currentPage.value.document?.type)
 
 const displayProjects = computed(() => {
-    return pageType.value === 'home_page' || pageType.value === 'project_listing_page' || pageType.value === 'project'
+	return pageType.value === 'home_page' || pageType.value === 'project_listing_page' || pageType.value === 'project'
 })
 </script>
 
@@ -29,9 +29,9 @@ const displayProjects = computed(() => {
 <style lang="scss" module>
 .nav {
     position: fixed;
+    z-index: 101;
     bottom: 24px;
     left: 50%;
     translate: -50%;
-    z-index: 101;
 }
 </style>

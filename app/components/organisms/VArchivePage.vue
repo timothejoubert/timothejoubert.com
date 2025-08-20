@@ -2,11 +2,11 @@
 import type { ArchiveDocument } from '~~/prismicio-types'
 
 defineProps<{
-    document: ArchiveDocument
+	document: ArchiveDocument
 }>()
 
 const { data: projects } = await usePrismicFetchProjects(false, {
-    graphQuery: `
+	graphQuery: `
         {
             project {
                 title

@@ -2,8 +2,8 @@
 import type { RichTextField } from '@prismicio/types'
 
 defineProps<{
-    field: RichTextField
-    wrapper?: string
+	field: RichTextField
+	wrapper?: string
 }>()
 </script>
 
@@ -45,9 +45,9 @@ defineProps<{
 .highlight {
     position: relative;
     display: inline;
-    color: var(--v-highlighted-text-color);
-    background-color: color-mix(in srgb, var(--v-highlighted-text-color) 20%, transparent);
     padding: 1px 4px 3px;
     border-radius: 3px;
+    background-color: color-mix(in srgb, var(--v-highlighted-text-color) 20%, transparent);
+    color: var(--v-highlighted-text-color);
 }
 </style>

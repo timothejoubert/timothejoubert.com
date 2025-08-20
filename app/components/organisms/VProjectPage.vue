@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { ProjectDocument } from '~~/prismicio-types'
-import VPrismicImg from '../atoms/VPrismicImg.vue'
-import VVideoPlayer from '../atoms/VVideoPlayer.vue'
-import { prismicDocumentRoute } from '~~/shared/prismic-routes'
+import type { ProjectDocument } from '~~/prismicio-types';
+import { prismicDocumentRoute } from '~~/shared/prismic-routes';
+import VPrismicImg from '../atoms/VPrismicImg.vue';
+import VVideoPlayer from '../atoms/VVideoPlayer.vue';
 
 const props = defineProps<{
-    document: ProjectDocument
+	document: ProjectDocument
 }>()
 
 const project = computed(() => props.document.data)
@@ -14,24 +14,24 @@ const prismic = usePrismic()
 const videoExtensions = ['mp4', 'mov']
 
 function endWidthVideoExt(url: string) {
-    const afterLastDot = url.substring(url?.lastIndexOf('.'))
-    return videoExtensions.some(ext => afterLastDot.startsWith('.' + ext))
+	const afterLastDot = url.substring(url?.lastIndexOf('.'))
+	return videoExtensions.some(ext => afterLastDot.startsWith('.' + ext))
 }
 
 const medias = computed(() => {
-    return project.value.medias
-        .filter(m => prismic.isFilled.linkToMedia(m.media) && m.media.url)
-        .map((mediaGroup) => {
-            return {
-                ...mediaGroup,
-                type: endWidthVideoExt(mediaGroup.media.url) ? 'video' : 'other',
-            }
-        })
+	return project.value.medias
+		.filter(m => prismic.isFilled.linkToMedia(m.media) && m.media.url)
+		.map((mediaGroup) => {
+			return {
+				...mediaGroup,
+				type: endWidthVideoExt(mediaGroup.media.url) ? 'video' : 'other',
+			}
+		})
 })
 
 const tags = computed(() => {
-    if (project.value.tag_group?.length) return project.value.tag_group.filter(item => item.tag).map(item => item.tag)
-    return props.document.tags || []
+	if (project.value.tag_group?.length) return project.value.tag_group.filter(item => item.tag).map(item => item.tag)
+	return props.document.tags || []
 })
 </script>
 
@@ -98,11 +98,11 @@ const tags = computed(() => {
 <style lang="scss" module>
 .root {
     position: absolute;
-    width: 50vw;
+    z-index: 11;
     top: 0;
     right: 0;
+    width: 50vw;
     min-height: 100svh;
-    z-index: 11;
     background-color: white;
 }
 
