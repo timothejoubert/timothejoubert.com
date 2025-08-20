@@ -3,7 +3,7 @@ import type { ReachableDocument } from '~/types/api'
 
 function getValue(obj: Record<string, unknown> | undefined, key: string, deepKey?: string) {
     const value = obj && key in obj && typeof obj[key]
-    if(!value) return undefined
+    if (!value) return undefined
 
     if (typeof value === 'string' && !deepKey) {
         return value as string
@@ -28,18 +28,18 @@ export function usePrismicSeoMeta(document: ReachableDocument) {
     const generateImg = useImage()
     const image = apiImgUrl
         ? generateImg(
-            apiImgUrl,
-            {
-                width: 1200,
-                height: 700,
-            },
-            {
-                provider: 'imgix',
-                modifiers: {
-                    fit: 'crop',
-                }
-            },
-        )
+                apiImgUrl,
+                {
+                    width: 1200,
+                    height: 700,
+                },
+                {
+                    provider: 'imgix',
+                    modifiers: {
+                        fit: 'crop',
+                    },
+                },
+            )
         : joinURL(siteUrl, '/share.jpg')
 
     const { path } = useRoute()

@@ -5,7 +5,7 @@ import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from './i18n/i18n'
 import { prismicDocumentRoutes } from './shared/prismic-routes'
 import { PREVIEW_PATH } from './app/constants/prismic-preview'
 
-const isDev = process.env.NODE_ENV === 'development'
+// const isDev = process.env.NODE_ENV === 'development'
 const isProd = process.env.NUXT_PUBLIC_SITE_ENV === 'production'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config

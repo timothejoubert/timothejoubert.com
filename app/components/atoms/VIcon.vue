@@ -5,14 +5,14 @@ defineProps({
         required: true,
     },
     mode: {
-      type: String as PropType<'svg' | 'css'>,
-      required: false,
-      default: null,
+        type: String as PropType<'svg' | 'css'>,
+        required: false,
+        default: null,
     },
     size: {
-      type: [Number, String],
-      required: false,
-      default: null,
+        type: [Number, String],
+        required: false,
+        default: null,
     },
 })
 </script>

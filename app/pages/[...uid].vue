@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { AboutDocument, ArchiveDocument, HomePageDocument, ProjectDocument } from '~~/prismicio-types';
+import type { AboutDocument, ArchiveDocument, HomePageDocument, ProjectDocument } from '~~/prismicio-types'
 
 const { document } = await useFetchPage(undefined)
 
@@ -10,13 +10,22 @@ const homeDocument = computed(() => document.value.type === 'home_page' ? docume
 </script>
 
 <template>
-    <VProjectPage v-if="projectDocument" :document="projectDocument" />
-    <VArchivePage v-else-if="archiveDocument" :document="archiveDocument" />
-    <VAboutPage v-else-if="aboutDocument" :document="aboutDocument" />
+    <VProjectPage
+        v-if="projectDocument"
+        :document="projectDocument"
+    />
+    <VArchivePage
+        v-else-if="archiveDocument"
+        :document="archiveDocument"
+    />
+    <VAboutPage
+        v-else-if="aboutDocument"
+        :document="aboutDocument"
+    />
     <div v-else-if="homeDocument">
         <h1>Home page</h1>
     </div>
-    <div v-else >
+    <div v-else>
         <h1>Fallback page</h1>
     </div>
 </template>

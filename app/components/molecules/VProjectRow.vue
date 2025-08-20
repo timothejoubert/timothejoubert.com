@@ -26,7 +26,9 @@ const tags = computed(() => {
             v-for="tag in tags"
             :key="tag"
             :label="tag"
-        >{{ tag }}</button>
+        >
+            {{ tag }}
+        </button>
         <!-- <VIcon name="arrow-up-right" /> -->
     </VPrismicLink>
 </template>

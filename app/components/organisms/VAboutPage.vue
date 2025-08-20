@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { AboutDocument } from '~~/prismicio-types';
+import type { AboutDocument } from '~~/prismicio-types'
 
 const props = defineProps<{
     document: AboutDocument
@@ -7,19 +7,37 @@ const props = defineProps<{
 
 const page = computed(() => props.document.data)
 </script>
+
 <template>
-    <div class="grid-container" :class="$style.root">
-		<VHighlightedText :field="page.content" wrapper="h2" :class="$style.content" />
+    <div
+        class="grid-container"
+        :class="$style.root"
+    >
+        <VHighlightedText
+            :field="page.content"
+            wrapper="h2"
+            :class="$style.content"
+        />
         <template v-if="page.sections?.length">
-            <section v-for="(section, i) in page.sections" :key="i" :class="$style.section">
-                <h3 :class="$style.title">{{ section.title }}</h3>
-                <VText v-if="section.content" :content="section.content" :class="$style.section__content" />
+            <section
+                v-for="(section, i) in page.sections"
+                :key="i"
+                :class="$style.section"
+            >
+                <h3 :class="$style.title">
+                    {{ section.title }}
+                </h3>
+                <VText
+                    v-if="section.content"
+                    :content="section.content"
+                    :class="$style.section__content"
+                />
             </section>
         </template>
     </div>
 </template>
-<style lang="scss" module>
 
+<style lang="scss" module>
 .root {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -30,12 +48,11 @@ const page = computed(() => props.document.data)
 	margin-top: 200px;
 	margin-inline: auto;
 	text-align: center;
-
 	grid-column: 1 / -1;
 }
 
 .section {
-    position: relative;
+	position: relative;
 	margin-top: 120px;
 }
 </style>

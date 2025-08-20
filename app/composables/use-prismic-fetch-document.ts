@@ -31,8 +31,9 @@ export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismi
             else if (prismicDocument && isExistingDocumentType(prismicDocument)) {
                 return await prismicClient.getSingle(prismicDocument, prismicFetchOptions)
             }
-        } catch (error) {
-            console.error('Error during Prismic document fetch', error);
+        }
+        catch (error) {
+            console.error('Error during Prismic document fetch', error)
             return { data: null }
         }
     }, {

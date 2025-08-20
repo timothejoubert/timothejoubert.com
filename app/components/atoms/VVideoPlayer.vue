@@ -28,7 +28,6 @@ export const embedVideoProps = {
     embedId: { type: String },
 }
 
-
 export const vVideoPlayerProps = {
     ...videoAttributes,
     ...embedVideoProps,

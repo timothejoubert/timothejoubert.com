@@ -16,7 +16,7 @@ const prismic = usePrismic()
 // https://prismic.io/docs/fields/rich-text
 const props = withDefaults(defineProps<VTextProps>(), {
     richTextSerializer: {
-        hyperlink: undefined
+        hyperlink: undefined,
     },
 })
 

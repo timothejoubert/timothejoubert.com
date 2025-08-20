@@ -4,7 +4,7 @@ import type { AllDocumentTypes, ProjectDocument, SettingsDocument } from '~~/pri
 // Document data
 export type DocumentWithUid = IntersectDocument<AllDocumentTypes, PrismicDocumentWithUID>
 export type DocumentWithoutUid = IntersectDocument<AllDocumentTypes, PrismicDocumentWithoutUID>
-export type ReachableDocument = ExcludeDocument<AllDocumentTypes, (SettingsDocument )>
+export type ReachableDocument = ExcludeDocument<AllDocumentTypes, (SettingsDocument)>
 export type RepeatableDocument = ProjectDocument
 
 // Document type
@@ -15,7 +15,7 @@ export type DocumentWithUidType = ExtractDocumentType<DocumentWithUid>
 export type DocumentWithoutUidType = ExtractDocumentType<IntersectDocument<AllDocumentTypes, PrismicDocumentWithoutUID>>
 
 //  UTILS
-type PickPrismicDocument<Type extends PrismicDocumentType> = Extract<ReachableDocument, { type: Type }>
+// type PickPrismicDocument<Type extends PrismicDocumentType> = Extract<ReachableDocument, { type: Type }>
 
 export type ExtractDocumentType<T extends PrismicDocument> = Pick<T, 'type'>['type']
 type IntersectDocument<T extends PrismicDocument, FilterType extends PrismicDocument> = T extends FilterType ? T : never

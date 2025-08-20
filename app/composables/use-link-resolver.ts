@@ -7,15 +7,15 @@ import type { PrismicReachableDocumentType, ReachableDocument } from '~/types/ap
 import type { PrismicDocumentRoute } from '~~/shared/prismic-routes'
 import { isPrismicDocumentRoute } from '~/utils/prismic/route-resolver'
 
-export type PossibleRouteReference =
-    string
-    | undefined
-    | null
-    | LocationAsRelativeRaw
-    | _RouteRecordBase
-    | ReachableDocument
-    | ContentRelationshipField<PrismicReachableDocumentType>
-    | PrismicDocumentRoute
+export type PossibleRouteReference
+    = string
+        | undefined
+        | null
+        | LocationAsRelativeRaw
+        | _RouteRecordBase
+        | ReachableDocument
+        | ContentRelationshipField<PrismicReachableDocumentType>
+        | PrismicDocumentRoute
 
 export function useLinkResolver(reference: PossibleRouteReference) {
     const siteUrl = useRuntimeConfig().public?.site.url
@@ -52,7 +52,7 @@ export function useLinkResolver(reference: PossibleRouteReference) {
     }
 
     const isRelative = computed(() => {
-        if(!url.value) return false
+        if (!url.value) return false
 
         return url.value.charAt(0) === '/' || url.value.charAt(0) === '#' || startWithSiteUrl(url.value)
     })

@@ -6,20 +6,36 @@ defineProps<{
     wrapper?: string
 }>()
 </script>
+
 <template>
-    <component :is="wrapper || 'div'" :class="$style.root">
+    <component
+        :is="wrapper || 'div'"
+        :class="$style.root"
+    >
         <VRichText :field="field">
             <template #default="scopedSlot">
-                <div v-if="scopedSlot.type === 'strong'" :class="$style.highlight">
-                    <VSplitText  render="chars" :content="scopedSlot.content" />
+                <div
+                    v-if="scopedSlot.type === 'strong'"
+                    :class="$style.highlight"
+                >
+                    <VSplitText
+                        render="chars"
+                        :content="scopedSlot.content"
+                    />
                 </div>
-                <component v-else :is="scopedSlot.type" :class="$style.tag">{{ scopedSlot.content }}</component>
+                <component
+                    :is="scopedSlot.type"
+                    v-else
+                    :class="$style.tag"
+                >
+                    {{ scopedSlot.content }}
+                </component>
             </template>
         </VRichText>
     </component>
 </template>
-<style lang="scss" module>
 
+<style lang="scss" module>
 .root {
     --v-highlighted-text-color: red;
 

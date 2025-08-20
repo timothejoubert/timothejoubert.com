@@ -1,9 +1,8 @@
-
 <script lang="ts">
 import pick from 'lodash/pick'
 import type { ImageField, LinkField } from '@prismicio/types'
 import { getImageFieldFilled } from '~/utils/prismic/image-field'
-import { getFilledLinkToMedia } from '~/utils/prismic/link-field.ts'
+import { getFilledLinkToMedia } from '~/utils/prismic/link-field'
 import { vImgProps } from '~/components/atoms/VImg.vue'
 import { VImg } from '#components'
 
@@ -14,7 +13,7 @@ export const vPrismicImgProps = {
         type: Object as PropType<VPrismicImageField>,
         required: true,
     },
-    ...vImgProps
+    ...vImgProps,
 }
 
 export default defineComponent({
@@ -36,7 +35,6 @@ export default defineComponent({
             placeholder: props.placeholder || '#eee',
             quality: 70,
         })
-    }
+    },
 })
-
 </script>

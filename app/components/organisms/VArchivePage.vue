@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { ArchiveDocument } from '~~/prismicio-types';
+import type { ArchiveDocument } from '~~/prismicio-types'
 
-const props = defineProps<{
+defineProps<{
     document: ArchiveDocument
 }>()
 
@@ -18,15 +18,20 @@ const { data: projects } = await usePrismicFetchProjects(false, {
         }`,
 })
 </script>
+
 <template>
     <div>
         <h1>Archive page | {{ document.data.title }}</h1>
         <ul>
-            <li v-for="project in projects" :key="project.id">
+            <li
+                v-for="project in projects"
+                :key="project.id"
+            >
                 <VProjectRow :project="project" />
             </li>
         </ul>
     </div>
 </template>
+
 <style lang="scss" module>
 </style>

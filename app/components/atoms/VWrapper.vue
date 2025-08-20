@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ComponentOrTagName } from '~/types/app'
+
 export type VWrapperProps = { wrapper?: ComponentOrTagName | false | undefined }
 </script>
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { ProjectDocument } from '~~/prismicio-types';
+import type { ProjectDocument } from '~~/prismicio-types'
 import type { VWrapperProps } from '~/components/atoms/VWrapper.vue'
 
 const props = defineProps<{
@@ -24,6 +24,5 @@ const tags = computed(() => {
 </template>
 
 <style lang="scss" module>
-
 
 </style>

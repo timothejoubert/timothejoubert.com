@@ -44,6 +44,9 @@ importers:
       stylelint:
         specifier: ^16.23.1
         version: 16.23.1(typescript@5.9.2)
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.2
       vite-svg-loader:
         specifier: ^5.1.0
         version: 5.1.0(vue@3.5.18(typescript@5.9.2))

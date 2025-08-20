@@ -1,4 +1,3 @@
-
 export async function usePrismicSettingsDocument() {
     const prismicClient = usePrismic().client
 

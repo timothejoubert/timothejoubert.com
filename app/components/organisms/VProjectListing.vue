@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { ProjectDocument } from '~~/prismicio-types';
+import type { ProjectDocument } from '~~/prismicio-types'
 
 defineProps<{
     projects: ProjectDocument[]
@@ -9,15 +9,19 @@ console.log('[VProjectListing]')
 </script>
 
 <template>
-    <ul class="grid" :class="$style.root" v-if="projects.length">
+    <ul
+        v-if="projects.length"
+        class="grid"
+        :class="$style.root"
+    >
         <VProjectCard
+            v-for="project in projects"
+            :key="project.uid"
             wrapper="li"
             :project="project"
             :class="$style.item"
-            v-for="project in projects"
-            :key="project.uid"
         />
-</ul>
+    </ul>
 </template>
 
 <style lang="scss" module>

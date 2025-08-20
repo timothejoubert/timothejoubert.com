@@ -1,4 +1,3 @@
-
 export const SETTINGS_TYPE = 'settings'
 export const MAIN_MENU_TYPE = 'main_menu'
 

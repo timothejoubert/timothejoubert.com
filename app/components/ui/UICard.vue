@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { VWrapperProps } from '~/components/atoms/VWrapper.vue'
-import VPrismicLink from '../atoms/VPrismicLink.vue';
-import type { VPrismicImageField } from '~/components/atoms/VPrismicImg.vue';
+import VPrismicLink from '../atoms/VPrismicLink.vue'
+import type { VPrismicImageField } from '~/components/atoms/VPrismicImg.vue'
 
 const props = defineProps<{
     title: string | null
@@ -29,11 +29,20 @@ const rootClasses = computed(() => {
         :wrapper="wrapper"
         :class="rootClasses"
     >
-        <component :is="url ? VPrismicLink : 'h3'" :to="url" v-if="title" :class="[$style.title]">
+        <component
+            :is="url ? VPrismicLink : 'h3'"
+            v-if="title"
+            :to="url"
+            :class="[$style.title]"
+        >
             {{ title }}
         </component>
         <template v-if="tags && tags.length">
-            <TransitionGroup :name="$style['tag-animation']" tag="div" :class="$style.tags">
+            <TransitionGroup
+                :name="$style['tag-animation']"
+                tag="div"
+                :class="$style.tags"
+            >
                 <button
                     v-for="(tag, i) in tags"
                     :key="tag"
@@ -43,10 +52,15 @@ const rootClasses = computed(() => {
                     :style="{ '--tag-index': tags.length - i }"
                     size="xs"
                     :class="$style.tag"
-                >{{ tag }}</button>
+                >
+                    {{ tag }}
+                </button>
             </TransitionGroup>
         </template>
-        <span v-if="content" :class="$style.content">{{ content }}</span>
+        <span
+            v-if="content"
+            :class="$style.content"
+        >{{ content }}</span>
         <VPrismicImg
             v-if="image"
             :field="image"

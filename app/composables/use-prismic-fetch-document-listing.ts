@@ -13,16 +13,15 @@ export type RepeatableDocumentType = ExtractDocumentType<ProjectDocument>
 export function usePrismicFetchDocuments<T extends PrismicDocument = RepeatableDocument>(
     prismicDocument: RepeatableDocumentType, options: GetAllByTypeParams = {},
 ) {
-
     const prismicClient = usePrismic().client
     const fetchOptions = {
-            // pageSize: options.pageSize || 12, // default 20
-            limit: options.pageSize || 2, // default 20
-            routes: prismicDocumentRoutes,
-            brokenRoute: '/404',
-            ...useLocale()?.fetchLocaleOption.value,
-            ...options,
-        }
+        // pageSize: options.pageSize || 12, // default 20
+        limit: options.pageSize || 2, // default 20
+        routes: prismicDocumentRoutes,
+        brokenRoute: '/404',
+        ...useLocale()?.fetchLocaleOption.value,
+        ...options,
+    }
 
     const hash: string[] = [prismicDocument]
     if (Object.keys(fetchOptions).length) hash.push(generateHashFromObject(fetchOptions))
