@@ -16,7 +16,6 @@ const videoExtensions = ['mp4', 'mov']
 
 function endWidthVideoExt(url: string) {
     const afterLastDot = url.substring(url?.lastIndexOf('.'))
-    console.log('afterLastDot', afterLastDot)
     return videoExtensions.some(ext => afterLastDot.startsWith('.' + ext))
 }
 

@@ -35,7 +35,7 @@ useHead({
 })
 
 function goToHome() {
-    clearError({ redirect: ' /' })
+    clearError({ redirect: '/' })
 }
 </script>
 

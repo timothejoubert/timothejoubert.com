@@ -1,13 +1,58 @@
 {
   "id": "about",
+  "label": "about",
+  "repeatable": false,
+  "status": true,
+  "format": "page",
   "json": {
     "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "title",
+          "placeholder": ""
+        }
+      },
+      "content": {
+        "type": "StructuredText",
+        "config": {
+          "label": "content",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "strong"
+        }
+      },
+      "sections": {
+        "type": "Group",
+        "config": {
+          "label": "sections",
+          "repeat": true,
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": {
+                "label": "title",
+                "placeholder": ""
+              }
+            },
+            "content": {
+              "type": "StructuredText",
+              "config": {
+                "label": "content",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "multi": "hyperlink,strong,em,paragraph,embed"
+              }
+            }
+          }
+        }
+      },
       "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
         "config": {
           "choices": {}
-        },
-        "fieldset": "Slice Zone",
-        "type": "Slices"
+        }
       }
     },
     "SEO & Metadata": {
@@ -37,9 +82,5 @@
         "type": "Image"
       }
     }
-  },
-  "label": "about",
-  "repeatable": false,
-  "status": true,
-  "format": "page"
+  }
 }

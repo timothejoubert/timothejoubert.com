@@ -29,7 +29,7 @@ export function usePrismicFetchDocuments<T extends PrismicDocument = RepeatableD
 
     const key = `documents-${hash.join('-')}`
 
-
+    // TODO: use getByType to get paginated data
     return useAsyncData(key, () => {
         return prismicClient.getAllByType<T>(prismicDocument, options)
     }, {
