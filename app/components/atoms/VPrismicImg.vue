@@ -1,10 +1,10 @@
 <script lang="ts">
-import pick from 'lodash/pick'
+import { VImg } from '#components'
 import type { ImageField, LinkField } from '@prismicio/types'
+import pick from 'lodash/pick'
+import { vImgProps } from '~/components/atoms/VImg.vue'
 import { getImageFieldFilled } from '~/utils/prismic/image-field'
 import { getFilledLinkToMedia } from '~/utils/prismic/link-field'
-import { vImgProps } from '~/components/atoms/VImg.vue'
-import { VImg } from '#components'
 
 export type VPrismicImageField = LinkField | ImageField
 
@@ -32,7 +32,7 @@ export default defineComponent({
 			height: props.height || imageField.value?.dimensions.height || mediaLinkField.value?.height,
 			alt: typeof props.alt === 'string' ? props.alt : (imageField.value?.alt || mediaLinkField.value?.name),
 			provider: 'imgix',
-			placeholder: props.placeholder || '#eee',
+			placeholder: props.placeholder || '#ffffff10',
 			quality: 70,
 		})
 	},

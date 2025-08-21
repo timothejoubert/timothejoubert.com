@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { ExtractPropTypes } from 'vue'
-import type { ImageOptions } from '@nuxt/image'
 import { imgProps } from '#image/components/NuxtImg.vue'
 import { getInt, parseSize } from '#image/utils'
+import type { ImageOptions } from '@nuxt/image'
+import type { ExtractPropTypes } from 'vue'
 
 export const vImgProps = {
 	...imgProps,
@@ -142,9 +142,9 @@ export default defineComponent({
     height: var(--v-img-height, auto); // responsive image
     background: var(--v-img-background, var(--v-img-placeholder));
 
-    &--loaded {
-        // Remove background when image is loaded. This is useful for hiding antialiasing artifacts.
-        --v-img-background: none;
-    }
+	// Remove background when image is loaded. This is useful for hiding antialiasing artifacts.
+    // &--loaded {
+    //     --v-img-background: none;
+    // }
 }
 </style>
