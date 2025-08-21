@@ -19,9 +19,7 @@ const displayProjects = computed(() => {
 
         <NuxtRouteAnnouncer />
         <VNav :class="$style.nav" />
-        <div>
-            <NuxtPage />
-        </div>
+        <NuxtPage />
         <VProjectListing
             v-if="projects?.length && displayProjects"
             :projects="projects"
