@@ -37,17 +37,17 @@ defineProps<{
 
 <style lang="scss" module>
 .root {
-    --v-highlighted-text-color: red;
-
     line-height: 1.6;
 }
 
 .highlight {
     position: relative;
     display: inline;
-    padding: 1px 4px 3px;
+    padding: 1px 7px 3px;
     border-radius: 3px;
-    background-color: color-mix(in srgb, var(--v-highlighted-text-color) 20%, transparent);
-    color: var(--v-highlighted-text-color);
+    // background-color: var(--color-surface);
+    // color: var(--color-content);
+    background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    color: var(--color-accent);
 }
 </style>
