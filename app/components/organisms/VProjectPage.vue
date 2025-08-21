@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { ProjectDocument } from '~~/prismicio-types';
-import { prismicDocumentRoute } from '~~/shared/prismic-routes';
-import VPrismicImg from '../atoms/VPrismicImg.vue';
-import VVideoPlayer from '../atoms/VVideoPlayer.vue';
+import type { ProjectDocument } from '~~/prismicio-types'
+import { prismicDocumentRoute } from '~~/shared/prismic-routes'
+import VPrismicImg from '../atoms/VPrismicImg.vue'
+import VVideoPlayer from '../atoms/VVideoPlayer.vue'
 
 const props = defineProps<{
 	document: ProjectDocument

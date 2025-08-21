@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import type { VPrismicImageField } from '~/components/atoms/VPrismicImg.vue'
 import type { VWrapperProps } from '~/components/atoms/VWrapper.vue'
 import VPrismicLink from '../atoms/VPrismicLink.vue'
-import type { VPrismicImageField } from '~/components/atoms/VPrismicImg.vue'
 
 const props = defineProps<{
 	title: string | null
@@ -86,6 +86,7 @@ const rootClasses = computed(() => {
 .title {
     order: 2;
     margin-block: 10px;
+    color: var(--color-content);
 
     @at-root .root a#{&}::before {
         position: absolute;

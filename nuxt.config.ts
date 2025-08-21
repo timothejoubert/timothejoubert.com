@@ -1,22 +1,18 @@
-import { repositoryName } from './slicemachine.config.json'
-import { version } from './package.json'
 import svgLoader from 'vite-svg-loader'
-import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from './i18n/i18n'
-import { prismicDocumentRoutes } from './shared/prismic-routes'
 import { PREVIEW_PATH } from './app/constants/prismic-preview'
+import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from './i18n/i18n'
+import { version } from './package.json'
+import { prismicDocumentRoutes } from './shared/prismic-routes'
+import { repositoryName } from './slicemachine.config.json'
 
 // const isDev = process.env.NODE_ENV === 'development'
 const isProd = process.env.NUXT_PUBLIC_SITE_ENV === 'production'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	modules: [
-		'@nuxt/eslint',
-		'@nuxt/fonts',
-		'@nuxt/icon',
-		'@nuxt/image',
-		'@nuxtjs/i18n',
-		'@nuxtjs/prismic',
+	modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n', '@nuxtjs/prismic', '@vueuse/nuxt'],
+	plugins: [
+		'~/plugins/anchor-polyfill.client.ts',
 	],
 
 	components: ['~/components/atoms', '~/components/molecules', '~/components/ui', '~/components/organisms'],

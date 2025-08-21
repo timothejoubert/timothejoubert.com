@@ -1,37 +1,41 @@
-export const SETTINGS_TYPE = 'settings'
-export const MAIN_MENU_TYPE = 'main_menu'
+export const prismicDocumentType = {
+	SETTINGS: 'settings',
+	MAIN_MENU: 'main_menu',
+	HOME_PAGE: 'home_page',
+	DEFAULT_PAGE: 'page',
+	PROJECT_PAGE: 'project',
+	PROJECT_LISTING_PAGE: 'project_listing_page',
+	ARCHIVE_PAGE: 'archive',
+	ABOUT_PAGE: 'about',
+} as const
 
-export const HOME_PAGE_TYPE = 'home_page'
-export const ARCHIVE_TYPE = 'archive'
-export const ABOUT_TYPE = 'about'
-export const PROJECT_LISTING_TYPE = 'project_listing_page'
-export const PROJECT_TYPE = 'project'
+export type PrismicDocumentType = typeof prismicDocumentType[keyof typeof prismicDocumentType]
 
 export const prismicDocumentRoutes = [
 	{
 		name: 'index',
-		type: HOME_PAGE_TYPE,
+		type: prismicDocumentType.HOME_PAGE,
 		path: '/:lang?',
 	},
 	{
 		name: 'archive',
-		type: ARCHIVE_TYPE,
+		type: prismicDocumentType.ARCHIVE_PAGE,
 		path: '/:lang?/archive',
 	},
 	{
 		name: 'about',
-		type: ABOUT_TYPE,
+		type: prismicDocumentType.ABOUT_PAGE,
 		path: '/:lang?/a-propos',
 	},
 	{
 		name: 'projets',
-		type: PROJECT_LISTING_TYPE,
+		type: prismicDocumentType.PROJECT_LISTING_PAGE,
 		path: '/:lang?/projets',
 		alias: ['/:lang?', '/:lang?/projets', '/:lang?/projects'],
 	},
 	{
 		name: 'projet',
-		type: PROJECT_TYPE,
+		type: prismicDocumentType.PROJECT_PAGE,
 		path: '/:lang?/projets/:uid',
 		alias: ['/:lang?/projects/:uid'],
 	},
@@ -39,7 +43,6 @@ export const prismicDocumentRoutes = [
 
 export type PrismicDocumentRoutes = typeof prismicDocumentRoutes
 export type PrismicDocumentRoute = PrismicDocumentRoutes[number]
-export type PrismicDocumentType = PrismicDocumentRoute['type']
 
 export const prismicDocumentName = prismicDocumentRoutes.reduce((acc, route) => {
 	const type = route.type

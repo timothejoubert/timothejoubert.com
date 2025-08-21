@@ -1,7 +1,7 @@
-import type { AllDocumentTypes } from '~~/prismicio-types'
-import type { PrismicDocumentType } from '~/types/api'
-import { isDynamicDocument, isExistingDocumentType } from '~/utils/prismic/document-type'
 import { usePrismicPreviewRoute } from '~/composables/use-prismic-preview-route'
+import type { PrismicDocumentType } from '~/types/api'
+import type { AllDocumentTypes } from '~~/prismicio-types'
+import { isDynamicDocument, isExistingDocumentType } from '~~/shared/prismic-document'
 
 export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismicDocument: PrismicDocumentType | undefined) {
 	const route = useRoute()

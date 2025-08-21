@@ -4,8 +4,6 @@ import type { ProjectDocument } from '~~/prismicio-types'
 defineProps<{
 	projects: ProjectDocument[]
 }>()
-
-console.log('[VProjectListing]')
 </script>
 
 <template>
