@@ -41,8 +41,6 @@ const page = computed(() => props.document.data)
 .root {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-
-	// max-width: 100ch;
 }
 
 .content {

@@ -35,14 +35,11 @@ const links = [
 </template>
 
 <style lang="scss" module>
-.root {
-    interpolate-size: allow-keywords;
-}
-
 .list {
+    margin-block: initial;
     display: flex;
     background-color: var(--color-surface);
-    padding: 6px;
+    padding: 5px;
     border-radius: 9px;
     width: fit-content;
     isolation: isolate;
@@ -93,7 +90,7 @@ const links = [
         right: anchor(right);
         bottom: anchor(bottom);
 
-        transition-timing-function: ease(out-quad);
+        transition: 0.25s ease(out-quart);
     }
 }
 

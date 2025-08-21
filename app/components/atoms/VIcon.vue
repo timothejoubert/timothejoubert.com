@@ -20,7 +20,7 @@ defineProps({
 <template>
     <NuxtIcon
         aria-hidden="true"
-        :name="'icon:' + name"
+        :name="name"
         :size="size"
         :mode="mode"
     />

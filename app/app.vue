@@ -12,13 +12,12 @@ const displayProjects = computed(() => {
 
 <template>
     <div>
-        <VThemeSwitcher />
         <DevOnly>
             <VGridVisualizer />
         </DevOnly>
 
         <NuxtRouteAnnouncer />
-        <VNav :class="$style.nav" />
+        <VNavBar />
         <NuxtPage />
         <VProjectListing
             v-if="projects?.length && displayProjects"

@@ -37,26 +37,18 @@ const rootClasses = computed(() => {
         >
             {{ title }}
         </component>
-        <template v-if="tags && tags.length">
-            <TransitionGroup
-                :name="$style['tag-animation']"
-                tag="div"
-                :class="$style.tags"
-            >
-                <button
-                    v-for="(tag, i) in tags"
-                    :key="tag"
-                    theme="accent"
-                    tag="div"
-                    :filled="true"
-                    :style="{ '--tag-index': tags.length - i }"
-                    size="xs"
-                    :class="$style.tag"
-                >
-                    {{ tag }}
-                </button>
-            </TransitionGroup>
-        </template>
+        <div
+            v-if="tags && tags.length"
+            :class="$style.tags"
+        >
+            <VTag
+                v-for="tag in tags"
+                :key="tag"
+                :class="$style.tag"
+                :label="tag"
+                wrapper="h3"
+            />
+        </div>
         <span
             v-if="content"
             :class="$style.content"
@@ -100,6 +92,10 @@ const rootClasses = computed(() => {
     flex-wrap: wrap;
     order: 3;
     gap: 6px;
+}
+
+.tag {
+    margin-block: initial;
 }
 
 .content {

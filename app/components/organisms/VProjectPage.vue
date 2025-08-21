@@ -103,7 +103,8 @@ const tags = computed(() => {
     right: 0;
     width: 50vw;
     min-height: 100svh;
-    background-color: white;
+    padding-inline: var(--gutter);
+    background-color: var(--color-background);
 }
 
 .media {

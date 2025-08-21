@@ -19,7 +19,6 @@ export default defineNuxtConfig({
 	devtools: { enabled: true },
 
 	css: ['~~/app/assets/scss/main.scss'],
-
 	runtimeConfig: {
 		public: {
 			version,
@@ -105,6 +104,10 @@ export default defineNuxtConfig({
 		compilation: {
 			strictMessage: false, // Message can contains HTML tag
 		},
+	},
+	// https://nuxt.com/modules/icon
+	icon: {
+		componentName: 'NuxtIcon',
 	},
 
 	// https://image.nuxt.com/get-started/configuration
