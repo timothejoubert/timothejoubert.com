@@ -49,6 +49,7 @@ export const prismicDocumentRoute = prismicDocumentRoutes.reduce((acc, route) =>
 
 export function isPrismicDocumentRoute(route: object) {
 	const type = 'type' in route && typeof route.type === 'string' && route.type
+	const hasPath = 'path' in route && typeof route.path === 'string' && route.path
 
-	return prismicDocumentRoutes.some(r => r.type === type)
+	return hasPath && prismicDocumentRoutes.some(r => r.type === type)
 }

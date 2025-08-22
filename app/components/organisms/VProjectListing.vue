@@ -27,6 +27,7 @@ defineProps<{
     position: relative;
     margin-block: initial;
     padding-inline: initial;
+    row-gap: var(--gutter);
 }
 
 .item {
