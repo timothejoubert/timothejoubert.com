@@ -1,4 +1,4 @@
-import type { PrismicDocumentWithoutUID, PrismicDocument, PrismicDocumentWithUID } from '@prismicio/types'
+import type { PrismicDocument, PrismicDocumentWithoutUID, PrismicDocumentWithUID } from '@prismicio/types'
 import type { AllDocumentTypes, ProjectDocument, SettingsDocument } from '~~/prismicio-types'
 
 // Document data
@@ -15,10 +15,10 @@ export type DocumentWithUidType = ExtractDocumentType<DocumentWithUid>
 export type DocumentWithoutUidType = ExtractDocumentType<IntersectDocument<AllDocumentTypes, PrismicDocumentWithoutUID>>
 
 //  UTILS
-// type PickPrismicDocument<Type extends PrismicDocumentType> = Extract<ReachableDocument, { type: Type }>
+export type ExtractPrismicDocument<Type extends PrismicDocumentType> = Extract<AllDocumentTypes, { type: Type }>
 
 export type ExtractDocumentType<T extends PrismicDocument> = Pick<T, 'type'>['type']
-type IntersectDocument<T extends PrismicDocument, FilterType extends PrismicDocument> = T extends FilterType ? T : never
+export type IntersectDocument<T extends PrismicDocument, FilterType extends PrismicDocument> = T extends FilterType ? T : never
 type ExcludeDocument<T extends PrismicDocument, FilterType extends PrismicDocument> = T extends FilterType ? never : T
 
 // type T = prismic.PrismicDocumentWithoutUID

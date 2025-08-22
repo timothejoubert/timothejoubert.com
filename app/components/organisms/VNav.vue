@@ -1,10 +1,19 @@
 <script lang="ts" setup>
-const links = [
-	{ label: 'Home', url: '/' },
-	{ label: 'Archive', url: '/archive' },
-	{ label: 'About', url: '/a-propos' },
-	{ label: 'Other', url: '/other' },
-]
+import { prismicDocumentType } from '~~/shared/prismic-document'
+
+const { data } = await usePrismicFetchDocument(prismicDocumentType.MENU)
+
+const prismic = usePrismic()
+const links = computed(() => {
+	return data.value.data.links.filter((link) => {
+		return prismic.isFilled.link(link)
+	}).map((link) => {
+		return {
+			...prismic.asLinkAttrs(link),
+			label: link.text,
+		}
+	})
+})
 </script>
 
 <template>
@@ -15,16 +24,18 @@ const links = [
         <ul :class="$style.list">
             <li
                 v-for="link in links"
-                :key="link.url"
+                :key="link.href"
                 :class="$style.item"
             >
                 <slot
-                    :url="link.url"
+                    :url="link.href"
                     :label="link.label"
                 >
                     <VPrismicLink
-                        :to="link.url"
+                        :to="link.href"
                         :class="$style.link"
+                        :target="link.target"
+                        :rel="link.rel"
                     >
                         {{ link.label }}
                     </VPrismicLink>
@@ -66,10 +77,10 @@ const links = [
     &::after {
         content: "";
         position: absolute;
-        top: calc(anchor(bottom) - 3px);
-        left: calc(anchor(left) + 8px);
-        right: calc(anchor(right) + 8px);
-        bottom: calc(anchor(bottom));
+        top: calc(anchor(bottom) - 9px);
+        left: calc(anchor(left) + 14px);
+        right: calc(anchor(right) + 14px);
+        bottom: calc(anchor(bottom) + 6px);
         border-radius: 10px;
         z-index: -1;
         background: var(--color-background);

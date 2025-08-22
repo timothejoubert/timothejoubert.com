@@ -1,11 +1,10 @@
+import type { ContentRelationshipField } from '@prismicio/types'
 import type {
 	LocationAsRelativeRaw,
 	_RouteRecordBase,
 } from 'vue-router'
-import type { ContentRelationshipField } from '@prismicio/types'
 import type { PrismicReachableDocumentType, ReachableDocument } from '~/types/api'
-import type { PrismicDocumentRoute } from '~~/shared/prismic-routes'
-import { isPrismicDocumentRoute } from '~/utils/prismic/route-resolver'
+import { type PrismicDocumentRoute, isPrismicDocumentRoute } from '~~/shared/prismic-routes'
 
 export type PossibleRouteReference
     = string

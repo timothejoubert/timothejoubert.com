@@ -1,5 +1,26 @@
-import type { PrismicDocumentType } from '~/types/api'
-import { prismicDocumentRoutes, prismicDocumentType } from '~~/shared/prismic-routes'
+import { prismicDocumentRoutes } from '~~/shared/prismic-routes'
+
+export const prismicDocumentCustomType = {
+	SETTINGS: 'settings',
+	MENU: 'menu',
+} as const
+
+const prismicDocumentPage = {
+	HOME_PAGE: 'home_page',
+	PROJECT_PAGE: 'project',
+	PROJECT_LISTING_PAGE: 'project_listing_page',
+	ARCHIVE_PAGE: 'archive',
+	ABOUT_PAGE: 'about',
+	// DEFAULT_PAGE: 'page',
+} as const
+
+export const prismicDocumentType = {
+	...prismicDocumentPage,
+	...prismicDocumentCustomType,
+} as const
+
+export type PrismicDocumentPageType = typeof prismicDocumentPage[keyof typeof prismicDocumentPage]
+export type PrismicDocumentType = typeof prismicDocumentType[keyof typeof prismicDocumentType]
 
 export function isExistingDocumentType(type: string) {
 	return !!prismicDocumentRoutes.find(route => route.type === type)

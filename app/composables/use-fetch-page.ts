@@ -1,7 +1,7 @@
 import { getDocumentTypeByUrl } from '~/utils/prismic/route-resolver'
-import type { PrismicDocumentType, ReachableDocument } from '~/types/api'
+import type { PrismicDocumentPageType } from '~~/shared/prismic-document'
 
-export async function useFetchPage<T extends ReachableDocument>(type: PrismicDocumentType | undefined) {
+export async function useFetchPage<T extends PrismicDocumentPageType>(type: PrismicDocumentPageType | undefined) {
 	const route = useRoute()
 	const documentType = type || getDocumentTypeByUrl(route.path)
 	const { isPreview } = usePrismicPreviewRoute()

@@ -1,9 +1,7 @@
-import { usePrismicPreviewRoute } from '~/composables/use-prismic-preview-route'
-import type { PrismicDocumentType } from '~/types/api'
-import type { AllDocumentTypes } from '~~/prismicio-types'
-import { isDynamicDocument, isExistingDocumentType } from '~~/shared/prismic-document'
+import type { ExtractPrismicDocument } from '~/types/api'
+import { isDynamicDocument, type PrismicDocumentType } from '~~/shared/prismic-document'
 
-export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismicDocument: PrismicDocumentType | undefined) {
+export async function usePrismicFetchDocument<Type extends PrismicDocumentType = PrismicDocumentType>(prismicDocument: Type | undefined) {
 	const route = useRoute()
 	const routeUid = route.params?.uid || ''
 	const uid = Array.isArray(routeUid) ? routeUid.at(-1) : routeUid // get the last uid when route has subPage
@@ -28,7 +26,7 @@ export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismi
 			else if (uid && prismicDocument && isDynamicDocument(prismicDocument)) {
 				return await prismicClient.getByUID(prismicDocument, uid, prismicFetchOptions)
 			}
-			else if (prismicDocument && isExistingDocumentType(prismicDocument)) {
+			else if (prismicDocument) {
 				return await prismicClient.getSingle(prismicDocument, prismicFetchOptions)
 			}
 		}
@@ -43,7 +41,7 @@ export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismi
 	})
 
 	return {
-		data: computed(() => data.value as T),
+		data: computed(() => data.value as ExtractPrismicDocument<Type>),
 		error,
 	}
 }

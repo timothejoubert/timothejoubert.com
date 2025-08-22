@@ -1,15 +1,4 @@
-export const prismicDocumentType = {
-	SETTINGS: 'settings',
-	MAIN_MENU: 'main_menu',
-	HOME_PAGE: 'home_page',
-	DEFAULT_PAGE: 'page',
-	PROJECT_PAGE: 'project',
-	PROJECT_LISTING_PAGE: 'project_listing_page',
-	ARCHIVE_PAGE: 'archive',
-	ABOUT_PAGE: 'about',
-} as const
-
-export type PrismicDocumentType = typeof prismicDocumentType[keyof typeof prismicDocumentType]
+import { prismicDocumentType, type PrismicDocumentType } from '~~/shared/prismic-document'
 
 export const prismicDocumentRoutes = [
 	{
@@ -57,3 +46,9 @@ export const prismicDocumentRoute = prismicDocumentRoutes.reduce((acc, route) =>
 
 	return acc
 }, {} as Record<PrismicDocumentType, PrismicDocumentRoute>)
+
+export function isPrismicDocumentRoute(route: object) {
+	const type = 'type' in route && typeof route.type === 'string' && route.type
+
+	return prismicDocumentRoutes.some(r => r.type === type)
+}
