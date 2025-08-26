@@ -1,4 +1,4 @@
-import { prismicDocumentRoutes } from '~~/shared/prismic-routes'
+import { prismicDocumentRoutes } from './prismic-routes'
 
 export const prismicDocumentCustomType = {
 	SETTINGS: 'settings',

@@ -1,4 +1,7 @@
 {
   "error_page.not_found_title": "Page introuvable",
-  "error_page.fallback_title": "Une erreur est survenue"
+  "error_page.fallback_title": "Une erreur est survenue",
+  "main_nav.aria_label": "Navigation principale",
+  "show_setting.aria_label": "Afficher / cacher les paramètres d'interface visuelle",
+  "back_to_projects.aria_label": "Retour a tous les projets"
 }

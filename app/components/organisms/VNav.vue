@@ -18,7 +18,7 @@ const links = computed(() => {
 
 <template>
     <nav
-        :aria-label="$t('main_nav')"
+        :aria-label="$t('main_nav.aria_label')"
         :class="$style.root"
     >
         <ul :class="$style.list">
@@ -62,25 +62,21 @@ const links = computed(() => {
         corner-shape: squircle;
     }
 
+    &:not(:has(li:hover)) li:has(a[aria-current="page"]) {
+        anchor-name: --hovered-link;
+    }
+
     li:hover {
-        anchor-name: --hovered-link;
-    }
-
-    li:has(a[aria-current="page"]) {
-        anchor-name: --hovered-link;
-    }
-
-    &:has(a[aria-current="page"]) {
         anchor-name: --hovered-link;
     }
 
     &::after {
         content: "";
         position: absolute;
-        top: calc(anchor(bottom) - 9px);
+        top: calc(anchor(bottom) - 6px);
         left: calc(anchor(left) + 14px);
         right: calc(anchor(right) + 14px);
-        bottom: calc(anchor(bottom) + 6px);
+        bottom: calc(anchor(bottom) + 3px);
         border-radius: 10px;
         z-index: -1;
         background: var(--color-background);

@@ -22,7 +22,6 @@ if (import.meta.server) {
 
 			return acc
 		}, '')
-	console.log(content)
 
 	useHead({
 		style: [{ innerHTML: ':root{ ' + content + ' }' }],

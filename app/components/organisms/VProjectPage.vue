@@ -37,19 +37,31 @@ const tags = computed(() => {
 
 <template>
     <div :class="$style.root">
-        <header>
-            <h1>Project page | {{ document.data.title }}</h1>
-            <VPrismicLink :to="prismicDocumentRoute.home_page">
-                Retour
+        <div :class="$style.head">
+            <h1 :class="$style.title">
+                {{ document.data.title }}
+            </h1>
+            <VPrismicLink
+                :to="prismicDocumentRoute.home_page"
+                :class="$style.back"
+                :aria-label="$t('back_to_projects.aria_label')"
+            >
+                <VIcon
+                    name="uil:corner-up-left-alt"
+                    size="1.6em"
+                />
             </VPrismicLink>
-            <template v-if="tags.length">
-                <button
-                    v-for="(tag, i) in tags"
-                    :key="tag || i"
-                >
-                    {{ tag }}
-                </button>
-            </template>
+        </div>
+        <hr :class="$style.hr">
+        <div
+            v-if="tags.length"
+            :class="$style.tags"
+        >
+            <VTag
+                v-for="(tag, i) in tags"
+                :key="tag || i"
+                :label="tag"
+            />
             <VTime
                 :date="project.date"
                 format="full"
@@ -57,15 +69,17 @@ const tags = computed(() => {
             <VText
                 v-if="project.short_description"
                 :content="project.short_description"
+                :class="$style['short-description']"
             />
             <VText
                 v-if="project.content"
                 :content="project.content"
+                :class="$style.description"
             />
             <VPrismicImg
                 :field="project.thumbnail"
             />
-        </header>
+        </div>
 
         <main>
             <div
@@ -97,14 +111,71 @@ const tags = computed(() => {
 
 <style lang="scss" module>
 .root {
-    position: absolute;
-    z-index: 11;
-    top: 0;
-    right: 0;
-    width: 50vw;
-    min-height: 100svh;
-    padding-inline: var(--gutter);
-    background-color: var(--color-background);
+    // position: absolute;
+    // z-index: 11;
+    // top: 0;
+    // right: 0;
+    // width: 50vw;
+    position: relative;
+    min-height: var(--app-max-height);
+    max-height: var(--app-max-height);
+    // padding-inline: var(--gutter);
+    // padding: var(--gutter) 0 var(--gutter) var(--gutter);
+    border-radius: 8px;
+    overflow-y: auto;
+    background-color: var(--color-surface);
+    border-left: 1PX solid color-mix(in hsl, var(--color-background), transparent 50%);
+    // scrollbar-width: none;
+
+    // isolation: isolate;
+    // scrollbar-gutter: stable;
+
+    // &::before {
+    //     position: absolute;
+    //     content: '';
+    //     inset: 0 0 0 -50vw;
+    //     background-color: rgba(0, 0, 0, 0.3);
+    //     z-index: -1;
+    // }
+}
+
+.head {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px;
+    gap: 12px;
+    background-color: color-mix(in hsl, var(--color-background), transparent 50%);
+}
+
+.title {
+    margin-block: initial;
+    font-size: 22px;
+}
+
+.back {
+    color: inherit;
+}
+
+.hr {
+    border: 0;
+    // border-top: 1px solid red;
+    width: 100%;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.short-description {
+    margin-top: 16px;
+}
+
+.description {
+    margin-top: 16px;
 }
 
 .media {

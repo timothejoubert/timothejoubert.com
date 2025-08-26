@@ -8,6 +8,7 @@ defineProps<{
     <div
         v-show="expanded"
         :class="[$style.content, expanded && $style['content--visible']]"
+        :aria-label="$t('show_setting.aria_label')"
     >
         <div :class="$style.inner">
             <VThemeSwitcher />

@@ -39,7 +39,7 @@ defineProps<{
     }
 
     @include media('>=lg') {
-        grid-column: auto / span 6;
+        grid-column: auto / span 3;
     }
 }
 </style>

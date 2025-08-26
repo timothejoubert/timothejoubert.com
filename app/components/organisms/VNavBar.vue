@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const expanded = ref(true)
+const expanded = ref(false)
 const toggle = () => expanded.value = !expanded.value
 const id = 'setting-modal'
 </script>
@@ -27,13 +27,8 @@ const id = 'setting-modal'
 
 <style lang="scss" module>
 .root {
-    position: fixed;
 	display: flex;
 	gap: 20px;
-    z-index: 101;
-    bottom: 24px;
-    left: 50%;
-    translate: -50%;
 }
 
 .button {

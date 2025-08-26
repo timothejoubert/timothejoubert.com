@@ -1,4 +1,4 @@
-import { prismicDocumentType, type PrismicDocumentType } from '~~/shared/prismic-document'
+import { prismicDocumentType, type PrismicDocumentType } from './prismic-document'
 
 export const prismicDocumentRoutes = [
 	{

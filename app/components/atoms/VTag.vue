@@ -21,5 +21,7 @@ defineProps<{
 	background-color: var(--color-content);
 	color: var(--color-background);
 	border-radius: 50vmax;
+    font-size: 12px;
+    font-weight: 400;
 }
 </style>

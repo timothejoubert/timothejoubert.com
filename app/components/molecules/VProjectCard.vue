@@ -73,6 +73,7 @@ $card-padding: 16px;
     border-radius: 0 42px 0 0;
     overflow: hidden;
     padding: $card-padding;
+    isolation: isolate;
 
     &::before {
         position: absolute;
@@ -121,7 +122,6 @@ $card-padding: 16px;
 
 .tag {
     margin: initial;
-    font-size: 13px;
     translate: calc(-100% - 20px) 0;
     transition: translate 0.3s calc(var(--tag-index) * 40ms) ease(out-quart);
 
