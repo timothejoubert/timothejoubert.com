@@ -1,9 +1,15 @@
 <script lang="ts" setup>
+import type { HomePageDocument } from '~~/prismicio-types'
+
+defineProps<{
+	document: HomePageDocument
+}>()
+
 const { data: projects } = await usePrismicFetchProjects(true)
 </script>
 
 <template>
-    <LazyVProjectList
+    <VProjectList
         v-if="projects?.length"
         :projects="projects"
     />

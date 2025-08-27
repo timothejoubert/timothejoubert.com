@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { KeyTextField, RichTextField, RTTextNodeBase } from '@prismicio/types'
+import type { KeyTextField, RichTextField } from '@prismicio/types'
 import type { VueRichTextSerializer } from '@prismicio/vue'
 // import { RichTextNodeType } from '@prismicio/types'
 
@@ -33,18 +33,17 @@ const richTextFilled = computed(() => {
 })
 
 const flatRichTextContent = computed(() => {
-	if (!props.tag || !richTextFilled.value?.length) return
+	if (richTextFilled.value?.length === 1 && !richTextFilled.value[0]?.spans.length) {
+		return (richTextFilled.value?.[0] as { text: string })?.text
+	}
 
-	const spans = (richTextFilled.value?.[0] as RTTextNodeBase)?.spans || []
-	if (richTextFilled.value?.length > 1 || spans.length > 0) return
-
-	return (richTextFilled.value?.[0] as { text: string })?.text
+	return undefined
 })
 </script>
 
 <template>
     <component
-        :is="tag || 'div'"
+        :is="tag || 'p'"
         v-if="isString || hasSlot || flatRichTextContent"
         :class="$style.root"
     >

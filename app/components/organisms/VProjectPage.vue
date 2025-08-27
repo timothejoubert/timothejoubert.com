@@ -36,7 +36,7 @@ const tags = computed(() => {
 </script>
 
 <template>
-    <div :class="$style.root">
+    <main :class="$style.root">
         <div :class="$style.head">
             <h1 :class="$style.title">
                 {{ document.data.title }}
@@ -52,122 +52,107 @@ const tags = computed(() => {
                 />
             </VPrismicLink>
         </div>
-        <hr :class="$style.hr">
         <div
-            v-if="tags.length"
-            :class="$style.tags"
+            :class="$style.attributes"
         >
-            <VTag
-                v-for="(tag, i) in tags"
-                :key="tag || i"
-                :label="tag"
-            />
+            <template v-if="tags.length">
+                <VTag
+                    v-for="(tag, i) in tags"
+                    :key="tag || i"
+                    :label="tag"
+                />
+            </template>
             <VTime
                 :date="project.date"
                 format="full"
             />
-            <VText
-                v-if="project.short_description"
-                :content="project.short_description"
-                :class="$style['short-description']"
-            />
-            <VText
-                v-if="project.content"
-                :content="project.content"
-                :class="$style.description"
-            />
-            <VPrismicImg
-                :field="project.thumbnail"
-            />
         </div>
+        <VText
+            v-if="project.short_description"
+            :content="project.short_description"
+            :class="$style['short-description']"
+        />
+        <VText
+            v-if="project.content"
+            :content="project.content"
+            :class="$style.description"
+        />
+        <VPrismicImg
+            :field="project.thumbnail"
+        />
 
-        <main>
+        <div
+            v-if="medias.length"
+            :class="$style.medias"
+        >
             <div
-                v-if="medias.length"
-                :class="$style.medias"
+                v-for="(mediaGroup, i) in medias"
+                :key="`media-${i}`"
+                :class="$style.media"
             >
-                <div
-                    v-for="(mediaGroup, i) in medias"
-                    :key="`media-${i}`"
-                    :class="$style.media"
-                >
-                    <VVideoPlayer
-                        v-if="mediaGroup.type === 'video'"
-                        autoplay
-                        muted
-                        :controls="false"
-                        loop
-                        :src="mediaGroup.media.url"
-                    />
-                    <VPrismicImg
-                        v-else
-                        :field="mediaGroup.media"
-                    />
-                </div>
+                <VVideoPlayer
+                    v-if="mediaGroup.type === 'video'"
+                    autoplay
+                    muted
+                    :controls="false"
+                    loop
+                    :src="mediaGroup.media.url"
+                />
+                <VPrismicImg
+                    v-else
+                    :field="mediaGroup.media"
+                />
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
 </template>
 
 <style lang="scss" module>
 .root {
-    // position: absolute;
-    // z-index: 11;
-    // top: 0;
-    // right: 0;
-    // width: 50vw;
-    position: relative;
-    min-height: var(--app-max-height);
-    max-height: var(--app-max-height);
-    // padding-inline: var(--gutter);
-    // padding: var(--gutter) 0 var(--gutter) var(--gutter);
-    border-radius: 8px;
-    overflow-y: auto;
-    background-color: var(--color-surface);
+    --v-project-page-padding-inline: 16px;
+
+    margin-top: var(--app-padding);
+    padding-inline: var(--v-project-page-padding-inline);
+    min-height: var(--app-inner-max-height);
+    border-radius: 8px 0 0 8px;
+    background-color: var(--color-background);
     border-left: 1PX solid color-mix(in hsl, var(--color-background), transparent 50%);
-    // scrollbar-width: none;
-
-    // isolation: isolate;
-    // scrollbar-gutter: stable;
-
-    // &::before {
-    //     position: absolute;
-    //     content: '';
-    //     inset: 0 0 0 -50vw;
-    //     background-color: rgba(0, 0, 0, 0.3);
-    //     z-index: -1;
-    // }
+    padding-bottom: 200px;
+    box-shadow: -13px -16px 16px 12px  color-mix(in hsl, var(--color-surface), transparent 30%);
+    z-index: 101;
+    overflow: hidden;
 }
 
 .head {
+    position: relative;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: flex-end;
-    padding: 8px;
+    padding-block: 4px;
+    padding-inline: var(--v-project-page-padding-inline);
     gap: 12px;
-    background-color: color-mix(in hsl, var(--color-background), transparent 50%);
+    left: calc(var(--v-project-page-padding-inline) * -1);
+    width: calc(100% + var(--v-project-page-padding-inline) * 2);
+    // background-color: color-mix(in hsl, var(--color-background), transparent 50%);
+    background-color: var(--color-accent);
+    color: var(--color-surface);
 }
 
 .title {
     margin-block: initial;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .back {
     color: inherit;
 }
 
-.hr {
-    border: 0;
-    // border-top: 1px solid red;
-    width: 100%;
-}
-
-.tags {
+.attributes {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
+    margin-top: 16px;
 }
 
 .short-description {
