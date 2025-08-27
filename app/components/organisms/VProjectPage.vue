@@ -111,37 +111,38 @@ const tags = computed(() => {
 .root {
     --v-project-page-padding-inline: 16px;
 
-    margin-top: var(--app-padding);
-    padding-inline: var(--v-project-page-padding-inline);
-    min-height: var(--app-inner-max-height);
-    border-radius: 8px 0 0 8px;
-    background-color: var(--color-background);
-    border-left: 1PX solid color-mix(in hsl, var(--color-background), transparent 50%);
-    padding-bottom: 200px;
-    box-shadow: -13px -16px 16px 12px  color-mix(in hsl, var(--color-surface), transparent 30%);
     z-index: 101;
     overflow: hidden;
+    min-height: var(--app-inner-max-height);
+    padding-bottom: 200px;
+    border-radius: 8px 0 0 8px;
+    border-left: 1PX solid color-mix(in hsl, var(--color-background), transparent 50%);
+    margin-top: var(--app-padding);
+    background-color: var(--color-background);
+    box-shadow: -13px -16px 16px 12px  color-mix(in hsl, var(--color-surface), transparent 30%);
+    padding-inline: var(--v-project-page-padding-inline);
 }
 
 .head {
     position: relative;
+    left: calc(var(--v-project-page-padding-inline) * -1);
     display: flex;
+    width: calc(100% + var(--v-project-page-padding-inline) * 2);
     flex-direction: row-reverse;
     align-items: center;
     justify-content: flex-end;
-    padding-block: 4px;
-    padding-inline: var(--v-project-page-padding-inline);
-    gap: 12px;
-    left: calc(var(--v-project-page-padding-inline) * -1);
-    width: calc(100% + var(--v-project-page-padding-inline) * 2);
+
     // background-color: color-mix(in hsl, var(--color-background), transparent 50%);
     background-color: var(--color-accent);
     color: var(--color-surface);
+    gap: 12px;
+    padding-block: 4px;
+    padding-inline: var(--v-project-page-padding-inline);
 }
 
 .title {
-    margin-block: initial;
     font-size: 18px;
+    margin-block: initial;
 }
 
 .back {
@@ -151,8 +152,8 @@ const tags = computed(() => {
 .attributes {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
     margin-top: 16px;
+    gap: 16px;
 }
 
 .short-description {

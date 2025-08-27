@@ -40,7 +40,6 @@ onBeforeUnmount(() => {
     grid-template-rows: 1fr;
     margin-block: initial;
     pointer-events: none;
-    pointer-events: none;
 }
 
 .item {

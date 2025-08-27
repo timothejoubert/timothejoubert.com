@@ -2,8 +2,8 @@
 @use "variables/themes" as *;
 
 :root {
+    background-color: var(--color-background);
     // @include theme($default-theme); // Set in VThmeSwitcher
 
     color: var(--color-content);
-    background-color: var(--color-background);
 }

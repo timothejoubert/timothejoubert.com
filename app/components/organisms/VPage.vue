@@ -10,9 +10,9 @@
 
 <style lang="scss" module>
 .root {
-	margin: calc(var(--gutter));
 	padding: calc(var(--gutter));
 	border-radius: 10px;
+	margin: calc(var(--gutter));
 	background-color: var(--color-surface);
 }
 </style>

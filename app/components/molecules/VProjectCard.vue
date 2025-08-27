@@ -68,22 +68,22 @@ $card-padding: 16px;
 .root {
     position: relative;
     display: flex;
-    flex-direction: column;
-    aspect-ratio: 1;
-    border-radius: 0 42px 0 0;
     overflow: hidden;
+    flex-direction: column;
     padding: $card-padding;
+    border-radius: 0 42px 0 0;
+    aspect-ratio: 1;
     isolation: isolate;
 
     &::before {
         position: absolute;
         z-index: 1;
-        background: linear-gradient(20deg, rgba(0, 0, 0, 0.9) 10%, rgba(0, 0, 0, 0.15) 100%);
+        background: linear-gradient(20deg, rgb(0, 0, 0, 90%) 10%, rgb(0, 0, 0, 15%) 100%);
         content: '';
         inset: 0;
         opacity: 1;
-        transition: opacity 0.4s ease(out-quad);
         pointer-events: none;
+        transition: opacity 0.4s ease(out-quad);
     }
 
     @media (hover: hover) {
@@ -94,13 +94,13 @@ $card-padding: 16px;
 }
 
 .title {
-    order: 2;
-    color: var(--color-content);
-    text-decoration: none;
-    margin-top: 12px;
     z-index: 1;
+    order: 2;
+    margin-top: 12px;
+    color: var(--color-content);
     font-size: 16px;
     font-weight: 700;
+    text-decoration: none;
 
     @at-root .root a#{&}::before {
         position: absolute;
@@ -110,20 +110,19 @@ $card-padding: 16px;
 }
 
 .tags {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 6px;
-    order: 1;
     z-index: 1;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    order: 1;
+    margin-top: auto;
+    gap: 6px;
 }
 
 .tag {
     margin: initial;
-    translate: calc(-100% - 20px) 0;
     transition: translate 0.3s calc(var(--tag-index) * 40ms) ease(out-quart);
+    translate: calc(-100% - 20px) 0;
 
     @media (hover: hover) {
         .root:hover & {
@@ -134,10 +133,9 @@ $card-padding: 16px;
 
 .img {
     position: absolute;
-    inset: 0;
     z-index: -1;
-
     filter: grayscale(1);
+    inset: 0;
     transition-duration: 0.3s;
     transition-property: filter, scale;
     transition-timing-function: ease(out-quart);

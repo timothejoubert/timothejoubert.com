@@ -45,10 +45,10 @@ const page = computed(() => props.document.data)
 
 .content {
 	margin-top: 200px;
+    font-weight: 400;
 	grid-column: 1 / -1;
 	margin-inline: auto;
 	text-align: center;
-    font-weight: 400;
 }
 
 .section {

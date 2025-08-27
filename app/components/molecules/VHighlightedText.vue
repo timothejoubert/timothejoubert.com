@@ -45,6 +45,7 @@ defineProps<{
     display: inline;
     padding: 1px 7px 3px;
     border-radius: 3px;
+
     // background-color: var(--color-surface);
     // color: var(--color-content);
     background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);

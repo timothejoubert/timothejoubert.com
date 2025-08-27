@@ -43,18 +43,16 @@ const displayProjects = computed(() => {
 
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: min-content;
-
     min-height: var(--app-max-height);
     max-height: var(--app-max-height);
-    overflow-y: auto;
 
-    margin: calc(var(--app-padding));
 	// padding-block: calc(var(--app-padding));
 	border-radius: 8px;
+    margin: calc(var(--app-padding));
 	background-color: var(--color-surface);
-
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content;
+    overflow-y: auto;
     scrollbar-width: none;
 
     --overlay-color: red;
@@ -62,22 +60,23 @@ const displayProjects = computed(() => {
     --overlay-height: 40px;
 
     &::after {
-        border-radius: inherit;
         position: fixed;
-        content: '';
+        z-index: 11;
+        border-radius: inherit;
         background: linear-gradient(to bottom,
             color-mix(in hsl, var(--overlay-color), transparent 10%) 10px,
             color-mix(in hsl, var(--overlay-color), transparent 100%) calc(var(--overlay-height)),
             color-mix(in hsl, var(--overlay-color), transparent 100%) calc(100% - var(--overlay-height)),
             color-mix(in hsl, var(--overlay-color), transparent 10%) calc(100% - 10px)
         );
+        content: '';
+
         // background: linear-gradient(to bottom,
         //     color-mix(in hsl, var(--overlay-color), transparent 100%) calc(var(--overlay-height)),
         //     color-mix(in hsl, var(--overlay-color), transparent 100%) calc(100% - var(--overlay-height)),
         //     color-mix(in hsl, var(--overlay-color), transparent 10%) calc(100% - 10px)
         // );
         inset: calc(var(--app-padding));
-        z-index: 11;
         pointer-events: none;
     }
 }
@@ -93,18 +92,17 @@ const displayProjects = computed(() => {
 .nav {
     position: fixed;
     z-index: 1001;
-    align-self: flex-end;
-    justify-self: center;
     bottom: calc(var(--app-padding) + 12px);
+    place-self: flex-end center;
 }
 
 .page {
     grid-column: 1 / -1;
 
     &--project {
+        align-self: center;
         grid-column: 2 / -1;
         grid-row: 1;
-        align-self: center;
     }
 }
 

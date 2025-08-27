@@ -49,15 +49,14 @@ const links = computed(() => {
 
 <style lang="scss" module>
 .list {
-    margin-block: initial;
     display: flex;
-    background-color: var(--color-surface);
+    width: fit-content;
     padding: 5px;
     border-radius: 9px;
-    width: fit-content;
-    isolation: isolate;
-
     anchor-name: --hovered-link;
+    background-color: var(--color-surface);
+    isolation: isolate;
+    margin-block: initial;
 
     @supports (corner-shape: squircle) {
         border-radius: 32px;
@@ -73,18 +72,13 @@ const links = computed(() => {
     }
 
     &::after {
-        content: "";
         position: absolute;
-        top: calc(anchor(bottom) - 6px);
-        left: calc(anchor(left) + 14px);
-        right: calc(anchor(right) + 14px);
-        bottom: calc(anchor(bottom) + 3px);
-        border-radius: 10px;
         z-index: -1;
+        inset: calc(anchor(bottom) - 6px) calc(anchor(right) + 14px) calc(anchor(bottom) + 3px) calc(anchor(left) + 14px);
+        border-radius: 10px;
         background: var(--color-background);
-
+        content: "";
         position-anchor: --hovered-link;
-
         transition: 0.3s ease(in-out-quad);
 
         @supports (corner-shape: squircle) {
@@ -94,11 +88,7 @@ const links = computed(() => {
     }
 
     &:has(a:hover)::after {
-        top: anchor(top);
-        left: anchor(left);
-        right: anchor(right);
-        bottom: anchor(bottom);
-
+        inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
         transition: 0.25s ease(out-quart);
     }
 }
@@ -109,7 +99,7 @@ const links = computed(() => {
 
 .link {
     display: block;
-    padding: 6px 16px 8px 16px;
+    padding: 6px 16px 8px;
     color: var(--color-content);
     text-decoration: none;
 }

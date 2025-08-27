@@ -33,22 +33,22 @@ const id = 'setting-modal'
 
 .button {
 	position: relative;
-	color: var(--color-content);
-	background-color: var(--color-surface);
 	border: none;
-	cursor: pointer;
-	padding-inline: 16px;
 	border-radius: 9px;
 	anchor-name: --button-setting-anchor;
+	background-color: var(--color-surface);
+	color: var(--color-content);
+	cursor: pointer;
+	padding-inline: 16px;
 
 	&::before {
 		position: absolute;
-		inset: 5px;
-		content: '';
 		background-color: var(--color-background);
+		content: '';
+		inset: 5px;
 		scale: 0 1;
-		transition: scale 0.25s ease(out-quart);
 		transform-origin: left;
+		transition: scale 0.25s ease(out-quart);
 
 		@supports (corner-shape: squircle) {
 			border-radius: 42px;

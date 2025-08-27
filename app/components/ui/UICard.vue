@@ -77,8 +77,8 @@ const rootClasses = computed(() => {
 
 .title {
     order: 2;
-    margin-block: 10px;
     color: var(--color-content);
+    margin-block: 10px;
 
     @at-root .root a#{&}::before {
         position: absolute;

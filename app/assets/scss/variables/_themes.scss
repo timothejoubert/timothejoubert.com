@@ -16,7 +16,7 @@ $themes: (
     ),
     blue: (
         color-background: #040915,
-        color-surface: #000000,
+        color-surface: #000,
         color-content: #b8bdd6,
         color-accent: #f09042,
     ),
@@ -27,5 +27,4 @@ $themes: (
         color-accent: #ff5252,
     )
 );
-
 $default-theme: main;
