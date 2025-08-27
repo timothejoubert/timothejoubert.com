@@ -55,21 +55,18 @@ watch(theme, setCssVars)
         <legend>Select a color theme</legend>
 
         <div
-            v-for="theme in themeInputs"
-            :key="theme.id"
+            v-for="themeInput in themeInputs"
+            :key="themeInput.id"
         >
             <input
-                :id="theme.id"
+                :id="themeInput.id"
                 type="radio"
-                :name="theme.name"
-                :value="theme.value"
-                :checked="currentTheme === theme.value"
+                :name="themeInput.name"
+                :value="themeInput.value"
+                :checked="themeInput.value === currentTheme"
                 @change="onChange"
             >
-            <label :for="theme.id">{{ theme.value }}</label>
+            <label :for="themeInput.id">{{ themeInput.value }}</label>
         </div>
     </fieldset>
 </template>
-
-<style lang="scss" module>
-</style>

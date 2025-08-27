@@ -12,7 +12,7 @@
         @each $key, $value in $theme {
             @if not $match {
                 --#{$key}: #{$value};
-            } @else if meta.type-of($match)==list {
+            } @else if meta.type-of($match) == list {
                 @each $match-value in $match {
                     @if string.index($key, $match-value) {
                         --#{$key}: #{$value};

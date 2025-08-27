@@ -3,7 +3,7 @@
 
 :root {
     background-color: var(--color-background);
-    // @include theme($default-theme); // Set in VThmeSwitcher
-
     color: var(--color-content);
+
+    // @include theme($default-theme); // Set in VThmeSwitcher
 }

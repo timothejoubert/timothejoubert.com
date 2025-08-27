@@ -18,6 +18,10 @@ export default {
 		// use scss/function-no-unknown
 		// @see https://github.com/stylelint-scss/stylelint-scss/blob/master/src/rules/function-no-unknown/README.md
 		'function-no-unknown': null,
+		'property-no-unknown': [
+			true,
+			{ ignoreProperties: ['corner-shape'] },
+		],
 		'scss/function-no-unknown': [
 			true,
 			{

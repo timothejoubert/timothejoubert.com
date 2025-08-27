@@ -55,8 +55,9 @@ const displayProjects = computed(() => {
     overflow-y: auto;
     scrollbar-width: none;
 
-    --overlay-color: red;
     --overlay-color: var(--color-surface);
+
+    // --overlay-color: red;
     --overlay-height: 40px;
 
     &::after {

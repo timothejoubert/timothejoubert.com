@@ -74,10 +74,10 @@ const links = computed(() => {
     &::after {
         position: absolute;
         z-index: -1;
-        inset: calc(anchor(bottom) - 6px) calc(anchor(right) + 14px) calc(anchor(bottom) + 3px) calc(anchor(left) + 14px);
         border-radius: 10px;
         background: var(--color-background);
         content: "";
+        inset: calc(anchor(bottom) - 6px) calc(anchor(right) + 14px) calc(anchor(bottom) + 3px) calc(anchor(left) + 14px);
         position-anchor: --hovered-link;
         transition: 0.3s ease(in-out-quad);
 

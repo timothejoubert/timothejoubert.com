@@ -32,6 +32,6 @@ const { data: projects } = await usePrismicFetchProjects(false, {
         </ul>
     </div>
 </template>
-
+<!--
 <style lang="scss" module>
-</style>
+</style> -->
