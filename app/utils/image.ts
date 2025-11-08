@@ -1,0 +1,20 @@
+// Props inspired by NuxtImg
+export const imageProps = {
+	src: { type: String, required: false },
+	format: { type: String, required: false },
+	quality: { type: [String, Number] as PropType<string | number>, required: false },
+	background: { type: String, required: false },
+	fit: { type: String, required: false },
+	provider: { type: String as PropType<string>, required: false },
+	sizes: { type: [String, Object] as PropType<string | Record<string, string>>, required: false },
+	densities: { type: String, required: false },
+	preload: { type: [Boolean, Object] as PropType<boolean | { fetchPriority?: 'auto' | 'high' | 'low' }>, required: false },
+	width: { type: [String, Number] as PropType<string | number>, required: false },
+	height: { type: [String, Number] as PropType<string | number>, required: false },
+	alt: { type: String, required: false },
+	crossorigin: { type: [String, Boolean] as PropType<'' | 'anonymous' | 'use-credentials' | boolean>, required: false },
+	nonce: { type: String, required: false },
+	loading: { type: String as PropType<'lazy' | 'eager'>, default: 'lazy' },
+	decoding: { type: String as PropType<'async' | 'auto' | 'sync'>, required: false },
+	longdesc: { type: String, required: false },
+}

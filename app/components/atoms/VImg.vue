@@ -1,27 +1,27 @@
 <script lang="ts">
-import { imgProps } from '#image/components/NuxtImg.vue'
-import { getInt, parseSize } from '#image/utils'
 import type { ImageOptions } from '@nuxt/image'
-import type { ExtractPropTypes } from 'vue'
 
 export const vImgProps = {
-	...imgProps,
-	loading: {
-		type: imgProps.loading.type,
-		// overrides NuxtImg default value
-		default: 'lazy',
+	...imageProps,
+	// @nuxt/image options
+	preset: {
+		type: String,
+		required: false,
+	},
+	placeholder: {
+		type: [Boolean, String, Number, Array] as PropType<boolean | string | number | [number, number?, number?, number?]>,
+		required: false,
+	},
+	modifiers: {
+		type: Object as PropType<ImageOptions['modifiers']>,
+		required: false,
 	},
 }
 
-export type VImgProps = ExtractPropTypes<typeof vImgProps>
-
 export default defineComponent({
-	props: {
-		...vImgProps,
-	},
+	props: vImgProps,
 	emits: ['load', 'error'],
 	setup(props, context) {
-		// PLACEHOLDER COLOR
 		const placeholderColor = computed(
 			() =>
 				typeof props.placeholder === 'string'
@@ -61,12 +61,12 @@ export default defineComponent({
 			format: props.format || props.modifiers?.format,
 		}))
 
-		const options = computed<ImageOptions>(() => ({
+		const options = computed(() => ({
 			provider: props.provider,
 			preset: props.preset,
 			densities: props.densities,
 			modifiers: modifiers.value,
-		}))
+		}) as ImageOptions)
 
 		const src = computed(() => $img(props.src!, modifiers.value, options.value))
 
@@ -76,11 +76,11 @@ export default defineComponent({
 				&& $img.getSizes(props.src!, {
 					...options.value,
 					sizes: props.sizes,
-				})
+				} as ImageOptions)
 			)
 		})
 		const internalSizes = computed(() => {
-			const result = responsiveImageData.value && responsiveImageData.value.sizes
+			const result = responsiveImageData.value && typeof responsiveImageData.value !== 'string' && responsiveImageData.value.sizes
 
 			if (result === '100vw') return // do not output sizes="100vw" as it is the default value
 
@@ -89,7 +89,7 @@ export default defineComponent({
 
 		// @see https://github.com/nuxt/image/blob/main/src/runtime/components/nuxt-img.ts
 		if (props.preload) {
-			const isResponsive = responsiveImageData.value && Object.values(responsiveImageData.value).every(v => v)
+			const isResponsive = responsiveImageData.value && typeof responsiveImageData.value !== 'string' && Object.values(responsiveImageData.value).every(v => v)
 
 			useHead({
 				link: [
@@ -99,11 +99,13 @@ export default defineComponent({
 						nonce: props.nonce,
 						...(!isResponsive
 							? { href: src.value }
-							: {
-								href: responsiveImageData.value.src,
-								imagesizes: responsiveImageData.value.sizes,
-								imagesrcset: responsiveImageData.value.srcset,
-							}),
+							: typeof responsiveImageData.value !== 'string' && responsiveImageData.value
+								? {
+									href: responsiveImageData.value.src,
+									imagesizes: responsiveImageData.value.sizes,
+									imagesrcset: responsiveImageData.value.srcset,
+								}
+								: {}),
 						...(typeof props.preload !== 'boolean' && props.preload.fetchPriority
 							? { fetchpriority: props.preload.fetchPriority }
 							: {}),
@@ -115,7 +117,7 @@ export default defineComponent({
 		return () =>
 			h('img', {
 				src: src.value,
-				srcset: responsiveImageData.value?.srcset,
+				srcset: typeof responsiveImageData.value !== 'string' ? responsiveImageData.value?.srcset : undefined,
 				sizes: internalSizes.value,
 				ref: root,
 				width: width.value,
@@ -138,8 +140,8 @@ export default defineComponent({
 .root {
     display: var(--v-img-display, block);
     width: var(--v-img-width, 100%);
-    max-width: var(--v-img-max-width, 100%); // responsive image
-    height: var(--v-img-height, auto); // responsive image
+    max-width: var(--v-img-max-width, 100%);
+    height: var(--v-img-height, auto);
     background: var(--v-img-background, var(--v-img-placeholder));
 
 	// Remove background when image is loaded. This is useful for hiding antialiasing artifacts.
