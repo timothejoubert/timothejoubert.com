@@ -8,7 +8,6 @@ const projectDocument = computed(() => document.value.type === prismicDocumentTy
 const archiveDocument = computed(() => document.value.type === prismicDocumentType.ARCHIVE_PAGE ? document.value as ArchiveDocument : undefined)
 const aboutDocument = computed(() => document.value.type === prismicDocumentType.ABOUT_PAGE ? document.value as AboutDocument : undefined)
 const homeDocument = computed(() => document.value.type === prismicDocumentType.HOME_PAGE ? document.value as HomePageDocument : undefined)
-// const projectListingDocument = computed(() => document.value.type === prismicDocumentType.PROJECT_LISTING_PAGE ? document.value as ProjectListingPageDocument : undefined)
 </script>
 
 <template>

@@ -20,6 +20,7 @@ const { data: projects } = await usePrismicFetchProjects(true)
 
 <style lang="scss" module>
 .root {
+    height: min-content;
     margin-block: initial;
     padding-inline: initial;
     row-gap: var(--gutter);

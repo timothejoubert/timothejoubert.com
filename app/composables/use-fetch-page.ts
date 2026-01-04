@@ -28,6 +28,6 @@ export async function useFetchPage<T extends PrismicDocumentPageType>(type: Pris
 
 	return {
 		document: data,
-		documentType: computed(() => data.value.type),
+		documentType: computed(() => data.value?.type),
 	}
 }

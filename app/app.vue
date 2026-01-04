@@ -1,27 +1,10 @@
 <script lang="ts" setup>
-import { prismicDocumentType } from '~~/shared/prismic-document'
-
-await useFetchPage(undefined)
-const currentPage = useCurrentPage()
-
-const currentPageType = computed(() => currentPage.value.document?.type)
-
-const displayProjects = computed(() => {
-	return [
-		prismicDocumentType.PROJECT_PAGE,
-	].some(type => type === currentPageType.value)
-})
 </script>
 
 <template>
     <div :class="$style.root">
         <NuxtRouteAnnouncer />
         <VHeader :class="$style.nav" />
-
-        <LazyVMainProjectListing
-            v-if="displayProjects"
-            :class="$style.projects"
-        />
 
         <NuxtPage />
 
