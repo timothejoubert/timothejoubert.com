@@ -1,18 +1,14 @@
 <script lang="ts" setup>
-import type { ProjectDocument } from '~~/prismicio-types'
-
-defineProps<{
-	projects: ProjectDocument[]
-}>()
+const { data: projects } = await usePrismicFetchProjects(true)
 </script>
 
 <template>
     <ul
-        v-if="projects.length"
+        v-if="projects?.length"
         class="grid"
         :class="$style.root"
     >
-        <VProjectCard
+        <LazyVProjectCard
             v-for="project in projects"
             :key="project.uid"
             wrapper="li"

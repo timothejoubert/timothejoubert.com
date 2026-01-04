@@ -47,7 +47,8 @@ const tags = computed(() => {
                 :aria-label="$t('back_to_projects.aria_label')"
             >
                 <VIcon
-                    name="uil:corner-up-left-alt"
+                    prefix="uil"
+                    name="corner-up-left-alt"
                     size="1.6em"
                 />
             </VPrismicLink>
@@ -56,7 +57,7 @@ const tags = computed(() => {
             :class="$style.attributes"
         >
             <template v-if="tags.length">
-                <VTag
+                <LazyVTag
                     v-for="(tag, i) in tags"
                     :key="tag || i"
                     :label="tag"
@@ -67,12 +68,12 @@ const tags = computed(() => {
                 format="full"
             />
         </div>
-        <VText
+        <LazyVText
             v-if="project.short_description"
             :content="project.short_description"
             :class="$style['short-description']"
         />
-        <VText
+        <LazyVText
             v-if="project.content"
             :content="project.content"
             :class="$style.description"
@@ -91,7 +92,7 @@ const tags = computed(() => {
                 :class="$style.media"
             >
                 <VVideoPlayer
-                    v-if="mediaGroup.type === 'video'"
+                    v-if="mediaGroup.type === 'video' && mediaGroup.media?.url"
                     autoplay
                     muted
                     :controls="false"

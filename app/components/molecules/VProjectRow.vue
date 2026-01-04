@@ -22,14 +22,12 @@ const tags = computed(() => {
         >
             {{ project.data.title }}
         </div>
-        <button
+        <VTag
             v-for="tag in tags"
             :key="tag"
             :label="tag"
-        >
-            {{ tag }}
-        </button>
-        <!-- <VIcon name="arrow-up-right" /> -->
+        />
+        <VIcon name="arrow-up-right" />
     </VPrismicLink>
 </template>
 

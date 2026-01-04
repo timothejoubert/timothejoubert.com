@@ -13,7 +13,8 @@ const page = computed(() => props.document.data)
         class="grid-container"
         :class="$style.root"
     >
-        <VHighlightedText
+        <LazyVHighlightedText
+            v-if="page.content"
             :field="page.content"
             wrapper="h2"
             :class="$style.content"
@@ -27,7 +28,7 @@ const page = computed(() => props.document.data)
                 <h3 :class="$style.title">
                     {{ section.title }}
                 </h3>
-                <VText
+                <LazyVText
                     v-if="section.content"
                     :content="section.content"
                     :class="$style.section__content"

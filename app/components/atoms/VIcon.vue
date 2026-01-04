@@ -14,13 +14,16 @@ defineProps({
 		required: false,
 		default: null,
 	},
+	prefix: {
+		type: String,
+	},
 })
 </script>
 
 <template>
     <NuxtIcon
         aria-hidden="true"
-        :name="name"
+        :name="`${prefix || 'icon'}:${name}`"
         :size="size"
         :mode="mode"
     />

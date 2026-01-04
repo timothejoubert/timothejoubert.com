@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 		'~/plugins/anchor-polyfill.client.ts',
 	],
 
-	components: ['~/components/atoms', '~/components/molecules', '~/components/ui', '~/components/organisms'],
+	components: ['~/components/atoms', '~/components/molecules', '~/components/organisms'],
 	devtools: { enabled: true },
 
 	css: ['~~/app/assets/scss/main.scss'],
@@ -105,9 +105,19 @@ export default defineNuxtConfig({
 			strictMessage: false, // Message can contains HTML tag
 		},
 	},
-	// https://nuxt.com/modules/icon
+	// https://nuxt.com/modules/icon#usage
 	icon: {
 		componentName: 'NuxtIcon',
+		class: '',
+		fallbackToApi: false,
+		localApiEndpoint: '/_nuxt_icon',
+		customCollections: [
+			{
+				normalizeIconName: false,
+				prefix: 'icon',
+				dir: './app/assets/images/icons',
+			},
+		],
 	},
 
 	// https://image.nuxt.com/get-started/configuration

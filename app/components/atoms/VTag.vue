@@ -2,7 +2,7 @@
 import type { VWrapperProps } from '~/components/atoms/VWrapper.vue'
 
 defineProps<{
-	label: string
+	label: string | null
 } & VWrapperProps>()
 </script>
 

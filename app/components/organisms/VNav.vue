@@ -3,8 +3,6 @@ import { prismicDocumentType } from '~~/shared/prismic-document'
 
 const { data } = await usePrismicFetchDocument(prismicDocumentType.MENU)
 
-console.log(data.value)
-
 const prismic = usePrismic()
 const links = computed(() => {
 	return data.value.data.links.filter((link) => {
