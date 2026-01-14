@@ -108,13 +108,12 @@ export default defineNuxtConfig({
 	// https://nuxt.com/modules/icon#usage
 	icon: {
 		componentName: 'NuxtIcon',
-		class: '',
-		fallbackToApi: false,
-		localApiEndpoint: '/_nuxt_icon',
+		serverBundle: {
+			collections: ['uil'],
+		},
 		customCollections: [
 			{
-				normalizeIconName: false,
-				prefix: 'icon',
+				prefix: 'tim',
 				dir: './app/assets/images/icons',
 			},
 		],

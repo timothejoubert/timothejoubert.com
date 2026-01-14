@@ -43,6 +43,7 @@
     },
     "packageManager": "pnpm@10.20.0",
     "devDependencies": {
+        "@iconify-json/uil": "^1.2.3",
         "@nuxtjs/prismic": "^4.1.0",
         "@prismicio/types": "^0.2.9",
         "@slicemachine/adapter-nuxt": "^0.3.86",

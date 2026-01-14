@@ -23,7 +23,7 @@ defineProps({
 <template>
     <NuxtIcon
         aria-hidden="true"
-        :name="`${prefix || 'icon'}:${name}`"
+        :name="`${prefix || 'tim'}:${name}`"
         :size="size"
         :mode="mode"
     />

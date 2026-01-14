@@ -3,5 +3,11 @@
   "error_page.fallback_title": "Une erreur est survenue",
   "main_nav.aria_label": "Navigation principale",
   "show_setting.aria_label": "Afficher / cacher les paramètres d'interface visuelle",
-  "back_to_projects.aria_label": "Retour a tous les projets"
+  "back_to_projects.aria_label": "Retour a tous les projets",
+  "name": "Nom",
+  "date": "Date",
+  "framework": "Cadre",
+  "tags": "Étiquettes",
+  "rate": "Note",
+  "rate_label": "Note de {rate} sur {max}"
 }

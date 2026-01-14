@@ -13,7 +13,6 @@ const id = 'setting-modal-' + useId()
             @click="toggle"
         >
             <VIcon
-                prefix="uil"
                 name="setting"
                 size="1.3em"
             />
@@ -33,6 +32,9 @@ const id = 'setting-modal-' + useId()
 <style lang="scss" module>
 .button {
 	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	border: none;
 	border-radius: 9px;
 	anchor-name: --button-setting-anchor;

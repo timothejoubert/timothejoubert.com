@@ -27,7 +27,7 @@
 .nav {
     position: fixed;
     z-index: 1001;
-    bottom: calc(var(--app-padding) + 12px);
+    bottom: calc(var(--app-padding));
     place-self: flex-end center;
 }
 
