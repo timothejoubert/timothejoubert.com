@@ -28,25 +28,7 @@ export function usePrismicFetchDocuments<T extends PrismicDocument = RepeatableD
 
 	const key = `documents-${hash.join('-')}`
 
-	// TODO: use getByType to get paginated data
 	return useAsyncData(key, () => {
-		return prismicClient.getAllByType<T>(prismicDocument, options)
-	}, {
-		getCachedData: (key, nuxtApp) => nuxtApp.static.data[key] ?? nuxtApp.payload.data[key],
-		dedupe: 'defer', // wait for the first request to finish before making another request
-		deep: false,
-		// lazy: true,
-		// default: () => {
-		//     return {
-		//         page: options.page || 0,
-		//         results_per_page: 0,
-		//         results_size: 0,
-		//         total_results_size: size,
-		//         total_pages: 0,
-		//         next_page: null,
-		//         prev_page: null,
-		//         results: [...Array(size).keys()].map(() => null),
-		//     }
-		// },
+		return prismicClient.getAllByType(prismicDocument, options)
 	})
 }

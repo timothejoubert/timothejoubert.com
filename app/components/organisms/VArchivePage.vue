@@ -36,18 +36,35 @@ const fetchOptions = computed(() => {
 	return result
 })
 
-const { data: projects, error } = usePrismicFetchDocuments(prismicDocumentType.PROJECT_PAGE, fetchOptions.value)
+const { data: projects, error, pending } = usePrismicFetchDocuments(prismicDocumentType.PROJECT_PAGE, fetchOptions.value)
 
 function getTagLabels(tagGroup: ProjectDocumentData['tag_group']) {
 	return tagGroup
 		.filter(item => item.tag)
 		.map(item => item.tag) || []
 }
+
+const { t } = useI18n()
+const fallbackMessage = computed(() => {
+	if (error.value) {
+		return t('archive_page.error_loading_projects')
+	}
+	if (pending.value) {
+		return t('archive_page.loading_projects')
+	}
+	if (!projects.value?.length) {
+		return t('archive_page.no_projects')
+	}
+	return null
+})
 </script>
 
 <template>
-    <div :class="$style.root">
+    <main :class="$style.root">
         <table :class="$style.table">
+            <caption class="visually-hidden">
+                {{ $t('archive_page.projects_list_caption') }}
+            </caption>
             <thead>
                 <tr :class="[$style.row, $style['row--head']]">
                     <td>
@@ -74,7 +91,15 @@ function getTagLabels(tagGroup: ProjectDocumentData['tag_group']) {
                 </tr>
             </thead>
             <tbody>
-                <template v-if="projects?.length">
+                <tr
+                    v-if="fallbackMessage"
+                    :class="[$style.row, $style['row--fallback']]"
+                >
+                    <td :colspan="6">
+                        {{ fallbackMessage }}
+                    </td>
+                </tr>
+                <template v-else-if="projects?.length">
                     <tr
                         v-for="project in projects"
                         :key="project.id"
@@ -102,19 +127,9 @@ function getTagLabels(tagGroup: ProjectDocumentData['tag_group']) {
                         </td>
                     </tr>
                 </template>
-                <tr v-else>
-                    <td :colspan="6">
-                        <template v-if="error">
-                            {{ $t('archive_page.error_loading_projects') }}
-                        </template>
-                        <template v-else-if="!projects?.length">
-                            {{ $t('archive_page.no_projects') }}
-                        </template>
-                    </td>
-                </tr>
             </tbody>
         </table>
-    </div>
+    </main>
 </template>
 
 <style lang="scss" module>
@@ -143,21 +158,22 @@ function getTagLabels(tagGroup: ProjectDocumentData['tag_group']) {
     padding-block: 6px;
 }
 
+.row--fallback,
 .row--body {
     background-color: var(--color-surface);
-}
 
-.row--body td {
-    padding-block: 10px;
+    td {
+        padding-block: 10px;
 
-    &:first-child {
-        border-bottom-left-radius: 8px;
-        border-top-left-radius: 8px;
-    }
+        &:first-child {
+            border-bottom-left-radius: 8px;
+            border-top-left-radius: 8px;
+        }
 
-    &:last-child {
-        border-bottom-right-radius: 8px;
-        border-top-right-radius: 8px;
+        &:last-child {
+            border-bottom-right-radius: 8px;
+            border-top-right-radius: 8px;
+        }
     }
 }
 
