@@ -2,7 +2,6 @@ import type { ExtractDocumentType } from '~/types/api'
 import { prismicDocumentRoutes } from '~~/shared/prismic-routes'
 import type { ProjectDocument } from '~~/prismicio-types'
 import { generateHashFromObject } from '~/utils/hash'
-import type { PrismicDocument } from '@prismicio/types'
 
 type PrismicClient = ReturnType<typeof usePrismic>['client']
 export type GetAllByTypeParams = Parameters<PrismicClient['getAllByType']>[1]
@@ -10,7 +9,7 @@ export type GetAllByTypeParams = Parameters<PrismicClient['getAllByType']>[1]
 export type RepeatableDocument = ProjectDocument
 export type RepeatableDocumentType = ExtractDocumentType<ProjectDocument>
 
-export function usePrismicFetchDocuments<T extends PrismicDocument = RepeatableDocument>(
+export function usePrismicFetchDocuments(
 	prismicDocument: RepeatableDocumentType, options: GetAllByTypeParams = {},
 ) {
 	const prismicClient = usePrismic().client
@@ -30,5 +29,7 @@ export function usePrismicFetchDocuments<T extends PrismicDocument = RepeatableD
 
 	return useAsyncData(key, () => {
 		return prismicClient.getAllByType(prismicDocument, options)
+	}, {
+		lazy: true,
 	})
 }
