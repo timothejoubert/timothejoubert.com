@@ -59,11 +59,6 @@ const fallbackMessage = computed(() => {
 })
 
 const animationEnabled = ref(false)
-
-const onMouseEnter = () => {
-	animationEnabled.value = true
-	console.log('Mouse entered')
-}
 </script>
 
 <template>
@@ -108,7 +103,7 @@ const onMouseEnter = () => {
                     $style.body,
                     animationEnabled && $style['body--animation-enabled'],
                 ]"
-                @mouseenter="onMouseEnter"
+                @mouseenter="() => animationEnabled = true"
                 @mouseleave="() => animationEnabled = false"
             >
                 <tr

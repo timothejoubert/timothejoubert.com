@@ -21,10 +21,13 @@ const links = computed(() => {
         :aria-label="$t('main_nav.aria_label')"
         :class="$style.root"
     >
-        <ul :class="$style.list">
+        <ul
+            v-if="links?.length"
+            :class="$style.list"
+        >
             <li
                 v-for="link in links"
-                :key="link.href"
+                :key="link?.href"
                 :class="$style.item"
             >
                 <slot
