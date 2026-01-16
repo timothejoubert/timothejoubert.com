@@ -4,6 +4,7 @@
 <template>
     <div :class="$style.root">
         <NuxtRouteAnnouncer />
+        <NuxtLoadingIndicator color="#DBE6EC" />
         <VHeader :class="$style.nav" />
 
         <NuxtPage />
@@ -21,7 +22,7 @@
     --app-inner-max-height: calc(100svh - var(--app-padding) * 4);
 
     position: relative;
-    margin: calc(var(--app-padding));
+    margin: var(--app-padding) var(--app-padding) 70px var(--app-padding);
 }
 
 .nav {

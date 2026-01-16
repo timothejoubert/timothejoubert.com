@@ -30,6 +30,6 @@ export function usePrismicFetchDocuments(
 	return useAsyncData(key, () => {
 		return prismicClient.getAllByType(prismicDocument, options)
 	}, {
-		lazy: true,
+		lazy: false,
 	})
 }

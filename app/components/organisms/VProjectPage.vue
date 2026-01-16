@@ -50,11 +50,7 @@ const tags = computed(() => {
                     :class="$style.back"
                     :aria-label="$t('back_to_projects.aria_label')"
                 >
-                    <VIcon
-                        prefix="uil"
-                        name="corner-up-left-alt"
-                        size="1.6em"
-                    />
+                    <VIcon name="corner-up-left-alt" />
                 </VPrismicLink>
             </div>
             <div

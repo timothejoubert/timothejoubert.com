@@ -13,5 +13,6 @@
   "archive_page.projects_list_caption": "Liste des projets archivés",
   "archive_page.error_loading_projects": "Erreur lors du chargement des projets.",
   "archive_page.no_projects_found": "Aucun projet trouvé.",
-  "archive_page.loading_projects": "Chargement des projets en cours..."
+  "archive_page.loading_projects": "Chargement des projets en cours...",
+  "project_link": "Lien du projet"
 }

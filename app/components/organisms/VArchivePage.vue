@@ -57,6 +57,13 @@ const fallbackMessage = computed(() => {
 	}
 	return null
 })
+
+const animationEnabled = ref(false)
+
+const onMouseEnter = () => {
+	animationEnabled.value = true
+	console.log('Mouse entered')
+}
 </script>
 
 <template>
@@ -66,7 +73,8 @@ const fallbackMessage = computed(() => {
                 {{ $t('archive_page.projects_list_caption') }}
             </caption>
             <thead>
-                <tr :class="[$style.row, $style['row--head']]">
+                <tr :class="$style['head-row']">
+                    <!-- <td style="width: 0; padding: 0;" /> -->
                     <td>
                         <VSortLink
                             :label="$t('name')"
@@ -87,13 +95,25 @@ const fallbackMessage = computed(() => {
                             field="rate"
                         />
                     </td>
-                    <td :class="$style['cell--right']" />
+                    <td
+                        :class="$style['cell--right']"
+                        class="visually-hidden"
+                    >
+                        {{ $t('project_link') }}
+                    </td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody
+                :class="[
+                    $style.body,
+                    animationEnabled && $style['body--animation-enabled'],
+                ]"
+                @mouseenter="onMouseEnter"
+                @mouseleave="() => animationEnabled = false"
+            >
                 <tr
                     v-if="fallbackMessage"
-                    :class="[$style.row, $style['row--fallback']]"
+                    :class="$style['body-row']"
                 >
                     <td :colspan="6">
                         {{ fallbackMessage }}
@@ -103,13 +123,21 @@ const fallbackMessage = computed(() => {
                     <tr
                         v-for="project in projects"
                         :key="project.id"
-                        :class="[$style.row, $style['row--body']]"
+                        :class="$style['body-row']"
                     >
-                        <td>{{ project.data.title }}</td>
+                        <td>
+                            <span>
+                                {{ project.data.title }}
+                            </span>
+                        </td>
                         <td>
                             <VTime :date="project.data.date" />
                         </td>
-                        <td>{{ project.data.framework }}</td>
+                        <td>
+                            <span>
+                                {{ project.data.framework }}
+                            </span>
+                        </td>
                         <td :class="$style.tags">
                             <VTag
                                 v-for="tag in getTagLabels(project.data.tag_group)"
@@ -121,7 +149,10 @@ const fallbackMessage = computed(() => {
                             <VStarRate :rate="project.data.rate" />
                         </td>
                         <td :class="$style['cell--right']">
-                            <VPrismicLink :to="project">
+                            <VPrismicLink
+                                :to="project"
+                                :class="$style['arrow-link']"
+                            >
                                 <VIcon name="arrow-up-right" />
                             </VPrismicLink>
                         </td>
@@ -134,6 +165,8 @@ const fallbackMessage = computed(() => {
 
 <style lang="scss" module>
 .root {
+    --v-archive-row-border-radius: 8px;
+    --v-archive-border-spacing: 5px;
     --v-start-rest-color: black;
 
     width: 100%;
@@ -141,7 +174,80 @@ const fallbackMessage = computed(() => {
 
 .table {
     width: 100%;
-    border-spacing: 0 5px;
+    border-spacing: 0 0;
+
+    // border-spacing: 0 var(--v-archive-border-spacing);
+
+    td {
+        padding-inline: 18px;
+    }
+}
+
+.head-row td {
+    padding-block: 4px;
+}
+
+.body-row td {
+    position: relative;
+    overflow: hidden;
+    padding-block: 14px;
+
+    > * {
+        // set above the pseudo elements
+        position: relative;
+    }
+
+    // Default background
+    &::after {
+        position: absolute;
+        z-index: -1;
+        background-color: var(--color-surface);
+        content: '';
+        inset: var(--v-archive-border-spacing) 0;
+        pointer-events: none;
+    }
+
+    &:first-child::after {
+        border-bottom-left-radius: var(--v-archive-row-border-radius);
+        border-top-left-radius: var(--v-archive-row-border-radius);
+    }
+
+    &:last-child::after {
+        border-bottom-right-radius: var(--v-archive-row-border-radius);
+        border-top-right-radius: var(--v-archive-row-border-radius);
+    }
+
+    // Hovered background
+    &::before {
+        position: absolute;
+        background-color: var(--color-background);
+        content: '';
+        inset: var(--v-archive-border-spacing) 0;
+        opacity: 0.7;
+        pointer-events: none;
+        translate: 0 100%;
+    }
+
+    @media(hover: hover) {
+        &:hover td::before {
+            translate: 0 0;
+        }
+    }
+}
+
+.body {
+    &:not(.body--animation-enabled) td::before {
+        transition: none;
+        translate: 0 calc(-100% - var(--v-archive-border-spacing));
+    }
+
+    &--animation-enabled td::before {
+        transition: translate 0.3s ease(out-quad);
+    }
+}
+
+.table:has(tr:hover) tr:hover ~ tr td::before {
+    translate: 0 calc(-100% - var(--v-archive-border-spacing));
 }
 
 .tags {
@@ -150,35 +256,14 @@ const fallbackMessage = computed(() => {
     gap: 8px;
 }
 
-.row td {
-    padding-inline: 18px;
-}
+.arrow-link {
+    color: inherit;
 
-.row--head td {
-    padding-block: 6px;
-}
-
-.row--fallback,
-.row--body {
-    background-color: var(--color-surface);
-
-    td {
-        padding-block: 10px;
-
-        &:first-child {
-            border-bottom-left-radius: 8px;
-            border-top-left-radius: 8px;
-        }
-
-        &:last-child {
-            border-bottom-right-radius: 8px;
-            border-top-right-radius: 8px;
-        }
+    &::before {
+        position: absolute;
+        content: '';
+        inset: 0;
     }
-}
-
-.row--body a {
-    color: inherit
 }
 
 .cell--right {
