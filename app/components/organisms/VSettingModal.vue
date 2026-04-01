@@ -26,6 +26,10 @@ const id = 'setting-modal-' + useId()
 		>
 			<div :class="$style.inner">
 				<VThemeSwitcher />
+				<div :class="$style['setting-item']">
+					<label for="grid_value">Grid value</label>
+					<input id="grid_value" type="number" min="1" value="4" max="5" />
+				</div>
 			</div>
 		</div>
 	</div>
@@ -110,5 +114,11 @@ const id = 'setting-modal-' + useId()
 
 .inner {
 	padding: 20px;
+}
+
+.setting-item {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
 }
 </style>

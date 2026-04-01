@@ -104,7 +104,7 @@ const _links = computed(() => {
 
 .link {
     display: block;
-    padding: 6px 16px 8px;
+    padding: 7px 16px 8px;
     color: var(--color-content);
     text-decoration: none;
 }

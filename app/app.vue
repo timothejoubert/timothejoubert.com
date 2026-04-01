@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+// TODO: try SSR and client-side teleport for project page content
 </script>
 
 <template>

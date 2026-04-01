@@ -52,8 +52,7 @@ watch(theme, setCssVars)
 
 <template>
     <fieldset>
-        <legend>Select a color theme</legend>
-
+        <legend>Color theme</legend>
         <div
             v-for="themeInput in themeInputs"
             :key="themeInput.id"
