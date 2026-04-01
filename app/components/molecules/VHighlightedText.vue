@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { RichTextField } from '@prismicio/types'
+import type { RichTextField } from '@prismicio/client'
 
 defineProps<{
 	field: RichTextField

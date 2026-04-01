@@ -1,5 +1,5 @@
-import type { ContentRelationshipField, FilledContentRelationshipField } from '@prismicio/types'
-import { LinkType } from '@prismicio/types'
+import type { ContentRelationshipField, FilledContentRelationshipField } from '@prismicio/client'
+import { LinkType } from '@prismicio/client'
 import { hasAllKeys } from '~/utils/object/object-validation'
 
 const fieldKeys = [

@@ -1,4 +1,4 @@
-import type { EmbedField, ImageField, LinkToMediaField } from '@prismicio/types'
+import type { EmbedField, ImageField, LinkToMediaField } from '@prismicio/client'
 import {
 	isFilledImageField,
 	isFilledLinkToMediaField,

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { filter } from '@prismicio/client'
 import type { ArchiveDocument, ProjectDocumentData } from '~~/prismicio-types'
 import { prismicDocumentType } from '~~/shared/prismic-document'
 
@@ -6,14 +7,11 @@ defineProps<{
 	document: ArchiveDocument
 }>()
 
-const { $prismic } = useNuxtApp()
-const prismicFilter = $prismic.filter
-
 const route = useRoute()
 const fetchOptions = computed(() => {
 	const result = {
 		orderings: [{ field: `my.project.date`, direction: 'desc' as const }],
-		filters: [prismicFilter.at('my.project.favorite', false)],
+		filters: [filter.at('my.project.favorite', false)],
 		graphQuery: `{
             project {
                 title
@@ -36,7 +34,7 @@ const fetchOptions = computed(() => {
 	return result
 })
 
-const { data: projects, error, pending } = usePrismicFetchDocuments(prismicDocumentType.PROJECT_PAGE, fetchOptions.value)
+const { data: projects, error, pending } = usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions.value)
 
 function getTagLabels(tagGroup: ProjectDocumentData['tag_group']) {
 	return tagGroup

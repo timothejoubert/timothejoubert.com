@@ -9,7 +9,7 @@ export type GetAllByTypeParams = Parameters<PrismicClient['getAllByType']>[1]
 export type RepeatableDocument = ProjectDocument
 export type RepeatableDocumentType = ExtractDocumentType<ProjectDocument>
 
-export function usePrismicFetchDocuments(
+export function usePrismicFetchDocumentListing(
 	prismicDocument: RepeatableDocumentType, options: GetAllByTypeParams = {},
 ) {
 	const prismicClient = usePrismic().client

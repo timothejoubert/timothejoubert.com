@@ -1,4 +1,4 @@
-import type { ContentRelationshipField } from '@prismicio/types'
+import type { ContentRelationshipField } from '@prismicio/client'
 import type {
 	LocationAsRelativeRaw,
 	_RouteRecordBase,

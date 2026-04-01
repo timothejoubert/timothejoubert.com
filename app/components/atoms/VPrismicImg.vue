@@ -1,6 +1,6 @@
 <script lang="ts">
 import { VImg } from '#components'
-import type { ImageField, LinkField } from '@prismicio/types'
+import type { ImageField, LinkField } from '@prismicio/client'
 import pick from 'lodash/pick'
 import { vImgProps } from '~/components/atoms/VImg.vue'
 import { getImageFieldFilled } from '~/utils/prismic/image-field'

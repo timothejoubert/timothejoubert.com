@@ -1,4 +1,4 @@
-import type { ImageFieldImage } from '@prismicio/types'
+import type { ImageFieldImage } from '@prismicio/client'
 import { hasAllKeys } from '~/utils/object/object-validation'
 
 const fieldKeys = ['id', 'url', 'dimensions', 'edit', 'alt', 'copyright']

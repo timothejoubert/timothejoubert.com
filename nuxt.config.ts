@@ -16,7 +16,7 @@ export default defineNuxtConfig({
 	],
 
 	components: ['~/components/atoms', '~/components/molecules', '~/components/organisms'],
-	devtools: { enabled: true },
+	devtools: { enabled: false },
 
 	css: ['~~/app/assets/scss/main.scss'],
 	runtimeConfig: {

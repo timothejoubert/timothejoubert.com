@@ -5,39 +5,48 @@ const id = 'setting-modal-' + useId()
 </script>
 
 <template>
-    <slot name="target">
-        <button
-            :class="$style.button"
-            :aria-controls="id"
-            :aria-expanded="expanded"
-            @click="toggle"
-        >
-            <VIcon
-                name="setting"
-                size="1.3em"
-            />
-        </button>
-    </slot>
-    <div
-        v-show="expanded"
-        :class="[$style.content, expanded && $style['content--visible']]"
-        :aria-label="$t('show_setting.aria_label')"
-    >
-        <div :class="$style.inner">
-            <VThemeSwitcher />
-        </div>
-    </div>
+	<div :class="$style.root">
+		<slot name="target">
+			<button
+				:class="$style.button"
+				:aria-controls="id"
+				:aria-expanded="expanded"
+				@click="toggle"
+			>
+				<VIcon
+					name="setting"
+					size="1.3em"
+				/>
+			</button>
+		</slot>
+		<div
+			:class="[$style.content, expanded && $style['content--visible']]"
+			:aria-label="$t('show_setting.aria_label')"
+			:key="id"
+		>
+			<div :class="$style.inner">
+				<VThemeSwitcher />
+			</div>
+		</div>
+	</div>
 </template>
 
 <style lang="scss" module>
+.root {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .button {
 	position: relative;
 	display: flex;
+	height: 100%;
 	align-items: center;
 	justify-content: center;
 	border: none;
 	border-radius: 9px;
-	anchor-name: --button-setting-anchor;
 	background-color: var(--color-surface);
 	color: var(--color-content);
 	cursor: pointer;
@@ -74,40 +83,29 @@ const id = 'setting-modal-' + useId()
 
 .content {
 	position: absolute;
-	bottom: 16px;
-	overflow: hidden;
-	width: 100%;
-	height: 0;
+	z-index: -1;
+	top: 0;
+	width: fit-content;
+	min-width: 280px;
+	max-width: 100%;
 	border-radius: 9px;
-
-	// bottom: calc(anchor(--button-setting-anchor top) + 16px);
-	// left: anchor(--button-setting-anchor left);
-
 	background-color: var(--color-surface);
 	color: var(--color-content);
-	position-anchor: --button-setting-anchor;
-    position-area: top;
-	position-try: flip-inline;
-	position-try-fallbacks: flip-inline;
-
-	// opacity: 0;
-	transition: all .3s;
-	transition-behavior: allow-discrete;
-
-	&--visible {
-		height: 200px;
-		opacity: 1;
-
-		@starting-style {
-			height: 0;
-			opacity: 0;
-		}
-	}
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity .22s ease(out-quad), translate .22s ease(out-quad);
+	translate: 0 -80%;
 
 	@supports (corner-shape: squircle) {
-        border-radius: 24px;
+		border-radius: 24px;
         corner-shape: squircle;
     }
+
+	&--visible {
+		opacity: 1;
+		pointer-events: initial;
+		translate: 0 calc(-100% - 12px);
+	}
 }
 
 .inner {

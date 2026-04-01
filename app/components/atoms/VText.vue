@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { KeyTextField, RichTextField } from '@prismicio/types'
+import type { KeyTextField, RichTextField } from '@prismicio/client'
 import type { VueRichTextSerializer } from '@prismicio/vue'
-// import { RichTextNodeType } from '@prismicio/types'
+// import { RichTextNodeType } from '@prismicio/client'
 
 export type VTextContent = string | RichTextField | KeyTextField | null
 

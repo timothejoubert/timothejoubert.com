@@ -1,32 +1,36 @@
 <script lang="ts" setup>
+import { asLinkAttrs, isFilled } from '@prismicio/client'
 import { prismicDocumentType } from '~~/shared/prismic-document'
 
 const { data } = await usePrismicFetchDocument(prismicDocumentType.MENU)
 
-const prismic = usePrismic()
-const links = computed(() => {
-	return data.value.data.links.filter((link) => {
-		return prismic.isFilled.link(link)
+const links = computed(() => data.value.data.links)
+
+const _links = computed(() => {
+	return links.value.filter((link) => {
+		return isFilled.link(link)
 	}).map((link) => {
 		return {
-			...prismic.asLinkAttrs(link),
+			...asLinkAttrs?.(link) || {},
 			label: link.text,
 		}
 	})
 })
+
 </script>
 
 <template>
     <nav
         :aria-label="$t('main_nav.aria_label')"
         :class="$style.root"
+        role="navigation"
     >
         <ul
-            v-if="links?.length"
+            v-if="_links?.length"
             :class="$style.list"
         >
             <li
-                v-for="link in links"
+                v-for="link in _links"
                 :key="link?.href"
                 :class="$style.item"
             >

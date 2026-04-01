@@ -1,4 +1,4 @@
-import type { PrismicDocument, PrismicDocumentWithoutUID, PrismicDocumentWithUID } from '@prismicio/types'
+import type { PrismicDocument, PrismicDocumentWithoutUID, PrismicDocumentWithUID } from '@prismicio/client'
 import type { AllDocumentTypes, ProjectDocument, SettingsDocument } from '~~/prismicio-types'
 
 // Document data
