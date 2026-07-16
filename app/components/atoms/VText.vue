@@ -11,6 +11,10 @@ interface VTextProps {
 	richTextSerializer?: VueRichTextSerializer | null
 }
 
+defineOptions({
+  inheritAttrs: false
+})
+
 const prismic = usePrismic()
 // Use custom rendered component
 // https://prismic.io/docs/fields/rich-text
@@ -60,20 +64,19 @@ const flatRichTextContent = computed(() => {
 
 <style lang="scss" module>
 .root {
-    *:first-child {
+    > *:first-child {
         margin-top: initial;
     }
 
-    strong {
-        font-weight: bold;
+    > *:last-child {
+        margin-bottom: initial;
     }
 
     a {
         color: var(--theme-color-primary);
-
-        // text-decoration: underline;
-        // text-decoration-thickness: 0.5px;
-        // text-underline-offset: 2px;
+        text-decoration: underline;
+        text-decoration-thickness: 0.5px;
+        text-underline-offset: 2px;
     }
 }
 </style>

@@ -8,20 +8,17 @@
 
 /* 3-Theme */
 $themes: (
-    main: (
-        color-background: #2D2D2D,
-        color-surface: #151515,
+    main: (color-surface: #2D2D2D,
+        color-background: #151515,
         color-content: #DBE6EC,
         color-accent: #E3FD41,
     ),
-    blue: (
-        color-background: #040915,
+    blue: (color-background: #040915,
         color-surface: #000,
         color-content: #b8bdd6,
         color-accent: #f09042,
     ),
-    green: (
-        color-background: #160d17,
+    green: (color-background: #160d17,
         color-surface: #160d17,
         color-content: #69f7a6,
         color-accent: #ff5252,

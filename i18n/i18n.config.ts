@@ -36,6 +36,11 @@ export default defineI18nConfig(() => ({
 					month: 'short',
 					timeZone: I18N_DEFAULT_TIMEZONE,
 				},
+				// 2021
+				'year': {
+					year: 'numeric',
+					timeZone: I18N_DEFAULT_TIMEZONE,
+				},
 				// monday
 				'weekday': {
 					weekday: 'long',

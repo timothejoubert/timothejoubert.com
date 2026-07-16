@@ -41,6 +41,7 @@ const tags = computed(() => {
             :class="$style.projects"
         />
         <main :class="$style.project">
+
             <div :class="$style.head">
                 <h1 :class="$style.title">
                     {{ document.data.title }}
@@ -48,36 +49,41 @@ const tags = computed(() => {
                 <VPrismicLink
                     :to="prismicDocumentRoute.home_page"
                     :class="$style.back"
-                    :aria-label="$t('back_to_projects.aria_label')"
+                    :title="$t('back_to_projects.aria_label')"
                 >
-                    <VIcon name="corner-up-left-alt" />
+                    <VIcon prefix="material-symbols" name="cancel" />
                 </VPrismicLink>
             </div>
-            <div
-                :class="$style.attributes"
-            >
-                <template v-if="tags.length">
-                    <LazyVTag
-                        v-for="(tag, i) in tags"
-                        :key="tag || i"
-                        :label="tag"
+
+            <div :class="$style.content">
+                <div
+                    :class="$style.attributes"
+                >
+                    <ul v-if="tags.length" :class="$style.tags">
+                        <LazyVTag
+                            v-for="(tag, i) in tags"
+                            :key="tag || i"
+                            :label="tag"
+                            wrapper="li"
+                        />
+                    </ul>
+                    <VTime
+                        :date="project.date"
+                        format="short"
                     />
-                </template>
-                <VTime
-                    :date="project.date"
-                    format="full"
+                </div>
+                <LazyVText
+                    v-if="project.short_description"
+                    :content="project.short_description"
+                    :class="$style['short-description']"
+                />
+                <LazyVText
+                    v-if="project.content"
+                    :content="project.content"
+                    :class="$style.description"
                 />
             </div>
-            <LazyVText
-                v-if="project.short_description"
-                :content="project.short_description"
-                :class="$style['short-description']"
-            />
-            <LazyVText
-                v-if="project.content"
-                :content="project.content"
-                :class="$style.description"
-            />
+
             <VPrismicImg
                 :field="project.thumbnail"
             />
@@ -116,7 +122,7 @@ const tags = computed(() => {
     grid-template-columns: 1fr 1fr;
 }
 
-.projects{
+.projects {
     position: sticky;
     top: 16px;
     grid-column: 1 / -1;
@@ -126,34 +132,54 @@ const tags = computed(() => {
 .project {
     --v-project-page-padding-inline: 16px;
 
+    position: relative;
     z-index: 11;
     width: 100%;
-    min-height: var(--app-inner-max-height);
+    max-height: var(--app-inner-max-height);
+    overflow: auto;
     padding-bottom: 200px;
-    border-radius: 8px 0 0 8px;
-    border-left: 1PX solid color-mix(in hsl, var(--color-background), transparent 50%);
+    border-radius: 12px;
     background-color: var(--color-background);
-    box-shadow: -13px -16px 16px 12px  color-mix(in hsl, var(--color-surface), transparent 30%);
+    // box-shadow: -13px -16px 16px 12px  color-mix(in hsl, var(--color-surface), transparent 30%);
     grid-column: 2 / -1;
     grid-row: 1;
-    padding-inline: var(--v-project-page-padding-inline);
+    border: 1PX solid var(--color-surface);
+    // background-color: var(--color-surface);
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .head {
-    position: relative;
-    left: calc(var(--v-project-page-padding-inline) * -1);
+    position: sticky;
+    top: 0;
     display: flex;
-    width: calc(100% + var(--v-project-page-padding-inline) * 2);
-    flex-direction: row-reverse;
     align-items: center;
-    justify-content: flex-end;
-
-    // background-color: color-mix(in hsl, var(--color-background), transparent 50%);
-    background-color: var(--color-accent);
-    color: var(--color-surface);
+    justify-content: space-between;
+    margin-top: -1PX;
+    background-color: var(--color-surface);
+    color: var(--color-content);
     gap: 12px;
-    padding-block: 4px;
+    border-radius: inherit;
+    padding-block: 12px;
     padding-inline: var(--v-project-page-padding-inline);
+
+    // Hide border-radius on top of the project page
+    &::before {
+        position: absolute;
+        content: '';
+        display: block;
+        top: -3px;
+        left: -5px;
+        right: -5px;
+        height: 15px;
+        background-color: var(--color-surface);
+        pointer-events: none;
+    }
 }
 
 .title {
@@ -162,14 +188,33 @@ const tags = computed(() => {
 }
 
 .back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: inherit;
+    font-size: 22px;
+}
+
+.content {
+    padding: var(--v-project-page-padding-inline);
+    background-color: var(--color-background);
 }
 
 .attributes {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 16px;
-    gap: 16px;
+    justify-content: space-between;
+    gap: 10px;
+    padding-block: 8px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: inherit;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .short-description {
@@ -181,6 +226,6 @@ const tags = computed(() => {
 }
 
 .media {
-    margin-block: 12px;
+    margin-block: 0;
 }
 </style>

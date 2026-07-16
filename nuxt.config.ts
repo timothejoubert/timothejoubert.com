@@ -109,7 +109,7 @@ export default defineNuxtConfig({
 	icon: {
 		componentName: 'NuxtIcon',
 		serverBundle: {
-			collections: ['uil'],
+			collections: ['material-symbols'],
 		},
 		customCollections: [
 			{

@@ -35,11 +35,15 @@ onBeforeUnmount(() => {
 
 <style lang="scss" module>
 .root {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
     left: var(--gutter);
     padding-left: initial;
     grid-template-rows: 1fr;
     margin-block: initial;
     pointer-events: none;
+    min-height: 100vh;
 }
 
 .item {

@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import type { ProjectDocument } from '~~/prismicio-types'
-import type { VWrapperProps } from '../atoms/VWrapper.vue'
+import type { VWrapperElement } from '~/components/atoms/VWrapper.vue'
 
 const props = defineProps<{
 	project: ProjectDocument
-} & VWrapperProps>()
+	wrapper?: VWrapperElement
+}>()
 
 const data = computed(() => props.project.data)
 const tags = computed(() => {
@@ -17,9 +18,6 @@ const orderedTags = computed(() => {
 })
 
 const img = computed(() => data.value.thumbnail)
-const imgSizes = computed(() => {
-	return 'xs:92vw sm:92vw md:30vw lg:22vw xl:22vw hq:22vw qhd:22vw'
-})
 </script>
 
 <template>
@@ -52,7 +50,7 @@ const imgSizes = computed(() => {
             :field="img"
             :width="400"
             :height="400"
-            :sizes="imgSizes"
+            sizes="xs:92vw sm:92vw md:30vw lg:22vw xl:22vw hq:22vw qhd:22vw"
             :modifiers="{
                 fit: 'crop',
                 ar: 1,

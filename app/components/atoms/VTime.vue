@@ -2,27 +2,28 @@
 import type { DateField } from '@prismicio/client'
 import { parseDate } from '~/utils/prismic/prismic-date'
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
 	date: string | undefined | DateField
-	format?: 'year' | 'month' | 'day' | 'full'
-}>(), {
-	format: 'year',
+	format?: string // use i18n date format, e.g. 'short', 'long', 'full', 'year', etc.
+}>()
+
+const { d } = useI18n()
+const dateObj = computed(() => {
+	const { year, month, day } = parseDate(props.date) || {}
+
+	return new Date(Number(year), Number(month) - 1, Number(day))
 })
 
 const output = computed(() => {
-	const date = parseDate(props.date)
-
-	if (props.format === 'year') return date?.year
-	else if (props.format === 'month') return date?.month
-	else if (props.format === 'day') return date?.day
-
-	return props.date
+	return d(dateObj.value, props.format || 'year')
 })
 </script>
 
 <template>
     <time
         v-if="date"
-        :datetime="date"
-    >{{ output }}</time>
+        :datetime="dateObj.toISOString()"
+    >
+		{{ output }}
+	</time>
 </template>

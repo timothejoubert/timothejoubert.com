@@ -10,7 +10,7 @@ const page = computed(() => props.document.data)
 
 <template>
     <div
-        class="grid-container"
+        class="grid"
         :class="$style.root"
     >
         <LazyVHighlightedText
@@ -31,7 +31,6 @@ const page = computed(() => props.document.data)
                 <LazyVText
                     v-if="section.content"
                     :content="section.content"
-                    :class="$style.section__content"
                 />
             </section>
         </template>
@@ -40,20 +39,41 @@ const page = computed(() => props.document.data)
 
 <style lang="scss" module>
 .root {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+	padding-top: 20vh;
+    row-gap: 82px;
 }
 
 .content {
-	margin-top: 200px;
     font-weight: 400;
 	grid-column: 1 / -1;
 	margin-inline: auto;
 	text-align: center;
+    margin-block: 0;
+
+    @include media('>=lg') {
+        grid-column: 3 / -3;
+    }
 }
 
 .section {
 	position: relative;
-	margin-top: 120px;
+
+    grid-column: 1 / -1;
+
+    a {
+        color: inherit;
+    }
+
+    @include media('>=lg') {
+
+        &:nth-of-type(odd) {
+            grid-column: 4 / span 3;
+        }
+
+        &:nth-of-type(even) {
+            grid-column: 8 / span 3;
+        }
+    }
+
 }
 </style>

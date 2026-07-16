@@ -6,7 +6,7 @@
     <div :class="$style.root">
         <NuxtRouteAnnouncer />
         <NuxtLoadingIndicator color="#DBE6EC" />
-        <VHeader :class="$style.nav" />
+        <VNav :class="$style.nav" />
 
         <NuxtPage />
 
@@ -18,19 +18,35 @@
 
 <style lang="scss" module>
 .root {
-    --app-padding: 16px;
-    --app-max-height: calc(100svh - var(--app-padding) * 2);
-    --app-inner-max-height: calc(100svh - var(--app-padding) * 4);
+    --app-padding-top: 24px;
+    --app-padding-left: 24px;
+    --app-padding-right: 24px;
+    --app-padding-bottom: 70px;
+
+    // --app-max-height: calc(100svh - var(--app-padding-top) - var(--app-padding-bottom));
+    --app-inner-max-height: calc(100svh - var(--app-padding-top) - var(--app-padding-bottom));
 
     position: relative;
-    margin: var(--app-padding) var(--app-padding) 70px var(--app-padding);
+    min-height: 100svh;
+    padding: var(--app-padding-top) var(--app-padding-right) var(--app-padding-bottom) var(--app-padding-left);
 }
 
 .nav {
     position: fixed;
     z-index: 1001;
-    bottom: calc(var(--app-padding));
+    bottom: calc(var(--app-padding-bottom) * 0.5);
+    translate: 0 50%;
     place-self: flex-end center;
+
+    &::before {
+        position: absolute;
+        content: '';
+        display: block;
+        inset: -40% -30%;
+        // background: radial-gradient(var(--color-surface) 30%, transparent);
+        pointer-events: none;
+        // backdrop-filter: blur(5px);
+    }
 }
 
 .page-container {

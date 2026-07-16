@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import type { VWrapperProps } from '~/components/atoms/VWrapper.vue'
+import type { VWrapperElement } from '~/components/atoms/VWrapper.vue'
 
 defineProps<{
 	label: string | null
-} & VWrapperProps>()
+    wrapper?: VWrapperElement
+}>()
 </script>
 
 <template>

@@ -1,15 +1,13 @@
 <script lang="ts">
 import type { ComponentOrTagName } from '~/types/app'
 
-export type VWrapperProps = { wrapper?: ComponentOrTagName | false | undefined }
+export type VWrapperElement = ComponentOrTagName | false | undefined
 </script>
 
 <script lang="ts" setup>
-/**
-* An condional wrapper element for the slot
-**/
-
-defineProps<VWrapperProps>()
+defineProps<{
+    wrapper: VWrapperElement
+}>()
 
 defineOptions({
 	inheritAttrs: false,
