@@ -13,6 +13,9 @@ node_modules
 logs
 *.log
 
+# Prismic backups
+backup/
+
 # Misc
 .DS_Store
 .fleet

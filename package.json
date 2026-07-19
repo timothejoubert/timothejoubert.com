@@ -14,7 +14,8 @@
         "lint:js": "eslint .",
         "lint:css": "stylelint \"**/*.{vue,css,scss}\"",
         "slicemachine": "start-slicemachine",
-        "type-gen": "npx prismic-ts-codegen"
+        "type-gen": "npx prismic-ts-codegen",
+        "prismic:backup": "node scripts/prismic-backup.js"
     },
     "dependencies": {
         "@nuxt/eslint": "1.16.0",
