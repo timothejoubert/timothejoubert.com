@@ -31,6 +31,10 @@
     padding: var(--app-padding-top) var(--app-padding-right) var(--app-padding-bottom) var(--app-padding-left);
 }
 
+.page-container {
+    min-height: calc(100vh - var(--app-padding-top) - var(--app-padding-bottom));
+}
+
 .nav {
     position: fixed;
     z-index: 1001;

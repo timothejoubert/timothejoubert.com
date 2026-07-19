@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { ProjectDocument } from '~~/prismicio-types'
 import type { VWrapperElement } from '~/components/atoms/VWrapper.vue'
+import { getRoutePath } from '~~/shared/prismic-routes'
 
 const props = defineProps<{
 	project: ProjectDocument
@@ -27,7 +28,7 @@ const img = computed(() => data.value.thumbnail)
     >
         <VPrismicLink
             v-if="data.title"
-            :to="project"
+            :to="getRoutePath('projet', { uid: project.uid })"
             :class="$style.title"
         >
             {{ data.title }}

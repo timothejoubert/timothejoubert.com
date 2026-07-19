@@ -11,10 +11,6 @@ interface VTextProps {
 	richTextSerializer?: VueRichTextSerializer | null
 }
 
-defineOptions({
-  inheritAttrs: false
-})
-
 const prismic = usePrismic()
 // Use custom rendered component
 // https://prismic.io/docs/fields/rich-text
@@ -53,13 +49,15 @@ const flatRichTextContent = computed(() => {
     >
         <slot>{{ flatRichTextContent ? flatRichTextContent : content }}</slot>
     </component>
-    <PrismicRichText
+    <div
         v-else-if="!!richTextFilled?.length"
-        :class="[$style.root, $attrs.class]"
-        :field="richTextFilled"
-        wrapper="div"
-        :components="richTextSerializer || undefined"
-    />
+        :class="$style.root"
+    >
+        <PrismicRichText
+            :field="richTextFilled"
+            :components="richTextSerializer || undefined"
+        />
+    </div>
 </template>
 
 <style lang="scss" module>

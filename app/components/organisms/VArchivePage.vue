@@ -2,6 +2,7 @@
 import { filter } from '@prismicio/client'
 import type { ArchiveDocument, ProjectDocumentData } from '~~/prismicio-types'
 import { prismicDocumentType } from '~~/shared/prismic-document'
+import { getRoutePath } from '~~/shared/prismic-routes'
 
 defineProps<{
 	document: ArchiveDocument
@@ -143,7 +144,7 @@ const animationEnabled = ref(false)
                         </td>
                         <td :class="$style['cell--right']">
                             <VPrismicLink
-                                :to="project"
+                                :to="getRoutePath('projet-archive', { uid: project.uid })"
                                 :class="$style['arrow-link']"
                             >
                                 <VIcon name="arrow-up-right" />

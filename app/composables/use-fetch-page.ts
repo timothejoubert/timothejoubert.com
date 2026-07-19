@@ -1,9 +1,9 @@
 import { getDocumentTypeByUrl } from '~/utils/prismic/route-resolver'
 import type { PrismicDocumentPageType } from '~~/shared/prismic-document'
 
-export async function useFetchPage<T extends PrismicDocumentPageType>(type: PrismicDocumentPageType | undefined) {
+export async function useFetchPage<T extends PrismicDocumentPageType>(type: T | undefined) {
 	const route = useRoute()
-	const documentType = type || getDocumentTypeByUrl(route.path)
+	const documentType = (type || getDocumentTypeByUrl(route.path)) as T | undefined
 	const { isPreview } = usePrismicPreviewRoute()
 
 	if (!documentType && !isPreview.value) {
@@ -21,13 +21,8 @@ export async function useFetchPage<T extends PrismicDocumentPageType>(type: Pris
 
 	usePage({ document: data.value })
 
-	if (data.value) {
-		usePrismicHead(data.value)
-		usePrismicSeoMeta(data.value)
-	}
-
 	return {
 		document: data,
-		documentType: computed(() => data.value?.type),
+		documentType,
 	}
 }
