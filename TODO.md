@@ -3,6 +3,12 @@
 - Add stylelint and eslint format rules on save
 - More generic setup of prismic document type
 
-### Display projet content
-if client navigation display the project component in app.vue as "modal like" content in front of current page
-if ssr rendering display the project page with the main project list or archive content in background
+- VUserSetting: improve/add feature and update style
+- VUserSetting: Set hover shape animation start from user mouse side
+
+- VProjectPage: Add prev and next project in VProjectPage footer
+- VProjectPage: Add reveal and switch animation
+- VProjectPage: Add backdrop or find a design hack to highlight VWindow with background
+- VSpashScreen: add animation (from tim label to navBar transition ?)
+
+- CMS: sync data field with schema.org (Project document need more field to specify CreativeWork)
