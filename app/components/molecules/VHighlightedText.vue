@@ -14,15 +14,11 @@ defineProps<{
     >
         <VRichText :field="field">
             <template #default="scopedSlot">
-                <div
+                <VVariableText
                     v-if="scopedSlot.type === 'strong'"
                     :class="$style.highlight"
-                >
-                    <VSplitText
-                        render="chars"
-                        :content="scopedSlot.content"
-                    />
-                </div>
+                    :content="scopedSlot.content"
+                />
                 <component
                     :is="scopedSlot.type"
                     v-else

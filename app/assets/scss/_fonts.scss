@@ -5,6 +5,10 @@
     font-weight: 400;
 }
 
+@include font-face($norm-font-name, 'tt-norms-pro-regular-subset') {
+    font-weight: 400;
+}
+
 @include font-face($norm-font-name, 'tt-norms-pro-italic-subset') {
     font-style: italic;
     font-weight: 400;
@@ -37,9 +41,25 @@
     font-weight: 700;
 }
 
+// @include font-face($noi-font-name, 'noigrotesk-variable') {
+//     font-style: oblique 0deg 10deg;
+//     font-weight: 100 900;
+// }
+
+@font-face {
+    font-display: swap;
+    font-family: $noi-font-name;
+    font-style: oblique 0deg 10deg;
+    font-weight: 100 900;
+    src: url('~/assets/fonts/noigrotesk-variable.ttf') format('truetype');
+    // src:
+    //     url('~/assets/fonts/noigrotesk-variable-trial.ttf') format('truetype'),
+    //     url('~/assets/fonts/noigrotesk-variable.woff') format('woff'),
+    //     url('~/assets/fonts/noigrotesk-variable.woff2') format('woff2');
+}
 
 body {
-    font-family: #{$norm-font-family};
+    font-family: #{$noi-font-family};
 
     --typography-family-label: #{$norm-font-family};
     --typography-family-text: #{$norm-font-family};

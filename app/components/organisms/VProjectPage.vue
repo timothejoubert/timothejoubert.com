@@ -33,16 +33,24 @@ const tags = computed(() => {
 	if (project.value.tag_group?.length) return project.value.tag_group.filter(item => item.tag).map(item => item.tag)
 	return props.document.tags || []
 })
+
+const projectEl = useTemplateRef<HTMLElement>('projectRef')
+const headEl = useTemplateRef<HTMLElement>('headRef')
+const rootEl = useTemplateRef<HTMLElement>('rootRef')
+
+const { style } = useDraggable(projectEl, {
+    handle: headEl,
+    containerElement: rootEl
+})
 </script>
 
 <template>
-    <div :class="$style.root">
+    <div :class="$style.root" ref="rootRef">
         <LazyVMainProjectListing
             :class="$style.projects"
         />
-        <main :class="$style.project">
-
-            <div :class="$style.head">
+        <main :class="$style.project" ref="projectRef" :style="style">
+            <div :class="$style.head" ref="headRef">
                 <h1 :class="$style.title">
                     {{ document.data.title }}
                 </h1>
@@ -120,6 +128,7 @@ const tags = computed(() => {
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
 }
 
 .projects {
@@ -132,7 +141,7 @@ const tags = computed(() => {
 .project {
     --v-project-page-padding-inline: 16px;
 
-    position: relative;
+    position: fixed;
     z-index: 11;
     width: 100%;
     max-height: var(--app-inner-max-height);
@@ -142,6 +151,7 @@ const tags = computed(() => {
     background-color: var(--color-background);
     // box-shadow: -13px -16px 16px 12px  color-mix(in hsl, var(--color-surface), transparent 30%);
     grid-column: 2 / -1;
+    width: 50%;
     grid-row: 1;
     border: 1PX solid var(--color-surface);
     // background-color: var(--color-surface);

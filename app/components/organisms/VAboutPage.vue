@@ -44,15 +44,11 @@ const page = computed(() => props.document.data)
 }
 
 .content {
-    font-weight: 400;
 	grid-column: 1 / -1;
 	margin-inline: auto;
 	text-align: center;
     margin-block: 0;
-
-    @include media('>=lg') {
-        grid-column: 3 / -3;
-    }
+    max-width: 54ch;
 }
 
 .section {

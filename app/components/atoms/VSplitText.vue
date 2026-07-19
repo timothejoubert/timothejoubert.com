@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { PropType, VNode } from 'vue'
 import type { SplitText } from '~/utils/split-text.ts'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
 	inheritAttrs: false,
@@ -35,7 +36,7 @@ export default defineComponent({
 
 			if (props.render === 'chars') {
 				renderNodes = splitTextData.characters.map((char, _i) => {
-					return h('span', { class: attrs.class }, char)
+					return h('span', { class: [attrs.class, 'split-text-char'] }, char)
 				})
 			}
 			else if (props.render === 'words') {

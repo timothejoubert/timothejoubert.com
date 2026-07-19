@@ -2,5 +2,9 @@ $norm-font-name: 'TT Norms Pro';
 
 // https://github.com/unjs/fontaine
 // {Name of Font} fallback
-$norm-font-name-fallback: '#{$norm-font-name} fallback'; 
+$norm-font-name-fallback: '#{$norm-font-name} fallback';
 $norm-font-family: $norm-font-name, $norm-font-name-fallback, sans-serif;
+
+$noi-font-name: 'noi';
+$noi-font-name-fallback: '#{$noi-font-name} fallback';
+$noi-font-family: $noi-font-name, $noi-font-name-fallback, monospace;
