@@ -62,7 +62,7 @@ export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocumen
 	// route.path first: Prismic's own doc.url can't disambiguate types that map to more than one
 	// route (e.g. project pages are reachable from both home and archive), so it isn't reliable
 	// as a canonical URL — the actually-served route always is.
-	const canonicalUrl = computed(() => joinURL(siteUrl, route.path || doc.value?.url))
+	const canonicalUrl = computed(() => joinURL(siteUrl, route.path || doc.value?.url || ''))
 
 	const alternateLinks = computed<PageMetaAlternateLink[]>(() => {
 		const alts = [
