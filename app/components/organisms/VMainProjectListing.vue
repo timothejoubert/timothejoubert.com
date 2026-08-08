@@ -5,7 +5,6 @@ const { data: projects } = await usePrismicFetchProjects(true)
 <template>
     <ul
         v-if="projects?.length"
-        class="grid"
         :class="$style.root"
     >
         <LazyVProjectCard
@@ -22,10 +21,18 @@ const { data: projects } = await usePrismicFetchProjects(true)
 .root {
     --grid-container-width: 100%;
 
+    display: grid;
     height: min-content;
+    gap: var(--gutter);
+    grid-template-columns: minmax(0, 1fr);
     margin-block: initial;
     padding-inline: initial;
-    row-gap: var(--gutter);
+
+    @include grid-container;
+
+    @include media('>=md') {
+        grid-template-columns: repeat(var(--v-home-grid-columns, 4), minmax(0, 1fr));
+    }
 }
 
 .item {
@@ -33,11 +40,7 @@ const { data: projects } = await usePrismicFetchProjects(true)
     list-style: none;
 
     @include media('>=md') {
-        grid-column: auto / span 4;
-    }
-
-    @include media('>=lg') {
-        grid-column: auto / span 3;
+        grid-column: auto;
     }
 }
 </style>

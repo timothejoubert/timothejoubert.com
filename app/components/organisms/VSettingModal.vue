@@ -2,6 +2,25 @@
 const expanded = ref(false)
 const toggle = () => expanded.value = !expanded.value
 const id = 'setting-modal-' + useId()
+
+const { columns, min, max } = useGridColumns()
+
+if (import.meta.server) {
+	useHead({
+		style: [{ innerHTML: `:root{ --v-home-grid-columns: ${columns.value}; }` }],
+	})
+}
+
+function setGridColumnsCssVar() {
+	document.documentElement.style.setProperty('--v-home-grid-columns', String(columns.value))
+}
+
+watch(columns, setGridColumnsCssVar)
+
+function onGridColumnsInput(e: Event) {
+	const value = Number((e.target as HTMLInputElement).value)
+	if (value) columns.value = value
+}
 </script>
 
 <template>
@@ -29,7 +48,14 @@ const id = 'setting-modal-' + useId()
 				<VThemeSwitcher />
 				<div :class="$style['setting-item']">
 					<label for="grid_value">Grid value</label>
-					<input id="grid_value" type="number" min="1" value="4" max="5" />
+					<input
+						id="grid_value"
+						type="number"
+						:min="min"
+						:max="max"
+						:value="columns"
+						@change="onGridColumnsInput"
+					/>
 				</div>
 			</div>
 		</div>
