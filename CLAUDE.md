@@ -38,6 +38,10 @@ Project pages are implemented as **nested routes** so a project opens as a modal
 - The Prismic `favorite` boolean field on a project determines which single context (home vs archive) it belongs to — a project never appears in both, so there's no canonical/duplicate-content concern.
 - `usePrismicFetchProjects(true|false)` fetches the home vs. archive project set respectively.
 
+### Prefer VueUse over hand-rolled utilities
+
+`@vueuse/nuxt` is a dependency and its composables are auto-imported. Before writing a new composable (or a chunk of imperative DOM/browser logic — mouse/pointer tracking, element bounding rects, resize/intersection observers, storage, clipboard, etc.), check whether VueUse already covers it (e.g. `useMouseInElement`, `useElementBounding`, `useResizeObserver`) and use that instead of reimplementing it. Only hand-roll when VueUse's composable doesn't fit the actual requirement (e.g. its geometry/behavior doesn't match what's needed) — and note briefly why when that's the case.
+
 ### Composables drive page data fetching
 
 Prismic fetching/meta logic lives in `app/composables/use-*.ts` (e.g. `useFetchPage`, `usePrismicFetchDocument`, `usePrismicFetchProjects`, `usePage`, `usePageMeta`, `usePrismicMeta`, `usePrismicPreviewRoute`). `useFetchPage` resolves the Prismic document type from the route (via `getDocumentTypeByUrl` in `app/utils/prismic/route-resolver.ts`) when not explicitly given, fetches the document, calls `usePage` to register it, and throws a Nuxt error (via `showError`) on 404/fetch failure. Page-level `.vue` files should stay thin and delegate to these composables rather than reimplementing fetch/error logic.

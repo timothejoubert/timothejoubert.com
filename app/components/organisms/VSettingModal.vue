@@ -3,6 +3,8 @@ const expanded = ref(false)
 const toggle = () => expanded.value = !expanded.value
 const id = 'setting-modal-' + useId()
 
+const { activate: onButtonMagnetEvent } = useMagnetHover()
+
 const { columns, min, max } = useGridColumns()
 
 if (import.meta.server) {
@@ -24,7 +26,11 @@ function onGridColumnsInput(e: Event) {
 </script>
 
 <template>
-	<div :class="$style.root">
+	<div
+		:class="$style.root"
+		@pointerenter="onButtonMagnetEvent"
+		@pointerleave="onButtonMagnetEvent"
+	>
 		<slot name="target">
 			<button
 				:class="$style.button"
@@ -68,11 +74,23 @@ function onGridColumnsInput(e: Event) {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+
+	// Extends the hoverable area beyond the visible button so the magnet effect starts on
+	// approach. Lives outside .button (which needs overflow: hidden to clip the moving shape).
+	// z-index: -1 keeps it "polite": it only wins hit-testing where nothing else is rendered,
+	// yielding to any real overlapping content (e.g. a neighboring nav link) in front of it.
+	&::before {
+		position: absolute;
+		z-index: -1;
+		content: '';
+		inset: -12px;
+	}
 }
 
 .button {
 	position: relative;
 	display: flex;
+	overflow: hidden;
 	height: 100%;
 	align-items: center;
 	justify-content: center;
@@ -81,16 +99,27 @@ function onGridColumnsInput(e: Event) {
 	background-color: var(--color-surface);
 	color: var(--color-content);
 	cursor: pointer;
+	isolation: isolate;
 	padding-inline: 16px;
 
-	&::before {
+	// z-index: auto positioned pseudos paint above in-flow content (the icon) regardless of
+	// DOM order, so isolation above + a negative z-index here keeps the icon on top.
+	&::after {
 		position: absolute;
+		z-index: -1;
 		background-color: var(--color-background);
 		content: '';
 		inset: 5px;
-		scale: 0 1;
-		transform-origin: left;
-		transition: scale 0.25s ease(out-quart);
+		opacity: 0;
+		scale: 0.85;
+		transition: opacity 0.3s ease(out-quart), scale 0.3s ease(out-quart), translate 0.3s ease(out-quart);
+		translate: var(--magnet-x, 0) var(--magnet-y, 0);
+
+		.root:hover & {
+			opacity: 1;
+			scale: 1;
+			translate: 0 0;
+		}
 
 		@supports (corner-shape: squircle) {
 			border-radius: 42px;
@@ -98,12 +127,10 @@ function onGridColumnsInput(e: Event) {
 		}
 	}
 
-	&:hover::before {
+	&[aria-expanded="true"]::after {
+		opacity: 1;
 		scale: 1;
-	}
-
-	&[aria-expanded="true"]::before {
-		scale: 1;
+		translate: 0 0;
 	}
 
 	@supports (corner-shape: squircle) {
