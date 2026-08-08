@@ -2,7 +2,7 @@ import svgLoader from 'vite-svg-loader'
 import { PREVIEW_PATH } from './app/constants/prismic-preview'
 import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from './i18n/i18n'
 import { version } from './package.json'
-import { prismicDocumentRoutes } from './shared/prismic-routes'
+import { prismicDocumentRoutes } from './shared/prismic-schema'
 import { repositoryName } from './slicemachine.config.json'
 
 // const isDev = process.env.NODE_ENV === 'development'

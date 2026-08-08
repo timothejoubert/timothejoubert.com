@@ -1,28 +1,49 @@
 // https://prismic.io/docs/route-resolver#resolvers
 // https://prismic.io/docs/nuxt-3-define-routes
-import { extractValueBetweenOccurrence } from '~/utils/string/extract'
 import { I18N_LOCALES } from '~~/i18n/i18n'
 import { prismicDocumentRoutes } from '~~/shared/prismic-schema'
 
-// TODO: find item by alias too
+type LocaleSegment = (typeof I18N_LOCALES)[number]
+
+function isLocaleSegment(segment: string | undefined): segment is LocaleSegment {
+	return I18N_LOCALES.includes(segment as LocaleSegment)
+}
+
+/**
+ * Whether `path` matches a route template such as `/:lang?/archive/:uid`.
+ * `:lang?` is an optional locale segment, any other `:param` matches a single arbitrary segment.
+ */
+function matchesTemplate(path: string, template: string): boolean {
+	const pathSegments = path.split('/').filter(Boolean)
+	const templateSegments = template.split('/').filter(Boolean)
+
+	let pathIndex = 0
+
+	for (const templateSegment of templateSegments) {
+		if (templateSegment === ':lang?') {
+			if (isLocaleSegment(pathSegments[pathIndex])) pathIndex++
+			continue
+		}
+
+		const pathSegment = pathSegments[pathIndex]
+		if (pathSegment === undefined) return false
+		if (!templateSegment.startsWith(':') && templateSegment !== pathSegment) return false
+
+		pathIndex++
+	}
+
+	return pathIndex === pathSegments.length
+}
+
+/** All path templates (primary path + aliases) a route can be reached by. */
+function getRouteTemplates(route: { path: string, alias?: readonly string[] }): string[] {
+	return [route.path, ...(route.alias || [])]
+}
+
 export function getDocumentTypeByUrl(path: string) {
-	const firstSegment = extractValueBetweenOccurrence(path, '/', [1, 2]) || ''
+	const route = prismicDocumentRoutes.find(prismicRoute =>
+		getRouteTemplates(prismicRoute).some(template => matchesTemplate(path, template)),
+	)
 
-	const route = prismicDocumentRoutes.find((prismicRoute) => {
-		if (path === prismicRoute.path) return true
-
-		// Replace locale or uid if exist
-		const hasLocale = I18N_LOCALES.includes(firstSegment as (typeof I18N_LOCALES)[number])
-		const dynamicUid = prismicRoute.path?.includes(':uid') && path.substring(path.lastIndexOf('/') + 1)
-
-		const filteredPath = prismicRoute.path
-			?.replace('/:lang?', hasLocale ? `/${firstSegment}` : '')
-			.replace(':uid', dynamicUid || '') || '/'
-
-		return path === filteredPath
-	})
-
-	if (route) return route.type
-
-	return undefined
+	return route?.type
 }

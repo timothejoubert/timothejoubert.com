@@ -30,6 +30,7 @@ export const prismicDocumentRoutes = [
 		name: 'index',
 		type: prismicDocumentType.HOME_PAGE,
 		path: '/:lang?',
+		alias: ['/:lang?/projets', '/:lang?/projects'],
 	},
 	{
 		name: 'archive',
