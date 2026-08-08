@@ -10,24 +10,27 @@ export type RepeatableDocument = ProjectDocument
 export type RepeatableDocumentType = ExtractDocumentType<ProjectDocument>
 
 export function usePrismicFetchDocumentListing(
-	prismicDocument: RepeatableDocumentType, options: GetAllByTypeParams = {},
+	prismicDocument: RepeatableDocumentType, options: MaybeRefOrGetter<GetAllByTypeParams> = {},
 ) {
 	const prismicClient = usePrismic().client
-	const fetchOptions = {
-		// pageSize: options.pageSize || 12, // default 20
-		limit: options.pageSize || 2, // default 20
-		routes: prismicDocumentRoutes,
-		brokenRoute: '/404',
-		...useLocale()?.fetchLocaleOption.value,
-		...options,
-	}
+	const fetchOptions = computed(() => {
+		return {
+			// pageSize: value.pageSize || 12, // default 20
+			limit: toValue(options)?.pageSize || 2, // default 20
+			routes: prismicDocumentRoutes,
+			brokenRoute: '/404',
+			...useLocale()?.fetchLocaleOption.value,
+			...toValue(options),
+		}
+	})
 
 	const hash: string[] = [prismicDocument]
-	if (Object.keys(fetchOptions).length) hash.push(generateHashFromObject(fetchOptions))
+	if (Object.keys(fetchOptions.value).length) hash.push(generateHashFromObject(fetchOptions.value))
 
 	const key = `documents-${hash.join('-')}`
 
-	return useAsyncData(key, () => prismicClient.getAllByType(prismicDocument, options), {
+	return useAsyncData(key, () => prismicClient.getAllByType(prismicDocument, toValue(options)), {
 		lazy: false,
+		watch: [fetchOptions],
 	})
 }

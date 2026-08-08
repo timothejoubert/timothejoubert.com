@@ -4,6 +4,8 @@
 - Faire une review SEO du site
 - Faire une review A11y du site
 
+- Skeleton archive row avec une taille similaire des cells lors du chargement (page fetch + refetch lors des queries d'order)
+
 - VProjectPage: Add reveal and switch animation to reveal content
 - VProjectPage: Add backdrop or find a design hack to highlight VWindow with background
 - VSpashScreen: add animation (from tim label to navBar transition ?)

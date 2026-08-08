@@ -7,31 +7,40 @@ const props = defineProps<{
 const ORDERING_PREFIX = 'ordering'
 
 const route = useRoute()
+const router = useRouter()
 const sort = computed(() => {
 	return route.query[ORDERING_PREFIX] === 'asc' ? 'desc' : 'asc'
 })
 
-const href = computed(() => route.path + `?field=${props.field}&${ORDERING_PREFIX}=${sort.value}`)
+function onClick() {
+	router.replace({ query: { field: props.field, [ORDERING_PREFIX]: sort.value } })
+}
 </script>
 
 <template>
-    <a
-        :href="href"
+    <button
+        type="button"
         :class="$style.link"
+        @click="onClick"
     >
         {{ props.label }}
         <VIcon
             prefix="material-symbols"
             :name="sort === 'asc' ? 'arrow-downward-alt' : 'arrow-upward-alt'"
         />
-    </a>
+    </button>
 </template>
 
 <style lang="scss" module>
 .link {
 	display: inline-flex;
 	align-items: center;
+	padding: 0;
+	border: none;
+	background: none;
 	color: inherit;
+	cursor: pointer;
+	font: inherit;
 	gap: 4px;
 	text-decoration: none;
 }

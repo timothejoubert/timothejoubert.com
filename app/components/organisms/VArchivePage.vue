@@ -34,7 +34,7 @@ const fetchOptions = computed(() => {
 	return result
 })
 
-const { data: projects, error, pending } = usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions.value)
+const { data: projects, error, pending } = usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions)
 
 function getTagLabels(tagGroup: ProjectDocumentData['tag_group']) {
 	return tagGroup
