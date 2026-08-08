@@ -87,17 +87,13 @@ $handle-corner: 10px;
 
 .root {
     position: absolute;
-    overflow: hidden;
+    // overflow: hidden;
     border-radius: 12px;
     background-color: var(--color-background);
     border: 1PX solid var(--color-surface);
 
     &--resizing {
         pointer-events: none;
-
-        [class*='resize-handle'] {
-            pointer-events: auto;
-        }
     }
 }
 
@@ -142,6 +138,10 @@ $handle-corner: 10px;
 [class*='resize-handle--'] {
     position: absolute;
     z-index: 10;
+
+    .root--resizing & {
+        pointer-events: auto;
+    }
 }
 
 .resize-handle--n  { top: 0; left: $handle-corner; right: $handle-corner; height: $handle-edge; cursor: n-resize; }

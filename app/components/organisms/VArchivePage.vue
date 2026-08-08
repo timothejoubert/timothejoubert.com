@@ -58,6 +58,14 @@ const fallbackMessage = computed(() => {
 })
 
 const animationEnabled = ref(false)
+
+function onRowClick(event: MouseEvent, uid: string) {
+	if ((event.target as HTMLElement).closest('a')) {
+		// Let the arrow link itself handle its own navigation/modifier clicks.
+		return
+	}
+	navigateTo(getRoutePath('projet-archive', { uid }))
+}
 </script>
 
 <template>
@@ -117,6 +125,7 @@ const animationEnabled = ref(false)
                         v-for="project in projects"
                         :key="project.id"
                         :class="$style['body-row']"
+                        @click="onRowClick($event, project.uid)"
                     >
                         <td>
                             <span>
@@ -160,6 +169,13 @@ const animationEnabled = ref(false)
 </template>
 
 <style lang="scss" module>
+
+// Hover effect
+// lorsque je survol l'une des lignes du tableau, son bandeau se déplace depuis la direction d'ou provient la souris pour recouvrir la ligne survolée
+// lorsque je survol la ligne suivante, le bandeau se déplace vers le bas pour disparaître
+// lorsque je survol la ligne precédante, le bandeau se déplace vers le haut pour disparaître
+// lors d'un survol rapide vers le bas, ca donne un effet de balayage du haut vers le bas avec de multiples bandeaux qui se suivent
+
 .root {
     --v-archive-row-border-radius: 8px;
     --v-archive-border-spacing: 5px;
@@ -172,8 +188,6 @@ const animationEnabled = ref(false)
     width: 100%;
     border-spacing: 0 0;
 
-    // border-spacing: 0 var(--v-archive-border-spacing);
-
     td {
         padding-inline: 18px;
     }
@@ -181,6 +195,10 @@ const animationEnabled = ref(false)
 
 .head-row td {
     padding-block: 4px;
+}
+
+.body-row {
+    cursor: pointer;
 }
 
 .body-row td {
@@ -223,11 +241,12 @@ const animationEnabled = ref(false)
         pointer-events: none;
         translate: 0 100%;
     }
+}
 
-    @media(hover: hover) {
-        &:hover td::before {
-            translate: 0 0;
-        }
+@media (hover: hover) {
+    // Hovering any cell counts as hovering the whole row.
+    .body-row:hover td::before {
+        translate: 0 0;
     }
 }
 
@@ -242,7 +261,7 @@ const animationEnabled = ref(false)
     }
 }
 
-.table:has(tr:hover) tr:hover ~ tr td::before {
+.table:has(.body-row:hover) .body-row:hover ~ .body-row td::before {
     translate: 0 calc(-100% - var(--v-archive-border-spacing));
 }
 

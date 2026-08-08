@@ -86,7 +86,7 @@ $card-padding: 16px;
     }
 
     @media (hover: hover) {
-        .root:hover &::before {
+        &:hover::before {
             opacity: 0.5;
         }
     }
