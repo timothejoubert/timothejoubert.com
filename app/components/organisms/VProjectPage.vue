@@ -129,6 +129,7 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
     z-index: 11;
     top: var(--app-padding-top);
     right: var(--app-padding-right);
+    overflow: hidden auto;
     width: 50%;
     max-width: var(--app-inner-max-width);
     max-height: var(--app-inner-max-height);
@@ -166,9 +167,9 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
 .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: inherit;
-    margin: 0;
     padding: 0;
+    margin: 0;
+    gap: inherit;
     list-style: none;
 }
 
