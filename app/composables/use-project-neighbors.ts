@@ -1,5 +1,5 @@
 import type { ProjectDocument } from '~~/prismicio-types'
-import { getRoutePath, type PrismicRouteName } from '~~/shared/prismic-routes'
+import { getRoutePath, type PrismicRouteName } from '~~/shared/prismic-schema'
 
 interface ProjectNeighbor {
 	title: ProjectDocument['data']['title']

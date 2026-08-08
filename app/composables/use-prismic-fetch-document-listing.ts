@@ -1,5 +1,5 @@
 import type { ExtractDocumentType } from '~/types/api'
-import { prismicDocumentRoutes } from '~~/shared/prismic-routes'
+import { prismicDocumentRoutes } from '~~/shared/prismic-schema'
 import type { ProjectDocument } from '~~/prismicio-types'
 import { generateHashFromObject } from '~/utils/hash'
 

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { ProjectDocument } from '~~/prismicio-types'
 import type { VWrapperElement } from '~/components/atoms/VWrapper.vue'
-import { getRoutePath } from '~~/shared/prismic-routes'
+import { getRoutePath } from '~~/shared/prismic-schema'
 
 const props = defineProps<{
 	project: ProjectDocument

@@ -1,5 +1,5 @@
-import type { ExtractPrismicDocument } from '~/types/api'
-import { isDynamicDocument, type PrismicDocumentType } from '~~/shared/prismic-document'
+import type { ExtractPrismicDocument, PrismicDocumentType } from '~/types/api'
+import { isDynamicDocument } from '~~/shared/prismic-schema'
 
 export async function usePrismicFetchDocument<Type extends PrismicDocumentType = PrismicDocumentType>(prismicDocument: Type | undefined) {
 	const route = useRoute()

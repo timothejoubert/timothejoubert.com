@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { prismicDocumentType } from '~~/shared/prismic-document'
-import { getRoutePath } from '~~/shared/prismic-routes'
+import { getRoutePath, prismicDocumentType } from '~~/shared/prismic-schema'
 
 const { document } = await useFetchPage(prismicDocumentType.PROJECT_PAGE)
 

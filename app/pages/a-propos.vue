@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { prismicDocumentType } from '~~/shared/prismic-document'
+import { prismicDocumentType } from '~~/shared/prismic-schema'
 
 const { document } = await useFetchPage(prismicDocumentType.ABOUT_PAGE)
 usePrismicMeta(document)

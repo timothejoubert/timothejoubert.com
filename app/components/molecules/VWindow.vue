@@ -87,10 +87,9 @@ $handle-corner: 10px;
 
 .root {
     position: absolute;
-    // overflow: hidden;
+    border: 1PX solid var(--color-surface);
     border-radius: 12px;
     background-color: var(--color-background);
-    border: 1PX solid var(--color-surface);
 
     &--resizing {
         pointer-events: none;
@@ -98,10 +97,9 @@ $handle-corner: 10px;
 }
 
 .inner {
+    overflow: auto;
     width: 100%;
     height: 100%;
-    overflow: auto;
-
     -ms-overflow-style: none;
     scrollbar-width: none;
 
@@ -113,23 +111,23 @@ $handle-corner: 10px;
 .head {
     position: sticky;
     top: 0;
-    cursor: move;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-radius: inherit;
     background-color: var(--color-surface);
     color: var(--color-content);
-    border-radius: inherit;
+    cursor: move;
 
     &::before {
         position: absolute;
-        content: '';
-        display: block;
         top: -3px;
-        left: -5px;
         right: -5px;
+        left: -5px;
+        display: block;
         height: 15px;
         background-color: var(--color-surface);
+        content: '';
         pointer-events: none;
     }
 }
@@ -144,12 +142,12 @@ $handle-corner: 10px;
     }
 }
 
-.resize-handle--n  { top: 0; left: $handle-corner; right: $handle-corner; height: $handle-edge; cursor: n-resize; }
-.resize-handle--s  { bottom: 0; left: $handle-corner; right: $handle-corner; height: $handle-edge; cursor: s-resize; }
+.resize-handle--n  { top: 0; right: $handle-corner; left: $handle-corner; height: $handle-edge; cursor: n-resize; }
+.resize-handle--s  { right: $handle-corner; bottom: 0; left: $handle-corner; height: $handle-edge; cursor: s-resize; }
 .resize-handle--e  { top: $handle-corner; right: 0; bottom: $handle-corner; width: $handle-edge; cursor: e-resize; }
-.resize-handle--w  { top: $handle-corner; left: 0; bottom: $handle-corner; width: $handle-edge; cursor: w-resize; }
+.resize-handle--w  { top: $handle-corner; bottom: $handle-corner; left: 0; width: $handle-edge; cursor: w-resize; }
 .resize-handle--ne { top: 0; right: 0; width: $handle-corner; height: $handle-corner; cursor: ne-resize; }
 .resize-handle--nw { top: 0; left: 0; width: $handle-corner; height: $handle-corner; cursor: nw-resize; }
-.resize-handle--se { bottom: 0; right: 0; width: $handle-corner; height: $handle-corner; cursor: se-resize; }
+.resize-handle--se { right: 0; bottom: 0; width: $handle-corner; height: $handle-corner; cursor: se-resize; }
 .resize-handle--sw { bottom: 0; left: 0; width: $handle-corner; height: $handle-corner; cursor: sw-resize; }
 </style>

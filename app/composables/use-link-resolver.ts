@@ -4,7 +4,7 @@ import type {
 	_RouteRecordBase,
 } from 'vue-router'
 import type { PrismicReachableDocumentType, ReachableDocument } from '~/types/api'
-import { type PrismicDocumentRoute, isPrismicDocumentRoute } from '~~/shared/prismic-routes'
+import { type PrismicDocumentRoute, isPrismicDocumentRoute } from '~~/shared/prismic-schema'
 
 export type PossibleRouteReference
     = string

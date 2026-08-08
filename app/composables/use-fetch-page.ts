@@ -1,5 +1,5 @@
 import { getDocumentTypeByUrl } from '~/utils/prismic/route-resolver'
-import type { PrismicDocumentPageType } from '~~/shared/prismic-document'
+import type { PrismicDocumentPageType } from '~~/shared/prismic-schema'
 
 export async function useFetchPage<T extends PrismicDocumentPageType>(type: T | undefined) {
 	const route = useRoute()

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { asLinkAttrs, isFilled } from '@prismicio/client'
-import { prismicDocumentType } from '~~/shared/prismic-document'
+import { prismicDocumentType } from '~~/shared/prismic-schema'
 
 const { data } = await usePrismicFetchDocument(prismicDocumentType.MENU)
 

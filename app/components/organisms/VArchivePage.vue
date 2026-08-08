@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { filter } from '@prismicio/client'
 import type { ArchiveDocument, ProjectDocumentData } from '~~/prismicio-types'
-import { prismicDocumentType } from '~~/shared/prismic-document'
-import { getRoutePath } from '~~/shared/prismic-routes'
+import { getRoutePath, prismicDocumentType } from '~~/shared/prismic-schema'
 
 defineProps<{
 	document: ArchiveDocument

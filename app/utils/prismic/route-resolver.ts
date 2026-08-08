@@ -2,7 +2,7 @@
 // https://prismic.io/docs/nuxt-3-define-routes
 import { extractValueBetweenOccurrence } from '~/utils/string/extract'
 import { I18N_LOCALES } from '~~/i18n/i18n'
-import { prismicDocumentRoutes } from '~~/shared/prismic-routes'
+import { prismicDocumentRoutes } from '~~/shared/prismic-schema'
 
 // TODO: find item by alias too
 export function getDocumentTypeByUrl(path: string) {

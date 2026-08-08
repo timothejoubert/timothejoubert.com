@@ -32,6 +32,11 @@ There is no test runner configured in this repo — do not assume Vitest/Jest ex
 
 Pages are backed by Prismic documents. `shared/prismic-routes.ts` is the **single source of truth** mapping Prismic document types to URL paths (`prismicDocumentRoutes`). Use `getRoutePath(name, params)` to build URLs rather than hardcoding paths — never index `prismicDocumentRoutes` directly by type for lookups with collisions, use `prismicRouteByName`.
 
+Document-type genericity is layered so nothing needs hand-syncing when a Prismic custom type is added/removed:
+- `app/types/api.ts`'s `PrismicDocumentType` is derived straight from the Prismic-codegen'd `AllDocumentTypes` (`prismicio-types.d.ts`) — the actual single source of truth for "what document types exist." Always import `PrismicDocumentType` from here, not re-declare it.
+- `shared/prismic-document.ts`'s `prismicDocumentType` object gives friendly named constants (`prismicDocumentType.HOME_PAGE`, etc.) for call-site ergonomics, but every value is checked against `PrismicDocumentType` via `satisfies` — a renamed/removed custom type fails to compile there instead of silently drifting.
+- `PrismicDocumentPageType` (routable page types) and `isDynamicDocument` (repeatable/`:uid` types) are both derived from `prismicDocumentRoutes`, not separately hand-listed — adding a new routable type only means adding one entry to `prismicDocumentRoutes`.
+
 Project pages are implemented as **nested routes** so a project opens as a modal over the listing page instead of unmounting it (SSR still renders both together for SEO). See `docs/project-modal-routing.md` for the full rationale. Concretely:
 - `app/pages/index.vue` renders the home listing + `<NuxtPage />`; `app/pages/index/[uid].vue` is the child project modal for home ("favorite") projects.
 - `app/pages/archive.vue` renders `VArchivePage` + `<NuxtPage />`; `app/pages/archive/[uid].vue` is the child project modal for archived projects.
