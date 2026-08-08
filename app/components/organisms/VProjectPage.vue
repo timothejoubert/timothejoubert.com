@@ -29,6 +29,8 @@ const tags = computed(() => {
     if (project.value.tag_group?.length) return project.value.tag_group.filter(item => item.tag).map(item => item.tag)
     return props.document.tags || []
 })
+
+const { prevProject, nextProject } = useProjectNeighbors(props.document)
 </script>
 
 <template>
@@ -95,6 +97,28 @@ const tags = computed(() => {
                 <VPrismicImg v-else :field="mediaGroup.media" />
             </div>
         </div>
+
+        <div
+            v-if="prevProject || nextProject"
+            :class="$style.footer"
+        >
+            <NuxtLink
+                v-if="prevProject"
+                :to="prevProject.path"
+                :class="$style['footer-link']"
+            >
+                <VIcon prefix="material-symbols" name="arrow-back" />
+                {{ prevProject.title }}
+            </NuxtLink>
+            <NuxtLink
+                v-if="nextProject"
+                :to="nextProject.path"
+                :class="[$style['footer-link'], $style['footer-link--next']]"
+            >
+                {{ nextProject.title }}
+                <VIcon prefix="material-symbols" name="arrow-forward" />
+            </NuxtLink>
+        </div>
     </VWindow>
 </template>
 
@@ -158,5 +182,26 @@ const tags = computed(() => {
 
 .media {
     margin-block: 0;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--v-project-page-padding-inline);
+    background-color: var(--color-background);
+    gap: 10px;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    gap: 6px;
+    text-decoration: none;
+
+    &--next {
+        margin-left: auto;
+        text-align: right;
+    }
 }
 </style>
