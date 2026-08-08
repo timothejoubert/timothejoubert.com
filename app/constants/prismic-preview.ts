@@ -1,1 +1,1 @@
-export const PREVIEW_PATH = '/prismic-preview'
+export const PREVIEW_PATH = '/preview'

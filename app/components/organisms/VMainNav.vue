@@ -4,7 +4,7 @@ import { prismicDocumentType } from '~~/shared/prismic-schema'
 
 const { data } = await usePrismicFetchDocument(prismicDocumentType.MENU)
 
-const links = computed(() => data.value.data.links)
+const links = computed(() => data.value?.data.links || [])
 
 const _links = computed(() => {
 	return links.value.filter((link) => {

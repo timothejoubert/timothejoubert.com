@@ -97,3 +97,26 @@ export type PrismicDocumentPageType = PrismicDocumentRoute['type']
 export function isDynamicDocument(type: PrismicDocumentType) {
 	return prismicDocumentRoutes.some(route => route.type === type && route.path.includes(':uid'))
 }
+
+/**
+ * Nuxt `routeRules` redirecting each route's `alias` path(s) to its canonical path (e.g. `/projets`
+ * and `/projects` both redirect to `/`), so aliases are real navigable/crawlable routes instead of
+ * only being considered by `getDocumentTypeByUrl`'s fallback resolution in `useFetchPage`.
+ * Static-friendly: works the same whether served (SSR) or prerendered (`nuxi generate`).
+ * Note: only handles alias paths without dynamic segments (none currently need one).
+ */
+export function getPrismicAliasRedirects(): Record<string, { redirect: string }> {
+	const rules: Record<string, { redirect: string }> = {}
+
+	for (const route of prismicDocumentRoutes) {
+		if (!('alias' in route) || !route.alias?.length) continue
+
+		const target = getRoutePath(route.name)
+		for (const alias of route.alias) {
+			const literalAlias = alias.replace('/:lang?', '') || '/'
+			rules[literalAlias] = { redirect: target }
+		}
+	}
+
+	return rules
+}

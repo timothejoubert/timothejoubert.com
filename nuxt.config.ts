@@ -2,7 +2,8 @@ import svgLoader from 'vite-svg-loader'
 import { PREVIEW_PATH } from './app/constants/prismic-preview'
 import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from './i18n/i18n'
 import { version } from './package.json'
-import { prismicDocumentRoutes } from './shared/prismic-schema'
+import { getPrismicSitemapUrls } from './shared/prismic-sitemap-urls'
+import { getPrismicAliasRedirects, prismicDocumentRoutes } from './shared/prismic-schema'
 import { repositoryName } from './slicemachine.config.json'
 
 // const isDev = process.env.NODE_ENV === 'development'
@@ -10,7 +11,7 @@ const isProd = process.env.NUXT_PUBLIC_SITE_ENV === 'production'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n', '@nuxtjs/prismic', '@vueuse/nuxt'],
+	modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n', '@nuxtjs/prismic', '@nuxtjs/sitemap', '@nuxtjs/robots', '@vueuse/nuxt'],
 	plugins: [
 		'~/plugins/anchor-polyfill.client.ts',
 	],
@@ -38,10 +39,36 @@ export default defineNuxtConfig({
 		public: {
 			version,
 			site: {
-				name: '',
-				url: '',
-				env: '',
+				name: 'Timothé Joubert',
+				url: 'https://timothejoubert.netlify.app',
+				env: 'local',
 			},
+		},
+	},
+
+	// https://nuxtseo.com/site-config — shared by @nuxtjs/sitemap and @nuxtjs/robots
+	site: {
+		url: process.env.NUXT_PUBLIC_SITE_URL,
+		name: process.env.NUXT_PUBLIC_SITE_NAME,
+	},
+
+	// https://nuxtseo.com/sitemap/getting-started/introduction
+	sitemap: {
+		exclude: [`${PREVIEW_PATH}/**`, '/slice-simulator'],
+		urls: () => getPrismicSitemapUrls(repositoryName),
+	},
+
+	// https://nuxtseo.com/robots/getting-started/introduction
+	robots: {
+		disallow: [PREVIEW_PATH, '/slice-simulator'],
+	},
+
+	// Redirect prismicDocumentRoutes' `alias` paths (e.g. /projets, /projects) to their canonical route.
+	routeRules: getPrismicAliasRedirects(),
+	nitro: {
+		prerender: {
+			// Aliases aren't linked from anywhere in the app, so the crawler won't find them on its own.
+			routes: Object.keys(getPrismicAliasRedirects()),
 		},
 	},
 

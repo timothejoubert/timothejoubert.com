@@ -18,22 +18,17 @@ export async function usePrismicFetchDocument<Type extends PrismicDocumentType =
 		brokenRoute: '/404',
 	}
 
-	const { data, error } = await useAsyncData(dataKey, async () => {
-		try {
-			if (isPreview.value && documentId.value) {
-				return await prismicClient.getByID(documentId.value, prismicFetchOptions)
-			}
-			else if (uid && prismicDocument && isDynamicDocument(prismicDocument)) {
-				return await prismicClient.getByUID(prismicDocument, uid, prismicFetchOptions)
-			}
-			else if (prismicDocument) {
-				return await prismicClient.getSingle(prismicDocument, prismicFetchOptions)
-			}
+	const { data, error } = await useAsyncData(dataKey, () => {
+		if (isPreview.value && documentId.value) {
+			return prismicClient.getByID(documentId.value, prismicFetchOptions)
 		}
-		catch (error) {
-			console.error('Error during Prismic document fetch', error)
-			return { data: null }
+		if (uid && prismicDocument && isDynamicDocument(prismicDocument)) {
+			return prismicClient.getByUID(prismicDocument, uid, prismicFetchOptions)
 		}
+		if (prismicDocument) {
+			return prismicClient.getSingle(prismicDocument, prismicFetchOptions)
+		}
+		return Promise.resolve(undefined)
 	}, {
 		getCachedData: (key, nuxtApp) => nuxtApp.static.data?.[key] ?? nuxtApp.payload.data?.[key],
 		dedupe: 'defer',

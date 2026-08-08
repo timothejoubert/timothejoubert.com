@@ -43,6 +43,10 @@ Project pages are implemented as **nested routes** so a project opens as a modal
 - The Prismic `favorite` boolean field on a project determines which single context (home vs archive) it belongs to — a project never appears in both, so there's no canonical/duplicate-content concern.
 - `usePrismicFetchProjects(true|false)` fetches the home vs. archive project set respectively.
 
+### Imports — prefer Nuxt aliases
+
+Use Nuxt's built-in path aliases (`~`/`@` for the app dir, `~~`/`@@` for the root, `#shared` for the `shared/` dir, etc.) instead of relative paths (`../../foo`) when importing across directories. This keeps imports stable when files move. Relative imports (`./foo`) remain fine for files in the same directory.
+
 ### Prefer VueUse over hand-rolled utilities
 
 `@vueuse/nuxt` is a dependency and its composables are auto-imported. Before writing a new composable (or a chunk of imperative DOM/browser logic — mouse/pointer tracking, element bounding rects, resize/intersection observers, storage, clipboard, etc.), check whether VueUse already covers it (e.g. `useMouseInElement`, `useElementBounding`, `useResizeObserver`) and use that instead of reimplementing it. Only hand-roll when VueUse's composable doesn't fit the actual requirement (e.g. its geometry/behavior doesn't match what's needed) — and note briefly why when that's the case.

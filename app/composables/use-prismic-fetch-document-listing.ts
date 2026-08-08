@@ -27,9 +27,7 @@ export function usePrismicFetchDocumentListing(
 
 	const key = `documents-${hash.join('-')}`
 
-	return useAsyncData(key, () => {
-		return prismicClient.getAllByType(prismicDocument, options)
-	}, {
+	return useAsyncData(key, () => prismicClient.getAllByType(prismicDocument, options), {
 		lazy: false,
 	})
 }
