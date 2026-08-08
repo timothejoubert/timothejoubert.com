@@ -4,6 +4,7 @@ import { asText, type ImageField, type KeyTextField, type RichTextField } from '
 import { joinURL } from 'ufo'
 import type { ReachableDocument } from '~/types/api'
 import { getFormattedLocale } from '~/composables/use-prismic-locale'
+import { ensureProtocol } from '~/utils/url'
 import { I18N_DEFAULT_LOCALE } from '~~/i18n/i18n'
 import type { PageMetaAlternateLink } from '~/composables/use-page-meta'
 
@@ -18,6 +19,7 @@ interface PrismicDocumentPageData extends Record<string, unknown> {
 export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocument | null | undefined>) {
 	const doc = toRef(documentOrRef)
 	const { site } = useRuntimeConfig().public
+	const siteUrl = ensureProtocol(site.url)
 	const generateImg = useImage()
 	const route = useRoute()
 
@@ -47,12 +49,15 @@ export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocumen
 			)
 		}
 		else {
-			return joinURL(site.url, '/images/share.jpg')
+			return joinURL(siteUrl, '/share.jpg')
 		}
 	})
 
 	const noindex = usePrismicPreviewRoute().isPreview
-	const canonicalUrl = computed(() => joinURL(site.url, doc.value?.url || route.path))
+	// route.path first: Prismic's own doc.url can't disambiguate types that map to more than one
+	// route (e.g. project pages are reachable from both home and archive), so it isn't reliable
+	// as a canonical URL — the actually-served route always is.
+	const canonicalUrl = computed(() => joinURL(siteUrl, route.path || doc.value?.url))
 
 	const alternateLinks = computed<PageMetaAlternateLink[]>(() => {
 		const alts = [
@@ -64,7 +69,7 @@ export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocumen
 			const locale = formattedLocale === I18N_DEFAULT_LOCALE ? '' : formattedLocale
 			return {
 				locale: alt.lang,
-				href: joinURL(site.url, locale || '', route.path),
+				href: joinURL(siteUrl, locale || '', route.path),
 			}
 		})
 	})

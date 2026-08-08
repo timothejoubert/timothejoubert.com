@@ -5,6 +5,7 @@ import type {
 } from 'vue-router'
 import type { PrismicReachableDocumentType, ReachableDocument } from '~/types/api'
 import { type PrismicDocumentRoute, isPrismicDocumentRoute } from '~~/shared/prismic-schema'
+import { ensureProtocol } from '~/utils/url'
 
 export type PossibleRouteReference
     = string
@@ -17,7 +18,8 @@ export type PossibleRouteReference
         | PrismicDocumentRoute
 
 export function useLinkResolver(reference: PossibleRouteReference) {
-	const siteUrl = useRuntimeConfig().public?.site.url
+	const rawSiteUrl = useRuntimeConfig().public?.site.url
+	const siteUrl = rawSiteUrl ? ensureProtocol(rawSiteUrl) : rawSiteUrl
 	const router = useRouter()
 
 	const url = computed(() => {

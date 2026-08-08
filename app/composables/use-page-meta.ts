@@ -1,6 +1,7 @@
 import type { ReactiveHead } from '@unhead/vue'
 import type { MaybeRefOrGetter } from 'vue'
 import { truncate } from '~/utils/string/truncate'
+import { ensureProtocol } from '~/utils/url'
 import { joinURL } from 'ufo'
 
 export interface PageMetaAlternateLink {
@@ -30,7 +31,7 @@ export function usePageMeta(options: PageMetaOptions = {}) {
     const title = computed(() => toValue(options.title) || '')
     const description = computed(() => toValue(options.description) || '')
     const truncatedDescription = computed(() => truncate(description.value, 160))
-    const image = computed(() => toValue(options.image) || joinURL(runtimeConfig.app.cdnUrl || runtimeConfig.public.site.url, '/images/share.jpg'))
+    const image = computed(() => toValue(options.image) || joinURL(ensureProtocol(runtimeConfig.app.cdnUrl || runtimeConfig.public.site.url), '/share.jpg'))
     const siteName = computed(() => toValue(options.siteName) || runtimeConfig.public.site.name || '')
     const noindex = computed(() => !!toValue(options.noindex))
     const canonicalUrl = computed(() => toValue(options.canonicalUrl) || undefined)
