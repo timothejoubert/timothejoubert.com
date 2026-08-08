@@ -14,6 +14,14 @@ interface PrismicDocumentPageData extends Record<string, unknown> {
 	meta_image?: ImageField
 	// Possible page field
 	image?: ImageField
+	// Project pages have a curated summary distinct from the full case-study body (`content`) —
+	// a better generic fallback for meta description than truncating arbitrary rich text.
+	short_description?: RichTextField
+}
+
+function richTextOrStringToText(field: string | RichTextField | undefined): string | undefined {
+	if (!field) return undefined
+	return typeof field === 'string' ? field : asText(field) || undefined
 }
 
 export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocument | null | undefined>) {
@@ -31,12 +39,9 @@ export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocumen
 	})
 
 	const description = computed(() => {
-		if (docData.value?.meta_description) return docData.value.meta_description
-
-		const content = docData.value?.content
-		if (!content) return undefined
-		if (typeof content === 'string') return content
-		return asText(content as RichTextField) || undefined
+		return docData.value?.meta_description
+			|| richTextOrStringToText(docData.value?.short_description)
+			|| richTextOrStringToText(docData.value?.content as string | RichTextField | undefined)
 	})
 
 	const image = computed(() => {
