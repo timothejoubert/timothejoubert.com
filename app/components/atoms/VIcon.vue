@@ -1,29 +1,16 @@
 <script setup lang="ts">
-defineProps({
-	name: {
-		type: String,
-		required: true,
-	},
-	mode: {
-		type: String as PropType<'svg' | 'css'>,
-		required: false,
-		default: null,
-	},
-	size: {
-		type: [Number, String],
-		required: false,
-		default: null,
-	},
-	prefix: {
-		type: String,
-	},
-})
+defineProps<{
+	name: string
+	mode?: 'svg' | 'css'
+	size?: number | string
+	prefix?: string
+}>()
 </script>
 
 <template>
     <NuxtIcon
         aria-hidden="true"
-        :name="`${prefix || 'tim'}:${name}`"
+        :name="`${prefix || 'material-symbols'}:${name}`"
         :size="size"
         :mode="mode"
     />

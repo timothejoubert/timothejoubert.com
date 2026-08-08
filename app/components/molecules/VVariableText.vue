@@ -62,7 +62,6 @@ function getLetterCenter(element: HTMLElement, axe: 'left' | 'top') {
 
 
 function setLetters() {
-    console.log('setLetters called')
     const lettersElements = Array.from(rootEl.value?.querySelectorAll('.split-text-char') || []) as HTMLElement[]
 
     letters.value = lettersElements.map((letter) => {
@@ -72,7 +71,6 @@ function setLetters() {
             yCenter: getLetterCenter(letter, 'top'),
         }
     })
-    console.log('lettersElements', letters.value)
 
 }
 
@@ -90,7 +88,6 @@ function onMouseMove(event: MouseEvent) {
 }
 
 function onMouseLeave() {
-    console.log('mouseleave')
     letters.value.forEach((letter) => {
         letter.element.style.removeProperty('--font-weight')
         letter.element.style.removeProperty('--font-italic')

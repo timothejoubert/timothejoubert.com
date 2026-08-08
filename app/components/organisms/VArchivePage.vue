@@ -68,7 +68,6 @@ const animationEnabled = ref(false)
             </caption>
             <thead>
                 <tr :class="$style['head-row']">
-                    <!-- <td style="width: 0; padding: 0;" /> -->
                     <td>
                         <VSortLink
                             :label="$t('name')"
@@ -147,7 +146,10 @@ const animationEnabled = ref(false)
                                 :to="getRoutePath('projet-archive', { uid: project.uid })"
                                 :class="$style['arrow-link']"
                             >
-                                <VIcon name="arrow-up-right" />
+                                <VIcon
+                                    prefix="material-symbols"
+                                    name="north-east"
+                                />
                             </VPrismicLink>
                         </td>
                     </tr>

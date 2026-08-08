@@ -111,12 +111,6 @@ export default defineNuxtConfig({
 		serverBundle: {
 			collections: ['material-symbols'],
 		},
-		customCollections: [
-			{
-				prefix: 'tim',
-				dir: './app/assets/images/icons',
-			},
-		],
 	},
 
 	// https://image.nuxt.com/get-started/configuration

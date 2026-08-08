@@ -14,7 +14,8 @@ const id = 'setting-modal-' + useId()
 				@click="toggle"
 			>
 				<VIcon
-					name="setting"
+					prefix="material-symbols"
+					name="settings"
 					size="1.3em"
 				/>
 			</button>

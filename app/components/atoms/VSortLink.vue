@@ -20,7 +20,10 @@ const href = computed(() => route.path + `?field=${props.field}&${ORDERING_PREFI
         :class="$style.link"
     >
         {{ props.label }}
-        <VIcon :name="sort === 'asc' ? 'sort-amount-down' : 'sort-amount-up'" />
+        <VIcon
+            prefix="material-symbols"
+            :name="sort === 'asc' ? 'arrow-downward-alt' : 'arrow-upward-alt'"
+        />
     </a>
 </template>
 
