@@ -156,6 +156,12 @@ export default defineNuxtConfig({
 		serverBundle: {
 			collections: ['material-symbols'],
 		},
+		// Scans source files for literal `prefix:name` icon ids (VIcon's `name` prop is always written
+		// as one full literal, e.g. `material-symbols:cancel`) and bakes matches into the client bundle —
+		// avoids a runtime API fetch that doesn't exist once the site is deployed as a static build.
+		clientBundle: {
+			scan: true,
+		},
 	},
 
 	// https://image.nuxt.com/get-started/configuration
