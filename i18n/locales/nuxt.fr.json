@@ -6,6 +6,7 @@
   "show_setting.aria_label": "Afficher / cacher les paramètres d'interface visuelle",
   "show_setting.button_label": "Paramètres d'affichage",
   "show_setting.grid_value_label": "Nombre de colonnes",
+  "show_setting.grid_value_hint": "Valeur comprise entre {min} et {max}",
   "theme_switcher.legend": "Thème de couleur",
   "back_to_projects.aria_label": "Retour a tous les projets",
   "name": "Nom",
@@ -19,5 +20,7 @@
   "archive_page.error_loading_projects": "Erreur lors du chargement des projets.",
   "archive_page.no_projects_found": "Aucun projet trouvé.",
   "archive_page.loading_projects": "Chargement des projets en cours...",
-  "project_link": "Lien du projet"
+  "project_link": "Lien du projet",
+  "sort_ascending": "Trié par ordre croissant",
+  "sort_descending": "Trié par ordre décroissant"
 }

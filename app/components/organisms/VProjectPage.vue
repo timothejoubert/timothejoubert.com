@@ -47,7 +47,7 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
             <NuxtLink
                 :to="backPath"
                 :class="$style.back"
-                :title="$t('back_to_projects.aria_label')"
+                :aria-label="$t('back_to_projects.aria_label')"
             >
                 <VIcon name="material-symbols:cancel" />
             </NuxtLink>

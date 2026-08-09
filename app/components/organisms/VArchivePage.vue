@@ -56,6 +56,13 @@ const fallbackMessage = computed(() => {
 	return null
 })
 
+const activeSortField = computed(() => (route.query['field'] as string) || 'date')
+const activeSortDirection = computed<'ascending' | 'descending'>(() => route.query['ordering'] === 'asc' ? 'ascending' : 'descending')
+
+function ariaSortFor(field: string) {
+	return activeSortField.value === field ? activeSortDirection.value : 'none'
+}
+
 const animationEnabled = ref(false)
 
 function onRowClick(event: MouseEvent, uid: string) {
@@ -81,32 +88,36 @@ function onRowClick(event: MouseEvent, uid: string) {
             </caption>
             <thead>
                 <tr :class="$style['head-row']">
-                    <td>
+                    <th scope="col" :aria-sort="ariaSortFor('title')">
                         <VSortLink
                             :label="$t('name')"
                             field="title"
+                            :sort-state="ariaSortFor('title')"
                         />
-                    </td>
-                    <td>
+                    </th>
+                    <th scope="col" :aria-sort="ariaSortFor('date')">
                         <VSortLink
                             :label="$t('date')"
                             field="date"
+                            :sort-state="ariaSortFor('date')"
                         />
-                    </td>
-                    <td>{{ $t('framework') }}</td>
-                    <td>{{ $t('tags') }}</td>
-                    <td>
+                    </th>
+                    <th scope="col">{{ $t('framework') }}</th>
+                    <th scope="col">{{ $t('tags') }}</th>
+                    <th scope="col" :aria-sort="ariaSortFor('rate')">
                         <VSortLink
                             :label="$t('rate')"
                             field="rate"
+                            :sort-state="ariaSortFor('rate')"
                         />
-                    </td>
-                    <td
+                    </th>
+                    <th
+                        scope="col"
                         :class="$style['cell--right']"
                         class="visually-hidden"
                     >
                         {{ $t('project_link') }}
-                    </td>
+                    </th>
                 </tr>
             </thead>
             <tbody
@@ -196,13 +207,16 @@ function onRowClick(event: MouseEvent, uid: string) {
     width: 100%;
     border-spacing: 0 0;
 
-    td {
+    td,
+    th {
         padding-inline: 18px;
     }
 }
 
-.head-row td {
+.head-row th {
+    font-weight: inherit;
     padding-block: 4px;
+    text-align: inherit;
 }
 
 .body-row {

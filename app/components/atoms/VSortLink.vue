@@ -2,6 +2,7 @@
 const props = defineProps<{
 	label: string
 	field: string
+	sortState?: 'ascending' | 'descending' | 'none'
 }>()
 
 const ORDERING_PREFIX = 'ordering'
@@ -27,6 +28,12 @@ function onClick() {
         <VIcon
             :name="sort === 'asc' ? 'material-symbols:arrow-downward-alt' : 'material-symbols:arrow-upward-alt'"
         />
+        <span
+            v-if="sortState && sortState !== 'none'"
+            class="visually-hidden"
+        >
+            {{ sortState === 'ascending' ? $t('sort_ascending') : $t('sort_descending') }}
+        </span>
     </button>
 </template>
 

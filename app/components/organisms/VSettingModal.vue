@@ -79,8 +79,15 @@ function onGridColumnsInput(e: Event) {
 						:min="min"
 						:max="max"
 						:value="columns"
+						aria-describedby="grid_value_hint"
 						@change="onGridColumnsInput"
 					/>
+					<span
+						id="grid_value_hint"
+						class="visually-hidden"
+					>
+						{{ $t('show_setting.grid_value_hint', { min, max }) }}
+					</span>
 				</div>
 			</div>
 		</div>

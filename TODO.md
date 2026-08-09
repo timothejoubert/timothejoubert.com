@@ -1,34 +1,41 @@
 ### TODO
-- Faire une review SEO du site
 
-- A11y (points restants identifiés lors de la review, non corrigés — moins prioritaires que la 1ère passe) :
-  - `VArchivePage.vue` : les en-têtes de colonnes triables sont des `<td>` au lieu de `<th scope="col">`, et `VSortLink.vue` ne communique l'état de tri (asc/desc) que via un changement d'icône visuel — ajouter `<th scope="col" :aria-sort="...">` + un texte visuellement masqué indiquant la direction courante dans `VSortLink.vue`.
-  - `VSettingModal.vue` : l'input numérique du nombre de colonnes n'a qu'un `<label>`, pas d'indication (aria-describedby) du min/max valide pour les lecteurs d'écran.
-  - `VProjectPage.vue` : le lien de fermeture (icône seule) utilise `title` au lieu d'un `aria-label`/texte masqué comme source du nom accessible.
-  - `error.vue` : contenu pas englobé dans un `<main>` (incohérent avec les autres pages) et pas de `role="alert"`/`aria-live` pour annoncer le changement de page lors d'une erreur en navigation client.
-  - `VWindow.vue` : pas de backdrop cliquable pour fermer la modale (seul Escape fonctionne) — à corréler avec l'item "VProjectPage: Add backdrop" déjà en TODO ; et la restauration du focus à la fermeture ne fait rien de significatif si la modale a été ouverte via un chargement direct d'URL (SSR), le focus initial était déjà sur `<body>`.
-  - Alt text des images Prismic (`VPrismicImg`/`VImg`) : aucune contrainte ne garantit qu'un éditeur remplisse le champ `alt` sur une image de contenu signifiante ; en cas de champ vide, l'image est silencieusement rendue comme décorative (`alt=""`) — nécessiterait une validation côté custom type Prismic ou un lint de contenu, pas un fix côté code.
-
-- Intégration page Error
+- VSortLink: utiliser plutot un pattern v-model pour update le state dans le parent au lieu de changer l'url directement dans le composant
 
 - VArchive: Skeleton archive row avec une taille similaire des cells lors du chargement (page fetch + refetch lors des queries d'order)
 - VArchive: responsive tableau
 
-- VProjectPage: Add reveal and switch animation to reveal content
-- VProjectPage: Add backdrop or find a design hack to highlight VWindow with background
-- VSpashScreen: add animation (from tim label to navBar transition ?)
-
 - VArchivePage: ajouter sort par Cadre (alphabetique) et étiquette (alphabetique)
 
-- Ajouter les data schema.org
+- Ajouter les data schema.org, notamment, #entity, webPage/CollectionPage, Project/CreativeWork
 - CMS: sync data field with schema.org (Project document need more field to specify CreativeWork)
 
-- Refactoriser les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
+- Intégration page Error
+
 
 ### improvement
 - Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
 
+- VProjectPage: Add reveal and switch animation to reveal content
+- VProjectPage: Add backdrop or find a design hack to highlight VWindow with background
+
+- VSpashScreen: add animation (from tim label to navBar transition ?)
+
+- Refactoriser les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
+
 ### Done
+- Review SEO du site :
+  - Duplicate content réel trouvé : `app/pages/index/[uid].vue` et `app/pages/archive/[uid].vue` fetchaient le même document `PROJECT_PAGE` sans vérifier le flag Prismic `favorite`, rendant chaque projet accessible aux deux URLs `/uid` et `/archive/uid` avec un canonical auto-référent sur chacune → ajout d'une redirection 301 (`navigateTo(..., { redirectCode: 301 })`) vers la route canonique selon `data.favorite`.
+  - `og:type` manquant dans `use-page-meta.ts` → ajouté (`website`).
+  - `VProjectCard.vue` : le titre passe d'un simple lien texte à un `<h2>` contenant le lien (meilleure hiérarchie sémantique/SEO pour les cartes projet, structure confirmée par les guides d'accessibilité — le lien doit être l'enfant du titre, pas l'inverse), sans changement visuel.
+  - Autres points de l'audit jugés mineurs et non traités : `meta_title`/description dépendant du contenu Prismic (pas du code), hreflang manuel prêt mais non exercé (une seule locale `fr` actuellement), pas de `loading="lazy"` par défaut sur `VImg` (dépend de l'appelant), absence de JSON-LD (déjà une tâche séparée ci-dessous).
+
+- Review A11y du site (2e passe, points restants de l'audit précédent) :
+  - `VArchivePage.vue` + `VSortLink.vue` : en-têtes de colonnes triables passés de `<td>` à `<th scope="col">` (toutes les cellules d'en-tête, pas seulement les triables, pour une sémantique de tableau correcte) + `:aria-sort` calculé dynamiquement (colonne/direction actives, en tenant compte du tri par défaut `date desc` quand aucune query n'est présente) ; `VSortLink.vue` reçoit cet état via une nouvelle prop `sortState` et affiche un texte visuellement masqué indiquant la direction courante.
+  - `VSettingModal.vue` : `aria-describedby` ajouté sur l'input nombre de colonnes, pointant vers un texte masqué précisant le min/max valide (`show_setting.grid_value_hint`).
+  - `VProjectPage.vue` : le lien de fermeture (icône seule) utilisait `title` comme source du nom accessible → remplacé par `aria-label`.
+  - `error.vue` : contenu englobé dans `<main id="main-content">` (cohérent avec les autres pages) ; le bloc de contenu (titre/sous-titre/message) reçoit `role="alert"` pour être annoncé aux lecteurs d'écran lors d'une erreur en navigation client, sans écraser le rôle de landmark `main`.
+
 - Review A11y du site (audit empirique via l'arbre d'accessibilité du navigateur + calculs de contraste WCAG réels, puis corrections) :
   - `VSettingModal.vue` : bouton avec `aria-label`/`aria-expanded` corrects, mais `aria-controls` pointait vers un id qui n'existait jamais réellement sur le panneau (seulement un `:key` Vue interne) → ajout de l'`:id` manquant sur le panneau. Le panneau replié (opacity:0, pointer-events:none) restait pourtant focusable au clavier (piège clavier réel) → ajout de `:inert="!expanded"`. Ajout de `role="group"`, gestion `Escape` (ferme + rend le focus au bouton déclencheur).
   - `VWindow.vue` (modale projet) : ajout de la sémantique modale complète — `role="dialog"`, `aria-modal="true"`, `aria-label` (titre du projet), focus trap (Tab/Shift+Tab cyclent dans le contenu focusable), `Escape` pour fermer, focus initial sur la modale à l'ouverture et **restauration du focus** sur l'élément déclencheur à la fermeture. Vérifié bout en bout en pilotant le DOM directement dans le navigateur (les clics/touches simulées via l'automatisation ne déclenchaient pas toujours les vrais événements, dispatch manuel des `KeyboardEvent` nécessaire pour un test fiable).
