@@ -1,6 +1,14 @@
 ### TODO
 - Faire une review SEO du site
 
+- A11y (points restants identifiés lors de la review, non corrigés — moins prioritaires que la 1ère passe) :
+  - `VArchivePage.vue` : les en-têtes de colonnes triables sont des `<td>` au lieu de `<th scope="col">`, et `VSortLink.vue` ne communique l'état de tri (asc/desc) que via un changement d'icône visuel — ajouter `<th scope="col" :aria-sort="...">` + un texte visuellement masqué indiquant la direction courante dans `VSortLink.vue`.
+  - `VSettingModal.vue` : l'input numérique du nombre de colonnes n'a qu'un `<label>`, pas d'indication (aria-describedby) du min/max valide pour les lecteurs d'écran.
+  - `VProjectPage.vue` : le lien de fermeture (icône seule) utilise `title` au lieu d'un `aria-label`/texte masqué comme source du nom accessible.
+  - `error.vue` : contenu pas englobé dans un `<main>` (incohérent avec les autres pages) et pas de `role="alert"`/`aria-live` pour annoncer le changement de page lors d'une erreur en navigation client.
+  - `VWindow.vue` : pas de backdrop cliquable pour fermer la modale (seul Escape fonctionne) — à corréler avec l'item "VProjectPage: Add backdrop" déjà en TODO ; et la restauration du focus à la fermeture ne fait rien de significatif si la modale a été ouverte via un chargement direct d'URL (SSR), le focus initial était déjà sur `<body>`.
+  - Alt text des images Prismic (`VPrismicImg`/`VImg`) : aucune contrainte ne garantit qu'un éditeur remplisse le champ `alt` sur une image de contenu signifiante ; en cas de champ vide, l'image est silencieusement rendue comme décorative (`alt=""`) — nécessiterait une validation côté custom type Prismic ou un lint de contenu, pas un fix côté code.
+
 - Intégration page Error
 
 - VArchive: Skeleton archive row avec une taille similaire des cells lors du chargement (page fetch + refetch lors des queries d'order)
