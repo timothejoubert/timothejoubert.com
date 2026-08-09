@@ -23,6 +23,8 @@
 - Ajouter les data schema.org
 - CMS: sync data field with schema.org (Project document need more field to specify CreativeWork)
 
+- Refactoriser les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
+
 ### improvement
 - Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
 
