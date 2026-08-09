@@ -133,6 +133,7 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
     width: 50%;
     max-width: var(--app-inner-max-width);
     max-height: var(--app-inner-max-height);
+	overscroll-behavior: contain;
 }
 
 .title {
