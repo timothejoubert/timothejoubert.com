@@ -6,6 +6,12 @@
     <div :class="$style.root">
         <NuxtRouteAnnouncer />
         <NuxtLoadingIndicator color="#DBE6EC" />
+        <a
+            href="#main-content"
+            :class="$style['skip-link']"
+        >
+            {{ $t('skip_to_content') }}
+        </a>
         <VNav :class="$style.nav" />
 
         <NuxtPage />
@@ -33,6 +39,21 @@
 
 .page-container {
     min-height: calc(100vh - var(--app-padding-top) - var(--app-padding-bottom));
+}
+
+.skip-link {
+    position: fixed;
+    z-index: 1002;
+    top: 0;
+    left: 0;
+    padding: 12px 20px;
+    background-color: var(--color-surface);
+    color: var(--color-content);
+    translate: 0 -100%;
+
+    &:focus-visible {
+        translate: 0 0;
+    }
 }
 
 .nav {

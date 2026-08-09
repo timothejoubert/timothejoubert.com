@@ -3,6 +3,21 @@ const expanded = ref(false)
 const toggle = () => expanded.value = !expanded.value
 const id = 'setting-modal-' + useId()
 
+const buttonEl = useTemplateRef<HTMLButtonElement>('buttonEl')
+
+function close() {
+	if (!expanded.value) return
+	expanded.value = false
+	buttonEl.value?.focus()
+}
+
+function onKeydown(e: KeyboardEvent) {
+	if (e.key === 'Escape' && expanded.value) {
+		e.stopPropagation()
+		close()
+	}
+}
+
 const { activate: onButtonMagnetEvent } = useMagnetHover()
 
 const { columns, min, max } = useGridColumns()
@@ -30,30 +45,34 @@ function onGridColumnsInput(e: Event) {
 		:class="$style.root"
 		@pointerenter="onButtonMagnetEvent"
 		@pointerleave="onButtonMagnetEvent"
+		@keydown="onKeydown"
 	>
 		<slot name="target">
 			<button
+				ref="buttonEl"
 				:class="$style.button"
 				:aria-controls="id"
 				:aria-expanded="expanded"
+				:aria-label="$t('show_setting.button_label')"
 				@click="toggle"
 			>
 				<VIcon
-					prefix="material-symbols"
-					name="settings"
+					name="material-symbols:settings"
 					size="1.3em"
 				/>
 			</button>
 		</slot>
 		<div
+			:id="id"
+			role="group"
+			:inert="!expanded"
 			:class="[$style.content, expanded && $style['content--visible']]"
 			:aria-label="$t('show_setting.aria_label')"
-			:key="id"
 		>
 			<div :class="$style.inner">
 				<VThemeSwitcher />
 				<div :class="$style['setting-item']">
-					<label for="grid_value">Grid value</label>
+					<label for="grid_value">{{ $t('show_setting.grid_value_label') }}</label>
 					<input
 						id="grid_value"
 						type="number"
@@ -112,8 +131,11 @@ function onGridColumnsInput(e: Event) {
 		inset: 5px;
 		opacity: 0;
 		scale: 0.85;
-		transition: opacity 0.3s ease(out-quart), scale 0.3s ease(out-quart), translate 0.3s ease(out-quart);
 		translate: var(--magnet-x, 0) var(--magnet-y, 0);
+
+		@media (prefers-reduced-motion: no-preference) {
+			transition: opacity 0.3s ease(out-quart), scale 0.3s ease(out-quart), translate 0.3s ease(out-quart);
+		}
 
 		.root:hover & {
 			opacity: 1;

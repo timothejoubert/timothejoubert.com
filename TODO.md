@@ -1,6 +1,7 @@
 ### TODO
 - Faire une review SEO du site
-- Faire une review A11y du site
+
+- Intégration page Error
 
 - VArchive: Skeleton archive row avec une taille similaire des cells lors du chargement (page fetch + refetch lors des queries d'order)
 - VArchive: responsive tableau
@@ -18,7 +19,16 @@
 - Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
 
 ### Done
-- Mettre à jour toutes les deps et vérifier pnpm audit
+- Review A11y du site (audit empirique via l'arbre d'accessibilité du navigateur + calculs de contraste WCAG réels, puis corrections) :
+  - `VSettingModal.vue` : bouton avec `aria-label`/`aria-expanded` corrects, mais `aria-controls` pointait vers un id qui n'existait jamais réellement sur le panneau (seulement un `:key` Vue interne) → ajout de l'`:id` manquant sur le panneau. Le panneau replié (opacity:0, pointer-events:none) restait pourtant focusable au clavier (piège clavier réel) → ajout de `:inert="!expanded"`. Ajout de `role="group"`, gestion `Escape` (ferme + rend le focus au bouton déclencheur).
+  - `VWindow.vue` (modale projet) : ajout de la sémantique modale complète — `role="dialog"`, `aria-modal="true"`, `aria-label` (titre du projet), focus trap (Tab/Shift+Tab cyclent dans le contenu focusable), `Escape` pour fermer, focus initial sur la modale à l'ouverture et **restauration du focus** sur l'élément déclencheur à la fermeture. Vérifié bout en bout en pilotant le DOM directement dans le navigateur (les clics/touches simulées via l'automatisation ne déclenchaient pas toujours les vrais événements, dispatch manuel des `KeyboardEvent` nécessaire pour un test fiable).
+  - Hiérarchie de titres et landmarks : `VHomePage`/`VArchivePage`/`VAboutPage` avaient chacun un `<div>` au lieu d'un `<main>`, et pas de `<h1>` visible (ou un `<h2>` faisant office de premier titre) → ajout de `<main id="main-content">` + `<h1>` (visuellement masqué quand redondant avec le design) sur chaque page ; `VAboutPage` : sections passées de `<h3>` à `<h2>` pour rester sous le nouveau `<h1>`. `VProjectCard.vue` : suppression de `wrapper="h3"` sur `<VTag>` qui créait un `<h3>` par étiquette sans aucun sens sémantique.
+  - Lien "skip to content" ajouté dans `app.vue` (`#main-content`), visible au focus clavier uniquement.
+  - `VArchivePage.vue` : `aria-label` par ligne sur le lien flèche (le libellé visuel seul — une icône — n'indiquait pas vers quel projet menait le lien) ; `aria-live="polite"` sur la cellule de statut (chargement/erreur/vide) pour que les lecteurs d'écran soient notifiés du changement d'état sans re-focus.
+  - `VThemeSwitcher.vue` : `<legend>` codée en dur passée en clé i18n.
+  - `prefers-reduced-motion` : une seule animation le respectait (spinner de chargement), toutes les autres (hover `VProjectCard`, `VSettingModal`, `VMainNav`, sweep de survol `VArchivePage`) tournaient sans opt-out → toutes les déclarations `transition` correspondantes encapsulées dans `@media (prefers-reduced-motion: no-preference)`.
+  - Contraste couleur : calculs WCAG réels (luminance relative) sur les 3 thèmes → tous passent AA, la plupart AAA ; pas un problème identifié, pas de changement nécessaire.
+  - `pnpm lint:css` : aucun nouveau warning introduit par ces changements (25 warnings préexistants, non liés).
 
 - Vérifier que le projet est bien lié au repo https://github.com/timothejoubert/timothejoubert.com sur une branche spécifique (remote `origin` et branche `nuxt4` confirmés)
 - Add stylelint and eslint format rules on save (`.vscode/settings.json`)

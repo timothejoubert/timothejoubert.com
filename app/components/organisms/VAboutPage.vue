@@ -9,14 +9,15 @@ const page = computed(() => props.document.data)
 </script>
 
 <template>
-    <div
+    <main
+        id="main-content"
         class="grid"
         :class="$style.root"
     >
         <LazyVHighlightedText
             v-if="page.content"
             :field="page.content"
-            wrapper="h2"
+            wrapper="h1"
             :class="$style.content"
         />
         <template v-if="page.sections?.length">
@@ -25,16 +26,16 @@ const page = computed(() => props.document.data)
                 :key="i"
                 :class="$style.section"
             >
-                <h3 :class="$style.title">
+                <h2 :class="$style.title">
                     {{ section.title }}
-                </h3>
+                </h2>
                 <LazyVText
                     v-if="section.content"
                     :content="section.content"
                 />
             </section>
         </template>
-    </div>
+    </main>
 </template>
 
 <style lang="scss" module>

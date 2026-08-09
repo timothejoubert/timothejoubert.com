@@ -68,7 +68,13 @@ function onRowClick(event: MouseEvent, uid: string) {
 </script>
 
 <template>
-    <main :class="$style.root">
+    <main
+        id="main-content"
+        :class="$style.root"
+    >
+        <h1 class="visually-hidden">
+            {{ document.data.title }}
+        </h1>
         <table :class="$style.table">
             <caption class="visually-hidden">
                 {{ $t('archive_page.projects_list_caption') }}
@@ -115,7 +121,10 @@ function onRowClick(event: MouseEvent, uid: string) {
                     v-if="fallbackMessage"
                     :class="$style['body-row']"
                 >
-                    <td :colspan="6">
+                    <td
+                        :colspan="6"
+                        aria-live="polite"
+                    >
                         {{ fallbackMessage }}
                     </td>
                 </tr>
@@ -153,10 +162,10 @@ function onRowClick(event: MouseEvent, uid: string) {
                             <VPrismicLink
                                 :to="getRoutePath('projet-archive', { uid: project.uid })"
                                 :class="$style['arrow-link']"
+                                :aria-label="`${$t('project_link')} : ${project.data.title}`"
                             >
                                 <VIcon
-                                    prefix="material-symbols"
-                                    name="north-east"
+                                    name="material-symbols:north-east"
                                 />
                             </VPrismicLink>
                         </td>
@@ -255,8 +264,10 @@ function onRowClick(event: MouseEvent, uid: string) {
         translate: 0 calc(-100% - var(--v-archive-border-spacing));
     }
 
-    &--animation-enabled td::before {
-        transition: translate 0.3s ease(out-quad);
+    @media (prefers-reduced-motion: no-preference) {
+        &--animation-enabled td::before {
+            transition: translate 0.3s ease(out-quad);
+        }
     }
 }
 

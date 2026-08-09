@@ -25,8 +25,7 @@ function onClick() {
     >
         {{ props.label }}
         <VIcon
-            prefix="material-symbols"
-            :name="sort === 'asc' ? 'arrow-downward-alt' : 'arrow-upward-alt'"
+            :name="sort === 'asc' ? 'material-symbols:arrow-downward-alt' : 'material-symbols:arrow-upward-alt'"
         />
     </button>
 </template>

@@ -37,6 +37,8 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
     <VWindow
         :class="$style.root"
         container-selector="body"
+        :aria-label="document.data.title"
+        @close="navigateTo(backPath)"
     >
         <template #head>
             <h1 :class="$style.title">
@@ -47,7 +49,7 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
                 :class="$style.back"
                 :title="$t('back_to_projects.aria_label')"
             >
-                <VIcon prefix="material-symbols" name="cancel" />
+                <VIcon name="material-symbols:cancel" />
             </NuxtLink>
         </template>
 
@@ -107,7 +109,7 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
                 :to="prevProject.path"
                 :class="$style['footer-link']"
             >
-                <VIcon prefix="material-symbols" name="arrow-back" />
+                <VIcon name="material-symbols:arrow-back" />
                 {{ prevProject.title }}
             </NuxtLink>
             <NuxtLink
@@ -116,7 +118,7 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
                 :class="[$style['footer-link'], $style['footer-link--next']]"
             >
                 {{ nextProject.title }}
-                <VIcon prefix="material-symbols" name="arrow-forward" />
+                <VIcon name="material-symbols:arrow-forward" />
             </NuxtLink>
         </div>
     </VWindow>

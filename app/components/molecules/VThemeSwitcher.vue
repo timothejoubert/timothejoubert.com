@@ -52,7 +52,7 @@ watch(theme, setCssVars)
 
 <template>
     <fieldset>
-        <legend>Color theme</legend>
+        <legend>{{ $t('theme_switcher.legend') }}</legend>
         <div
             v-for="themeInput in themeInputs"
             :key="themeInput.id"

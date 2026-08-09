@@ -33,14 +33,12 @@ const rest = computed(() => {
         <VIcon
             v-for="i in rateValueCeil"
             :key="i"
-            prefix="material-symbols"
-            name="star"
+            name="material-symbols:star"
             :class="$style.star"
         />
         <VIcon
             v-if="rest > 0 && rest < 1"
-            prefix="material-symbols"
-            name="star"
+            name="material-symbols:star"
             :class="[$style.star, $style['star--rest']]"
             :style="{
                 'clip-path': `inset(0 0 0 ${100 - (rest * 100)}%)`,

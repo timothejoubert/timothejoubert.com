@@ -84,7 +84,10 @@ const _links = computed(() => {
         content: "";
         inset: calc(anchor(bottom) - 6px) calc(anchor(right) + 14px) calc(anchor(bottom) + 3px) calc(anchor(left) + 14px);
         position-anchor: --hovered-link;
-        transition: 0.3s ease(in-out-quad);
+
+        @media (prefers-reduced-motion: no-preference) {
+            transition: 0.3s ease(in-out-quad);
+        }
 
         @supports (corner-shape: squircle) {
             border-radius: 24px;
@@ -94,7 +97,10 @@ const _links = computed(() => {
 
     &:has(a:hover)::after {
         inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
-        transition: 0.25s ease(out-quart);
+
+        @media (prefers-reduced-motion: no-preference) {
+            transition: 0.25s ease(out-quart);
+        }
     }
 }
 

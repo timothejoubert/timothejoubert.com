@@ -43,7 +43,6 @@ const img = computed(() => data.value.thumbnail)
                 :class="$style.tag"
                 :label="tag"
                 :style="{ '--tag-index': orderedTags.length - i }"
-                wrapper="h3"
             />
         </div>
         <VPrismicImg
@@ -82,7 +81,10 @@ $card-padding: 16px;
         inset: 0;
         opacity: 1;
         pointer-events: none;
-        transition: opacity 0.4s ease(out-quad);
+
+        @media (prefers-reduced-motion: no-preference) {
+            transition: opacity 0.4s ease(out-quad);
+        }
     }
 
     @media (hover: hover) {
@@ -120,8 +122,11 @@ $card-padding: 16px;
 
 .tag {
     margin: initial;
-    transition: translate 0.3s calc(var(--tag-index) * 40ms) ease(out-quart);
     translate: calc(-100% - 20px) 0;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: translate 0.3s calc(var(--tag-index) * 40ms) ease(out-quart);
+    }
 
     @media (hover: hover) {
         .root:hover & {
@@ -135,9 +140,12 @@ $card-padding: 16px;
     z-index: -1;
     filter: grayscale(1);
     inset: 0;
-    transition-duration: 0.3s;
-    transition-property: filter, scale;
-    transition-timing-function: ease(out-quart);
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition-duration: 0.3s;
+        transition-property: filter, scale;
+        transition-timing-function: ease(out-quart);
+    }
 
     @media (hover: hover) {
         .root:hover & {
