@@ -109,6 +109,8 @@ Indentation is **tabs**, enforced by ESLint (`@stylistic/indent: ['error', 'tab'
 
 `i18n/i18n.ts` defines `I18N_DEFAULT_LOCALE`/`I18N_LOCALES`; locale message files are `i18n/locales/nuxt.<locale>.json`. Routing strategy is `prefix_except_default` (default locale has no prefix, matching the `/:lang?` optional segment in `prismicDocumentRoutes`).
 
+Every static UI string (labels, aria-labels, fallback/error/empty-state messages, etc.) must go through an i18n key — `$t('key')` in templates, `t('key')` in `<script>` (via `useI18n()`). Never hardcode static text directly in a template or script, even a single word — add the key to `i18n/locales/nuxt.<locale>.json` instead. This does **not** apply to content coming from Prismic fields (already localized at the CMS level).
+
 ### SVGs and icons
 
 SVGs are imported as URLs via `vite-svg-loader` (`defaultImport: 'url'`) — see `nuxt.config.ts` `vite.plugins`. `@nuxt/icon` is configured with `componentName: 'NuxtIcon'` and only bundles the `material-symbols` collection server-side; check `app/components/atoms/VIcon.vue` for how icons are dispatched between local SVGs and `NuxtIcon`.
