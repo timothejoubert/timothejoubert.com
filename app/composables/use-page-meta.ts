@@ -76,6 +76,7 @@ export function usePageMeta(options: PageMetaOptions = {}) {
             // The client side update is required for the share on iOS Safari feature
             // to have the correct meta data when sharing.
             { name: 'description', content: truncatedDescription.value },
+            { property: 'og:type', content: 'website' },
             { property: 'og:title', content: title.value },
             { property: 'og:site_name', content: siteName.value },
             { property: 'og:description', content: truncatedDescription.value },

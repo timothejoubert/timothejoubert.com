@@ -30,7 +30,7 @@ export default defineComponent({
 			src: imageField.value?.url || mediaLinkField.value?.url,
 			width: props.width || imageField.value?.dimensions.width || mediaLinkField.value?.width,
 			height: props.height || imageField.value?.dimensions.height || mediaLinkField.value?.height,
-			alt: typeof props.alt === 'string' ? props.alt : (imageField.value?.alt || mediaLinkField.value?.name),
+			alt: typeof props.alt === 'string' ? props.alt : (imageField.value?.alt || ''),
 			provider: 'imgix',
 			placeholder: props.placeholder || '#ffffff10',
 			quality: 70,
