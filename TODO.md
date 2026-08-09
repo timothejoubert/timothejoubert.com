@@ -1,6 +1,4 @@
 ### TODO
-- Mettre à jour toutes les deps et vérifier pnpm audit
-
 - Faire une review SEO du site
 - Faire une review A11y du site
 
@@ -20,6 +18,8 @@
 - Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
 
 ### Done
+- Mettre à jour toutes les deps et vérifier pnpm audit
+
 - Vérifier que le projet est bien lié au repo https://github.com/timothejoubert/timothejoubert.com sur une branche spécifique (remote `origin` et branche `nuxt4` confirmés)
 - Add stylelint and eslint format rules on save (`.vscode/settings.json`)
 

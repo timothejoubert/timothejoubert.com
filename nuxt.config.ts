@@ -66,6 +66,9 @@ export default defineNuxtConfig({
 	// Redirect prismicDocumentRoutes' `alias` paths (e.g. /projets, /projects) to their canonical route.
 	routeRules: getPrismicAliasRedirects(),
 	nitro: {
+		// Pinned explicitly so `pnpm generate` outputs the same directory (dist) locally and on Netlify,
+		// instead of relying on Nitro's env-based auto-detection (which only kicks in on Netlify's build servers).
+		preset: 'netlify-static',
 		prerender: {
 			// Aliases aren't linked from anywhere in the app, so the crawler won't find them on its own.
 			routes: Object.keys(getPrismicAliasRedirects()),
