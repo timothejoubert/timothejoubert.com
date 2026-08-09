@@ -26,13 +26,17 @@ const img = computed(() => data.value.thumbnail)
         :wrapper="wrapper"
         :class="$style.root"
     >
-        <VPrismicLink
+        <h2
             v-if="data.title"
-            :to="getRoutePath('projet', { uid: project.uid })"
             :class="$style.title"
         >
-            {{ data.title }}
-        </VPrismicLink>
+            <VPrismicLink
+                :to="getRoutePath('projet', { uid: project.uid })"
+                :class="$style.link"
+            >
+                {{ data.title }}
+            </VPrismicLink>
+        </h2>
         <div
             v-if="orderedTags && orderedTags.length"
             :class="$style.tags"
@@ -97,13 +101,16 @@ $card-padding: 16px;
 .title {
     z-index: 1;
     order: 2;
-    margin-top: 12px;
-    color: var(--color-content);
+    margin: 12px 0 0;
     font-size: 16px;
     font-weight: 700;
+}
+
+.link {
+    color: var(--color-content);
     text-decoration: none;
 
-    @at-root .root a#{&}::before {
+    &::before {
         position: absolute;
         content: '';
         inset: 0;
