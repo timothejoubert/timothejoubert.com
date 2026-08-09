@@ -52,6 +52,5 @@
         "@slicemachine/adapter-nuxt": "^0.3.98",
         "prismic-ts-codegen": "^0.1.30",
         "slice-machine-ui": "^2.21.5"
-    },
-    "packageManager": "pnpm@10.20.0"
+    }
 }
