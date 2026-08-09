@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { filter } from '@prismicio/client'
+import { withQuery } from 'ufo'
 import type { ArchiveDocument, ProjectDocumentData } from '~~/prismicio-types'
 import { getRoutePath, prismicDocumentType } from '~~/shared/prismic-schema'
 
@@ -8,30 +9,42 @@ defineProps<{
 }>()
 
 const route = useRoute()
+const router = useRouter()
+
+// Kept as separate primitive computeds (not one object-returning computed) so Vue's
+// value-equality short-circuit works: fetchOptions/the listing fetch below only reacts
+// when field/direction actually change, not on every route change (e.g. opening a
+// project modal appends a uid segment to the URL, which would otherwise still produce a
+// new — but deep-equal — sort object and needlessly retrigger the fetch).
+const sortField = computed(() => (route.query['field'] as string) || 'date')
+const sortDirection = computed<'asc' | 'desc'>(() => route.query['ordering'] === 'asc' ? 'asc' : 'desc')
+
+const sort = computed({
+	get() {
+		return { field: sortField.value, direction: sortDirection.value }
+	},
+	set(value) {
+		router.replace({ query: { field: value.field, ordering: value.direction } })
+	},
+})
+
 const fetchOptions = computed(() => {
-	const result = {
-		orderings: [{ field: `my.project.date`, direction: 'desc' as const }],
+	return {
+		orderings: [{
+			field: `my.project.${sortField.value}`,
+			direction: sortDirection.value,
+		}],
 		filters: [filter.at('my.project.favorite', false)],
 		graphQuery: `{
-            project {
-                title
-                date
-                rate
-                tag_group
-                framework
-            }
-        }`,
+				project {
+					title
+					date
+					rate
+					tag_group
+					framework
+				}
+			}`,
 	}
-
-	const value = route.query['ordering']
-	const field = route.query['field']
-	if (value && field) {
-		Object.assign(result, {
-			orderings: [{ field: `my.project.${field}`, direction: value }],
-		})
-	}
-
-	return result
 })
 
 const { data: projects, error, pending } = usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions)
@@ -47,30 +60,34 @@ const fallbackMessage = computed(() => {
 	if (error.value) {
 		return t('archive_page.error_loading_projects')
 	}
-	if (pending.value) {
-		return t('archive_page.loading_projects')
-	}
-	if (!projects.value?.length) {
+	if (!pending.value && !projects.value?.length) {
 		return t('archive_page.no_projects')
 	}
 	return null
 })
 
-const activeSortField = computed(() => (route.query['field'] as string) || 'date')
-const activeSortDirection = computed<'ascending' | 'descending'>(() => route.query['ordering'] === 'asc' ? 'ascending' : 'descending')
+const SKELETON_ROW_COUNT = 20
+const skeletonRows = computed(() => Array.from({ length: SKELETON_ROW_COUNT }, (_, i) => i))
 
 function ariaSortFor(field: string) {
-	return activeSortField.value === field ? activeSortDirection.value : 'none'
+	if (sort.value.field !== field) return 'none'
+	return sort.value.direction === 'asc' ? 'ascending' : 'descending'
 }
 
 const animationEnabled = ref(false)
+
+// Keeps the current sort query in the URL when opening a project — losing it would reset
+// VArchivePage's sort to its default and trigger an unwanted refetch/skeleton flash.
+function projectPath(uid: string) {
+	return withQuery(getRoutePath('projet-archive', { uid }), route.query)
+}
 
 function onRowClick(event: MouseEvent, uid: string) {
 	if ((event.target as HTMLElement).closest('a')) {
 		// Let the arrow link itself handle its own navigation/modifier clicks.
 		return
 	}
-	navigateTo(getRoutePath('projet-archive', { uid }))
+	navigateTo(projectPath(uid))
 }
 </script>
 
@@ -90,25 +107,25 @@ function onRowClick(event: MouseEvent, uid: string) {
                 <tr :class="$style['head-row']">
                     <th scope="col" :aria-sort="ariaSortFor('title')">
                         <VSortLink
+                            v-model="sort"
                             :label="$t('name')"
                             field="title"
-                            :sort-state="ariaSortFor('title')"
                         />
                     </th>
                     <th scope="col" :aria-sort="ariaSortFor('date')">
                         <VSortLink
+                            v-model="sort"
                             :label="$t('date')"
                             field="date"
-                            :sort-state="ariaSortFor('date')"
                         />
                     </th>
                     <th scope="col">{{ $t('framework') }}</th>
                     <th scope="col">{{ $t('tags') }}</th>
                     <th scope="col" :aria-sort="ariaSortFor('rate')">
                         <VSortLink
+                            v-model="sort"
                             :label="$t('rate')"
                             field="rate"
-                            :sort-state="ariaSortFor('rate')"
                         />
                     </th>
                     <th
@@ -128,8 +145,37 @@ function onRowClick(event: MouseEvent, uid: string) {
                 @mouseenter="() => animationEnabled = true"
                 @mouseleave="() => animationEnabled = false"
             >
+                <template v-if="pending">
+                    <tr :class="$style['body-row']">
+                        <td
+                            :colspan="6"
+                            class="visually-hidden"
+                            aria-live="polite"
+                        >
+                            {{ $t('archive_page.loading_projects') }}
+                        </td>
+                    </tr>
+                    <tr
+                        v-for="i in skeletonRows"
+                        :key="`skeleton-row-${i}`"
+                        :class="$style['body-row']"
+                        aria-hidden="true"
+                    >
+                        <td><span :class="$style.skeleton" :style="{ width: `${120 - (i % 3) * 30}px` }" /></td>
+                        <td><span :class="$style.skeleton" :style="{ width: `${45 - (i % 2) * 10}px` }" /></td>
+                        <td><span :class="$style.skeleton" :style="{ width: `${85 - (i % 4) * 15}px` }" /></td>
+                        <td :class="$style.tags">
+                            <span :class="$style.skeleton" :style="{ width: `${60 - (i % 3) * 15}px` }" />
+                            <span v-if="i % 2 === 0" :class="$style.skeleton" style="width: 55px" />
+                        </td>
+                        <td><span :class="$style.skeleton" style="width: 70px" /></td>
+                        <td :class="$style['cell--right']">
+                            <span :class="[$style.skeleton, $style['skeleton--icon']]" />
+                        </td>
+                    </tr>
+                </template>
                 <tr
-                    v-if="fallbackMessage"
+                    v-else-if="fallbackMessage"
                     :class="$style['body-row']"
                 >
                     <td
@@ -171,7 +217,7 @@ function onRowClick(event: MouseEvent, uid: string) {
                         </td>
                         <td :class="$style['cell--right']">
                             <VPrismicLink
-                                :to="getRoutePath('projet-archive', { uid: project.uid })"
+                                :to="projectPath(project.uid)"
                                 :class="$style['arrow-link']"
                                 :aria-label="`${$t('project_link')} : ${project.data.title}`"
                             >
@@ -206,6 +252,7 @@ function onRowClick(event: MouseEvent, uid: string) {
 .table {
     width: 100%;
     border-spacing: 0 0;
+    table-layout: fixed;
 
     td,
     th {
@@ -213,10 +260,38 @@ function onRowClick(event: MouseEvent, uid: string) {
     }
 }
 
+// Column widths are set on the header row (table-layout: fixed only reads the
+// first row) so the skeleton and real rows always share the exact same column
+// widths — otherwise switching between them (different content) shifts the
+// columns and produces a visible flash.
 .head-row th {
     font-weight: inherit;
     padding-block: 4px;
     text-align: inherit;
+
+    &:nth-child(1) {
+        width: 26%;
+    }
+
+    &:nth-child(2) {
+        width: 10%;
+    }
+
+    &:nth-child(3) {
+        width: 14%;
+    }
+
+    &:nth-child(4) {
+        width: 26%;
+    }
+
+    &:nth-child(5) {
+        width: 16%;
+    }
+
+    &:nth-child(6) {
+        width: 8%;
+    }
 }
 
 .body-row {
@@ -307,5 +382,31 @@ function onRowClick(event: MouseEvent, uid: string) {
 
 .cell--right {
     text-align: right;
+}
+
+.skeleton {
+    display: inline-block;
+    height: 1em;
+    border-radius: 4px;
+    background-color: var(--color-surface);
+
+    &--icon {
+        width: 1em;
+        margin-left: auto;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        animation: skeleton-pulse 1.2s ease-in-out infinite;
+    }
+}
+
+@keyframes skeleton-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
 }
 </style>

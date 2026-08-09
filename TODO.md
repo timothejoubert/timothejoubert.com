@@ -1,8 +1,5 @@
 ### TODO
 
-- VSortLink: utiliser plutot un pattern v-model pour update le state dans le parent au lieu de changer l'url directement dans le composant
-
-- VArchive: Skeleton archive row avec une taille similaire des cells lors du chargement (page fetch + refetch lors des queries d'order)
 - VArchive: responsive tableau
 
 - VArchivePage: ajouter sort par Cadre (alphabetique) et étiquette (alphabetique)
@@ -24,6 +21,14 @@
 - Refactoriser les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
 
 ### Done
+- VArchive: flash de la table à l'ouverture d'un projet — deux bugs distincts trouvés et corrigés :
+  - Le lien vers un projet (`getRoutePath('projet-archive', { uid })`) construisait une URL sans la query de tri (`?field=...&ordering=...`), donc l'ouvrir la réinitialisait au tri par défaut → nouveau fetch. Corrigé en propageant la query courante (`ufo.withQuery`) sur le lien d'ouverture (`VArchivePage.vue`), le lien de fermeture/retour (`backPath`, `archive/[uid].vue`) et la navigation précédent/suivant (`VProjectPage.vue`).
+  - Même une fois la query préservée, `VArchivePage.vue` refetchait quand même : `sort`/`fetchOptions` étaient des `computed` retournant un nouvel objet à chaque évaluation ; Vue déclenche le watcher de `useAsyncData` sur un changement de référence, pas de valeur — donc n'importe quel changement de route (même juste l'ajout du segment `/uid`, query inchangée) suffisait à re-déclencher tout le fetch. Corrigé en dérivant `field`/`direction` via deux `computed` primitifs séparés (`sortField`/`sortDirection`) : Vue court-circuite la propagation quand la valeur primitive résultante est inchangée, donc le fetch ne se redéclenche plus que sur un changement réel de tri. Vérifié via l'onglet réseau : la requête dupliquée vers la liste (`orderings=[my.project.title]`) déclenchée à l'ouverture d'un projet a disparu.
+
+- VArchive: skeleton de lignes pendant le chargement (`VArchivePage.vue`) — lignes placeholder avec la même structure de cellules que les vraies lignes (largeurs de barres variables par colonne, pour un rendu moins uniforme), affichées pendant `pending` (fetch initial et refetch lors d'un changement de tri), `aria-hidden="true"` car purement visuel ; l'annonce aux lecteurs d'écran reste portée par une ligne dédiée visuellement masquée (`aria-live="polite"`), séparée du visuel. Pulsation d'opacité encadrée par `@media (prefers-reduced-motion: no-preference)`. Largeurs en `px` fixes (pas en `%` de la colonne) pour rester proches de la taille réelle du contenu — sinon, combiné à `table-layout: fixed` (colonnes larges et stables), les barres s'étiraient sur presque toute la colonne et créaient un effet de flash au switch skeleton → données.
+
+- VSortLink: refactor en pattern `v-model` (`SortState { field, direction }`) au lieu de lire/écrire l'URL directement dans le composant — `VSortLink.vue` ne dépend plus de `useRoute`/`useRouter`, il reçoit l'état actif via `modelValue` et émet le prochain état au clic ; `VArchivePage.vue` reste seul propriétaire de la synchronisation avec la query (`computed` avec get/set) et du refetch. Corrige au passage un bug latent : l'état de tri (icône + `aria-sort`) était calculé globalement plutôt que par colonne, une colonne inactive pouvait s'afficher comme triée.
+
 - Review SEO du site :
   - Duplicate content réel trouvé : `app/pages/index/[uid].vue` et `app/pages/archive/[uid].vue` fetchaient le même document `PROJECT_PAGE` sans vérifier le flag Prismic `favorite`, rendant chaque projet accessible aux deux URLs `/uid` et `/archive/uid` avec un canonical auto-référent sur chacune → ajout d'une redirection 301 (`navigateTo(..., { redirectCode: 301 })`) vers la route canonique selon `data.favorite`.
   - `og:type` manquant dans `use-page-meta.ts` → ajouté (`website`).

@@ -1,20 +1,30 @@
+<script lang="ts">
+export interface SortState {
+	field: string
+	direction: 'asc' | 'desc'
+}
+</script>
+
 <script lang="ts" setup>
 const props = defineProps<{
 	label: string
 	field: string
-	sortState?: 'ascending' | 'descending' | 'none'
 }>()
 
-const ORDERING_PREFIX = 'ordering'
+const model = defineModel<SortState>({ required: true })
 
-const route = useRoute()
-const router = useRouter()
-const sort = computed(() => {
-	return route.query[ORDERING_PREFIX] === 'asc' ? 'desc' : 'asc'
+const isActive = computed(() => model.value.field === props.field)
+
+const nextDirection = computed(() => {
+	return isActive.value && model.value.direction === 'asc' ? 'desc' : 'asc'
+})
+const sortState = computed(() => {
+	if (!isActive.value) return 'none'
+	return model.value.direction === 'asc' ? 'ascending' : 'descending'
 })
 
 function onClick() {
-	router.replace({ query: { field: props.field, [ORDERING_PREFIX]: sort.value } })
+	model.value = { field: props.field, direction: nextDirection.value }
 }
 </script>
 
@@ -26,10 +36,10 @@ function onClick() {
     >
         {{ props.label }}
         <VIcon
-            :name="sort === 'asc' ? 'material-symbols:arrow-downward-alt' : 'material-symbols:arrow-upward-alt'"
+            :name="nextDirection === 'asc' ? 'material-symbols:arrow-downward-alt' : 'material-symbols:arrow-upward-alt'"
         />
         <span
-            v-if="sortState && sortState !== 'none'"
+            v-if="sortState !== 'none'"
             class="visually-hidden"
         >
             {{ sortState === 'ascending' ? $t('sort_ascending') : $t('sort_descending') }}

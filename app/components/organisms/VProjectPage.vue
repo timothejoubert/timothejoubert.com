@@ -1,10 +1,19 @@
 <script lang="ts" setup>
+import { withQuery } from 'ufo'
 import type { ProjectDocument } from '~~/prismicio-types'
 
 const props = defineProps<{
     document: ProjectDocument
     backPath: string
 }>()
+
+const route = useRoute()
+
+// Keeps the current query (e.g. VArchivePage's sort) when navigating between projects,
+// otherwise it gets dropped and the listing behind the modal resets/refetches.
+function withCurrentQuery(path: string) {
+    return withQuery(path, route.query)
+}
 
 const project = computed(() => props.document.data)
 const prismic = usePrismic()
@@ -106,7 +115,7 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
         >
             <NuxtLink
                 v-if="prevProject"
-                :to="prevProject.path"
+                :to="withCurrentQuery(prevProject.path)"
                 :class="$style['footer-link']"
             >
                 <VIcon name="material-symbols:arrow-back" />
@@ -114,7 +123,7 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
             </NuxtLink>
             <NuxtLink
                 v-if="nextProject"
-                :to="nextProject.path"
+                :to="withCurrentQuery(nextProject.path)"
                 :class="[$style['footer-link'], $style['footer-link--next']]"
             >
                 {{ nextProject.title }}

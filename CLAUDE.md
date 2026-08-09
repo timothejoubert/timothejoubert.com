@@ -47,6 +47,10 @@ Project pages are implemented as **nested routes** so a project opens as a modal
 
 Use Nuxt's built-in path aliases (`~`/`@` for the app dir, `~~`/`@@` for the root, `#shared` for the `shared/` dir, etc.) instead of relative paths (`../../foo`) when importing across directories. This keeps imports stable when files move. Relative imports (`./foo`) remain fine for files in the same directory.
 
+### Prefer type inference over explicit types
+
+Let TypeScript infer types (`computed`, `ref`, function return types, etc.) instead of writing an explicit generic/annotation when inference already gives the correct type — e.g. `computed(() => cond ? 'asc' : 'desc')` already infers `'asc' | 'desc'`, so don't add `computed<'asc' | 'desc'>(...)` on top of it. Only add an explicit type when inference would be wrong or wider than intended (e.g. an empty array/object literal, a value that needs to satisfy an interface it doesn't structurally match, or a genuinely ambiguous return across branches).
+
 ### Prefer VueUse over hand-rolled utilities
 
 `@vueuse/nuxt` is a dependency and its composables are auto-imported. Before writing a new composable (or a chunk of imperative DOM/browser logic — mouse/pointer tracking, element bounding rects, resize/intersection observers, storage, clipboard, etc.), check whether VueUse already covers it (e.g. `useMouseInElement`, `useElementBounding`, `useResizeObserver`) and use that instead of reimplementing it. Only hand-roll when VueUse's composable doesn't fit the actual requirement (e.g. its geometry/behavior doesn't match what's needed) — and note briefly why when that's the case.
