@@ -1,10 +1,15 @@
 ### TODO
 
-- CMS: pour les documents projets, ajouter un champ select dans prismic pour différents type de projet/CreativeWork, et voir si on ajoute des nouvelles données relative (necessaire) en fonction de type schema.org
+- CMS: pour les documents projets, ajouter un champ select dans prismic pour différents type de projet/CreativeWork, et voir si on ajoute des nouvelles données relative (necessaire) en fonction de type schema.org — plan détaillé dans `SCHEMA-ORG-PROJECT-TYPE.md`
 - Ajouter les data schema.org avec les module nuxt, notamment, #entity, webPage/CollectionPage, Project/CreativeWork
+
+- Migrer vers type Builder sur prismic https://prismic.io/docs/type-builder#migrate-to-the-type-builder
 
 - Intégration page Error
 - VArchive: améliorer le coté responsive de la table
+
+- Script d'import de projets dans Prismic à partir de fichiers markdown + médias en local (front-matter → champs `project` type/tag_group/framework, contenu → RichText, médias → Asset API) : faisable via la Migration API de Prismic, exposée par `@prismicio/client` (déjà installé, ^7.21.8, requiert un write API token généré manuellement dans le dashboard Prismic + Node ≥ 20, ok sur ce repo en Node 24) — `createWriteClient` + `createMigration()` + `migration.createAsset(fichier local, ...)` + `migration.createDocument({ type: 'project', data }, title)` + `client.migrate(migration)`. Limite à anticiper : documents créés en brouillon (publication manuelle après coup), et pas de convertisseur Markdown→RichText Prismic officiel (à écrire soi-même, même simple).
+
 
 ### improvement
 - Refactor: utiliser une composable commune pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
@@ -17,6 +22,8 @@
 
 
 ### Next step
+
+- En partant de fichier markdown et de média sur mon ordi en local, voir si c'est possible de faire un script pour les datas et medias de projets directement dans un repo prismic
 
 - Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
 
