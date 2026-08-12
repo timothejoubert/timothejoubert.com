@@ -11,11 +11,6 @@ defineProps<{
 const route = useRoute()
 const router = useRouter()
 
-// Kept as separate primitive computeds (not one object-returning computed) so Vue's
-// value-equality short-circuit works: fetchOptions/the listing fetch below only reacts
-// when field/direction actually change, not on every route change (e.g. opening a
-// project modal appends a uid segment to the URL, which would otherwise still produce a
-// new — but deep-equal — sort object and needlessly retrigger the fetch).
 const sortField = computed(() => (route.query['field'] as string) || 'date')
 const sortDirection = computed<'asc' | 'desc'>(() => route.query['ordering'] === 'asc' ? 'asc' : 'desc')
 
@@ -28,11 +23,17 @@ const sort = computed({
 	},
 })
 
+// `tag` can't be sorted by Prismic's API (`tag_group` is a repeatable Group field,
+// orderings only support scalar document fields) — it's sorted client-side instead,
+// so the fetch always falls back to a stable server-side ordering in that case.
+const SERVER_SORTABLE_FIELDS = ['title', 'date', 'rate', 'framework']
+
 const fetchOptions = computed(() => {
+	const isServerSortable = SERVER_SORTABLE_FIELDS.includes(sortField.value)
 	return {
 		orderings: [{
-			field: `my.project.${sortField.value}`,
-			direction: sortDirection.value,
+			field: `my.project.${isServerSortable ? sortField.value : 'date'}`,
+			direction: isServerSortable ? sortDirection.value : 'desc',
 		}],
 		filters: [filter.at('my.project.favorite', false)],
 		graphQuery: `{
@@ -47,13 +48,37 @@ const fetchOptions = computed(() => {
 	}
 })
 
-const { data: projects, error, pending } = usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions)
+const {
+	data: projects,
+	error,
+	pending
+} = usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions)
+
+const rows = computed(() => {
+	if (pending.value) {
+		return Array.from({ length: 20 }, (_, i) => ({ id: `skeleton-${i}`, index: i, uid: null, data: null }))
+	}
+
+	return projects.value || []
+})
 
 function getTagLabels(tagGroup: ProjectDocumentData['tag_group']) {
 	return tagGroup
 		.filter(item => item.tag)
 		.map(item => item.tag) || []
 }
+
+function tagSortKey(tagGroup: ProjectDocumentData['tag_group'] | undefined) {
+	const labels = tagGroup ? getTagLabels(tagGroup) : []
+	return [...labels].sort((a, b) => (a ?? '').localeCompare(b ?? ''))[0] ?? ''
+}
+
+const sortedRows = computed(() => {
+	if (sortField.value !== 'tag') return rows.value
+
+	const direction = sortDirection.value === 'asc' ? 1 : -1
+	return [...rows.value].sort((a, b) => direction * tagSortKey(a.data?.tag_group).localeCompare(tagSortKey(b.data?.tag_group)))
+})
 
 const { t } = useI18n()
 const fallbackMessage = computed(() => {
@@ -66,8 +91,7 @@ const fallbackMessage = computed(() => {
 	return null
 })
 
-const SKELETON_ROW_COUNT = 20
-const skeletonRows = computed(() => Array.from({ length: SKELETON_ROW_COUNT }, (_, i) => i))
+
 
 function ariaSortFor(field: string) {
 	if (sort.value.field !== field) return 'none'
@@ -78,12 +102,13 @@ const animationEnabled = ref(false)
 
 // Keeps the current sort query in the URL when opening a project — losing it would reset
 // VArchivePage's sort to its default and trigger an unwanted refetch/skeleton flash.
-function projectPath(uid: string) {
+function projectPath(uid: string | null) {
+	if (!uid) return
 	return withQuery(getRoutePath('projet-archive', { uid }), route.query)
 }
 
-function onRowClick(event: MouseEvent, uid: string) {
-	if ((event.target as HTMLElement).closest('a')) {
+function onRowClick(event: MouseEvent, uid: string | null) {
+	if (!uid || (event.target as HTMLElement).closest('a')) {
 		// Let the arrow link itself handle its own navigation/modifier clicks.
 		return
 	}
@@ -99,141 +124,149 @@ function onRowClick(event: MouseEvent, uid: string) {
         <h1 class="visually-hidden">
             {{ document.data.title }}
         </h1>
-        <table :class="$style.table">
-            <caption class="visually-hidden">
-                {{ $t('archive_page.projects_list_caption') }}
-            </caption>
-            <thead>
-                <tr :class="$style['head-row']">
-                    <th scope="col" :aria-sort="ariaSortFor('title')">
-                        <VSortLink
-                            v-model="sort"
-                            :label="$t('name')"
-                            field="title"
-                        />
-                    </th>
-                    <th scope="col" :aria-sort="ariaSortFor('date')">
-                        <VSortLink
-                            v-model="sort"
-                            :label="$t('date')"
-                            field="date"
-                        />
-                    </th>
-                    <th scope="col">{{ $t('framework') }}</th>
-                    <th scope="col">{{ $t('tags') }}</th>
-                    <th scope="col" :aria-sort="ariaSortFor('rate')">
-                        <VSortLink
-                            v-model="sort"
-                            :label="$t('rate')"
-                            field="rate"
-                        />
-                    </th>
-                    <th
-                        scope="col"
-                        :class="$style['cell--right']"
-                        class="visually-hidden"
+        <div :class="$style['scroll-wrapper']">
+            <table :class="$style.table">
+                <caption class="visually-hidden">
+                    {{ $t('archive_page.projects_list_caption') }}
+                </caption>
+                <thead>
+                    <tr :class="$style['head-row']">
+                        <th
+                            scope="col"
+                            :class="[$style.cell, $style['head-cell']]"
+                            :aria-sort="ariaSortFor('title')"
+                        >
+                            <VSortLink
+                                v-model="sort"
+                                :label="$t('name')"
+                                field="title"
+                            />
+                        </th>
+                        <th
+                            scope="col"
+                            :class="[$style.cell, $style['head-cell']]"
+                            :aria-sort="ariaSortFor('date')"
+                        >
+                            <VSortLink
+                                v-model="sort"
+                                :label="$t('date')"
+                                field="date"
+                            />
+                        </th>
+                        <th
+                            scope="col"
+                            :class="[$style.cell, $style['head-cell']]"
+                            :aria-sort="ariaSortFor('framework')"
+                        >
+                            <VSortLink
+                                v-model="sort"
+                                :label="$t('framework')"
+                                field="framework"
+                            />
+                        </th>
+                        <th
+                            scope="col"
+                            :class="[$style.cell, $style['head-cell']]"
+                            :aria-sort="ariaSortFor('tag')"
+                        >
+                            <VSortLink
+                                v-model="sort"
+                                :label="$t('tags')"
+                                field="tag"
+                            />
+                        </th>
+                        <th
+                            scope="col"
+                            :class="[$style.cell, $style['head-cell']]"
+                            :aria-sort="ariaSortFor('rate')"
+                        >
+                            <VSortLink
+                                v-model="sort"
+                                :label="$t('rate')"
+                                field="rate"
+                            />
+                        </th>
+                        <th
+                            scope="col"
+                            :class="[$style.cell, $style['head-cell'], $style['cell--right']]"
+                            class="visually-hidden"
+                        >
+                            {{ $t('project_link') }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody
+                    :class="[
+                        $style.body,
+                        animationEnabled && $style['body--animation-enabled'],
+                    ]"
+                    @mouseenter="() => animationEnabled = true"
+                    @mouseleave="() => animationEnabled = false"
+                >
+                    <tr
+                        v-if="fallbackMessage"
+                        :class="$style['body-row']"
                     >
-                        {{ $t('project_link') }}
-                    </th>
-                </tr>
-            </thead>
-            <tbody
-                :class="[
-                    $style.body,
-                    animationEnabled && $style['body--animation-enabled'],
-                ]"
-                @mouseenter="() => animationEnabled = true"
-                @mouseleave="() => animationEnabled = false"
-            >
-                <template v-if="pending">
-                    <tr :class="$style['body-row']">
                         <td
                             :colspan="6"
-                            class="visually-hidden"
+                            :class="[$style.cell, $style['body-cell']]"
                             aria-live="polite"
                         >
-                            {{ $t('archive_page.loading_projects') }}
+                            {{ fallbackMessage }}
                         </td>
                     </tr>
-                    <tr
-                        v-for="i in skeletonRows"
-                        :key="`skeleton-row-${i}`"
-                        :class="$style['body-row']"
-                        aria-hidden="true"
-                    >
-                        <td><span :class="$style.skeleton" :style="{ width: `${120 - (i % 3) * 30}px` }" /></td>
-                        <td><span :class="$style.skeleton" :style="{ width: `${45 - (i % 2) * 10}px` }" /></td>
-                        <td><span :class="$style.skeleton" :style="{ width: `${85 - (i % 4) * 15}px` }" /></td>
-                        <td :class="$style.tags">
-                            <span :class="$style.skeleton" :style="{ width: `${60 - (i % 3) * 15}px` }" />
-                            <span v-if="i % 2 === 0" :class="$style.skeleton" style="width: 55px" />
-                        </td>
-                        <td><span :class="$style.skeleton" style="width: 70px" /></td>
-                        <td :class="$style['cell--right']">
-                            <span :class="[$style.skeleton, $style['skeleton--icon']]" />
-                        </td>
-                    </tr>
-                </template>
-                <tr
-                    v-else-if="fallbackMessage"
-                    :class="$style['body-row']"
-                >
-                    <td
-                        :colspan="6"
-                        aria-live="polite"
-                    >
-                        {{ fallbackMessage }}
-                    </td>
-                </tr>
-                <template v-else-if="projects?.length">
-                    <tr
-                        v-for="project in projects"
-                        :key="project.id"
-                        :class="$style['body-row']"
-                        @click="onRowClick($event, project.uid)"
-                    >
-                        <td>
-                            <span>
-                                {{ project.data.title }}
-                            </span>
-                        </td>
-                        <td>
-                            <VTime :date="project.data.date" />
-                        </td>
-                        <td>
-                            <span>
-                                {{ project.data.framework }}
-                            </span>
-                        </td>
-                        <td :class="$style.tags">
-                            <VTag
-                                v-for="tag in getTagLabels(project.data.tag_group)"
-                                :key="tag + '-' + project.id"
-                                :label="tag"
-                            />
-                        </td>
-                        <td>
-                            <VStarRate :rate="project.data.rate" />
-                        </td>
-                        <td :class="$style['cell--right']">
-                            <VPrismicLink
-                                :to="projectPath(project.uid)"
-                                :class="$style['arrow-link']"
-                                :aria-label="`${$t('project_link')} : ${project.data.title}`"
-                            >
-                                <VIcon
-                                    name="material-symbols:north-east"
-                                />
-                            </VPrismicLink>
-                        </td>
-                    </tr>
-                </template>
-            </tbody>
-        </table>
+                    <template v-else-if="sortedRows?.length">
+                        <tr
+                            v-for="(project, index) in sortedRows"
+                            :key="project.id"
+                            :class="[$style['body-row'], pending && $style['body-row--skeleton']]"
+                            @click="onRowClick($event, project.uid)"
+							:style="{ '--loading-animation-delay': `${index * 0.02}s` }"
+                        >
+                            <td :class="[$style.cell, $style['cell--title'], $style['body-cell']]">
+								{{ project.data?.title }}
+                            </td>
+                            <td :class="[$style.cell, $style['body-cell']]">
+                                <VTime :date="project.data?.date" />
+                            </td>
+                            <td :class="[$style.cell, $style['body-cell']]">
+								{{ project.data?.framework }}
+                            </td>
+                            <td :class="[$style.cell, $style['body-cell']]">
+								<template v-if="project.data?.tag_group?.length">
+									<VTag
+										v-for="tag in getTagLabels(project.data.tag_group)"
+										:key="tag + '-' + project.id"
+										:label="tag"
+										:class="$style.tag"
+									/>
+								</template>
+                            </td>
+                            <td :class="[$style.cell, $style['body-cell']]">
+                                <VStarRate
+									v-if="project.data?.rate"
+									:rate="project.data.rate"
+								/>
+                            </td>
+                            <td :class="[$style.cell, $style['body-cell'], $style['cell--right']]">
+                                <VPrismicLink
+                                    :to="projectPath(project.uid)"
+                                    :class="$style['arrow-link']"
+                                    :aria-label="`${$t('project_link')} : ${project.data?.title}`"
+                                >
+                                    <VIcon name="material-symbols:north-east" />
+                                </VPrismicLink>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
     </main>
 </template>
 
 <style lang="scss" module>
+@use '@/assets/scss/mixins/loading-animation' as *;
 
 // Hover effect
 // lorsque je survol l'une des lignes du tableau, son bandeau se déplace depuis la direction d'ou provient la souris pour recouvrir la ligne survolée
@@ -249,164 +282,172 @@ function onRowClick(event: MouseEvent, uid: string) {
     width: 100%;
 }
 
+.scroll-wrapper {
+    overflow-x: auto;
+}
+
 .table {
-    width: 100%;
     border-spacing: 0 0;
     table-layout: fixed;
 
-    td,
-    th {
-        padding-inline: 18px;
+    @include media('>=md') {
+        width: 100%;
     }
 }
 
-// Column widths are set on the header row (table-layout: fixed only reads the
-// first row) so the skeleton and real rows always share the exact same column
-// widths — otherwise switching between them (different content) shifts the
-// columns and produces a visible flash.
-.head-row th {
+.cell {
+    padding-inline: 18px;
+	vertical-align: middle;
+}
+
+.head-cell {
     font-weight: inherit;
     padding-block: 4px;
     text-align: inherit;
 
     &:nth-child(1) {
-        width: 26%;
-    }
+        // width: clamp(300px, 26%, 30ch);
+		width: 26%;
+	}
 
     &:nth-child(2) {
-        width: 10%;
+        // width: clamp(70px, 10%, 30ch);
+		width: 10%;
     }
 
     &:nth-child(3) {
-        width: 14%;
+		// width: clamp(100px, 14%, 30ch);
+		width: 14%;
     }
 
     &:nth-child(4) {
-        width: 26%;
+		// width: clamp(160px, 26%, 30ch);
+		width: 26%;
     }
 
     &:nth-child(5) {
-        width: 16%;
+		// width: clamp(100px, 16%, 30ch);
+		width: 16%;
     }
 
     &:nth-child(6) {
-        width: 8%;
+		// width: clamp(40px, 8%, 10ch);
+		width: 8%;
     }
+}
+
+.body {
+	position: relative;
 }
 
 .body-row {
     cursor: pointer;
+
+	&--skeleton {
+		$gradient-color: #ffffff0b;
+
+		animation: loading-animation 1.4s var(--loading-animation-delay, 0s) infinite ease(in-out-circ);
+		background-image: linear-gradient(
+				to right,
+				transparent 0%,
+				$gradient-color 10%,
+				$gradient-color 20%,
+				transparent 30%
+		);
+		background-position: 120% center;
+		background-repeat: no-repeat;
+		background-size: 120% 80%;
+		content: '';
+	}
 }
 
-.body-row td {
+@keyframes loading-animation {
+    100% {
+        background-position: -480% center;
+    }
+}
+
+.body-cell {
     position: relative;
     overflow: hidden;
-    padding-block: 14px;
+    padding-block: 12px;
 
     > * {
         // set above the pseudo elements
         position: relative;
+		z-index: 1;
     }
 
     // Default background
-    &::after {
+    &::before {
         position: absolute;
-        z-index: -1;
+        z-index: -2;
         background-color: var(--color-surface);
         content: '';
         inset: var(--v-archive-border-spacing) 0;
         pointer-events: none;
     }
 
-    &:first-child::after {
+    &:first-child::before {
         border-bottom-left-radius: var(--v-archive-row-border-radius);
         border-top-left-radius: var(--v-archive-row-border-radius);
     }
 
-    &:last-child::after {
+    &:last-child::before {
         border-bottom-right-radius: var(--v-archive-row-border-radius);
         border-top-right-radius: var(--v-archive-row-border-radius);
     }
 
     // Hovered background
-    &::before {
+    &::after {
         position: absolute;
+		z-index: -1;
         background-color: var(--color-background);
         content: '';
         inset: var(--v-archive-border-spacing) 0;
         opacity: 0.7;
         pointer-events: none;
         translate: 0 100%;
+
+		.body:not(.body--animation-enabled) & {
+			transition: none; // hide up transition forEach previous rows when leave body
+			translate: 0 calc(-100% - var(--v-archive-border-spacing));
+		}
+
+		.body--animation-enabled & {
+			transition: translate 0.3s ease(out-quad);
+		}
+
+
+		@media (hover: hover) {
+			.body-row:hover & {
+				translate: 0 0;
+			}
+
+			.table:has(.body-row:hover) .body-row:hover ~ .body-row & {
+				translate: 0 calc(-100% - var(--v-archive-border-spacing));
+			}
+		}
     }
 }
 
-@media (hover: hover) {
-    // Hovering any cell counts as hovering the whole row.
-    .body-row:hover td::before {
-        translate: 0 0;
+.tag {
+    white-space: nowrap;
+
+    & + & {
+        margin-left: 8px;
     }
 }
 
-.body {
-    &:not(.body--animation-enabled) td::before {
-        transition: none;
-        translate: 0 calc(-100% - var(--v-archive-border-spacing));
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-        &--animation-enabled td::before {
-            transition: translate 0.3s ease(out-quad);
-        }
-    }
-}
-
-.table:has(.body-row:hover) .body-row:hover ~ .body-row td::before {
-    translate: 0 calc(-100% - var(--v-archive-border-spacing));
-}
-
-.tags {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.cell--title {
+	white-space: nowrap;
 }
 
 .arrow-link {
     color: inherit;
-
-    &::before {
-        position: absolute;
-        content: '';
-        inset: 0;
-    }
 }
 
 .cell--right {
     text-align: right;
-}
-
-.skeleton {
-    display: inline-block;
-    height: 1em;
-    border-radius: 4px;
-    background-color: var(--color-surface);
-
-    &--icon {
-        width: 1em;
-        margin-left: auto;
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-        animation: skeleton-pulse 1.2s ease-in-out infinite;
-    }
-}
-
-@keyframes skeleton-pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
 }
 </style>

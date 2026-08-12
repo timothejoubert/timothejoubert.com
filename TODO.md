@@ -1,18 +1,13 @@
 ### TODO
 
-- VArchive: responsive tableau
-
-- VArchivePage: ajouter sort par Cadre (alphabetique) et étiquette (alphabetique)
-
-- Ajouter les data schema.org, notamment, #entity, webPage/CollectionPage, Project/CreativeWork
-- CMS: sync data field with schema.org (Project document need more field to specify CreativeWork)
+- CMS: pour les documents projets, ajouter un champ select dans prismic pour différents type de projet/CreativeWork, et voir si on ajoute des nouvelles données relative (necessaire) en fonction de type schema.org
+- Ajouter les data schema.org avec les module nuxt, notamment, #entity, webPage/CollectionPage, Project/CreativeWork
 
 - Intégration page Error
-
+- VArchive: améliorer le coté responsive de la table
 
 ### improvement
-- Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
-
+- Refactor: utiliser une composable commune pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
 - VProjectPage: Add reveal and switch animation to reveal content
 - VProjectPage: Add backdrop or find a design hack to highlight VWindow with background
 
@@ -20,7 +15,18 @@
 
 - Refactoriser les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
 
+
+### Next step
+
+- Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
+
+
 ### Done
+- VArchivePage: sort par Cadre et étiquette (alphabétique) — `VArchivePage.vue`. "Cadre" (`framework`, champ `Select` scalaire) trie via l'API Prismic comme les colonnes existantes (`orderings: [{ field: 'my.project.framework' }]`). "Étiquette" (`tag_group`) ne peut pas être trié côté Prismic — c'est un champ `Group` répétable, l'API `orderings` ne supporte que des champs scalaires — donc trié côté client (`sortedRows` computed, clé de tri = étiquette alphabétiquement la plus petite de chaque projet) après un fetch qui retombe sur un tri serveur stable (`date desc`) dans ce cas. Vérifié dans le navigateur : les deux colonnes trient correctement et sans erreur console.
+- VArchive: utilise des class pour styliser les cells (th, td) au lieu d'utiliser des selecteurs non précis (.head-row th)
+
+- VArchive: responsive tableau (`VArchivePage.vue`) — `<table>` enveloppée dans un `<div class="scroll-wrapper">` (`overflow-x: auto`). Largeurs de colonnes mobile-first : valeurs fixes en `px` par défaut (assez larges pour rester lisibles), remplacées par les pourcentages existants à partir de `md` (768px) via `@include media('>=md')`, convention déjà utilisée par `VMainProjectListing.vue`. Sous `md`, la table garde sa largeur naturelle (somme des colonnes, pas `100%`) donc elle dépasse la largeur d'écran → scroll horizontal au lieu d'un écrasement illisible des colonnes. Aucun changement de structure/sémantique table (pas de risque sur le travail a11y déjà fait). Vérifié via inspection des styles calculés dans le navigateur (media query `(min-width: 768px)` bien générée, rendu desktop inchangé) ; ⚠️ pas de vérification visuelle réelle à une largeur mobile — l'outil de resize de fenêtre du navigateur ne fonctionnait pas dans cet environnement.
+
 - VArchive: flash de la table à l'ouverture d'un projet — deux bugs distincts trouvés et corrigés :
   - Le lien vers un projet (`getRoutePath('projet-archive', { uid })`) construisait une URL sans la query de tri (`?field=...&ordering=...`), donc l'ouvrir la réinitialisait au tri par défaut → nouveau fetch. Corrigé en propageant la query courante (`ufo.withQuery`) sur le lien d'ouverture (`VArchivePage.vue`), le lien de fermeture/retour (`backPath`, `archive/[uid].vue`) et la navigation précédent/suivant (`VProjectPage.vue`).
   - Même une fois la query préservée, `VArchivePage.vue` refetchait quand même : `sort`/`fetchOptions` étaient des `computed` retournant un nouvel objet à chaque évaluation ; Vue déclenche le watcher de `useAsyncData` sur un changement de référence, pas de valeur — donc n'importe quel changement de route (même juste l'ajout du segment `/uid`, query inchangée) suffisait à re-déclencher tout le fetch. Corrigé en dérivant `field`/`direction` via deux `computed` primitifs séparés (`sortField`/`sortDirection`) : Vue court-circuite la propagation quand la valeur primitive résultante est inchangée, donc le fetch ne se redéclenche plus que sur un changement réel de tri. Vérifié via l'onglet réseau : la requête dupliquée vers la liste (`orderings=[my.project.title]`) déclenchée à l'ouverture d'un projet a disparu.
