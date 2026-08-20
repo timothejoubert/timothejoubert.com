@@ -65,6 +65,66 @@
           "label": "columns"
         },
         "type": "Group"
+      }
+    },
+    "SEO & Metadata": {
+      "meta_description": {
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "A brief summary of the page"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {
+            "height": 1260,
+            "width": 2400
+          },
+          "label": "Meta Image",
+          "thumbnails": []
+        },
+        "type": "Image"
+      },
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      }
+    },
+    "Publisher": {
+      "publisher_name": {
+        "config": {
+          "label": "Name"
+        },
+        "type": "Text"
+      },
+      "publisher_url": {
+        "config": {
+          "label": "URL",
+          "select": "web"
+        },
+        "type": "Link"
+      },
+      "publisher_image": {
+        "config": {
+          "label": "Image"
+        },
+        "type": "Image"
+      },
+      "publisher_job_title": {
+        "config": {
+          "label": "Job title"
+        },
+        "type": "Text"
+      },
+      "publisher_work_for": {
+        "config": {
+          "label": "Works for"
+        },
+        "type": "Text"
       },
       "socials": {
         "config": {
@@ -104,33 +164,6 @@
           "label": "Socials"
         },
         "type": "Group"
-      }
-    },
-    "SEO & Metadata": {
-      "meta_description": {
-        "config": {
-          "label": "Meta Description",
-          "placeholder": "A brief summary of the page"
-        },
-        "type": "Text"
-      },
-      "meta_image": {
-        "config": {
-          "constraint": {
-            "height": 1260,
-            "width": 2400
-          },
-          "label": "Meta Image",
-          "thumbnails": []
-        },
-        "type": "Image"
-      },
-      "meta_title": {
-        "config": {
-          "label": "Meta Title",
-          "placeholder": "A title of the page used for social media and search engines"
-        },
-        "type": "Text"
       }
     }
   },

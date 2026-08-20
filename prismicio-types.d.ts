@@ -819,18 +819,7 @@ interface SettingsDocumentData {
 	 * - **Tab**: Main
 	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
 	 */
-	columns: prismic.GroupField<Simplify<SettingsDocumentDataColumnsItem>>;
-	
-	/**
-	 * Socials field in *Settings*
-	 *
-	 * - **Field Type**: Group
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: settings.socials[]
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-	 */
-	socials: prismic.GroupField<Simplify<SettingsDocumentDataSocialsItem>>;/**
+	columns: prismic.GroupField<Simplify<SettingsDocumentDataColumnsItem>>;/**
 	 * Meta Description field in *Settings*
 	 *
 	 * - **Field Type**: Text
@@ -861,7 +850,71 @@ interface SettingsDocumentData {
 	 * - **Tab**: SEO & Metadata
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
-	meta_title: prismic.KeyTextField;
+	meta_title: prismic.KeyTextField;/**
+	 * Name field in *Settings*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.publisher_name
+	 * - **Tab**: Publisher
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	publisher_name: prismic.KeyTextField;
+	
+	/**
+	 * URL field in *Settings*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.publisher_url
+	 * - **Tab**: Publisher
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	publisher_url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+	
+	/**
+	 * Image field in *Settings*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.publisher_image
+	 * - **Tab**: Publisher
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	publisher_image: prismic.ImageField<never>;
+	
+	/**
+	 * Job title field in *Settings*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.publisher_job_title
+	 * - **Tab**: Publisher
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	publisher_job_title: prismic.KeyTextField;
+	
+	/**
+	 * Works for field in *Settings*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.publisher_work_for
+	 * - **Tab**: Publisher
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	publisher_work_for: prismic.KeyTextField;
+	
+	/**
+	 * Socials field in *Settings*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: settings.socials[]
+	 * - **Tab**: Publisher
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+	 */
+	socials: prismic.GroupField<Simplify<SettingsDocumentDataSocialsItem>>;
 }
 
 /**
