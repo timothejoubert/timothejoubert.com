@@ -1,16 +1,21 @@
 <script lang="ts" setup>
+import { isFilled } from '@prismicio/client'
 import { getFilledLinkToWeb } from '~/utils/prismic/link-field'
 
 // TODO: try SSR and client-side teleport for project page content
 
-const runtimeConfig = useRuntimeConfig()
 const { data: settings } = await usePrismicSettingsDocument()
+const publisher = computed(() => settings.value?.data)
 
 useSchemaOrg([
 	definePerson({
-		name: runtimeConfig.public.site.name,
-		email: settings.value?.data.email || undefined,
-		sameAs: settings.value?.data.socials
+		name: publisher.value?.publisher_name || undefined,
+		url: getFilledLinkToWeb(publisher.value?.publisher_url)?.url,
+		image: isFilled.image(publisher.value?.publisher_image) ? publisher.value.publisher_image.url : undefined,
+		email: publisher.value?.email || undefined,
+		jobTitle: publisher.value?.publisher_job_title || undefined,
+		worksFor: publisher.value?.publisher_work_for ? { '@type': 'Organization', name: publisher.value.publisher_work_for } : undefined,
+		sameAs: publisher.value?.socials
 			.map(({ link }) => getFilledLinkToWeb(link)?.url)
 			.filter((url): url is string => !!url),
 	}),
