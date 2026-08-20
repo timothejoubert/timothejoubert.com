@@ -23,10 +23,12 @@ const sort = computed({
 	},
 })
 
-// `tag` can't be sorted by Prismic's API (`tag_group` is a repeatable Group field,
-// orderings only support scalar document fields) — it's sorted client-side instead,
-// so the fetch always falls back to a stable server-side ordering in that case.
-const SERVER_SORTABLE_FIELDS = ['title', 'date', 'rate', 'framework']
+// `tag` and `title` can't be sorted correctly by Prismic's API: `tag_group` is a repeatable Group
+// field (orderings only support scalar document fields), and `title`'s ordering is a byte/codepoint
+// comparison, not locale-aware — French titles with accents (e.g. "Éclipse") sort completely wrong
+// (verified against the live API: accented titles get shoved to the very end). Both fall back to a
+// stable server-side ordering and are re-sorted client-side with `localeCompare` instead.
+const SERVER_SORTABLE_FIELDS = ['date', 'rate', 'framework']
 
 const fetchOptions = computed(() => {
 	const isServerSortable = SERVER_SORTABLE_FIELDS.includes(sortField.value)
@@ -74,9 +76,14 @@ function tagSortKey(tagGroup: ProjectDocumentData['tag_group'] | undefined) {
 }
 
 const sortedRows = computed(() => {
-	if (sortField.value !== 'tag') return rows.value
+	if (!['tag', 'title'].includes(sortField.value)) return rows.value
 
 	const direction = sortDirection.value === 'asc' ? 1 : -1
+
+	if (sortField.value === 'title') {
+		return [...rows.value].sort((a, b) => direction * (a.data?.title ?? '').localeCompare(b.data?.title ?? ''))
+	}
+
 	return [...rows.value].sort((a, b) => direction * tagSortKey(a.data?.tag_group).localeCompare(tagSortKey(b.data?.tag_group)))
 })
 
