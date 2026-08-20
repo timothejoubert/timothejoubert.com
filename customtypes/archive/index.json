@@ -1,33 +1,30 @@
 {
-  "id": "archive",
-  "label": "archive",
-  "repeatable": false,
-  "status": true,
   "format": "page",
+  "id": "archive",
   "json": {
     "Main": {
       "title": {
-        "type": "Text",
         "config": {
           "label": "title",
           "placeholder": ""
-        }
+        },
+        "type": "Text"
       },
       "content": {
-        "type": "StructuredText",
         "config": {
-          "label": "content",
-          "placeholder": "",
           "allowTargetBlank": true,
-          "multi": "strong,em,hyperlink,paragraph"
-        }
+          "label": "content",
+          "multi": "strong,em,hyperlink,paragraph",
+          "placeholder": ""
+        },
+        "type": "StructuredText"
       },
       "slices": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
         "config": {
           "choices": {}
-        }
+        },
+        "fieldset": "Slice Zone",
+        "type": "Slices"
       }
     },
     "SEO & Metadata": {
@@ -57,5 +54,8 @@
         "type": "Image"
       }
     }
-  }
+  },
+  "label": "archive",
+  "repeatable": false,
+  "status": true
 }

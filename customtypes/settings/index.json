@@ -1,79 +1,77 @@
 {
+  "format": "page",
   "id": "settings",
   "json": {
     "Main": {
       "website_name": {
-        "type": "Text",
         "config": {
           "label": "Website name",
           "placeholder": ""
-        }
+        },
+        "type": "Text"
       },
       "about_title": {
-        "type": "Text",
         "config": {
           "label": "About title",
           "placeholder": ""
-        }
+        },
+        "type": "Text"
       },
       "about_content": {
-        "type": "StructuredText",
         "config": {
+          "allowTargetBlank": true,
           "label": "About content",
           "placeholder": "",
-          "allowTargetBlank": true,
           "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
+        },
+        "type": "StructuredText"
       },
       "email": {
-        "type": "Text",
         "config": {
           "label": "Email",
           "placeholder": ""
-        }
+        },
+        "type": "Text"
       },
       "display_all_projects": {
-        "type": "Boolean",
         "config": {
-          "label": "Display all projects",
           "default_value": false,
-          "placeholder_true": "true",
-          "placeholder_false": "false"
-        }
+          "label": "Display all projects",
+          "placeholder_false": "false",
+          "placeholder_true": "true"
+        },
+        "type": "Boolean"
       },
       "columns": {
-        "type": "Group",
         "config": {
-          "label": "columns",
           "fields": {
             "title": {
-              "type": "Text",
               "config": {
                 "label": "Title",
                 "placeholder": ""
-              }
+              },
+              "type": "Text"
             },
             "content": {
-              "type": "StructuredText",
               "config": {
+                "allowTargetBlank": true,
                 "label": "Content",
                 "placeholder": "",
-                "allowTargetBlank": true,
                 "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-              }
+              },
+              "type": "StructuredText"
             }
-          }
-        }
+          },
+          "label": "columns"
+        },
+        "type": "Group"
       },
       "socials": {
-        "type": "Group",
         "config": {
           "fields": {
             "social": {
-              "type": "Select",
               "config": {
                 "label": "Social",
-                "placeholder": "",
                 "options": [
                   "Instagram",
                   "Facebook",
@@ -83,26 +81,29 @@
                   "Behance",
                   "LinkedIn",
                   "Github"
-                ]
-              }
+                ],
+                "placeholder": ""
+              },
+              "type": "Select"
             },
             "link": {
-              "type": "Link",
               "config": {
                 "label": "Link",
                 "select": null
-              }
+              },
+              "type": "Link"
             },
             "label": {
-              "type": "Text",
               "config": {
                 "label": "Label",
                 "placeholder": ""
-              }
+              },
+              "type": "Text"
             }
           },
           "label": "Socials"
-        }
+        },
+        "type": "Group"
       }
     },
     "SEO & Metadata": {
@@ -135,6 +136,5 @@
   },
   "label": "Settings",
   "repeatable": false,
-  "status": true,
-  "format": "page"
+  "status": true
 }

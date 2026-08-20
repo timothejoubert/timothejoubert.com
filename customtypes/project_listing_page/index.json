@@ -1,4 +1,5 @@
 {
+  "format": "page",
   "id": "project_listing_page",
   "json": {
     "Main": {
@@ -40,6 +41,5 @@
   },
   "label": "project_listing_page",
   "repeatable": false,
-  "status": true,
-  "format": "page"
+  "status": true
 }

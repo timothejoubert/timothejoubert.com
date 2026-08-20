@@ -1,29 +1,29 @@
 {
   "format": "custom",
   "id": "menu",
-  "label": "Menu",
-  "repeatable": false,
-  "status": true,
   "json": {
     "Main": {
       "title": {
-        "type": "Text",
         "config": {
           "label": "Title",
           "placeholder": ""
-        }
+        },
+        "type": "Text"
       },
       "links": {
-        "type": "Link",
         "config": {
-          "label": "Links",
-          "placeholder": "",
-          "select": null,
           "allowTargetBlank": true,
           "allowText": true,
-          "repeat": true
-        }
+          "label": "Links",
+          "placeholder": "",
+          "repeat": true,
+          "select": null
+        },
+        "type": "Link"
       }
     }
-  }
+  },
+  "label": "Menu",
+  "repeatable": false,
+  "status": true
 }

@@ -1,4 +1,5 @@
 {
+  "format": "page",
   "id": "project",
   "json": {
     "Main": {
@@ -9,69 +10,68 @@
         "type": "UID"
       },
       "title": {
-        "type": "Text",
         "config": {
           "label": "Title",
           "placeholder": ""
-        }
+        },
+        "type": "Text"
       },
       "favorite": {
-        "type": "Boolean",
         "config": {
-          "label": "Favorite",
           "default_value": false,
-          "placeholder_true": "true",
-          "placeholder_false": "false"
-        }
+          "label": "Favorite",
+          "placeholder_false": "false",
+          "placeholder_true": "true"
+        },
+        "type": "Boolean"
       },
       "rate": {
-        "type": "Number",
         "config": {
           "label": "Rate",
           "placeholder": ""
-        }
+        },
+        "type": "Number"
       },
       "awards": {
-        "type": "Group",
         "config": {
-          "label": "Awards",
           "fields": {
             "name": {
-              "type": "Text",
               "config": {
                 "label": "Name",
                 "placeholder": ""
-              }
+              },
+              "type": "Text"
             },
             "link": {
-              "type": "Link",
               "config": {
                 "label": "link",
                 "placeholder": "",
                 "select": null
-              }
+              },
+              "type": "Link"
             },
             "type": {
-              "type": "Select",
               "config": {
                 "label": "type",
-                "placeholder": "",
-                "options": ["book", "web"]
-              }
+                "options": [
+                  "book",
+                  "web"
+                ],
+                "placeholder": ""
+              },
+              "type": "Select"
             }
-          }
-        }
+          },
+          "label": "Awards"
+        },
+        "type": "Group"
       },
       "tag_group": {
-        "type": "Group",
         "config": {
-          "label": "Tag group",
           "fields": {
             "tag": {
-              "type": "Select",
               "config": {
                 "label": "Tag",
-                "placeholder": "",
                 "options": [
                   "Développement",
                   "Typographie",
@@ -83,17 +83,19 @@
                   "Illustration",
                   "Expression plastique",
                   "Multimédia"
-                ]
-              }
+                ],
+                "placeholder": ""
+              },
+              "type": "Select"
             }
-          }
-        }
+          },
+          "label": "Tag group"
+        },
+        "type": "Group"
       },
       "framework": {
-        "type": "Select",
         "config": {
           "label": "Framework",
-          "placeholder": "",
           "options": [
             "Freelance",
             "Perso",
@@ -103,88 +105,90 @@
             "DEC",
             "BTS",
             "STD2A"
-          ]
-        }
+          ],
+          "placeholder": ""
+        },
+        "type": "Select"
       },
       "short_description": {
-        "type": "StructuredText",
         "config": {
+          "allowTargetBlank": true,
           "label": "Short description",
           "placeholder": "",
-          "allowTargetBlank": true,
           "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
+        },
+        "type": "StructuredText"
       },
       "content": {
-        "type": "StructuredText",
         "config": {
+          "allowTargetBlank": true,
           "label": "Content",
           "placeholder": "",
-          "allowTargetBlank": true,
           "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
+        },
+        "type": "StructuredText"
       },
       "thumbnail": {
-        "type": "Link",
         "config": {
           "label": "Thumbnail",
           "placeholder": "",
           "select": "media"
-        }
+        },
+        "type": "Link"
       },
       "date": {
-        "type": "Date",
         "config": {
           "label": "Date",
           "placeholder": ""
-        }
+        },
+        "type": "Date"
       },
       "link": {
-        "type": "Link",
         "config": {
           "label": "Link",
           "placeholder": "",
           "select": null
-        }
+        },
+        "type": "Link"
       },
       "link_label": {
-        "type": "Text",
         "config": {
           "label": "Link label",
           "placeholder": ""
-        }
+        },
+        "type": "Text"
       },
       "medias": {
-        "type": "Group",
         "config": {
-          "label": "Medias",
           "fields": {
             "media": {
-              "type": "Link",
               "config": {
                 "label": "Media",
                 "placeholder": "",
                 "select": "media"
-              }
+              },
+              "type": "Link"
             },
             "embed_url": {
-              "type": "Text",
               "config": {
                 "label": "Embed url",
                 "placeholder": ""
-              }
+              },
+              "type": "Text"
             },
             "sound_enabled": {
-              "type": "Boolean",
               "config": {
-                "label": "sound enabled",
                 "default_value": false,
-                "placeholder_true": "true",
-                "placeholder_false": "false"
-              }
+                "label": "sound enabled",
+                "placeholder_false": "false",
+                "placeholder_true": "true"
+              },
+              "type": "Boolean"
             }
-          }
-        }
+          },
+          "label": "Medias"
+        },
+        "type": "Group"
       }
     },
     "SEO & Metadata": {
@@ -217,6 +221,5 @@
   },
   "label": "Project",
   "repeatable": true,
-  "status": true,
-  "format": "page"
+  "status": true
 }

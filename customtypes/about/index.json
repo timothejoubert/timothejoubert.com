@@ -1,58 +1,55 @@
 {
-  "id": "about",
-  "label": "about",
-  "repeatable": false,
-  "status": true,
   "format": "page",
+  "id": "about",
   "json": {
     "Main": {
       "title": {
-        "type": "Text",
         "config": {
           "label": "title",
           "placeholder": ""
-        }
+        },
+        "type": "Text"
       },
       "content": {
-        "type": "StructuredText",
         "config": {
-          "label": "content",
-          "placeholder": "",
           "allowTargetBlank": true,
-          "multi": "strong"
-        }
+          "label": "content",
+          "multi": "strong",
+          "placeholder": ""
+        },
+        "type": "StructuredText"
       },
       "sections": {
-        "type": "Group",
         "config": {
-          "label": "sections",
-          "repeat": true,
           "fields": {
             "title": {
-              "type": "Text",
               "config": {
                 "label": "title",
                 "placeholder": ""
-              }
+              },
+              "type": "Text"
             },
             "content": {
-              "type": "StructuredText",
               "config": {
-                "label": "content",
-                "placeholder": "",
                 "allowTargetBlank": true,
-                "multi": "hyperlink,strong,em,paragraph,embed"
-              }
+                "label": "content",
+                "multi": "hyperlink,strong,em,paragraph,embed",
+                "placeholder": ""
+              },
+              "type": "StructuredText"
             }
-          }
-        }
+          },
+          "label": "sections",
+          "repeat": true
+        },
+        "type": "Group"
       },
       "slices": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
         "config": {
           "choices": {}
-        }
+        },
+        "fieldset": "Slice Zone",
+        "type": "Slices"
       }
     },
     "SEO & Metadata": {
@@ -82,5 +79,8 @@
         "type": "Image"
       }
     }
-  }
+  },
+  "label": "about",
+  "repeatable": false,
+  "status": true
 }

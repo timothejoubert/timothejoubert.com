@@ -1,13 +1,14 @@
 {
+  "format": "page",
   "id": "home_page",
   "json": {
     "Main": {
       "title": {
-        "type": "Text",
         "config": {
           "label": "Title",
           "placeholder": ""
-        }
+        },
+        "type": "Text"
       }
     },
     "SEO & Metadata": {
@@ -40,6 +41,5 @@
   },
   "label": "Home page",
   "repeatable": false,
-  "status": true,
-  "format": "page"
+  "status": true
 }
