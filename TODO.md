@@ -10,6 +10,8 @@
 	- Fix animation d'apprarition des tags dans VProjectCard
 	- VArchive: améliorer le coté responsive de la table
 
+- VArchive: ordering par name ne prend pas en compte les accents, il faudrait plutot se base sur l'uid du projet pour éviter ce probleme
+
 ### improvement
 - Refactor: utiliser une composable commun pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
 - VProjectPage: Add reveal and switch animation to reveal content
