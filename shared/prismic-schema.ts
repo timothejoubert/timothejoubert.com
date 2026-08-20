@@ -47,7 +47,7 @@ export const prismicDocumentRoutes = [
 	{
 		name: 'projet',
 		type: prismicDocumentType.PROJECT_PAGE,
-		path: '/:lang?/:uid',
+		path: '/:lang?/projets/:uid',
 	},
 	{
 		name: 'projet-archive',

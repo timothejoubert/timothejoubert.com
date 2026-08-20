@@ -12,7 +12,7 @@ if (!noindex.value) {
 	usePrismicProjectSchemaOrg(document, {
 		title: title.value,
 		description: description.value,
-		canonicalUrl: canonicalUrl.value
+		canonicalUrl: canonicalUrl.value,
 	})
 }
 </script>

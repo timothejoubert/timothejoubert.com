@@ -4,6 +4,7 @@ import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from './i18n/i18n'
 import { version } from './package.json'
 import { getPrismicSitemapUrls } from './shared/prismic-sitemap-urls'
 import { getPrismicAliasRedirects, prismicDocumentRoutes } from './shared/prismic-schema'
+import { getLegacyFavoriteProjectRedirects } from './shared/prismic-legacy-project-redirects'
 import { repositoryName } from './prismic.config.json'
 
 // const isDev = process.env.NODE_ENV === 'development'
@@ -72,6 +73,21 @@ export default defineNuxtConfig({
 		prerender: {
 			// Aliases aren't linked from anywhere in the app, so the crawler won't find them on its own.
 			routes: Object.keys(getPrismicAliasRedirects()),
+		},
+	},
+
+	hooks: {
+		// Favorite projects moved from /:uid to /projets/:uid — redirect the old indexed URLs.
+		// Needs a Prismic fetch, so it can't be a plain synchronous `routeRules` entry like the
+		// alias redirects above; the nitro:config hook is the standard way to inject build-time,
+		// asynchronously-fetched route rules/prerender routes.
+		'nitro:config': async (nitroConfig) => {
+			const legacyProjectRedirects = await getLegacyFavoriteProjectRedirects(repositoryName)
+
+			nitroConfig.routeRules = { ...nitroConfig.routeRules, ...legacyProjectRedirects }
+			nitroConfig.prerender ||= {}
+			nitroConfig.prerender.routes ||= []
+			nitroConfig.prerender.routes.push(...Object.keys(legacyProjectRedirects))
 		},
 	},
 

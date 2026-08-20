@@ -10,11 +10,11 @@ Ce comportement est implémenté via les **nested routes natives de Nuxt/Vue Rou
 
 | Contexte | URL projet |
 |---|---|
-| Home (`favorite: true`) | `/:uid` |
+| Home (`favorite: true`) | `/projets/:uid` |
 | Archives (`favorite: false`) | `/archive/:uid` |
 | About | `/a-propos` |
 
-Les anciens chemins `/projets/:uid` sont supprimés (ou redirigés si nécessaire).
+> **Historique** : `/projets/:uid` avait été volontairement supprimé au profit d'un simple `/:uid` lors de la mise en place du routing imbriqué (voir plus bas), puis réintroduit ensuite. Les anciennes URLs `/:uid` sont redirigées en 301 vers `/projets/:uid` — voir `shared/prismic-legacy-project-redirects.ts`, calculé dynamiquement à chaque build à partir des projets `favorite: true` actuels (pas de liste figée).
 
 ## Logique de séparation home / archives
 
@@ -33,7 +33,8 @@ Chaque projet appartient à **un seul contexte** — pas de duplicate content, p
 app/pages/
   index.vue              ← home    — affiche VMainProjectListing + <NuxtPage />
   index/
-    [uid].vue            ← projet home en modal
+    projets/
+      [uid].vue          ← projet home en modal (/projets/:uid)
   archive.vue            ← archives — affiche VArchivePage + <NuxtPage />
   archive/
     [uid].vue            ← projet archive en modal
@@ -56,11 +57,11 @@ app/pages/
 
 ## Changements nécessaires
 
-### `shared/prismic-routes.ts`
-Remplacer la route `projet` (`/:lang?/projets/:uid`) par deux routes :
+### `shared/prismic-schema.ts`
+Deux routes pour le type `project` :
 ```ts
-{ type: 'project', path: '/:lang?/:uid' }           // home projects
-{ type: 'project', path: '/:lang?/archive/:uid' }   // archive projects
+{ name: 'projet', type: 'project', path: '/:lang?/projets/:uid' }           // home projects
+{ name: 'projet-archive', type: 'project', path: '/:lang?/archive/:uid' }   // archive projects
 ```
 
 ### `app/pages/index.vue`
@@ -69,7 +70,7 @@ Wrapper de la home : rend `VHomePage` (= `VMainProjectListing`) et inclut `<Nuxt
 ### `app/pages/archive.vue`
 Wrapper des archives : rend `VArchivePage` et inclut `<NuxtPage />`.
 
-### `app/pages/index/[uid].vue` et `app/pages/archive/[uid].vue`
+### `app/pages/index/projets/[uid].vue` et `app/pages/archive/[uid].vue`
 Composants de page projet (modal). Récupèrent le document projet via `uid`. Rendent `VProjectPage` sans le listing en background (le parent s'en charge).
 
 ### `app/components/molecules/VProjectCard.vue`
