@@ -44,9 +44,20 @@ Dans `customtypes/project/index.json`, tab `Main`, juste après `favorite` (clas
 
 **Non, pas pour l'instant.** Les propriétés spécifiques à certains sous-types (`VideoObject.duration`, `SoftwareApplication.applicationCategory`, etc.) sont des enrichissements optionnels en JSON-LD, jamais requis pour un contenu valide — et les champs génériques déjà présents (`title`, `short_description`/`content`, `thumbnail`, `date`, `awards`, `link`) couvrent déjà les propriétés `CreativeWork` de base (`name`, `description`, `image`, `dateCreated`, `award`, `url`) quel que soit le `@type` choisi. Ajouter des champs par type maintenant serait de la spéculation sur des besoins pas encore vérifiés — à réévaluer concrètement pendant le chantier JSON-LD, une fois qu'on voit vraiment ce qui manque.
 
-### 4. Étape manuelle (à faire par toi)
+### 4. Implémentation (via la CLI, pas d'édition manuelle du JSON)
 
-Éditer le JSON local ne suffit pas à synchroniser le custom type vers le repo Prismic distant — il faudra lancer `pnpm slicemachine` et pousser le changement depuis son interface (pas d'accès direct au compte/repo Prismic distant).
+Ce repo est passé au Type Builder — la convention est de toujours passer par la CLI Prismic pour modifier les modèles, jamais d'éditer `customtypes/**/index.json` à la main :
+
+```sh
+npx prismic field add select creative_work_type --to-type project --tab Main \
+  --label "Type (schema.org)" \
+  --option CreativeWork --option WebSite --option SoftwareApplication --option VisualArtwork --option VideoObject
+npx prismic field reorder creative_work_type --after favorite --from-type project
+npx prismic push
+pnpm type-gen
+```
+
+`npx prismic push` requiert un working tree git propre sur les fichiers de modèle (garde-fou de la CLI) — committer `customtypes/project/index.json` avant de pousser si besoin.
 
 ### 5. TODO.md
 
