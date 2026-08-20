@@ -3,5 +3,34 @@
   "libraries": [
     "./app/slices"
   ],
-  "routes": []
+  "routes": [
+    {
+      "type": "about",
+      "path": "/:lang?/a-propos"
+    },
+    {
+      "type": "archive",
+      "path": "/:lang?/archive"
+    },
+    {
+      "type": "home_page",
+      "path": "/:lang?"
+    },
+    {
+      "type": "project",
+      "path": "/:lang?/:uid"
+    },
+    {
+      "type": "project",
+      "path": "/:lang?/archive/:uid"
+    },
+    {
+      "type": "project_listing_page",
+      "path": "/project-listing-page"
+    },
+    {
+      "type": "settings",
+      "path": "/settings"
+    }
+  ]
 }

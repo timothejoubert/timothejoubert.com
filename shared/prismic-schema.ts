@@ -7,7 +7,9 @@ import type { PrismicDocumentType } from '~/types/api'
  * 2. Add a friendly constant to `prismicDocumentType` below.
  * 3. If it's a routable page, add an entry to `prismicDocumentRoutes` below.
  * `PrismicDocumentPageType` and `isDynamicDocument` derive from `prismicDocumentRoutes`
- * automatically — no other manual wiring needed.
+ * automatically — no other manual wiring needed. `pnpm type-gen` also regenerates
+ * `prismic.config.json`'s `routes` field from `prismicDocumentRoutes` (via
+ * `scripts/sync-prismic-routes.js`) — never hand-edit that field, it's a generated artifact.
  */
 
 /**

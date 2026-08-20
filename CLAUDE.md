@@ -21,7 +21,7 @@ pnpm lint:css         # stylelint only (*.vue, *.css, *.scss)
 
 npx prismic pull      # pull custom type / slice models from Prismic (Type Builder)
 npx prismic push      # push local custom type / slice models to Prismic
-pnpm type-gen         # regenerate prismicio-types.d.ts from customtypes/** models (npx prismic-ts-codegen)
+pnpm type-gen         # regenerate prismicio-types.d.ts (npx prismic gen types) and prismic.config.json's routes (scripts/sync-prismic-routes.js)
 pnpm prismic:backup   # run scripts/prismic-backup.js
 ```
 
@@ -31,11 +31,11 @@ There is no test runner configured in this repo — do not assume Vitest/Jest ex
 
 ### Prismic-driven routing
 
-Pages are backed by Prismic documents. `shared/prismic-routes.ts` is the **single source of truth** mapping Prismic document types to URL paths (`prismicDocumentRoutes`). Use `getRoutePath(name, params)` to build URLs rather than hardcoding paths — never index `prismicDocumentRoutes` directly by type for lookups with collisions, use `prismicRouteByName`.
+Pages are backed by Prismic documents. `shared/prismic-schema.ts` is the **single source of truth** mapping Prismic document types to URL paths (`prismicDocumentRoutes`). Use `getRoutePath(name, params)` to build URLs rather than hardcoding paths — never index `prismicDocumentRoutes` directly by type for lookups with collisions, use `prismicRouteByName`. `prismic.config.json`'s `routes` field is a generated artifact derived from `prismicDocumentRoutes` by `pnpm type-gen` (`scripts/sync-prismic-routes.js`) — never hand-edit it, edit `prismicDocumentRoutes` instead.
 
 Document-type genericity is layered so nothing needs hand-syncing when a Prismic custom type is added/removed:
 - `app/types/api.ts`'s `PrismicDocumentType` is derived straight from the Prismic-codegen'd `AllDocumentTypes` (`prismicio-types.d.ts`) — the actual single source of truth for "what document types exist." Always import `PrismicDocumentType` from here, not re-declare it.
-- `shared/prismic-document.ts`'s `prismicDocumentType` object gives friendly named constants (`prismicDocumentType.HOME_PAGE`, etc.) for call-site ergonomics, but every value is checked against `PrismicDocumentType` via `satisfies` — a renamed/removed custom type fails to compile there instead of silently drifting.
+- `shared/prismic-schema.ts`'s `prismicDocumentType` object gives friendly named constants (`prismicDocumentType.HOME_PAGE`, etc.) for call-site ergonomics, but every value is checked against `PrismicDocumentType` via `satisfies` — a renamed/removed custom type fails to compile there instead of silently drifting.
 - `PrismicDocumentPageType` (routable page types) and `isDynamicDocument` (repeatable/`:uid` types) are both derived from `prismicDocumentRoutes`, not separately hand-listed — adding a new routable type only means adding one entry to `prismicDocumentRoutes`.
 
 Project pages are implemented as **nested routes** so a project opens as a modal over the listing page instead of unmounting it (SSR still renders both together for SEO). See `docs/project-modal-routing.md` for the full rationale. Concretely:
@@ -73,7 +73,7 @@ Props are declared with the **TypeScript generic** form of `defineProps<{ ... }>
 
 ### Prismic utilities
 
-`app/utils/prismic/*` centralizes Prismic field handling: link resolution (`link-field.ts`, `prismic-link-to.ts`, `route-resolver.ts`), image fields (`image-field.ts`, `prismic-media.ts`), content relationships (`content-relationship-field.ts`), and dates (`prismic-date.ts`). `shared/prismic-document.ts` defines `prismicDocumentType`/`PrismicDocumentPageType`. Prismic custom type models live in `customtypes/**/index.json`, managed via the `prismic` CLI / Type Builder (not Slice Machine, which this project has migrated away from); run `pnpm type-gen` after changing them to refresh `prismicio-types.d.ts` (this generated file is eslint-ignored — never hand-edit it).
+`app/utils/prismic/*` centralizes Prismic field handling: link resolution (`link-field.ts`, `prismic-link-to.ts`, `route-resolver.ts`), image fields (`image-field.ts`, `prismic-media.ts`), content relationships (`content-relationship-field.ts`), and dates (`prismic-date.ts`). `shared/prismic-schema.ts` defines `prismicDocumentType`/`PrismicDocumentPageType`. Prismic custom type models live in `customtypes/**/index.json`, managed via the `prismic` CLI / Type Builder (not Slice Machine, which this project has migrated away from); run `pnpm type-gen` after changing them to refresh `prismicio-types.d.ts` (this generated file is eslint-ignored — never hand-edit it).
 
 ### Styling
 

@@ -16,7 +16,7 @@
         "lint-fix": "pnpm lint:js --fix && pnpm lint:css --fix",
         "lint:js": "eslint .",
         "lint:css": "stylelint \"**/*.{vue,css,scss}\"",
-        "type-gen": "npx prismic-ts-codegen",
+        "type-gen": "npx prismic gen types && node scripts/sync-prismic-routes.js",
         "prismic:backup": "node scripts/prismic-backup.js"
     },
     "dependencies": {
@@ -50,7 +50,6 @@
     },
     "devDependencies": {
         "@iconify-json/material-symbols": "^1.2.89",
-        "@iconify-json/uil": "^1.2.3",
-        "prismic-ts-codegen": "^0.1.30"
+        "@iconify-json/uil": "^1.2.3"
     }
 }
