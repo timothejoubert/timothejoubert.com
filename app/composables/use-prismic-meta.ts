@@ -24,7 +24,12 @@ function richTextOrStringToText(field: string | RichTextField | undefined): stri
 	return typeof field === 'string' ? field : asText(field) || undefined
 }
 
-export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocument | null | undefined>) {
+export interface PrismicMetaOptions {
+	/** schema.org `WebPage` subtype for this route (e.g. `CollectionPage`, `AboutPage`). Omit to let `nuxt-schema-org` emit its default `WebPage` node. */
+	schemaOrgType?: string
+}
+
+export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocument | null | undefined>, options: PrismicMetaOptions = {}) {
 	const doc = toRef(documentOrRef)
 	const { site } = useRuntimeConfig().public
 	const siteUrl = ensureProtocol(site.url)
@@ -81,6 +86,18 @@ export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocumen
 
 	const { head } = usePageMeta({ title, description, image, canonicalUrl, alternateLinks, noindex })
 	useHead(head)
+
+	if (options.schemaOrgType && !noindex.value) {
+		useSchemaOrg([
+			defineWebPage({
+				'@type': options.schemaOrgType,
+				name: title.value,
+				description: description.value,
+				image: image.value,
+				url: canonicalUrl.value,
+			}),
+		])
+	}
 
 	return { title, description, image, canonicalUrl, alternateLinks, noindex }
 }

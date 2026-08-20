@@ -2,7 +2,7 @@
 import { prismicDocumentType } from '~~/shared/prismic-schema'
 
 const { document } = await useFetchPage(prismicDocumentType.ABOUT_PAGE)
-usePrismicMeta(document)
+usePrismicMeta(document, { schemaOrgType: 'AboutPage' })
 </script>
 
 <template>

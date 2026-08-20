@@ -1,18 +1,17 @@
 ### TODO
 
-- CMS: pour les documents projets, ajouter un champ select dans prismic pour différents type de projet/CreativeWork, et voir si on ajoute des nouvelles données relative (necessaire) en fonction de type schema.org — plan détaillé dans `SCHEMA-ORG-PROJECT-TYPE.md`
-- Ajouter les data schema.org avec les module nuxt, notamment, #entity, webPage/CollectionPage, Project/CreativeWork
+- changer l'url des pages projets "favorite" de /nom-du-projet vers /projets/nom-du-projet et garder /archive/nom-du-projet vers /archive/nom-du-projet. Il faut que la route par default soit /projets/xxx et qu'elle soit differente si favorite = false
 
-- Migrer vers type Builder sur prismic https://prismic.io/docs/type-builder#migrate-to-the-type-builder
-
-- Intégration page Error
-- VArchive: améliorer le coté responsive de la table
-
-- Script d'import de projets dans Prismic à partir de fichiers markdown + médias en local (front-matter → champs `project` type/tag_group/framework, contenu → RichText, médias → Asset API) : faisable via la Migration API de Prismic, exposée par `@prismicio/client` (déjà installé, ^7.21.8, requiert un write API token généré manuellement dans le dashboard Prismic + Node ≥ 20, ok sur ce repo en Node 24) — `createWriteClient` + `createMigration()` + `migration.createAsset(fichier local, ...)` + `migration.createDocument({ type: 'project', data }, title)` + `client.migrate(migration)`. Limite à anticiper : documents créés en brouillon (publication manuelle après coup), et pas de convertisseur Markdown→RichText Prismic officiel (à écrire soi-même, même simple).
-
+- Intégration page Error, page racine /page-introuvable & page de projet
+- Faire un subset de la typo variable en woff2, actuellement trop lourde
+- Amélioration du design du site
+	- typo monospace pour le contenu de la page about
+	- update du style des settings globaux (themes, columns input)
+	- Fix animation d'apprarition des tags dans VProjectCard
+	- VArchive: améliorer le coté responsive de la table
 
 ### improvement
-- Refactor: utiliser une composable commune pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
+- Refactor: utiliser une composable commun pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
 - VProjectPage: Add reveal and switch animation to reveal content
 - VProjectPage: Add backdrop or find a design hack to highlight VWindow with background
 
@@ -23,12 +22,17 @@
 
 ### Next step
 
+- Script d'import de projets dans Prismic à partir de fichiers markdown + médias en local (front-matter → champs `project` type/tag_group/framework, contenu → RichText, médias → Asset API) : faisable via la Migration API de Prismic, exposée par `@prismicio/client` (déjà installé, ^7.21.8, requiert un write API token généré manuellement dans le dashboard Prismic + Node ≥ 20, ok sur ce repo en Node 24) — `createWriteClient` + `createMigration()` + `migration.createAsset(fichier local, ...)` + `migration.createDocument({ type: 'project', data }, title)` + `client.migrate(migration)`. Limite à anticiper : documents créés en brouillon (publication manuelle après coup), et pas de convertisseur Markdown→RichText Prismic officiel (à écrire soi-même, même simple).
+
 - En partant de fichier markdown et de média sur mon ordi en local, voir si c'est possible de faire un script pour les datas et medias de projets directement dans un repo prismic
 
 - Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
 
 
 ### Done
+- Migrer vers type Builder sur prismic https://prismic.io/docs/type-builder#migrate-to-the-type-builder
+- CMS: champ `creative_work_type` (Select) ajouté au custom type `project` via la CLI Prismic (`prismic field add select` + `prismic push`, pas d'édition manuelle du JSON — cf. `SCHEMA-ORG-PROJECT-TYPE.md`), valeurs = noms de types schema.org (`CreativeWork`/`WebSite`/`SoftwareApplication`/`VisualArtwork`/`VideoObject`) injectées telles quelles en `@type`. Décision : pas de champs supplémentaires par sous-type (les champs génériques existants suffisent).
+- Données schema.org/JSON-LD via `nuxt-schema-org` : entité globale `Person` (sourcée du singleton Prismic `settings` — `website_name`/`email`/`socials[].link` → `sameAs` — donne enfin un usage réel à `usePrismicSettingsDocument`, jusque-là inutilisé) dans `app.vue` ; `WebPage`/`CollectionPage`/`AboutPage` par page (option `schemaOrgType` sur `usePrismicMeta`) ; `CreativeWork` par projet (nouveau composable `usePrismicProjectSchemaOrg`, `@type` dynamique = `creative_work_type`). ⚠️ Bug trouvé et corrigé en testant : `index.vue`/`archive.vue` (pages parentes du routing imbriqué projet-en-modal) émettaient toujours leur nœud `CollectionPage` même quand un projet était ouvert par-dessus (le script de la page parente tourne aussi dans ce cas) — corrigé en n'émettant ce nœud que si aucune route enfant (`route.params.uid`) n'est active. Vérifié dans le HTML généré (`pnpm generate`) : accueil/archive → `CollectionPage`, à-propos → `AboutPage`, page projet → `WebPage` simple + `CreativeWork` avec les bonnes données, sur plusieurs projets (favoris et archive).
 - VArchivePage: sort par Cadre et étiquette (alphabétique) — `VArchivePage.vue`. "Cadre" (`framework`, champ `Select` scalaire) trie via l'API Prismic comme les colonnes existantes (`orderings: [{ field: 'my.project.framework' }]`). "Étiquette" (`tag_group`) ne peut pas être trié côté Prismic — c'est un champ `Group` répétable, l'API `orderings` ne supporte que des champs scalaires — donc trié côté client (`sortedRows` computed, clé de tri = étiquette alphabétiquement la plus petite de chaque projet) après un fetch qui retombe sur un tri serveur stable (`date desc`) dans ce cas. Vérifié dans le navigateur : les deux colonnes trient correctement et sans erreur console.
 - VArchive: utilise des class pour styliser les cells (th, td) au lieu d'utiliser des selecteurs non précis (.head-row th)
 

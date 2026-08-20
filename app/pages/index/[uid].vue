@@ -7,7 +7,14 @@ if (document.value && !document.value.data.favorite) {
 	await navigateTo(getRoutePath('projet-archive', { uid: document.value.uid }), { redirectCode: 301 })
 }
 
-usePrismicMeta(document)
+const { title, description, canonicalUrl, noindex } = usePrismicMeta(document)
+if (!noindex.value) {
+	usePrismicProjectSchemaOrg(document, {
+		title: title.value,
+		description: description.value,
+		canonicalUrl: canonicalUrl.value
+	})
+}
 </script>
 
 <template>

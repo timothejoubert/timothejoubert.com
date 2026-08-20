@@ -11,7 +11,7 @@ const isProd = process.env.NUXT_PUBLIC_SITE_ENV === 'production'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n', '@nuxtjs/prismic', '@nuxtjs/sitemap', '@nuxtjs/robots', '@vueuse/nuxt'],
+	modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n', '@nuxtjs/prismic', '@nuxtjs/sitemap', '@nuxtjs/robots', 'nuxt-schema-org', '@vueuse/nuxt'],
 	plugins: [
 		'~/plugins/anchor-polyfill.client.ts',
 	],
