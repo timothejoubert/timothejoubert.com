@@ -1,0 +1,7 @@
+{
+  "repositoryName": "timothe-joubert",
+  "libraries": [
+    "./app/slices"
+  ],
+  "routes": []
+}

@@ -4,7 +4,7 @@ import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from './i18n/i18n'
 import { version } from './package.json'
 import { getPrismicSitemapUrls } from './shared/prismic-sitemap-urls'
 import { getPrismicAliasRedirects, prismicDocumentRoutes } from './shared/prismic-schema'
-import { repositoryName } from './slicemachine.config.json'
+import { repositoryName } from './prismic.config.json'
 
 // const isDev = process.env.NODE_ENV === 'development'
 const isProd = process.env.NUXT_PUBLIC_SITE_ENV === 'production'
@@ -54,13 +54,13 @@ export default defineNuxtConfig({
 
 	// https://nuxtseo.com/sitemap/getting-started/introduction
 	sitemap: {
-		exclude: [`${PREVIEW_PATH}/**`, '/slice-simulator'],
+		exclude: [`${PREVIEW_PATH}/**`],
 		urls: () => getPrismicSitemapUrls(repositoryName),
 	},
 
 	// https://nuxtseo.com/robots/getting-started/introduction
 	robots: {
-		disallow: [PREVIEW_PATH, '/slice-simulator'],
+		disallow: [PREVIEW_PATH],
 	},
 
 	// Redirect prismicDocumentRoutes' `alias` paths (e.g. /projets, /projects) to their canonical route.

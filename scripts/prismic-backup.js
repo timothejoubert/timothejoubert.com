@@ -2,11 +2,11 @@ import * as prismic from '@prismicio/client'
 import { writeFileSync, mkdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
-const config = JSON.parse(readFileSync(join(process.cwd(), 'slicemachine.config.json'), 'utf-8'))
+const config = JSON.parse(readFileSync(join(process.cwd(), 'prismic.config.json'), 'utf-8'))
 const REPOSITORY = config.repositoryName
 
 if (!REPOSITORY) {
-    console.error('No repositoryName found in slicemachine.config.json')
+    console.error('No repositoryName found in prismic.config.json')
     process.exit(1)
 }
 

@@ -1,5 +1,5 @@
 import type { Config } from 'prismic-ts-codegen'
-import { libraries } from './slicemachine.config.json'
+import { libraries } from './prismic.config.json'
 
 const config: Config = {
 	output: './prismicio-types.d.ts',

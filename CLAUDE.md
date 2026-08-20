@@ -19,7 +19,8 @@ pnpm lint-fix         # same, with --fix
 pnpm lint:js          # eslint only
 pnpm lint:css         # stylelint only (*.vue, *.css, *.scss)
 
-pnpm slicemachine     # start Slice Machine (Prismic custom types / slices UI)
+npx prismic pull      # pull custom type / slice models from Prismic (Type Builder)
+npx prismic push      # push local custom type / slice models to Prismic
 pnpm type-gen         # regenerate prismicio-types.d.ts from customtypes/** models (npx prismic-ts-codegen)
 pnpm prismic:backup   # run scripts/prismic-backup.js
 ```
@@ -72,7 +73,7 @@ Props are declared with the **TypeScript generic** form of `defineProps<{ ... }>
 
 ### Prismic utilities
 
-`app/utils/prismic/*` centralizes Prismic field handling: link resolution (`link-field.ts`, `prismic-link-to.ts`, `route-resolver.ts`), image fields (`image-field.ts`, `prismic-media.ts`), content relationships (`content-relationship-field.ts`), and dates (`prismic-date.ts`). `shared/prismic-document.ts` defines `prismicDocumentType`/`PrismicDocumentPageType`. Prismic custom type models live in `customtypes/**/index.json`; run `pnpm type-gen` after changing them to refresh `prismicio-types.d.ts` (this generated file is eslint-ignored — never hand-edit it).
+`app/utils/prismic/*` centralizes Prismic field handling: link resolution (`link-field.ts`, `prismic-link-to.ts`, `route-resolver.ts`), image fields (`image-field.ts`, `prismic-media.ts`), content relationships (`content-relationship-field.ts`), and dates (`prismic-date.ts`). `shared/prismic-document.ts` defines `prismicDocumentType`/`PrismicDocumentPageType`. Prismic custom type models live in `customtypes/**/index.json`, managed via the `prismic` CLI / Type Builder (not Slice Machine, which this project has migrated away from); run `pnpm type-gen` after changing them to refresh `prismicio-types.d.ts` (this generated file is eslint-ignored — never hand-edit it).
 
 ### Styling
 

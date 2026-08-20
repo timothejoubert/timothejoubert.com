@@ -4,7 +4,7 @@ import {
 	isFilledLinkToMediaField,
 	isVideoEmbedField,
 } from '~/utils/prismic/guard'
-import prismicData from '~~/slicemachine.config.json'
+import prismicData from '~~/prismic.config.json'
 import { replaceSpecialCharacter } from '~/utils/string/slugify'
 import { getObjWithAllKeys } from '~/utils/object/object-validation'
 
