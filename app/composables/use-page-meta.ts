@@ -50,7 +50,7 @@ export function usePageMeta(options: PageMetaOptions = {}) {
         if (alternateLinks) {
             links.push(...alternateLinks.map(alternateLink => ({
                 hid: `alternate-${alternateLink.locale}`,
-                rel: 'alternate',
+                rel: 'alternate' as const,
                 hreflang: alternateLink.locale,
                 href: alternateLink.href,
             })))

@@ -2,8 +2,6 @@
 import { isFilled } from '@prismicio/client'
 import { getFilledLinkToWeb } from '~/utils/prismic/link-field'
 
-// TODO: try SSR and client-side teleport for project page content
-
 const { data: settings } = await usePrismicSettingsDocument()
 const publisher = computed(() => settings.value?.data)
 
@@ -80,16 +78,18 @@ useSchemaOrg([
     position: fixed;
     z-index: 1001;
     bottom: calc(var(--app-padding-bottom) * 0.5);
-    translate: 0 50%;
     place-self: flex-end center;
+    translate: 0 50%;
 
     &::before {
         position: absolute;
-        content: '';
         display: block;
+        content: '';
         inset: -40% -30%;
+
         // background: radial-gradient(var(--color-surface) 30%, transparent);
         pointer-events: none;
+
         // backdrop-filter: blur(5px);
     }
 }
