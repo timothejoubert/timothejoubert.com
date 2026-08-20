@@ -25,6 +25,19 @@
         },
         "type": "Boolean"
       },
+      "creative_work_type": {
+        "config": {
+          "label": "Type (schema.org)",
+          "options": [
+            "CreativeWork",
+            "WebSite",
+            "SoftwareApplication",
+            "VisualArtwork",
+            "VideoObject"
+          ]
+        },
+        "type": "Select"
+      },
       "rate": {
         "config": {
           "label": "Rate",

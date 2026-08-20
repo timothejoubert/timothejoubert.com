@@ -456,6 +456,17 @@ interface ProjectDocumentData {
 	favorite: prismic.BooleanField;
 	
 	/**
+	 * Type (schema.org) field in *Project*
+	 *
+	 * - **Field Type**: Select
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: project.creative_work_type
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/select
+	 */
+	creative_work_type: prismic.SelectField<"CreativeWork" | "WebSite" | "SoftwareApplication" | "VisualArtwork" | "VideoObject">;
+	
+	/**
 	 * Rate field in *Project*
 	 *
 	 * - **Field Type**: Number
