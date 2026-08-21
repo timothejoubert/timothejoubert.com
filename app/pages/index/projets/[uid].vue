@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { getRoutePath, prismicDocumentType } from '~~/shared/prismic-schema'
 
-const { document } = await useFetchPage(prismicDocumentType.PROJECT_PAGE)
+const backPath = getRoutePath('index')
+
+const { document } = await useFetchPage(prismicDocumentType.PROJECT_PAGE, { fatal: false })
 
 if (document.value && !document.value.data.favorite) {
 	await navigateTo(getRoutePath('projet-archive', { uid: document.value.uid }), { redirectCode: 301 })
@@ -19,8 +21,7 @@ if (!noindex.value) {
 
 <template>
     <VProjectPage
-        v-if="document"
         :document="document"
-        :back-path="getRoutePath('index')"
+        :back-path="backPath"
     />
 </template>

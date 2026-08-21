@@ -47,7 +47,9 @@ function reload() {
 
 <template>
     <div>
-        <VErrorPage
+        <VErrorContent
+            wrapper="main"
+            id="main-content"
             :title="title"
             :subtitle="subtitle"
             :content="content"
@@ -67,7 +69,7 @@ function reload() {
             >
                 {{ $t('back_home') }}
             </button>
-        </VErrorPage>
+        </VErrorContent>
         <VNav />
     </div>
 </template>

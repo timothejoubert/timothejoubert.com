@@ -1,6 +1,7 @@
 {
   "error_page.not_found_title": "Page introuvable",
   "error_page.not_found_content": "La page que vous recherchez n'existe pas ou a été déplacée.",
+  "error_page.project_not_found_content": "Le projet que vous recherchez n'existe pas ou a été déplacé.",
   "error_page.server_error_title": "Erreur serveur",
   "error_page.server_error_content": "Une erreur est survenue de notre côté. Veuillez réessayer dans quelques instants.",
   "error_page.unauthenticated_user_error_title": "Authentification requise",

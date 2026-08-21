@@ -3,7 +3,7 @@ import { withQuery } from 'ufo'
 import type { ProjectDocument } from '~~/prismicio-types'
 
 const props = defineProps<{
-    document: ProjectDocument
+    document?: ProjectDocument | null
     backPath: string
 }>()
 
@@ -15,7 +15,7 @@ function withCurrentQuery(path: string) {
     return withQuery(path, route.query)
 }
 
-const project = computed(() => props.document.data)
+const project = computed(() => props.document?.data)
 const prismic = usePrismic()
 
 const videoExtensions = ['mp4', 'mov']
@@ -26,6 +26,8 @@ function endWidthVideoExt(url: string) {
 }
 
 const medias = computed(() => {
+    if (!project.value) return []
+
     return project.value.medias
         .filter(m => prismic.isFilled.linkToMedia(m.media) && m.media.url)
         .map(mediaGroup => ({
@@ -35,23 +37,27 @@ const medias = computed(() => {
 })
 
 const tags = computed(() => {
-    if (project.value.tag_group?.length) return project.value.tag_group.filter(item => item.tag).map(item => item.tag)
-    return props.document.tags || []
+    if (project.value?.tag_group?.length) return project.value.tag_group.filter(item => item.tag).map(item => item.tag)
+    return props.document?.tags || []
 })
 
-const { prevProject, nextProject } = useProjectNeighbors(props.document)
+// Nested route (`[uid].vue`) remounts this component on every `:uid` change (no
+// `definePageMeta({ key })`/keepalive), so calling this only when a document exists is safe.
+const { prevProject, nextProject } = props.document
+    ? useProjectNeighbors(props.document)
+    : { prevProject: computed(() => undefined), nextProject: computed(() => undefined) }
 </script>
 
 <template>
     <VWindow
         :class="$style.root"
         container-selector="body"
-        :aria-label="document.data.title"
+        :aria-label="document?.data.title ?? $t('error_page.not_found_title')"
         @close="navigateTo(backPath)"
     >
         <template #head>
             <h1 :class="$style.title">
-                {{ document.data.title }}
+                {{ document?.data.title ?? $t('error_page.not_found_title') }}
             </h1>
             <NuxtLink
                 :to="backPath"
@@ -62,74 +68,91 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
             </NuxtLink>
         </template>
 
-        <div :class="$style.content">
-            <div :class="$style.attributes">
-                <ul v-if="tags.length" :class="$style.tags">
-                    <LazyVTag
-                        v-for="(tag, i) in tags"
-                        :key="tag || i"
-                        :label="tag"
-                        wrapper="li"
+        <template v-if="document">
+            <div :class="$style.content">
+                <div :class="$style.attributes">
+                    <ul v-if="tags.length" :class="$style.tags">
+                        <LazyVTag
+                            v-for="(tag, i) in tags"
+                            :key="tag || i"
+                            :label="tag"
+                            wrapper="li"
+                        />
+                    </ul>
+                    <VTime
+                        :date="project?.date"
+                        format="short"
                     />
-                </ul>
-                <VTime
-                    :date="project.date"
-                    format="short"
+                </div>
+                <LazyVText
+                    v-if="project?.short_description"
+                    :content="project.short_description"
+                    :class="$style['short-description']"
+                />
+                <LazyVText
+                    v-if="project?.content"
+                    :content="project.content"
+                    :class="$style.description"
                 />
             </div>
-            <LazyVText
-                v-if="project.short_description"
-                :content="project.short_description"
-                :class="$style['short-description']"
-            />
-            <LazyVText
-                v-if="project.content"
-                :content="project.content"
-                :class="$style.description"
-            />
-        </div>
 
-        <VPrismicImg :field="project.thumbnail" />
+            <VPrismicImg :field="project?.thumbnail" />
 
-        <div v-if="medias.length" :class="$style.medias">
+            <div v-if="medias.length" :class="$style.medias">
+                <div
+                    v-for="(mediaGroup, i) in medias"
+                    :key="`media-${i}`"
+                    :class="$style.media"
+                >
+                    <VVideoPlayer
+                        v-if="mediaGroup.type === 'video' && mediaGroup.media?.url"
+                        autoplay
+                        muted
+                        :controls="false"
+                        loop
+                        :src="mediaGroup.media.url"
+                    />
+                    <VPrismicImg v-else :field="mediaGroup.media" />
+                </div>
+            </div>
+
             <div
-                v-for="(mediaGroup, i) in medias"
-                :key="`media-${i}`"
-                :class="$style.media"
+                v-if="prevProject || nextProject"
+                :class="$style.footer"
             >
-                <VVideoPlayer
-                    v-if="mediaGroup.type === 'video' && mediaGroup.media?.url"
-                    autoplay
-                    muted
-                    :controls="false"
-                    loop
-                    :src="mediaGroup.media.url"
-                />
-                <VPrismicImg v-else :field="mediaGroup.media" />
+                <NuxtLink
+                    v-if="prevProject"
+                    :to="withCurrentQuery(prevProject.path)"
+                    :class="$style['footer-link']"
+                >
+                    <VIcon name="material-symbols:arrow-back" />
+                    {{ prevProject.title }}
+                </NuxtLink>
+                <NuxtLink
+                    v-if="nextProject"
+                    :to="withCurrentQuery(nextProject.path)"
+                    :class="[$style['footer-link'], $style['footer-link--next']]"
+                >
+                    {{ nextProject.title }}
+                    <VIcon name="material-symbols:arrow-forward" />
+                </NuxtLink>
             </div>
-        </div>
+        </template>
 
-        <div
-            v-if="prevProject || nextProject"
-            :class="$style.footer"
+        <VErrorContent
+            v-else
+            :class="$style['not-found']"
+            :full-page="false"
+            :subtitle="$t('error_status', { code: 404 })"
+            :content="$t('error_page.project_not_found_content')"
         >
             <NuxtLink
-                v-if="prevProject"
-                :to="withCurrentQuery(prevProject.path)"
-                :class="$style['footer-link']"
+                :to="backPath"
+                :class="$style.button"
             >
-                <VIcon name="material-symbols:arrow-back" />
-                {{ prevProject.title }}
+                {{ $t('back_home') }}
             </NuxtLink>
-            <NuxtLink
-                v-if="nextProject"
-                :to="withCurrentQuery(nextProject.path)"
-                :class="[$style['footer-link'], $style['footer-link--next']]"
-            >
-                {{ nextProject.title }}
-                <VIcon name="material-symbols:arrow-forward" />
-            </NuxtLink>
-        </div>
+        </VErrorContent>
     </VWindow>
 </template>
 
@@ -215,6 +238,24 @@ const { prevProject, nextProject } = useProjectNeighbors(props.document)
     &--next {
         margin-left: auto;
         text-align: right;
+    }
+}
+
+.not-found {
+    padding: var(--v-project-page-padding-inline);
+}
+
+.button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 9px;
+    background-color: var(--color-surface);
+    color: var(--color-content);
+    cursor: pointer;
+
+    @supports (corner-shape: squircle) {
+        border-radius: 24px;
+        corner-shape: squircle;
     }
 }
 </style>

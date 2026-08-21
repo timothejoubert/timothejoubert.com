@@ -30,7 +30,7 @@ useSchemaOrg([
         >
             {{ $t('skip_to_content') }}
         </a>
-        <VNav :class="$style.nav" />
+        <VNav />
 
         <NuxtPage />
 
@@ -42,14 +42,6 @@ useSchemaOrg([
 
 <style lang="scss" module>
 .root {
-    --app-padding-top: 24px;
-    --app-padding-left: 24px;
-    --app-padding-right: 24px;
-    --app-padding-bottom: 70px;
-
-    // --app-max-height: calc(100svh - var(--app-padding-top) - var(--app-padding-bottom));
-    --app-inner-max-height: calc(100svh - var(--app-padding-top) - var(--app-padding-bottom));
-
     position: relative;
     min-height: 100svh;
     padding: var(--app-padding-top) var(--app-padding-right) var(--app-padding-bottom) var(--app-padding-left);
@@ -71,26 +63,6 @@ useSchemaOrg([
 
     &:focus-visible {
         translate: 0 0;
-    }
-}
-
-.nav {
-    position: fixed;
-    z-index: 1001;
-    bottom: calc(var(--app-padding-bottom) * 0.5);
-    place-self: flex-end center;
-    translate: 0 50%;
-
-    &::before {
-        position: absolute;
-        display: block;
-        content: '';
-        inset: -40% -30%;
-
-        // background: radial-gradient(var(--color-surface) 30%, transparent);
-        pointer-events: none;
-
-        // backdrop-filter: blur(5px);
     }
 }
 

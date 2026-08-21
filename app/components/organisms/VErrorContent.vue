@@ -1,16 +1,27 @@
 <script lang="ts" setup>
-defineProps<{
-	title: string
+import type { VWrapperElement } from '~/components/atoms/VWrapper.vue'
+
+withDefaults(defineProps<{
+	wrapper?: VWrapperElement
+	fullPage?: boolean
+	title?: string
 	subtitle: string
 	content: string
 	errorMessage?: string
-}>()
+}>(), {
+	fullPage: true,
+})
+
+defineOptions({
+	inheritAttrs: false,
+})
 </script>
 
 <template>
-    <main
-        id="main-content"
-        :class="$style.root"
+    <VWrapper
+        :wrapper="wrapper || 'div'"
+        v-bind="$attrs"
+        :class="[$style.root, fullPage && $style['root--full-page']]"
     >
         <div
             role="alert"
@@ -19,7 +30,10 @@ defineProps<{
             <p :class="$style.subtitle">
                 {{ subtitle }}
             </p>
-            <h1 :class="$style.title">
+            <h1
+                v-if="title"
+                :class="$style.title"
+            >
                 {{ title }}
             </h1>
             <p :class="$style.content">
@@ -33,16 +47,19 @@ defineProps<{
                 <slot />
             </div>
         </div>
-    </main>
+    </VWrapper>
 </template>
 
 <style lang="scss" module>
 .root {
     display: flex;
-    min-height: var(--app-inner-max-height, 100svh);
     align-items: center;
     justify-content: center;
     text-align: center;
+
+    &--full-page {
+        min-height: var(--app-inner-max-height, 100svh);
+    }
 }
 
 .card {
