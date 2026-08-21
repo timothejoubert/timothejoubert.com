@@ -1,3 +1,4 @@
+import { NotFoundError } from '@prismicio/client'
 import type { ExtractPrismicDocument, PrismicDocumentType } from '~/types/api'
 import { isDynamicDocument } from '~~/shared/prismic-schema'
 
@@ -18,17 +19,25 @@ export async function usePrismicFetchDocument<Type extends PrismicDocumentType =
 		brokenRoute: '/404',
 	}
 
-	const { data, error } = await useAsyncData(dataKey, () => {
-		if (isPreview.value && documentId.value) {
-			return prismicClient.getByID(documentId.value, prismicFetchOptions)
+	const { data, error } = await useAsyncData(dataKey, async () => {
+		try {
+			if (isPreview.value && documentId.value) {
+				return await prismicClient.getByID(documentId.value, prismicFetchOptions)
+			}
+			if (uid && prismicDocument && isDynamicDocument(prismicDocument)) {
+				return await prismicClient.getByUID(prismicDocument, uid, prismicFetchOptions)
+			}
+			if (prismicDocument) {
+				return await prismicClient.getSingle(prismicDocument, prismicFetchOptions)
+			}
+			return undefined
 		}
-		if (uid && prismicDocument && isDynamicDocument(prismicDocument)) {
-			return prismicClient.getByUID(prismicDocument, uid, prismicFetchOptions)
+		catch (e) {
+			if (e instanceof NotFoundError) {
+				throw createError({ statusCode: 404, statusMessage: 'Not Found', cause: e })
+			}
+			throw e
 		}
-		if (prismicDocument) {
-			return prismicClient.getSingle(prismicDocument, prismicFetchOptions)
-		}
-		return Promise.resolve(undefined)
 	}, {
 		getCachedData: (key, nuxtApp) => nuxtApp.static.data?.[key] ?? nuxtApp.payload.data?.[key],
 		dedupe: 'defer',

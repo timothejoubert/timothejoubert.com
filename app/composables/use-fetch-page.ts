@@ -9,7 +9,7 @@ export async function useFetchPage<T extends PrismicDocumentPageType>(type: T | 
 	if (!documentType && !isPreview.value) {
 		throw showError({
 			message: 'can\'t find prismic document to display during use-fetch-page',
-			status: 404,
+			statusCode: 404,
 		})
 	}
 

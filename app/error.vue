@@ -30,6 +30,8 @@ const content = computed(() => {
 	return t('error_page.content')
 })
 
+const errorMessage = computed(() => import.meta.dev ? error.message : undefined)
+
 useHead({
 	title: title.value,
 })
@@ -37,31 +39,51 @@ useHead({
 function goToHome() {
 	clearError({ redirect: '/' })
 }
+
+function reload() {
+	window.location.reload()
+}
 </script>
 
 <template>
-    <main id="main-content">
-        <div role="alert">
-            <h1>{{ title }}</h1>
-            <h2> {{ subtitle }}</h2>
-            <p>{{ content }}</p>
-            <pre>{{ error.message }}</pre>
+    <div>
+        <VErrorPage
+            :title="title"
+            :subtitle="subtitle"
+            :content="content"
+            :error-message="errorMessage"
+        >
             <button
                 v-if="isServerError"
-                onclick="window.location.reload()"
+                :class="$style.button"
+                @click="reload"
             >
                 {{ $t('refresh') }}
             </button>
             <button
                 v-else
+                :class="$style.button"
                 @click="goToHome"
             >
                 {{ $t('back_home') }}
             </button>
-        </div>
+        </VErrorPage>
         <VNav />
-    </main>
+    </div>
 </template>
 
-<!-- <style lang="scss" module>
-</style> -->
+<style lang="scss" module>
+.button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 9px;
+    background-color: var(--color-surface);
+    color: var(--color-content);
+    cursor: pointer;
+
+    @supports (corner-shape: squircle) {
+        border-radius: 24px;
+        corner-shape: squircle;
+    }
+}
+</style>
