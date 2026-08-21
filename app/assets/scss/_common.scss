@@ -3,6 +3,14 @@ html {
 }
 
 body {
+    --app-padding-top: 24px;
+    --app-padding-left: 24px;
+    --app-padding-right: 24px;
+    --app-padding-bottom: 70px;
+
+    // --app-max-height: calc(100svh - var(--app-padding-top) - var(--app-padding-bottom));
+    --app-inner-max-height: calc(100svh - var(--app-padding-top) - var(--app-padding-bottom));
+
     margin: initial;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -26,6 +34,6 @@ body {
 }
 
 p {
-    line-height: 1.35;
     font-size: 16px;
+    line-height: 1.35;
 }

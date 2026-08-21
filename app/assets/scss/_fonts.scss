@@ -1,67 +1,24 @@
 @use './variables/fonts.scss' as *;
 @use './mixins/font-face.scss' as *;
 
-@include font-face($norm-font-name, 'tt-norms-pro-regular-subset') {
-    font-weight: 400;
+@include font-face($fraktion-sans-name, 'pp-fraktion-sans-variable') {
+    font-weight: 200 800;
 }
 
-@include font-face($norm-font-name, 'tt-norms-pro-regular-subset') {
-    font-weight: 400;
-}
-
-@include font-face($norm-font-name, 'tt-norms-pro-italic-subset') {
+@include font-face($fraktion-sans-name, 'pp-fraktion-sans-italic-variable') {
     font-style: italic;
-    font-weight: 400;
+    font-weight: 200 800;
 }
 
-@include font-face($norm-font-name, 'tt-norms-pro-normal-subset') {
-    font-weight: 450;
+@include font-face($fraktion-mono-name, 'pp-fraktion-mono-variable') {
+    font-weight: 200 800;
 }
 
-@include font-face($norm-font-name, 'tt-norms-pro-normal-italic-subset') {
+@include font-face($fraktion-mono-name, 'pp-fraktion-mono-italic-variable') {
     font-style: italic;
-    font-weight: 450;
-}
-
-@include font-face($norm-font-name, 'tt-norms-pro-demibold-subset') {
-    font-weight: 600;
-}
-
-@include font-face($norm-font-name, 'tt-norms-pro-demibold-italic-subset') {
-    font-style: italic;
-    font-weight: 600;
-}
-
-@include font-face($norm-font-name, 'tt-norms-pro-bold-subset') {
-    font-weight: 700;
-}
-
-@include font-face($norm-font-name, 'tt-norms-pro-bold-italic-subset') {
-    font-style: italic;
-    font-weight: 700;
-}
-
-// @include font-face($noi-font-name, 'noigrotesk-variable') {
-//     font-style: oblique 0deg 10deg;
-//     font-weight: 100 900;
-// }
-
-@font-face {
-    font-display: swap;
-    font-family: $noi-font-name;
-    font-style: oblique 0deg 10deg;
-    font-weight: 100 900;
-    src: url('~/assets/fonts/noigrotesk-variable.ttf') format('truetype');
-    // src:
-    //     url('~/assets/fonts/noigrotesk-variable-trial.ttf') format('truetype'),
-    //     url('~/assets/fonts/noigrotesk-variable.woff') format('woff'),
-    //     url('~/assets/fonts/noigrotesk-variable.woff2') format('woff2');
+    font-weight: 200 800;
 }
 
 body {
-    font-family: #{$noi-font-family};
-
-    --typography-family-label: #{$norm-font-family};
-    --typography-family-text: #{$norm-font-family};
-    --typography-family-title: #{$norm-font-family};
+    font-family: #{$fraktion-sans-family};
 }

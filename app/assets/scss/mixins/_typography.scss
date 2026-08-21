@@ -1,9 +1,10 @@
 @use 'sass:math';
 @use './include-media' as *;
+@use '../variables/fonts.scss' as *;
 
 // HEADING
 @mixin text-h1-xxs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
@@ -12,7 +13,7 @@
 }
 
 @mixin text-h1-xs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
@@ -21,7 +22,7 @@
 }
 
 @mixin text-h1-sm {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 64px;
     font-style: normal;
     font-weight: 700;
@@ -30,7 +31,7 @@
 }
 
 @mixin text-h1-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 76px; // Updated on live review with DA (not sync in figma)
     font-style: normal;
     font-weight: 700;
@@ -39,7 +40,7 @@
 }
 
 @mixin text-h1-lg {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 104px;
     font-style: normal;
     font-weight: 700;
@@ -69,7 +70,7 @@
 }
 
 @mixin text-h2-xs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -78,7 +79,7 @@
 }
 
 @mixin text-h2-sm {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 32px;
     font-style: normal;
     font-weight: 700;
@@ -87,7 +88,7 @@
 }
 
 @mixin text-h2-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 38px;
     font-style: normal;
     font-weight: 700;
@@ -110,7 +111,7 @@
 }
 
 @mixin text-h3-xs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
@@ -118,7 +119,7 @@
 }
 
 @mixin text-h3-sm {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
@@ -126,7 +127,7 @@
 }
 
 @mixin text-h3-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -146,7 +147,7 @@
 }
 
 @mixin text-h4-xs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -154,7 +155,7 @@
 }
 
 @mixin text-h4-sm {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -162,7 +163,7 @@
 }
 
 @mixin text-h4-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
@@ -182,7 +183,7 @@
 }
 
 @mixin text-h5-xs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -190,7 +191,7 @@
 }
 
 @mixin text-h5-sm {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -198,7 +199,7 @@
 }
 
 @mixin text-h5-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -218,7 +219,7 @@
 }
 
 @mixin text-overtitle-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -227,7 +228,7 @@
 
 
 @mixin text-subtitle-xs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -236,7 +237,7 @@
 }
 
 @mixin text-subtitle-sm {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
@@ -245,7 +246,7 @@
 }
 
 @mixin text-subtitle-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
@@ -267,7 +268,7 @@
 
 // BODY
 @mixin text-body-xxs {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -275,7 +276,7 @@
 }
 
 @mixin text-body-xs {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -283,7 +284,7 @@
 }
 
 @mixin text-body-sm {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -291,7 +292,7 @@
 }
 
 @mixin text-body-md {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -299,7 +300,7 @@
 }
 
 @mixin text-body-lg {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -322,7 +323,7 @@
 
 // BUTTONS
 @mixin label-text-button-basic-commons {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-style: normal;
     font-weight: 700;
     line-height: 110%;
@@ -348,7 +349,7 @@
 
 // OTHERS
 @mixin text-introduction-xs {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
@@ -356,7 +357,7 @@
 }
 
 @mixin text-introduction-sm {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -364,7 +365,7 @@
 }
 
 @mixin text-introduction-md {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 32px;
     font-style: normal;
     font-weight: 700;
@@ -372,7 +373,7 @@
 }
 
 @mixin text-introduction-lg {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
@@ -394,7 +395,7 @@
 // Event
 
 @mixin text-event-title-xs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 42px;
     font-style: normal;
     font-weight: 700;
@@ -403,7 +404,7 @@
 }
 
 @mixin text-event-title-sm {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
@@ -412,7 +413,7 @@
 }
 
 @mixin text-event-title-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 80px;
     font-style: normal;
     font-weight: 700;
@@ -436,7 +437,7 @@
 }
 
 @mixin text-event-subtitle-xs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
@@ -445,7 +446,7 @@
 }
 
 @mixin text-event-subtitle-sm {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 28px;
     font-style: normal;
     font-weight: 400;
@@ -454,7 +455,7 @@
 }
 
 @mixin text-event-subtitle-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 44px;
     font-style: normal;
     font-weight: 400;
@@ -473,7 +474,7 @@
 }
 
 @mixin text-event-subtitle-2-xs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -481,7 +482,7 @@
 }
 
 @mixin text-event-subtitle-2-sm {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -489,7 +490,7 @@
 }
 
 @mixin text-event-subtitle-2-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -510,7 +511,7 @@
 }
 
 @mixin text-event-date-item-xs {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -518,7 +519,7 @@
 }
 
 @mixin text-event-date-item-sm {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
@@ -526,7 +527,7 @@
 }
 
 @mixin text-event-date-item-md {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
@@ -542,7 +543,7 @@
 }
 
 @mixin text-event-introduction-sm {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 22px;
     font-style: normal;
     font-weight: 450;
@@ -550,7 +551,7 @@
 }
 
 @mixin text-event-introduction-md {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 28px;
     font-style: normal;
     font-weight: 450;
@@ -567,7 +568,7 @@
 }
 
 @mixin text-event-info-sm($font-weight: 400) {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 16px;
     font-style: normal;
     font-weight: $font-weight;
@@ -576,7 +577,7 @@
 }
 
 @mixin text-event-info-md($font-weight: 400) {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 18px;
     font-style: normal;
     font-weight: $font-weight;
@@ -596,7 +597,7 @@
 }
 
 @mixin text-event-card-title-xs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
@@ -604,7 +605,7 @@
 }
 
 @mixin text-event-card-title-sm {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -612,7 +613,7 @@
 }
 
 @mixin text-event-card-title-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
@@ -621,7 +622,7 @@
 }
 
 @mixin text-event-card-title-lg {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 36px;
     font-style: normal;
     font-weight: 700;
@@ -639,7 +640,7 @@
 }
 
 @mixin text-event-card-subtitle-xs {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -648,7 +649,7 @@
 }
 
 @mixin text-event-card-subtitle-sm {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -657,7 +658,7 @@
 }
 
 @mixin text-event-card-subtitle-md {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -666,7 +667,7 @@
 }
 
 @mixin text-event-card-subtitle-lg {
-    font-family: var(--typography-family-title);
+    font-family: $fraktion-sans-family;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
@@ -686,14 +687,14 @@
 
 // TAGS
 @mixin label-tag-common {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-style: normal;
     font-weight: 700;
     line-height: 110%;
 }
 
 @mixin label-tag-xs {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 12px;
     font-style: normal;
     font-weight: 700;
@@ -701,7 +702,7 @@
 }
 
 @mixin label-tag-sm {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -709,7 +710,7 @@
 }
 
 @mixin label-tag-md {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -730,7 +731,7 @@
 
 // ohers
 @mixin label-more-xs {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 32px;
     font-style: normal;
     font-weight: 700;
@@ -739,7 +740,7 @@
 }
 
 @mixin label-more-sm {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 42px;
     font-style: normal;
     font-weight: 700;
@@ -750,7 +751,7 @@
 }
 
 @mixin label-more-md {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 56px;
     font-style: normal;
     font-weight: 700;
@@ -775,7 +776,7 @@
 }
 
 @mixin label-breadcrumb-sm {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
@@ -783,7 +784,7 @@
 }
 
 @mixin label-breadcrumb-md {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -792,7 +793,7 @@
 
 // FORM
 @mixin text-form-input {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -800,7 +801,7 @@
 }
 
 @mixin text-form-label {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 14px;
     font-style: normal;
     font-weight: 450;
@@ -808,7 +809,7 @@
 }
 
 @mixin text-form-label-option {
-    font-family: var(--typography-family-label);
+    font-family: $fraktion-sans-family;
     font-size: 16px;
     font-style: normal;
     font-weight: 450;
@@ -816,7 +817,7 @@
 }
 
 @mixin text-form-error {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -824,7 +825,7 @@
 }
 
 @mixin text-form-supporting {
-    font-family: var(--typography-family-text);
+    font-family: $fraktion-sans-family;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;

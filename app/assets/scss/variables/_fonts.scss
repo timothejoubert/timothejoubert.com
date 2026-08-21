@@ -1,10 +1,6 @@
-$norm-font-name: 'TT Norms Pro';
-
-// https://github.com/unjs/fontaine
-// {Name of Font} fallback
-$norm-font-name-fallback: '#{$norm-font-name} fallback';
-$norm-font-family: $norm-font-name, $norm-font-name-fallback, sans-serif;
-
-$noi-font-name: 'noi';
-$noi-font-name-fallback: '#{$noi-font-name} fallback';
-$noi-font-family: $noi-font-name, $noi-font-name-fallback, monospace;
+$fraktion-sans-name: 'PP Fraktion Sans';
+$fraktion-sans-name-fallback: '#{$fraktion-sans-name} fallback';
+$fraktion-sans-family: $fraktion-sans-name, $fraktion-sans-name-fallback, sans-serif;
+$fraktion-mono-name: 'PP Fraktion Mono';
+$fraktion-mono-name-fallback: '#{$fraktion-mono-name} fallback';
+$fraktion-mono-family: $fraktion-mono-name, $fraktion-mono-name-fallback, monospace;

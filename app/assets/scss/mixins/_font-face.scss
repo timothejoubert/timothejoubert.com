@@ -8,8 +8,7 @@
     @font-face {
         font-display: swap;
         font-family: $font-family;
-        src: url('~/assets/fonts/#{$file-name}.woff') format('woff'),
-        url('~/assets/fonts/#{$file-name}.woff2') format('woff2');
+        src: url('~/assets/fonts/#{$file-name}.woff2') format('woff2');
         @content;
     }
 }

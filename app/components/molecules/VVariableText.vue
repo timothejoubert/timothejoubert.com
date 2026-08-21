@@ -19,7 +19,6 @@ const { width } = useWindowSize()
 watch(width, setLetters)
 
 const X_RANGE = 60
-const Y_RANGE = 40
 
 const slots = useSlots()
 const _content = computed(() => {
@@ -79,19 +78,15 @@ function onMouseMove(event: MouseEvent) {
         const mouseDist = getDistance(event.clientX, letter.xCenter, event.clientY, letter.yCenter)
         const dist = isNaN(mouseDist) ? 0 : parseInt(mouseDist.toFixed(2))
 
-        const weight = mapRange(Math.min(dist, X_RANGE), 0, X_RANGE, 900, 300)
-        const italic = mapRange(Math.min(dist, Y_RANGE), 0, Y_RANGE, 10, 0)
+        const weight = mapRange(Math.min(dist, X_RANGE), 0, X_RANGE, 800, 300)
 
         letter.element.style.setProperty('--font-weight', weight.toString())
-        letter.element.style.setProperty('--font-italic', italic.toString())
     })
 }
 
 function onMouseLeave() {
     letters.value.forEach((letter) => {
         letter.element.style.removeProperty('--font-weight')
-        letter.element.style.removeProperty('--font-italic')
-        // letter.element.style.setProperty('font-variation-settings', `"wght" 300 "ital" 0`)
     })
 }
 </script>
@@ -111,13 +106,9 @@ function onMouseLeave() {
 </template>
 <style lang="scss" module>
 .root {
-
     :global(.split-text-char) {
-        // TODO: use monospace font for avoid jumping letters when changing font-weight
-        // font-family: monospace;
-        font-variation-settings:
-            'wght' var(--font-weight, 400),
-            'ital' var(--font-italic, 0);
+        font-family: #{$fraktion-mono-family};
+        font-variation-settings: 'wght' var(--font-weight, 400);
         transition: font-variation-settings 0.3s ease(out-quad);
     }
 }
