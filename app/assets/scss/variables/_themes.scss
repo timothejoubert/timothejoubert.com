@@ -1,25 +1,21 @@
 @use './colors' as *;
 
-// Export themes from variable2css figma plugin
-// https://www.figma.com/community/plugin/1261234393153346915/variables2css
-
-// Generated output is sass, need to convert to scss
-// CMD f + CMD r could help
-
-/* 3-Theme */
 $themes: (
-    main: (color-surface: #2D2D2D,
+    main: (
+		color-surface: #2D2D2D,
         color-background: #151515,
         color-content: #DBE6EC,
         color-accent: #E3FD41,
     ),
-    blue: (color-background: #040915,
-        color-surface: #000,
+    blue: (
+		color-background: #040915,
+        color-surface: #272737,
         color-content: #b8bdd6,
         color-accent: #f09042,
     ),
-    green: (color-background: #160d17,
-        color-surface: #160d17,
+    green: (
+		color-background: #160d17,
+        color-surface: #232828,
         color-content: #69f7a6,
         color-accent: #ff5252,
     )
