@@ -18,7 +18,7 @@ const rootEl = useTemplateRef<HTMLElement>('rootRef')
 const { width } = useWindowSize()
 watch(width, setLetters)
 
-const X_RANGE = 60
+const X_RANGE = 200
 
 const slots = useSlots()
 const _content = computed(() => {
@@ -78,7 +78,7 @@ function onMouseMove(event: MouseEvent) {
         const mouseDist = getDistance(event.clientX, letter.xCenter, event.clientY, letter.yCenter)
         const dist = isNaN(mouseDist) ? 0 : parseInt(mouseDist.toFixed(2))
 
-        const weight = mapRange(Math.min(dist, X_RANGE), 0, X_RANGE, 800, 300)
+        const weight = mapRange(Math.min(dist, X_RANGE), 0, X_RANGE, 800, 200)
 
         letter.element.style.setProperty('--font-weight', weight.toString())
     })
@@ -108,7 +108,7 @@ function onMouseLeave() {
 .root {
     :global(.split-text-char) {
         font-family: #{$fraktion-mono-family};
-        font-variation-settings: 'wght' var(--font-weight, 400);
+        font-variation-settings: 'wght' var(--font-weight, 200);
         transition: font-variation-settings 0.3s ease(out-quad);
     }
 }

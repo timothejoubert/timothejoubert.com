@@ -10,40 +10,34 @@ defineProps<{
 <template>
     <component
         :is="wrapper || 'div'"
-        :class="$style.root"
     >
-        <VRichText :field="field">
-            <template #default="scopedSlot">
-                <VVariableText
-                    v-if="scopedSlot.type === 'strong'"
-                    :class="$style.highlight"
-                    :content="scopedSlot.content"
-                />
-                <component
-                    :is="scopedSlot.type"
-                    v-else
-                    :class="$style.tag"
-                >
-                    {{ scopedSlot.content }}
-                </component>
-            </template>
+        <VRichText
+			:field="field"
+			v-slot="{ type, content }"
+		>
+			<VVariableText
+				v-if="type === 'strong'"
+				tag="span"
+				:class="$style.highlight"
+				:content="content"
+			/>
+			<component
+				v-else
+				:is="type"
+				:class="$style.tag"
+			>
+				{{ content }}
+			</component>
         </VRichText>
     </component>
 </template>
 
 <style lang="scss" module>
-.root {
-    line-height: 1.6;
-}
-
 .highlight {
     position: relative;
     display: inline;
-    padding: 1px 7px 3px;
+    padding: 0 2px 6px;
     border-radius: 3px;
-
-    // background-color: var(--color-surface);
-    // color: var(--color-content);
     background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
     color: var(--color-accent);
 }

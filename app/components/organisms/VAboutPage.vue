@@ -17,7 +17,7 @@ const page = computed(() => props.document.data)
         <LazyVHighlightedText
             v-if="page.content"
             :field="page.content"
-            wrapper="h1"
+            wrapper="p"
             :class="$style.content"
         />
         <template v-if="page.sections?.length">
@@ -45,16 +45,19 @@ const page = computed(() => props.document.data)
 }
 
 .content {
+    max-width: 60ch;
+	font-family: #{$fraktion-mono-family};
+	font-size: 26px;
+	font-weight: 300;
 	grid-column: 1 / -1;
+    line-height: 1.7;
+    margin-block: 0;
 	margin-inline: auto;
 	text-align: center;
-    margin-block: 0;
-    max-width: 54ch;
 }
 
 .section {
 	position: relative;
-
     grid-column: 1 / -1;
 
     a {
@@ -62,7 +65,6 @@ const page = computed(() => props.document.data)
     }
 
     @include media('>=lg') {
-
         &:nth-of-type(odd) {
             grid-column: 4 / span 3;
         }

@@ -1,15 +1,17 @@
 ### TODO
 
 - Amélioration du design du site
-	- typo monospace pour le contenu de la page about (interaction avec font variable)
-	- update du style des settings globaux (themes, columns input)
-	- Fix animation d'apprarition des tags dans VProjectCard
-	- VArchive: améliorer le coté responsive de la table
-	- VArchive: mettre la row avec aria-current="page" dans un style visible
+	- [x] typo monospace pour le contenu de la page about (interaction avec font variable)
+	- [] update du style des settings globaux (themes, columns input)
+	- [x] Fix animation d'apprarition des tags dans VProjectCard
+	- [] VArchive: améliorer le coté responsive de la table
+	- [] VArchive: mettre la row avec aria-current="page" dans un style visible
 
-VArchive: enlever le sort par tag et simplifier la logique de sort pour enlever SERVER_SORTABLE_FIELDS
+- VArchive: enlever le sort par tag et simplifier la logique de sort pour enlever SERVER_SORTABLE_FIELDS
+- SEO: adapter le heading de page index et archive si une NuxtPage est rendu (page projet affiché)
 
 ### improvement
+- VAboutPage: rendre paragraph brut en SRR et ensuite charger le split de word dans VHighlightedText
 - Refactor: utiliser une composable commun pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
 - VProjectPage: Add reveal and switch animation to reveal content
 - VProjectPage: Add backdrop or find a design hack to highlight VWindow with background
