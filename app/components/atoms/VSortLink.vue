@@ -31,19 +31,18 @@ function onClick() {
 <template>
     <button
         type="button"
-        :class="$style.link"
+        :class="[$style.link, isActive && $style['link--active']]"
+        :title="sortState === 'ascending' ? $t('sort_descending', { label: props.label }) : $t('sort_ascending', { label: props.label })"
         @click="onClick"
     >
         {{ props.label }}
         <VIcon
+			v-if="isActive"
             :name="nextDirection === 'asc' ? 'material-symbols:arrow-downward-alt' : 'material-symbols:arrow-upward-alt'"
         />
-        <span
-            v-if="sortState !== 'none'"
-            class="visually-hidden"
-        >
-            {{ sortState === 'ascending' ? $t('sort_ascending') : $t('sort_descending') }}
-        </span>
+		<span v-else
+			:class="$style.circle"
+		></span>
     </button>
 </template>
 
@@ -59,5 +58,19 @@ function onClick() {
 	font: inherit;
 	gap: 4px;
 	text-decoration: none;
+
+	&--active {
+		font-weight: 600;
+	}
+}
+
+.circle {
+	display: inline-block;
+	width: 4px;
+	height: 4px;
+	border-radius: 50vmax;
+	margin-top: 2px;
+	margin-left: 3px;
+	background-color: currentcolor;
 }
 </style>
