@@ -138,7 +138,7 @@ $handle-edge: 4px;
 $handle-corner: 10px;
 
 .root {
-    position: absolute;
+	position: var(--v-window-display, fixed);
     border: 1PX solid var(--color-surface);
     border-radius: 12px;
     background-color: var(--color-background);
