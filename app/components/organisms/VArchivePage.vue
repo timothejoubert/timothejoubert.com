@@ -105,7 +105,39 @@ function ariaSortFor(field: string) {
 	return sort.value.direction === 'asc' ? 'ascending' : 'descending'
 }
 
-const animationEnabled = ref(false)
+const hoveredIndex = ref<number | null>(null)
+// Frozen at the last real hover — never reset to `null` on leave — so rows
+// still waiting "above" don't reclassify to "below" (and sweep through the
+// visible position) just because the pointer left the table entirely.
+const lastHoveredIndex = ref<number | null>(null)
+// One-way latch: flips once on the first hover and never resets, so the
+// band transition is off only for the very first paint (nothing to animate
+// from yet) and on for the rest of the component's lifetime.
+const hasInteracted = ref(false)
+
+function onRowEnter(index: number) {
+	hasInteracted.value = true
+	hoveredIndex.value = index
+	lastHoveredIndex.value = index
+}
+
+// When the pointer leaves a row without entering another one (i.e. it leaves
+// the table entirely), `lastHoveredIndex` alone can't tell which way the band
+// should exit — both "above" and "below" fall on the same row. Read the exit
+// side from the cursor's position relative to the row instead.
+function onRowLeave(event: MouseEvent, index: number) {
+	hoveredIndex.value = null
+
+	const rect = (event.currentTarget as HTMLElement).getBoundingClientRect()
+	const exitedAbove = event.clientY < rect.top + rect.height / 2
+	lastHoveredIndex.value = exitedAbove ? index - 1 : index
+}
+
+function rowBandState(index: number) {
+	if (hoveredIndex.value === index) return 'visible'
+	if (lastHoveredIndex.value === null || index <= lastHoveredIndex.value) return 'below'
+	return 'above'
+}
 
 // Keeps the current sort query in the URL when opening a project — losing it would reset
 // VArchivePage's sort to its default and trigger an unwanted refetch/skeleton flash.
@@ -205,10 +237,8 @@ function onRowClick(event: MouseEvent, uid: string | null) {
                 <tbody
                     :class="[
                         $style.body,
-                        animationEnabled && $style['body--animation-enabled'],
+                        hasInteracted && $style['body--has-interacted'],
                     ]"
-                    @mouseenter="() => animationEnabled = true"
-                    @mouseleave="() => animationEnabled = false"
                 >
                     <tr
                         v-if="fallbackMessage"
@@ -226,8 +256,14 @@ function onRowClick(event: MouseEvent, uid: string | null) {
                         <tr
                             v-for="(project, index) in sortedRows"
                             :key="project.id"
-                            :class="[$style['body-row'], pending && $style['body-row--skeleton']]"
+                            :class="[
+                                $style['body-row'],
+                                pending && $style['body-row--skeleton'],
+                                $style[`body-row--band-${rowBandState(index)}`],
+                            ]"
                             @click="onRowClick($event, project.uid)"
+                            @mouseenter="onRowEnter(index)"
+                            @mouseleave="onRowLeave($event, index)"
 							:style="{ '--loading-animation-delay': `${index * 0.02}s` }"
                         >
                             <td :class="[$style.cell, $style['cell--title'], $style['body-cell']]">
@@ -280,6 +316,8 @@ function onRowClick(event: MouseEvent, uid: string | null) {
 // lorsque je survol la ligne suivante, le bandeau se déplace vers le bas pour disparaître
 // lorsque je survol la ligne precédante, le bandeau se déplace vers le haut pour disparaître
 // lors d'un survol rapide vers le bas, ca donne un effet de balayage du haut vers le bas avec de multiples bandeaux qui se suivent
+
+$v-archive-band-duration: 0.3s;
 
 .root {
     --v-archive-row-border-radius: 8px;
@@ -414,27 +452,29 @@ function onRowClick(event: MouseEvent, uid: string | null) {
         inset: var(--v-archive-border-spacing) 0;
         opacity: 0.7;
         pointer-events: none;
+        transition: none;
         translate: 0 100%;
 
-		.body:not(.body--animation-enabled) & {
-			transition: none; // hide up transition forEach previous rows when leave body
-			translate: 0 calc(-100% - var(--v-archive-border-spacing));
+		.body--has-interacted & {
+			transition: translate $v-archive-band-duration ease(out-quad);
 		}
 
-		.body--animation-enabled & {
-			transition: translate 0.3s ease(out-quad);
+		.body-row:has(a[aria-current='page']) & {
+			translate: 0 0;
 		}
-
 
 		@media (hover: hover) {
-			.body-row:hover & {
+			.body-row--band-visible & {
 				translate: 0 0;
 			}
 
-			.table:has(.body-row:hover) .body-row:hover ~ .body-row & {
+			.body-row--band-above & {
 				translate: 0 calc(-100% - var(--v-archive-border-spacing));
 			}
 		}
+
+		// .body-row--band-below (and the pre-interaction default) both
+		// resolve to the base `translate: 0 100%` above.
     }
 }
 
