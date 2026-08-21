@@ -21,12 +21,11 @@
     &::before {
         position: absolute;
         display: block;
+        backdrop-filter: blur(1px);
         content: '';
-        inset: -40% -30%;
+        inset: -60% -30%;
+        mask-image: radial-gradient(closest-side, black 40%, transparent 100%);
         pointer-events: none;
-
-        // background: radial-gradient(var(--color-surface) 30%, transparent);
-        // backdrop-filter: blur(5px);
     }
 }
 </style>
