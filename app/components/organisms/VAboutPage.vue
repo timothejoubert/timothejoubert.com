@@ -20,7 +20,10 @@ const page = computed(() => props.document.data)
             wrapper="p"
             :class="$style.content"
         />
-        <template v-if="page.sections?.length">
+        <div
+			v-if="page.sections?.length"
+			:class="$style.sections"
+		>
             <section
                 v-for="(section, i) in page.sections"
                 :key="i"
@@ -34,7 +37,7 @@ const page = computed(() => props.document.data)
                     :content="section.content"
                 />
             </section>
-        </template>
+        </div>
     </main>
 </template>
 
@@ -56,6 +59,25 @@ const page = computed(() => props.document.data)
 	text-align: center;
 }
 
+.sections {
+	position: relative;
+	display: grid;
+	grid-column: 1 / -1;
+	grid-template-columns: subgrid;
+
+	&::before {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: calc(var(--gutter) * -0.5);
+		width: 1PX;
+		background-color: currentcolor;
+		content: '';
+		grid-column: 7;
+		opacity: 0.2;
+	}
+}
+
 .section {
 	position: relative;
     grid-column: 1 / -1;
@@ -64,15 +86,25 @@ const page = computed(() => props.document.data)
         color: inherit;
     }
 
+	em {
+		min-height: 2lh;
+	}
+
     @include media('>=lg') {
         &:nth-of-type(odd) {
+			left: -20px;
             grid-column: 4 / span 3;
+			text-align: right;
         }
 
         &:nth-of-type(even) {
-            grid-column: 8 / span 3;
+			left: 20px;
+            grid-column: 7 / span 3;
         }
     }
+}
 
+.title {
+	margin-block: 0 20px;
 }
 </style>

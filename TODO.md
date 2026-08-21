@@ -2,10 +2,10 @@
 
 - Amélioration du design du site
 	- [x] typo monospace pour le contenu de la page about (interaction avec font variable)
-	- [] update du style des settings globaux (themes, columns input)
 	- [x] Fix animation d'apprarition des tags dans VProjectCard
-	- [] VArchive: améliorer le coté responsive de la table
 	- [] VArchive: mettre la row avec aria-current="page" dans un style visible
+	- [] update du style des settings globaux (themes, columns input)
+	- [] VArchive: améliorer le coté responsive de la table
 
 - VArchive: enlever le sort par tag et simplifier la logique de sort pour enlever SERVER_SORTABLE_FIELDS
 - SEO: adapter le heading de page index et archive si une NuxtPage est rendu (page projet affiché)
