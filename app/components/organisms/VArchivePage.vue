@@ -23,15 +23,13 @@ const sort = computed({
 	},
 })
 
-// `tag` and `title` can't be sorted correctly by Prismic's API: `tag_group` is a repeatable Group
-// field (orderings only support scalar document fields), and `title`'s ordering is a byte/codepoint
-// comparison, not locale-aware — French titles with accents (e.g. "Éclipse") sort completely wrong
-// (verified against the live API: accented titles get shoved to the very end). Both fall back to a
-// stable server-side ordering and are re-sorted client-side with `localeCompare` instead.
-const SERVER_SORTABLE_FIELDS = ['date', 'rate', 'framework']
-
+// `title`'s ordering via Prismic's API is a byte/codepoint comparison, not locale-aware — French
+// titles with accents (e.g. "Éclipse") sort completely wrong (verified against the live API:
+// accented titles get shoved to the very end; sorting by `uid` instead doesn't work either — both
+// `my.project.uid` and `document.uid` are silently ignored by the API). It falls back to a stable
+// server-side ordering and is re-sorted client-side with `localeCompare` instead.
 const fetchOptions = computed(() => {
-	const isServerSortable = SERVER_SORTABLE_FIELDS.includes(sortField.value)
+	const isServerSortable = sortField.value !== 'title'
 	return {
 		orderings: [{
 			field: `my.project.${isServerSortable ? sortField.value : 'date'}`,
@@ -70,21 +68,12 @@ function getTagLabels(tagGroup: ProjectDocumentData['tag_group']) {
 		.map(item => item.tag) || []
 }
 
-function tagSortKey(tagGroup: ProjectDocumentData['tag_group'] | undefined) {
-	const labels = tagGroup ? getTagLabels(tagGroup) : []
-	return [...labels].sort((a, b) => (a ?? '').localeCompare(b ?? ''))[0] ?? ''
-}
-
 const sortedRows = computed(() => {
-	if (!['tag', 'title'].includes(sortField.value)) return rows.value
+	if (sortField.value !== 'title') return rows.value
 
 	const direction = sortDirection.value === 'asc' ? 1 : -1
 
-	if (sortField.value === 'title') {
-		return [...rows.value].sort((a, b) => direction * (a.data?.title ?? '').localeCompare(b.data?.title ?? ''))
-	}
-
-	return [...rows.value].sort((a, b) => direction * tagSortKey(a.data?.tag_group).localeCompare(tagSortKey(b.data?.tag_group)))
+	return [...rows.value].sort((a, b) => direction * (a.data?.title ?? '').localeCompare(b.data?.title ?? ''))
 })
 
 const { t } = useI18n()
@@ -206,13 +195,8 @@ function onRowClick(event: MouseEvent, uid: string | null) {
                         <th
                             scope="col"
                             :class="[$style.cell, $style['head-cell']]"
-                            :aria-sort="ariaSortFor('tag')"
                         >
-                            <VSortLink
-                                v-model="sort"
-                                :label="$t('tags')"
-                                field="tag"
-                            />
+                            {{ $t('tags') }}
                         </th>
                         <th
                             scope="col"

@@ -60,7 +60,7 @@ function onClick() {
 	text-decoration: none;
 
 	&--active {
-		font-weight: 600;
+		font-weight: 800;
 	}
 }
 
