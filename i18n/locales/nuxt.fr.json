@@ -23,7 +23,7 @@
   "date": "Date",
   "framework": "Cadre",
   "tags": "Étiquettes",
-  "rate": "Note",
+  "rate": "Fierté",
   "rate_label": "Note de {rate} sur {max}",
   "archive_page.heading": "Archive",
   "archive_page.projects_list_caption": "Liste des projets archivés",

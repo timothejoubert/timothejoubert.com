@@ -301,12 +301,8 @@ function onRowClick(event: MouseEvent, uid: string | null) {
 // lorsque je survol la ligne precédante, le bandeau se déplace vers le haut pour disparaître
 // lors d'un survol rapide vers le bas, ca donne un effet de balayage du haut vers le bas avec de multiples bandeaux qui se suivent
 
-$v-archive-band-duration: 0.3s;
-
 .root {
     --v-archive-row-border-radius: 8px;
-    --v-archive-border-spacing: 5px;
-    --v-start-rest-color: black;
 
     width: 100%;
 }
@@ -316,11 +312,11 @@ $v-archive-band-duration: 0.3s;
 }
 
 .table {
-    border-spacing: 0 0;
+	border-spacing: 0 10px;
     table-layout: fixed;
 
     @include media('>=md') {
-        width: 100%;
+		width: 100%;
     }
 }
 
@@ -331,7 +327,6 @@ $v-archive-band-duration: 0.3s;
 
 .head-cell {
     font-weight: inherit;
-    padding-block: 4px;
     text-align: inherit;
 
     &:nth-child(1) {
@@ -399,7 +394,7 @@ $v-archive-band-duration: 0.3s;
 .body-cell {
     position: relative;
     overflow: hidden;
-    padding-block: 12px;
+    padding-block: 8px;
 
     > * {
         // set above the pseudo elements
@@ -407,40 +402,38 @@ $v-archive-band-duration: 0.3s;
 		z-index: 1;
     }
 
-    // Default background
-    &::before {
-        position: absolute;
-        z-index: -2;
-        background-color: var(--color-surface);
-        content: '';
-        inset: var(--v-archive-border-spacing) 0;
-        pointer-events: none;
-    }
-
-    &:first-child::before {
+    &:first-child {
         border-bottom-left-radius: var(--v-archive-row-border-radius);
         border-top-left-radius: var(--v-archive-row-border-radius);
     }
 
-    &:last-child::before {
+    &:last-child {
         border-bottom-right-radius: var(--v-archive-row-border-radius);
         border-top-right-radius: var(--v-archive-row-border-radius);
     }
 
-    // Hovered background
+    // Default background
+    &::before,
     &::after {
         position: absolute;
 		z-index: -1;
-        background-color: var(--color-background);
+        background-color: color-mix(in srgb, var(--color-content) 7%, var(--color-background));
         content: '';
-        inset: var(--v-archive-border-spacing) 0;
-        opacity: 0.7;
+        inset: 0;
         pointer-events: none;
-        transition: none;
+    }
+
+    // Hovered background
+    &::after {
+        background-color: color-mix(in srgb, var(--color-content) 15%, var(--color-background));
+
+        // background-color: var(--color-background);
         translate: 0 100%;
 
+        // opacity: 0.7;
+
 		.body--has-interacted & {
-			transition: translate $v-archive-band-duration ease(out-quad);
+			transition: translate 0.3s ease(out-quad);
 		}
 
 		.body-row:has(a[aria-current='page']) & {
@@ -453,12 +446,9 @@ $v-archive-band-duration: 0.3s;
 			}
 
 			.body-row--band-above & {
-				translate: 0 calc(-100% - var(--v-archive-border-spacing));
+				translate: 0 -100%;
 			}
 		}
-
-		// .body-row--band-below (and the pre-interaction default) both
-		// resolve to the base `translate: 0 100%` above.
     }
 }
 
