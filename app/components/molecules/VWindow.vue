@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<{
     ariaLabel?: string
 }>(), {
     storageKey: 'v-window',
-    minWidth: 300,
+    minWidth: 330,
     minHeight: 400,
 })
 
