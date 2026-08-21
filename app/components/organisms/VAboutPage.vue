@@ -1,11 +1,18 @@
 <script lang="ts" setup>
 import type { AboutDocument } from '~~/prismicio-types'
+import { getFilledLinkToWeb } from '~/utils/prismic/link-field'
 
 const props = defineProps<{
 	document: AboutDocument
 }>()
 
+const { t } = useI18n()
+
 const page = computed(() => props.document.data)
+const columns = computed(() => [
+	{ key: 'formations', label: t('about_page.formations'), entries: page.value.formations ?? [] },
+	{ key: 'experiences', label: t('about_page.experiences'), entries: page.value.experiences ?? [] },
+])
 </script>
 
 <template>
@@ -21,22 +28,60 @@ const page = computed(() => props.document.data)
             :class="$style.content"
         />
         <div
-			v-if="page.sections?.length"
-			:class="$style.sections"
+			v-if="columns.some((column) => column.entries.length)"
+			:class="$style.columns"
 		>
-            <section
-                v-for="(section, i) in page.sections"
-                :key="i"
-                :class="$style.section"
+            <template
+                v-for="column in columns"
+                :key="column.key"
             >
-                <h2 :class="$style.title">
-                    {{ section.title }}
-                </h2>
-                <LazyVText
-                    v-if="section.content"
-                    :content="section.content"
-                />
-            </section>
+                <div
+                    v-if="column.entries.length"
+                    :class="$style.column"
+                >
+                    <h2 :class="$style['column-title']">
+                        {{ column.label }}
+                    </h2>
+                    <div
+                        v-for="(entry, i) in column.entries"
+                        :key="i"
+                        :class="$style.entry"
+                    >
+                        <div :class="$style.head">
+                            <h3 :class="$style.title">
+                                <VPrismicLink
+                                    v-if="getFilledLinkToWeb(entry.link)"
+                                    :to="getFilledLinkToWeb(entry.link)"
+                                    :class="$style.link"
+                                >
+                                    {{ entry.title }}
+                                    <VIcon name="material-symbols:north-east" />
+                                </VPrismicLink>
+                                <template v-else>
+                                    {{ entry.title }}
+                                </template>
+                            </h3>
+                            <VTime
+                                v-if="entry.date"
+                                :date="entry.date"
+                                :class="$style.date"
+                            />
+                        </div>
+                        <p
+                            v-if="entry.content || entry.place"
+                            :class="$style.meta"
+                        >
+                            <VText
+                                v-if="entry.content"
+                                tag="span"
+                                :content="entry.content"
+                            />
+                            <template v-if="entry.content && entry.place">, </template>
+                            {{ entry.place }}
+                        </p>
+                    </div>
+                </div>
+            </template>
         </div>
     </main>
 </template>
@@ -59,11 +104,12 @@ const page = computed(() => props.document.data)
 	text-align: center;
 }
 
-.sections {
+.columns {
 	position: relative;
 	display: grid;
 	grid-column: 1 / -1;
 	grid-template-columns: subgrid;
+	row-gap: 60px;
 
 	&::before {
 		position: absolute;
@@ -78,34 +124,61 @@ const page = computed(() => props.document.data)
 	}
 }
 
-.section {
-	position: relative;
-    grid-column: 1 / -1;
+.column {
+	grid-column: 1 / -1;
 
-    a {
-        color: inherit;
-    }
+	@include media('>=lg') {
+		&:nth-child(1) {
+			grid-column: 1 / 7;
+		}
 
-	em {
-		min-height: 2lh;
+		&:nth-child(2) {
+			grid-column: 7 / -1;
+		}
 	}
+}
 
-    @include media('>=lg') {
-        &:nth-of-type(odd) {
-			left: -20px;
-            grid-column: 4 / span 3;
-			text-align: right;
-        }
+.column-title {
+	font-size: 14px;
+	font-weight: 500;
+	letter-spacing: 0.05em;
+	margin-block: 0 40px;
+	opacity: 0.5;
+	text-transform: uppercase;
+}
 
-        &:nth-of-type(even) {
-			left: 20px;
-            grid-column: 7 / span 3;
-        }
-    }
+.entry {
+	& + & {
+		margin-top: 32px;
+	}
+}
+
+.head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 20px;
 }
 
 .title {
 	font-size: 20px;
-	margin-block: 0 20px;
+	margin-block: 0;
+}
+
+.link {
+	display: inline-flex;
+	align-items: center;
+	color: inherit;
+	gap: 0.4em;
+}
+
+.date {
+	flex-shrink: 0;
+	opacity: 0.5;
+}
+
+.meta {
+	margin-block: 4px 0;
+	opacity: 0.6;
 }
 </style>

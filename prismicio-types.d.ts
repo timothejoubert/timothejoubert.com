@@ -46,32 +46,117 @@ type ContentRelationshipFieldWithData<
 		>
 }[Exclude<TCustomType[number], string>["id"]];
 
+type AboutDocumentDataSlicesSlice = never
+
 /**
- * Item in *about → sections*
+ * Item in *about → Formations*
  */
-export interface AboutDocumentDataSectionsItem {
+export interface AboutDocumentDataFormationsItem {
 	/**
-	 * title field in *about → sections*
+	 * Titre field in *about → Formations*
 	 *
 	 * - **Field Type**: Text
 	 * - **Placeholder**: *None*
-	 * - **API ID Path**: about.sections[].title
+	 * - **API ID Path**: about.formations[].title
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	title: prismic.KeyTextField;
 	
 	/**
-	 * content field in *about → sections*
+	 * Contenu field in *about → Formations*
 	 *
 	 * - **Field Type**: Rich Text
 	 * - **Placeholder**: *None*
-	 * - **API ID Path**: about.sections[].content
+	 * - **API ID Path**: about.formations[].content
 	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
 	 */
 	content: prismic.RichTextField;
+	
+	/**
+	 * Lieu field in *about → Formations*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: about.formations[].place
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	place: prismic.KeyTextField;
+	
+	/**
+	 * Date field in *about → Formations*
+	 *
+	 * - **Field Type**: Date
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: about.formations[].date
+	 * - **Documentation**: https://prismic.io/docs/fields/date
+	 */
+	date: prismic.DateField;
+	
+	/**
+	 * Lien field in *about → Formations*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: about.formations[].link
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 }
 
-type AboutDocumentDataSlicesSlice = never
+/**
+ * Item in *about → Expériences*
+ */
+export interface AboutDocumentDataExperiencesItem {
+	/**
+	 * Titre field in *about → Expériences*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: about.experiences[].title
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	title: prismic.KeyTextField;
+	
+	/**
+	 * Contenu field in *about → Expériences*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: about.experiences[].content
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	content: prismic.RichTextField;
+	
+	/**
+	 * Lieu field in *about → Expériences*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: about.experiences[].place
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	place: prismic.KeyTextField;
+	
+	/**
+	 * Date field in *about → Expériences*
+	 *
+	 * - **Field Type**: Date
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: about.experiences[].date
+	 * - **Documentation**: https://prismic.io/docs/fields/date
+	 */
+	date: prismic.DateField;
+	
+	/**
+	 * Lien field in *about → Expériences*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: about.experiences[].link
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
 
 /**
  * Content for about documents
@@ -100,17 +185,6 @@ interface AboutDocumentData {
 	content: prismic.RichTextField;
 	
 	/**
-	 * sections field in *about*
-	 *
-	 * - **Field Type**: Group
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: about.sections[]
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-	 */
-	sections: prismic.GroupField<Simplify<AboutDocumentDataSectionsItem>>;
-	
-	/**
 	 * Slice Zone field in *about*
 	 *
 	 * - **Field Type**: Slice Zone
@@ -119,7 +193,29 @@ interface AboutDocumentData {
 	 * - **Tab**: Main
 	 * - **Documentation**: https://prismic.io/docs/slices
 	 */
-	slices: prismic.SliceZone<AboutDocumentDataSlicesSlice>;/**
+	slices: prismic.SliceZone<AboutDocumentDataSlicesSlice>;
+	
+	/**
+	 * Formations field in *about*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: about.formations[]
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+	 */
+	formations: prismic.GroupField<Simplify<AboutDocumentDataFormationsItem>>;
+	
+	/**
+	 * Expériences field in *about*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: about.experiences[]
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+	 */
+	experiences: prismic.GroupField<Simplify<AboutDocumentDataExperiencesItem>>;/**
 	 * Meta Title field in *about*
 	 *
 	 * - **Field Type**: Text
@@ -947,8 +1043,9 @@ declare module "@prismicio/client" {
 		export type {
 			AboutDocument,
 			AboutDocumentData,
-			AboutDocumentDataSectionsItem,
 			AboutDocumentDataSlicesSlice,
+			AboutDocumentDataFormationsItem,
+			AboutDocumentDataExperiencesItem,
 			ArchiveDocument,
 			ArchiveDocumentData,
 			ArchiveDocumentDataSlicesSlice,

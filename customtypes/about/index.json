@@ -19,37 +19,94 @@
         },
         "type": "StructuredText"
       },
-      "sections": {
-        "config": {
-          "fields": {
-            "title": {
-              "config": {
-                "label": "title",
-                "placeholder": ""
-              },
-              "type": "Text"
-            },
-            "content": {
-              "config": {
-                "allowTargetBlank": true,
-                "label": "content",
-                "multi": "hyperlink,strong,em,paragraph,embed",
-                "placeholder": ""
-              },
-              "type": "StructuredText"
-            }
-          },
-          "label": "sections",
-          "repeat": true
-        },
-        "type": "Group"
-      },
       "slices": {
         "config": {
           "choices": {}
         },
         "fieldset": "Slice Zone",
         "type": "Slices"
+      },
+      "formations": {
+        "config": {
+          "fields": {
+            "title": {
+              "config": {
+                "label": "Titre"
+              },
+              "type": "Text"
+            },
+            "content": {
+              "config": {
+                "allowTargetBlank": true,
+                "label": "Contenu",
+                "multi": "paragraph,strong,em,hyperlink"
+              },
+              "type": "StructuredText"
+            },
+            "place": {
+              "config": {
+                "label": "Lieu"
+              },
+              "type": "Text"
+            },
+            "date": {
+              "config": {
+                "label": "Date"
+              },
+              "type": "Date"
+            },
+            "link": {
+              "config": {
+                "label": "Lien",
+                "select": "web"
+              },
+              "type": "Link"
+            }
+          },
+          "label": "Formations"
+        },
+        "type": "Group"
+      },
+      "experiences": {
+        "config": {
+          "fields": {
+            "title": {
+              "config": {
+                "label": "Titre"
+              },
+              "type": "Text"
+            },
+            "content": {
+              "config": {
+                "allowTargetBlank": true,
+                "label": "Contenu",
+                "multi": "paragraph,strong,em,hyperlink"
+              },
+              "type": "StructuredText"
+            },
+            "place": {
+              "config": {
+                "label": "Lieu"
+              },
+              "type": "Text"
+            },
+            "date": {
+              "config": {
+                "label": "Date"
+              },
+              "type": "Date"
+            },
+            "link": {
+              "config": {
+                "label": "Lien",
+                "select": "web"
+              },
+              "type": "Link"
+            }
+          },
+          "label": "Expériences"
+        },
+        "type": "Group"
       }
     },
     "SEO & Metadata": {

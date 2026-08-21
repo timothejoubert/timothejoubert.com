@@ -32,5 +32,7 @@
   "archive_page.loading_projects": "Chargement des projets en cours...",
   "project_link": "Lien du projet",
   "sort_ascending": "Trié par {label} par ordre croissant",
-  "sort_descending": "Trié par {label} par ordre décroissant"
+  "sort_descending": "Trié par {label} par ordre décroissant",
+  "about_page.formations": "Formations",
+  "about_page.experiences": "Expériences"
 }
