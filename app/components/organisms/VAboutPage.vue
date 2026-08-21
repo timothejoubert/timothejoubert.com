@@ -50,7 +50,7 @@ const page = computed(() => props.document.data)
 .content {
     max-width: 60ch;
 	font-family: #{$fraktion-mono-family};
-	font-size: 26px;
+	font-size: 24px;
 	font-weight: 300;
 	grid-column: 1 / -1;
     line-height: 1.7;
@@ -105,6 +105,7 @@ const page = computed(() => props.document.data)
 }
 
 .title {
+	font-size: 20px;
 	margin-block: 0 20px;
 }
 </style>

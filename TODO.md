@@ -1,5 +1,7 @@
 ### TODO
 
+- VAboutPage: change les fields en un group "Formations" et un group "Expériences" incluant un field répétable (titre, contenu, place, date, lien)
+
 - Amélioration du design du site
 	- [x] typo monospace pour le contenu de la page about (interaction avec font variable)
 	- [x] Fix animation d'apprarition des tags dans VProjectCard
@@ -7,7 +9,6 @@
 	- [] update du style des settings globaux (themes, columns input)
 	- [] VArchive: améliorer le coté responsive de la table
 
-- VAboutPage: change les fields en un group "Formations" et un group "Expériences" incluant un field répétable (titre, contenu, place, date, lien)
 - SEO: adapter le heading de page index et archive si une NuxtPage est rendu (page projet affiché)
 
 
