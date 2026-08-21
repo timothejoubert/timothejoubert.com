@@ -38,6 +38,7 @@ function onClick() {
         {{ props.label }}
         <VIcon
 			v-if="isActive"
+			:class="$style.icon"
             :name="nextDirection === 'asc' ? 'material-symbols:arrow-downward-alt' : 'material-symbols:arrow-upward-alt'"
         />
 		<span v-else
@@ -72,5 +73,13 @@ function onClick() {
 	margin-top: 2px;
 	margin-left: 3px;
 	background-color: currentcolor;
+}
+
+.icon {
+	margin-top: 2px;
+
+	.link--active & {
+		color: var(--color-accent);
+	}
 }
 </style>
