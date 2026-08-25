@@ -19,13 +19,6 @@
         },
         "type": "StructuredText"
       },
-      "slices": {
-        "config": {
-          "choices": {}
-        },
-        "fieldset": "Slice Zone",
-        "type": "Slices"
-      },
       "formations": {
         "config": {
           "fields": {
@@ -39,7 +32,8 @@
               "config": {
                 "allowTargetBlank": true,
                 "label": "Contenu",
-                "multi": "paragraph,strong,em,hyperlink"
+                "placeholder": "",
+                "single": "strong,em,hyperlink"
               },
               "type": "StructuredText"
             },
@@ -80,7 +74,8 @@
               "config": {
                 "allowTargetBlank": true,
                 "label": "Contenu",
-                "multi": "paragraph,strong,em,hyperlink"
+                "placeholder": "",
+                "single": "strong,em,hyperlink"
               },
               "type": "StructuredText"
             },
@@ -107,6 +102,13 @@
           "label": "Expériences"
         },
         "type": "Group"
+      },
+      "slices": {
+        "config": {
+          "choices": {}
+        },
+        "fieldset": "Slice Zone",
+        "type": "Slices"
       }
     },
     "SEO & Metadata": {

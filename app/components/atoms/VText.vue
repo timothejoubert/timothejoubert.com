@@ -23,7 +23,9 @@ const props = withDefaults(defineProps<VTextProps>(), {
 const slots = useSlots()
 const hasSlot = slots.default?.()
 
-const isString = computed(() => typeof props.content === 'string')
+const rawContent = computed(() => {
+	return typeof props.content === 'string' ? props.content : undefined
+})
 
 const richTextFilled = computed(() => {
 	const isRichText = props.content && typeof props.content !== 'string'
@@ -44,10 +46,10 @@ const flatRichTextContent = computed(() => {
 <template>
     <component
         :is="tag || 'p'"
-        v-if="isString || hasSlot || flatRichTextContent"
+        v-if="rawContent || hasSlot || flatRichTextContent"
         :class="$style.root"
     >
-        <slot>{{ flatRichTextContent ? flatRichTextContent : content }}</slot>
+        <slot>{{ flatRichTextContent ? flatRichTextContent : rawContent }}</slot>
     </component>
     <div
         v-else-if="!!richTextFilled?.length"

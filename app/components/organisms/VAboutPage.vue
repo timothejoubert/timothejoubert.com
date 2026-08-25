@@ -35,7 +35,7 @@ const columns = computed(() => [
                 v-for="column in columns"
                 :key="column.key"
             >
-                <div
+                <section
                     v-if="column.entries.length"
                     :class="$style.column"
                 >
@@ -55,7 +55,10 @@ const columns = computed(() => [
                                     :class="$style.link"
                                 >
                                     {{ entry.title }}
-                                    <VIcon name="material-symbols:north-east" />
+                                    <VIcon
+										:class="$style.icon"
+										name="material-symbols:north-east"
+									/>
                                 </VPrismicLink>
                                 <template v-else>
                                     {{ entry.title }}
@@ -67,20 +70,20 @@ const columns = computed(() => [
                                 :class="$style.date"
                             />
                         </div>
-                        <p
-                            v-if="entry.content || entry.place"
-                            :class="$style.meta"
-                        >
-                            <VText
-                                v-if="entry.content"
-                                tag="span"
-                                :content="entry.content"
-                            />
-                            <template v-if="entry.content && entry.place">, </template>
-                            {{ entry.place }}
-                        </p>
+						<VText
+							v-if="entry.content"
+							tag="p"
+							:content="entry.content"
+							:class="$style.column__content"
+						/>
+						<VText
+							v-if="entry.place"
+							tag="p"
+							:content="entry.place"
+							:class="$style.place"
+						/>
                     </div>
-                </div>
+                </section>
             </template>
         </div>
     </main>
@@ -88,7 +91,7 @@ const columns = computed(() => [
 
 <style lang="scss" module>
 .root {
-	padding-top: 20vh;
+	padding-top: 15vh;
     row-gap: 82px;
 }
 
@@ -128,12 +131,14 @@ const columns = computed(() => [
 	grid-column: 1 / -1;
 
 	@include media('>=lg') {
+		padding-inline: 24px;
+
 		&:nth-child(1) {
-			grid-column: 1 / 7;
+			grid-column: 3 / span 4;
 		}
 
 		&:nth-child(2) {
-			grid-column: 7 / -1;
+			grid-column: 7 / span 4;
 		}
 	}
 }
@@ -141,8 +146,7 @@ const columns = computed(() => [
 .column-title {
 	font-size: 14px;
 	font-weight: 500;
-	letter-spacing: 0.05em;
-	margin-block: 0 40px;
+	margin-block: 0 28px;
 	opacity: 0.5;
 	text-transform: uppercase;
 }
@@ -161,7 +165,7 @@ const columns = computed(() => [
 }
 
 .title {
-	font-size: 20px;
+	font-size: 16px;
 	margin-block: 0;
 }
 
@@ -172,13 +176,22 @@ const columns = computed(() => [
 	gap: 0.4em;
 }
 
+.icon {
+	font-size: 16px;
+}
+
 .date {
 	flex-shrink: 0;
 	opacity: 0.5;
 }
 
-.meta {
-	margin-block: 4px 0;
-	opacity: 0.6;
+.place,
+.column__content {
+	margin-block: 0;
+}
+
+.place {
+	font-style: italic;
+	opacity: 0.5;
 }
 </style>
