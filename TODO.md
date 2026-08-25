@@ -1,8 +1,5 @@
 ### TODO
 
-- SEO/GEO: faire un audit du contenu existant et proproser des améliorations
-- SEO/GEO: adapter le heading de page index et archive si une NuxtPage est rendu, page projet affiché
-
 - Amélioration du design du site
 	- [x] typo monospace pour le contenu de la page about (interaction avec font variable)
 	- [x] Fix animation d'apprarition des tags dans VProjectCard
@@ -10,23 +7,24 @@
 	- [x] update du style des settings globaux (themes, columns input)
 	- [] VArchive: améliorer le coté responsive de la table
 
-### improvement
-- Refactor: utiliser une composable commun pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
-- Refactor: les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
-
+- VMainProjectListing: Ajouter un indicateur visuel sur le projet aria-current="page"
+- VWindow: empecher de pouvoir drag en dehors de la fenetre
 
 ### Next step
-- VSpashScreen: Ajouter une animation d'apparition lors de la premier connexion sur le site, il faut que ca soit une feature générique qui puisse facilement etre réutilisée sur d'autres sites. Activable avec un featureFlag dans le nuxt.config.ts et certaines options (localStorage ou sessionStorage...). Dans ce site l'animation sera l'apparition du texte "TIM" puis le wrapper de ce texte devra prendre l'emplacement de VMainNav puis l'apparition progressive du reste des éléments dans la page
-
-- Récuperer toutes les projets via prismic, à partir de ces datas il faut construire une structure uniformisée pour chaque projet. Par exemple un fichier markdown pour le contenu + dossier pour les medias (avec une nomenclature spécifique). En me basant sur cette structure, je vais pouvoir construire des nouveaux projets pour ensuite générer une migration automatisé dans prismic.
+- Je veux avoir une structure organisé et uniformisée de tous mes projets dans un dossier sur mon ordi (bureau).
+Chaque projet doit etre rangé dans un folder dans un dossier racine, dans un premier temps il faudra définir une structure commune à partir des informations d'un projet type sur Prismic. Par exemple, un fichier markdown qui à toutes les informations du projet, titre, date, description courte, scope, description détaillée, thumbnail, médias associées... avec un autre dossier qui contient tous les médias correctement compréssés. Une fois une structure et nomenclature définit, on va pouvoir scrappé l'ensemble des données provenelent de mon repo Prismic et générer une base de tout mes projets existant. Par la suite, je vais pouvoir ajouter des nouveaux projets à la main. Une fois fait, on va faire un script permettant de migrer tous ces nouveaux projets dans Prismic
 Script d'import de projets dans Prismic à partir de fichiers markdown + médias en local (front-matter → champs `project` type/tag_group/framework, contenu → RichText, médias → Asset API) : faisable via la Migration API de Prismic, exposée par `@prismicio/client` (déjà installé, ^7.21.8, requiert un write API token généré manuellement dans le dashboard Prismic + Node ≥ 20, ok sur ce repo en Node 24) — `createWriteClient` + `createMigration()` + `migration.createAsset(fichier local, ...)` + `migration.createDocument({ type: 'project', data }, title)` + `client.migrate(migration)`. Limite à anticiper : documents créés en brouillon (publication manuelle après coup), et pas de convertisseur Markdown→RichText Prismic officiel (à écrire soi-même, même simple).
 
-- En partant de fichier markdown et de média sur mon ordi en local, voir si c'est possible de faire un script pour les datas et medias de projets directement dans un repo prismic
+- Refactor: utiliser une composable commun pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
+- Refactor: les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
 
 - Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
 
 
 ### Done
+- SEO/GEO: faire un audit du contenu existant et proproser des améliorations
+- SEO/GEO: adapter le heading de page index et archive si une NuxtPage est rendu, page projet affiché
+
 - VProjectPage: Add reveal animation with use-page-intro.ts
 - VProjectPage: Add reveal and switch animation to reveal content
 - VProjectPage: Add backdrop or find a design hack to highlight VWindow with background
@@ -34,6 +32,8 @@ Script d'import de projets dans Prismic à partir de fichiers markdown + médias
 - VWindow: fix la position initiale de l'élément sur mobile
 - VAboutPage: rendre paragraph brut en SRR et ensuite charger le split de word dans VHighlightedText
 - VAboutPage: change les fields en un group "Formations" et un group "Expériences" incluant un field répétable (titre, contenu, place, date, lien)
+
+- VSpashScreen: Ajouter une animation d'apparition lors de la premier connexion sur le site, il faut que ca soit une feature générique qui puisse facilement etre réutilisée sur d'autres sites. Activable avec un featureFlag dans le nuxt.config.ts et certaines options (localStorage ou sessionStorage...). Dans ce site l'animation sera l'apparition du texte "TIM" puis le wrapper de ce texte devra prendre l'emplacement de VMainNav puis l'apparition progressive du reste des éléments dans la page
 
 - VArchive: retiré le tri par `tag` (colonne "étiquettes" toujours affichée, juste plus triable) et simplifié `SERVER_SORTABLE_FIELDS` → `title` est désormais le seul champ non triable côté serveur, remplacé par une simple exclusion (`sortField.value !== 'title'`) dans `fetchOptions`/`sortedRows` (`VArchivePage.vue`). Piste explorée pour trier `title` sans le problème des accents (`orderings` sur `uid`) : testée en live contre l'API Prismic sous deux formats (`my.project.uid` et `document.uid`) — aucun des deux ne trie réellement (résultat identique en asc/desc pour `document.uid`, ordre incohérent pour `my.project.uid`) ; le champ est silencieusement ignoré par l'API. Confirme le constat déjà noté plus bas dans cette section — le tri par titre reste donc client-side (`localeCompare`).
 - Subset de la typo variable "Noi Grotesk" en woff2 (`app/assets/fonts/`, `app/assets/scss/_fonts.scss`) : la police n'était servie qu'en `.ttf` non subsetté (479K, seul format chargé — le `.woff2`/`.woff` déjà présents dans le dossier étaient du code mort en commentaire). Généré un nouveau `noigrotesk-variable-subset.woff2` (91K, via `pyftsubset`/`fonttools`, scope Latin de base + Latin-1 Supplement + ponctuation typographique utilisée) qui remplace le `.ttf` dans le `@font-face`. Point d'attention découvert en inspectant les fichiers existants avec `fonttools` : le `.woff2` déjà présent (18K, semblait donc "déjà optimisé") n'avait en réalité **aucune table `fvar`/`gvar`** — c'est une instance statique, pas la police variable — il aurait cassé l'animation `wght`/`ital` au survol dans `VVariableText.vue` s'il avait été utilisé tel quel. Le nouveau fichier conserve ces tables (vérifié via script Python `fontTools.ttLib`) pour rester compatible avec cette animation. Anciens `.ttf`/`.woff`/`.woff2` (non subsetté) supprimés. Vérifié : `pnpm lint:css` sans nouveau warning, `pnpm build` (123 routes) ne référence plus que le nouveau fichier dans `dist/_nuxt/`. Second point du TODO ("supprimer `$norm-font-name` si pas utilisé") non applicable : cette variable est activement utilisée par les 9 `@font-face` de TT Norms Pro et les variables CSS `--typography-family-*`.
