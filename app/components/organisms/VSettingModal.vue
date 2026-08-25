@@ -154,6 +154,6 @@ const { activate: onButtonMagnetEvent } = useMagnetHover()
 }
 
 .inner {
-	padding: 18px;
+	padding: 6px;
 }
 </style>

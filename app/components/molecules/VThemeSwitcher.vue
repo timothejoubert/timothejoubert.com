@@ -88,15 +88,22 @@ useHead({
 	display: flex;
 	flex-flow: column wrap;
 	justify-content: space-between;
-	gap: 10px;
+	gap: 4px;
 }
 
 .item {
 	padding: 8px;
 	border-radius: 8px;
+	transition: background-color 0.3s ease(out-quad);
 
 	&:has(input:checked) {
 		background-color: var(--color-background);
+	}
+
+	&:not(:has(input:checked)) {
+		&:hover {
+			background-color: color-mix(in srgb, var(--color-background) 40%, transparent);
+		}
 	}
 }
 
@@ -106,7 +113,7 @@ useHead({
 	align-items: center;
     justify-content: space-between;
 	cursor: pointer;
-	gap: 18px;
+	gap: 24px;
 }
 
 .label__text {

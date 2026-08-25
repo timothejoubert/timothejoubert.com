@@ -20,6 +20,12 @@ const rootEl = useTemplateRef<HTMLElement>('rootEl')
 const headEl = useTemplateRef<HTMLElement>('headEl')
 const containerEl = ref<HTMLElement | null>(null)
 
+// Below `md`, a saved desktop drag/resize position can place the whole window off-screen —
+// the responsive layout (full width, anchored to the top) takes over instead, so saved
+// position/size are ignored and the interactions themselves are disabled.
+const { width: viewportWidth } = useWindowSize()
+const isMobile = computed(() => viewportWidth.value < breakpoint('md'))
+
 // Modal-like behaviour: this window visually covers the page behind it, so it needs
 // dialog semantics — focus moves in on mount, is trapped while open, and returns to
 // whatever triggered it (e.g. the project card link) once the consumer closes it.
@@ -87,7 +93,7 @@ watch(isDragging, (dragging) => {
 })
 
 watch([x, y], ([newX, newY]) => {
-    if (hasDragged.value) savedPosition.value = { x: newX, y: newY }
+    if (hasDragged.value && !isMobile.value) savedPosition.value = { x: newX, y: newY }
 })
 
 // Resize
@@ -97,11 +103,12 @@ const { startResize, isResizing, style: resizeStyle } = useResizable(rootEl, {
     minHeight: props.minHeight,
     storageKey: `${props.storageKey}-size`,
     position: { x, y, onActivate: () => { hasDragged.value = true } },
+    disabled: isMobile,
 })
 
 // Combined style
 const windowStyle = computed(() => ({
-    ...(hasDragged.value && { left: `${x.value}px`, top: `${y.value}px` }),
+    ...(hasDragged.value && !isMobile.value && { left: `${x.value}px`, top: `${y.value}px` }),
     ...resizeStyle.value,
 }))
 </script>
@@ -142,6 +149,7 @@ $handle-corner: 10px;
     border: 1PX solid var(--color-surface);
     border-radius: 12px;
     background-color: var(--color-background);
+    box-shadow: -5px 5px 20PX 10PX rgb(0, 0, 0, 20%);
 
     &--resizing {
         pointer-events: none;
@@ -149,7 +157,7 @@ $handle-corner: 10px;
 }
 
 .inner {
-    overflow: auto;
+    overflow: clip;
     width: 100%;
     height: 100%;
     -ms-overflow-style: none;
@@ -162,6 +170,7 @@ $handle-corner: 10px;
 
 .head {
     position: sticky;
+	z-index: 1;
     top: 0;
     display: flex;
     align-items: center;
@@ -170,6 +179,10 @@ $handle-corner: 10px;
     background-color: var(--color-surface);
     color: var(--color-content);
     cursor: move;
+
+    @include media('<md') {
+        cursor: default;
+    }
 
     &::before {
         position: absolute;
@@ -191,6 +204,10 @@ $handle-corner: 10px;
 
     .root--resizing & {
         pointer-events: auto;
+    }
+
+    @include media('<md') {
+        display: none;
     }
 }
 

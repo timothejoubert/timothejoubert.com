@@ -21,32 +21,24 @@ useSchemaOrg([
 </script>
 
 <template>
-    <div :class="$style.root">
-        <NuxtRouteAnnouncer />
-        <NuxtLoadingIndicator color="#DBE6EC" />
-        <a
-            href="#main-content"
-            :class="$style['skip-link']"
-        >
-            {{ $t('skip_to_content') }}
-        </a>
-        <VNav />
+	<NuxtRouteAnnouncer />
+	<NuxtLoadingIndicator color="#DBE6EC" />
+	<a
+		href="#main-content"
+		:class="$style['skip-link']"
+	>
+		{{ $t('skip_to_content') }}
+	</a>
+	<VNav />
 
-		<NuxtPage />
+	<NuxtPage />
 
-		<DevOnly>
-            <VGridVisualizer />
-        </DevOnly>
-    </div>
+	<DevOnly>
+		<VGridVisualizer />
+	</DevOnly>
 </template>
 
 <style lang="scss" module>
-.root {
-    position: relative;
-    min-height: 100svh;
-    padding: var(--app-padding-top) var(--app-padding-right) var(--app-padding-bottom) var(--app-padding-left);
-}
-
 .page-container {
     min-height: calc(100vh - var(--app-padding-top) - var(--app-padding-bottom));
 }

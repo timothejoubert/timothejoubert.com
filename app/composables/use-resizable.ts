@@ -16,6 +16,7 @@ export interface UseResizableOptions {
     minHeight?: number
     storageKey?: string
     position?: UseResizablePosition
+    disabled?: MaybeRefOrGetter<boolean>
 }
 
 const CURSOR_MAP: Record<ResizeDirection, string> = {
@@ -27,7 +28,7 @@ export function useResizable(
     targetEl: MaybeRefOrGetter<HTMLElement | null | undefined>,
     options: UseResizableOptions = {},
 ) {
-    const { minWidth = 200, minHeight = 200, storageKey, position, containerEl } = options
+    const { minWidth = 200, minHeight = 200, storageKey, position, containerEl, disabled } = options
 
     const savedSize = storageKey
         ? useCookie<{ width: number, height: number } | null>(storageKey, { default: () => null })
@@ -42,12 +43,18 @@ export function useResizable(
     const hasResized = computed(() => hasResizedWidth.value || hasResizedHeight.value)
     const isResizing = ref(false)
 
-    const style = computed<CSSProperties>(() => ({
-        ...(hasResizedWidth.value && { width: `${width.value}px` }),
-        ...(hasResizedHeight.value && { height: `${height.value}px`, maxHeight: 'none' }),
-    }))
+    const style = computed<CSSProperties>(() => {
+        if (toValue(disabled)) return {}
+
+        return {
+            ...(hasResizedWidth.value && { width: `${width.value}px` }),
+            ...(hasResizedHeight.value && { height: `${height.value}px`, maxHeight: 'none' }),
+        }
+    })
 
     function startResize(event: PointerEvent, direction: ResizeDirection) {
+        if (toValue(disabled)) return
+
         event.preventDefault()
         event.stopPropagation()
 

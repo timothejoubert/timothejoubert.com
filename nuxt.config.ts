@@ -46,9 +46,8 @@ export default defineNuxtConfig({
 			},
 			pageIntro: {
 				enabled: true,
-				persistence: 'none',
+				persistence: 'sessionStorage',
 				storageKey: 'page-intro-seen',
-				stepDurations: { nav: 200, settings: 1500, content: 400 },
 			},
 		},
 	},

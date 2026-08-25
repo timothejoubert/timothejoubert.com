@@ -7,6 +7,21 @@ const props = defineProps<{
     backPath: string
 }>()
 
+const { phase } = usePageIntro()
+const revealed = computed(() => phase.value === 'page' || phase.value === 'done')
+
+// One-shot: whatever direction the previous project's prev/next link set is consumed right away
+// so a future remount (e.g. browser back/forward, direct URL) doesn't replay a stale slide.
+const switchDirection = useProjectSwitchDirection()
+const enterDirection = switchDirection.value
+switchDirection.value = null
+
+const contentMounted = ref(false)
+onMounted(async () => {
+	await nextTick()
+	contentMounted.value = true
+})
+
 const route = useRoute()
 
 // Keeps the current query (e.g. VArchivePage's sort) when navigating between projects,
@@ -50,7 +65,7 @@ const { prevProject, nextProject } = props.document
 
 <template>
     <VWindow
-        :class="$style.root"
+        :class="[$style.root, revealed && $style['root--visible']]"
         container-selector="body"
         :aria-label="document?.data.title ?? $t('error_page.not_found_title')"
         @close="navigateTo(backPath)"
@@ -69,73 +84,83 @@ const { prevProject, nextProject } = props.document
         </template>
 
         <template v-if="document">
-            <div :class="$style.content">
-                <div :class="$style.attributes">
-                    <ul v-if="tags.length" :class="$style.tags">
-                        <LazyVTag
-                            v-for="(tag, i) in tags"
-                            :key="tag || i"
-                            :label="tag"
-                            wrapper="li"
-                        />
-                    </ul>
-                    <VTime
-                        :date="project?.date"
-                        format="short"
-                    />
-                </div>
-                <LazyVText
-                    v-if="project?.short_description"
-                    :content="project.short_description"
-                    :class="$style['short-description']"
-                />
-                <LazyVText
-                    v-if="project?.content"
-                    :content="project.content"
-                    :class="$style.description"
-                />
-            </div>
-
-            <VPrismicImg :field="project?.thumbnail" />
-
-            <div v-if="medias.length" :class="$style.medias">
-                <div
-                    v-for="(mediaGroup, i) in medias"
-                    :key="`media-${i}`"
-                    :class="$style.media"
-                >
-                    <VVideoPlayer
-                        v-if="mediaGroup.type === 'video' && mediaGroup.media?.url"
-                        autoplay
-                        muted
-                        :controls="false"
-                        loop
-                        :src="mediaGroup.media.url"
-                    />
-                    <VPrismicImg v-else :field="mediaGroup.media" />
-                </div>
-            </div>
-
             <div
-                v-if="prevProject || nextProject"
-                :class="$style.footer"
+                :class="[
+                    $style['content-wrapper'],
+                    contentMounted && $style['content-wrapper--visible'],
+                    enterDirection && $style[`content-wrapper--from-${enterDirection}`],
+                ]"
             >
-                <NuxtLink
-                    v-if="prevProject"
-                    :to="withCurrentQuery(prevProject.path)"
-                    :class="$style['footer-link']"
+                <div :class="$style.content">
+                    <div :class="$style.attributes">
+                        <ul v-if="tags.length" :class="$style.tags">
+                            <LazyVTag
+                                v-for="(tag, i) in tags"
+                                :key="tag || i"
+                                :label="tag"
+                                wrapper="li"
+                            />
+                        </ul>
+                        <VTime
+                            :date="project?.date"
+                            format="short"
+                        />
+                    </div>
+                    <LazyVText
+                        v-if="project?.short_description"
+                        :content="project.short_description"
+                        :class="$style['short-description']"
+                    />
+                    <LazyVText
+                        v-if="project?.content"
+                        :content="project.content"
+                        :class="$style.description"
+                    />
+                </div>
+
+                <VPrismicImg :field="project?.thumbnail" />
+
+                <div v-if="medias.length" :class="$style.medias">
+                    <div
+                        v-for="(mediaGroup, i) in medias"
+                        :key="`media-${i}`"
+                        :class="$style.media"
+                    >
+                        <VVideoPlayer
+                            v-if="mediaGroup.type === 'video' && mediaGroup.media?.url"
+                            autoplay
+                            muted
+                            :controls="false"
+                            loop
+                            :src="mediaGroup.media.url"
+                        />
+                        <VPrismicImg v-else :field="mediaGroup.media" />
+                    </div>
+                </div>
+
+                <div
+                    v-if="prevProject || nextProject"
+                    :class="$style.footer"
                 >
-                    <VIcon name="material-symbols:arrow-back" />
-                    {{ prevProject.title }}
-                </NuxtLink>
-                <NuxtLink
-                    v-if="nextProject"
-                    :to="withCurrentQuery(nextProject.path)"
-                    :class="[$style['footer-link'], $style['footer-link--next']]"
-                >
-                    {{ nextProject.title }}
-                    <VIcon name="material-symbols:arrow-forward" />
-                </NuxtLink>
+                    <NuxtLink
+                        v-if="prevProject"
+                        :to="withCurrentQuery(prevProject.path)"
+                        :class="$style['footer-link']"
+                        @click="switchDirection = 'prev'"
+                    >
+                        <VIcon name="material-symbols:arrow-back" />
+                        {{ prevProject.title }}
+                    </NuxtLink>
+                    <NuxtLink
+                        v-if="nextProject"
+                        :to="withCurrentQuery(nextProject.path)"
+                        :class="[$style['footer-link'], $style['footer-link--next']]"
+                        @click="switchDirection = 'next'"
+                    >
+                        {{ nextProject.title }}
+                        <VIcon name="material-symbols:arrow-forward" />
+                    </NuxtLink>
+                </div>
             </div>
         </template>
 
@@ -163,18 +188,55 @@ const { prevProject, nextProject } = props.document
     z-index: 11;
     top: var(--app-padding-top);
     right: var(--app-padding-right);
+	left: var(--app-padding-left);
     overflow: hidden auto;
-    width: 50%;
     max-width: var(--app-inner-max-width);
     max-height: var(--app-inner-max-height);
+	opacity: 0;
 	overscroll-behavior: contain;
+	translate: 0 24px;
+
+	@include media('>=md') {
+		left: initial;
+    	width: 50%;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		transition: opacity 0.4s ease(out-quad), translate 0.4s ease(out-quad);
+	}
+
+	&--visible {
+		opacity: 1;
+		translate: 0 0;
+	}
 }
 
 .title {
     font-size: 18px;
     margin-block: initial;
-    padding-block: 12px;
+    padding-block: 8px;
     padding-inline: var(--v-project-page-padding-inline);
+}
+
+.content-wrapper {
+	opacity: 0;
+
+	&--from-prev {
+		translate: -40px 0;
+	}
+
+	&--from-next {
+		translate: 40px 0;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		transition: opacity 0.4s ease(out-quad), translate 0.4s ease(out-quad);
+	}
+
+	&--visible {
+		opacity: 1;
+		translate: 0 0;
+	}
 }
 
 .back {

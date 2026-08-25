@@ -51,11 +51,10 @@ export const usePageIntro = createSharedComposable(() => {
 			return
 		}
 
-		const durations = config.stepDurations
 		const steps: [PageIntroPhase, number][] = [
-			['settings', durations.nav],
-			['content', durations.settings],
-			['page', durations.content],
+			['settings', 200],
+			['content', 1000],
+			['page', 400],
 		]
 
 		for (const [next, delay] of steps) {
