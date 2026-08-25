@@ -35,8 +35,8 @@ export default defineComponent({
 			let renderNodes: VNode[] | VNode[][] | null = null
 
 			if (props.render === 'chars') {
-				renderNodes = splitTextData.characters.map((char, _i) => {
-					return h('span', { class: [attrs.class, 'split-text-char'] }, char)
+				renderNodes = splitTextData.characters.map((char, i) => {
+					return h('span', { class: [attrs.class, 'split-text-char'], style: { '--data-char-index': i } }, char)
 				})
 			}
 			else if (props.render === 'words') {

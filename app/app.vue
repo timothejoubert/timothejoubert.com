@@ -32,10 +32,10 @@ useSchemaOrg([
         </a>
         <VNav />
 
-        <NuxtPage />
+		<NuxtPage />
 
-        <DevOnly>
-            <VGridVisualizer :class="$style.grid" />
+		<DevOnly>
+            <VGridVisualizer />
         </DevOnly>
     </div>
 </template>

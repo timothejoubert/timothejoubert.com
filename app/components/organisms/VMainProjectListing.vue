@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 const { data: projects } = await usePrismicFetchProjects(true)
+
+const { phase } = usePageIntro()
+const pageRevealed = computed(() => phase.value === 'page' || phase.value === 'done')
 </script>
 
 <template>
@@ -8,11 +11,12 @@ const { data: projects } = await usePrismicFetchProjects(true)
         :class="$style.root"
     >
         <LazyVProjectCard
-            v-for="project in projects"
+            v-for="(project, index) in projects"
             :key="project.uid"
             wrapper="li"
             :project="project"
-            :class="$style.item"
+            :class="[$style.item, pageRevealed && $style['item--visible']]"
+            :style="{ '--item-index': index }"
         />
     </ul>
 </template>
@@ -38,9 +42,22 @@ const { data: projects } = await usePrismicFetchProjects(true)
 .item {
     grid-column: 1 / -1;
     list-style: none;
+    opacity: 0;
+    translate: 0 24px;
 
     @include media('>=md') {
         grid-column: auto;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: 0.5s ease(out-quad);
+        transition-delay: calc(var(--item-index, 0) * 30ms);
+		transition-property: opacity, translate;
+    }
+
+    &--visible {
+        opacity: 1;
+        translate: 0 0;
     }
 }
 </style>

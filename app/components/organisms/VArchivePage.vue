@@ -8,6 +8,9 @@ defineProps<{
 	document: ArchiveDocument
 }>()
 
+const { phase } = usePageIntro()
+const pageRevealed = computed(() => phase.value === 'page' || phase.value === 'done')
+
 const route = useRoute()
 const router = useRouter()
 
@@ -158,7 +161,7 @@ function onRowClick(event: MouseEvent, uid: string | null) {
                     {{ $t('archive_page.projects_list_caption') }}
                 </caption>
                 <thead>
-                    <tr :class="$style['head-row']">
+                    <tr :class="[$style['head-row'], pageRevealed && $style['head-row--visible']]">
                         <th
                             scope="col"
                             :class="[$style.cell, $style['head-cell']]"
@@ -243,12 +246,13 @@ function onRowClick(event: MouseEvent, uid: string | null) {
                             :class="[
                                 $style['body-row'],
                                 pending && $style['body-row--skeleton'],
+                                pageRevealed && $style['body-row--visible'],
                                 $style[`body-row--band-${rowBandState(index)}`],
                             ]"
                             @click="onRowClick($event, project.uid)"
                             @mouseenter="onRowEnter(index)"
                             @mouseleave="onRowLeave($event, index)"
-							:style="{ '--loading-animation-delay': `${index * 0.02}s` }"
+							:style="{ '--loading-animation-delay': `${index * 0.02}s`, '--row-index': index }"
                         >
                             <td :class="[$style.cell, $style['cell--title'], $style['body-cell']]">
 								{{ project.data?.title }}
@@ -325,6 +329,20 @@ function onRowClick(event: MouseEvent, uid: string | null) {
 	vertical-align: middle;
 }
 
+.head-row {
+    opacity: 0;
+    translate: 0 24px;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: opacity 0.4s ease(out-quad), translate 0.4s ease(out-quad);
+    }
+
+    &--visible {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
 .head-cell {
     font-weight: inherit;
     text-align: inherit;
@@ -366,6 +384,18 @@ function onRowClick(event: MouseEvent, uid: string | null) {
 
 .body-row {
     cursor: pointer;
+    opacity: 0;
+    translate: 0 24px;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: opacity 0.4s ease(out-quad), translate 0.4s ease(out-quad);
+        transition-delay: calc(var(--row-index, 0) * 20ms);
+    }
+
+    &--visible {
+        opacity: 1;
+        translate: 0 0;
+    }
 
 	&--skeleton {
 		$gradient-color: #ffffff0b;

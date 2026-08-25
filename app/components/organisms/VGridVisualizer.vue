@@ -39,11 +39,11 @@ onBeforeUnmount(() => {
     z-index: 1000;
     top: 0;
     left: var(--gutter);
+    min-height: 100vh;
     padding-left: initial;
     grid-template-rows: 1fr;
     margin-block: initial;
     pointer-events: none;
-    min-height: 100vh;
 }
 
 .item {

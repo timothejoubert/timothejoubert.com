@@ -44,6 +44,12 @@ export default defineNuxtConfig({
 				url: 'https://timothejoubert.netlify.app',
 				env: 'local',
 			},
+			pageIntro: {
+				enabled: true,
+				persistence: 'none',
+				storageKey: 'page-intro-seen',
+				stepDurations: { nav: 200, settings: 1500, content: 400 },
+			},
 		},
 	},
 

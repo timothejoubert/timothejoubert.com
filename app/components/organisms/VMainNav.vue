@@ -16,7 +16,6 @@ const _links = computed(() => {
 		}
 	})
 })
-
 </script>
 
 <template>

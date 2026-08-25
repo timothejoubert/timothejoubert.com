@@ -22,40 +22,40 @@ const { activate: onButtonMagnetEvent } = useMagnetHover()
 </script>
 
 <template>
-	<div
-		:class="$style.root"
-		@pointerenter="onButtonMagnetEvent"
-		@pointerleave="onButtonMagnetEvent"
-		@keydown="onKeydown"
-	>
-		<slot name="target">
-			<button
-				ref="buttonEl"
-				:class="$style.button"
-				:aria-controls="id"
-				:aria-expanded="expanded"
-				:aria-label="$t('show_setting.button_label')"
-				@click="toggle"
-			>
-				<VIcon
-					name="material-symbols:settings"
-					size="1.3em"
-				/>
-			</button>
-		</slot>
-		<div
-			:id="id"
-			role="group"
-			:inert="!expanded"
-			:class="[$style.content, expanded && $style['content--visible']]"
-			:aria-label="$t('show_setting.aria_label')"
-		>
-			<div :class="$style.inner">
-				<VThemeSwitcher />
-				<!-- <VColumnsInput /> -->
-			</div>
-		</div>
-	</div>
+    <div
+        :class="$style.root"
+        @pointerenter="onButtonMagnetEvent"
+        @pointerleave="onButtonMagnetEvent"
+        @keydown="onKeydown"
+    >
+        <slot name="target">
+            <button
+                ref="buttonEl"
+                :class="$style.button"
+                :aria-controls="id"
+                :aria-expanded="expanded"
+                :aria-label="$t('show_setting.button_label')"
+                @click="toggle"
+            >
+                <VIcon
+                    name="material-symbols:settings"
+                    size="1.3em"
+                />
+            </button>
+        </slot>
+        <div
+            :id="id"
+            role="group"
+            :inert="!expanded"
+            :class="[$style.content, expanded && $style['content--visible']]"
+            :aria-label="$t('show_setting.aria_label')"
+        >
+            <div :class="$style.inner">
+                <VThemeSwitcher />
+                <!-- <VColumnsInput /> -->
+            </div>
+        </div>
+    </div>
 </template>
 
 <style lang="scss" module>
@@ -65,10 +65,6 @@ const { activate: onButtonMagnetEvent } = useMagnetHover()
 	align-items: center;
 	justify-content: center;
 
-	// Extends the hoverable area beyond the visible button so the magnet effect starts on
-	// approach. Lives outside .button (which needs overflow: hidden to clip the moving shape).
-	// z-index: -1 keeps it "polite": it only wins hit-testing where nothing else is rendered,
-	// yielding to any real overlapping content (e.g. a neighboring nav link) in front of it.
 	&::before {
 		position: absolute;
 		z-index: -1;
@@ -92,8 +88,6 @@ const { activate: onButtonMagnetEvent } = useMagnetHover()
 	isolation: isolate;
 	padding-inline: 16px;
 
-	// z-index: auto positioned pseudos paint above in-flow content (the icon) regardless of
-	// DOM order, so isolation above + a negative z-index here keeps the icon on top.
 	&::after {
 		position: absolute;
 		z-index: -1;

@@ -8,6 +8,9 @@ const props = defineProps<{
 
 const { t } = useI18n()
 
+const { phase } = usePageIntro()
+const pageRevealed = computed(() => phase.value === 'page' || phase.value === 'done')
+
 const page = computed(() => props.document.data)
 const columns = computed(() => [
 	{ key: 'formations', label: t('about_page.formations'), entries: page.value.formations ?? [] },
@@ -25,11 +28,11 @@ const columns = computed(() => [
             v-if="page.content"
             :field="page.content"
             wrapper="p"
-            :class="$style.content"
+            :class="[$style.content, pageRevealed && $style['content--visible']]"
         />
         <div
 			v-if="columns.some((column) => column.entries.length)"
-			:class="$style.columns"
+			:class="[$style.columns, pageRevealed && $style['columns--visible']]"
 		>
             <template
                 v-for="column in columns"
@@ -39,13 +42,14 @@ const columns = computed(() => [
                     v-if="column.entries.length"
                     :class="$style.column"
                 >
-                    <h2 :class="$style['column-title']">
+                    <h2 :class="[$style['column-title'], pageRevealed && $style['column-title--visible']]">
                         {{ column.label }}
                     </h2>
                     <div
                         v-for="(entry, i) in column.entries"
                         :key="i"
-                        :class="$style.entry"
+                        :class="[$style.entry, pageRevealed && $style['entry--visible']]"
+                        :style="{ '--entry-index': i }"
                     >
                         <div :class="$style.head">
                             <h3 :class="$style.title">
@@ -91,6 +95,8 @@ const columns = computed(() => [
 
 <style lang="scss" module>
 .root {
+	--grid-container-width: 100%;
+
 	padding-top: 15vh;
     row-gap: 82px;
 }
@@ -104,7 +110,18 @@ const columns = computed(() => [
     line-height: 1.7;
     margin-block: 0;
 	margin-inline: auto;
+	opacity: 0;
 	text-align: center;
+	translate: 0 24px;
+
+	@media (prefers-reduced-motion: no-preference) {
+		transition: opacity 0.4s ease(out-quad), translate 0.4s ease(out-quad);
+	}
+
+	&--visible {
+		opacity: 1;
+		translate: 0 0;
+	}
 }
 
 .columns {
@@ -114,16 +131,26 @@ const columns = computed(() => [
 	grid-template-columns: subgrid;
 	row-gap: 60px;
 
-	&::before {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: calc(var(--gutter) * -0.5);
-		width: 1PX;
-		background-color: currentcolor;
-		content: '';
-		grid-column: 7;
-		opacity: 0.2;
+	@include media('>=lg') {
+		&::before {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: calc(var(--gutter) * -0.5);
+			width: 1PX;
+			background-color: currentcolor;
+			content: '';
+			grid-column: 7;
+			opacity: 0;
+
+			@media (prefers-reduced-motion: no-preference) {
+				transition: opacity 0.4s ease(out-quad);
+			}
+		}
+
+		&--visible::before {
+			opacity: 0.2;
+		}
 	}
 }
 
@@ -147,13 +174,36 @@ const columns = computed(() => [
 	font-size: 14px;
 	font-weight: 500;
 	margin-block: 0 28px;
-	opacity: 0.5;
+	opacity: 0;
 	text-transform: uppercase;
+	translate: 0 24px;
+
+	@media (prefers-reduced-motion: no-preference) {
+		transition: opacity 0.4s ease(out-quad), translate 0.4s ease(out-quad);
+	}
+
+	&--visible {
+		opacity: 0.5;
+		translate: 0 0;
+	}
 }
 
 .entry {
+	opacity: 0;
+	translate: 0 24px;
+
 	& + & {
 		margin-top: 32px;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		transition: opacity 0.4s ease(out-quad), translate 0.4s ease(out-quad);
+		transition-delay: calc(var(--entry-index, 0) * 50ms);
+	}
+
+	&--visible {
+		opacity: 1;
+		translate: 0 0;
 	}
 }
 

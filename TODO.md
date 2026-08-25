@@ -1,23 +1,22 @@
 ### TODO
 
+- VSpashScreen: Ajouter une animation d'apparition lors de la premier connexion sur le site, il faut que ca soit une feature générique qui puisse facilement etre réutilisée sur d'autres sites. Activable avec un featureFlag dans le nuxt.config.ts et certaines options (localStorage ou sessionStorage...). Dans ce site l'animation sera l'apparition du texte "TIM" puis le wrapper de ce texte devra prendre l'emplacement de VMainNav puis l'apparition progressive du reste des éléments dans la page
+
+- VProjectPage: Add reveal and switch animation to reveal content
+- VProjectPage: Add backdrop or find a design hack to highlight VWindow with background
+
+- SEO: faire un audit du contenu existant et proproser des améliorations
+- SEO: adapter le heading de page index et archive si une NuxtPage est rendu, page projet affiché
 
 - Amélioration du design du site
 	- [x] typo monospace pour le contenu de la page about (interaction avec font variable)
 	- [x] Fix animation d'apprarition des tags dans VProjectCard
 	- [x] VArchive: mettre la row avec aria-current="page" dans un style visible
-	- [] update du style des settings globaux (themes, columns input)
+	- [x] update du style des settings globaux (themes, columns input)
 	- [] VArchive: améliorer le coté responsive de la table
 
-- SEO: faire un audit du contenu existant et proproser des améliorations
-- SEO: adapter le heading de page index et archive si une NuxtPage est rendu, page projet affiché
-
 ### improvement
-- VAboutPage: rendre paragraph brut en SRR et ensuite charger le split de word dans VHighlightedText
 - Refactor: utiliser une composable commun pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
-- VProjectPage: Add reveal and switch animation to reveal content
-- VProjectPage: Add backdrop or find a design hack to highlight VWindow with background
-
-- VSpashScreen: add animation (from tim label to navBar transition ?)
 
 - Refactoriser les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
 
@@ -33,6 +32,7 @@ Script d'import de projets dans Prismic à partir de fichiers markdown + médias
 
 
 ### Done
+- VAboutPage: rendre paragraph brut en SRR et ensuite charger le split de word dans VHighlightedText
 - VAboutPage: change les fields en un group "Formations" et un group "Expériences" incluant un field répétable (titre, contenu, place, date, lien)
 
 - VArchive: retiré le tri par `tag` (colonne "étiquettes" toujours affichée, juste plus triable) et simplifié `SERVER_SORTABLE_FIELDS` → `title` est désormais le seul champ non triable côté serveur, remplacé par une simple exclusion (`sortField.value !== 'title'`) dans `fetchOptions`/`sortedRows` (`VArchivePage.vue`). Piste explorée pour trier `title` sans le problème des accents (`orderings` sur `uid`) : testée en live contre l'API Prismic sous deux formats (`my.project.uid` et `document.uid`) — aucun des deux ne trie réellement (résultat identique en asc/desc pour `document.uid`, ordre incohérent pour `my.project.uid`) ; le champ est silencieusement ignoré par l'API. Confirme le constat déjà noté plus bas dans cette section — le tri par titre reste donc client-side (`localeCompare`).

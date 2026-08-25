@@ -35,7 +35,7 @@
   "sort_descending": "Trié par {label} par ordre décroissant",
   "about_page.formations": "Formations",
   "about_page.experiences": "Expériences",
-  "theme_switcher.main": "Thème Neutre",
-  "theme_switcher.blue": "Thème bleu",
-  "theme_switcher.green": "Thème vert"
+  "theme_switcher.main": "Neutre",
+  "theme_switcher.blue": "Bleu",
+  "theme_switcher.green": "Vert"
 }
