@@ -19,11 +19,10 @@ const columns = computed(() => [
 </script>
 
 <template>
-    <main
-        id="main-content"
-        class="grid"
+	<VPageWrapper
+		class="grid"
         :class="$style.root"
-    >
+	>
         <LazyVHighlightedText
             v-if="page.content"
             :field="page.content"
@@ -90,7 +89,7 @@ const columns = computed(() => [
                 </section>
             </template>
         </div>
-    </main>
+	</VPageWrapper>
 </template>
 
 <style lang="scss" module>

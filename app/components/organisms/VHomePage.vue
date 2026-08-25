@@ -4,13 +4,22 @@ import type { HomePageDocument } from '~~/prismicio-types'
 defineProps<{
 	document: HomePageDocument
 }>()
+
+// A project modal (nested route) renders its own <h1> for the project title — the listing's
+// own heading is demoted to <h2> in that case so the page only ever has one <h1>.
+const route = useRoute()
+const hasSubRoute = computed(() => !!route.params.uid)
+const headingTag = computed(() => hasSubRoute.value ? 'h2' : 'h1')
 </script>
 
 <template>
-    <main id="main-content">
-        <h1 class="visually-hidden">
+    <VPageWrapper>
+        <component
+            :is="headingTag"
+            class="visually-hidden"
+        >
             {{ document.data.title }}
-        </h1>
+        </component>
         <VMainProjectListing />
-    </main>
+    </VPageWrapper>
 </template>

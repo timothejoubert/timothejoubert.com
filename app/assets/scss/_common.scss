@@ -42,4 +42,6 @@ p {
 	position: relative;
     min-height: 100svh;
     padding: var(--app-padding-top) var(--app-padding-right) var(--app-padding-bottom) var(--app-padding-left);
+
+    // min-height: calc(100vh - var(--app-padding-top) - var(--app-padding-bottom));
 }

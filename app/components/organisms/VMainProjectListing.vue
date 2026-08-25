@@ -1,8 +1,25 @@
 <script lang="ts" setup>
+import { joinURL } from 'ufo'
+import { getRoutePath } from '~~/shared/prismic-schema'
+import { ensureProtocol } from '~/utils/url'
+
 const { data: projects } = await usePrismicFetchProjects(true)
 
 const { phase } = usePageIntro()
 const pageRevealed = computed(() => phase.value === 'page' || phase.value === 'done')
+
+const { site } = useRuntimeConfig().public
+if (projects.value?.length) {
+	useSchemaOrg([
+		defineItemList({
+			itemListElement: projects.value.map((project, index) => ({
+				position: index + 1,
+				name: project.data.title,
+				url: joinURL(ensureProtocol(site.url), getRoutePath('projet', { uid: project.uid })),
+			})),
+		}),
+	])
+}
 </script>
 
 <template>

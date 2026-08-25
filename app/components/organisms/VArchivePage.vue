@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { filter } from '@prismicio/client'
-import { withQuery } from 'ufo'
+import { joinURL, withQuery } from 'ufo'
 import type { ArchiveDocument, ProjectDocumentData } from '~~/prismicio-types'
 import { getRoutePath, prismicDocumentType } from '~~/shared/prismic-schema'
+import { ensureProtocol } from '~/utils/url'
 
 defineProps<{
 	document: ArchiveDocument
@@ -13,6 +14,10 @@ const pageRevealed = computed(() => phase.value === 'page' || phase.value === 'd
 
 const route = useRoute()
 const router = useRouter()
+
+// A project modal (nested route) renders its own <h1> for the project title — the listing's
+// own heading is demoted to <h2> in that case so the page only ever has one <h1>.
+const headingTag = computed(() => route.params.uid ? 'h2' : 'h1')
 
 const sortField = computed(() => (route.query['field'] as string) || 'date')
 const sortDirection = computed<'asc' | 'desc'>(() => route.query['ordering'] === 'asc' ? 'asc' : 'desc')
@@ -51,11 +56,15 @@ const fetchOptions = computed(() => {
 	}
 })
 
-const {
-	data: projects,
-	error,
-	pending
-} = usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions)
+const documentListing = usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions)
+// Awaited here (unlike a plain `if` right after the un-awaited call) so the initial `useSchemaOrg`
+// call below runs synchronously once the data is actually resolved — `useSchemaOrg`/`inject()`
+// only work inside setup()'s own synchronous flow (a top-level `await` in <script setup> keeps
+// that flow intact; a `watchEffect` callback, which runs detached from it, does not). Later
+// client-side re-fetches (sort changes) still update `pending`/`projects` reactively as before —
+// only this one-shot schema.org emission is tied to the initial resolution.
+await documentListing
+const { data: projects, error, pending } = documentListing
 
 const rows = computed(() => {
 	if (pending.value) {
@@ -64,6 +73,19 @@ const rows = computed(() => {
 
 	return projects.value || []
 })
+
+const { site } = useRuntimeConfig().public
+if (projects.value?.length) {
+	useSchemaOrg([
+		defineItemList({
+			itemListElement: projects.value.map((project, index) => ({
+				position: index + 1,
+				name: project.data.title,
+				url: joinURL(ensureProtocol(site.url), getRoutePath('projet-archive', { uid: project.uid })),
+			})),
+		}),
+	])
+}
 
 function getTagLabels(tagGroup: ProjectDocumentData['tag_group']) {
 	return tagGroup
@@ -148,13 +170,15 @@ function onRowClick(event: MouseEvent, uid: string | null) {
 </script>
 
 <template>
-    <main
-        id="main-content"
-        :class="$style.root"
-    >
-        <h1 class="visually-hidden">
+	<VPageWrapper
+		:class="$style.root"
+	>
+        <component
+            :is="headingTag"
+            class="visually-hidden"
+        >
             {{ document.data.title }}
-        </h1>
+        </component>
         <div :class="$style['scroll-wrapper']">
             <table :class="$style.table">
                 <caption class="visually-hidden">
@@ -293,7 +317,7 @@ function onRowClick(event: MouseEvent, uid: string | null) {
                 </tbody>
             </table>
         </div>
-    </main>
+	</VPageWrapper>
 </template>
 
 <style lang="scss" module>

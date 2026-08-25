@@ -46,10 +46,8 @@ function reload() {
 </script>
 
 <template>
-    <div>
+	<VPageWrapper>
         <VErrorContent
-            wrapper="main"
-            id="main-content"
             :title="title"
             :subtitle="subtitle"
             :content="content"
@@ -71,7 +69,7 @@ function reload() {
             </button>
         </VErrorContent>
         <VNav />
-    </div>
+    </VPageWrapper>
 </template>
 
 <style lang="scss" module>

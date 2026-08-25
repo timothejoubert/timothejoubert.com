@@ -25,6 +25,7 @@
   "tags": "Étiquettes",
   "rate": "Fierté",
   "rate_label": "Note de {rate} sur {max}",
+  "home_page.heading": "Accueil",
   "archive_page.heading": "Archive",
   "archive_page.projects_list_caption": "Liste des projets archivés",
   "archive_page.error_loading_projects": "Erreur lors du chargement des projets.",
