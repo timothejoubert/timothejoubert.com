@@ -108,8 +108,8 @@ function onMouseLeave() {
 .root {
     :global(.split-text-char) {
         font-family: #{$fraktion-mono-family};
-        font-variation-settings: 'wght' var(--font-weight, 200);
-        transition: font-variation-settings 0.3s ease(out-quad);
+        font-variation-settings: 'wght' var(--font-weight, 100);
+        transition: font-variation-settings 0.2s ease(out-quad);
     }
 }
 </style>

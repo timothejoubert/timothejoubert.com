@@ -1,9 +1,14 @@
 <script lang="ts" setup>
+const { t } = useI18n()
+
 const themeInputs = Object.keys(getThemes()).map((theme) => {
+	const label = t('theme_switcher.' + theme)
 	return {
 		name: 'color-theme',
 		id: 'theme-' + theme,
 		value: theme,
+		label,
+		data: getTheme(theme)
 	}
 })
 
@@ -12,25 +17,7 @@ const currentTheme = useCookie('user-color-theme', {
 	watch: true,
 })
 
-const theme = computed(() => getTheme(currentTheme.value) || {})
-const metaScript = computed(() => [{ name: 'theme-color', content: theme.value?.['color-background'] }])
-
-if (import.meta.server) {
-	const content
-		= Object.entries(theme.value).reduce((acc, [key, value]) => {
-			acc += '--' + key + ': ' + value + '; '
-
-			return acc
-		}, '')
-
-	useHead({
-		style: [{ innerHTML: ':root{ ' + content + ' }' }],
-	})
-}
-
-useHead({
-	meta: metaScript,
-})
+const currentThemeData = computed(() => themeInputs.find(theme => theme.value === currentTheme.value)?.data)
 
 function onChange(e: Event) {
 	const value = (e.target as { value?: string | undefined })?.value
@@ -38,25 +25,50 @@ function onChange(e: Event) {
 	if (value) currentTheme.value = value
 }
 
-function setCssVars() {
-	const root = window?.document?.documentElement
-	if (!theme.value || !root) return
+// META
+const metaScript = computed(() => [{ name: 'theme-color', content: currentThemeData.value?.['color-background'] }])
+const styleTag = computed(() => {
+	if (!currentThemeData.value) return []
 
-	for (const key in theme.value) {
-		root.style.setProperty('--' + key, theme.value[key] || '')
-	}
-}
+	const style =  Object.entries(currentThemeData.value).reduce((acc, [key, value]) => {
+		acc += '--' + key + ': ' + value + '; '
 
-watch(theme, setCssVars)
+		return acc
+	}, '')
+	return [{ innerHTML: `:root{ ${style} }` }]
+})
+
+useHead({
+	meta: metaScript,
+	style: styleTag,
+})
+
 </script>
 
 <template>
-    <fieldset>
-        <legend>{{ $t('theme_switcher.legend') }}</legend>
+    <fieldset :class="$style.fieldset">
+        <legend class="visually-hidden">{{ $t('theme_switcher.legend') }}</legend>
         <div
             v-for="themeInput in themeInputs"
             :key="themeInput.id"
+			:class="$style.item"
         >
+			<label :for="themeInput.id" :class="$style.label">
+				<span :class="$style.label__text">
+					{{ themeInput.label }}
+				</span>
+				<div :class="$style['color-items']">
+					<template
+						v-for="(colorValue, colorName) in themeInput.data"
+						:key="colorName"
+					>
+						<span
+							:style="{ backgroundColor: colorValue }"
+							:class="$style['color-item']"
+						></span>
+					</template>
+				</div>
+			</label>
             <input
                 :id="themeInput.id"
                 type="radio"
@@ -64,8 +76,58 @@ watch(theme, setCssVars)
                 :value="themeInput.value"
                 :checked="themeInput.value === currentTheme"
                 @change="onChange"
+				class="visually-hidden"
             >
-            <label :for="themeInput.id">{{ themeInput.value }}</label>
         </div>
     </fieldset>
 </template>
+
+<style lang="scss" module>
+.fieldset {
+	all: unset;
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.item {
+	padding: 8px;
+	border-radius: 8px;
+
+	&:has(input:checked) {
+		background-color: var(--color-background);
+	}
+}
+
+.label {
+	display: flex;
+	width: 100%;
+	align-items: center;
+    justify-content: space-between;
+	cursor: pointer;
+	gap: 18px;
+}
+
+.label__text {
+	white-space: nowrap;
+}
+
+.color-items {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.color-item {
+	position: relative;
+	display: inline-block;
+	width: 20px;
+	border-radius: 50vmax;
+	aspect-ratio: 1;
+
+	&:not(:last-child) {
+		margin-right: -9px;
+	}
+}
+</style>

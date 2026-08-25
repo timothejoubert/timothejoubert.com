@@ -99,7 +99,7 @@ const columns = computed(() => [
     max-width: 60ch;
 	font-family: #{$fraktion-mono-family};
 	font-size: 24px;
-	font-weight: 300;
+	font-weight: 100;
 	grid-column: 1 / -1;
     line-height: 1.7;
     margin-block: 0;

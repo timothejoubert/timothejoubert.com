@@ -19,25 +19,6 @@ function onKeydown(e: KeyboardEvent) {
 }
 
 const { activate: onButtonMagnetEvent } = useMagnetHover()
-
-const { columns, min, max } = useGridColumns()
-
-if (import.meta.server) {
-	useHead({
-		style: [{ innerHTML: `:root{ --v-home-grid-columns: ${columns.value}; }` }],
-	})
-}
-
-function setGridColumnsCssVar() {
-	document.documentElement.style.setProperty('--v-home-grid-columns', String(columns.value))
-}
-
-watch(columns, setGridColumnsCssVar)
-
-function onGridColumnsInput(e: Event) {
-	const value = Number((e.target as HTMLInputElement).value)
-	if (value) columns.value = value
-}
 </script>
 
 <template>
@@ -71,24 +52,7 @@ function onGridColumnsInput(e: Event) {
 		>
 			<div :class="$style.inner">
 				<VThemeSwitcher />
-				<div :class="$style['setting-item']">
-					<label for="grid_value">{{ $t('show_setting.grid_value_label') }}</label>
-					<input
-						id="grid_value"
-						type="number"
-						:min="min"
-						:max="max"
-						:value="columns"
-						aria-describedby="grid_value_hint"
-						@change="onGridColumnsInput"
-					/>
-					<span
-						id="grid_value_hint"
-						class="visually-hidden"
-					>
-						{{ $t('show_setting.grid_value_hint', { min, max }) }}
-					</span>
-				</div>
+				<!-- <VColumnsInput /> -->
 			</div>
 		</div>
 	</div>
@@ -173,7 +137,7 @@ function onGridColumnsInput(e: Event) {
 	z-index: -1;
 	top: 0;
 	width: fit-content;
-	min-width: 280px;
+	min-width: var(--setting-modal-min-width, fit-content);
 	max-width: 100%;
 	border-radius: 9px;
 	background-color: var(--color-surface);
@@ -196,12 +160,6 @@ function onGridColumnsInput(e: Event) {
 }
 
 .inner {
-	padding: 20px;
-}
-
-.setting-item {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 10px;
+	padding: 18px;
 }
 </style>
