@@ -132,7 +132,10 @@ $card-padding: 16px;
     translate: calc(-100% - 20px) 0;
 
     @media (prefers-reduced-motion: no-preference) {
-        transition: translate 0.3s calc(var(--tag-index) * 40ms) ease(out-quart);
+        transition-duration: 0.3s;
+        transition-delay: calc(var(--tag-index) * 40ms);
+        transition-property: translate;
+        transition-timing-function: ease(out-quart);
     }
 
     @media (hover: hover) {
