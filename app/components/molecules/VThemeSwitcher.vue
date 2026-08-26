@@ -91,29 +91,24 @@ useHead({
 	gap: 4px;
 }
 
-.item {
-	padding: 8px;
-	border-radius: 8px;
-	transition: background-color 0.3s ease(out-quad);
-
-	&:has(input:checked) {
-		background-color: var(--color-background);
-	}
-
-	&:not(:has(input:checked)) {
-		&:hover {
-			background-color: color-mix(in srgb, var(--color-background) 40%, transparent);
-		}
-	}
-}
-
 .label {
 	display: flex;
 	width: 100%;
 	align-items: center;
     justify-content: space-between;
+	padding: 8px;
+	border-radius: 8px;
 	cursor: pointer;
 	gap: 24px;
+	transition: background-color 0.3s ease(out-quad);
+
+	.item:has(input:checked) & {
+		background-color: var(--color-background);
+	}
+
+	.item:not(:has(input:checked)):hover & {
+		background-color: color-mix(in srgb, var(--color-background) 40%, transparent);
+	}
 }
 
 .label__text {
