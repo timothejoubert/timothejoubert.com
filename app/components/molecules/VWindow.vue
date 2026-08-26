@@ -157,9 +157,7 @@ $handle-corner: 10px;
 }
 
 .inner {
-    overflow: clip;
     width: 100%;
-    height: 100%;
     -ms-overflow-style: none;
     scrollbar-width: none;
 

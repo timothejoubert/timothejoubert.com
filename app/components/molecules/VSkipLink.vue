@@ -25,9 +25,11 @@ import { SKIP_LINKS } from '~/constants/skip-links'
 	padding: 12px 20px;
     background-color: var(--color-surface);
 	opacity: 0;
+	pointer-events: none;
 
 	&:focus-within {
 		opacity: 1;
+		pointer-events: initial;
 	}
 }
 

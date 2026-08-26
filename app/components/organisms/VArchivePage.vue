@@ -179,7 +179,6 @@ function onRowClick(event: MouseEvent, uid: string | null) {
         >
             {{ document.data.title }}
         </component>
-        <div :class="$style['scroll-wrapper']">
             <table :class="$style.table">
                 <caption class="visually-hidden">
                     {{ $t('archive_page.projects_list_caption') }}
@@ -239,9 +238,8 @@ function onRowClick(event: MouseEvent, uid: string | null) {
                         <th
                             scope="col"
                             :class="[$style.cell, $style['head-cell'], $style['cell--right']]"
-                            class="visually-hidden"
                         >
-                            {{ $t('project_link') }}
+                            <span class="visually-hidden">{{ $t('project_link') }}</span>
                         </th>
                     </tr>
                 </thead>
@@ -316,12 +314,17 @@ function onRowClick(event: MouseEvent, uid: string | null) {
                     </template>
                 </tbody>
             </table>
-        </div>
 	</VPageWrapper>
 </template>
 
 <style lang="scss" module>
 @use '@/assets/scss/mixins/loading-animation' as *;
+
+@keyframes loading-animation {
+    100% {
+        background-position: -480% center;
+    }
+}
 
 // Hover effect
 // lorsque je survol l'une des lignes du tableau, son bandeau se déplace depuis la direction d'ou provient la souris pour recouvrir la ligne survolée
@@ -335,22 +338,38 @@ function onRowClick(event: MouseEvent, uid: string | null) {
     width: 100%;
 }
 
-.scroll-wrapper {
-    overflow-x: auto;
-}
-
 .table {
+    width: 100%;
 	border-spacing: 0 10px;
     table-layout: fixed;
-
-    @include media('>=md') {
-		width: 100%;
-    }
 }
 
 .cell {
+	box-sizing: border-box;
     padding-inline: 18px;
 	vertical-align: middle;
+	white-space: nowrap;
+
+	@include media('<600px') {
+		// framework
+		&:nth-child(3) {
+            display: none;
+        }
+    }
+
+	@include media('<800px') {
+		// rate
+		&:nth-child(5) {
+            display: none;
+        }
+	}
+
+	@include media('<1000px') {
+		// tags
+		&:nth-child(4) {
+            display: none;
+        }
+	}
 }
 
 .head-row {
@@ -368,38 +387,36 @@ function onRowClick(event: MouseEvent, uid: string | null) {
 }
 
 .head-cell {
-    font-weight: inherit;
-    text-align: inherit;
+	font-weight: inherit;
+	text-align: inherit;
 
-    &:nth-child(1) {
-        // width: clamp(300px, 26%, 30ch);
-		width: 26%;
+	&:nth-child(1) {
+		width: 20ch;
 	}
 
-    &:nth-child(2) {
-        // width: clamp(70px, 10%, 30ch);
-		width: 10%;
-    }
+	&:nth-child(2) {
+		width: 8ch;
+	}
 
-    &:nth-child(3) {
-		// width: clamp(100px, 14%, 30ch);
-		width: 14%;
-    }
+	// framework
+	&:nth-child(3) {
+		width: 8ch;
+	}
 
-    &:nth-child(4) {
-		// width: clamp(160px, 26%, 30ch);
-		width: 26%;
-    }
+	// tags
+	&:nth-child(4) {
+		width: 18ch;
+	}
 
-    &:nth-child(5) {
-		// width: clamp(100px, 16%, 30ch);
-		width: 16%;
-    }
+	// rate
+	&:nth-child(5) {
+		width: 90px;
+	}
 
-    &:nth-child(6) {
-		// width: clamp(40px, 8%, 10ch);
-		width: 8%;
-    }
+	// link
+	&:nth-child(6) {
+		width: 30px;
+	}
 }
 
 .body {
@@ -425,6 +442,7 @@ function onRowClick(event: MouseEvent, uid: string | null) {
 		$gradient-color: #ffffff0b;
 
 		animation: loading-animation 1.4s var(--loading-animation-delay, 0s) infinite ease(in-out-circ);
+		background-color: color-mix(in srgb, var(--color-content) 7%, var(--color-background));
 		background-image: linear-gradient(
 				to right,
 				transparent 0%,
@@ -434,15 +452,9 @@ function onRowClick(event: MouseEvent, uid: string | null) {
 		);
 		background-position: 120% center;
 		background-repeat: no-repeat;
-		background-size: 120% 80%;
+		background-size: 120% 100%;
 		content: '';
 	}
-}
-
-@keyframes loading-animation {
-    100% {
-        background-position: -480% center;
-    }
 }
 
 .body-cell {
@@ -476,6 +488,10 @@ function onRowClick(event: MouseEvent, uid: string | null) {
         inset: 0;
         pointer-events: none;
     }
+
+	.body-row--skeleton &::before {
+		display: none;
+	}
 
     // Hovered background
     &::after {
