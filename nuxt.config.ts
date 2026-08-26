@@ -76,8 +76,9 @@ export default defineNuxtConfig({
 		// instead of relying on Nitro's env-based auto-detection (which only kicks in on Netlify's build servers).
 		preset: 'netlify-static',
 		prerender: {
-			// Aliases aren't linked from anywhere in the app, so the crawler won't find them on its own.
-			routes: Object.keys(getPrismicAliasRedirects()),
+			// Aliases and llms.txt aren't linked from anywhere in the app, so the crawler won't find
+			// them on its own.
+			routes: [...Object.keys(getPrismicAliasRedirects()), '/llms.txt'],
 		},
 	},
 

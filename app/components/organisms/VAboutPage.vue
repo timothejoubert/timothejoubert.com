@@ -23,6 +23,9 @@ const columns = computed(() => [
 		class="grid"
         :class="$style.root"
 	>
+        <h1 class="visually-hidden">
+            {{ page.title }}
+        </h1>
         <LazyVHighlightedText
             v-if="page.content"
             :field="page.content"
