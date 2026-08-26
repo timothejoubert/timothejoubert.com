@@ -1,12 +1,5 @@
 ### TODO
-
-- Amélioration du design du site
-	- [x] typo monospace pour le contenu de la page about (interaction avec font variable)
-	- [x] Fix animation d'apprarition des tags dans VProjectCard
-	- [x] VArchive: mettre la row avec aria-current="page" dans un style visible
-	- [x] update du style des settings globaux (themes, columns input)
-	- [] VArchive: améliorer le coté responsive de la table
-
+- VArchivePage: ajouter un scroll pour la cell de tags si le contenu dépasse la taille initiale
 - VMainProjectListing: Ajouter un indicateur visuel sur le projet aria-current="page"
 - VWindow: empecher de pouvoir drag en dehors de la fenetre
 
@@ -22,6 +15,14 @@ Script d'import de projets dans Prismic à partir de fichiers markdown + médias
 
 
 ### Done
+
+- Amélioration du design du site
+	- [x] typo monospace pour le contenu de la page about (interaction avec font variable)
+	- [x] Fix animation d'apprarition des tags dans VProjectCard
+	- [x] VArchive: mettre la row avec aria-current="page" dans un style visible
+	- [x] update du style des settings globaux (themes, columns input)
+	- [x] VArchive: améliorer le coté responsive de la table
+
 - SEO/GEO: faire un audit du contenu existant et proproser des améliorations
 - SEO/GEO: adapter le heading de page index et archive si une NuxtPage est rendu, page projet affiché
 

@@ -156,6 +156,16 @@ const columns = computed(() => [
 .column {
 	grid-column: 1 / -1;
 
+	@include media('>=md') {
+		&:nth-child(1) {
+			grid-column: 1 / span 5;
+		}
+
+		&:nth-child(2) {
+			grid-column: 8 / span 5;
+		}
+	}
+
 	@include media('>=lg') {
 		padding-inline: 24px;
 

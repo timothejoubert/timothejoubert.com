@@ -30,6 +30,15 @@ export function usePrismicFetchDocumentListing(
 	const key = `documents-${hash.join('-')}`
 
 	return useAsyncData(key, () => prismicClient.getAllByType(prismicDocument, toValue(options)), {
+		// Only reuse cached data for the component's initial fetch (e.g. a remount caused by the
+		// project-modal nested route's first Suspense activation — see docs/project-modal-routing.md)
+		// — not for `watch`-triggered refetches, otherwise changing `fetchOptions` (e.g. sort
+		// ordering on the archive page) would just re-serve the stale cached list instead of
+		// actually refetching.
+		getCachedData: (key, nuxtApp, ctx) => {
+			if (ctx.cause !== 'initial') return undefined
+			return nuxtApp.static.data?.[key] ?? nuxtApp.payload.data?.[key]
+		},
 		lazy: false,
 		watch: [fetchOptions],
 	})

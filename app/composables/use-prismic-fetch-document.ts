@@ -1,10 +1,16 @@
 import { NotFoundError } from '@prismicio/client'
+import type { AsyncDataOptions } from '#app'
 import type { ExtractPrismicDocument, PrismicDocumentType } from '~/types/api'
 import { isDynamicDocument } from '~~/shared/prismic-schema'
 
-export async function usePrismicFetchDocument<Type extends PrismicDocumentType = PrismicDocumentType>(prismicDocument: Type | undefined) {
+export function usePrismicFetchDocument<Type extends PrismicDocumentType = PrismicDocumentType>(
+	prismicDocument: Type | undefined,
+	options?: { uid?: string } & AsyncDataOptions<ExtractPrismicDocument<Type> | undefined>,
+) {
+	const { uid: uidOverride, ...asyncDataOptions } = options ?? {}
+
 	const route = useRoute()
-	const routeUid = route.params?.uid || ''
+	const routeUid = uidOverride || route.params?.uid || ''
 	const uid = Array.isArray(routeUid) ? routeUid.at(-1) : routeUid // get the last uid when route has subPage
 
 	const { documentId, isPreview } = usePrismicPreviewRoute()
@@ -19,15 +25,17 @@ export async function usePrismicFetchDocument<Type extends PrismicDocumentType =
 		brokenRoute: '/404',
 	}
 
-	const { data, error } = await useAsyncData(dataKey, async () => {
+	return useAsyncData<ExtractPrismicDocument<Type> | undefined>(dataKey, async () => {
 		try {
 			if (isPreview.value && documentId.value) {
 				return await prismicClient.getByID(documentId.value, prismicFetchOptions)
 			}
 			if (uid && prismicDocument && isDynamicDocument(prismicDocument)) {
+				// @ts-expect-error
 				return await prismicClient.getByUID(prismicDocument, uid, prismicFetchOptions)
 			}
 			if (prismicDocument) {
+				// @ts-expect-error
 				return await prismicClient.getSingle(prismicDocument, prismicFetchOptions)
 			}
 			return undefined
@@ -42,10 +50,6 @@ export async function usePrismicFetchDocument<Type extends PrismicDocumentType =
 		getCachedData: (key, nuxtApp) => nuxtApp.static.data?.[key] ?? nuxtApp.payload.data?.[key],
 		dedupe: 'defer',
 		deep: false,
+		...asyncDataOptions,
 	})
-
-	return {
-		data: computed(() => data.value as ExtractPrismicDocument<Type>),
-		error,
-	}
 }

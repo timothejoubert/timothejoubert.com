@@ -10,6 +10,9 @@ usePrismicMeta(document, { schemaOrgType: route.params.uid ? undefined : 'Collec
 </script>
 
 <template>
-    <VHomePage :document="document" />
+    <VHomePage
+		v-if="document"
+		:document="document"
+	/>
     <NuxtPage />
 </template>

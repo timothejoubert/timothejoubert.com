@@ -56,23 +56,7 @@ const fetchOptions = computed(() => {
 	}
 })
 
-const documentListing = usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions)
-// Awaited here (unlike a plain `if` right after the un-awaited call) so the initial `useSchemaOrg`
-// call below runs synchronously once the data is actually resolved — `useSchemaOrg`/`inject()`
-// only work inside setup()'s own synchronous flow (a top-level `await` in <script setup> keeps
-// that flow intact; a `watchEffect` callback, which runs detached from it, does not). Later
-// client-side re-fetches (sort changes) still update `pending`/`projects` reactively as before —
-// only this one-shot schema.org emission is tied to the initial resolution.
-await documentListing
-const { data: projects, error, pending } = documentListing
-
-const rows = computed(() => {
-	if (pending.value) {
-		return Array.from({ length: 20 }, (_, i) => ({ id: `skeleton-${i}`, index: i, uid: null, data: null }))
-	}
-
-	return projects.value || []
-})
+const { data: projects, error, pending } = await usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions)
 
 const { site } = useRuntimeConfig().public
 if (projects.value?.length) {
@@ -86,6 +70,14 @@ if (projects.value?.length) {
 		}),
 	])
 }
+
+const rows = computed(() => {
+	if (pending.value) {
+		return Array.from({ length: 20 }, (_, i) => ({ id: `skeleton-${i}`, index: i, uid: null, data: null }))
+	}
+
+	return projects.value || []
+})
 
 function getTagLabels(tagGroup: ProjectDocumentData['tag_group']) {
 	return tagGroup
@@ -286,14 +278,17 @@ function onRowClick(event: MouseEvent, uid: string | null) {
 								{{ project.data?.framework }}
                             </td>
                             <td :class="[$style.cell, $style['body-cell']]">
-								<template v-if="project.data?.tag_group?.length">
+								<div
+									v-if="project.data?.tag_group?.length"
+									:class="$style.tags"
+								>
 									<VTag
 										v-for="tag in getTagLabels(project.data.tag_group)"
 										:key="tag + '-' + project.id"
 										:label="tag"
 										:class="$style.tag"
 									/>
-								</template>
+								</div>
                             </td>
                             <td :class="[$style.cell, $style['body-cell']]">
                                 <VStarRate
@@ -522,16 +517,20 @@ function onRowClick(event: MouseEvent, uid: string | null) {
     }
 }
 
-.tag {
-    white-space: nowrap;
+.tags {
+	overflow: auto hidden;
+	-ms-overflow-style: none;
+    scrollbar-width: none;
 
-    & + & {
-        margin-left: 8px;
+    &::-webkit-scrollbar {
+        display: none;
     }
 }
 
-.cell--title {
-	white-space: nowrap;
+.tag {
+    & + & {
+        margin-left: 8px;
+    }
 }
 
 .arrow-link {
