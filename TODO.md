@@ -1,7 +1,6 @@
 ### TODO
 - VArchivePage: ajouter un scroll pour la cell de tags si le contenu dépasse la taille initiale
 - VMainProjectListing: Ajouter un indicateur visuel sur le projet aria-current="page"
-- VWindow: empecher de pouvoir drag en dehors de la fenetre
 
 ### Next step
 - Je veux avoir une structure organisé et uniformisée de tous mes projets dans un dossier sur mon ordi (bureau).
@@ -15,7 +14,7 @@ Script d'import de projets dans Prismic à partir de fichiers markdown + médias
 
 
 ### Done
-
+- VWindow: empecher de pouvoir drag en dehors de la fenetre
 - Amélioration du design du site
 	- [x] typo monospace pour le contenu de la page about (interaction avec font variable)
 	- [x] Fix animation d'apprarition des tags dans VProjectCard
