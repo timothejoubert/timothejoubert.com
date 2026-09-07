@@ -15,6 +15,8 @@ logs
 
 # Prismic backups
 backup/
+projects-source/*/sources/
+projects-source/*/media/
 
 # Misc
 .DS_Store

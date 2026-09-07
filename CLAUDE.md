@@ -23,6 +23,10 @@ npx prismic pull      # pull custom type / slice models from Prismic (Type Build
 npx prismic push      # push local custom type / slice models to Prismic
 pnpm type-gen         # regenerate prismicio-types.d.ts (npx prismic gen types) and prismic.config.json's routes (scripts/sync-prismic-routes.js)
 pnpm prismic:backup   # run scripts/prismic-backup.js
+
+pnpm projects:check-source    # validate every projects-source/*/project.md (allowed field values, referenced media files exist, no orphan files)
+pnpm projects:export-source   # generate projects-source/ from projects currently published in Prismic
+pnpm projects:import-source   # push new/changed projects-source/ projects to Prismic (Migration API, requires PRISMIC_WRITE_TOKEN)
 ```
 
 There is no test runner configured in this repo — do not assume Vitest/Jest exists.
@@ -39,7 +43,7 @@ Document-type genericity is layered so nothing needs hand-syncing when a Prismic
 - `PrismicDocumentPageType` (routable page types) and `isDynamicDocument` (repeatable/`:uid` types) are both derived from `prismicDocumentRoutes`, not separately hand-listed — adding a new routable type only means adding one entry to `prismicDocumentRoutes`.
 
 Project pages are implemented as **nested routes** so a project opens as a modal over the listing page instead of unmounting it (SSR still renders both together for SEO). See `docs/project-modal-routing.md` for the full rationale. Concretely:
-- `app/pages/index.vue` renders the home listing + `<NuxtPage />`; `app/pages/index/[uid].vue` is the child project modal for home ("favorite") projects.
+- `app/pages/index.vue` renders the home listing + `<NuxtPage />`; `app/pages/index/projets/[uid].vue` is the child project modal for home ("favorite") projects.
 - `app/pages/archive.vue` renders `VArchivePage` + `<NuxtPage />`; `app/pages/archive/[uid].vue` is the child project modal for archived projects.
 - The Prismic `favorite` boolean field on a project determines which single context (home vs archive) it belongs to — a project never appears in both, so there's no canonical/duplicate-content concern.
 - `usePrismicFetchProjects(true|false)` fetches the home vs. archive project set respectively.
@@ -116,11 +120,19 @@ Indentation is **tabs**, enforced by ESLint (`@stylistic/indent: ['error', 'tab'
 
 Every static UI string (labels, aria-labels, fallback/error/empty-state messages, etc.) must go through an i18n key — `$t('key')` in templates, `t('key')` in `<script>` (via `useI18n()`). Never hardcode static text directly in a template or script, even a single word — add the key to `i18n/locales/nuxt.<locale>.json` instead. This does **not** apply to content coming from Prismic fields (already localized at the CMS level).
 
+### Local project archive (`projects-source/`)
+
+Every project (past or future, digital or not) also lives locally in `projects-source/<uid>/` — a plain-text (markdown + YAML front-matter) source of truth derived from the Prismic `project` custom type but independent of it, meant to outlast Prismic itself. Full convention (folder structure, field-by-field mapping to Prismic, allowed values, archive-only fields like `sources`/`tools`/`client` with no Prismic equivalent yet) is in `docs/project-source-structure.md`; empty skeleton in `scripts/templates/project-template.md`.
+
+- `scripts/export-projects-to-source.js` / `scripts/import-projects-from-source.js` are the two directions of the round-trip with Prismic (the latter uses the Migration API + `projects-source/.sync-state.json`, a generated file hashing each project's content/media to only push what changed — never hand-edit it).
+- `scripts/check-source.js` validates the archive (see the `pnpm projects:check-source` command above) — run it after editing any `project.md` by hand.
+- Only `project.md` is meant to be committed to this repo; each project's `media/` and `sources/` (raw working files) subfolders stay local/uncommitted (see `.gitignore`).
+
 ### SVGs and icons
 
 SVGs are imported as URLs via `vite-svg-loader` (`defaultImport: 'url'`) — see `nuxt.config.ts` `vite.plugins`. `@nuxt/icon` is configured with `componentName: 'NuxtIcon'` and only bundles the `material-symbols` collection server-side; check `app/components/atoms/VIcon.vue` for how icons are dispatched between local SVGs and `NuxtIcon`.
 
 ## Notes
 
-- `runtimeConfig.public.site.env` distinguishes production (`NUXT_PUBLIC_SITE_ENV=production`) from other environments; `isProd` in `nuxt.config.ts` gates things like the Prismic toolbar.
+- `isProd` (`nuxt.config.ts`) is computed at build time from `process.env.NUXT_PUBLIC_SITE_ENV === 'production'` — distinguishes production from other environments and gates things like the Prismic toolbar.
 - Preview mode routing is defined in `app/constants/prismic-preview.ts` (`PREVIEW_PATH`) and handled by `usePrismicPreviewRoute`.

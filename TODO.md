@@ -1,12 +1,18 @@
 ### TODO
+- Archive locale de projets (`projects-source/`) : structure, convention et scripts déjà en place (voir "Done" plus bas) — reste à faire au fil de l'eau :
+  - Ajouter les nouveaux projets (passés et à venir) à la main dans `projects-source/`, un dossier par `uid` avec son `project.md` et ses médias, en suivant `docs/project-source-structure.md`.
+  - Vérifier régulièrement avec `pnpm projects:check-source` (front-matter valide, fichiers médias présents).
+  - Lancer `pnpm projects:import-source` (avec `PRISMIC_WRITE_TOKEN`) pour pousser les projets nouveaux/modifiés vers Prismic.
+
+- CMS: ajouter les champs `tools` (liste de strings) et `client` (string, mappe sur schema.org `sourceOrganization`) au custom type `project` via la CLI Prismic (comme `creative_work_type`), actuellement archive-only dans `projects-source/*/project.md` — une fois fait, les ajouter au tableau de correspondance de `docs/project-source-structure.md`, au mapping de `scripts/import-projects-from-source.js`/`scripts/export-projects-to-source.js`, et émettre `client` dans le JSON-LD (`usePrismicProjectSchemaOrg`, propriété `sourceOrganization`).
+
+- `projects-source/` : `project.md` versionné en git, mais `media/` et `sources/` de chaque projet restent ignorés pour l'instant (451 Mo actuellement, surtout des vidéos — git n'est pas adapté à ce type de contenu en l'état). Mettre en place Git LFS pour `media/` (au moins les `.mp4`/`.mov`) afin de pouvoir versionner ces fichiers sans faire grossir le `.git` indéfiniment ; `sources/` (fichiers de travail bruts psd/ai/figma) peut rester non versionné même après ça.
+
+- Img: check img sizes (project card size seem too wides)
 - VArchivePage: ajouter un scroll pour la cell de tags si le contenu dépasse la taille initiale
 - VMainProjectListing: Ajouter un indicateur visuel sur le projet aria-current="page"
 
 ### Next step
-- Je veux avoir une structure organisé et uniformisée de tous mes projets dans un dossier sur mon ordi (bureau).
-Chaque projet doit etre rangé dans un folder dans un dossier racine, dans un premier temps il faudra définir une structure commune à partir des informations d'un projet type sur Prismic. Par exemple, un fichier markdown qui à toutes les informations du projet, titre, date, description courte, scope, description détaillée, thumbnail, médias associées... avec un autre dossier qui contient tous les médias correctement compréssés. Une fois une structure et nomenclature définit, on va pouvoir scrappé l'ensemble des données provenelent de mon repo Prismic et générer une base de tout mes projets existant. Par la suite, je vais pouvoir ajouter des nouveaux projets à la main. Une fois fait, on va faire un script permettant de migrer tous ces nouveaux projets dans Prismic
-Script d'import de projets dans Prismic à partir de fichiers markdown + médias en local (front-matter → champs `project` type/tag_group/framework, contenu → RichText, médias → Asset API) : faisable via la Migration API de Prismic, exposée par `@prismicio/client` (déjà installé, ^7.21.8, requiert un write API token généré manuellement dans le dashboard Prismic + Node ≥ 20, ok sur ce repo en Node 24) — `createWriteClient` + `createMigration()` + `migration.createAsset(fichier local, ...)` + `migration.createDocument({ type: 'project', data }, title)` + `client.migrate(migration)`. Limite à anticiper : documents créés en brouillon (publication manuelle après coup), et pas de convertisseur Markdown→RichText Prismic officiel (à écrire soi-même, même simple).
-
 - Refactor: utiliser une composable commun pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
 - Refactor: les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
 
@@ -14,6 +20,8 @@ Script d'import de projets dans Prismic à partir de fichiers markdown + médias
 
 
 ### Done
+- Archive locale de projets : convention de dossier/fichier (`docs/project-source-structure.md`), template (`scripts/templates/project-template.md`), export Prismic → local (`scripts/export-projects-to-source.js`), import local → Prismic via Migration API (`scripts/import-projects-from-source.js`, avec `.sync-state.json` pour ne pousser que les projets nouveaux/modifiés), et script de vérification (`scripts/check-source.js`, `pnpm projects:check-source` — front-matter valide, fichiers médias présents, pas d'orphelins). Quelques champs archive-only ajoutés (`sources`, `link_status`, `collaborators`, `tools`, `client`) pour du contexte non destiné à Prismic ou pas encore synchronisé (voir TODO ci-dessus pour `tools`/`client`).
+
 - VWindow: empecher de pouvoir drag en dehors de la fenetre
 - Amélioration du design du site
 	- [x] typo monospace pour le contenu de la page about (interaction avec font variable)

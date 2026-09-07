@@ -17,7 +17,10 @@
         "lint:js": "eslint .",
         "lint:css": "stylelint \"**/*.{vue,css,scss}\"",
         "type-gen": "npx prismic gen types && node scripts/sync-prismic-routes.js",
-        "prismic:backup": "node scripts/prismic-backup.js"
+        "prismic:backup": "node scripts/prismic-backup.js",
+        "projects:export-source": "node scripts/export-projects-to-source.js",
+        "projects:import-source": "node scripts/import-projects-from-source.js",
+        "projects:check-source": "node scripts/check-source.js"
     },
     "dependencies": {
         "@nuxt/eslint": "1.17.0",
@@ -53,6 +56,9 @@
     "devDependencies": {
         "@iconify-json/material-symbols": "^1.2.89",
         "@iconify-json/uil": "^1.2.3",
+        "@prismicio/migrate": "^0.0.2",
+        "js-yaml": "^5.4.1",
+        "marked": "^18.0.11",
         "nuxtseo-layer-devtools": "^5.3.14"
     }
 }
