@@ -117,7 +117,10 @@
             "DSAA",
             "DEC",
             "BTS",
-            "STD2A"
+            "STD2A",
+            "Agence",
+            "École",
+            "Stage"
           ],
           "placeholder": ""
         },
@@ -202,6 +205,27 @@
           "label": "Medias"
         },
         "type": "Group"
+      },
+      "via": {
+        "config": {
+          "label": "Via",
+          "placeholder": "Nom précis du cadre (agence, studio de stage, établissement scolaire...)"
+        },
+        "type": "Text"
+      },
+      "client": {
+        "config": {
+          "label": "Client",
+          "placeholder": "Commanditaire réel du projet"
+        },
+        "type": "Text"
+      },
+      "tools": {
+        "config": {
+          "label": "Tools",
+          "placeholder": "Outils/stack utilisés (séparés par une virgule)"
+        },
+        "type": "Text"
       }
     },
     "SEO & Metadata": {
