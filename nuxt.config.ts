@@ -13,13 +13,16 @@ const isProd = process.env.NUXT_PUBLIC_SITE_ENV === 'production'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n', '@nuxtjs/prismic', '@nuxtjs/sitemap', '@nuxtjs/robots', 'nuxt-schema-org', '@vueuse/nuxt'],
+	eslint: {
+		config: {
+			stylistic: true
+		},
+	},
 	plugins: [
 		'~/plugins/anchor-polyfill.client.ts',
 	],
-
 	components: ['~/components/atoms', '~/components/molecules', '~/components/organisms'],
 	devtools: { enabled: true },
-
 	app: {
 		head: {
 			link: [
@@ -34,7 +37,6 @@ export default defineNuxtConfig({
 			],
 		},
 	},
-
 	css: ['~~/app/assets/scss/main.scss'],
 	runtimeConfig: {
 		public: {
@@ -51,24 +53,20 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-
 	// https://nuxtseo.com/site-config — shared by @nuxtjs/sitemap and @nuxtjs/robots
 	site: {
 		url: process.env.NUXT_PUBLIC_SITE_URL,
 		name: process.env.NUXT_PUBLIC_SITE_NAME,
 	},
-
 	// https://nuxtseo.com/sitemap/getting-started/introduction
 	sitemap: {
 		exclude: [`${PREVIEW_PATH}/**`],
 		urls: () => getPrismicSitemapUrls(repositoryName),
 	},
-
 	// https://nuxtseo.com/robots/getting-started/introduction
 	robots: {
 		disallow: [PREVIEW_PATH],
 	},
-
 	// Redirect prismicDocumentRoutes' `alias` paths (e.g. /projets, /projects) to their canonical route.
 	routeRules: getPrismicAliasRedirects(),
 	nitro: {
@@ -81,7 +79,6 @@ export default defineNuxtConfig({
 			routes: [...Object.keys(getPrismicAliasRedirects()), '/llms.txt'],
 		},
 	},
-
 	hooks: {
 		// Favorite projects moved from /:uid to /projets/:uid — redirect the old indexed URLs.
 		// Needs a Prismic fetch, so it can't be a plain synchronous `routeRules` entry like the
@@ -96,11 +93,9 @@ export default defineNuxtConfig({
 			nitroConfig.prerender.routes.push(...Object.keys(legacyProjectRedirects))
 		},
 	},
-
 	experimental: {
 		asyncContext: true,
 	},
-
 	compatibilityDate: '2025-07-15',
 	vite: {
 		build: {
@@ -139,21 +134,12 @@ export default defineNuxtConfig({
 			}),
 		],
 	},
-
 	postcss: {
 		plugins: {
 			// https://github.com/cuth/postcss-pxtorem?tab=readme-ov-file#options
 			'postcss-pxtorem': {
 				propList: ['*'],
 				exclude: /(node_modules|scss\/export)/i,
-			},
-		},
-	},
-
-	eslint: {
-		config: {
-			stylistic: {
-				indent: 4,
 			},
 		},
 	},
@@ -185,7 +171,6 @@ export default defineNuxtConfig({
 			scan: true,
 		},
 	},
-
 	// https://image.nuxt.com/get-started/configuration
 	image: {
 		imgix: {

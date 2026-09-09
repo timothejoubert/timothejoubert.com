@@ -5,5 +5,7 @@ allowBuilds:
   unrs-resolver: true
   vue-demi: true
 
-minimumReleaseAgeExclude:
-  - '@nuxtjs/robots@6.1.4'
+overrides:
+  # typescript-eslint doesn't support TS 7.0 yet (github.com/typescript-eslint/typescript-eslint/issues/10940)
+  # — force the whole graph onto the last 5.x line so `pnpm lint:js` can run at all.
+  typescript: ^5.9.3

@@ -12,11 +12,9 @@ export default withNuxt(
 		],
 	},
 ).append({
-	rules: {
-		// ✅ Autorise les tabs comme indentation
+    rules: {
 		'@stylistic/no-tabs': ['error', { allowIndentationTabs: true }],
-
-		// ✅ Force l’indentation avec tab
 		'@stylistic/indent': ['error', 'tab'],
-	},
+		'@stylistic/function-paren-newline': ['error', 'consistent'],
+    },
 })
