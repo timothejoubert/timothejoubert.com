@@ -51,6 +51,7 @@ const fetchOptions = computed(() => {
 					rate
 					tag_group
 					framework
+					via
 				}
 			}`,
 	}
@@ -158,6 +159,13 @@ function onRowClick(event: MouseEvent, uid: string | null) {
 		return
 	}
 	navigateTo(projectPath(uid))
+}
+
+function frameworkOutput(projectData: ProjectDocumentData | null) {
+	if ((projectData?.framework === 'Agence' || projectData?.framework === 'Stage') && projectData?.via) {
+		return projectData?.via
+	}
+	return projectData?.framework
 }
 </script>
 
@@ -275,7 +283,7 @@ function onRowClick(event: MouseEvent, uid: string | null) {
                                 <VTime :date="project.data?.date" />
                             </td>
                             <td :class="[$style.cell, $style['body-cell']]">
-								{{ project.data?.framework }}
+								{{ frameworkOutput(project.data) }}
                             </td>
                             <td :class="[$style.cell, $style['body-cell']]">
 								<div
