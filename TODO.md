@@ -1,5 +1,15 @@
 ### TODO
-- Dans l'interface Prismic d'un projet je voudrais mettre les champs (type, awards, via, client, tools) dans un autre onglet pour avoir une interface plus claire
+- Img: check img sizes (project card size seem too wides)
+- VArchivePage: ajouter un scroll pour la cell de tags si le contenu dépasse la taille initiale
+- VMainProjectListing: Ajouter un indicateur visuel sur le projet aria-current="page"
+
+### Next step
+- Refactor: utiliser une composable commun pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
+- Refactor: les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
+
+- Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
+
+### Done
 
 - Archive locale de projets (`projects-source/`) : structure, convention et scripts déjà en place (voir "Done" plus bas) — reste à faire au fil de l'eau :
   - Ajouter les nouveaux projets (passés et à venir) à la main dans `projects-source/`, un dossier par `uid` avec son `project.md` et ses médias, en suivant `docs/project-source-structure.md`.
@@ -14,18 +24,8 @@
 
 - `projects-source/` : `project.md` versionné en git, mais `media/` et `sources/` de chaque projet restent ignorés pour l'instant (451 Mo actuellement, surtout des vidéos — git n'est pas adapté à ce type de contenu en l'état). Mettre en place Git LFS pour `media/` (au moins les `.mp4`/`.mov`) afin de pouvoir versionner ces fichiers sans faire grossir le `.git` indéfiniment ; `sources/` (fichiers de travail bruts psd/ai/figma) peut rester non versionné même après ça.
 
-- Img: check img sizes (project card size seem too wides)
-- VArchivePage: ajouter un scroll pour la cell de tags si le contenu dépasse la taille initiale
-- VMainProjectListing: Ajouter un indicateur visuel sur le projet aria-current="page"
+- Interface Prismic du custom type `project` : nouvel onglet "Details" (`prismic type add-tab` + `prismic field remove`/`prismic field add ... --tab Details` pour chaque champ, mêmes id/type/options — le contenu déjà publié n'est pas affecté, il est rattaché à l'id du champ, pas à son onglet) regroupant `creative_work_type` (Type schema.org), `awards`, `via`, `client`, `tools`, qui restaient jusque-là mélangés aux champs principaux (`title`, `content`, `medias`...) dans l'onglet Main. Poussé via `prismic push --force` (modèle non commité), `pnpm type-gen` relancé (aucun changement de types généré, seul le regroupement par onglet a changé).
 
-### Next step
-- Refactor: utiliser une composable commun pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
-- Refactor: les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
-
-- Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
-
-
-### Done
 - Archive locale de projets : convention de dossier/fichier (`docs/project-source-structure.md`), template (`scripts/templates/project-template.md`), export Prismic → local (`scripts/export-projects-to-source.js`), import local → Prismic via Migration API (`scripts/import-projects-from-source.js`, avec `.sync-state.json` pour ne pousser que les projets nouveaux/modifiés), et script de vérification (`scripts/check-source.js`, `pnpm projects:check-source` — front-matter valide, fichiers médias présents, pas d'orphelins). Quelques champs archive-only ajoutés (`sources`, `link_status`, `collaborators`, `tools`, `client`, `via`) pour du contexte non destiné à Prismic ou pas encore synchronisé.
 
 - Migration `framework`/`via`/`client`/`tools` : `framework` généralisé en catégories stables (`Freelance | Perso | Agence | École | Stage`, anciennes valeurs `Rézo zéro`/`Master 2`/`DSAA`/`DEC`/`BTS`/`STD2A` gardées côté Prismic par prudence mais plus utilisées) — le nom précis du cadre (agence, studio de stage, formation) vit désormais dans le nouveau champ `via`, le commanditaire réel du projet dans `client`, indépendant de `via`. Ajout des champs `via`/`client`/`tools` au custom type Prismic `project` via la CLI (`prismic field add text`), option `framework` étendue (`prismic field edit framework --option ...`), 46 projets (`Agence`/`École`/`Stage`) republiés via `pnpm projects:import-source`. Deux bugs trouvés et corrigés dans `scripts/import-projects-from-source.js` en migrant, jamais déclenchés avant faute de nouveau thumbnail à uploader : `thumbnail`/`medias[].file` neufs mal formatés pour la Migration API (`LinkToMedia` attend `{ link_type: 'Media', id: <asset> }`, pas l'asset brut) et `meta_image` vide envoyé en `null` alors que Prismic attend `{}`. ⚠️ Incident en cours de route : 12 projets brièvement publiés avec des données vides (premier essai interrompu par le bug ci-dessus) — corrigé immédiatement après le fix, vérifié champ par champ (`framework`/`via`/`client`/`thumbnail`) via l'API.

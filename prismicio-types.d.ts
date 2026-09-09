@@ -439,41 +439,6 @@ interface MenuDocumentData {
 export type MenuDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<MenuDocumentData>, "menu", Lang>;
 
 /**
- * Item in *Project → Awards*
- */
-export interface ProjectDocumentDataAwardsItem {
-	/**
-	 * Name field in *Project → Awards*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: project.awards[].name
-	 * - **Documentation**: https://prismic.io/docs/fields/text
-	 */
-	name: prismic.KeyTextField;
-	
-	/**
-	 * link field in *Project → Awards*
-	 *
-	 * - **Field Type**: Link
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: project.awards[].link
-	 * - **Documentation**: https://prismic.io/docs/fields/link
-	 */
-	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-	
-	/**
-	 * type field in *Project → Awards*
-	 *
-	 * - **Field Type**: Select
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: project.awards[].type
-	 * - **Documentation**: https://prismic.io/docs/fields/select
-	 */
-	type: prismic.SelectField<"book" | "web">;
-}
-
-/**
  * Item in *Project → Tag group*
  */
 export interface ProjectDocumentDataTagGroupItem {
@@ -525,6 +490,41 @@ export interface ProjectDocumentDataMediasItem {
 }
 
 /**
+ * Item in *Project → Awards*
+ */
+export interface ProjectDocumentDataAwardsItem {
+	/**
+	 * Name field in *Project → Awards*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: project.awards[].name
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	name: prismic.KeyTextField;
+	
+	/**
+	 * link field in *Project → Awards*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: project.awards[].link
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+	
+	/**
+	 * type field in *Project → Awards*
+	 *
+	 * - **Field Type**: Select
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: project.awards[].type
+	 * - **Documentation**: https://prismic.io/docs/fields/select
+	 */
+	type: prismic.SelectField<"book" | "web">;
+}
+
+/**
  * Content for Project documents
  */
 interface ProjectDocumentData {
@@ -552,17 +552,6 @@ interface ProjectDocumentData {
 	favorite: prismic.BooleanField;
 	
 	/**
-	 * Type (schema.org) field in *Project*
-	 *
-	 * - **Field Type**: Select
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: project.creative_work_type
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/select
-	 */
-	creative_work_type: prismic.SelectField<"CreativeWork" | "WebSite" | "SoftwareApplication" | "VisualArtwork" | "VideoObject">;
-	
-	/**
 	 * Rate field in *Project*
 	 *
 	 * - **Field Type**: Number
@@ -572,17 +561,6 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/number
 	 */
 	rate: prismic.NumberField;
-	
-	/**
-	 * Awards field in *Project*
-	 *
-	 * - **Field Type**: Group
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: project.awards[]
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-	 */
-	awards: prismic.GroupField<Simplify<ProjectDocumentDataAwardsItem>>;
 	
 	/**
 	 * Tag group field in *Project*
@@ -681,40 +659,7 @@ interface ProjectDocumentData {
 	 * - **Tab**: Main
 	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
 	 */
-	medias: prismic.GroupField<Simplify<ProjectDocumentDataMediasItem>>;
-	
-	/**
-	 * Via field in *Project*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: Nom précis du cadre (agence, studio de stage, établissement scolaire...)
-	 * - **API ID Path**: project.via
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/text
-	 */
-	via: prismic.KeyTextField;
-	
-	/**
-	 * Client field in *Project*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: Commanditaire réel du projet
-	 * - **API ID Path**: project.client
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/text
-	 */
-	client: prismic.KeyTextField;
-	
-	/**
-	 * Tools field in *Project*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: Outils/stack utilisés (séparés par une virgule)
-	 * - **API ID Path**: project.tools
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/text
-	 */
-	tools: prismic.KeyTextField;/**
+	medias: prismic.GroupField<Simplify<ProjectDocumentDataMediasItem>>;/**
 	 * Meta Description field in *Project*
 	 *
 	 * - **Field Type**: Text
@@ -745,7 +690,60 @@ interface ProjectDocumentData {
 	 * - **Tab**: SEO & Metadata
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
-	meta_title: prismic.KeyTextField;
+	meta_title: prismic.KeyTextField;/**
+	 * Type (schema.org) field in *Project*
+	 *
+	 * - **Field Type**: Select
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: project.creative_work_type
+	 * - **Tab**: Details
+	 * - **Documentation**: https://prismic.io/docs/fields/select
+	 */
+	creative_work_type: prismic.SelectField<"CreativeWork" | "WebSite" | "SoftwareApplication" | "VisualArtwork" | "VideoObject">;
+	
+	/**
+	 * Awards field in *Project*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: project.awards[]
+	 * - **Tab**: Details
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+	 */
+	awards: prismic.GroupField<Simplify<ProjectDocumentDataAwardsItem>>;
+	
+	/**
+	 * Via field in *Project*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Nom précis du cadre (agence, studio de stage, établissement scolaire...)
+	 * - **API ID Path**: project.via
+	 * - **Tab**: Details
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	via: prismic.KeyTextField;
+	
+	/**
+	 * Client field in *Project*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Commanditaire réel du projet
+	 * - **API ID Path**: project.client
+	 * - **Tab**: Details
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	client: prismic.KeyTextField;
+	
+	/**
+	 * Tools field in *Project*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Outils/stack utilisés (séparés par une virgule)
+	 * - **API ID Path**: project.tools
+	 * - **Tab**: Details
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	tools: prismic.KeyTextField;
 }
 
 /**
@@ -1088,9 +1086,9 @@ declare module "@prismicio/client" {
 			MenuDocumentData,
 			ProjectDocument,
 			ProjectDocumentData,
-			ProjectDocumentDataAwardsItem,
 			ProjectDocumentDataTagGroupItem,
 			ProjectDocumentDataMediasItem,
+			ProjectDocumentDataAwardsItem,
 			ProjectListingPageDocument,
 			ProjectListingPageDocumentData,
 			ProjectListingPageDocumentDataSlicesSlice,

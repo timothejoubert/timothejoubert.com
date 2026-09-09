@@ -25,59 +25,12 @@
         },
         "type": "Boolean"
       },
-      "creative_work_type": {
-        "config": {
-          "label": "Type (schema.org)",
-          "options": [
-            "CreativeWork",
-            "WebSite",
-            "SoftwareApplication",
-            "VisualArtwork",
-            "VideoObject"
-          ]
-        },
-        "type": "Select"
-      },
       "rate": {
         "config": {
           "label": "Rate",
           "placeholder": ""
         },
         "type": "Number"
-      },
-      "awards": {
-        "config": {
-          "fields": {
-            "name": {
-              "config": {
-                "label": "Name",
-                "placeholder": ""
-              },
-              "type": "Text"
-            },
-            "link": {
-              "config": {
-                "label": "link",
-                "placeholder": "",
-                "select": null
-              },
-              "type": "Link"
-            },
-            "type": {
-              "config": {
-                "label": "type",
-                "options": [
-                  "book",
-                  "web"
-                ],
-                "placeholder": ""
-              },
-              "type": "Select"
-            }
-          },
-          "label": "Awards"
-        },
-        "type": "Group"
       },
       "tag_group": {
         "config": {
@@ -205,27 +158,6 @@
           "label": "Medias"
         },
         "type": "Group"
-      },
-      "via": {
-        "config": {
-          "label": "Via",
-          "placeholder": "Nom précis du cadre (agence, studio de stage, établissement scolaire...)"
-        },
-        "type": "Text"
-      },
-      "client": {
-        "config": {
-          "label": "Client",
-          "placeholder": "Commanditaire réel du projet"
-        },
-        "type": "Text"
-      },
-      "tools": {
-        "config": {
-          "label": "Tools",
-          "placeholder": "Outils/stack utilisés (séparés par une virgule)"
-        },
-        "type": "Text"
       }
     },
     "SEO & Metadata": {
@@ -251,6 +183,72 @@
         "config": {
           "label": "Meta Title",
           "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      }
+    },
+    "Details": {
+      "creative_work_type": {
+        "config": {
+          "label": "Type (schema.org)",
+          "options": [
+            "CreativeWork",
+            "WebSite",
+            "SoftwareApplication",
+            "VisualArtwork",
+            "VideoObject"
+          ]
+        },
+        "type": "Select"
+      },
+      "awards": {
+        "config": {
+          "fields": {
+            "name": {
+              "config": {
+                "label": "Name"
+              },
+              "type": "Text"
+            },
+            "link": {
+              "config": {
+                "label": "link"
+              },
+              "type": "Link"
+            },
+            "type": {
+              "config": {
+                "label": "type",
+                "options": [
+                  "book",
+                  "web"
+                ]
+              },
+              "type": "Select"
+            }
+          },
+          "label": "Awards"
+        },
+        "type": "Group"
+      },
+      "via": {
+        "config": {
+          "label": "Via",
+          "placeholder": "Nom précis du cadre (agence, studio de stage, établissement scolaire...)"
+        },
+        "type": "Text"
+      },
+      "client": {
+        "config": {
+          "label": "Client",
+          "placeholder": "Commanditaire réel du projet"
+        },
+        "type": "Text"
+      },
+      "tools": {
+        "config": {
+          "label": "Tools",
+          "placeholder": "Outils/stack utilisés (séparés par une virgule)"
         },
         "type": "Text"
       }
