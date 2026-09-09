@@ -53,8 +53,18 @@ export default defineNuxtConfig({
             },
         },
     },
-    // Redirect prismicDocumentRoutes' `alias` paths (e.g. /projets, /projects) to their canonical route.
-    routeRules: getPrismicAliasRedirects(),
+    routeRules: {
+        // Redirect prismicDocumentRoutes' `alias` paths (e.g. /projets, /projects) to their canonical route.
+        ...getPrismicAliasRedirects(),
+        '/**': {
+            headers: {
+                'X-Content-Type-Options': 'nosniff',
+                'X-Frame-Options': 'SAMEORIGIN',
+                'Referrer-Policy': 'strict-origin-when-cross-origin',
+                'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+            },
+        },
+    },
     experimental: {
         asyncContext: true,
     },
