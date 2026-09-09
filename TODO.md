@@ -1,4 +1,7 @@
 ### TODO
+- Retire les dossier atoms,molecules,organisms dans components et resoudre toutes les paths des composants utilisé dans la codeBase
+- Refactor le principe de typography, class global et mixin. Se baser sur la logique dans le projet hugo-tomasi (/Users/joubert/Documents/websites/TIM/hugo-tomasi)
+
 - Img: check img sizes (project card size seem too wides)
 - VArchivePage: ajouter un scroll pour la cell de tags si le contenu dépasse la taille initiale
 - VMainProjectListing: Ajouter un indicateur visuel sur le projet aria-current="page"

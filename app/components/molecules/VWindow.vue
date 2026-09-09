@@ -8,10 +8,12 @@ const props = withDefaults(defineProps<{
     minHeight?: number
     containerSelector?: string
     ariaLabel?: string
+    position?: 'fixed' | 'absolute'
 }>(), {
     storageKey: 'v-window',
     minWidth: 330,
     minHeight: 400,
+    position: 'fixed',
 })
 
 const emit = defineEmits<{ close: [] }>()
@@ -70,9 +72,15 @@ onBeforeUnmount(() => {
     previouslyFocused?.focus?.()
 })
 
+// A `fixed` window is anchored to the viewport and must not receive any
+// container — useDraggable's scroll-compensation math (`container.scrollTop`)
+// is only correct for an element nested inside a scrolling container, and
+// corrupts a fixed element's position as soon as the page itself is scrolled.
+// `useResizable` already falls back to viewport bounds when container is null.
 onMounted(() => {
-    if(!props.containerSelector) return null
-    containerEl.value = document.querySelector(props.containerSelector) as HTMLElement | null
+    containerEl.value = props.position === 'absolute' && props.containerSelector
+        ? document.querySelector<HTMLElement>(props.containerSelector)
+        : null
 })
 
 // Drag
@@ -89,7 +97,19 @@ const { x, y, isDragging } = useDraggable(rootEl, {
 })
 
 watch(isDragging, (dragging) => {
-    if (dragging) hasDragged.value = true
+    if (!dragging) return
+
+    // useDraggable's x/y only update on pointermove, not on the initial pointerdown —
+    // without this sync, the first drag ever (no saved position, x/y still at their
+    // {0, 0} default) would flash the window to the top-left corner for one frame
+    // before the first move corrects it.
+    if (!hasDragged.value && rootEl.value) {
+        const rect = rootEl.value.getBoundingClientRect()
+        x.value = rect.left
+        y.value = rect.top
+    }
+
+    hasDragged.value = true
 })
 
 watch([x, y], ([newX, newY]) => {
@@ -108,6 +128,7 @@ const { startResize, isResizing, style: resizeStyle } = useResizable(rootEl, {
 
 // Combined style
 const windowStyle = computed(() => ({
+    '--v-window-display': props.position,
     ...(hasDragged.value && !isMobile.value && { left: `${x.value}px`, top: `${y.value}px` }),
     ...resizeStyle.value,
 }))
