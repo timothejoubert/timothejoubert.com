@@ -20,7 +20,7 @@ awards:
     link: https://pickselverse.com/site/unanime/
   - name: La Boucle — Top 5 sites architectes français
     type: web
-    link: https://laboucle.media/ux-ui-design/notre-top-5-des-sites-architectes-francais/
+    link: https://www.laboucle.fr/media-article/notre-top-5-des-sites-darchitectes-francais
   - name: Maxibestof
     type: web
     link: https://maxibestof.one/websites/70521-unanime
