@@ -2,8 +2,8 @@
 import type { RichTextField } from '@prismicio/client'
 
 defineProps<{
-	field: RichTextField
-	wrapper?: string
+    field: RichTextField
+    wrapper?: string
 }>()
 </script>
 
@@ -12,22 +12,22 @@ defineProps<{
         :is="wrapper || 'div'"
     >
         <VRichText
-			:field="field"
-			v-slot="{ type, content }"
-		>
-			<VVariableText
-				v-if="type === 'strong'"
-				tag="span"
-				:class="$style.highlight"
-				:content="content"
-			/>
-			<component
-				v-else
-				:is="type"
-				:class="$style.tag"
-			>
-				{{ content }}
-			</component>
+            v-slot="{ type, content }"
+            :field="field"
+        >
+            <VVariableText
+                v-if="type === 'strong'"
+                tag="span"
+                :class="$style.highlight"
+                :content="content"
+            />
+            <component
+                :is="type"
+                v-else
+                :class="$style.tag"
+            >
+                {{ content }}
+            </component>
         </VRichText>
     </component>
 </template>

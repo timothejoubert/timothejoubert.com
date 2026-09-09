@@ -3,55 +3,55 @@
 
 // HEADING
 @mixin text-h1 {
-	font-family: $fraktion-sans-family;
-	font-weight: map.get($font-weight, bold);
-	letter-spacing: -0.02em;
-	line-height: 1.1;
+    font-family: $fraktion-sans-family;
+    font-weight: map.get($font-weight, bold);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
 }
 
 @mixin text-h2 {
-	font-family: $fraktion-sans-family;
-	font-weight: map.get($font-weight, bold);
-	letter-spacing: -0.02em;
-	line-height: 1.15;
+    font-family: $fraktion-sans-family;
+    font-weight: map.get($font-weight, bold);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
 }
 
 @mixin text-h3 {
-	font-family: $fraktion-sans-family;
-	font-weight: map.get($font-weight, bold);
-	line-height: 1.2;
+    font-family: $fraktion-sans-family;
+    font-weight: map.get($font-weight, bold);
+    line-height: 1.2;
 }
 
 @mixin text-h4 {
-	font-family: $fraktion-sans-family;
-	font-weight: map.get($font-weight, bold);
-	line-height: 1.2;
+    font-family: $fraktion-sans-family;
+    font-weight: map.get($font-weight, bold);
+    line-height: 1.2;
 }
 
 @mixin text-h5 {
-	font-family: $fraktion-sans-family;
-	font-weight: map.get($font-weight, bold);
-	line-height: 1.2;
+    font-family: $fraktion-sans-family;
+    font-weight: map.get($font-weight, bold);
+    line-height: 1.2;
 }
 
 @mixin text-overtitle {
-	font-family: $fraktion-sans-family;
-	font-weight: map.get($font-weight, bold);
-	letter-spacing: 0.08em;
-	line-height: 1;
-	text-transform: uppercase;
+    font-family: $fraktion-sans-family;
+    font-weight: map.get($font-weight, bold);
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
 }
 
 // BODY
 @mixin text-body {
-	font-family: $fraktion-sans-family;
-	font-weight: map.get($font-weight, regular);
-	line-height: 1.4;
+    font-family: $fraktion-sans-family;
+    font-weight: map.get($font-weight, regular);
+    line-height: 1.4;
 }
 
 // TAGS
 @mixin text-label {
-	font-family: $fraktion-sans-family;
-	font-weight: map.get($font-weight, regular);
-	line-height: 1.1;
+    font-family: $fraktion-sans-family;
+    font-weight: map.get($font-weight, regular);
+    line-height: 1.1;
 }

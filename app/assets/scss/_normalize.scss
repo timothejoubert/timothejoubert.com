@@ -11,7 +11,9 @@
 :where([contenteditable]:not([contenteditable="false"])) {
     -webkit-line-break: after-white-space;
     overflow-wrap: break-word;
+    /* stylelint-disable-next-line property-no-deprecated -- deliberate vendor-prefixed fix, no non-deprecated equivalent */
     -moz-user-modify: read-write;
+    /* stylelint-disable-next-line property-no-deprecated -- deliberate vendor-prefixed fix, no non-deprecated equivalent */
     -webkit-user-modify: read-write;
     user-select: auto;
 }

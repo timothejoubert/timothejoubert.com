@@ -2,18 +2,18 @@
 import type { VWrapperElement } from '~/components/atoms/VWrapper.vue'
 
 withDefaults(defineProps<{
-	wrapper?: VWrapperElement
-	fullPage?: boolean
-	title?: string
-	subtitle: string
-	content: string
-	errorMessage?: string
+    wrapper?: VWrapperElement
+    fullPage?: boolean
+    title?: string
+    subtitle: string
+    content: string
+    errorMessage?: string
 }>(), {
-	fullPage: true,
+    fullPage: true,
 })
 
 defineOptions({
-	inheritAttrs: false,
+    inheritAttrs: false,
 })
 </script>
 
@@ -27,7 +27,10 @@ defineOptions({
             role="alert"
             :class="$style.card"
         >
-            <p class="text-body-xs" :class="$style.subtitle">
+            <p
+                class="text-body-xs"
+                :class="$style.subtitle"
+            >
                 {{ subtitle }}
             </p>
             <h1

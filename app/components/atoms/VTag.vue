@@ -2,7 +2,7 @@
 import type { VWrapperElement } from '~/components/atoms/VWrapper.vue'
 
 defineProps<{
-	label: string | null
+    label: string | null
     wrapper?: VWrapperElement
 }>()
 </script>
@@ -19,9 +19,9 @@ defineProps<{
 
 <style lang="scss" module>
 .root {
-	padding: 3px 8px;
-	border-radius: 50vmax;
-	background-color: var(--color-content);
-	color: var(--color-background);
+    padding: 3px 8px;
+    border-radius: 50vmax;
+    background-color: var(--color-content);
+    color: var(--color-background);
 }
 </style>

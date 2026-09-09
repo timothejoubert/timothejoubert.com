@@ -16,7 +16,7 @@
         @if meta.type-of($piece) == list {
             $result: string.unquote("#{$result}#{$glue}#{list-implode($piece, $glue)}");
         } @else if $piece != '' {
-            $result: if($i == 1, $piece, string.unquote("#{$result}#{$glue}#{$piece}"));
+            $result: if(sass($i == 1): $piece; else: string.unquote("#{$result}#{$glue}#{$piece}"));
         }
     }
 

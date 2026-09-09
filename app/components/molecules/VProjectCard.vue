@@ -4,18 +4,18 @@ import type { VWrapperElement } from '~/components/atoms/VWrapper.vue'
 import { getRoutePath } from '~~/shared/prismic-schema'
 
 const props = defineProps<{
-	project: ProjectDocument
-	wrapper?: VWrapperElement
+    project: ProjectDocument
+    wrapper?: VWrapperElement
 }>()
 
 const data = computed(() => props.project.data)
 const tags = computed(() => {
-	if (props.project.data.tag_group?.length) return props.project.data.tag_group.filter(item => item.tag).map(item => item.tag as string)
-	return props.project.tags.filter(t => t) as string[]
+    if (props.project.data.tag_group?.length) return props.project.data.tag_group.filter(item => item.tag).map(item => item.tag as string)
+    return props.project.tags.filter(t => t) as string[]
 })
 
 const orderedTags = computed(() => {
-	return [...tags.value]?.sort((a, b) => a.length - b.length)
+    return [...tags.value]?.sort((a, b) => a.length - b.length)
 })
 
 const img = computed(() => data.value.thumbnail)
@@ -131,10 +131,7 @@ $card-padding: 16px;
     translate: calc(-100% - 20px) 0;
 
     @media (prefers-reduced-motion: no-preference) {
-        transition-duration: 0.3s;
-        transition-delay: calc(var(--tag-index) * 40ms);
-        transition-property: translate;
-        transition-timing-function: ease(out-quart);
+        transition: translate 0.3s ease(out-quart) calc(var(--tag-index) * 40ms);
     }
 
     @media (hover: hover) {

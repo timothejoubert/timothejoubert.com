@@ -1,4 +1,3 @@
-
 export function getDistance(xA: number, xB: number, yA: number, yB: number) {
     const xDiff = xA - xB
     const yDiff = yA - yB

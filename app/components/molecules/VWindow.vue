@@ -153,7 +153,10 @@ const windowStyle = computed(() => ({
         />
 
         <div :class="$style.inner">
-            <div ref="headEl" :class="$style.head">
+            <div
+                ref="headEl"
+                :class="$style.head"
+            >
                 <slot name="head" />
             </div>
             <slot />
@@ -166,7 +169,7 @@ $handle-edge: 4px;
 $handle-corner: 10px;
 
 .root {
-	position: var(--v-window-display, fixed);
+    position: var(--v-window-display, fixed);
     border: 1PX solid var(--color-surface);
     border-radius: 12px;
     background-color: var(--color-background);
@@ -189,7 +192,7 @@ $handle-corner: 10px;
 
 .head {
     position: sticky;
-	z-index: 1;
+    z-index: 1;
     top: 0;
     display: flex;
     align-items: center;
@@ -230,12 +233,67 @@ $handle-corner: 10px;
     }
 }
 
-.resize-handle--n  { top: 0; right: $handle-corner; left: $handle-corner; height: $handle-edge; cursor: n-resize; }
-.resize-handle--s  { right: $handle-corner; bottom: 0; left: $handle-corner; height: $handle-edge; cursor: s-resize; }
-.resize-handle--e  { top: $handle-corner; right: 0; bottom: $handle-corner; width: $handle-edge; cursor: e-resize; }
-.resize-handle--w  { top: $handle-corner; bottom: $handle-corner; left: 0; width: $handle-edge; cursor: w-resize; }
-.resize-handle--ne { top: 0; right: 0; width: $handle-corner; height: $handle-corner; cursor: ne-resize; }
-.resize-handle--nw { top: 0; left: 0; width: $handle-corner; height: $handle-corner; cursor: nw-resize; }
-.resize-handle--se { right: 0; bottom: 0; width: $handle-corner; height: $handle-corner; cursor: se-resize; }
-.resize-handle--sw { bottom: 0; left: 0; width: $handle-corner; height: $handle-corner; cursor: sw-resize; }
+.resize-handle--n {
+    top: 0;
+    right: $handle-corner;
+    left: $handle-corner;
+    height: $handle-edge;
+    cursor: n-resize;
+}
+
+.resize-handle--s {
+    right: $handle-corner;
+    bottom: 0;
+    left: $handle-corner;
+    height: $handle-edge;
+    cursor: s-resize;
+}
+
+.resize-handle--e {
+    top: $handle-corner;
+    right: 0;
+    bottom: $handle-corner;
+    width: $handle-edge;
+    cursor: e-resize;
+}
+
+.resize-handle--w {
+    top: $handle-corner;
+    bottom: $handle-corner;
+    left: 0;
+    width: $handle-edge;
+    cursor: w-resize;
+}
+
+.resize-handle--ne {
+    top: 0;
+    right: 0;
+    width: $handle-corner;
+    height: $handle-corner;
+    cursor: ne-resize;
+}
+
+.resize-handle--nw {
+    top: 0;
+    left: 0;
+    width: $handle-corner;
+    height: $handle-corner;
+    cursor: nw-resize;
+}
+
+.resize-handle--se {
+    right: 0;
+    bottom: 0;
+    width: $handle-corner;
+    height: $handle-corner;
+    cursor: se-resize;
+}
+
+.resize-handle--sw {
+    bottom: 0;
+    left: 0;
+    width: $handle-corner;
+    height: $handle-corner;
+    cursor: sw-resize;
+}
 </style>

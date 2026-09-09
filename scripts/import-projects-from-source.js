@@ -235,7 +235,7 @@ for (const uid of uids) {
 
     const unchanged
         = cached?.sourceHash === sourceHash
-            && mediaRelPaths.every(relPath => cached.media?.[relPath]?.hash === hashBuffer(readFileSync(join(projectDir, relPath))))
+          && mediaRelPaths.every(relPath => cached.media?.[relPath]?.hash === hashBuffer(readFileSync(join(projectDir, relPath))))
 
     if (unchanged) {
         skipped.push(uid)
@@ -249,8 +249,7 @@ for (const uid of uids) {
         ? await resolveMedia(uid, projectDir, frontMatter.meta_image, 'image', { type: 'meta_image' }, cached?.media)
         : null
     const mediaEntries = await Promise.all((frontMatter.medias ?? []).map((media, index) =>
-        media.file ? resolveMedia(uid, projectDir, media.file, 'media', { type: 'medias', index }, cached?.media) : null,
-    ))
+        media.file ? resolveMedia(uid, projectDir, media.file, 'media', { type: 'medias', index }, cached?.media) : null))
 
     const data = buildData({ uid, frontMatter, shortDescription, content, thumbnail, metaImage, mediaEntries }, projectDir)
     const title = frontMatter.title || uid

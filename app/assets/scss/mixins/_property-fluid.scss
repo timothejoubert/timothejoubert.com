@@ -1,11 +1,12 @@
 @use "sass:math";
+@use 'sass:meta';
+@use 'sass:map';
 @use "../functions/fluid" as *;
 @use "../functions/decimal" as *;
 @use "../functions/breakpoint" as *;
 @use "../functions/px-to-rem" as *;
 @use "./include-media" as *;
-@use 'sass:meta';
-@use 'sass:map';
+
 
 /**
  * Interpolate value from XL (1440) to HD (1920) breakpoint
@@ -20,9 +21,9 @@
         @warn "property-fluid(): The values map has no XL breakpoint";
     }
 
-    $value-xl: if(sass($is-map): map.get($value, xl); else: $value);
+    $value-xl: if($is-map, map.get($value, xl), $value);
     $value-hd: decimal-round(math.div(breakpoint(hd), breakpoint(xl)) * $value-xl);
-    $default-value: if(sass($is-map): fluid($value); else: px-to-rem($value));
+    $default-value: if($is-map, fluid($value), px-to-rem($value));
 
     @if $breakpoint {
         @include media($breakpoint) {

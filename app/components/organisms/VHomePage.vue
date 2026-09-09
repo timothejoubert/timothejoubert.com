@@ -2,7 +2,7 @@
 import type { HomePageDocument } from '~~/prismicio-types'
 
 defineProps<{
-	document: HomePageDocument
+    document: HomePageDocument
 }>()
 
 // A project modal (nested route) renders its own <h1> for the project title — the listing's

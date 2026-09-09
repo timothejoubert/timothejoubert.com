@@ -10,15 +10,15 @@ const pageRevealed = computed(() => phase.value === 'page' || phase.value === 'd
 
 const { site } = useRuntimeConfig().public
 if (projects.value?.length) {
-	useSchemaOrg([
-		defineItemList({
-			itemListElement: projects.value.map((project, index) => ({
-				position: index + 1,
-				name: project.data.title,
-				url: joinURL(ensureProtocol(site.url), getRoutePath('projet', { uid: project.uid })),
-			})),
-		}),
-	])
+    useSchemaOrg([
+        defineItemList({
+            itemListElement: projects.value.map((project, index) => ({
+                position: index + 1,
+                name: project.data.title,
+                url: joinURL(ensureProtocol(site.url), getRoutePath('projet', { uid: project.uid })),
+            })),
+        }),
+    ])
 }
 </script>
 
@@ -69,7 +69,7 @@ if (projects.value?.length) {
     @media (prefers-reduced-motion: no-preference) {
         transition: 0.5s ease(out-quad);
         transition-delay: calc(var(--item-index, 0) * 30ms);
-		transition-property: opacity, translate;
+        transition-property: opacity, translate;
     }
 
     &--visible {

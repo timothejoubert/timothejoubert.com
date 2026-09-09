@@ -19,8 +19,8 @@ switchDirection.value = null
 
 const contentMounted = ref(false)
 onMounted(async () => {
-	await nextTick()
-	contentMounted.value = true
+    await nextTick()
+    contentMounted.value = true
 })
 
 const route = useRoute()
@@ -34,11 +34,11 @@ function withCurrentQuery(path: string) {
 const project = computed(() => props.document?.data)
 
 const mainExternalLink = computed(() => {
-	if (isFilled.link(project.value?.link)) {
-		return project.value?.link
-	}
+    if (isFilled.link(project.value?.link)) {
+        return project.value?.link
+    }
 
-	return null
+    return null
 })
 
 const awardLinks = computed(() => {
@@ -85,7 +85,10 @@ const { prevProject, nextProject } = props.document
         @close="navigateTo(backPath)"
     >
         <template #head>
-            <h1 class="text-h4" :class="$style.title">
+            <h1
+                class="text-h4"
+                :class="$style.title"
+            >
                 {{ document?.data.title ?? $t('error_page.not_found_title') }}
             </h1>
             <NuxtLink
@@ -108,7 +111,10 @@ const { prevProject, nextProject } = props.document
             >
                 <div :class="$style.content">
                     <div :class="$style.attributes">
-                        <ul v-if="tags.length" :class="$style.tags">
+                        <ul
+                            v-if="tags.length"
+                            :class="$style.tags"
+                        >
                             <LazyVTag
                                 v-for="(tag, i) in tags"
                                 :key="tag || i"
@@ -116,34 +122,37 @@ const { prevProject, nextProject } = props.document
                                 wrapper="li"
                             />
                         </ul>
-						<VPrismicLink
-							v-if="mainExternalLink"
-							:to="mainExternalLink"
-							:class="$style.link"
-						>
-							{{ mainExternalLink.text ?? $t('project_link') }}
-							<VIcon name="material-symbols:north-east" />
-						</VPrismicLink>
-						<ul v-if="awardLinks.length" :class="$style.awards">
-							<li
-								:class="$style['awards__item']"
-								v-for="(award, index) in awardLinks"
-								:key="`award-${index}`"
-							>
-								<VPrismicLink
-									:to="award"
-									:class="$style.awards__link"
-									:aria-label="award.text ?? $t('award_link')"
-								>
-									<VIcon name="material-symbols:trophy" />
-								</VPrismicLink>
-							</li>
-						</ul>
+                        <VPrismicLink
+                            v-if="mainExternalLink"
+                            :to="mainExternalLink"
+                            :class="$style.link"
+                        >
+                            {{ mainExternalLink.text ?? $t('project_link') }}
+                            <VIcon name="material-symbols:north-east" />
+                        </VPrismicLink>
+                        <ul
+                            v-if="awardLinks.length"
+                            :class="$style.awards"
+                        >
+                            <li
+                                v-for="(award, index) in awardLinks"
+                                :key="`award-${index}`"
+                                :class="$style['awards__item']"
+                            >
+                                <VPrismicLink
+                                    :to="award"
+                                    :class="$style.awards__link"
+                                    :aria-label="award.text ?? $t('award_link')"
+                                >
+                                    <VIcon name="material-symbols:trophy" />
+                                </VPrismicLink>
+                            </li>
+                        </ul>
 
                         <VTime
                             :date="project?.date"
                             format="short"
-							:class="$style.date"
+                            :class="$style.date"
                         />
                     </div>
                     <LazyVText
@@ -160,7 +169,10 @@ const { prevProject, nextProject } = props.document
 
                 <VPrismicImg :field="project?.thumbnail" />
 
-                <div v-if="medias.length" :class="$style.medias">
+                <div
+                    v-if="medias.length"
+                    :class="$style.medias"
+                >
                     <div
                         v-for="(mediaGroup, i) in medias"
                         :key="`media-${i}`"
@@ -174,7 +186,10 @@ const { prevProject, nextProject } = props.document
                             loop
                             :src="mediaGroup.media.url"
                         />
-                        <VPrismicImg v-else :field="mediaGroup.media" />
+                        <VPrismicImg
+                            v-else
+                            :field="mediaGroup.media"
+                        />
                     </div>
                 </div>
 
@@ -228,27 +243,27 @@ const { prevProject, nextProject } = props.document
     z-index: 11;
     top: var(--app-padding-top);
     right: var(--app-padding-right);
-	left: var(--app-padding-left);
+    left: var(--app-padding-left);
     overflow: hidden auto;
     max-width: var(--app-inner-max-width);
     max-height: var(--app-inner-max-height);
-	opacity: 0;
-	overscroll-behavior: contain;
-	translate: 0 24px;
+    opacity: 0;
+    overscroll-behavior: contain;
+    translate: 0 24px;
 
-	@include media('>=md') {
-		left: initial;
-    	width: 50%;
-	}
+    @include media('>=md') {
+        left: initial;
+        width: 50%;
+    }
 
-	@media (prefers-reduced-motion: no-preference) {
-		transition: opacity 0.4s ease(out-quad), translate 0.4s ease(out-quad);
-	}
+    @media (prefers-reduced-motion: no-preference) {
+        transition: opacity 0.4s ease(out-quad), translate 0.4s ease(out-quad);
+    }
 
-	&--visible {
-		opacity: 1;
-		translate: 0 0;
-	}
+    &--visible {
+        opacity: 1;
+        translate: 0 0;
+    }
 }
 
 .title {
@@ -258,24 +273,24 @@ const { prevProject, nextProject } = props.document
 }
 
 .content-wrapper {
-	opacity: 0;
+    opacity: 0;
 
-	&--from-prev {
-		translate: -40px 0;
-	}
+    &--from-prev {
+        translate: -40px 0;
+    }
 
-	&--from-next {
-		translate: 40px 0;
-	}
+    &--from-next {
+        translate: 40px 0;
+    }
 
-	@media (prefers-reduced-motion: no-preference) {
-		transition: opacity 0.4s ease(out-quad), translate 0.4s ease(out-quad);
-	}
+    @media (prefers-reduced-motion: no-preference) {
+        transition: opacity 0.4s ease(out-quad), translate 0.4s ease(out-quad);
+    }
 
-	&--visible {
-		opacity: 1;
-		translate: 0 0;
-	}
+    &--visible {
+        opacity: 1;
+        translate: 0 0;
+    }
 }
 
 .back {
@@ -309,50 +324,50 @@ const { prevProject, nextProject } = props.document
 }
 
 .link {
-	display: inline-flex;
-	align-items: center;
-	color: var(--color-content);
-	gap: 3px;
-	text-underline-offset: 2px;
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-content);
+    gap: 3px;
+    text-underline-offset: 2px;
 
-	:global(.iconify) {
-		font-size: 14px;
-	}
+    :global(.iconify) {
+        font-size: 14px;
+    }
 }
 
 .link,
 .awards__link {
-	color: var(--color-content);
-	transition: color 0.3s ease(out-quad);
+    color: var(--color-content);
+    transition: color 0.3s ease(out-quad);
 
-	&:focus-visible {
-		color: var(--color-accent);
-	}
+    &:focus-visible {
+        color: var(--color-accent);
+    }
 
-	@media (hover: 'hover') {
-		&:hover {
-			color: var(--color-accent);
-		}
-	}
+    @media (hover: 'hover') {
+        &:hover {
+            color: var(--color-accent);
+        }
+    }
 }
 
 .awards {
-	display: flex;
-	align-items: center;
-	padding: 0;
-	margin: 0;
-	list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 .awards__link {
-	display: flex;
+    display: flex;
     align-items: center;
-	justify-content: center;
-	padding: 4px;
+    justify-content: center;
+    padding: 4px;
 }
 
 .date {
-	margin-left: auto;
+    margin-left: auto;
 }
 
 .short-description {

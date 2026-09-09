@@ -3,14 +3,14 @@ import { createClient, filter, isFilled } from '@prismicio/client'
 import { getRoutePath, type PrismicRouteName, prismicDocumentType } from './prismic-schema'
 
 function toSitemapUrl(routeName: PrismicRouteName, doc: ProjectDocument) {
-	const thumbnail = doc.data.thumbnail
-	const thumbnailUrl = isFilled.linkToMedia(thumbnail) ? thumbnail.url : undefined
+    const thumbnail = doc.data.thumbnail
+    const thumbnailUrl = isFilled.linkToMedia(thumbnail) ? thumbnail.url : undefined
 
-	return {
-		loc: getRoutePath(routeName, { uid: doc.uid }),
-		lastmod: new Date(doc.last_publication_date).toISOString(),
-		images: thumbnailUrl ? [{ loc: thumbnailUrl }] : undefined,
-	}
+    return {
+        loc: getRoutePath(routeName, { uid: doc.uid }),
+        lastmod: new Date(doc.last_publication_date).toISOString(),
+        images: thumbnailUrl ? [{ loc: thumbnailUrl }] : undefined,
+    }
 }
 
 /**
@@ -19,15 +19,15 @@ function toSitemapUrl(routeName: PrismicRouteName, doc: ProjectDocument) {
  * split across the home and archive listings) need resolving here, along with their thumbnail.
  */
 export async function getPrismicSitemapUrls(repositoryName: string) {
-	const client = createClient(repositoryName)
+    const client = createClient(repositoryName)
 
-	const [favoriteProjects, archivedProjects] = await Promise.all([
-		client.getAllByType(prismicDocumentType.PROJECT_PAGE, { filters: [filter.at('my.project.favorite', true)] }),
-		client.getAllByType(prismicDocumentType.PROJECT_PAGE, { filters: [filter.at('my.project.favorite', false)] }),
-	])
+    const [favoriteProjects, archivedProjects] = await Promise.all([
+        client.getAllByType(prismicDocumentType.PROJECT_PAGE, { filters: [filter.at('my.project.favorite', true)] }),
+        client.getAllByType(prismicDocumentType.PROJECT_PAGE, { filters: [filter.at('my.project.favorite', false)] }),
+    ])
 
-	return [
-		...favoriteProjects.map(doc => toSitemapUrl('projet', doc)),
-		...archivedProjects.map(doc => toSitemapUrl('projet-archive', doc)),
-	]
+    return [
+        ...favoriteProjects.map(doc => toSitemapUrl('projet', doc)),
+        ...archivedProjects.map(doc => toSitemapUrl('projet-archive', doc)),
+    ]
 }

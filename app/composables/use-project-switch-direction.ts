@@ -8,5 +8,5 @@ export type ProjectSwitchDirection = 'prev' | 'next' | null
  * isolated per-request in SSR.
  */
 export function useProjectSwitchDirection() {
-	return useState<ProjectSwitchDirection>('project-switch-direction', () => null)
+    return useState<ProjectSwitchDirection>('project-switch-direction', () => null)
 }

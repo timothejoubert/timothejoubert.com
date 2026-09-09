@@ -7,14 +7,14 @@ const { data } = await usePrismicFetchDocument(prismicDocumentType.MENU)
 const links = computed(() => data.value?.data.links || [])
 
 const _links = computed(() => {
-	return links.value.filter((link) => {
-		return isFilled.link(link)
-	}).map((link) => {
-		return {
-			...asLinkAttrs?.(link) || {},
-			label: link.text,
-		}
-	})
+    return links.value.filter((link) => {
+        return isFilled.link(link)
+    }).map((link) => {
+        return {
+            ...asLinkAttrs?.(link) || {},
+            label: link.text,
+        }
+    })
 })
 </script>
 

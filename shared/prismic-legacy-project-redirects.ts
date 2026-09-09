@@ -7,13 +7,13 @@ import { getRoutePath, prismicDocumentType } from './prismic-schema'
  * that never existed at the old path still gets a harmless, unused redirect rule.
  */
 export async function getLegacyFavoriteProjectRedirects(repositoryName: string): Promise<Record<string, { redirect: { to: string, statusCode: 301 } }>> {
-	const client = createClient(repositoryName)
+    const client = createClient(repositoryName)
 
-	const favoriteProjects = await client.getAllByType(prismicDocumentType.PROJECT_PAGE, {
-		filters: [filter.at('my.project.favorite', true)],
-	})
+    const favoriteProjects = await client.getAllByType(prismicDocumentType.PROJECT_PAGE, {
+        filters: [filter.at('my.project.favorite', true)],
+    })
 
-	return Object.fromEntries(
-		favoriteProjects.map(doc => [`/${doc.uid}`, { redirect: { to: getRoutePath('projet', { uid: doc.uid }), statusCode: 301 as const } }]),
-	)
+    return Object.fromEntries(
+        favoriteProjects.map(doc => [`/${doc.uid}`, { redirect: { to: getRoutePath('projet', { uid: doc.uid }), statusCode: 301 as const } }]),
+    )
 }

@@ -3,16 +3,16 @@ await usePrismicPersonSchemaOrg()
 </script>
 
 <template>
-	<NuxtRouteAnnouncer />
-	<NuxtLoadingIndicator color="#DBE6EC" />
+    <NuxtRouteAnnouncer />
+    <NuxtLoadingIndicator color="#DBE6EC" />
 
-	<VSkipLink />
+    <VSkipLink />
 
-	<VNav />
+    <VNav />
 
-	<NuxtPage />
+    <NuxtPage />
 
-	<DevOnly>
-		<VGridVisualizer />
-	</DevOnly>
+    <DevOnly>
+        <VGridVisualizer />
+    </DevOnly>
 </template>

@@ -1,4 +1,3 @@
-
 <script lang="ts" setup>
 import { getDistance, mapRange } from '~/utils/math'
 import { getSlotsInnerText } from '~/utils/vue/get-slot-children-text'
@@ -40,25 +39,25 @@ onBeforeUnmount(() => {
 
 function getLetterCenter(element: HTMLElement, axe: 'left' | 'top') {
     let result = 0
-    if(!rootEl.value) return result
+    if (!rootEl.value) return result
 
     if (axe === 'top') {
-        result =
-            rootEl.value.getBoundingClientRect().top +
-            parseInt(getComputedStyle(rootEl.value).paddingTop) +
-            element.offsetTop +
-            element.getBoundingClientRect().height / 2
-    } else {
-        result =
-            rootEl.value.getBoundingClientRect().left +
-            parseInt(getComputedStyle(rootEl.value).paddingLeft) +
-            element.offsetLeft +
-            element.getBoundingClientRect().width / 2
+        result
+            = rootEl.value.getBoundingClientRect().top
+              + parseInt(getComputedStyle(rootEl.value).paddingTop)
+              + element.offsetTop
+              + element.getBoundingClientRect().height / 2
+    }
+    else {
+        result
+            = rootEl.value.getBoundingClientRect().left
+              + parseInt(getComputedStyle(rootEl.value).paddingLeft)
+              + element.offsetLeft
+              + element.getBoundingClientRect().width / 2
     }
 
     return parseInt(result.toFixed(2))
 }
-
 
 function setLetters() {
     const lettersElements = Array.from(rootEl.value?.querySelectorAll('.split-text-char') || []) as HTMLElement[]
@@ -70,7 +69,6 @@ function setLetters() {
             yCenter: getLetterCenter(letter, 'top'),
         }
     })
-
 }
 
 function onMouseMove(event: MouseEvent) {
@@ -104,6 +102,7 @@ function onMouseLeave() {
         />
     </component>
 </template>
+
 <style lang="scss" module>
 .root {
     :global(.split-text-char) {

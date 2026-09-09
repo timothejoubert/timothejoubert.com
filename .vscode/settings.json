@@ -1,11 +1,14 @@
 {
-	"editor.insertSpaces": false,
+	"editor.insertSpaces": true,
 	"editor.tabSize": 4,
 	"editor.detectIndentation": false,
 	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
 	"[scss]": {
-		"editor.defaultFormatter": "stylelint.vscode-stylelint"
+		// stylelint.vscode-stylelint doesn't implement real document formatting (only fixAll code actions,
+		// see codeActionsOnSave below) — disabling formatOnSave here prevents VSCode falling back to another
+		// installed extension's formatter (e.g. Some Sass), which would reformat using its own tab default.
+		"editor.formatOnSave": false
 	},
 	"[vue]": {
 		"editor.defaultFormatter": "dbaeumer.vscode-eslint"

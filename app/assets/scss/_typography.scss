@@ -3,48 +3,48 @@
 
 // Heading
 .text-h1 {
-	@include text-h1;
-	@include font-size-fluid((xs: 28px, xl: 40px));
+    @include text-h1;
+    @include font-size-fluid((xs: 28px, xl: 40px));
 }
 
 .text-h2 {
-	@include text-h2;
-	@include font-size-fluid((xs: 22px, xl: 32px));
+    @include text-h2;
+    @include font-size-fluid((xs: 22px, xl: 32px));
 }
 
 .text-h3 {
-	@include text-h3;
-	@include font-size-fluid((xs: 20px, xl: 26px));
+    @include text-h3;
+    @include font-size-fluid((xs: 20px, xl: 26px));
 }
 
 .text-h4 {
-	@include text-h4;
-	@include font-size-fluid((xs: 16px, xl: 20px));
+    @include text-h4;
+    @include font-size-fluid((xs: 16px, xl: 20px));
 }
 
 .text-h5 {
-	@include text-h5;
-	@include font-size-fluid((xs: 14px, xl: 18px));
+    @include text-h5;
+    @include font-size-fluid((xs: 14px, xl: 18px));
 }
 
 .text-overtitle {
-	@include text-overtitle;
-	@include font-size-fluid((xs: 12px, xl: 14px));
+    @include text-overtitle;
+    @include font-size-fluid((xs: 12px, xl: 14px));
 }
 
 // Body
 .text-body {
-	@include text-body;
-	@include font-size-fluid((xs: 14px, xl: 16px));
+    @include text-body;
+    @include font-size-fluid((xs: 14px, xl: 16px));
 }
 
 .text-body-xs {
-	@include text-body;
-	@include font-size-fluid((xs: 12px, xl: 14px));
+    @include text-body;
+    @include font-size-fluid((xs: 12px, xl: 14px));
 }
 
 // Tags
 .text-label {
-	@include text-label;
-	@include font-size-fluid((xs: 12px, xl: 13px));
+    @include text-label;
+    @include font-size-fluid((xs: 12px, xl: 13px));
 }

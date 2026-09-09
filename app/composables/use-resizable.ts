@@ -1,6 +1,5 @@
-import { computed, ref } from 'vue'
+import { computed, ref, toValue } from 'vue'
 import type { CSSProperties, MaybeRefOrGetter, Ref } from 'vue'
-import { toValue } from 'vue'
 
 export type ResizeDirection = 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w' | 'nw'
 

@@ -86,7 +86,7 @@ SCSS Modules (`<style lang="scss" module>` + `$style.xxx` in templates), BEM-lik
 - `export/*.module.scss` — SCSS values exported to JS/TS via CSS modules (breakpoints, colors, ease curves, grid, theme).
 - Global entry point is `app/assets/scss/main.scss`, loaded via `nuxt.config.ts` `css`.
 
-Indentation is **tabs**, enforced by ESLint (`@stylistic/indent: ['error', 'tab']`, `no-tabs` allows indentation tabs only). This applies across `.ts`/`.vue`/config files, not just SCSS.
+Indentation is **4 spaces**, enforced by ESLint (`@stylistic/indent: ['error', 4]`) and Stylelint (`@stylistic/indentation: 4`). This applies across `.ts`/`.vue`/config files, not just SCSS.
 
 ### SCSS rules
 

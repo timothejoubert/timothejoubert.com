@@ -9,11 +9,11 @@ export function markdownToRichText(markdown, { resolveImage } = {}) {
     return htmlAsRichText(html, {
         serializer: resolveImage
             ? {
-                    img: ({ node }) => ({
-                        type: 'image',
-                        id: resolveImage(node.properties.src, node.properties.alt),
-                    }),
-                }
+                img: ({ node }) => ({
+                    type: 'image',
+                    id: resolveImage(node.properties.src, node.properties.alt),
+                }),
+            }
             : undefined,
     })
 }

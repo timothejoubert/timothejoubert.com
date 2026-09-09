@@ -10,7 +10,7 @@ defineProps<{
 }>()
 
 defineOptions({
-	inheritAttrs: false,
+    inheritAttrs: false,
 })
 </script>
 

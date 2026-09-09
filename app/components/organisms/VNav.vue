@@ -10,8 +10,8 @@ const realContentVisible = computed(() => phase.value === 'content' || phase.val
 // sequence/session state.
 const mounted = ref(false)
 onMounted(async () => {
-	await nextTick()
-	mounted.value = true
+    await nextTick()
+    mounted.value = true
 })
 </script>
 
@@ -75,11 +75,11 @@ onMounted(async () => {
 }
 
 .root {
-	position: fixed;
+    position: fixed;
     z-index: 1001;
     bottom: calc(var(--app-padding-bottom) * 0.5);
-	display: flex;
-	gap: 20px;
+    display: flex;
+    gap: 20px;
     place-self: flex-end center;
     translate: 0 50%;
 
@@ -165,13 +165,13 @@ onMounted(async () => {
 }
 
 .placeholder-text {
-	font-variation-settings: 'wght' 700;
+    font-variation-settings: 'wght' 700;
     padding-inline: 4px;
 
-	@media (prefers-reduced-motion: no-preference) {
-		animation: weight-in 0.4s ease(out-quad) alternate infinite;
-		animation-delay: calc(var(--data-char-index, 0) * 80ms);
-	}
+    @media (prefers-reduced-motion: no-preference) {
+        animation: weight-in 0.4s ease(out-quad) alternate infinite;
+        animation-delay: calc(var(--data-char-index, 0) * 80ms);
+    }
 }
 
 .settings-placeholder {
@@ -203,8 +203,8 @@ onMounted(async () => {
 }
 
 .spinner {
-	@media (prefers-reduced-motion: no-preference) {
-		animation: spin 0.8s linear infinite;
-	}
+    @media (prefers-reduced-motion: no-preference) {
+        animation: spin 0.8s linear infinite;
+    }
 }
 </style>
