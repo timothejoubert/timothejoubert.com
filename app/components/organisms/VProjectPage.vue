@@ -247,12 +247,9 @@ const { prevProject, nextProject } = props.document
     top: var(--app-padding-top);
     right: var(--app-padding-right);
     left: var(--app-padding-left);
-    overflow: hidden auto;
     max-width: var(--app-inner-max-width);
     max-height: var(--app-inner-max-height);
     opacity: 0;
-    overscroll-behavior: contain;
-    scrollbar-width: none;
     translate: 0 24px;
 
     @include media('>=md') {
@@ -325,6 +322,10 @@ const { prevProject, nextProject } = props.document
     margin: 0;
     gap: 10px;
     list-style: none;
+
+    @include media('<md') {
+        width: 100%;
+    }
 }
 
 .link {
