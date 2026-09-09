@@ -1,6 +1,7 @@
 ### TODO
 - Retire les dossier atoms,molecules,organisms dans components et resoudre toutes les paths des composants utilisé dans la codeBase
 - VArchivePage: ajouter un scroll pour la cell de tags si le contenu dépasse la taille initiale
+- Améliorer l'accessibilité /docs/audit-accessibilite-rgaa.md
 
 ### Next step
 - Refactor: utiliser une composable commun pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
