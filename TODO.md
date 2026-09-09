@@ -4,6 +4,7 @@
 - Améliorer l'accessibilité /docs/audit-accessibilite-rgaa.md
 
 ### Next step
+- Mettre en place le webhook
 - Refactor: utiliser une composable commun pour le fetch des projets, adapter usePrismicFetchProjects pour l'usage dans VArchivePage
 - Refactor: les composants concernant les medias/image/vidéo, cleanner les fichiers utiles pour avoir une logique plus propre (data-driven) et des fonctions regroupé par usage
 

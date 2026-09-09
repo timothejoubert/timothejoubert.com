@@ -4,9 +4,10 @@ import { join } from 'node:path'
 
 const SOURCE_DIR = join(process.cwd(), 'projects-source')
 
-const projectCustomType = JSON.parse(
+const projectCustomTypeJson = JSON.parse(
     readFileSync(join(process.cwd(), 'customtypes', 'project', 'index.json'), 'utf-8'),
-).json.Main
+).json
+const projectCustomType = { ...projectCustomTypeJson.Main, ...projectCustomTypeJson.Details }
 
 const ALLOWED_CREATIVE_WORK_TYPES = new Set(projectCustomType.creative_work_type.config.options)
 const ALLOWED_FRAMEWORKS = new Set(projectCustomType.framework.config.options)
@@ -110,14 +111,15 @@ const uids = readdirSync(SOURCE_DIR, { withFileTypes: true })
 console.log(`Checking ${uids.length} project(s) in ${SOURCE_DIR}...`)
 
 let errorCount = 0
+let skippedCount = 0
 
 for (const uid of uids) {
     const projectDir = join(SOURCE_DIR, uid)
     const markdownPath = join(projectDir, 'project.md')
 
     if (!existsSync(markdownPath)) {
-        console.warn(`  [${uid}] Missing project.md`)
-        errorCount++
+        console.log(`  [${uid}] Skipped (no project.md yet)`)
+        skippedCount++
         continue
     }
 
@@ -147,6 +149,7 @@ for (const uid of uids) {
     }
 }
 
-console.log(`\nDone. ${errorCount === 0 ? 'No issues found.' : `${errorCount} issue(s) found.`}`)
+const skippedSummary = skippedCount > 0 ? ` (${skippedCount} skipped, no project.md yet)` : ''
+console.log(`\nDone. ${errorCount === 0 ? 'No issues found.' : `${errorCount} issue(s) found.`}${skippedSummary}`)
 
 if (errorCount > 0) process.exit(1)
