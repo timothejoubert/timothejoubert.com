@@ -8,6 +8,134 @@
       }
     }
   },
+  "chalet-du-parc": {
+    "sourceHash": "72fb76cc86aef5263b8fcb42988350f19304a2ab2e3f660cac05c08e19e2fdf2",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "5bbf10c640b33cf7ca59bc7e6a6c38e0192efd07265b8f45011ae45c3ebf071d",
+        "assetId": "fdip3cBIiHY1S-p1"
+      }
+    }
+  },
+  "cite-de-la-tapisserie": {
+    "sourceHash": "1da6ef2ac2c62a4210a5d1de8fab518d3924f9a3cc5b809d06627e794ca87c90",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "c468afa96246e8fb1c8099b022c0c6286bbac2344077ccfb777ba00dc338b402",
+        "assetId": "9oLJ1WJ3PtsWd5KA"
+      }
+    }
+  },
+  "fraiche-design-thinking": {
+    "sourceHash": "db00670e91eb66b2decbeacc859a3b43a8fa5c268d745b67f8f19e092714932e",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "8f20b706db0ccdd2fd5e3cc664390cfcd5f2757b35ad80dd68f41b2defb52dc0",
+        "assetId": "OjEbZ4L08o6oVqUK"
+      }
+    }
+  },
+  "la-comedie": {
+    "sourceHash": "13cde148527a156232c6f303b581773c5ade0c8ca559934a573e87a00455f30e",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "2390bca8fad568c2bf1a4972c10fa7623b1d6271ec730ce78e218eb3a382d7ec",
+        "assetId": "beihC-Y4IrtEwqje"
+      }
+    }
+  },
+  "memorial-de-verdun": {
+    "sourceHash": "7b11610f470df90acff8810879cd45152ae937ab2312b19dbafeb6a5c96b3da3",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "38b13f9b98914dcd5622d10f7d9d0449a511610feb3be6427677255f0eea3bbf",
+        "assetId": "lOoMS-ir0_X5ki2X"
+      }
+    }
+  },
+  "mingat": {
+    "sourceHash": "e509b37a179e2d5a118967124f55fb20157610a796b9e6a1cbe52b42ba1ef908",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "f7785bd2ca00152163530cda63a8b5036cfa0924b5348a484a76213359631ed2",
+        "assetId": "71v0W4xjKJ8eMsvG"
+      }
+    }
+  },
+  "musee-beaux-arts-rennes": {
+    "sourceHash": "3056323c33ed4f3abd9eb2c24799fa77d89f119c2773a208ef7397d2cf7dd375",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "29e2e697fd318ef935dad9578cfc28ee7b880d63fa4ab7ad137370e2ea99885d",
+        "assetId": "LTBm7Jg4wgROraot"
+      }
+    }
+  },
+  "nuits-de-fourviere": {
+    "sourceHash": "9db0fd98fa373273b29f9c1e4b194a66844b5f64019f2410dd72db0838e755b9",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "bf75a0ce5ec7074e8ab31c46ae73896a65c7de68608227b7b13201f3b1665479",
+        "assetId": "2tfl9MjRLHeq7eQY"
+      }
+    }
+  },
+  "theatre-des-celestins": {
+    "sourceHash": "f75f0b8014a0269d22dbd422ada55ef43728b606601322059c86d51298737b9b",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "6572c06b3a58690e1ebbed877040e3a109d6accd0641ab5ed1d57e3f3db2954c",
+        "assetId": "6MIgBL59AQ9cCKLR"
+      }
+    }
+  },
+  "theatre-du-rond-point": {
+    "sourceHash": "e2d75b51a7275f458db74379653b2af0c373122671e8940a2a947e6ed35d73b1",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "25576b8803daa5d94800d0158a0d7fa082c52a79d3810c88785dce93743d3e2d",
+        "assetId": "n1b9-iF768TNk0bl"
+      }
+    }
+  },
+  "unanime": {
+    "sourceHash": "1d0f09162dfad65c91e73ff173814cda1aced4aafa1c97893033d840da0dfc28",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "7d7b633144a30c3560d67745fb9408c1ff3bb8e5865319638d53896359848669",
+        "assetId": "y-HYA8G_sKXzH9GY"
+      }
+    }
+  },
+  "duo-form": {
+    "sourceHash": "d18c70db38ab7351c276f45c545a5fe5aecca221be5ecc26468e83ef70141d50",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "476b3aa5372092a319ff224d6dba86ef982db8e6a513833738a236973592fd63",
+        "assetId": "ZM_gEREAACMAes2x"
+      },
+      "media/media-0.jpg": {
+        "hash": "d641e6b76dc74bead47ad99d28bf5f82e55f23c3e7ecadbd01a69d6f09ddb3bd",
+        "assetId": "ZM_gEREAACEAes2t"
+      },
+      "media/media-1.mp4": {
+        "hash": "be3d6bb2121d58a05e93d0442c52cd7dc05ed5b8e8b87e561e5f489bf7449fd2",
+        "assetId": "ZM_gEREAACEAes21"
+      },
+      "media/media-2.jpg": {
+        "hash": "c98fd985de1847510a819f4c640726f5d5d66196c7f5d01cc6bd3419df28f922",
+        "assetId": "ZM_gEREAACMAes2s"
+      },
+      "media/media-3.jpg": {
+        "hash": "e0853038fd537a111851344e037344dad30b8fb1ea2e18ef698fb95c952f8178",
+        "assetId": "ZM_gEREAACEAes2u"
+      },
+      "media/media-4.jpg": {
+        "hash": "1674d265a3f1710ee0f67e9c8854605bcd79ad755fd8bc41b7c0455b495cd26c",
+        "assetId": "ZM_gEREAACEAes2v"
+      }
+    }
+  },
   "a-guilt-routine": {
     "sourceHash": "c1d6bdfeaa7ccb39eb2fd7ea2348e76d1ba2a0b0f0a31c806716f9ececbe8a92",
     "media": {
@@ -375,35 +503,6 @@
       }
     }
   },
-  "duo-form": {
-    "sourceHash": "d18c70db38ab7351c276f45c545a5fe5aecca221be5ecc26468e83ef70141d50",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "476b3aa5372092a319ff224d6dba86ef982db8e6a513833738a236973592fd63",
-        "assetId": "ZM_gEREAACMAes2x"
-      },
-      "media/media-0.jpg": {
-        "hash": "d641e6b76dc74bead47ad99d28bf5f82e55f23c3e7ecadbd01a69d6f09ddb3bd",
-        "assetId": "ZM_gEREAACEAes2t"
-      },
-      "media/media-1.mp4": {
-        "hash": "be3d6bb2121d58a05e93d0442c52cd7dc05ed5b8e8b87e561e5f489bf7449fd2",
-        "assetId": "ZM_gEREAACEAes21"
-      },
-      "media/media-2.jpg": {
-        "hash": "c98fd985de1847510a819f4c640726f5d5d66196c7f5d01cc6bd3419df28f922",
-        "assetId": "ZM_gEREAACMAes2s"
-      },
-      "media/media-3.jpg": {
-        "hash": "e0853038fd537a111851344e037344dad30b8fb1ea2e18ef698fb95c952f8178",
-        "assetId": "ZM_gEREAACEAes2u"
-      },
-      "media/media-4.jpg": {
-        "hash": "1674d265a3f1710ee0f67e9c8854605bcd79ad755fd8bc41b7c0455b495cd26c",
-        "assetId": "ZM_gEREAACEAes2v"
-      }
-    }
-  },
   "eclipse": {
     "sourceHash": "b25c9baae8ac1e89bff0e0588b0de6c4399ed288c2a444b59ad6e2dc7fbb0f9a",
     "media": {
@@ -538,7 +637,7 @@
     }
   },
   "lmd-playground": {
-    "sourceHash": "be7aacaaf783e5e5f5b43d35c5ea56b8fdf18a6794053b19f79d426d412653cd",
+    "sourceHash": "e988608e672bab0cd5c14fe3b1a2c5c3561608bb35f88617750449b5deaf6c81",
     "media": {
       "media/thumbnail.jpg": {
         "hash": "741c3c522406a7da4dd87fb64e57337e627c0b42aa92e7d8209bd31f91048421",
@@ -670,6 +769,118 @@
       }
     }
   },
+  "rapport-rz": {
+    "sourceHash": "6032a3bd1ccfae71973dcc20a7284366376235cea8985caf7f25c25b9e2b73cf",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "297d6177bfedb62ecfe3c261f0a1485f8eac3b5f7c96f52cec142b7efd69c7ca",
+        "assetId": "ZL7T3xEAAB4ALWKX"
+      },
+      "media/media-0.jpg": {
+        "hash": "14169e5851ac15a82ad42b8f7c06be8029b875fff416c0c0958a7a2db127eb0f",
+        "assetId": "ZL7T3xEAACIALWKZ"
+      },
+      "media/media-1.jpg": {
+        "hash": "aba0b49a0acfccb0e9a523670a8168497a0b22ddaae8a21fdc56f6b5b89dd500",
+        "assetId": "ZL7T3xEAACMALWKV"
+      },
+      "media/media-2.jpg": {
+        "hash": "fd939b7c056c36881111eb802551a46d5c6c7bdd1a9c9096cf15452288ae6406",
+        "assetId": "ZL7T3xEAACEALWKU"
+      },
+      "media/media-3.jpg": {
+        "hash": "48da6e984a3432449c294ca9999e1d3e9c337d8f370b11ff53b769d577cd891a",
+        "assetId": "ZL7T3xEAACEALWKW"
+      },
+      "media/media-4.jpg": {
+        "hash": "f57bc7c607d328d245752e2ae0628d7f4425a00831000ad7ae4a0244cdaeea0a",
+        "assetId": "ZL7T3xEAACEALWKT"
+      },
+      "media/media-5.jpg": {
+        "hash": "f73527d0d28d497324a0aced452bce194c4c258104a4b53f14582b44c92a5f7a",
+        "assetId": "ZL7T3xEAACEALWKS"
+      },
+      "media/media-6.jpg": {
+        "hash": "f59205c4e0efcaf5bbe39ddfd529a6c790cb040033191ad957198c03dc6a6878",
+        "assetId": "ZL7T3hEAAB4ALWKR"
+      }
+    }
+  },
+  "spline-u": {
+    "sourceHash": "bd48a632a7e1bdc93822b7bd51a3c3e78980c5477e8747ded95d927cc36bf7ae",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "d3d97244f3fe84ad851888ff2ca44ffb48e7f58bd7da5fa237cf1d0173822f12",
+        "assetId": "ZT1HyREAACIAaKIf"
+      },
+      "media/media-0.png": {
+        "hash": "6a7668f3f5324b25729f437b2986becdef4e2d692e6e0a18eafc18b8a2777f91",
+        "assetId": "ZT1HyREAACMAaKIh"
+      },
+      "media/media-1.jpg": {
+        "hash": "2bb179c3a858a6c89ebdea56cd0e024c3513ae1e8ad2cf0ce22e11ac3dfb04e3",
+        "assetId": "ZT1HyREAACQAaKId"
+      },
+      "media/media-2.jpg": {
+        "hash": "e63b8b6aad4a68d368b71eb448f3a0bb60afd95ea013ca06c55ee987cd919c1c",
+        "assetId": "ZT1HyREAACMAaKIi"
+      },
+      "media/media-3.jpg": {
+        "hash": "e443e7d1a1ec707232c4b71eab8e3e822fbd37374798055785c7f4eab8c75ef5",
+        "assetId": "ZT1HyREAACMAaKIg"
+      },
+      "media/media-4.mp4": {
+        "hash": "e85e32c038653d78db8fed2c8fb55abab7fb5ad2029107bff74f2e8880084a3c",
+        "assetId": "ZT1HyREAACQAaKIe"
+      }
+    }
+  },
+  "vestige-informatique": {
+    "sourceHash": "d5ac41acc3f45046b4eee479e19ca51e47591d456e9c27cab6edb0b06a3382de",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "d25959c78ce2875b8f92f4b0b8f0eacd5cab18afd669bd53c0827616c52edd65",
+        "assetId": "ZT2D0xEAACMAaa14"
+      },
+      "media/media-0.JPG": {
+        "hash": "61cc526b9ade01a9fc917a7ef64db880302d30407501ec4fd30b2c1779b5d0e4",
+        "assetId": "ZT2D1BEAACIAaa1_"
+      },
+      "media/media-1.jpg": {
+        "hash": "167f368d8f5f97001351fd329620f1dd3970b268f0e7c6c51367a926ef5c720c",
+        "assetId": "ZT2D1BEAACMAaa2A"
+      },
+      "media/media-2.JPG": {
+        "hash": "c1fed1e922604e3b2291265c0fe5723f6f72d2b6cf9b99e3441ec63b6e716b14",
+        "assetId": "ZT2D1BEAACMAaa2B"
+      },
+      "media/media-3.JPG": {
+        "hash": "298ef095baf929b7fa432d6d9384bdb822149861ab8ff7fb6f629ad3675101d4",
+        "assetId": "ZT2D1BEAACMAaa2C"
+      },
+      "media/media-4.JPG": {
+        "hash": "75912d7f50c69163ab23cfe3c2c9dd16e347bb6b9982d4bb961a362855365887",
+        "assetId": "ZT2D1BEAACIAaa2D"
+      },
+      "media/media-5.JPG": {
+        "hash": "7557abab845d5514188fa59dd47e111709137606517ae51318474018625ffa49",
+        "assetId": "ZT2D1BEAACUAaa2E"
+      }
+    }
+  },
+  "xwing": {
+    "sourceHash": "277774779d51dbbe20c1f7225319ea659671555c96f8968333a37bf31b4b7541",
+    "media": {
+      "media/thumbnail.jpg": {
+        "hash": "aec9736941f23be7468cc89d4f8c2850e95b5db6f6bd6a60615c0fabaf305a7c",
+        "assetId": "ZO4vvxAAACAA_7HS"
+      },
+      "media/media-0.mp4": {
+        "hash": "d064940ec5cb249dd5686e2bf5deadd4eba91810cc3b0e2589dcc97e15b84b9f",
+        "assetId": "ZO4vvxAAACIA_7HR"
+      }
+    }
+  },
   "pierre-david": {
     "sourceHash": "022b64bbde6b0540d3a66fd6ad2a6670aa12396b1f06782ec3b5f9dbadabf09d",
     "media": {
@@ -780,45 +991,8 @@
       }
     }
   },
-  "rapport-rz": {
-    "sourceHash": "6032a3bd1ccfae71973dcc20a7284366376235cea8985caf7f25c25b9e2b73cf",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "297d6177bfedb62ecfe3c261f0a1485f8eac3b5f7c96f52cec142b7efd69c7ca",
-        "assetId": "ZL7T3xEAAB4ALWKX"
-      },
-      "media/media-0.jpg": {
-        "hash": "14169e5851ac15a82ad42b8f7c06be8029b875fff416c0c0958a7a2db127eb0f",
-        "assetId": "ZL7T3xEAACIALWKZ"
-      },
-      "media/media-1.jpg": {
-        "hash": "aba0b49a0acfccb0e9a523670a8168497a0b22ddaae8a21fdc56f6b5b89dd500",
-        "assetId": "ZL7T3xEAACMALWKV"
-      },
-      "media/media-2.jpg": {
-        "hash": "fd939b7c056c36881111eb802551a46d5c6c7bdd1a9c9096cf15452288ae6406",
-        "assetId": "ZL7T3xEAACEALWKU"
-      },
-      "media/media-3.jpg": {
-        "hash": "48da6e984a3432449c294ca9999e1d3e9c337d8f370b11ff53b769d577cd891a",
-        "assetId": "ZL7T3xEAACEALWKW"
-      },
-      "media/media-4.jpg": {
-        "hash": "f57bc7c607d328d245752e2ae0628d7f4425a00831000ad7ae4a0244cdaeea0a",
-        "assetId": "ZL7T3xEAACEALWKT"
-      },
-      "media/media-5.jpg": {
-        "hash": "f73527d0d28d497324a0aced452bce194c4c258104a4b53f14582b44c92a5f7a",
-        "assetId": "ZL7T3xEAACEALWKS"
-      },
-      "media/media-6.jpg": {
-        "hash": "f59205c4e0efcaf5bbe39ddfd529a6c790cb040033191ad957198c03dc6a6878",
-        "assetId": "ZL7T3hEAAB4ALWKR"
-      }
-    }
-  },
   "screen-club": {
-    "sourceHash": "4d121b357dd14331afd921f6a3c6af277c1df073bbdd16857c0ce8d6fa20650e",
+    "sourceHash": "d9724c6983bb3a725b4b183948c70288263af66f1cebd1b5f34ce96e880b5fea",
     "media": {
       "media/thumbnail.jpg": {
         "hash": "b9adc2856d5601da6d4037a59330abddb108d46464d4cb98f21fd266eb1b6b67",
@@ -843,197 +1017,6 @@
       "media/media-4.jpg": {
         "hash": "a0a73e82a19f264f6f524ba36ab2b5f8832fd709928375fafe872ca50ed4c4f0",
         "assetId": "ZT0upBEAACIAaDDa"
-      }
-    }
-  },
-  "spline-u": {
-    "sourceHash": "bd48a632a7e1bdc93822b7bd51a3c3e78980c5477e8747ded95d927cc36bf7ae",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "d3d97244f3fe84ad851888ff2ca44ffb48e7f58bd7da5fa237cf1d0173822f12",
-        "assetId": "ZT1HyREAACIAaKIf"
-      },
-      "media/media-0.png": {
-        "hash": "6a7668f3f5324b25729f437b2986becdef4e2d692e6e0a18eafc18b8a2777f91",
-        "assetId": "ZT1HyREAACMAaKIh"
-      },
-      "media/media-1.jpg": {
-        "hash": "2bb179c3a858a6c89ebdea56cd0e024c3513ae1e8ad2cf0ce22e11ac3dfb04e3",
-        "assetId": "ZT1HyREAACQAaKId"
-      },
-      "media/media-2.jpg": {
-        "hash": "e63b8b6aad4a68d368b71eb448f3a0bb60afd95ea013ca06c55ee987cd919c1c",
-        "assetId": "ZT1HyREAACMAaKIi"
-      },
-      "media/media-3.jpg": {
-        "hash": "e443e7d1a1ec707232c4b71eab8e3e822fbd37374798055785c7f4eab8c75ef5",
-        "assetId": "ZT1HyREAACMAaKIg"
-      },
-      "media/media-4.mp4": {
-        "hash": "e85e32c038653d78db8fed2c8fb55abab7fb5ad2029107bff74f2e8880084a3c",
-        "assetId": "ZT1HyREAACQAaKIe"
-      }
-    }
-  },
-  "vestige-informatique": {
-    "sourceHash": "d5ac41acc3f45046b4eee479e19ca51e47591d456e9c27cab6edb0b06a3382de",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "d25959c78ce2875b8f92f4b0b8f0eacd5cab18afd669bd53c0827616c52edd65",
-        "assetId": "ZT2D0xEAACMAaa14"
-      },
-      "media/media-0.JPG": {
-        "hash": "61cc526b9ade01a9fc917a7ef64db880302d30407501ec4fd30b2c1779b5d0e4",
-        "assetId": "ZT2D1BEAACIAaa1_"
-      },
-      "media/media-1.jpg": {
-        "hash": "167f368d8f5f97001351fd329620f1dd3970b268f0e7c6c51367a926ef5c720c",
-        "assetId": "ZT2D1BEAACMAaa2A"
-      },
-      "media/media-2.JPG": {
-        "hash": "c1fed1e922604e3b2291265c0fe5723f6f72d2b6cf9b99e3441ec63b6e716b14",
-        "assetId": "ZT2D1BEAACMAaa2B"
-      },
-      "media/media-3.JPG": {
-        "hash": "298ef095baf929b7fa432d6d9384bdb822149861ab8ff7fb6f629ad3675101d4",
-        "assetId": "ZT2D1BEAACMAaa2C"
-      },
-      "media/media-4.JPG": {
-        "hash": "75912d7f50c69163ab23cfe3c2c9dd16e347bb6b9982d4bb961a362855365887",
-        "assetId": "ZT2D1BEAACIAaa2D"
-      },
-      "media/media-5.JPG": {
-        "hash": "7557abab845d5514188fa59dd47e111709137606517ae51318474018625ffa49",
-        "assetId": "ZT2D1BEAACUAaa2E"
-      }
-    }
-  },
-  "xwing": {
-    "sourceHash": "277774779d51dbbe20c1f7225319ea659671555c96f8968333a37bf31b4b7541",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "aec9736941f23be7468cc89d4f8c2850e95b5db6f6bd6a60615c0fabaf305a7c",
-        "assetId": "ZO4vvxAAACAA_7HS"
-      },
-      "media/media-0.mp4": {
-        "hash": "d064940ec5cb249dd5686e2bf5deadd4eba91810cc3b0e2589dcc97e15b84b9f",
-        "assetId": "ZO4vvxAAACIA_7HR"
-      }
-    }
-  },
-  "yourtoys": {
-    "sourceHash": "c0473571fdc63e8f0ddcd2791283abf7615a9d0cb762f1139a53126c771190a5",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "7a83a3873cc96f860abd9b4fab891daed5ac9bf39032a9c4c30c0e6532f40180",
-        "assetId": "ZT1xCxEAACIAaVmP"
-      },
-      "media/media-0.mp4": {
-        "hash": "19f6833872430713cbd1312cc83705eb33c7ede836fda55e5b2e9f141db10cf4",
-        "assetId": "ZT1xDBEAACIAaVmQ"
-      },
-      "media/media-1.jpg": {
-        "hash": "a2c912eb474936a05ba0c9fed537ecfb2f1694d5fb0166f703b977bd948e36bd",
-        "assetId": "ZT1xCxEAACMAaVmO"
-      }
-    }
-  },
-  "chalet-du-parc": {
-    "sourceHash": "72fb76cc86aef5263b8fcb42988350f19304a2ab2e3f660cac05c08e19e2fdf2",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "5bbf10c640b33cf7ca59bc7e6a6c38e0192efd07265b8f45011ae45c3ebf071d",
-        "assetId": "fdip3cBIiHY1S-p1"
-      }
-    }
-  },
-  "cite-de-la-tapisserie": {
-    "sourceHash": "1da6ef2ac2c62a4210a5d1de8fab518d3924f9a3cc5b809d06627e794ca87c90",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "c468afa96246e8fb1c8099b022c0c6286bbac2344077ccfb777ba00dc338b402",
-        "assetId": "9oLJ1WJ3PtsWd5KA"
-      }
-    }
-  },
-  "fraiche-design-thinking": {
-    "sourceHash": "db00670e91eb66b2decbeacc859a3b43a8fa5c268d745b67f8f19e092714932e",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "8f20b706db0ccdd2fd5e3cc664390cfcd5f2757b35ad80dd68f41b2defb52dc0",
-        "assetId": "OjEbZ4L08o6oVqUK"
-      }
-    }
-  },
-  "la-comedie": {
-    "sourceHash": "13cde148527a156232c6f303b581773c5ade0c8ca559934a573e87a00455f30e",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "2390bca8fad568c2bf1a4972c10fa7623b1d6271ec730ce78e218eb3a382d7ec",
-        "assetId": "beihC-Y4IrtEwqje"
-      }
-    }
-  },
-  "memorial-de-verdun": {
-    "sourceHash": "7b11610f470df90acff8810879cd45152ae937ab2312b19dbafeb6a5c96b3da3",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "38b13f9b98914dcd5622d10f7d9d0449a511610feb3be6427677255f0eea3bbf",
-        "assetId": "lOoMS-ir0_X5ki2X"
-      }
-    }
-  },
-  "mingat": {
-    "sourceHash": "e509b37a179e2d5a118967124f55fb20157610a796b9e6a1cbe52b42ba1ef908",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "f7785bd2ca00152163530cda63a8b5036cfa0924b5348a484a76213359631ed2",
-        "assetId": "71v0W4xjKJ8eMsvG"
-      }
-    }
-  },
-  "musee-beaux-arts-rennes": {
-    "sourceHash": "3056323c33ed4f3abd9eb2c24799fa77d89f119c2773a208ef7397d2cf7dd375",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "29e2e697fd318ef935dad9578cfc28ee7b880d63fa4ab7ad137370e2ea99885d",
-        "assetId": "LTBm7Jg4wgROraot"
-      }
-    }
-  },
-  "nuits-de-fourviere": {
-    "sourceHash": "9db0fd98fa373273b29f9c1e4b194a66844b5f64019f2410dd72db0838e755b9",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "bf75a0ce5ec7074e8ab31c46ae73896a65c7de68608227b7b13201f3b1665479",
-        "assetId": "2tfl9MjRLHeq7eQY"
-      }
-    }
-  },
-  "theatre-des-celestins": {
-    "sourceHash": "f75f0b8014a0269d22dbd422ada55ef43728b606601322059c86d51298737b9b",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "6572c06b3a58690e1ebbed877040e3a109d6accd0641ab5ed1d57e3f3db2954c",
-        "assetId": "6MIgBL59AQ9cCKLR"
-      }
-    }
-  },
-  "theatre-du-rond-point": {
-    "sourceHash": "e2d75b51a7275f458db74379653b2af0c373122671e8940a2a947e6ed35d73b1",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "25576b8803daa5d94800d0158a0d7fa082c52a79d3810c88785dce93743d3e2d",
-        "assetId": "n1b9-iF768TNk0bl"
-      }
-    }
-  },
-  "unanime": {
-    "sourceHash": "1d0f09162dfad65c91e73ff173814cda1aced4aafa1c97893033d840da0dfc28",
-    "media": {
-      "media/thumbnail.jpg": {
-        "hash": "7d7b633144a30c3560d67745fb9408c1ff3bb8e5865319638d53896359848669",
-        "assetId": "y-HYA8G_sKXzH9GY"
       }
     }
   }

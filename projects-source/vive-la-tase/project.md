@@ -12,7 +12,9 @@ tags:
   - Design d'interface
   - Motion design
 awards: []
-medias: []
+medias:
+  - file: media/maquette-accueil.jpg
+    sound_enabled: false
 thumbnail: media/thumbnail.jpg
 meta_title:
 meta_description:

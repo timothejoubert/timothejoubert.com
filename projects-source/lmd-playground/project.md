@@ -40,9 +40,4 @@ Création de l'identité visuelle et d'un outil web interactif pour les journée
 
 ## Content
 
-À l'occasion des journées portes ouvertes de La Martinière Diderot 2021, j’ai imaginé une identité visuelle générative. Pour mettre en avant l'aspect modulaire du design, j'ai mis en place une interface graphique. Les visiteurs des JPO en ligne ont donc pu interagir avec pour générer
-leur propre palette colorimétrique, leur propre composition et animer le tout pour rendre leur visite plus attrayante.
-
-Je n'ai jamais été très fan des productions d'art génératif, cela m'évoque plus des œuvres de scientifique que des œuvres graphiques. Cependant, j'aimerais utiliser cette pratique pour réaliser des outils graphiques facilitant la déclinaison et l'itération autour d'une identité graphique. J'apprécie particulièrement les projets du [Studio Dumbar](https://studiodumbar.com/work/north-sea-jazz) et de [Chevalvert](https://chevalvert.fr/fr/projects/federation-francaise-du-paysage), ils mettent à profit la programmation pour proposer des visuels et des animations originales. 
-
-
+À l'occasion des journées portes ouvertes de La Martinière Diderot 2021, j’ai imaginé une identité visuelle générative. Pour mettre en avant l'aspect modulaire du design, j'ai mis en place une interface graphique. Les visiteurs des JPO en ligne ont donc pu interagir avec pour générer leur propre palette colorimétrique, leur propre composition et animer le tout pour rendre leur visite plus attrayante. Je n'ai jamais été très fan des productions d'art génératif, cela m'évoque plus des œuvres de scientifique que des œuvres graphiques. Cependant, j'aimerais utiliser cette pratique pour réaliser des outils graphiques facilitant la déclinaison et l'itération autour d'une identité graphique. J'apprécie particulièrement les projets du [Studio Dumbar](https://studiodumbar.com/work/north-sea-jazz) et de [Chevalvert](https://chevalvert.fr/fr/projects/federation-francaise-du-paysage), ils mettent à profit la programmation pour proposer des visuels et des animations originales.

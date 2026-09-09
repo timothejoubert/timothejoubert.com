@@ -80,9 +80,37 @@ function validateFrontMatter(frontMatter) {
     return errors
 }
 
+// Asset tags are capped at 20 characters by the Asset API — several project uids exceed
+// that (e.g. "cest-tout-un-programme"), so the tag is a truncated prefix rather than the
+// full uid. Truncated prefixes happen to stay distinct across the current project set.
+function assetTag(uid) {
+    return uid.slice(0, 20)
+}
+
+// Looks up the Prismic media library for an asset already tagged with this project's uid,
+// matching on filename + exact byte size — the uid tag is what makes this safe (the same
+// filename, e.g. "thumbnail.jpg", is reused across every project, so filename/size alone
+// could false-match another project's asset of the same size). This is what actually
+// prevents duplicate uploads across retries: a failed migrate() can leave assets created
+// but undiscovered by .sync-state.json, since it's only persisted after a *successful*
+// migration.
+async function findExistingAssetId(uid, filename, size) {
+    const url = new URL('assets', writeClient.assetAPIEndpoint)
+    url.searchParams.set('keyword', filename)
+    url.searchParams.set('pageSize', '100')
+
+    const response = await fetch(url, {
+        headers: { repository: writeClient.repositoryName, authorization: `Bearer ${writeClient.writeToken}` },
+    })
+    if (!response.ok) return null
+
+    const { items } = await response.json()
+    return items?.find(asset => asset.size === size && asset.tags?.some(tag => tag.name === assetTag(uid)))?.id ?? null
+}
+
 // dataPath describes where to read the resulting asset `id` back from a refetched
 // document, once a *new* asset has actually been created by the migration.
-function resolveMedia(projectDir, relPath, kind, dataPath, cachedMedia) {
+async function resolveMedia(uid, projectDir, relPath, kind, dataPath, cachedMedia) {
     const buffer = readFileSync(join(projectDir, relPath))
     const hash = hashBuffer(buffer)
     const cached = cachedMedia?.[relPath]
@@ -98,7 +126,18 @@ function resolveMedia(projectDir, relPath, kind, dataPath, cachedMedia) {
     }
 
     const filename = relPath.split('/').pop()
-    const asset = migration.createAsset(buffer, filename)
+    const existingId = await findExistingAssetId(uid, filename, buffer.length)
+    if (existingId) {
+        return {
+            relPath,
+            hash,
+            dataPath,
+            changed: false,
+            field: kind === 'image' ? { id: existingId } : { link_type: 'Media', id: existingId },
+        }
+    }
+
+    const asset = migration.createAsset(buffer, filename, { tags: [assetTag(uid)] })
     return { relPath, hash, dataPath, changed: true, field: kind === 'image' ? asset : { link_type: 'Media', id: asset } }
 }
 
@@ -108,10 +147,10 @@ function readAssetIdFromDoc(doc, dataPath) {
     return doc.data.medias?.[dataPath.index]?.media?.id ?? null
 }
 
-function buildData({ frontMatter, shortDescription, content, thumbnail, metaImage, mediaEntries }, projectDir) {
+function buildData({ uid, frontMatter, shortDescription, content, thumbnail, metaImage, mediaEntries }, projectDir) {
     const resolveImage = (src, alt) => {
         const buffer = readFileSync(join(projectDir, src))
-        return migration.createAsset(buffer, src.split('/').pop(), { alt })
+        return migration.createAsset(buffer, src.split('/').pop(), { alt, tags: [assetTag(uid)] })
     }
 
     return {
@@ -122,7 +161,7 @@ function buildData({ frontMatter, shortDescription, content, thumbnail, metaImag
         awards: (frontMatter.awards ?? []).map(award => ({
             name: award.name ?? null,
             type: award.type ?? null,
-            link: award.link ? { link_type: 'Web', url: award.link } : null,
+            link: award.link ? { link_type: 'Web', url: award.link } : { link_type: 'Any' },
         })),
         tag_group: (frontMatter.tags ?? []).map(tag => ({ tag })),
         framework: frontMatter.framework ?? null,
@@ -133,7 +172,7 @@ function buildData({ frontMatter, shortDescription, content, thumbnail, metaImag
         content: markdownToRichText(content, { resolveImage }).result,
         thumbnail: thumbnail?.field ?? null,
         date: frontMatter.date ?? null,
-        link: frontMatter.link ? { link_type: 'Web', url: frontMatter.link } : null,
+        link: frontMatter.link ? { link_type: 'Web', url: frontMatter.link } : { link_type: 'Any' },
         link_label: frontMatter.link_label ?? null,
         medias: (frontMatter.medias ?? []).map((media, index) => {
             const entry = { sound_enabled: media.sound_enabled ?? false }
@@ -204,16 +243,16 @@ for (const uid of uids) {
     }
 
     const thumbnail = frontMatter.thumbnail
-        ? resolveMedia(projectDir, frontMatter.thumbnail, 'media', { type: 'thumbnail' }, cached?.media)
+        ? await resolveMedia(uid, projectDir, frontMatter.thumbnail, 'media', { type: 'thumbnail' }, cached?.media)
         : null
     const metaImage = frontMatter.meta_image
-        ? resolveMedia(projectDir, frontMatter.meta_image, 'image', { type: 'meta_image' }, cached?.media)
+        ? await resolveMedia(uid, projectDir, frontMatter.meta_image, 'image', { type: 'meta_image' }, cached?.media)
         : null
-    const mediaEntries = (frontMatter.medias ?? []).map((media, index) =>
-        media.file ? resolveMedia(projectDir, media.file, 'media', { type: 'medias', index }, cached?.media) : null,
-    )
+    const mediaEntries = await Promise.all((frontMatter.medias ?? []).map((media, index) =>
+        media.file ? resolveMedia(uid, projectDir, media.file, 'media', { type: 'medias', index }, cached?.media) : null,
+    ))
 
-    const data = buildData({ frontMatter, shortDescription, content, thumbnail, metaImage, mediaEntries }, projectDir)
+    const data = buildData({ uid, frontMatter, shortDescription, content, thumbnail, metaImage, mediaEntries }, projectDir)
     const title = frontMatter.title || uid
 
     let existingDoc = null
@@ -244,6 +283,8 @@ if (pendingRefetch.length > 0) {
     }
     catch (error) {
         console.warn(`\nmigrate() failed: ${error.message}`)
+        if (error.response) console.warn(JSON.stringify(error.response, null, 2))
+        else console.warn(error.stack)
         console.warn('Some projects below may or may not have been created/updated — verifying what actually landed in Prismic...')
     }
 

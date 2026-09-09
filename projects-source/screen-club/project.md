@@ -14,7 +14,7 @@ link_status: offline
 tags:
   - Développement
   - Design d'interface
-awards:
+tools:
   - Wagtail
   - Javascript
 medias:

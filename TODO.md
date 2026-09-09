@@ -1,13 +1,16 @@
 ### TODO
+- Dans l'interface Prismic d'un projet je voudrais mettre les champs (type, awards, via, client, tools) dans un autre onglet pour avoir une interface plus claire
+
 - Archive locale de projets (`projects-source/`) : structure, convention et scripts déjà en place (voir "Done" plus bas) — reste à faire au fil de l'eau :
   - Ajouter les nouveaux projets (passés et à venir) à la main dans `projects-source/`, un dossier par `uid` avec son `project.md` et ses médias, en suivant `docs/project-source-structure.md`.
   - Vérifier régulièrement avec `pnpm projects:check-source` (front-matter valide, fichiers médias présents).
   - Lancer `pnpm projects:import-source` (avec `PRISMIC_WRITE_TOKEN`) pour pousser les projets nouveaux/modifiés vers Prismic.
 
-- CMS: nettoyage final de la migration `framework`/`via`/`client`/`tools` (cf. "Done" plus bas pour ce qui a déjà été fait) :
-  - Une fois confiant que plus rien ne s'appuie sur les anciennes options, retirer `Rézo zéro | Master 2 | DSAA | DEC | BTS | STD2A` du `Select` `framework` du custom type `project` via la CLI Prismic (gardées pour l'instant par prudence, aucun document ne les utilise plus).
+- CMS: nettoyage final de la migration `framework`/`via`/`client`/`tools` (cf. "Done" plus bas pour ce qui a déjà été fait). État vérifié le 2026-09-08 : les 46 projets `Agence`/`École`/`Stage` sont publiés côté Prismic avec des données complètes (0 document encore sur une ancienne valeur `framework`, 0 champ core vidé par erreur — vérifié via l'API directement). Reste à faire :
+  - Retirer `Rézo zéro | Master 2 | DSAA | DEC | BTS | STD2A` du `Select` `framework` du custom type `project` via la CLI Prismic (gardées pour l'instant par prudence, mais plus aucun document ne les utilise — sûr de les retirer maintenant).
   - Ajouter `via`/`client`/`tools` au tableau de correspondance de `docs/project-source-structure.md` (actuellement documentés à part comme fraîchement migrés).
   - Émettre `client` dans le JSON-LD (`usePrismicProjectSchemaOrg`, propriété schema.org `sourceOrganization`).
+  - Bibliothèque média Prismic nettoyée le 2026-09-08 : 1045 → 299 assets (746 doublons supprimés, résidus des tentatives ratées pendant cette migration), tous les assets restants tagués avec le uid de leur projet (`scripts/import-projects-from-source.js` tague désormais chaque nouvel asset automatiquement).
 
 - `projects-source/` : `project.md` versionné en git, mais `media/` et `sources/` de chaque projet restent ignorés pour l'instant (451 Mo actuellement, surtout des vidéos — git n'est pas adapté à ce type de contenu en l'état). Mettre en place Git LFS pour `media/` (au moins les `.mp4`/`.mov`) afin de pouvoir versionner ces fichiers sans faire grossir le `.git` indéfiniment ; `sources/` (fichiers de travail bruts psd/ai/figma) peut rester non versionné même après ça.
 
