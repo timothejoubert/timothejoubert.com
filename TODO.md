@@ -1,4 +1,5 @@
 ### TODO
+- Performance : appliquer les pistes de /docs/performance-audit.md — preconnect vers `images.prismic.io` (`nuxt.config.ts`), `fetchpriority`/`loading` explicite sur l'image LCP du listing et de la page projet, vérifier l'usage de `@nuxt/fonts` (préload des fonts critiques)
 - Changer le type media (link) vers un field image pour thumbnail et media dans le document Projet (faire attention a ne pas perdre les relations de media lors de ces changements de type de field dans prismic)
 - Retire les dossier atoms,molecules,organisms dans components et resoudre toutes les paths des composants utilisé dans la codeBase
 - VArchivePage: ajouter un scroll pour la cell de tags si le contenu dépasse la taille initiale

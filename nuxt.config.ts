@@ -77,6 +77,11 @@ export default defineNuxtConfig({
             // Aliases and llms.txt aren't linked from anywhere in the app, so the crawler won't find
             // them on its own.
             routes: [...Object.keys(getPrismicAliasRedirects()), '/llms.txt'],
+            // Generate flat `page.html` files instead of `page/index.html`. Netlify's static server
+            // 301-redirects a bare `/page` to `/page/` when a directory exists — which conflicted with
+            // canonical/sitemap/og:url (all built without a trailing slash), likely why Google Search
+            // Console showed every page but the homepage as "Discovered - currently not indexed".
+            autoSubfolderIndex: false,
         },
     },
     vite: {
