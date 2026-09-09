@@ -60,17 +60,22 @@ if (projects.value?.length) {
     grid-column: 1 / -1;
     list-style: none;
     opacity: 0;
+    outline: 1PX solid transparent;
+    transition:
+        opacity 0.5s calc(var(--item-index, 0) * 30ms) ease(out-quad),
+        translate 0.5s calc(var(--item-index, 0) * 30ms) ease(out-quad),
+        outline 0.2s ease(out-quad);
     translate: 0 24px;
+
+    &:has([aria-current="page"]) {
+        outline-color: var(--color-accent);
+    }
 
     @include media('>=md') {
         grid-column: auto;
     }
 
-    @media (prefers-reduced-motion: no-preference) {
-        transition: 0.5s ease(out-quad);
-        transition-delay: calc(var(--item-index, 0) * 30ms);
-        transition-property: opacity, translate;
-    }
+
 
     &--visible {
         opacity: 1;
