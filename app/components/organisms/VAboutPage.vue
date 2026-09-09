@@ -106,7 +106,7 @@ const columns = computed(() => [
     --grid-container-width: 100%;
 
     padding-top: 15vh;
-    row-gap: 82px;
+    row-gap: 122px;
 }
 
 .content {
@@ -189,7 +189,7 @@ const columns = computed(() => [
 }
 
 .column-title {
-    margin-block: 0 28px;
+    margin-block: 0 48px;
     opacity: 0;
     translate: 0 24px;
 
