@@ -4,7 +4,8 @@ title: Théâtre du Rond-Point
 favorite: false
 date: '2025-06-09'
 creative_work_type: WebSite
-framework: Rézo zéro
+framework: Agence
+via: Rézo zéro
 rate: 15
 link: https://www.theatredurondpoint.fr/
 link_label: Voir le site
@@ -16,6 +17,9 @@ thumbnail: media/thumbnail.jpg
 meta_title:
 meta_description:
 meta_image:
+tools:
+  - Roadiz
+  - Nuxt
 ---
 
 ## Short description

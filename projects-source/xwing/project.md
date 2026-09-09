@@ -4,7 +4,9 @@ title: X-wing
 favorite: false
 date: '2021-10-20'
 creative_work_type: VisualArtwork
-framework: Master 2
+framework: École
+client:
+via: CIM — Université Lyon 2
 rate: 12
 link: null
 link_label: null

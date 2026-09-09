@@ -4,14 +4,19 @@ title: Screen club
 favorite: false
 date: '2021-05-19'
 creative_work_type: WebSite
-framework: Freelance
+framework: Stage
+via: Screen club
+client:
 rate: 15
 link: https://www.screen-club.com/
 link_label: null
+link_status: offline
 tags:
   - Développement
   - Design d'interface
-awards: []
+awards:
+  - Wagtail
+  - Javascript
 medias:
   - sound_enabled: false
     file: media/media-0.jpg
@@ -34,5 +39,3 @@ meta_image: null
 Création du portfolio pour Screen club, un studio Lyonnais de développement Web, d'art numérique et de scénographie dirigé par dirigé par Martial Geoffre-Rouland.
 
 ## Content
-
-

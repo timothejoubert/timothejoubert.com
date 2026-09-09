@@ -4,7 +4,8 @@ title: Musée des beaux-arts de Rennes
 favorite: false
 date: '2024-09-16'
 creative_work_type: WebSite
-framework: Rézo zéro
+framework: Agence
+via: Rézo zéro
 rate: 16
 link: https://mba.rennes.fr/
 link_label: Voir le site
@@ -16,6 +17,9 @@ thumbnail: media/thumbnail.jpg
 meta_title:
 meta_description:
 meta_image:
+tools:
+  - Roadiz
+  - Nuxt
 ---
 
 ## Short description

@@ -93,6 +93,8 @@ async function buildProjectArchive(doc, warnings) {
         date: data.date || null,
         creative_work_type: data.creative_work_type || null,
         framework: data.framework || null,
+        via: data.via || null,
+        client: data.client || null,
         rate: data.rate ?? null,
         link: data.link?.url ?? null,
         link_label: data.link_label || null,
@@ -109,6 +111,7 @@ async function buildProjectArchive(doc, warnings) {
         meta_title: data.meta_title || null,
         meta_description: data.meta_description || null,
         meta_image: metaImagePath ? toRelativePath(metaImagePath, projectDir) : null,
+        tools: data.tools ? data.tools.split(',').map(tool => tool.trim()).filter(Boolean) : [],
     }
 
     const shortDescription = richTextToMarkdown(data.short_description, warnings)

@@ -4,7 +4,9 @@ title: Fontimate
 favorite: true
 date: '2022-02-04'
 creative_work_type: SoftwareApplication
-framework: Master 2
+framework: École
+client:
+via: CIM — Université Lyon 2
 rate: 16
 link: https://fontimate.netlify.app/
 link_label: null

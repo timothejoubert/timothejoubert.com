@@ -4,7 +4,9 @@ title: Vestige informatique
 favorite: false
 date: '2020-04-15'
 creative_work_type: CreativeWork
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 14
 link: null
 link_label: null

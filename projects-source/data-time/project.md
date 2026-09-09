@@ -4,7 +4,9 @@ title: DataTime
 favorite: false
 date: '2020-04-11'
 creative_work_type: SoftwareApplication
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 12
 link: null
 link_label: null

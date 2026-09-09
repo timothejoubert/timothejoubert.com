@@ -4,8 +4,16 @@ title:
 favorite: false
 date:
 creative_work_type:                 # CreativeWork | WebSite | SoftwareApplication | VisualArtwork | VideoObject
-framework:                          # Freelance | Perso | Rézo zéro | Master 2 | DSAA | DEC | BTS | STD2A
-client:                              # archive-only pour l'instant (à ajouter au custom type Prismic `project` à l'avenir, mappe sur schema.org `sourceOrganization`)
+framework:                          # Freelance | Perso | Agence | École | Stage
+via:                                 # nom précis du cadre : agence, studio de stage, établissement scolaire... vide pour Freelance/Perso
+                                     #   Agence : Rézo zéro
+                                     #   Stage  : Screen club
+                                     #   École (Master 2) : CIM — Université Lyon 2
+                                     #   École (DSAA)      : DSAA Design — La Martinière Diderot, Lyon
+                                     #   École (DEC)       : Techniques d'intégration multimédia, Matane
+                                     #   École (BTS)       : Design graphique, Villefontaine
+client:                              # commanditaire réel du projet, mappe sur schema.org `sourceOrganization`
+                                     # peut différer projet par projet même sous le même `via` ; vide si aucun commanditaire externe (projet perso, ou projet qui documente `via` lui-même)
 rate:
 link:
 link_label:
@@ -35,7 +43,7 @@ link_status:                        # archive-only — online | offline | archiv
 collaborators: []                   # archive-only
                                      # - name: Prénom Nom
                                      #   role: Design | Développement | ...
-tools: []                           # archive-only pour l'instant (à ajouter au custom type Prismic `project` à l'avenir)
+tools: []                           # ex. Figma, Three.js — joint par ", " lors de l'import (Text côté Prismic)
                                      # - Figma
                                      # - Three.js
 ---

@@ -4,7 +4,9 @@ title: Éclipse
 favorite: false
 date: '2020-03-17'
 creative_work_type: CreativeWork
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 11
 link: https://dsaadesign-lyon.fr/fr/eclipse-mirage-festival-2020/
 link_label: null

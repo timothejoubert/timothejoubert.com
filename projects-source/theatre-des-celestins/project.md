@@ -4,7 +4,8 @@ title: Théâtre des Célestins
 favorite: false
 date: '2024-02-01'
 creative_work_type: WebSite
-framework: Rézo zéro
+framework: Agence
+via: Rézo zéro
 rate: 16
 link: https://theatredescelestins.fr/
 link_label: Voir le site
@@ -16,6 +17,9 @@ thumbnail: media/thumbnail.jpg
 meta_title:
 meta_description:
 meta_image:
+tools:
+  - Roadiz
+  - Nuxt
 ---
 
 ## Short description

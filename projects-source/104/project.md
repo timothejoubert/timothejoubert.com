@@ -1,13 +1,14 @@
 ---
-uid: cite-de-la-tapisserie
-title: Cité de la tapisserie
+uid: '104'
+title: '104'
 favorite: false
-date: '2024-12-02'
+date: '2026-03-30'
 creative_work_type: WebSite
 framework: Agence
 via: Rézo zéro
-rate: 15
-link: https://www.cite-tapisserie.fr/
+client: CENTQUATRE-PARIS
+rate: 16
+link: https://www.104.fr/
 link_label: Voir le site
 tags:
   - Développement
@@ -17,6 +18,11 @@ thumbnail: media/thumbnail.jpg
 meta_title:
 meta_description:
 meta_image:
+sources:
+  - label: Repo
+    link: https://gitlab.rezo-zero.com/cent-quatre-paris/104.fr
+link_status: online
+collaborators: []
 tools:
   - Roadiz
   - Nuxt
@@ -24,7 +30,7 @@ tools:
 
 ## Short description
 
-Site web pour la Cité internationale de la tapisserie à Aubusson
+Site web pour l'établissement public Le Centquatre-Paris
 
 ## Content
 

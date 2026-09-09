@@ -4,7 +4,9 @@ title: Duik wtf
 favorite: false
 date: '2021-12-07'
 creative_work_type: VideoObject
-framework: Master 2
+framework: École
+client:
+via: CIM — Université Lyon 2
 rate: 12
 link: null
 link_label: null

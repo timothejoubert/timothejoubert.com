@@ -4,7 +4,9 @@ title: Abra vinum
 favorite: false
 date: '2021-04-13'
 creative_work_type: WebSite
-framework: Freelance
+framework: Stage
+via: Screen club
+client: Abra vinum
 rate: 12
 link: null
 link_label: null
@@ -12,6 +14,9 @@ tags:
   - Développement
   - Design d'interface
 awards: []
+tools:
+  - Wagtail CMS
+  - Javascript
 medias:
   - sound_enabled: false
     file: media/media-0.jpg

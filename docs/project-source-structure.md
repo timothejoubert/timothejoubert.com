@@ -31,6 +31,9 @@ Portée actuelle : uniquement la convention. Aucun script d'export (Prismic → 
 | `awards` | Group (`name`, `link`, `type`) | Front-matter `awards` (liste d'objets) |
 | `tag_group` | Group (`tag`, Select) | Front-matter `tags` (liste de strings) |
 | `framework` | Select | Front-matter `framework` |
+| `via` | Text | Front-matter `via` |
+| `client` | Text | Front-matter `client` |
+| `tools` | Text (liste jointe par `, `) | Front-matter `tools` (liste de strings) |
 | `short_description` | StructuredText (court) | Corps markdown, section `## Short description` |
 | `content` | StructuredText | Corps markdown, section `## Content` |
 | `thumbnail` | LinkToMedia | Fichier dans `media/`, référencé par front-matter `thumbnail` |
@@ -44,12 +47,20 @@ Portée actuelle : uniquement la convention. Aucun script d'export (Prismic → 
 
 Chaque champ Prismic apparaît exactement une fois dans l'archive — aucun champ n'est dupliqué ni omis.
 
+Précisions sur `via`/`client` (pas encore émis dans le JSON-LD du site, cf. `TODO.md`) :
+- `via` — nom précis du cadre désigné par `framework` : l'agence pour `Agence`, le studio pour un `Stage`, l'établissement/formation pour une `École` ; vide pour `Freelance`/`Perso` (pas d'intermédiaire à préciser). Valeurs en usage :
+  - Agence : `Rézo zéro`
+  - Stage : `Screen club`
+  - École (Master 2) : `CIM — Université Lyon 2`
+  - École (DSAA) : `DSAA Design — La Martinière Diderot, Lyon`
+  - École (DEC) : `Techniques d'intégration multimédia, Matane`
+  - École (BTS) : `Design graphique, Villefontaine`
+- `client` — commanditaire réel du projet (mappe sur la propriété schema.org `sourceOrganization`), peut différer projet par projet même sous le même `via` (ex. deux stages chez Screen club pour deux clients différents) ; vide si le projet n'a pas de commanditaire externe (projet perso, ou projet qui documente `via` lui-même — ex. le portfolio du studio de stage).
+
 En plus de cette correspondance, le front-matter porte des champs **archive-only** sans équivalent Prismic — jamais lus ni écrits par `projects:import-source` ni `projects:export-source`, purement pour référence personnelle :
 - `sources` (liste d'objets `label`/`link`) — liens vers les fichiers de travail (repo, Figma, dossier Drive...).
 - `link_status` (`online` | `offline` | `archived`) — état du lien public (`link`), pour repérer sans revisiter chaque URL un projet dont le site n'est plus en ligne (cf. le cas de `timothejoubert.com`, domaine expiré et repris par un tiers).
 - `collaborators` (liste d'objets `name`/`role`) — qui a travaillé sur le projet et dans quel rôle.
-- `tools` (liste de strings, ex. `Figma`, `Three.js`) — outils/stack utilisés. Archive-only pour l'instant ; à ajouter au custom type Prismic `project` à l'avenir (via la CLI Prismic, cf. `TODO.md`), à ce moment-là ce champ rejoindra le tableau de correspondance ci-dessus.
-- `client` (string) — organisation commanditaire du projet (mappe sur la propriété schema.org `sourceOrganization`). Archive-only pour l'instant ; même trajectoire que `tools` (à pousser vers Prismic + JSON-LD, cf. `TODO.md`).
 
 ## Valeurs autorisées
 
@@ -57,7 +68,7 @@ Ces listes sont dupliquées depuis `customtypes/project/index.json` — elles fo
 même si Prismic ou ce fichier disparaissent. Si le custom type Prismic évolue, mettre à jour ici aussi.
 
 - **creative_work_type** : CreativeWork | WebSite | SoftwareApplication | VisualArtwork | VideoObject
-- **framework** : Freelance | Perso | Rézo zéro | Master 2 | DSAA | DEC | BTS | STD2A
+- **framework** : Freelance | Perso | Agence | École | Stage — le custom type Prismic garde encore `Rézo zéro | Master 2 | DSAA | DEC | BTS | STD2A` en plus par prudence (ancien modèle, plus utilisé par aucun document), à retirer une fois la migration jugée stable, cf. `TODO.md`.
 - **tags** : Développement, Typographie, Design d'interface, Identité visuelle, Code créatif,
   Motion design, Édition, Illustration, Expression plastique, Multimédia
 - **awards.type** : book | web
@@ -71,8 +82,9 @@ title: Mon Projet
 favorite: true
 date: 2024-03-01
 creative_work_type: CreativeWork   # CreativeWork | WebSite | SoftwareApplication | VisualArtwork | VideoObject
-framework: Perso                    # Freelance | Perso | Rézo zéro | Master 2 | DSAA | DEC | BTS | STD2A
-client:                              # archive-only pour l'instant (à ajouter au custom type Prismic `project` à l'avenir, mappe sur schema.org `sourceOrganization`)
+framework: Perso                    # Freelance | Perso | Agence | École | Stage
+via:                                 # nom précis du cadre (agence, studio de stage, établissement scolaire...) — vide pour Freelance/Perso
+client:                              # commanditaire réel du projet — mappe sur schema.org `sourceOrganization`
 rate:
 link:
 link_label:
@@ -102,7 +114,7 @@ link_status: online                 # archive-only — online | offline | archiv
 collaborators:                      # archive-only
   - name: Prénom Nom
     role: Design
-tools:                               # archive-only pour l'instant (à ajouter au custom type Prismic `project` à l'avenir)
+tools:                               # ex. Figma, Three.js — joint par ", " lors de l'import (Text côté Prismic)
   - Figma
 ---
 

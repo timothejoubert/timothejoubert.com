@@ -4,7 +4,8 @@ title: CMBV
 favorite: false
 date: '2022-09-19'
 creative_work_type: WebSite
-framework: Rézo zéro
+framework: Agence
+via: Rézo zéro
 rate: 12
 link: https://expodcast.cmbv.fr
 link_label: null
@@ -22,6 +23,9 @@ thumbnail: media/thumbnail.jpg
 meta_title: null
 meta_description: null
 meta_image: null
+tools:
+  - Roadiz
+  - Nuxt
 ---
 
 ## Short description

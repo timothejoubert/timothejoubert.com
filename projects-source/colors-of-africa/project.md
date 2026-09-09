@@ -4,7 +4,9 @@ title: Colors of africa
 favorite: false
 date: '2021-07-13'
 creative_work_type: SoftwareApplication
-framework: Freelance
+framework: Stage
+via: Screen club
+client: 
 rate: 12
 link: https://colors-of-africa.netlify.app
 link_label: null

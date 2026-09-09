@@ -4,7 +4,8 @@ title: Fraiche design thinking
 favorite: false
 date: '2023-08-01'
 creative_work_type: WebSite
-framework: Rézo zéro
+framework: Agence
+via: Rézo zéro
 rate: 16
 link: https://www.fraichedesignthinking.com/
 link_label: Voir le site
@@ -28,6 +29,9 @@ thumbnail: media/thumbnail.jpg
 meta_title:
 meta_description:
 meta_image:
+tools:
+  - Roadiz
+  - Nuxt
 ---
 
 ## Short description

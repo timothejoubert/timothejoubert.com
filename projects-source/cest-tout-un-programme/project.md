@@ -4,7 +4,9 @@ title: C'est tout un programme
 favorite: false
 date: '2021-02-16'
 creative_work_type: CreativeWork
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 17
 link: null
 link_label: null

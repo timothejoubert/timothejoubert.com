@@ -67,6 +67,9 @@ function validateFrontMatter(frontMatter) {
     if (frontMatter.client !== undefined && frontMatter.client !== null && typeof frontMatter.client !== 'string') {
         errors.push(`Invalid client "${frontMatter.client}" (expected a string)`)
     }
+    if (frontMatter.via !== undefined && frontMatter.via !== null && typeof frontMatter.via !== 'string') {
+        errors.push(`Invalid via "${frontMatter.via}" (expected a string)`)
+    }
 
     return errors
 }

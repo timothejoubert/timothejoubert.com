@@ -4,7 +4,9 @@ title: L'inutile
 favorite: false
 date: '2021-04-02'
 creative_work_type: VisualArtwork
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 11
 link: null
 link_label: null

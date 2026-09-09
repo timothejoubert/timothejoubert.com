@@ -4,7 +4,9 @@ title: Audiome
 favorite: false
 date: '2020-06-01'
 creative_work_type: SoftwareApplication
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 15
 link: https://audiome.netlify.app/home/index.html
 link_label: null

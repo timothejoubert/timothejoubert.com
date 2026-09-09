@@ -4,7 +4,8 @@ title: Modelec
 favorite: true
 date: '2022-12-12'
 creative_work_type: WebSite
-framework: Rézo zéro
+framework: Agence
+via: Rézo zéro
 rate: 18
 link: https://www.modelec.com/fr
 link_label: null
@@ -29,6 +30,9 @@ thumbnail: media/thumbnail.jpg
 meta_title: null
 meta_description: null
 meta_image: null
+tools:
+  - Roadiz
+  - Nuxt
 ---
 
 ## Short description

@@ -59,7 +59,7 @@ export interface AboutDocumentDataFormationsItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	title: prismic.KeyTextField;
-
+	
 	/**
 	 * Contenu field in *about → Formations*
 	 *
@@ -69,7 +69,7 @@ export interface AboutDocumentDataFormationsItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
 	 */
 	content: prismic.RichTextField;
-
+	
 	/**
 	 * Lieu field in *about → Formations*
 	 *
@@ -79,7 +79,7 @@ export interface AboutDocumentDataFormationsItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	place: prismic.KeyTextField;
-
+	
 	/**
 	 * Date field in *about → Formations*
 	 *
@@ -89,7 +89,7 @@ export interface AboutDocumentDataFormationsItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/date
 	 */
 	date: prismic.DateField;
-
+	
 	/**
 	 * Lien field in *about → Formations*
 	 *
@@ -114,7 +114,7 @@ export interface AboutDocumentDataExperiencesItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	title: prismic.KeyTextField;
-
+	
 	/**
 	 * Contenu field in *about → Expériences*
 	 *
@@ -124,7 +124,7 @@ export interface AboutDocumentDataExperiencesItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
 	 */
 	content: prismic.RichTextField;
-
+	
 	/**
 	 * Lieu field in *about → Expériences*
 	 *
@@ -134,7 +134,7 @@ export interface AboutDocumentDataExperiencesItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	place: prismic.KeyTextField;
-
+	
 	/**
 	 * Date field in *about → Expériences*
 	 *
@@ -144,7 +144,7 @@ export interface AboutDocumentDataExperiencesItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/date
 	 */
 	date: prismic.DateField;
-
+	
 	/**
 	 * Lien field in *about → Expériences*
 	 *
@@ -172,7 +172,7 @@ interface AboutDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	title: prismic.KeyTextField;
-
+	
 	/**
 	 * content field in *about*
 	 *
@@ -183,7 +183,7 @@ interface AboutDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
 	 */
 	content: prismic.RichTextField;
-
+	
 	/**
 	 * Formations field in *about*
 	 *
@@ -194,7 +194,7 @@ interface AboutDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
 	 */
 	formations: prismic.GroupField<Simplify<AboutDocumentDataFormationsItem>>;
-
+	
 	/**
 	 * Expériences field in *about*
 	 *
@@ -205,7 +205,7 @@ interface AboutDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
 	 */
 	experiences: prismic.GroupField<Simplify<AboutDocumentDataExperiencesItem>>;
-
+	
 	/**
 	 * Slice Zone field in *about*
 	 *
@@ -225,7 +225,7 @@ interface AboutDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	meta_title: prismic.KeyTextField;
-
+	
 	/**
 	 * Meta Description field in *about*
 	 *
@@ -236,7 +236,7 @@ interface AboutDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	meta_description: prismic.KeyTextField;
-
+	
 	/**
 	 * Meta Image field in *about*
 	 *
@@ -276,7 +276,7 @@ interface ArchiveDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	title: prismic.KeyTextField;
-
+	
 	/**
 	 * content field in *archive*
 	 *
@@ -287,7 +287,7 @@ interface ArchiveDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
 	 */
 	content: prismic.RichTextField;
-
+	
 	/**
 	 * Slice Zone field in *archive*
 	 *
@@ -307,7 +307,7 @@ interface ArchiveDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	meta_title: prismic.KeyTextField;
-
+	
 	/**
 	 * Meta Description field in *archive*
 	 *
@@ -318,7 +318,7 @@ interface ArchiveDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	meta_description: prismic.KeyTextField;
-
+	
 	/**
 	 * Meta Image field in *archive*
 	 *
@@ -365,7 +365,7 @@ interface HomePageDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	meta_description: prismic.KeyTextField;
-
+	
 	/**
 	 * Meta Image field in *Home page*
 	 *
@@ -376,7 +376,7 @@ interface HomePageDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/image
 	 */
 	meta_image: prismic.ImageField<never>;
-
+	
 	/**
 	 * Meta Title field in *Home page*
 	 *
@@ -414,7 +414,7 @@ interface MenuDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	title: prismic.KeyTextField;
-
+	
 	/**
 	 * Links field in *Menu*
 	 *
@@ -451,7 +451,7 @@ export interface ProjectDocumentDataAwardsItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	name: prismic.KeyTextField;
-
+	
 	/**
 	 * link field in *Project → Awards*
 	 *
@@ -461,7 +461,7 @@ export interface ProjectDocumentDataAwardsItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/link
 	 */
 	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-
+	
 	/**
 	 * type field in *Project → Awards*
 	 *
@@ -501,7 +501,7 @@ export interface ProjectDocumentDataMediasItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/link-to-media
 	 */
 	media: prismic.LinkToMediaField<prismic.FieldState, never>;
-
+	
 	/**
 	 * Embed url field in *Project → Medias*
 	 *
@@ -511,7 +511,7 @@ export interface ProjectDocumentDataMediasItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	embed_url: prismic.KeyTextField;
-
+	
 	/**
 	 * sound enabled field in *Project → Medias*
 	 *
@@ -538,7 +538,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	title: prismic.KeyTextField;
-
+	
 	/**
 	 * Favorite field in *Project*
 	 *
@@ -550,7 +550,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/boolean
 	 */
 	favorite: prismic.BooleanField;
-
+	
 	/**
 	 * Type (schema.org) field in *Project*
 	 *
@@ -561,7 +561,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/select
 	 */
 	creative_work_type: prismic.SelectField<"CreativeWork" | "WebSite" | "SoftwareApplication" | "VisualArtwork" | "VideoObject">;
-
+	
 	/**
 	 * Rate field in *Project*
 	 *
@@ -572,7 +572,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/number
 	 */
 	rate: prismic.NumberField;
-
+	
 	/**
 	 * Awards field in *Project*
 	 *
@@ -583,7 +583,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
 	 */
 	awards: prismic.GroupField<Simplify<ProjectDocumentDataAwardsItem>>;
-
+	
 	/**
 	 * Tag group field in *Project*
 	 *
@@ -594,7 +594,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
 	 */
 	tag_group: prismic.GroupField<Simplify<ProjectDocumentDataTagGroupItem>>;
-
+	
 	/**
 	 * Framework field in *Project*
 	 *
@@ -604,8 +604,8 @@ interface ProjectDocumentData {
 	 * - **Tab**: Main
 	 * - **Documentation**: https://prismic.io/docs/fields/select
 	 */
-	framework: prismic.SelectField<"Freelance" | "Perso" | "Rézo zéro" | "Master 2" | "DSAA" | "DEC" | "BTS" | "STD2A">;
-
+	framework: prismic.SelectField<"Freelance" | "Perso" | "Rézo zéro" | "Master 2" | "DSAA" | "DEC" | "BTS" | "STD2A" | "Agence" | "École" | "Stage">;
+	
 	/**
 	 * Short description field in *Project*
 	 *
@@ -616,7 +616,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
 	 */
 	short_description: prismic.RichTextField;
-
+	
 	/**
 	 * Content field in *Project*
 	 *
@@ -627,7 +627,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
 	 */
 	content: prismic.RichTextField;
-
+	
 	/**
 	 * Thumbnail field in *Project*
 	 *
@@ -638,7 +638,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/link-to-media
 	 */
 	thumbnail: prismic.LinkToMediaField<prismic.FieldState, never>;
-
+	
 	/**
 	 * Date field in *Project*
 	 *
@@ -649,7 +649,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/date
 	 */
 	date: prismic.DateField;
-
+	
 	/**
 	 * Link field in *Project*
 	 *
@@ -660,7 +660,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/link
 	 */
 	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-
+	
 	/**
 	 * Link label field in *Project*
 	 *
@@ -671,7 +671,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	link_label: prismic.KeyTextField;
-
+	
 	/**
 	 * Medias field in *Project*
 	 *
@@ -681,7 +681,40 @@ interface ProjectDocumentData {
 	 * - **Tab**: Main
 	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
 	 */
-	medias: prismic.GroupField<Simplify<ProjectDocumentDataMediasItem>>;/**
+	medias: prismic.GroupField<Simplify<ProjectDocumentDataMediasItem>>;
+	
+	/**
+	 * Via field in *Project*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Nom précis du cadre (agence, studio de stage, établissement scolaire...)
+	 * - **API ID Path**: project.via
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	via: prismic.KeyTextField;
+	
+	/**
+	 * Client field in *Project*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Commanditaire réel du projet
+	 * - **API ID Path**: project.client
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	client: prismic.KeyTextField;
+	
+	/**
+	 * Tools field in *Project*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Outils/stack utilisés (séparés par une virgule)
+	 * - **API ID Path**: project.tools
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	tools: prismic.KeyTextField;/**
 	 * Meta Description field in *Project*
 	 *
 	 * - **Field Type**: Text
@@ -691,7 +724,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	meta_description: prismic.KeyTextField;
-
+	
 	/**
 	 * Meta Image field in *Project*
 	 *
@@ -702,7 +735,7 @@ interface ProjectDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/image
 	 */
 	meta_image: prismic.ImageField<never>;
-
+	
 	/**
 	 * Meta Title field in *Project*
 	 *
@@ -751,7 +784,7 @@ interface ProjectListingPageDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	meta_title: prismic.KeyTextField;
-
+	
 	/**
 	 * Meta Description field in *project_listing_page*
 	 *
@@ -762,7 +795,7 @@ interface ProjectListingPageDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	meta_description: prismic.KeyTextField;
-
+	
 	/**
 	 * Meta Image field in *project_listing_page*
 	 *
@@ -799,7 +832,7 @@ export interface SettingsDocumentDataColumnsItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	title: prismic.KeyTextField;
-
+	
 	/**
 	 * Content field in *Settings → columns*
 	 *
@@ -824,7 +857,7 @@ export interface SettingsDocumentDataSocialsItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/select
 	 */
 	social: prismic.SelectField<"Instagram" | "Facebook" | "Youtube" | "Vimeo" | "TikTok" | "Behance" | "LinkedIn" | "Github">;
-
+	
 	/**
 	 * Link field in *Settings → Socials*
 	 *
@@ -834,7 +867,7 @@ export interface SettingsDocumentDataSocialsItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/link
 	 */
 	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-
+	
 	/**
 	 * Label field in *Settings → Socials*
 	 *
@@ -860,7 +893,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	website_name: prismic.KeyTextField;
-
+	
 	/**
 	 * About title field in *Settings*
 	 *
@@ -871,7 +904,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	about_title: prismic.KeyTextField;
-
+	
 	/**
 	 * About content field in *Settings*
 	 *
@@ -882,7 +915,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
 	 */
 	about_content: prismic.RichTextField;
-
+	
 	/**
 	 * Email field in *Settings*
 	 *
@@ -893,7 +926,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	email: prismic.KeyTextField;
-
+	
 	/**
 	 * Display all projects field in *Settings*
 	 *
@@ -905,7 +938,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/boolean
 	 */
 	display_all_projects: prismic.BooleanField;
-
+	
 	/**
 	 * columns field in *Settings*
 	 *
@@ -925,7 +958,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	meta_description: prismic.KeyTextField;
-
+	
 	/**
 	 * Meta Image field in *Settings*
 	 *
@@ -936,7 +969,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/image
 	 */
 	meta_image: prismic.ImageField<never>;
-
+	
 	/**
 	 * Meta Title field in *Settings*
 	 *
@@ -956,7 +989,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	publisher_name: prismic.KeyTextField;
-
+	
 	/**
 	 * URL field in *Settings*
 	 *
@@ -967,7 +1000,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/link
 	 */
 	publisher_url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-
+	
 	/**
 	 * Image field in *Settings*
 	 *
@@ -978,7 +1011,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/image
 	 */
 	publisher_image: prismic.ImageField<never>;
-
+	
 	/**
 	 * Job title field in *Settings*
 	 *
@@ -989,7 +1022,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	publisher_job_title: prismic.KeyTextField;
-
+	
 	/**
 	 * Works for field in *Settings*
 	 *
@@ -1000,7 +1033,7 @@ interface SettingsDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/text
 	 */
 	publisher_work_for: prismic.KeyTextField;
-
+	
 	/**
 	 * Socials field in *Settings*
 	 *
@@ -1030,15 +1063,15 @@ declare module "@prismicio/client" {
 	interface CreateClient {
 		(repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
 	}
-
+	
 	interface CreateWriteClient {
 		(repositoryNameOrEndpoint: string, options: prismic.WriteClientConfig): prismic.WriteClient<AllDocumentTypes>;
 	}
-
+	
 	interface CreateMigration {
 		(): prismic.Migration<AllDocumentTypes>;
 	}
-
+	
 	namespace Content {
 		export type {
 			AboutDocument,

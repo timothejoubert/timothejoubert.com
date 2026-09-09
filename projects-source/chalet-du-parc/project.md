@@ -1,13 +1,14 @@
 ---
-uid: cite-de-la-tapisserie
-title: Cité de la tapisserie
+uid: chalet-du-parc
+title: Chalet du Parc
 favorite: false
-date: '2024-12-02'
+date: '2026-05-14'
 creative_work_type: WebSite
 framework: Agence
 via: Rézo zéro
-rate: 15
-link: https://www.cite-tapisserie.fr/
+client:
+rate: 14
+link: https://www.chaletduparc.fr/
 link_label: Voir le site
 tags:
   - Développement
@@ -17,6 +18,9 @@ thumbnail: media/thumbnail.jpg
 meta_title:
 meta_description:
 meta_image:
+sources: []
+link_status: online
+collaborators: []
 tools:
   - Roadiz
   - Nuxt
@@ -24,7 +28,7 @@ tools:
 
 ## Short description
 
-Site web pour la Cité internationale de la tapisserie à Aubusson
+Site web pour Le Chalet du Parc à Lyon
 
 ## Content
 

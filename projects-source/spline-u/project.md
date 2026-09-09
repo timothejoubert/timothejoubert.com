@@ -4,7 +4,9 @@ title: Spline U
 favorite: false
 date: '2021-03-13'
 creative_work_type: CreativeWork
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 12
 link: https://regularswitch.com/project/variant-typographique
 link_label: null

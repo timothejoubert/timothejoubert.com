@@ -4,7 +4,9 @@ title: LMD Playground
 favorite: true
 date: '2021-02-16'
 creative_work_type: SoftwareApplication
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 16
 link: https://www.lamartinierediderot.fr/jpo/jpo2021_jeu.html
 link_label: Découvrir le générateur

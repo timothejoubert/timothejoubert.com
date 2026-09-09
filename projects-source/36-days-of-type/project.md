@@ -12,6 +12,9 @@ tags:
   - Code créatif
   - Typographie
 awards: []
+tools:
+  - P5
+  - Javascript
 medias:
   - sound_enabled: false
     file: media/media-0.jpg
@@ -49,4 +52,4 @@ Conception d'un générateur de lettre pour le défi Instagram '36 days of type'
 
 ## Content
 
-À l'occasion du challenge 36 days of type, j'ai conçu un script P5.js qui construit les lettres à partir de formes géométriques simples. J'ai ajouté une interface graphique qui permet de modifier l'aspect de la typographie afin de générer une grande variété de caractères. La difficulté de ce challenge est d'être assez constant et productif pour poster chaque jour. Malgré la conception du script en amont, l'enregistrement, l'édition, le tri et les retouches des visuelles produis reste très chronophage. Cela pourrait être une tâche intéressante à automatiser à l'avenir. Je reste bien satisfait de la diversité des lettres produites et des détails intéressants de certains caractères. 
+À l'occasion du challenge 36 days of type, j'ai conçu un script P5.js qui construit les lettres à partir de formes géométriques simples. J'ai ajouté une interface graphique qui permet de modifier l'aspect de la typographie afin de générer une grande variété de caractères. La difficulté de ce challenge est d'être assez constant et productif pour poster chaque jour. Malgré la conception du script en amont, l'enregistrement, l'édition, le tri et les retouches des visuelles produis reste très chronophage. Cela pourrait être une tâche intéressante à automatiser à l'avenir. Je reste bien satisfait de la diversité des lettres produites et des détails intéressants de certains caractères.

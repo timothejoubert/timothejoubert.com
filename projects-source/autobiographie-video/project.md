@@ -4,7 +4,9 @@ title: Autobiographie video
 favorite: false
 date: '2019-09-06'
 creative_work_type: VideoObject
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 14
 link: null
 link_label: null

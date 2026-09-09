@@ -4,7 +4,9 @@ title: Rapport RZ
 favorite: false
 date: '2022-08-25'
 creative_work_type: CreativeWork
-framework: Master 2
+framework: École
+client:
+via: CIM — Université Lyon 2
 rate: 14
 link: null
 link_label: null

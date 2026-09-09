@@ -4,7 +4,9 @@ title: Bob life
 favorite: false
 date: '2019-11-29'
 creative_work_type: VisualArtwork
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 14
 link: null
 link_label: null

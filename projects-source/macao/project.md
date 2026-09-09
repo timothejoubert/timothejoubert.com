@@ -4,7 +4,9 @@ title: Macao
 favorite: false
 date: '2021-05-16'
 creative_work_type: WebSite
-framework: Freelance
+framework: Stage
+via: Screen club
+client: Thomas Roussel
 rate: 11
 link: null
 link_label: null

@@ -4,7 +4,9 @@ title: Pierre David
 favorite: false
 date: '2021-05-12'
 creative_work_type: WebSite
-framework: Freelance
+framework: Stage
+via: Screen club
+client: Pierre David
 rate: 14
 link: https://www.pierredavid.net/
 link_label: null

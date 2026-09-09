@@ -4,7 +4,9 @@ title: Com on
 favorite: false
 date: '2022-01-08'
 creative_work_type: CreativeWork
-framework: Master 2
+framework: École
+client:
+via: CIM — Université Lyon 2
 rate: 13
 link: null
 link_label: null

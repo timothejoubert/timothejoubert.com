@@ -4,7 +4,9 @@ title: Alkatrine font
 favorite: false
 date: '2020-01-10'
 creative_work_type: VideoObject
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 15
 link: null
 link_label: null

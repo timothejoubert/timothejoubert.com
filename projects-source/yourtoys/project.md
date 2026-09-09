@@ -4,7 +4,9 @@ title: Yourtoys
 favorite: false
 date: '2020-05-05'
 creative_work_type: WebSite
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 12
 link: null
 link_label: null

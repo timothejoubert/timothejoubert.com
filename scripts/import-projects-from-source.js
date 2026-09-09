@@ -98,7 +98,8 @@ function resolveMedia(projectDir, relPath, kind, dataPath, cachedMedia) {
     }
 
     const filename = relPath.split('/').pop()
-    return { relPath, hash, dataPath, changed: true, field: migration.createAsset(buffer, filename) }
+    const asset = migration.createAsset(buffer, filename)
+    return { relPath, hash, dataPath, changed: true, field: kind === 'image' ? asset : { link_type: 'Media', id: asset } }
 }
 
 function readAssetIdFromDoc(doc, dataPath) {
@@ -125,6 +126,9 @@ function buildData({ frontMatter, shortDescription, content, thumbnail, metaImag
         })),
         tag_group: (frontMatter.tags ?? []).map(tag => ({ tag })),
         framework: frontMatter.framework ?? null,
+        via: frontMatter.via ?? null,
+        client: frontMatter.client ?? null,
+        tools: (frontMatter.tools ?? []).length > 0 ? frontMatter.tools.join(', ') : null,
         short_description: markdownToRichText(shortDescription).result,
         content: markdownToRichText(content, { resolveImage }).result,
         thumbnail: thumbnail?.field ?? null,
@@ -139,7 +143,7 @@ function buildData({ frontMatter, shortDescription, content, thumbnail, metaImag
         }),
         meta_title: frontMatter.meta_title ?? null,
         meta_description: frontMatter.meta_description ?? null,
-        meta_image: metaImage?.field ?? null,
+        meta_image: metaImage?.field ?? {},
     }
 }
 

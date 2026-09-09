@@ -4,7 +4,9 @@ title: Pogote-moi cette fonte !
 favorite: true
 date: '2021-06-15'
 creative_work_type: SoftwareApplication
-framework: DSAA
+framework: École
+client:
+via: DSAA Design — La Martinière Diderot, Lyon
 rate: 17
 link: https://timothej.notion.site/Pogote-moi-cette-fonte-4521a648613240dd906d6966609ea2d6?pvs=4
 link_label: Explorer ma démarche

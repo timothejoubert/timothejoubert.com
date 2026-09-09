@@ -45,7 +45,7 @@ meta_image: null
 
 ## Short description
 
-Afin de rendre le confinement productif, j'ai fait une petite série d'animation divers et variée. J'ai particulièrement apprécié faire des animations frame by frame, c'est une très bonne pratique pour se détendre et passer le temps, je recommande. 
+Afin de rendre le confinement productif, j'ai fait une petite série d'animation divers et variée. J'ai particulièrement apprécié faire des animations frame by frame, c'est une très bonne pratique pour se détendre et passer le temps, je recommande.
 
 ## Content
 
