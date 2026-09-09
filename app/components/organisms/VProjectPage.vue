@@ -167,7 +167,10 @@ const { prevProject, nextProject } = props.document
                     />
                 </div>
 
-                <VPrismicImg :field="project?.thumbnail" />
+                <VPrismicImg
+                    :field="project?.thumbnail"
+                    sizes="xs:92vw sm:92vw md:30vw lg:42vw xl:42vw hq:42vw qhd:42vw"
+                />
 
                 <div
                     v-if="medias.length"
@@ -249,6 +252,7 @@ const { prevProject, nextProject } = props.document
     max-height: var(--app-inner-max-height);
     opacity: 0;
     overscroll-behavior: contain;
+    scrollbar-width: none;
     translate: 0 24px;
 
     @include media('>=md') {
