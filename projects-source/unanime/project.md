@@ -1,7 +1,7 @@
 ---
 uid: unanime
 title: Unanime
-favorite: true
+favorite: false
 date: '2023-09-24'
 creative_work_type: WebSite
 framework: Agence
