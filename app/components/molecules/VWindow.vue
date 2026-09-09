@@ -22,6 +22,10 @@ const rootEl = useTemplateRef<HTMLElement>('rootEl')
 const headEl = useTemplateRef<HTMLElement>('headEl')
 const containerEl = ref<HTMLElement | null>(null)
 
+// `arrivedState.bottom` is also true when the content doesn't overflow at all.
+const { arrivedState } = useScroll(rootEl)
+const canScrollDown = computed(() => !arrivedState.bottom)
+
 // Below `md`, a saved desktop drag/resize position can place the whole window off-screen —
 // the responsive layout (full width, anchored to the top) takes over instead, so saved
 // position/size are ignored and the interactions themselves are disabled.
@@ -161,19 +165,40 @@ const windowStyle = computed(() => ({
             </div>
             <slot />
         </div>
+
+        <div
+            v-if="canScrollDown"
+            :class="$style.fade"
+        />
     </div>
 </template>
 
 <style lang="scss" module>
-$handle-edge: 4px;
-$handle-corner: 10px;
+$handle-edge: 8px;
+$handle-corner: 14px;
+$fade-height: 48px;
 
 .root {
     position: var(--v-window-display, fixed);
+    overflow: hidden auto;
     border: 1PX solid var(--color-surface);
     border-radius: 12px;
     background-color: var(--color-background);
-    box-shadow: -5px 5px 20PX 10PX rgb(0, 0, 0, 20%);
+    box-shadow: -5px 5px 20PX 10PX rgb(0 0 0 / 20%);
+
+    // `overflow: hidden` + `border-radius` alone clip via a fast compositor shortcut that
+    // can desync by a subpixel from a `position: sticky` descendant's own scroll-driven
+    // layer (known Chromium/WebKit rendering bug), letting scrolled content bleed through
+    // the rounded corners. Adding a mask forces the browser onto the slower but correct
+    // full-mask compositing path instead of that shortcut.
+    mask-image: radial-gradient(white, black);
+    -ms-overflow-style: none;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     &--resizing {
         pointer-events: none;
@@ -182,12 +207,18 @@ $handle-corner: 10px;
 
 .inner {
     width: 100%;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+}
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
+.fade {
+    position: sticky;
+    z-index: 1;
+    bottom: 0;
+    height: $fade-height;
+    margin-top: -$fade-height;
+    background: linear-gradient(to bottom, transparent, rgb(0 0 0 / 60%));
+    border-end-end-radius: inherit;
+    border-end-start-radius: inherit;
+    pointer-events: none;
 }
 
 .head {
@@ -197,7 +228,6 @@ $handle-corner: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-radius: inherit;
     background-color: var(--color-surface);
     color: var(--color-content);
     cursor: move;
