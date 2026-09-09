@@ -10,6 +10,7 @@ link: null
 link_label: null
 tags:
   - Multimédia
+  - Expression plastique
 awards: []
 medias:
   - sound_enabled: false

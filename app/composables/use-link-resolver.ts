@@ -1,4 +1,4 @@
-import type { ContentRelationshipField } from '@prismicio/client'
+import type { ContentRelationshipField, LinkField } from '@prismicio/client'
 import type {
 	LocationAsRelativeRaw,
 	_RouteRecordBase,
@@ -16,6 +16,7 @@ export type PossibleRouteReference
         | ReachableDocument
         | ContentRelationshipField<PrismicReachableDocumentType>
         | PrismicDocumentRoute
+		| LinkField
 
 export function useLinkResolver(reference: PossibleRouteReference) {
 	const rawSiteUrl = useRuntimeConfig().public?.site.url

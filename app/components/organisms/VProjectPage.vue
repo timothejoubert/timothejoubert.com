@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { withQuery } from 'ufo'
 import type { ProjectDocument } from '~~/prismicio-types'
+import { isFilled } from '@prismicio/client'
 
 const props = defineProps<{
     document?: ProjectDocument | null
@@ -31,10 +32,24 @@ function withCurrentQuery(path: string) {
 }
 
 const project = computed(() => props.document?.data)
-const prismic = usePrismic()
+
+const mainExternalLink = computed(() => {
+	if (isFilled.link(project.value?.link)) {
+		return project.value?.link
+	}
+
+	return null
+})
+
+const awardLinks = computed(() => {
+    if (!project.value) return []
+
+    return project.value.awards
+        .filter(a => isFilled.link(a.link) && a.link.url)
+        .map(a => a.link)
+})
 
 const videoExtensions = ['mp4', 'mov']
-
 function endWidthVideoExt(url: string) {
     const afterLastDot = url.substring(url?.lastIndexOf('.'))
     return videoExtensions.some(ext => afterLastDot.startsWith('.' + ext))
@@ -44,7 +59,7 @@ const medias = computed(() => {
     if (!project.value) return []
 
     return project.value.medias
-        .filter(m => prismic.isFilled.linkToMedia(m.media) && m.media.url)
+        .filter(m => isFilled.linkToMedia(m.media) && m.media.url)
         .map(mediaGroup => ({
             ...mediaGroup,
             type: endWidthVideoExt(mediaGroup.media.url) ? 'video' : 'other',
@@ -101,9 +116,34 @@ const { prevProject, nextProject } = props.document
                                 wrapper="li"
                             />
                         </ul>
+						<VPrismicLink
+							v-if="mainExternalLink"
+							:to="mainExternalLink"
+							:class="$style.link"
+						>
+							{{ mainExternalLink.text ?? $t('project_link') }}
+							<VIcon name="material-symbols:north-east" />
+						</VPrismicLink>
+						<ul v-if="awardLinks.length" :class="$style.awards">
+							<li
+								:class="$style['awards__item']"
+								v-for="(award, index) in awardLinks"
+								:key="`award-${index}`"
+							>
+								<VPrismicLink
+									:to="award"
+									:class="$style.awards__link"
+									:aria-label="award.text ?? $t('award_link')"
+								>
+									<VIcon name="material-symbols:trophy" />
+								</VPrismicLink>
+							</li>
+						</ul>
+
                         <VTime
                             :date="project?.date"
                             format="short"
+							:class="$style.date"
                         />
                     </div>
                     <LazyVText
@@ -256,8 +296,7 @@ const { prevProject, nextProject } = props.document
 .attributes {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
+    gap: 14px;
     padding-block: 8px;
 }
 
@@ -266,8 +305,55 @@ const { prevProject, nextProject } = props.document
     flex-wrap: wrap;
     padding: 0;
     margin: 0;
-    gap: inherit;
+    gap: 10px;
     list-style: none;
+}
+
+.link {
+	display: inline-flex;
+	align-items: center;
+	color: var(--color-content);
+	gap: 3px;
+	text-underline-offset: 2px;
+
+	:global(.iconify) {
+		font-size: 14px;
+	}
+}
+
+.link,
+.awards__link {
+	color: var(--color-content);
+	transition: color 0.3s ease(out-quad);
+
+	&:focus-visible {
+		color: var(--color-accent);
+	}
+
+	@media (hover: 'hover') {
+		&:hover {
+			color: var(--color-accent);
+		}
+	}
+}
+
+.awards {
+	display: flex;
+	align-items: center;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.awards__link {
+	display: flex;
+    align-items: center;
+	justify-content: center;
+	padding: 4px;
+}
+
+.date {
+	margin-left: auto;
 }
 
 .short-description {
@@ -296,11 +382,6 @@ const { prevProject, nextProject } = props.document
     color: inherit;
     gap: 6px;
     text-decoration: none;
-
-    &--next {
-        margin-left: auto;
-        text-align: right;
-    }
 }
 
 .not-found {
