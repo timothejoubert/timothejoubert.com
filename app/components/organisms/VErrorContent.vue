@@ -27,11 +27,12 @@ defineOptions({
             role="alert"
             :class="$style.card"
         >
-            <p :class="$style.subtitle">
+            <p class="text-body-xs" :class="$style.subtitle">
                 {{ subtitle }}
             </p>
             <h1
                 v-if="title"
+                class="text-h1"
                 :class="$style.title"
             >
                 {{ title }}
@@ -68,14 +69,12 @@ defineOptions({
 
 .subtitle {
     color: var(--theme-color-primary);
-    font-size: 14px;
     letter-spacing: 0.04em;
     margin-block: 0 8px;
     text-transform: uppercase;
 }
 
 .title {
-    font-size: 32px;
     margin-block: 0 16px;
 }
 

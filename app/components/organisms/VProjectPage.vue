@@ -81,18 +81,18 @@ const { prevProject, nextProject } = props.document
 <template>
     <VWindow
         :class="[$style.root, revealed && $style['root--visible']]"
-        container-selector="body"
         :aria-label="document?.data.title ?? $t('error_page.not_found_title')"
         @close="navigateTo(backPath)"
     >
         <template #head>
-            <h1 :class="$style.title">
+            <h1 class="text-h4" :class="$style.title">
                 {{ document?.data.title ?? $t('error_page.not_found_title') }}
             </h1>
             <NuxtLink
                 :to="backPath"
                 :class="$style.back"
                 :aria-label="$t('back_to_projects.aria_label')"
+                @pointerdown.stop
             >
                 <VIcon name="material-symbols:cancel" />
             </NuxtLink>
@@ -252,7 +252,6 @@ const { prevProject, nextProject } = props.document
 }
 
 .title {
-    font-size: 18px;
     margin-block: initial;
     padding-block: 8px;
     padding-inline: var(--v-project-page-padding-inline);

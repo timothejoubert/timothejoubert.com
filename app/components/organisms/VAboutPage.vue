@@ -44,7 +44,7 @@ const columns = computed(() => [
                     v-if="column.entries.length"
                     :class="$style.column"
                 >
-                    <h2 :class="[$style['column-title'], pageRevealed && $style['column-title--visible']]">
+                    <h2 class="text-overtitle" :class="[$style['column-title'], pageRevealed && $style['column-title--visible']]">
                         {{ column.label }}
                     </h2>
                     <div
@@ -54,7 +54,7 @@ const columns = computed(() => [
                         :style="{ '--entry-index': i }"
                     >
                         <div :class="$style.head">
-                            <h3 :class="$style.title">
+                            <h3 class="text-h5" :class="$style.title">
                                 <VPrismicLink
                                     v-if="getFilledLinkToWeb(entry.link)"
                                     :to="getFilledLinkToWeb(entry.link)"
@@ -183,11 +183,8 @@ const columns = computed(() => [
 }
 
 .column-title {
-	font-size: 14px;
-	font-weight: 500;
 	margin-block: 0 28px;
 	opacity: 0;
-	text-transform: uppercase;
 	translate: 0 24px;
 
 	@media (prefers-reduced-motion: no-preference) {
@@ -227,7 +224,6 @@ const columns = computed(() => [
 }
 
 .title {
-	font-size: 16px;
 	margin-block: 0;
 }
 

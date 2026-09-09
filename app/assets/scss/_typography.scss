@@ -1,48 +1,50 @@
 @use 'mixins/typography' as *;
+@use 'mixins/font-size-fluid' as *;
 
 // Heading
 .text-h1 {
-    @include text-h1;
+	@include text-h1;
+	@include font-size-fluid((xs: 28px, xl: 40px));
 }
 
 .text-h2 {
-    @include text-h2;
+	@include text-h2;
+	@include font-size-fluid((xs: 22px, xl: 32px));
 }
 
 .text-h3 {
-    @include text-h3;
+	@include text-h3;
+	@include font-size-fluid((xs: 20px, xl: 26px));
 }
 
 .text-h4 {
-    @include text-h4;
+	@include text-h4;
+	@include font-size-fluid((xs: 16px, xl: 20px));
 }
 
 .text-h5 {
-    @include text-h5;
+	@include text-h5;
+	@include font-size-fluid((xs: 14px, xl: 18px));
 }
 
-// Common
-.text-body-xxs {
-    @include text-body-xxs;
+.text-overtitle {
+	@include text-overtitle;
+	@include font-size-fluid((xs: 12px, xl: 14px));
+}
+
+// Body
+.text-body {
+	@include text-body;
+	@include font-size-fluid((xs: 14px, xl: 16px));
 }
 
 .text-body-xs {
-    @include text-body-xs;
-}
-
-.text-body {
-    @include text-body;
-}
-
-.text-introduction {
-    @include text-introduction;
-}
-
-.text-subtitle {
-    @include text-subtitle;
+	@include text-body;
+	@include font-size-fluid((xs: 12px, xl: 14px));
 }
 
 // Tags
-.label-tag {
-    @include label-tag;
+.text-label {
+	@include text-label;
+	@include font-size-fluid((xs: 12px, xl: 13px));
 }

@@ -28,6 +28,7 @@ onMounted(async () => {
             >
                 <VSplitText
                     render="chars"
+                    class="text-h2"
                     :class="$style['placeholder-text']"
                     content="TIM"
                 />
@@ -164,10 +165,7 @@ onMounted(async () => {
 }
 
 .placeholder-text {
-	font-family: #{$fraktion-sans-family};
-    font-size: 30px;
 	font-variation-settings: 'wght' 700;
-    line-height: 1;
     padding-inline: 4px;
 
 	@media (prefers-reduced-motion: no-preference) {

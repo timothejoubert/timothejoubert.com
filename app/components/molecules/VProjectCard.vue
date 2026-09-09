@@ -28,6 +28,7 @@ const img = computed(() => data.value.thumbnail)
     >
         <h2
             v-if="data.title"
+            class="text-h5"
             :class="$style.title"
         >
             <VPrismicLink
@@ -102,8 +103,6 @@ $card-padding: 16px;
     z-index: 1;
     order: 2;
     margin: 12px 0 0;
-    font-size: 16px;
-    font-weight: 700;
 }
 
 .link {

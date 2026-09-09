@@ -10,6 +10,7 @@ defineProps<{
 <template>
     <VWrapper
         :wrapper="wrapper || 'span'"
+        class="text-label"
         :class="$style.root"
     >
         {{ label }}
@@ -22,7 +23,5 @@ defineProps<{
 	border-radius: 50vmax;
 	background-color: var(--color-content);
 	color: var(--color-background);
-    font-size: 12px;
-    font-weight: 400;
 }
 </style>
