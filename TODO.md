@@ -1,4 +1,5 @@
 ### TODO
+- Changer le type media (link) vers un field image pour thumbnail et media dans le document Projet (faire attention a ne pas perdre les relations de media lors de ces changements de type de field dans prismic)
 - Retire les dossier atoms,molecules,organisms dans components et resoudre toutes les paths des composants utilisé dans la codeBase
 - VArchivePage: ajouter un scroll pour la cell de tags si le contenu dépasse la taille initiale
 - Améliorer l'accessibilité /docs/audit-accessibilite-rgaa.md
