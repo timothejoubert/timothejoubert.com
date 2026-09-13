@@ -42,6 +42,7 @@ export default {
         'scss/comment-no-empty': null,
         'color-function-notation': null, // do not change rgba() to rgb()
         'no-duplicate-selectors': null, // The & selector is considering as duplicate. See https://github.com/stylelint/stylelint/issues/7893
+        'declaration-block-no-redundant-longhand-properties': null, // keep transition-* longhand split (auto-merge into shorthand breaks calc()/custom functions like ease())
         'at-rule-empty-line-before': [
             'always',
             {

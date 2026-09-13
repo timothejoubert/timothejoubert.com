@@ -128,11 +128,11 @@ $card-padding: 16px;
 
 .tag {
     margin: initial;
+    transition-delay: calc(var(--tag-index) * 40ms);
+    transition-duration: 0.3s;
+    transition-property: translate;
+    transition-timing-function: ease(out-quart);
     translate: calc(-100% - 20px) 0;
-
-    @media (prefers-reduced-motion: no-preference) {
-        transition: translate 0.3s ease(out-quart) calc(var(--tag-index) * 40ms);
-    }
 
     @media (hover: hover) {
         .root:hover & {
