@@ -14,7 +14,7 @@ Déjà géré, rien à faire côté Netlify :
 Aucun `<link rel="preconnect">` dans `nuxt.config.ts` (`app.head.link`, lignes 22-29). À ajouter, avec `crossorigin` — gain sur les pages avec beaucoup d'images au-dessus de la ligne de flottaison (listing home/archive, page projet).
 
 ### 2. Image LCP sans priorité explicite
-`VImg`/`VPrismicImg` (`app/components/atoms/`) supportent déjà `loading`, `preload`, `fetchpriority` — mais aucun appelant (`VProjectCard.vue`, `VHomePage.vue`, `VProjectPage.vue`) ne les utilise explicitement. Pas de garantie que la 1ère image visible (LCP) soit priorisée par le navigateur.
+`VImg`/`VPrismicImg` (`app/components/`) supportent déjà `loading`, `preload`, `fetchpriority` — mais aucun appelant (`VProjectCard.vue`, `VHomePage.vue`, `VProjectPage.vue`) ne les utilise explicitement. Pas de garantie que la 1ère image visible (LCP) soit priorisée par le navigateur.
 - 1ère carte du listing / image hero de `VProjectPage` → `loading="eager"` + `fetchpriority="high"`.
 - Reste de la grille → `loading="lazy"` explicite.
 

@@ -16,7 +16,6 @@ export default defineNuxtConfig({
     plugins: [
         '~/plugins/anchor-polyfill.client.ts',
     ],
-    components: ['~/components/atoms', '~/components/molecules', '~/components/organisms'],
     devtools: { enabled: true },
     app: {
         head: {

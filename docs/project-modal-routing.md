@@ -73,13 +73,13 @@ Wrapper des archives : rend `VArchivePage` et inclut `<NuxtPage />`.
 ### `app/pages/index/projets/[uid].vue` et `app/pages/archive/[uid].vue`
 Composants de page projet (modal). Récupèrent le document projet via `uid`. Rendent `VProjectPage` sans le listing en background (le parent s'en charge).
 
-### `app/components/molecules/VProjectCard.vue`
+### `app/components/VProjectCard.vue`
 Lien généré avec `:to="project"` → à remplacer par un lien direct `/:uid` (le composant sait qu'il est toujours dans le contexte home).
 
-### `app/components/organisms/VArchivePage.vue`
+### `app/components/VArchivePage.vue`
 Lien vers chaque projet → à remplacer par `/archive/:uid` au lieu de `:to="project"`.
 
-### `app/components/organisms/VProjectPage.vue`
+### `app/components/VProjectPage.vue`
 Supprimer `<LazyVMainProjectListing />` : le listing est désormais rendu par la page parent, pas par le composant projet.
 
 ## Ce qui ne change pas

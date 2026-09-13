@@ -1,7 +1,6 @@
 ### TODO
 - Performance : appliquer les pistes de /docs/performance-audit.md — preconnect vers `images.prismic.io` (`nuxt.config.ts`), `fetchpriority`/`loading` explicite sur l'image LCP du listing et de la page projet, vérifier l'usage de `@nuxt/fonts` (préload des fonts critiques)
 - Changer le type media (link) vers un field image pour thumbnail et media dans le document Projet (faire attention a ne pas perdre les relations de media lors de ces changements de type de field dans prismic)
-- Retire les dossier atoms,molecules,organisms dans components et resoudre toutes les paths des composants utilisé dans la codeBase
 - VArchivePage: ajouter un scroll pour la cell de tags si le contenu dépasse la taille initiale
 - Améliorer l'accessibilité /docs/audit-accessibilite-rgaa.md
 
@@ -13,6 +12,7 @@
 - Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
 
 ### Done
+- Retiré les dossiers `atoms`/`molecules`/`organisms` dans `app/components/` (structure à plat désormais) : 30 fichiers déplacés (`git mv`), les 4 imports explicites (`~/components/atoms/VWrapper.vue`, `~/components/atoms/VImg.vue`) corrigés vers le nouveau chemin plat, l'option `components: ['~/components/atoms', ...]` de `nuxt.config.ts` retirée (le scan par défaut de Nuxt couvre déjà `app/components/` récursivement). Chemins mis à jour dans `CLAUDE.md`, `README.md`, `docs/performance-audit.md`, `docs/audit-accessibilite-rgaa.md`, `docs/project-modal-routing.md`. Vérifié via `pnpm build` (148 routes prérendues, aucune erreur).
 - VMainProjectListing: Ajouter un indicateur visuel sur le projet aria-current="page"
 - Img: check img sizes (project card size seem too wides)
 - Refactor le principe de typography, class global et mixin. Se baser sur la logique dans le projet hugo-tomasi (/Users/joubert/Documents/websites/TIM/hugo-tomasi)

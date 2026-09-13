@@ -2,7 +2,7 @@
 import { VImg } from '#components'
 import type { ImageField, LinkField } from '@prismicio/client'
 import pick from 'lodash/pick'
-import { vImgProps } from '~/components/atoms/VImg.vue'
+import { vImgProps } from '~/components/VImg.vue'
 import { getImageFieldFilled } from '~/utils/prismic/image-field'
 import { getFilledLinkToMedia } from '~/utils/prismic/link-field'
 

@@ -64,12 +64,12 @@ Let TypeScript infer types (`computed`, `ref`, function return types, etc.) inst
 
 Prismic fetching/meta logic lives in `app/composables/use-*.ts` (e.g. `useFetchPage`, `usePrismicFetchDocument`, `usePrismicFetchProjects`, `usePage`, `usePageMeta`, `usePrismicMeta`, `usePrismicPreviewRoute`). `useFetchPage` resolves the Prismic document type from the route (via `getDocumentTypeByUrl` in `app/utils/prismic/route-resolver.ts`) when not explicitly given, fetches the document, calls `usePage` to register it, and throws a Nuxt error (via `showError`) on 404/fetch failure. Page-level `.vue` files should stay thin and delegate to these composables rather than reimplementing fetch/error logic.
 
-### Component structure — atomic design
+### Component structure
 
-`app/components/{atoms,molecules,organisms}` (auto-imported, see `nuxt.config.ts` `components` option). All components are prefixed `V` (e.g. `VText`, `VIcon`, `VProjectPage`). Roughly:
-- **atoms**: primitive rendering wrappers, often around Prismic fields (`VText`, `VRichText`, `VPrismicImg`, `VPrismicLink`, `VTag`, `VImg`).
-- **molecules**: composed UI pieces (`VProjectCard`, `VWindow`, `VThemeSwitcher`, `VHighlightedText`).
-- **organisms**: full page sections/screens rendered by page routes (`VHomePage`, `VArchivePage`, `VProjectPage`, `VAboutPage`, `VMainNav`, `VSettingModal`).
+`app/components/` is a flat directory (auto-imported via Nuxt's default component scanning — no custom `components` option in `nuxt.config.ts`). All components are prefixed `V` (e.g. `VText`, `VIcon`, `VProjectPage`). Roughly, by role:
+- **primitive rendering wrappers**, often around Prismic fields (`VText`, `VRichText`, `VPrismicImg`, `VPrismicLink`, `VTag`, `VImg`).
+- **composed UI pieces** (`VProjectCard`, `VWindow`, `VThemeSwitcher`, `VHighlightedText`).
+- **full page sections/screens** rendered by page routes (`VHomePage`, `VArchivePage`, `VProjectPage`, `VAboutPage`, `VMainNav`, `VSettingModal`).
 
 `VText` is the standard way to render a field that may be a plain string, a Prismic `KeyTextField`, or a `RichTextField` — it picks the right render path (plain tag, slot, or `PrismicRichText`) automatically; prefer it over branching on field type by hand.
 
@@ -132,7 +132,7 @@ Every project (past or future, digital or not) also lives locally in `projects-s
 
 ### SVGs and icons
 
-SVGs are imported as URLs via `vite-svg-loader` (`defaultImport: 'url'`) — see `nuxt.config.ts` `vite.plugins`. `@nuxt/icon` is configured with `componentName: 'NuxtIcon'` and only bundles the `material-symbols` collection server-side; check `app/components/atoms/VIcon.vue` for how icons are dispatched between local SVGs and `NuxtIcon`.
+SVGs are imported as URLs via `vite-svg-loader` (`defaultImport: 'url'`) — see `nuxt.config.ts` `vite.plugins`. `@nuxt/icon` is configured with `componentName: 'NuxtIcon'` and only bundles the `material-symbols` collection server-side; check `app/components/VIcon.vue` for how icons are dispatched between local SVGs and `NuxtIcon`.
 
 ## Notes
 

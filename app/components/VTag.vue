@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { VWrapperElement } from '~/components/atoms/VWrapper.vue'
+import type { VWrapperElement } from '~/components/VWrapper.vue'
 
 defineProps<{
     label: string | null

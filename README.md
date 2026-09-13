@@ -35,7 +35,7 @@ Quelques éléments structurants pour se repérer dans le code (détails complet
 
 - **Routing piloté par Prismic** — `shared/prismic-schema.ts` est la source de vérité qui fait correspondre chaque type de document Prismic à une route (`prismicDocumentRoutes`). Une page projet s'ouvre en modale par-dessus le listing (home ou archive) via des routes imbriquées (`app/pages/index/[uid].vue`, `app/pages/archive/[uid].vue`) plutôt qu'en remplaçant la page — voir `docs/project-modal-routing.md`.
 - **Composables pour le fetch de données** — la logique de récupération Prismic vit dans `app/composables/use-*.ts` (`useFetchPage`, `usePrismicFetchDocument`, `usePrismicFetchProjects`...) ; les fichiers `.vue` de pages restent volontairement fins et délèguent à ces composables.
-- **Composants en atomic design** — `app/components/{atoms,molecules,organisms}`, tous préfixés `V` (`VText`, `VProjectCard`, `VHomePage`...), auto-importés.
+- **Composants** — `app/components/` (à plat), tous préfixés `V` (`VText`, `VProjectCard`, `VHomePage`...), auto-importés.
 - **Utilitaires Prismic centralisés** — `app/utils/prismic/*` gère la résolution de liens, les images, les content relationships et les dates ; les custom types Prismic vivent dans `customtypes/**/index.json` (géré via la CLI `prismic`, pas Slice Machine).
 - **Styling** — SCSS Modules (`<style lang="scss" module>` + `$style.xxx`), classes BEM-like, tokens partagés dans `app/assets/scss/` (variables, fonctions, mixins).
 - **i18n** — toute chaîne d'UI statique passe par une clé i18n (`i18n/locales/nuxt.<locale>.json`), sauf le contenu Prismic déjà localisé côté CMS.

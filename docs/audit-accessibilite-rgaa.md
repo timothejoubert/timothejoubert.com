@@ -37,9 +37,9 @@ Ce document est un état des lieux d'accessibilité du site, basé sur le **RGAA
 
 ### 1. Images
 
-- `app/components/atoms/VImg.vue:117-134` et `app/components/atoms/VPrismicImg.vue:33` : l'attribut `alt` est **toujours présent** dans le HTML rendu, avec priorité prop > champ Prismic > chaîne vide. Conforme au critère 1.1 (présence de l'alternative).
+- `app/components/VImg.vue:117-134` et `app/components/VPrismicImg.vue:33` : l'attribut `alt` est **toujours présent** dans le HTML rendu, avec priorité prop > champ Prismic > chaîne vide. Conforme au critère 1.1 (présence de l'alternative).
 - **Point de vigilance éditorial** (pas un défaut de code) : rien ne garantit qu'un `alt` Prismic non renseigné soit pertinent — dépend de la saisie CMS. À intégrer dans une checklist de publication de projet plutôt que corrigé en code.
-- Icônes décoratives : `app/components/atoms/VIcon.vue:11-17` pose systématiquement `aria-hidden="true"` — bonne pratique par défaut (critère 1.2).
+- Icônes décoratives : `app/components/VIcon.vue:11-17` pose systématiquement `aria-hidden="true"` — bonne pratique par défaut (critère 1.2).
 
 ### 3. Couleurs
 
@@ -59,14 +59,14 @@ Aucune information n'est portée par la couleur seule : le sélecteur de thème 
 
 ### 6. Liens
 
-- **Écart confirmé en live** sur `/a-propos` : les liens externes (`https://www.rezo-zero.com/fr/`, `https://www.screen-club.com/`, etc., rendus par `app/components/atoms/VPrismicLink.vue:27-33`) s'ouvrent avec `target="_blank" rel="noopener noreferrer"` mais **sans aucune indication visible ou annoncée** (pas d'`aria-label`, pas de texte visuellement masqué, pas d'icône) que le lien ouvre une nouvelle fenêtre.
+- **Écart confirmé en live** sur `/a-propos` : les liens externes (`https://www.rezo-zero.com/fr/`, `https://www.screen-club.com/`, etc., rendus par `app/components/VPrismicLink.vue:27-33`) s'ouvrent avec `target="_blank" rel="noopener noreferrer"` mais **sans aucune indication visible ou annoncée** (pas d'`aria-label`, pas de texte visuellement masqué, pas d'icône) que le lien ouvre une nouvelle fenêtre.
   - **Critère RGAA concerné : 6.2** / WCAG 3.2.5 (changement de contexte à l'initiative de l'utilisateur, prévisible).
   - **Recommandation** : ajouter un texte visuellement masqué (`visually-hidden`, classe déjà définie dans `app/assets/scss/_common.scss:24-33`) du type "(nouvelle fenêtre)" dans `VPrismicLink.vue`, conditionné à `target === '_blank'`, via une clé i18n dédiée.
 
 ### 7. Scripts (composants interactifs)
 
 - Aucun élément interactif custom ne repose sur une `div` avec seul gestionnaire de clic — recherche exhaustive négative sur `app/components`. Tous s'appuient sur `<button>`, `<a>`/`NuxtLink`, `<input>` natifs. Conforme critère 7.1/7.3.
-- **Écart** : les poignées de redimensionnement de la fenêtre modale projet (`app/components/molecules/VWindow.vue:148-153`) ne réagissent qu'à `@pointerdown` — aucune alternative clavier pour redimensionner la fenêtre.
+- **Écart** : les poignées de redimensionnement de la fenêtre modale projet (`app/components/VWindow.vue:148-153`) ne réagissent qu'à `@pointerdown` — aucune alternative clavier pour redimensionner la fenêtre.
   - **Critère RGAA concerné : 7.1/7.3** (toute fonctionnalité scriptée doit être utilisable au clavier) / WCAG 2.1.1.
   - Gravité modérée : fonctionnalité secondaire (la modale reste consultable et fermable au clavier sans redimensionnement), mais à corriger ou explicitement documenter comme non essentielle.
 - Le reste de l'interactivité scriptée est solide :
@@ -79,7 +79,7 @@ Aucune information n'est portée par la couleur seule : le sélecteur de thème 
 
 - `<html lang>` posé dynamiquement selon la locale (`app/composables/use-page-meta.ts:63-65`, injecté via `use-prismic-meta.ts:89`). Confirmé en live : `lang="fr"`. Conforme critère 8.3.
 - Landmarks : `<nav>` (avec `aria-label`), lien d'évitement (`VSkipLink.vue`) vers `#main-content`. **Confirmé fonctionnel en live** — l'élément cible existe bien dans le DOM rendu (le grep statique initial était un faux négatif, probablement dû à un id posé dynamiquement côté template). Conforme critère 12.7/12.8.
-- **Écart mineur** : `app/components/molecules/VSkipLink.vue:8` — `aria-label="Liens d'évitement"` est une chaîne française codée en dur, alors que le texte du lien lui-même (ligne 16) passe bien par `$t(...)`. Sans impact utilisateur tant qu'une seule langue (fr) est active, mais à corriger pour cohérence si l'anglais est activé un jour.
+- **Écart mineur** : `app/components/VSkipLink.vue:8` — `aria-label="Liens d'évitement"` est une chaîne française codée en dur, alors que le texte du lien lui-même (ligne 16) passe bien par `$t(...)`. Sans impact utilisateur tant qu'une seule langue (fr) est active, mais à corriger pour cohérence si l'anglais est activé un jour.
 - **Coquille éditoriale** (hors code, dans une donnée i18n) : `i18n/locales/nuxt.fr.json:21` — `"back_to_projects.aria_label": "Retour a tous les projets"` (accent manquant sur "à"). À corriger pour la qualité de la synthèse vocale.
 
 ### 9. Présentation de l'information
@@ -89,7 +89,7 @@ Aucune information n'est portée par la couleur seule : le sélecteur de thème 
   - `VProjectPage.vue:88-93` : `<h1>` propre à la modale projet.
   - `VAboutPage.vue` : `h1` (masqué) → `h2` par section → `h3` par entrée — **confirmé en live** sur `/a-propos` (`H1: À propos` → `H2: Formations/Expériences` → `H3` par diplôme/expérience).
   - Conforme critère 9.1.
-- **Point à surveiller** : le rich text Prismic libre (rendu par `app/components/atoms/VText.vue:57-62`) peut techniquement injecter des `h2`/`h3` arbitraires selon la saisie éditoriale, sans contrôle programmatique de la hiérarchie à cet endroit. À couvrir par une checklist éditoriale RGAA (ne jamais sauter un niveau de titre dans un bloc de contenu riche).
+- **Point à surveiller** : le rich text Prismic libre (rendu par `app/components/VText.vue:57-62`) peut techniquement injecter des `h2`/`h3` arbitraires selon la saisie éditoriale, sans contrôle programmatique de la hiérarchie à cet endroit. À couvrir par une checklist éditoriale RGAA (ne jamais sauter un niveau de titre dans un bloc de contenu riche).
 - Tableau d'archives (`VArchivePage.vue`) : `<caption class="visually-hidden">` (ligne 181), `<th scope="col">` + `aria-sort` (lignes 183-234) — bon usage des critères 5.x (tableaux) et 9.x.
 
 ### 10. Formulaires
