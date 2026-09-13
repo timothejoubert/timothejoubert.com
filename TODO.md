@@ -1,8 +1,8 @@
 ### TODO
 - Performance : appliquer les pistes de /docs/performance-audit.md — preconnect vers `images.prismic.io` (`nuxt.config.ts`), `fetchpriority`/`loading` explicite sur l'image LCP du listing et de la page projet, vérifier l'usage de `@nuxt/fonts` (préload des fonts critiques)
 - Changer le type media (link) vers un field image pour thumbnail et media dans le document Projet (faire attention a ne pas perdre les relations de media lors de ces changements de type de field dans prismic)
-- VArchivePage: ajouter un scroll pour la cell de tags si le contenu dépasse la taille initiale
 - Améliorer l'accessibilité /docs/audit-accessibilite-rgaa.md
+- Faire un lazy loading des vidéos (éviter de charger/lancer les vidéos automatiquement)
 
 ### Next step
 - Mettre en place le webhook
@@ -12,6 +12,7 @@
 - Add runtime config to disabled fetch to prismic assets CDN (prevent consume free plan bandwidth)
 
 ### Done
+- VArchivePage: scroll horizontal de la cellule "Étiquettes" utilisable en clic-glisser à la souris (façon Figma/Google Photos), pas seulement molette/trackpad/tactile (qui fonctionnaient déjà via `overflow: auto` mais avec une scrollbar volontairement masquée, donc sans affordance). Nouvelle composable générique `app/composables/use-drag-scroll.ts` (`useDragScroll`, sans paramètre, dérive l'élément dragué de `e.currentTarget` — utilisable directement dans un `v-for` sans instance par ligne) encapsulée dans un nouveau composant réutilisable `app/components/VDraggable.vue` (wrapper à slot, porte l'`overflow`/curseur `grab`/`grabbing`) plutôt que câblée en dur dans `VArchivePage.vue`. N'intercepte que `pointerType === 'mouse'` (le tactile/pen garde son scroll natif, pas de conflit avec le momentum scrolling). Anti-conflit avec la navigation de ligne (`onRowClick` sur la `<tr>`) : au relâchement, si un vrai drag a eu lieu (seuil 5px), un listener `click` `capture: true, once: true` posé sur l'élément dragué avale le clic suivant avant qu'il ne remonte au handler de la ligne — sans toucher à `onRowClick` lui-même. Aucune composable VueUse ne couvrait ce besoin exact (`useDraggable` déplace la position de l'élément, pas son scroll ; `useScroll`/`usePointerSwipe`/`useMousePressed` n'ont pas de logique de geste continu adaptée) — hand-roll cohérent avec le précédent `useResizable` de `VWindow.vue`. Vérifié via `pnpm lint:js`/`pnpm lint:css` (aucune nouvelle erreur, 2 erreurs eslint préexistantes non liées) et `pnpm build` (148 routes, aucune régression). ⚠️ Test visuel du drag réel en navigateur non effectué dans cet environnement (extension Chrome non connectée) — à vérifier manuellement sur `/archive`.
 - Retiré les dossiers `atoms`/`molecules`/`organisms` dans `app/components/` (structure à plat désormais) : 30 fichiers déplacés (`git mv`), les 4 imports explicites (`~/components/atoms/VWrapper.vue`, `~/components/atoms/VImg.vue`) corrigés vers le nouveau chemin plat, l'option `components: ['~/components/atoms', ...]` de `nuxt.config.ts` retirée (le scan par défaut de Nuxt couvre déjà `app/components/` récursivement). Chemins mis à jour dans `CLAUDE.md`, `README.md`, `docs/performance-audit.md`, `docs/audit-accessibilite-rgaa.md`, `docs/project-modal-routing.md`. Vérifié via `pnpm build` (148 routes prérendues, aucune erreur).
 - VMainProjectListing: Ajouter un indicateur visuel sur le projet aria-current="page"
 - Img: check img sizes (project card size seem too wides)

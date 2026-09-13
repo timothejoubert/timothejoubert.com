@@ -284,17 +284,14 @@ function frameworkOutput(projectData: ProjectDocumentData | null) {
                             {{ frameworkOutput(project.data) }}
                         </td>
                         <td :class="[$style.cell, $style['body-cell']]">
-                            <div
-                                v-if="project.data?.tag_group?.length"
-                                :class="$style.tags"
-                            >
+                            <LazyVDraggable v-if="project.data?.tag_group?.length">
                                 <VTag
                                     v-for="tag in getTagLabels(project.data.tag_group)"
                                     :key="tag + '-' + project.id"
                                     :label="tag"
                                     :class="$style.tag"
                                 />
-                            </div>
+                            </LazyVDraggable>
                         </td>
                         <td :class="[$style.cell, $style['body-cell']]">
                             <VStarRate
@@ -520,16 +517,6 @@ function frameworkOutput(projectData: ProjectDocumentData | null) {
                 translate: 0 -100%;
             }
         }
-    }
-}
-
-.tags {
-    overflow: auto hidden;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-        display: none;
     }
 }
 

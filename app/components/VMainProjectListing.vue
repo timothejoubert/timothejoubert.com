@@ -75,8 +75,6 @@ if (projects.value?.length) {
         grid-column: auto;
     }
 
-
-
     &--visible {
         opacity: 1;
         translate: 0 0;
