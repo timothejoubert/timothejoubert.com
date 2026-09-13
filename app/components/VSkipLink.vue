@@ -5,7 +5,7 @@ import { SKIP_LINKS } from '~/constants/skip-links'
 <template>
     <nav
         :class="$style.root"
-        aria-label="Liens d'évitement"
+        :aria-label="$t('skip_link.aria_label')"
     >
         <a
             v-for="(link, key) in SKIP_LINKS"

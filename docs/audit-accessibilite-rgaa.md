@@ -108,9 +108,9 @@ Aucun formulaire de contact sur le site. Les seuls contrôles de saisie sont des
 ## Recommandations priorisées
 
 ### Quick wins (correctifs de code simples)
-1. Ajouter une indication "(nouvelle fenêtre)" visuellement masquée sur les liens `target="_blank"` dans `VPrismicLink.vue` (RGAA 6.2).
-2. Passer l'`aria-label` de `VSkipLink.vue:8` par une clé i18n.
-3. Corriger l'accent manquant dans `i18n/locales/nuxt.fr.json:21`.
+1. ✅ Ajouter une indication "(nouvelle fenêtre)" visuellement masquée sur les liens `target="_blank"` dans `VPrismicLink.vue` (RGAA 6.2).
+2. ✅ Passer l'`aria-label` de `VSkipLink.vue:8` par une clé i18n.
+3. ✅ Corriger l'accent manquant dans `i18n/locales/nuxt.fr.json:21`.
 
 ### Actions structurantes
 4. Ajouter une alternative clavier (ou documenter l'exclusion) pour le redimensionnement de la modale projet (`VWindow.vue`).
