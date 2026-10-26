@@ -2,7 +2,7 @@ import { toRef } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
 import type { ProjectDocument } from '~~/prismicio-types'
 import { getFilledLinkToMedia, getFilledLinkToWeb } from '~/utils/prismic/link-field'
-import { getSchemaOrgIdentityId, getSchemaOrgPrimaryImageId } from '~/utils/schema-org'
+import { getSchemaOrgIdentityId, getSchemaOrgPrimaryImageId, getSchemaOrgWebPageId, getSchemaOrgWorkId } from '~/utils/schema-org'
 import { ensureProtocol } from '~/utils/url'
 
 // A type alias (not an interface) so it stays assignable to schema-org's index-signatured `ListItem`.
@@ -27,7 +27,7 @@ export function usePrismicProjectSchemaOrg(documentOrRef: MaybeRefOrGetter<Proje
 
     const { data } = doc.value
     // Stable `@id` so the page's `WebPage` can point to the work as its main entity
-    const workId = `${meta.canonicalUrl}#work`
+    const workId = getSchemaOrgWorkId(meta.canonicalUrl)
     const image = getFilledLinkToMedia(data.thumbnail)?.url
     // The delivered work itself (e.g. the client's website), not this portfolio page describing it
     const externalUrl = getFilledLinkToWeb(data.link)?.url
@@ -46,7 +46,7 @@ export function usePrismicProjectSchemaOrg(documentOrRef: MaybeRefOrGetter<Proje
             'image': image ? { '@id': imageId } : undefined,
             'dateCreated': data.date || undefined,
             'url': externalUrl ? ensureProtocol(externalUrl) : meta.canonicalUrl,
-            'mainEntityOfPage': { '@id': `${meta.canonicalUrl}#webpage` },
+            'mainEntityOfPage': { '@id': getSchemaOrgWebPageId(meta.canonicalUrl) },
             // Same `@id` as the global `Person` node, so the work is attributed to its author
             'creator': { '@id': getSchemaOrgIdentityId(useRuntimeConfig().public.site.url) },
             'keywords': data.tag_group.map(({ tag }) => tag).filter(Boolean),

@@ -107,12 +107,10 @@ export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocumen
 
         useSchemaOrg([
             defineImage({ '@id': imageId, 'url': image.value }),
+            // `name`, `description` and `url` are inherited by nuxt-schema-org from the head set above
             defineWebPage({
                 '@type': options.schemaOrgType,
-                'name': title.value,
-                'description': description.value,
                 'image': { '@id': imageId },
-                'url': canonicalUrl.value,
                 'mainEntity': options.mainEntityId ? { '@id': options.mainEntityId } : undefined,
             }),
         ])
