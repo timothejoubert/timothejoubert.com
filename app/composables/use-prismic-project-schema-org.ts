@@ -1,9 +1,8 @@
 import { toRef } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
-import { withTrailingSlash } from 'ufo'
 import type { ProjectDocument } from '~~/prismicio-types'
 import { getFilledLinkToMedia } from '~/utils/prismic/link-field'
-import { ensureProtocol } from '~/utils/url'
+import { getSchemaOrgIdentityId } from '~/utils/schema-org'
 
 // A type alias (not an interface) so it stays assignable to schema-org's index-signatured `ListItem`.
 type PrismicProjectSchemaOrgBreadcrumbEntry = {
@@ -26,21 +25,28 @@ export function usePrismicProjectSchemaOrg(documentOrRef: MaybeRefOrGetter<Proje
     if (!doc.value) return
 
     const { data } = doc.value
-    // Same `@id` as the global `Person` node (nuxt-schema-org's identity), so the work is attributed to its author.
-    const identityId = `${withTrailingSlash(ensureProtocol(useRuntimeConfig().public.site.url))}#identity`
+    // Stable `@id` so the page's `WebPage` can point to the work as its main entity
+    const workId = `${meta.canonicalUrl}#work`
+    const image = getFilledLinkToMedia(data.thumbnail)?.url
 
     useSchemaOrg([
         {
+            '@id': workId,
             '@type': data.creative_work_type || 'CreativeWork',
             'name': meta.title,
             'description': meta.description,
-            'image': getFilledLinkToMedia(data.thumbnail)?.url,
+            'image': image,
             'dateCreated': data.date || undefined,
             'url': meta.canonicalUrl,
-            'creator': { '@id': identityId },
+            // Same `@id` as the global `Person` node, so the work is attributed to its author
+            'creator': { '@id': getSchemaOrgIdentityId(useRuntimeConfig().public.site.url) },
             'keywords': data.tag_group.map(({ tag }) => tag).filter(Boolean),
             'award': data.awards.map(({ name }) => name).filter(Boolean),
         },
+        // No `image` here: the work already carries it, a second reference would duplicate the ImageObject
+        defineWebPage({
+            mainEntity: { '@id': workId },
+        }),
         defineBreadcrumb({
             itemListElement: [
                 ...(meta.breadcrumb || []),

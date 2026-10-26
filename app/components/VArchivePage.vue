@@ -60,7 +60,8 @@ const fetchOptions = computed(() => {
 const { data: projects, error, pending } = await usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions)
 
 const { site } = useRuntimeConfig().public
-if (projects.value?.length) {
+// Not when a project modal is open over the listing: the page is then about that project only
+if (projects.value?.length && !route.params.uid) {
     useSchemaOrg([
         defineItemList({
             itemListElement: projects.value.map((project, index) => ({
