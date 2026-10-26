@@ -1,7 +1,6 @@
 <script lang="ts">
 import { VImg } from '#components'
 import type { ImageField, LinkField } from '@prismicio/client'
-import pick from 'lodash/pick'
 import { vImgProps } from '~/components/VImg.vue'
 import { getImageFieldFilled } from '~/utils/prismic/image-field'
 import { getFilledLinkToMedia } from '~/utils/prismic/link-field'
@@ -21,7 +20,7 @@ export default defineComponent({
         ...vPrismicImgProps,
     },
     setup(props) {
-        const imgProps = computed(() => pick(props, Object.keys(vImgProps)))
+        const imgProps = computed(() => Object.fromEntries(Object.keys(vImgProps).map(key => [key, props[key as keyof typeof props]])))
         const imageField = computed(() => getImageFieldFilled(props.field))
         const mediaLinkField = computed(() => getFilledLinkToMedia(props.field))
 
