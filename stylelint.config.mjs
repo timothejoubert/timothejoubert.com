@@ -35,7 +35,9 @@ export default {
                     'px-to-rem',
                     'ease',
                     'v-bind',
-                    'flex-grid'],
+                    'flex-grid',
+                    'sass', // Sass if(sass($cond): a; else: b) syntax
+                ],
             }, // use custom functions
         ],
         'declaration-property-value-no-unknown': null, // prevent collision with sass functions
