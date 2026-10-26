@@ -41,6 +41,16 @@ export const vVideoPlayerProps = {
     fit: { type: String as PropType<'cover' | 'contain'> },
 }
 
+// Only declare types every browser can play: `.mov` (video/quicktime) is refused by Chrome's `<source type>`
+// check even when it holds H.264, so let the browser sniff the file instead.
+const videoMimeTypes: Record<string, string> = { mp4: 'video/mp4', m4v: 'video/mp4', webm: 'video/webm', ogv: 'video/ogg' }
+
+function getVideoMimeType(src?: string) {
+    const extension = src?.split('?')[0]?.split('.').pop()?.toLowerCase()
+
+    return extension ? videoMimeTypes[extension] : undefined
+}
+
 export default defineComponent({
     props: vVideoPlayerProps,
     setup(props) {
@@ -70,7 +80,8 @@ export default defineComponent({
                 playsinline: playsinline.value || undefined,
                 muted: muted.value || undefined,
                 loop: loop.value || undefined,
-                autoplay: autoplay.value || undefined,
+                // Autoplay is driven by the intersection observer below, so off-screen videos don't all download and play at once
+                preload: 'metadata',
                 controls: controls.value || undefined,
             }
         })
@@ -128,14 +139,36 @@ export default defineComponent({
 
             const altSources = (props.altSources || []).filter(file => !!file.src && !!file.mimeType)
 
-            return [{ src: src.value, mimeType: props.mimeType || 'video/mp4' }, ...altSources]
+            return [{ src: src.value, mimeType: props.mimeType || getVideoMimeType(src.value) }, ...altSources]
+        })
+
+        const playerComponent = ref<HTMLVideoElement | null>(null)
+
+        useIntersectionObserver(playerComponent, ([entry]) => {
+            const video = playerComponent.value
+            if (!video || !autoplay.value) return
+
+            if (entry?.isIntersecting) video.play().catch(() => {}) // rejected when the browser blocks autoplay, nothing to recover
+            else video.pause()
         })
 
         // STYLE
+        // Prismic media links don't expose video dimensions: read them from the file metadata to reserve the right space
+        const metadataRatio = ref<number>()
+        const onLoadedMetadata = () => {
+            const video = playerComponent.value
+            if (video?.videoWidth && video.videoHeight) metadataRatio.value = video.videoWidth / video.videoHeight
+        }
+
+        // Metadata may already be loaded before hydration, `loadedmetadata` won't fire again
+        onMounted(() => {
+            if (playerComponent.value && playerComponent.value.readyState >= HTMLMediaElement.HAVE_METADATA) onLoadedMetadata()
+        })
+
         const ratio = computed(() => {
             const validRatio = props.width && props.height && Number(props.width) / Number(props.height)
 
-            return typeof validRatio === 'number' ? validRatio : 16 / 9
+            return typeof validRatio === 'number' ? validRatio : (metadataRatio.value || 16 / 9)
         })
 
         const playerSize = ref<number[]>([])
@@ -153,7 +186,7 @@ export default defineComponent({
             return style
         })
 
-        return { controls, isEmbed, playerStyle, videoAttrs, videoSources, src }
+        return { controls, isEmbed, onLoadedMetadata, playerComponent, playerStyle, videoAttrs, videoSources, src }
     },
 })
 </script>
@@ -172,14 +205,16 @@ export default defineComponent({
         v-else
         v-bind="videoAttrs"
         ref="playerComponent"
+        :style="playerStyle"
         :class="$style.video"
+        @loadedmetadata="onLoadedMetadata"
     >
         <template v-if="videoSources.length">
             <source
                 v-for="source in videoSources"
                 :key="source.src"
                 :src="source.src"
-                :type="source.mimeType as string"
+                :type="source.mimeType"
             >
         </template>
     </video>
