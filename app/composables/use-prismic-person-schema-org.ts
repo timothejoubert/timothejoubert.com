@@ -1,6 +1,7 @@
 import { asText, isFilled } from '@prismicio/client'
 import { callWithNuxt } from '#app'
 import { getFilledLinkToWeb } from '~/utils/prismic/link-field'
+import { ensureProtocol } from '~/utils/url'
 
 /**
  * Global schema.org `Person` node, sourced from the `settings` singleton (contact/socials) and
@@ -49,11 +50,14 @@ export async function usePrismicPersonSchemaOrg() {
         return [intro, experiences].filter(Boolean).join(' ') || undefined
     })
 
+    // The Prismic link can be typed without a scheme (`timothejoubert.netlify.app`), which isn't a valid schema.org URL
+    const publisherUrl = getFilledLinkToWeb(publisher.value?.publisher_url)?.url
+
     callWithNuxt(nuxtApp, () => useSchemaOrg([
         definePerson({
             name: publisher.value?.publisher_name || undefined,
             description: description.value,
-            url: getFilledLinkToWeb(publisher.value?.publisher_url)?.url,
+            url: publisherUrl ? ensureProtocol(publisherUrl) : undefined,
             image: isFilled.image(publisher.value?.publisher_image) ? publisher.value.publisher_image.url : undefined,
             email: publisher.value?.email || undefined,
             jobTitle: publisher.value?.publisher_job_title || undefined,

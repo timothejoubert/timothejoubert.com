@@ -1,7 +1,9 @@
 import { toRef } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
+import { withTrailingSlash } from 'ufo'
 import type { ProjectDocument } from '~~/prismicio-types'
 import { getFilledLinkToMedia } from '~/utils/prismic/link-field'
+import { ensureProtocol } from '~/utils/url'
 
 // A type alias (not an interface) so it stays assignable to schema-org's index-signatured `ListItem`.
 type PrismicProjectSchemaOrgBreadcrumbEntry = {
@@ -24,6 +26,8 @@ export function usePrismicProjectSchemaOrg(documentOrRef: MaybeRefOrGetter<Proje
     if (!doc.value) return
 
     const { data } = doc.value
+    // Same `@id` as the global `Person` node (nuxt-schema-org's identity), so the work is attributed to its author.
+    const identityId = `${withTrailingSlash(ensureProtocol(useRuntimeConfig().public.site.url))}#identity`
 
     useSchemaOrg([
         {
@@ -33,6 +37,7 @@ export function usePrismicProjectSchemaOrg(documentOrRef: MaybeRefOrGetter<Proje
             'image': getFilledLinkToMedia(data.thumbnail)?.url,
             'dateCreated': data.date || undefined,
             'url': meta.canonicalUrl,
+            'creator': { '@id': identityId },
             'keywords': data.tag_group.map(({ tag }) => tag).filter(Boolean),
             'award': data.awards.map(({ name }) => name).filter(Boolean),
         },
