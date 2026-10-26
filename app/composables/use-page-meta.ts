@@ -13,6 +13,8 @@ export interface PageMetaOptions {
     title?: MaybeRefOrGetter<string | null | undefined>
     description?: MaybeRefOrGetter<string | null | undefined>
     image?: MaybeRefOrGetter<string | undefined>
+    /** Open Graph object type, e.g. `article` for a project case study. Defaults to `website`. */
+    ogType?: MaybeRefOrGetter<'website' | 'article' | undefined>
     siteName?: MaybeRefOrGetter<string | undefined>
     noindex?: MaybeRefOrGetter<boolean | undefined>
     canonicalUrl?: MaybeRefOrGetter<string | null | undefined>
@@ -35,6 +37,12 @@ export function usePageMeta(options: PageMetaOptions = {}) {
     const siteName = computed(() => toValue(options.siteName) || runtimeConfig.public.site.name || '')
     const noindex = computed(() => !!toValue(options.noindex))
     const canonicalUrl = computed(() => toValue(options.canonicalUrl) || undefined)
+    const ogType = computed(() => toValue(options.ogType) || 'website')
+    // Open Graph expects a `language_TERRITORY` locale (`fr_FR`), not a bare language code.
+    const ogLocale = computed(() => {
+        const locale = $i18n.locale.value
+        return locale.includes('-') ? locale.replace('-', '_') : `${locale}_${locale.toUpperCase()}`
+    })
 
     const link = computed<ReactiveHead['link']>(() => {
         const links: NonNullable<ReactiveHead['link']> = []
@@ -76,7 +84,8 @@ export function usePageMeta(options: PageMetaOptions = {}) {
             // The client side update is required for the share on iOS Safari feature
             // to have the correct meta data when sharing.
             { name: 'description', content: truncatedDescription.value },
-            { property: 'og:type', content: 'website' },
+            { property: 'og:type', content: ogType.value },
+            { property: 'og:locale', content: ogLocale.value },
             { property: 'og:title', content: title.value },
             { property: 'og:site_name', content: siteName.value },
             { property: 'og:description', content: truncatedDescription.value },

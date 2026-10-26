@@ -1,10 +1,12 @@
 import { computed, toRef } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
-import { asText, type ImageField, type KeyTextField, type RichTextField } from '@prismicio/client'
+import { asText, type ImageField, type KeyTextField, type LinkToMediaField, type RichTextField } from '@prismicio/client'
 import { joinURL } from 'ufo'
 import type { ReachableDocument } from '~/types/api'
 import { getFormattedLocale } from '~/composables/use-prismic-locale'
 import { ensureProtocol } from '~/utils/url'
+import { getFilledLinkToMedia } from '~/utils/prismic/link-field'
+import { prismicDocumentType } from '#shared/prismic-schema'
 import { I18N_DEFAULT_LOCALE } from '~~/i18n/i18n'
 import type { PageMetaAlternateLink } from '~/composables/use-page-meta'
 
@@ -14,6 +16,8 @@ interface PrismicDocumentPageData extends Record<string, unknown> {
     meta_image?: ImageField
     // Possible page field
     image?: ImageField
+    // Project pages: main visual (a media link, which can also be a video)
+    thumbnail?: LinkToMediaField
     // Project pages have a curated summary distinct from the full case-study body (`content`) —
     // a better generic fallback for meta description than truncating arbitrary rich text.
     short_description?: RichTextField
@@ -50,12 +54,17 @@ export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocumen
     })
 
     const image = computed(() => {
-        const imgUrl = docData.value?.meta_image?.url || docData.value?.image?.url
+        const thumbnail = getFilledLinkToMedia(docData.value?.thumbnail)
+        const imgUrl = docData.value?.meta_image?.url
+          || docData.value?.image?.url
+          || (thumbnail?.kind === 'image' ? thumbnail.url : undefined)
         if (imgUrl) {
+            // Prismic URLs already carry imgix params (`?auto=compress,format`): drop them so the
+            // provider doesn't append a second `?`. Social crawlers don't all support AVIF/WebP,
+            // hence a forced JPEG, at the 1200×630 size Open Graph recommends.
             return generateImg(
-                imgUrl,
-                { width: 1200, height: 700 },
-                { modifiers: { fit: 'crop' } },
+                imgUrl.split('?')[0]!,
+                { width: 1200, height: 630, fit: 'crop', format: 'jpg', quality: 80 },
             )
         }
         else {
@@ -84,7 +93,9 @@ export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocumen
         })
     })
 
-    const { head } = usePageMeta({ title, description, image, canonicalUrl, alternateLinks, noindex })
+    const ogType = computed(() => doc.value?.type === prismicDocumentType.PROJECT_PAGE ? 'article' : 'website')
+
+    const { head } = usePageMeta({ title, description, image, ogType, canonicalUrl, alternateLinks, noindex })
     useHead(head)
 
     if (options.schemaOrgType && !noindex.value) {
