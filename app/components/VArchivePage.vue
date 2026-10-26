@@ -60,7 +60,8 @@ const fetchOptions = computed(() => {
 const { data: projects, error, pending } = await usePrismicFetchDocumentListing(prismicDocumentType.PROJECT_PAGE, fetchOptions)
 
 const { site } = useRuntimeConfig().public
-if (projects.value?.length) {
+// Not when a project modal is open over the listing: the page is then about that project only
+if (projects.value?.length && !route.params.uid) {
     useSchemaOrg([
         defineItemList({
             itemListElement: projects.value.map((project, index) => ({
@@ -175,7 +176,7 @@ function frameworkOutput(projectData: ProjectDocumentData | null) {
             :is="headingTag"
             class="visually-hidden"
         >
-            {{ document.data.title }}
+            {{ document.data.title || $t('archive_page.heading') }}
         </component>
         <table :class="$style.table">
             <caption class="visually-hidden">

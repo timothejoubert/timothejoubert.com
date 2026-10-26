@@ -62,6 +62,10 @@ export default defineNuxtConfig({
                 'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
             },
         },
+        // Netlify serves `.webmanifest` as `application/octet-stream` by default
+        '/site.webmanifest': {
+            headers: { 'Content-Type': 'application/manifest+json' },
+        },
     },
     experimental: {
         asyncContext: true,

@@ -1,6 +1,5 @@
 ### TODO
 - Nettoyage `projects-source/` : lancer `node scripts/find-duplicates.js` (génère `projects-source/.duplicates-report.md`, ~2249 groupes de doublons exacts identifiés lors de l'audit, ~10,3 Go récupérables) et trier manuellement quel exemplaire garder pour chaque groupe ; puis supprimer les déchets système (`.DS_Store`, `Thumbs.db`, `__pycache__` dans `pierre-david`/`screen-club`, fichiers de taille 0). Contexte : `m2-36-days-of-type/sources/` déjà traité (masters `.mov` bruts compressés en H.265 via `scripts/compress-36dot-masters.js`, 12,68 Go → 3,31 Go, originaux supprimés).
-- Changer le type media (link) vers un field image pour thumbnail et media dans le document Projet (faire attention a ne pas perdre les relations de media lors de ces changements de type de field dans prismic)
 - Améliorer l'accessibilité /docs/audit-accessibilite-rgaa.md
 - Faire un lazy loading des vidéos (éviter de charger/lancer les vidéos automatiquement)
 
