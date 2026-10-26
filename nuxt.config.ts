@@ -76,9 +76,10 @@ export default defineNuxtConfig({
         // instead of relying on Nitro's env-based auto-detection (which only kicks in on Netlify's build servers).
         preset: 'netlify-static',
         prerender: {
-            // Aliases and llms.txt aren't linked from anywhere in the app, so the crawler won't find
-            // them on its own.
-            routes: [...Object.keys(getPrismicAliasRedirects()), '/llms.txt'],
+            // llms.txt isn't linked from anywhere in the app, so the crawler won't find it on its own.
+            // Redirect routes (aliases, legacy project URLs) must NOT be prerendered: their meta-refresh
+            // stub `.html` file would shadow the real 301/302 rule Netlify reads from `_redirects`.
+            routes: ['/llms.txt'],
             // Generate flat `page.html` files instead of `page/index.html`. Netlify's static server
             // 301-redirects a bare `/page` to `/page/` when a directory exists — which conflicted with
             // canonical/sitemap/og:url (all built without a trailing slash), likely why Google Search
@@ -149,9 +150,14 @@ export default defineNuxtConfig({
             const legacyProjectRedirects = await getLegacyFavoriteProjectRedirects(repositoryName)
 
             nitroConfig.routeRules = { ...nitroConfig.routeRules, ...legacyProjectRedirects }
+
+            // Redirect routes are found by the prerender crawler through links, but must not be prerendered
+            // (see `nitro.prerender.routes`): Netlify serves them from `_redirects`. Exact match on purpose,
+            // a string `ignore` entry is a prefix (`/projets` would also skip every `/projets/:uid`).
+            const redirectPaths = new Set([...Object.keys(getPrismicAliasRedirects()), ...Object.keys(legacyProjectRedirects)])
             nitroConfig.prerender ||= {}
-            nitroConfig.prerender.routes ||= []
-            nitroConfig.prerender.routes.push(...Object.keys(legacyProjectRedirects))
+            nitroConfig.prerender.ignore ||= []
+            nitroConfig.prerender.ignore.push((path: string) => redirectPaths.has(path))
         },
     },
     eslint: {
