@@ -17,7 +17,10 @@ logs
 backup/
 projects-source/**
 !projects-source/**/
-!projects-source/**/project.md
+!projects-source/*/project.md
+# Raw working files (often nested git clones of old sites) — never committed
+projects-source/*/sources/
+projects-source/*/media/
 
 # Misc
 .DS_Store
