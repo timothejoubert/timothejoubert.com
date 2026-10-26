@@ -13,7 +13,7 @@ tags:
 awards: []
 medias:
   - sound_enabled: false
-    file: media/media-0.mov
+    file: media/media-0.mp4
   - sound_enabled: false
     file: media/media-1.jpg
 thumbnail: media/thumbnail.jpg
