@@ -6,6 +6,10 @@ allowBuilds:
   vue-demi: true
 
 overrides:
-  # typescript-eslint doesn't support TS 7.0 yet (github.com/typescript-eslint/typescript-eslint/issues/10940)
-  # — force the whole graph onto the last 5.x line so `pnpm lint:js` can run at all.
-  typescript: ^5.9.3
+  # typescript-eslint (via @nuxt/eslint) declares `typescript: >=4.8.4 <6.1.0` and doesn't support TS 7 yet
+  # (github.com/typescript-eslint/typescript-eslint/issues/10940) — force the whole graph onto the 6.0.x line
+  # so `pnpm lint:js` can run. Bump once typescript-eslint widens its peer range.
+  typescript: ~6.0.3
+  # stylelint-config-idiomatic-order@10 still depends on stylelint-order ^6, whose peer range stops at stylelint 16.
+  # stylelint-order 8 keeps the same `order/*` rules and supports stylelint 17. Drop once the config bumps it.
+  stylelint-order: ^8.1.2
