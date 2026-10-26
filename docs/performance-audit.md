@@ -18,9 +18,8 @@ Aucun `<link rel="preconnect">` dans `nuxt.config.ts` (`app.head.link`, lignes 2
 - 1ère carte du listing / image hero de `VProjectPage` → `loading="eager"` + `fetchpriority="high"`.
 - Reste de la grille → `loading="lazy"` explicite.
 
-### 3. Fonts — `@nuxt/fonts` inutilisé + pas de preload
-Les fonts sont auto-hébergées et déclarées à la main via `@font-face` en SCSS (`app/assets/scss/_fonts.scss` + `app/assets/fonts/*.woff2`), avec `font-display: swap` (déjà bien). Mais le module `@nuxt/fonts` est activé dans `nuxt.config.ts` sans être réellement utilisé pour ces fichiers (poids mort potentiel), et aucun `<link rel="preload" as="font">` n'existe pour les fonts critiques above-the-fold.
-- Soit configurer `@nuxt/fonts` pour qu'il gère ces fichiers (preload auto), soit ajouter un preload manuel dans `app.head.link`.
+### 3. Fonts — ✅ résolu
+Les fonts sont auto-hébergées et déclarées à la main via `@font-face` en SCSS (`app/assets/scss/_fonts.scss` + `app/assets/fonts/*.woff2`), avec `font-display: swap`. Le module `@nuxt/fonts`, inutilisé, a été retiré, et `app/app.vue` preload `pp-fraktion-sans-variable.woff2` (font du `body`) via `useHead` en important l'URL hashée par Vite (même asset que le `@font-face`).
 
 ## Vérifié sans anomalie (rien à faire)
 - **Requêtes Prismic** : pas de N+1 dans `usePrismicFetchProjects`/`usePrismicFetchDocument`, et de toute façon fetch au build (SSG).
