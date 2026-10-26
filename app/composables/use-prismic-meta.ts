@@ -30,7 +30,9 @@ function richTextOrStringToText(field: string | RichTextField | undefined): stri
 
 export interface PrismicMetaOptions {
     /** schema.org `WebPage` subtype for this route (e.g. `CollectionPage`, `AboutPage`). Omit to let `nuxt-schema-org` emit its default `WebPage` node. */
-    schemaOrgType?: 'WebPage' | 'CollectionPage' | 'AboutPage'
+    schemaOrgType?: 'WebPage' | 'CollectionPage' | 'AboutPage' | ('AboutPage' | 'ProfilePage')[]
+    /** `@id` of the node this page is about (e.g. the `Person` for a `ProfilePage`). */
+    mainEntityId?: string
 }
 
 export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocument | null | undefined>, options: PrismicMetaOptions = {}) {
@@ -106,6 +108,7 @@ export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocumen
                 'description': description.value,
                 'image': image.value,
                 'url': canonicalUrl.value,
+                'mainEntity': options.mainEntityId ? { '@id': options.mainEntityId } : undefined,
             }),
         ])
     }

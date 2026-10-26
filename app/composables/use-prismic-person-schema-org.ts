@@ -33,22 +33,10 @@ export async function usePrismicPersonSchemaOrg() {
             .map(name => ({ '@type': 'EducationalOrganization', name }))
     })
 
-    // schema.org has no standard property for a full work history on a `Person` — rather than
-    // invent a non-standard structure, experiences are folded into a plain-text `description`
-    // alongside the about page's own intro text. Field shape: `title` is the employer/company
-    // name, `content` is a short description, `place` is the city.
-    const description = computed(() => {
-        const intro = asText(aboutData.value?.content) || undefined
-        const experiences = aboutData.value?.experiences
-            ?.map((experience) => {
-                const parts = [experience.title, asText(experience.content), experience.place].filter(Boolean)
-                return parts.length ? parts.join(', ') : undefined
-            })
-            .filter((entry): entry is string => !!entry)
-            .join('. ')
-
-        return [intro, experiences].filter(Boolean).join(' ') || undefined
-    })
+    // The about page's intro only: schema.org has no standard property for a full work history on
+    // a `Person`, and folding experiences into this text made it an unreadable list of companies.
+    // Experiences stay on /a-propos, linked to this node through its `ProfilePage`.
+    const description = computed(() => asText(aboutData.value?.content) || undefined)
 
     // The Prismic link can be typed without a scheme (`timothejoubert.netlify.app`), which isn't a valid schema.org URL
     const publisherUrl = getFilledLinkToWeb(publisher.value?.publisher_url)?.url
