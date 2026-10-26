@@ -47,6 +47,7 @@
         "@iconify-json/material-symbols": "^1.2.96",
         "@prismicio/migrate": "^0.0.2",
         "@stylistic/stylelint-plugin": "^5.3.1",
+        "@types/node": "~24.19.2",
         "eslint": "^10.13.0",
         "js-yaml": "^5.5.0",
         "marked": "^18.1.1",

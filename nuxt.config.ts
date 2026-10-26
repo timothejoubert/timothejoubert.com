@@ -117,6 +117,14 @@ export default defineNuxtConfig({
             }),
         ],
     },
+    typescript: {
+        // TS 6+ no longer auto-includes every @types package — nuxt.config.ts needs Node's `process` types.
+        nodeTsConfig: {
+            compilerOptions: {
+                types: ['node'],
+            },
+        },
+    },
     postcss: {
         plugins: {
             // https://github.com/cuth/postcss-pxtorem?tab=readme-ov-file#options
@@ -201,7 +209,7 @@ export default defineNuxtConfig({
         preview: PREVIEW_PATH,
         toolbar: !isProd,
         clientConfig: {
-            routes: prismicDocumentRoutes,
+            routes: [...prismicDocumentRoutes],
         },
     },
     // https://nuxtseo.com/robots/getting-started/introduction

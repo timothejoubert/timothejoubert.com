@@ -1,4 +1,6 @@
-import type { PrismicDocumentType } from '~/types/api'
+import type { AllDocumentTypes } from '../prismicio-types'
+
+type PrismicDocumentType = AllDocumentTypes['type']
 
 /**
  * Single source of truth for every Prismic document type used in the app: its identity (friendly
@@ -15,7 +17,8 @@ import type { PrismicDocumentType } from '~/types/api'
 /**
  * Friendly named constants for every Prismic document type used in the app (routable pages and
  * singleton config documents like `settings`/`menu` alike). `satisfies` ties each value back to
- * `PrismicDocumentType` (itself derived from the generated `prismicio-types.d.ts`), so a
+ * the generated `prismicio-types.d.ts` document types (same as `PrismicDocumentType` in `app/types/api.ts`,
+ * which can't be imported here: this file is also loaded by nuxt.config.ts, outside the app's aliases), so a
  * renamed/removed custom type fails to compile here instead of silently going stale.
  */
 export const prismicDocumentType = {
