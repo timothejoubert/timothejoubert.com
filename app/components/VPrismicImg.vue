@@ -27,8 +27,8 @@ export default defineComponent({
         return () => h(VImg, {
             ...imgProps.value,
             src: imageField.value?.url || mediaLinkField.value?.url,
-            width: props.width || imageField.value?.dimensions.width || mediaLinkField.value?.width,
-            height: props.height || imageField.value?.dimensions.height || mediaLinkField.value?.height,
+            width: props.width || imageField.value?.dimensions.width || mediaLinkField.value?.width || undefined,
+            height: props.height || imageField.value?.dimensions.height || mediaLinkField.value?.height || undefined,
             alt: typeof props.alt === 'string' ? props.alt : (imageField.value?.alt || ''),
             provider: 'imgix',
             placeholder: props.placeholder || '#ffffff10',

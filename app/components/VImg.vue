@@ -57,7 +57,7 @@ export default defineComponent({
             ...props.modifiers,
             width: width.value,
             height: height.value,
-            quality: getInt(props.quality || props.modifiers?.quality) || $img.options.quality,
+            quality: getInt(props.quality || (props.modifiers?.quality as string | number | undefined)) || $img.options.quality,
             format: props.format || props.modifiers?.format,
         }))
 
@@ -91,24 +91,19 @@ export default defineComponent({
         if (props.preload) {
             const isResponsive = responsiveImageData.value && typeof responsiveImageData.value !== 'string' && Object.values(responsiveImageData.value).every(v => v)
 
+            const responsive = isResponsive && typeof responsiveImageData.value !== 'string' ? responsiveImageData.value : undefined
+
+            // One flat object literal (no conditional spreads) so unhead can narrow it to its preload-image link type.
             useHead({
                 link: [
                     {
                         rel: 'preload',
                         as: 'image',
                         nonce: props.nonce,
-                        ...(!isResponsive
-                            ? { href: src.value }
-                            : typeof responsiveImageData.value !== 'string' && responsiveImageData.value
-                                ? {
-                                    href: responsiveImageData.value.src,
-                                    imagesizes: responsiveImageData.value.sizes,
-                                    imagesrcset: responsiveImageData.value.srcset,
-                                }
-                                : {}),
-                        ...(typeof props.preload !== 'boolean' && props.preload.fetchPriority
-                            ? { fetchpriority: props.preload.fetchPriority }
-                            : {}),
+                        href: responsive ? responsive.src : src.value,
+                        imagesizes: responsive?.sizes,
+                        imagesrcset: responsive?.srcset,
+                        fetchpriority: typeof props.preload !== 'boolean' ? props.preload.fetchPriority : undefined,
                     },
                 ],
             })

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { KeyTextField, RichTextField } from '@prismicio/client'
-import type { VueRichTextSerializer } from '@prismicio/vue'
+import type { RichTextComponents } from '@prismicio/vue'
 // import { RichTextNodeType } from '@prismicio/client'
 
 export type VTextContent = string | RichTextField | KeyTextField | null
@@ -8,16 +8,16 @@ export type VTextContent = string | RichTextField | KeyTextField | null
 interface VTextProps {
     tag?: string
     content?: VTextContent
-    richTextSerializer?: VueRichTextSerializer | null
+    richTextSerializer?: RichTextComponents | null
 }
 
 const prismic = usePrismic()
 // Use custom rendered component
 // https://prismic.io/docs/fields/rich-text
 const props = withDefaults(defineProps<VTextProps>(), {
-    richTextSerializer: {
+    richTextSerializer: () => ({
         hyperlink: undefined,
-    },
+    }),
 })
 
 const slots = useSlots()
@@ -35,9 +35,8 @@ const richTextFilled = computed(() => {
 })
 
 const flatRichTextContent = computed(() => {
-    if (richTextFilled.value?.length === 1 && !richTextFilled.value[0]?.spans.length) {
-        return (richTextFilled.value?.[0] as { text: string })?.text
-    }
+    const block = richTextFilled.value?.length === 1 ? richTextFilled.value[0] : undefined
+    if (block && 'text' in block && !block.spans.length) return block.text
 
     return undefined
 })

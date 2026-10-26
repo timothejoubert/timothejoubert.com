@@ -2,6 +2,7 @@
 import { withQuery } from 'ufo'
 import type { ProjectDocument } from '~~/prismicio-types'
 import { isFilled } from '@prismicio/client'
+import { getFilledLinkToMedia } from '~/utils/prismic/link-field'
 
 const props = defineProps<{
     document?: ProjectDocument | null
@@ -58,12 +59,12 @@ function endWidthVideoExt(url: string) {
 const medias = computed(() => {
     if (!project.value) return []
 
-    return project.value.medias
-        .filter(m => isFilled.linkToMedia(m.media) && m.media.url)
-        .map(mediaGroup => ({
-            ...mediaGroup,
-            type: endWidthVideoExt(mediaGroup.media.url) ? 'video' : 'other',
-        }))
+    return project.value.medias.flatMap((mediaGroup) => {
+        const media = getFilledLinkToMedia(mediaGroup.media)
+        if (!media) return []
+
+        return [{ ...mediaGroup, media, type: endWidthVideoExt(media.url) ? 'video' : 'other' }]
+    })
 })
 
 const tags = computed(() => {

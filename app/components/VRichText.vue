@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { RichTextField } from '@prismicio/client'
+import type { RichTextField, RTTextNode } from '@prismicio/client'
 
 const props = defineProps<{
     field: RichTextField
 }>()
 
-function parseTextBlocks(richTextBlock: RichTextField<'filled'>[number]) {
+function parseTextBlocks(richTextBlock: RTTextNode) {
     const { text, spans } = richTextBlock
     const result = []
     let cursor = 0
@@ -47,7 +47,7 @@ const prismic = usePrismic()
 
 const tags = computed(() => {
     if (prismic.isFilled.richText(props.field)) {
-        return props.field.map(parseTextBlocks).flat()
+        return props.field.filter((block): block is RTTextNode => 'text' in block).map(parseTextBlocks).flat()
     }
 
     return undefined

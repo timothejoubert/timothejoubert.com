@@ -6,7 +6,7 @@ import { defineComponent, h } from 'vue'
 export default defineComponent({
     inheritAttrs: false,
     props: {
-        content: { type: [String, null, undefined], required: true },
+        content: { type: String as PropType<string | null>, default: null },
         render: String as PropType<'all' | 'lines' | 'words' | 'chars'>,
     },
     emits: {
@@ -50,7 +50,7 @@ export default defineComponent({
                 })
             }
             else if (splitTextData.all.length === 1) {
-                renderNodes = renderLine(splitTextData.all[0])
+                renderNodes = renderLine(splitTextData.all[0]!)
             }
             else {
                 renderNodes = splitTextData.all.map(line => renderLine(line))

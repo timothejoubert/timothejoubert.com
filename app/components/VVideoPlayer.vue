@@ -17,9 +17,14 @@ export const videoFile = {
     mimeType: { type: String },
 }
 
+interface VideoSource {
+    src?: string
+    mimeType?: string
+}
+
 export const videoDocument = {
     ...videoFile,
-    altSources: { type: Array as PropType<(typeof videoFile)[]> },
+    altSources: { type: Array as PropType<VideoSource[]> },
 }
 
 export const embedVideoProps = {
@@ -62,11 +67,11 @@ export default defineComponent({
             return {
                 width: props.width,
                 height: props.height,
-                playsinline: playsinline.value ? '' : undefined,
-                muted: muted.value ? '' : undefined,
-                loop: loop.value ? '' : undefined,
-                autoplay: autoplay.value ? '' : undefined,
-                controls: controls.value ? '' : undefined,
+                playsinline: playsinline.value || undefined,
+                muted: muted.value || undefined,
+                loop: loop.value || undefined,
+                autoplay: autoplay.value || undefined,
+                controls: controls.value || undefined,
             }
         })
 
