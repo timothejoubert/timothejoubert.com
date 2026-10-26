@@ -120,7 +120,8 @@ export default defineComponent({
                 alt: props.alt || '',
                 loading: props.loading,
                 fetchpriority: props.fetchpriority,
-                crossorigin: props.crossorigin,
+                // Boolean prop casting turns an absent `crossorigin` into `false`, which would render `crossorigin="false"` (treated as anonymous CORS)
+                crossorigin: typeof props.crossorigin === 'string' ? props.crossorigin : props.crossorigin ? 'anonymous' : undefined,
                 decoding: props.decoding,
                 longdesc: props.longdesc,
                 style: style.value,
