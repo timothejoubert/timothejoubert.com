@@ -26,7 +26,7 @@ function richTextOrStringToText(field: string | RichTextField | undefined): stri
 
 export interface PrismicMetaOptions {
     /** schema.org `WebPage` subtype for this route (e.g. `CollectionPage`, `AboutPage`). Omit to let `nuxt-schema-org` emit its default `WebPage` node. */
-    schemaOrgType?: string
+    schemaOrgType?: 'WebPage' | 'CollectionPage' | 'AboutPage'
 }
 
 export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocument | null | undefined>, options: PrismicMetaOptions = {}) {
@@ -55,7 +55,7 @@ export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocumen
             return generateImg(
                 imgUrl,
                 { width: 1200, height: 700 },
-                { provider: 'ipx', modifiers: { fit: 'crop' } },
+                { modifiers: { fit: 'crop' } },
             )
         }
         else {

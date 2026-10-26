@@ -183,6 +183,8 @@ export default defineNuxtConfig({
     },
     // https://image.nuxt.com/get-started/configuration
     image: {
+        // Every image comes from Prismic (served by imgix) — also types useImage() options against it.
+        provider: 'imgix',
         imgix: {
             baseURL: '',
         },

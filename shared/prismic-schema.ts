@@ -88,9 +88,9 @@ export function getRoutePath(name: PrismicRouteName, params?: Record<string, str
     return path
 }
 
-export function isPrismicDocumentRoute(route: object) {
+export function isPrismicDocumentRoute(route: object): route is PrismicDocumentRoute {
     const type = 'type' in route && typeof route.type === 'string' && route.type
-    const hasPath = 'path' in route && typeof route.path === 'string' && route.path
+    const hasPath = 'path' in route && typeof route.path === 'string' && !!route.path
 
     return hasPath && prismicDocumentRoutes.some(r => r.type === type)
 }

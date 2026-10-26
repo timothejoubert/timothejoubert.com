@@ -3,7 +3,8 @@ import type { MaybeRefOrGetter } from 'vue'
 import type { ProjectDocument } from '~~/prismicio-types'
 import { getFilledLinkToMedia } from '~/utils/prismic/link-field'
 
-interface PrismicProjectSchemaOrgBreadcrumbEntry {
+// A type alias (not an interface) so it stays assignable to schema-org's index-signatured `ListItem`.
+type PrismicProjectSchemaOrgBreadcrumbEntry = {
     name: string
     item: string
 }
