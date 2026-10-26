@@ -1,8 +1,9 @@
 import { toRef } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
 import type { ProjectDocument } from '~~/prismicio-types'
-import { getFilledLinkToMedia } from '~/utils/prismic/link-field'
-import { getSchemaOrgIdentityId } from '~/utils/schema-org'
+import { getFilledLinkToMedia, getFilledLinkToWeb } from '~/utils/prismic/link-field'
+import { getSchemaOrgIdentityId, getSchemaOrgPrimaryImageId } from '~/utils/schema-org'
+import { ensureProtocol } from '~/utils/url'
 
 // A type alias (not an interface) so it stays assignable to schema-org's index-signatured `ListItem`.
 type PrismicProjectSchemaOrgBreadcrumbEntry = {
@@ -28,16 +29,24 @@ export function usePrismicProjectSchemaOrg(documentOrRef: MaybeRefOrGetter<Proje
     // Stable `@id` so the page's `WebPage` can point to the work as its main entity
     const workId = `${meta.canonicalUrl}#work`
     const image = getFilledLinkToMedia(data.thumbnail)?.url
+    // The delivered work itself (e.g. the client's website), not this portfolio page describing it
+    const externalUrl = getFilledLinkToWeb(data.link)?.url
+
+    // Explicit `@id`: auto-numbered image ids (`#/schema/image/1`) point to different images from one page to another
+    const imageId = getSchemaOrgPrimaryImageId(meta.canonicalUrl)
 
     useSchemaOrg([
+        ...(image ? [defineImage({ '@id': imageId, 'url': image })] : []),
         {
             '@id': workId,
             '@type': data.creative_work_type || 'CreativeWork',
-            'name': meta.title,
+            // The bare project title: `meta.title` carries the " | site name" suffix of the <title> tag
+            'name': data.title || meta.title,
             'description': meta.description,
-            'image': image,
+            'image': image ? { '@id': imageId } : undefined,
             'dateCreated': data.date || undefined,
-            'url': meta.canonicalUrl,
+            'url': externalUrl ? ensureProtocol(externalUrl) : meta.canonicalUrl,
+            'mainEntityOfPage': { '@id': `${meta.canonicalUrl}#webpage` },
             // Same `@id` as the global `Person` node, so the work is attributed to its author
             'creator': { '@id': getSchemaOrgIdentityId(useRuntimeConfig().public.site.url) },
             'keywords': data.tag_group.map(({ tag }) => tag).filter(Boolean),

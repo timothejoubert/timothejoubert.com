@@ -2,6 +2,7 @@ import { asText, isFilled } from '@prismicio/client'
 import { callWithNuxt } from '#app'
 import { getFilledLinkToWeb } from '~/utils/prismic/link-field'
 import { ensureProtocol } from '~/utils/url'
+import { getSchemaOrgIdentityImageId } from '~/utils/schema-org'
 
 /**
  * Global schema.org `Person` node, sourced from the `settings` singleton (contact/socials) and
@@ -41,12 +42,17 @@ export async function usePrismicPersonSchemaOrg() {
     // The Prismic link can be typed without a scheme (`timothejoubert.netlify.app`), which isn't a valid schema.org URL
     const publisherUrl = getFilledLinkToWeb(publisher.value?.publisher_url)?.url
 
+    const image = isFilled.image(publisher.value?.publisher_image) ? publisher.value.publisher_image.url : undefined
+    // Explicit `@id`: auto-numbered image ids (`#/schema/image/1`) point to different images from one page to another
+    const imageId = getSchemaOrgIdentityImageId(useRuntimeConfig().public.site.url)
+
     callWithNuxt(nuxtApp, () => useSchemaOrg([
+        ...(image ? [defineImage({ '@id': imageId, 'url': image })] : []),
         definePerson({
             name: publisher.value?.publisher_name || undefined,
             description: description.value,
             url: publisherUrl ? ensureProtocol(publisherUrl) : undefined,
-            image: isFilled.image(publisher.value?.publisher_image) ? publisher.value.publisher_image.url : undefined,
+            image: image ? { '@id': imageId } : undefined,
             email: publisher.value?.email || undefined,
             jobTitle: publisher.value?.publisher_job_title || undefined,
             worksFor: publisher.value?.publisher_work_for ? { '@type': 'Organization', 'name': publisher.value.publisher_work_for } : undefined,

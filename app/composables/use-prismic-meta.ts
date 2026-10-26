@@ -6,6 +6,7 @@ import type { ReachableDocument } from '~/types/api'
 import { getFormattedLocale } from '~/composables/use-prismic-locale'
 import { ensureProtocol } from '~/utils/url'
 import { getFilledLinkToMedia } from '~/utils/prismic/link-field'
+import { getSchemaOrgPrimaryImageId } from '~/utils/schema-org'
 import { prismicDocumentType } from '#shared/prismic-schema'
 import { I18N_DEFAULT_LOCALE } from '~~/i18n/i18n'
 import type { PageMetaAlternateLink } from '~/composables/use-page-meta'
@@ -101,12 +102,16 @@ export function usePrismicMeta(documentOrRef?: MaybeRefOrGetter<ReachableDocumen
     useHead(head)
 
     if (options.schemaOrgType && !noindex.value) {
+        // Explicit `@id`: auto-numbered image ids (`#/schema/image/1`) point to different images from one page to another
+        const imageId = getSchemaOrgPrimaryImageId(canonicalUrl.value)
+
         useSchemaOrg([
+            defineImage({ '@id': imageId, 'url': image.value }),
             defineWebPage({
                 '@type': options.schemaOrgType,
                 'name': title.value,
                 'description': description.value,
-                'image': image.value,
+                'image': { '@id': imageId },
                 'url': canonicalUrl.value,
                 'mainEntity': options.mainEntityId ? { '@id': options.mainEntityId } : undefined,
             }),
