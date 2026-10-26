@@ -175,7 +175,7 @@ function frameworkOutput(projectData: ProjectDocumentData | null) {
             :is="headingTag"
             class="visually-hidden"
         >
-            {{ document.data.title }}
+            {{ document.data.title || $t('archive_page.heading') }}
         </component>
         <table :class="$style.table">
             <caption class="visually-hidden">
