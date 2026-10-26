@@ -119,6 +119,7 @@ export default defineComponent({
                 height: height.value,
                 alt: props.alt || '',
                 loading: props.loading,
+                fetchpriority: props.fetchpriority,
                 crossorigin: props.crossorigin,
                 decoding: props.decoding,
                 longdesc: props.longdesc,

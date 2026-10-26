@@ -8,6 +8,10 @@ const { data: projects } = await usePrismicFetchProjects(true)
 const { phase } = usePageIntro()
 const pageRevealed = computed(() => phase.value === 'page' || phase.value === 'done')
 
+// When a project modal is open over the listing, its image is the LCP, not the first card
+const route = useRoute()
+const hasPriorityCard = computed(() => !route.params.uid)
+
 const { site } = useRuntimeConfig().public
 if (projects.value?.length) {
     useSchemaOrg([
@@ -32,6 +36,7 @@ if (projects.value?.length) {
             :key="project.uid"
             wrapper="li"
             :project="project"
+            :priority="hasPriorityCard && index === 0"
             :class="[$style.item, pageRevealed && $style['item--visible']]"
             :style="{ '--item-index': index }"
         />

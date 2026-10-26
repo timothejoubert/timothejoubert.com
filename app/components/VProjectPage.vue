@@ -171,6 +171,8 @@ const { prevProject, nextProject } = props.document
                 <VPrismicImg
                     :field="project?.thumbnail"
                     sizes="xs:92vw sm:92vw md:30vw lg:42vw xl:42vw hq:42vw qhd:42vw"
+                    loading="eager"
+                    fetchpriority="high"
                 />
 
                 <div

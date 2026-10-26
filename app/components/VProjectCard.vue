@@ -6,6 +6,7 @@ import { getRoutePath } from '~~/shared/prismic-schema'
 const props = defineProps<{
     project: ProjectDocument
     wrapper?: VWrapperElement
+    priority?: boolean
 }>()
 
 const data = computed(() => props.project.data)
@@ -56,6 +57,8 @@ const img = computed(() => data.value.thumbnail)
             :width="400"
             :height="400"
             sizes="xs:92vw sm:92vw md:30vw lg:22vw xl:22vw hq:22vw qhd:22vw"
+            :loading="priority ? 'eager' : 'lazy'"
+            :fetchpriority="priority ? 'high' : undefined"
             :modifiers="{
                 fit: 'crop',
                 ar: 1,

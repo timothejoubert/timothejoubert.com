@@ -15,6 +15,7 @@ export const imageProps = {
     crossorigin: { type: [String, Boolean] as PropType<'' | 'anonymous' | 'use-credentials' | boolean>, required: false },
     nonce: { type: String, required: false },
     loading: { type: String as PropType<'lazy' | 'eager'>, default: 'lazy' },
+    fetchpriority: { type: String as PropType<'auto' | 'high' | 'low'>, required: false },
     decoding: { type: String as PropType<'async' | 'auto' | 'sync'>, required: false },
     longdesc: { type: String, required: false },
 }

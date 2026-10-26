@@ -22,6 +22,8 @@ export default defineNuxtConfig({
                 { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
                 { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
                 { rel: 'manifest', href: '/site.webmanifest' },
+                // No crossorigin: Prismic images are fetched as no-cors <img>, a CORS connection wouldn't be reused
+                { rel: 'preconnect', href: 'https://images.prismic.io' },
             ],
             meta: [
                 { name: 'theme-color', content: '#151515' },
