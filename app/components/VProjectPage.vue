@@ -67,6 +67,9 @@ const medias = computed(() => {
     })
 })
 
+// The window is full width below md, then 50% of the viewport (default size, resizable)
+const imgSizes = 'xs:92vw sm:92vw md:50vw lg:50vw xl:50vw hq:50vw qhd:50vw'
+
 const tags = computed(() => {
     if (project.value?.tag_group?.length) return project.value.tag_group.filter(item => item.tag).map(item => item.tag)
     return props.document?.tags || []
@@ -170,7 +173,7 @@ const { prevProject, nextProject } = props.document
 
                 <VPrismicImg
                     :field="project?.thumbnail"
-                    sizes="xs:92vw sm:92vw md:30vw lg:42vw xl:42vw hq:42vw qhd:42vw"
+                    :sizes="imgSizes"
                     loading="eager"
                     fetchpriority="high"
                 />
@@ -195,6 +198,7 @@ const { prevProject, nextProject } = props.document
                         <VPrismicImg
                             v-else
                             :field="mediaGroup.media"
+                            :sizes="imgSizes"
                         />
                     </div>
                 </div>
